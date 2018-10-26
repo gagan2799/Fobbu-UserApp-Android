@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/grey_header">
+
+
+    <RelativeLayout
+            android:id="@+id/rlTop"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <ImageView
+                android:id="@+id/ivBack"
+                android:layout_width="wrap_content"
+                android:padding="8dp"
+                android:src="@drawable/back_button"
+                android:layout_height="wrap_content"/>
+
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:padding="8dp"
+                android:layout_alignParentTop="true"
+                android:src="@drawable/fobbu_logo_blue"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/add_vehicle"
+                android:id="@+id/tvHeading"
+                android:textAllCaps="true"
+                android:textSize="@dimen/textsize_large"
+                android:textColor="@color/color_grey"
+                android:layout_below="@+id/ivBack"
+                android:layout_centerHorizontal="true"/>
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:background="@color/white"
+            android:layout_below="@+id/rlTop"
+            android:id="@+id/rlNameBar"
+            android:layout_marginTop="15dp"
+            android:layout_height="wrap_content">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:text="@string/new_text"
+                android:textColor="@color/red"
+                android:padding="10dp"
+                android:id="@+id/tvNew"
+                android:layout_marginLeft="40dp"
+                android:layout_centerVertical="true"
+                android:textSize="@dimen/textsize_normal"
+                android:layout_height="wrap_content"/>
+
+        <View
+                android:layout_width="match_parent"
+                android:layout_alignLeft="@+id/tvNew"
+                android:layout_alignRight="@+id/tvNew"
+                android:layout_below="@+id/tvNew"
+                android:background="@color/red"
+                android:layout_height="1dp"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:text="@string/edit"
+                android:textColor="@color/color_grey"
+                android:padding="10dp"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/tvNew"
+                android:id="@+id/tvEdit"
+                android:layout_marginLeft="50dp"
+                android:textSize="@dimen/textsize_normal"
+                android:layout_height="wrap_content"/>
+
+        <ImageView
+                android:layout_width="wrap_content"
+                android:src="@drawable/list"
+                android:layout_alignParentRight="true"
+                android:padding="10dp"
+                android:layout_centerVertical="true"
+                android:layout_height="wrap_content"/>
+
+    </RelativeLayout>
+
+    <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_below="@+id/rlNameBar"
+            android:layout_height="match_parent">
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_marginLeft="40dp"
+                android:orientation="vertical"
+                android:layout_marginTop="25dp"
+                android:layout_height="wrap_content">
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:weightSum="2"
+                    android:gravity="center_vertical"
+                    android:layout_height="wrap_content">
+                <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="0.7"
+                        android:id="@+id/tvVehicleBrand"
+                        android:textSize="@dimen/textsize_medium"
+                        android:textColor="@color/color_grey"
+                        android:text="@string/vehicle_brand"
+                        android:layout_centerVertical="true"
+                        android:layout_height="wrap_content"/>
+
+                <EditText
+                        android:layout_width="0dp"
+                        android:layout_weight="1.3"
+                        android:layout_toRightOf="@+id/tvVehicleBrand"
+                        android:background="@drawable/border_line_grey"
+                        android:id="@+id/etBrand"
+                        android:layout_marginRight="40dp"
+                        android:singleLine="true"
+                        android:textSize="@dimen/textsize_medium"
+                        android:padding="10dp"
+                        android:imeOptions="actionNext"
+                        android:layout_centerVertical="true"
+                        android:layout_height="wrap_content"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="20dp"
+                    android:weightSum="2"
+                    android:layout_height="wrap_content">
+                <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="0.7"
+                        android:id="@+id/tvVehicleReg"
+                        android:textSize="@dimen/textsize_medium"
+                        android:textColor="@color/color_grey"
+                        android:text="@string/vehicle_reg_no"
+                        android:layout_centerVertical="true"
+                        android:layout_height="wrap_content"/>
+
+                <EditText
+                        android:layout_width="0dp"
+                        android:layout_weight="1.3"
+                        android:layout_toRightOf="@+id/tvVehicleReg"
+                        android:background="@drawable/border_line_grey"
+                        android:id="@+id/etRegNumber"
+                        android:layout_marginRight="40dp"
+                        android:singleLine="true"
+                        android:textSize="@dimen/textsize_medium"
+                        android:padding="10dp"
+                        android:imeOptions="actionNext"
+                        android:layout_centerVertical="true"
+                        android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="20dp"
+                    android:weightSum="2"
+                    android:layout_height="wrap_content">
+                <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="0.7"
+                        android:id="@+id/tvSubModel"
+                        android:textSize="@dimen/textsize_medium"
+                        android:textColor="@color/color_grey"
+                        android:text="@string/vehicle_sub_model"
+                        android:layout_centerVertical="true"
+                        android:layout_height="wrap_content"/>
+
+                <EditText
+                        android:layout_width="0dp"
+                        android:layout_weight="1.3"
+                        android:layout_toRightOf="@+id/tvSubModel"
+                        android:background="@drawable/border_line_grey"
+                        android:id="@+id/etSubModel"
+                        android:layout_marginRight="40dp"
+                        android:singleLine="true"
+                        android:textSize="@dimen/textsize_medium"
+                        android:padding="10dp"
+                        android:imeOptions="actionNext"
+                        android:layout_centerVertical="true"
+                        android:layout_height="wrap_content"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="20dp"
+                    android:weightSum="2"
+                    android:layout_height="wrap_content">
+                <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="0.7"
+                        android:id="@+id/tvYearsOfMake"
+                        android:textSize="@dimen/textsize_medium"
+                        android:textColor="@color/color_grey"
+                        android:text="@string/year_of_make"
+                        android:layout_centerVertical="true"
+                        android:layout_height="wrap_content"/>
+
+                <EditText
+                        android:layout_width="0dp"
+                        android:layout_weight="1.3"
+                        android:layout_toRightOf="@+id/tvYearsOfMake"
+                        android:background="@drawable/border_line_grey"
+                        android:id="@+id/etYearsOfMake"
+                        android:layout_marginRight="40dp"
+                        android:textSize="@dimen/textsize_medium"
+                        android:padding="10dp"
+                        android:singleLine="true"
+                        android:imeOptions="actionDone"
+                        android:layout_centerVertical="true"
+                        android:layout_height="wrap_content"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="20dp"
+                    android:weightSum="2"
+                    android:gravity="center_vertical"
+                    android:layout_height="wrap_content">
+                <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="0.7"
+                        android:id="@+id/tvUploadPics"
+                        android:textSize="@dimen/textsize_medium"
+                        android:textColor="@color/color_grey"
+                        android:text="@string/upload_pics"
+                        android:layout_centerVertical="true"
+                        android:layout_height="wrap_content"/>
+
+                <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1.3"
+                        android:orientation="horizontal"
+                        android:layout_marginRight="40dp"
+                        android:weightSum="4"
+                        android:layout_toRightOf="@+id/tvUploadPics"
+                        android:layout_height="wrap_content">
+
+                    <LinearLayout android:layout_width="0dp"
+                                  android:layout_weight="1"
+                                  android:background="@drawable/border_line_grey"
+                                  android:layout_height="match_parent">
+                        <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:id="@+id/ivImage1"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/photo_camera"
+                        />
+
+                    </LinearLayout>
+                    <RelativeLayout android:layout_width="0dp"
+                                    android:layout_weight="1"
+                                    android:layout_height="wrap_content">
+                        <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/ivImage2"
+                                android:padding="10dp"
+                                android:layout_centerInParent="true"
+                                android:src="@drawable/photo_camera"
+                                android:background="@drawable/border_line_grey"/>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout android:layout_width="0dp"
+                                    android:layout_weight="1"
+                                    android:layout_height="wrap_content">
+                        <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/ivImage3"
+                                android:padding="10dp"
+                                android:layout_centerInParent="true"
+                                android:src="@drawable/photo_camera"
+                                android:background="@drawable/border_line_grey"/>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout android:layout_width="0dp"
+                                    android:layout_weight="1"
+                                    android:layout_height="wrap_content">
+                        <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/ivImage4"
+                                android:padding="10dp"
+                                android:layout_alignParentRight="true"
+                                android:src="@drawable/photo_camera"
+                                android:background="@drawable/border_line_grey"/>
+
+                    </RelativeLayout>
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="20dp"
+                    android:weightSum="2"
+                    android:gravity="center_vertical"
+                    android:layout_height="wrap_content">
+                <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="0.7"
+                        android:id="@+id/tvVehicleType"
+                        android:textSize="@dimen/textsize_medium"
+                        android:textColor="@color/color_grey"
+                        android:text="@string/vehicle_type"
+                        android:layout_centerVertical="true"
+                        android:layout_height="wrap_content"/>
+
+                <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1.3"
+                        android:orientation="horizontal"
+                        android:layout_marginRight="40dp"
+                        android:gravity="center_vertical"
+                        android:layout_height="wrap_content">
+
+                    <ImageView
+                            android:src="@drawable/car_blue"
+                            android:layout_width="wrap_content"
+                            android:padding="10dp"
+                            android:id="@+id/ivCar"
+                            android:layout_height="wrap_content"/>
+
+                    <ImageView
+                            android:src="@drawable/scooter_blue"
+                            android:layout_width="wrap_content"
+                            android:padding="10dp"
+                            android:id="@+id/ivBike"
+                            android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <TextView
+                    android:id="@+id/tvAddEditVehicle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/add_vehicle"
+                    android:paddingRight="35dp"
+                    android:textSize="@dimen/textsize_normal"
+                    android:paddingTop="18dp"
+                    android:paddingLeft="35dp"
+                    android:layout_gravity="center_horizontal"
+                    android:singleLine="true"
+                    android:layout_marginTop="25dp"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:paddingBottom="25dp"
+                    android:layout_marginBottom="30dp"
+                    android:background="@drawable/rounded_red"
+                    android:textColor="#ffffff"/>
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:id="@+id/rlLoader"
+            android:visibility="gone"
+            android:layout_height="match_parent">
+
+        <com.wang.avi.AVLoadingIndicatorView
+                android:id="@+id/avi"
+                style="@style/AVLoadingIndicatorView.Large"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                android:layout_centerInParent="true"
+                app:indicatorColor="@color/colorPrimary"
+                app:indicatorName="BallScaleMultipleIndicator"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

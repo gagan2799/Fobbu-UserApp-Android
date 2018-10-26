@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:animateLayoutChanges="true"
+                android:orientation="vertical">
+
+
+    <RelativeLayout
+            android:id="@+id/rlTop"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/profile_screen"
+            android:background="@color/colorPrimary"
+            android:orientation="vertical">
+
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/cross_white"
+                android:id="@+id/ivCrossDrawer"
+                android:layout_alignParentRight="true"
+                android:padding="10dp"/>
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_above="@+id/tvName"
+                android:layout_height="match_parent">
+
+            <com.mikhaellopez.circularimageview.CircularImageView
+                    android:layout_width="@dimen/profile_drawer_image"
+                    android:layout_height="@dimen/profile_drawer_image"
+                    android:src="@drawable/dummy_pic"
+                    android:layout_centerHorizontal="true"
+                    app:civ_border_color="@color/white"
+                    android:layout_centerInParent="true"
+                    android:id="@+id/ivProfileDrawer"
+                    app:civ_border_width="4dp"
+                    app:civ_shadow="true"
+                    app:civ_shadow_radius="10"/>
+
+
+        </RelativeLayout>
+
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvName"
+                android:text="sdvsdvsdv"
+                android:layout_centerHorizontal="true"
+                android:textSize="@dimen/textsize_normal"
+                android:textColor="@color/white"
+                android:layout_above="@+id/tvMembership"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvMembership"
+                android:text=""
+                android:layout_centerHorizontal="true"
+                android:textSize="@dimen/textsize_medium"
+                android:layout_margin="4dp"
+                android:layout_alignParentBottom="true"
+                android:textColor="@color/white"/>
+
+    </RelativeLayout>
+
+
+    <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_below="@+id/rlTop"
+            android:layout_height="match_parent">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="vertical">
+
+            <TextView
+                    android:id="@+id/tvMyOrders"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/my_order_drawer"
+                    android:drawableRight="@drawable/arrow_drawer"
+                    android:drawablePadding="10dp"
+                    android:padding="8dp"
+                    android:gravity="center_vertical"
+                    android:text="@string/my_orders"
+                    android:textColor="@color/drawer_text_color"
+                    android:textSize="@dimen/textsize_medium"/>
+
+            <TextView
+                    android:id="@+id/tvMyPassbook"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/my_passbook_drawer"
+                    android:drawableRight="@drawable/arrow_drawer"
+                    android:drawablePadding="10dp"
+                    android:padding="8dp"
+                    android:gravity="center_vertical"
+                    android:text="@string/my_passbook"
+                    android:textColor="@color/drawer_text_color"
+                    android:textSize="@dimen/textsize_medium"/>
+
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/drawer_view_color"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"/>
+
+            <TextView
+                    android:id="@+id/tvAddVehicles"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/add_vehicle_drawer"
+                    android:drawableRight="@drawable/arrow_drawer"
+                    android:drawablePadding="10dp"
+                    android:padding="8dp"
+                    android:gravity="center_vertical"
+                    android:text="@string/add_vehicle"
+                    android:textColor="@color/drawer_text_color"
+                    android:textSize="@dimen/textsize_medium"/>
+
+            <TextView
+                    android:id="@+id/tvAddEmergencyVehicle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/add_emergence"
+                    android:drawableRight="@drawable/arrow_drawer"
+                    android:drawablePadding="10dp"
+                    android:padding="8dp"
+                    android:gravity="center_vertical"
+                    android:text="@string/add_emergency_contacts"
+                    android:textColor="@color/drawer_text_color"
+                    android:textSize="@dimen/textsize_medium"/>
+
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/drawer_view_color"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"/>
+
+            <TextView
+                    android:id="@+id/tvPaymentSettings"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/payment_setting_drawer"
+                    android:drawableRight="@drawable/arrow_drawer"
+                    android:drawablePadding="10dp"
+                    android:padding="8dp"
+                    android:gravity="center_vertical"
+                    android:text="@string/payment_settings"
+                    android:textColor="@color/drawer_text_color"
+                    android:textSize="@dimen/textsize_medium"/>
+
+            <TextView
+                    android:id="@+id/tvFreebies"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/freebies_drawer"
+                    android:drawableRight="@drawable/arrow_drawer"
+                    android:drawablePadding="10dp"
+                    android:padding="8dp"
+                    android:gravity="center_vertical"
+                    android:text="@string/freebies"
+                    android:textColor="@color/drawer_text_color"
+                    android:textSize="@dimen/textsize_medium"/>
+
+            <TextView
+                    android:id="@+id/tvHelp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/help_drawer"
+                    android:drawableRight="@drawable/arrow_drawer"
+                    android:drawablePadding="10dp"
+                    android:padding="8dp"
+                    android:text="@string/help"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/drawer_text_color"
+                    android:textSize="@dimen/textsize_medium"/>
+
+            <TextView
+                    android:id="@+id/tvSecuritySettings"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/lock_drawer"
+                    android:drawableRight="@drawable/arrow_drawer"
+                    android:drawablePadding="10dp"
+                    android:padding="8dp"
+                    android:gravity="center_vertical"
+                    android:text="@string/security_settings"
+                    android:textColor="@color/drawer_text_color"
+                    android:textSize="@dimen/textsize_medium"/>
+
+            <TextView
+                    android:id="@+id/tvLogout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/power_drawer"
+                    android:drawableRight="@drawable/arrow_drawer"
+                    android:drawablePadding="10dp"
+                    android:layout_marginBottom="15dp"
+                    android:padding="8dp"
+                    android:gravity="center_vertical"
+                    android:text="@string/logout"
+                    android:textColor="@color/drawer_text_color"
+                    android:textSize="@dimen/textsize_medium"/>
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+</RelativeLayout>

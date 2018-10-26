@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/splash_background">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/ivCenter"
+        android:layout_alignParentTop="true">
+
+        <ImageView
+            android:id="@+id/ivFobbuText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="30dp"
+            android:src="@drawable/fobbu_text_white" />
+
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/ivCenter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:src="@drawable/fobbu_splash" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ivCenter"
+        android:layout_alignParentBottom="true">
+
+
+            <ImageView
+                android:id="@+id/ivFobbuCar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/splash_vehicles" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:id="@+id/view"
+                android:layout_alignLeft="@+id/ivFobbuCar"
+                android:layout_alignRight="@+id/ivFobbuCar"
+                android:layout_below="@+id/ivFobbuCar"
+                android:background="@color/white" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/view"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textsize_small"
+            android:text="@string/splash_text"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/tvText"/>
+
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

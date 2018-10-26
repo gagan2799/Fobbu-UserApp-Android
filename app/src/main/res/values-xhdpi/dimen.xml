@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="textsize_normal">14sp</dimen>
+    <dimen name="textsize_small">9sp</dimen>
+    <dimen name="textsize_medium">10sp</dimen>
+    <dimen name="textsize_extra_small">7sp</dimen>
+    <dimen name="textsize_large">19sp</dimen>
+    <dimen name="textsize_extra_large">22sp</dimen>
+
+
+    //Profile Pic drawer size
+    <dimen name="profile_drawer_image">220px</dimen>
+    <dimen name="profile_screen">370px</dimen>
+    <dimen name="margin_left">45dp</dimen>
+    <dimen name="header_height">156dp</dimen>
+
+
+
+</resources>

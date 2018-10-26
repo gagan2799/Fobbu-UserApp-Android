@@ -1,0 +1,49 @@
+package com.fobbu.member.android.activities
+
+import android.content.Intent
+import android.support.v7.app.AppCompatActivity
+import android.os.Bundle
+import android.os.Handler
+import android.view.animation.AnimationUtils
+import com.fobbu.member.android.R
+import com.fobbu.member.android.tutorial.TutorialActivity
+import com.fobbu.member.android.utils.CommonClass
+import kotlinx.android.synthetic.main.activity_splash.*
+
+class SplashActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_splash)
+        fade()
+
+        Handler().postDelayed({
+            //HANDLE WHERE SHOULD APP LAND IN
+            navigateToScreen()
+        }, 3000)
+    }
+
+    private fun navigateToScreen() {
+
+        when {
+            CommonClass(this,this).getString("CoachMark_first_time")=="" -> {
+                startActivity(Intent(this,TutorialActivity::class.java))
+                finish()
+            }
+            CommonClass(this,this).getString("mobile_number")!="" -> {
+                startActivity(Intent(this,DashboardActivity::class.java))
+                finish()
+            }
+            else -> {
+                startActivity(Intent(this,AddEditVehicleActivity::class.java))
+                finish()
+            }
+        }
+    }
+
+    private fun fade() {
+        val animation1 = AnimationUtils.loadAnimation(applicationContext, R.anim.fade)
+        ivCenter.startAnimation(animation1)
+        ivFobbuText.startAnimation(animation1)
+    }
+}

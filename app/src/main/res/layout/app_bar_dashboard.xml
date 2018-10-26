@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:background="@color/home_background"
+        android:layout_height="match_parent">
+
+
+    <RelativeLayout
+            android:id="@+id/rlTop"
+            android:layout_width="match_parent"
+            android:background="@color/home_background"
+            android:layout_height="wrap_content">
+
+        <ImageView
+                android:id="@+id/ivDrawer"
+                android:layout_width="wrap_content"
+                android:padding="12dp"
+                android:src="@drawable/drawer"
+                android:layout_height="wrap_content"/>
+
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/fobbu_logo_blue"
+                android:layout_centerInParent="true"/>
+
+    </RelativeLayout>
+
+
+    <FrameLayout
+            android:id="@+id/content_frame"
+            android:layout_width="match_parent"
+            android:layout_below="@+id/rlTop"
+            android:layout_above="@+id/llBottomBar"
+            android:layout_height="match_parent" />
+
+
+
+    <LinearLayout
+            android:orientation="horizontal"
+            android:weightSum="4"
+            android:id="@+id/llBottomBar"
+            android:layout_alignParentBottom="true"
+            android:background="@color/colorPrimary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:id="@+id/llHome"
+                android:layout_weight="1">
+
+            <ImageView
+                    android:layout_width="wrap_content"
+                    android:padding="10dp"
+                    android:background="@color/white"
+                    android:id="@+id/ivHome"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/meters_click_tabbar"
+            />
+
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:id="@+id/llRSA"
+                android:layout_weight="1">
+
+            <ImageView
+                    android:layout_width="wrap_content"
+                    android:padding="10dp"
+                    android:id="@+id/ivRSA"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/car_tabbar"
+            />
+
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_weight="1">
+
+            <ImageView
+                    android:layout_width="wrap_content"
+                    android:padding="10dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/car_docs_tabbar"
+            />
+
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_weight="1">
+
+            <ImageView
+                    android:layout_width="wrap_content"
+                    android:padding="10dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/offer_tabbar"
+            />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</RelativeLayout>
