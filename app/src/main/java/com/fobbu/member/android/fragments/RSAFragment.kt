@@ -1,7 +1,9 @@
-package com.fobbu.member.android.activities
+package com.fobbu.member.android.fragments
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.Dialog
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -13,76 +15,59 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
-import android.provider.Settings
 import android.support.v4.app.ActivityCompat
+import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import android.support.v4.content.FileProvider
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
-import android.view.Gravity
-import android.view.View
+import android.util.TypedValue
+import android.view.*
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import android.widget.TextView
-import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.fobbu.member.android.R
-import com.fobbu.member.android.apiInterface.MyApplication
-import com.fobbu.member.android.apiInterface.WebServiceApi
-import com.fobbu.member.android.modals.MainPojo
-import com.fobbu.member.android.utils.CommonClass
-import kotlinx.android.synthetic.main.activity_add_edit_vehicle.*
-import okhttp3.MediaType
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
-import org.json.JSONObject
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.fobbu.member.android.interfaces.HeaderText
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
-import java.util.*
+import java.util.ArrayList
 
-class AddEditVehicleActivity : AppCompatActivity() {
+class RSAFragment: Fragment()
+{
+    private var headerText: HeaderText? = null
 
-    private lateinit var webServiceApi: WebServiceApi
+    private lateinit var llPhoto1:LinearLayout
+    private lateinit var llPhoto2:LinearLayout
+    private lateinit var llPhoto3:LinearLayout
+    private lateinit var llPhoto4:LinearLayout
 
-    private var imageFrom = ""
-    private var vehicleType = ""
+    private lateinit var ivImage1:ImageView
+    private lateinit var ivImage2:ImageView
+    private lateinit var ivImage3:ImageView
+    private lateinit var ivImage4:ImageView
+    private lateinit var imgBig:ImageView
+    private lateinit var imgClose:ImageView
 
-    private var isImageOn1 = false
-    private var isImageOn2 = false
-    private var isImageOn3 = false
-    private var isImageOn4 = false
+    private lateinit var rlBigProfile:RelativeLayout
 
-    private var file1: File? = null
-    private var file2: File? = null
-    private var file3: File? = null
-    private var file4: File? = null
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        // Inflate the layout for this fragment
+        val view = inflater.inflate(R.layout.fragment_rsa, container, false)
 
-    private var dataList: ArrayList<Any> = ArrayList()
+        if (view != null) {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_add_edit_vehicle)
-        addClicks()
+            initialise(view)
+
+            handleClick()
+        }
+        return view
     }
 
-    private fun addClicks() {
-
-        webServiceApi = getEnv().getRetrofitMulti()
-
-        imgClose.setOnClickListener {
-
-            rlBigProfile.visibility=View.GONE
-        }
-
-        ivBack.setOnClickListener {
-            if(rlBigProfile.visibility==View.VISIBLE)
-                rlBigProfile.visibility=View.GONE
-            else
-                finish()
-        }
+    private fun handleClick() {
 
         llPhoto1.setOnClickListener {
 
@@ -122,50 +107,84 @@ class AddEditVehicleActivity : AppCompatActivity() {
                 showDocPopup()
             }
         }
+        imgClose.setOnClickListener {
 
-        ivBike.setOnClickListener {
-            vehicleType = "2wheeler"
-            ivBike.setImageResource(R.drawable.scooter_red)
-            ivCar.setImageResource(R.drawable.car_blue)
-        }
-
-        ivCar.setOnClickListener {
-            vehicleType = "4wheeler"
-            ivBike.setImageResource(R.drawable.scooter_blue)
-            ivCar.setImageResource(R.drawable.car_red)
-        }
-
-        tvAddEditVehicle.setOnClickListener {
-
-            when {
-                etBrand.text.toString()=="" -> Toast.makeText(this,resources.getString(R.string.add_brand),Toast.LENGTH_SHORT).show()
-                etRegNumber.text.toString()=="" -> Toast.makeText(this,resources.getString(R.string.add_reg_no),Toast.LENGTH_SHORT).show()
-                etSubModel.text.toString()=="" -> Toast.makeText(this,resources.getString(R.string.add_sub_model),Toast.LENGTH_SHORT).show()
-                etYearsOfMake.text.toString()=="" -> Toast.makeText(this,resources.getString(R.string.add_year),Toast.LENGTH_SHORT).show()
-                vehicleType=="" -> Toast.makeText(this,resources.getString(R.string.add_vehicle_type),Toast.LENGTH_SHORT).show()
-                else -> {
-                    if (file1 != null && file1!!.exists())
-                        dataList.add(file1!!)
-
-                    if (file2 != null && file2!!.exists())
-                        dataList.add(file2!!)
-
-                    if (file3 != null && file3!!.exists())
-                        dataList.add(file3!!)
-
-                    if (file4 != null && file4!!.exists())
-                        dataList.add(file4!!)
-
-                    addVehicleApi()
-                }
-            }
-
+            rlBigProfile.visibility=View.GONE
         }
     }
 
+    private fun initialise(view: View?) {
+        headerText = activity as HeaderText?
+
+        headerText!!.setTitle(resources.getString(R.string.rsa_textt))
+
+        llPhoto1 = view!!.findViewById(R.id.llPhoto1)
+        llPhoto2 = view.findViewById(R.id.llPhoto2)
+        llPhoto3 = view.findViewById(R.id.llPhoto3)
+        llPhoto4 = view.findViewById(R.id.llPhoto4)
+
+        ivImage1 = view.findViewById(R.id.ivImage1)
+        ivImage2 = view.findViewById(R.id.ivImage2)
+        ivImage3 = view.findViewById(R.id.ivImage3)
+        ivImage4 = view.findViewById(R.id.ivImage4)
+
+        imgClose = view.findViewById(R.id.imgClose)
+
+        imgBig = view.findViewById(R.id.imgBig)
+
+        rlBigProfile= view.findViewById(R.id.rlBigProfile)
+    }
+
+
+    @SuppressLint("SetTextI18n")
+    fun showPaymentPopupFinal(id: String, name: String, amount: Double?) {
+
+        val inflater = activity!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+
+        val cViewFinalPopup = inflater.inflate(R.layout.fragment_builder_confirm, null)
+
+       val builderFinal = Dialog(activity)
+
+        builderFinal.requestWindowFeature(Window.FEATURE_NO_TITLE)
+
+        builderFinal.setCancelable(false)
+
+        builderFinal.setContentView(cViewFinalPopup)
+
+        builderFinal.getWindow()!!.setBackgroundDrawableResource(android.R.color.transparent)
+
+        val tvConfirm = cViewFinalPopup.findViewById(R.id.tvConfirm) as TextView
+
+
+        tvConfirm.setOnClickListener {
+            builderFinal.dismiss()
+
+
+        }
+
+        builderFinal.window!!.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
+
+        builderFinal.show()
+    }
+
+    ////////////////FOR VEHICLE IMAGE/////////////////////////
+    private var isImageOn1 = false
+    private var isImageOn2 = false
+    private var isImageOn3 = false
+    private var isImageOn4 = false
+
+    private var file1: File? = null
+    private var file2: File? = null
+    private var file3: File? = null
+    private var file4: File? = null
+
+    private var imageFrom = ""
+
+    private var dataList: ArrayList<Any> = ArrayList()
+
     private fun showPopupViewDelete(s: String) {
 
-        val alertDialog = AlertDialog.Builder(this).create()
+        val alertDialog = AlertDialog.Builder(activity!!).create()
         alertDialog.setTitle("Car Images")
         alertDialog.setMessage(null)
         alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "View") { _, _ ->
@@ -173,25 +192,25 @@ class AddEditVehicleActivity : AppCompatActivity() {
             when (s) {
                 "1" -> {
                     rlBigProfile.visibility=View.VISIBLE
-                    Glide.with(this@AddEditVehicleActivity)
+                    Glide.with(this@RSAFragment)
                         .load(file1)
                         .into(imgBig)
                 }
                 "2" -> {
                     rlBigProfile.visibility=View.VISIBLE
-                    Glide.with(this@AddEditVehicleActivity)
+                    Glide.with(this@RSAFragment)
                         .load(file2)
                         .into(imgBig)
                 }
                 "3" -> {
                     rlBigProfile.visibility=View.VISIBLE
-                    Glide.with(this@AddEditVehicleActivity)
+                    Glide.with(this@RSAFragment)
                         .load(file3)
                         .into(imgBig)
                 }
                 "4" -> {
                     rlBigProfile.visibility=View.VISIBLE
-                    Glide.with(this@AddEditVehicleActivity)
+                    Glide.with(this@RSAFragment)
                         .load(file4)
                         .into(imgBig)
                 }
@@ -231,7 +250,7 @@ class AddEditVehicleActivity : AppCompatActivity() {
 
     private fun showDocPopup() {
 
-        val alertDialog = AlertDialog.Builder(this).create()
+        val alertDialog = AlertDialog.Builder(activity!!).create()
         alertDialog.setTitle("Upload Car Images")
         alertDialog.setMessage("Please select from where you want to choose")
         alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Gallery") { dialogInterface, i ->
@@ -240,10 +259,10 @@ class AddEditVehicleActivity : AppCompatActivity() {
             if (apiLevel >= 23) {
                 //phone state
                 val permission1 =
-                    ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE)
+                    ContextCompat.checkSelfPermission(activity!!, android.Manifest.permission.READ_EXTERNAL_STORAGE)
 
                 val permission2 =
-                    ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    ContextCompat.checkSelfPermission(activity!!, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
 
                 if (permission1 != PackageManager.PERMISSION_GRANTED || permission2 != PackageManager.PERMISSION_GRANTED) {
                     makeRequest2()
@@ -261,12 +280,12 @@ class AddEditVehicleActivity : AppCompatActivity() {
                 //phone state
 
                 val permission1 =
-                    ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE)
+                    ContextCompat.checkSelfPermission(activity!!, android.Manifest.permission.READ_EXTERNAL_STORAGE)
 
                 val permission2 =
-                    ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    ContextCompat.checkSelfPermission(activity!!, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
 
-                val permission3 = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+                val permission3 = ContextCompat.checkSelfPermission(activity!!, Manifest.permission.CAMERA)
 
                 if (permission1 != PackageManager.PERMISSION_GRANTED || permission2 != PackageManager.PERMISSION_GRANTED
                     || permission3 != PackageManager.PERMISSION_GRANTED
@@ -289,7 +308,7 @@ class AddEditVehicleActivity : AppCompatActivity() {
 
     private fun makeRequest1() {
         ActivityCompat.requestPermissions(
-            this@AddEditVehicleActivity,
+            activity!!,
             arrayOf(
                 "android.permission.WRITE_EXTERNAL_STORAGE",
                 "android.permission.READ_EXTERNAL_STORAGE",
@@ -301,7 +320,7 @@ class AddEditVehicleActivity : AppCompatActivity() {
 
     private fun makeRequest2() {
         ActivityCompat.requestPermissions(
-            this@AddEditVehicleActivity,
+            activity!!,
             arrayOf(
                 "android.permission.WRITE_EXTERNAL_STORAGE",
                 "android.permission.READ_EXTERNAL_STORAGE",
@@ -331,8 +350,8 @@ class AddEditVehicleActivity : AppCompatActivity() {
 
         mImageCaptureUri = if (apiLevel >= 24) {
             FileProvider.getUriForFile(
-                this@AddEditVehicleActivity,
-                this.applicationContext.packageName + ".provider", mFileTemp!!
+                activity!!,
+                activity!!.packageName + ".provider", mFileTemp!!
             )
         } else {
             Uri.fromFile(mFileTemp)
@@ -405,7 +424,7 @@ class AddEditVehicleActivity : AppCompatActivity() {
 
     @SuppressLint("Recycle")
     public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (resultCode != RESULT_OK) {
+        if (resultCode != AppCompatActivity.RESULT_OK) {
             return
         }
 
@@ -415,7 +434,8 @@ class AddEditVehicleActivity : AppCompatActivity() {
 
                 try {
                     val projection = arrayOf(MediaStore.Images.Media.DATA)
-                    val cursor = contentResolver.query(data!!.data, projection, null, null, null)
+                    val cursor = activity!!.contentResolver.query(data!!.data,
+                        projection, null, null, null)
                     val columnIndex = cursor!!.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
                     cursor.moveToFirst()
                     val path = cursor.getString(columnIndex)
@@ -427,28 +447,28 @@ class AddEditVehicleActivity : AppCompatActivity() {
                     if (imgFile.exists()) {
                         when (imageFrom) {
                             "1" -> {
-                                Glide.with(this@AddEditVehicleActivity)
+                                Glide.with(this@RSAFragment)
                                     .load(imgFile)
                                     .into(ivImage1)
                                 isImageOn1 = true
                                 file1 = imgFile
                             }
                             "2" -> {
-                                Glide.with(this@AddEditVehicleActivity)
+                                Glide.with(this@RSAFragment)
                                     .load(imgFile)
                                     .into(ivImage2)
                                 isImageOn2 = true
                                 file2 = imgFile
                             }
                             "3" -> {
-                                Glide.with(this@AddEditVehicleActivity)
+                                Glide.with(this@RSAFragment)
                                     .load(imgFile)
                                     .into(ivImage3)
                                 isImageOn3 = true
                                 file3 = imgFile
                             }
                             "4" -> {
-                                Glide.with(this@AddEditVehicleActivity)
+                                Glide.with(this@RSAFragment)
                                     .load(imgFile)
                                     .into(ivImage4)
                                 isImageOn4 = true
@@ -463,7 +483,7 @@ class AddEditVehicleActivity : AppCompatActivity() {
 
             imageCameraCaptureRequest ->
 
-                if (requestCode == imageCameraCaptureRequest && resultCode == RESULT_OK) {
+                if (requestCode == imageCameraCaptureRequest && resultCode == AppCompatActivity.RESULT_OK) {
 
                     val imgFile = compressImage(File(mFileTemp!!.path))
                     println("IMAGE FILE 2  $imgFile")
@@ -472,28 +492,28 @@ class AddEditVehicleActivity : AppCompatActivity() {
                     if (imgFile.exists()) {
                         when (imageFrom) {
                             "1" -> {
-                                Glide.with(this@AddEditVehicleActivity)
+                                Glide.with(this@RSAFragment)
                                     .load(imgFile)
                                     .into(ivImage1)
                                 isImageOn1 = true
                                 file1 = imgFile
                             }
                             "2" -> {
-                                Glide.with(this@AddEditVehicleActivity)
+                                Glide.with(this@RSAFragment)
                                     .load(imgFile)
                                     .into(ivImage2)
                                 isImageOn2 = true
                                 file2 = imgFile
                             }
                             "3" -> {
-                                Glide.with(this@AddEditVehicleActivity)
+                                Glide.with(this@RSAFragment)
                                     .load(imgFile)
                                     .into(ivImage3)
                                 isImageOn3 = true
                                 file3 = imgFile
                             }
                             "4" -> {
-                                Glide.with(this@AddEditVehicleActivity)
+                                Glide.with(this@RSAFragment)
                                     .load(imgFile)
                                     .into(ivImage4)
                                 isImageOn4 = true
@@ -508,7 +528,7 @@ class AddEditVehicleActivity : AppCompatActivity() {
 
     private fun showMessageDialog(message: String) {
         val alertDialog = AlertDialog.Builder(
-            this@AddEditVehicleActivity!!
+            activity!!
             , R.style.MyDialogTheme
         ).create()
         alertDialog.setMessage(message)
@@ -517,7 +537,6 @@ class AddEditVehicleActivity : AppCompatActivity() {
         ) { dialog
             , _ ->
             dialog.dismiss()
-           finish()
         }
 
         alertDialog.show()
@@ -576,78 +595,4 @@ class AddEditVehicleActivity : AppCompatActivity() {
         return Bitmap.createBitmap(source, 0, 0, source.width, source.height, matrix, false)
     }
 
-    //////////////////ADD EDIT VEHICLE API  /////////////////////////
-    private fun addVehicleApi() {
-
-        val fileList = ArrayList<MultipartBody.Part>()
-
-        for (i in 0 until dataList.size) {
-            var imgProfile: MultipartBody.Part? = null
-            val file = File(dataList[i].toString())
-            // create RequestBody instance from file
-            val requestFile = RequestBody.create(MediaType.parse("image/jpeg"), file)
-            // MultipartBody.Part is used to send also the actual file name
-            imgProfile = MultipartBody.Part.createFormData("photos", file.name, requestFile)
-            fileList.add(imgProfile!!)
-        }
-
-        rlLoader.visibility = View.VISIBLE
-
-        val jsonDoc = JSONObject()
-
-        jsonDoc.put("user_id", CommonClass(this, this).getString("user_id"))
-        jsonDoc.put("vehicle_brand", etBrand.text.toString().trim())
-        jsonDoc.put("vehicle_registration_number", etRegNumber.text.toString().trim())
-        jsonDoc.put("vehicle_sub_model", etSubModel.text.toString().trim())
-        jsonDoc.put("make_of_year", etYearsOfMake.text.toString().trim())
-        jsonDoc.put("vehicle_type", vehicleType)
-
-        val partnerJsonBody = RequestBody.create(MediaType.parse("text/plain"), jsonDoc.toString())
-
-        val map = HashMap<String, RequestBody>()
-        map["vehicle"] = partnerJsonBody
-
-        val validateUserApi = webServiceApi.addVehicle(map, fileList)
-
-        validateUserApi.enqueue(object : Callback<MainPojo> {
-            override fun onFailure(call: Call<MainPojo>?, t: Throwable?) {
-                t!!.stackTrace
-                rlLoader.visibility = View.GONE
-                println("api failed")
-            }
-
-            override fun onResponse(call: Call<MainPojo>?, response: Response<MainPojo>?) {
-                rlLoader.visibility = View.GONE
-
-                try {
-                    val mainPojo = response!!.body()
-
-                    println("main pojo data $mainPojo")
-
-                    if (mainPojo!!.success == "true") {
-
-                        println("Success")
-                        CommonClass(
-                            this@AddEditVehicleActivity,
-                            this@AddEditVehicleActivity
-                        ).showToast(mainPojo.message)
-
-                        finish()
-
-                    } else {
-                        CommonClass(
-                            this@AddEditVehicleActivity,
-                            this@AddEditVehicleActivity
-                        ).showToast(mainPojo.message)
-                    }
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                }
-            }
-        })
-    }
-
-    private fun getEnv(): MyApplication {
-        return application as MyApplication
-    }
 }

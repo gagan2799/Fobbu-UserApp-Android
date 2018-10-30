@@ -35,7 +35,7 @@ class SplashActivity : AppCompatActivity() {
                 finish()
             }
             else -> {
-                startActivity(Intent(this,AddEditVehicleActivity::class.java))
+                startActivity(Intent(this,TutorialActivity::class.java))
                 finish()
             }
         }

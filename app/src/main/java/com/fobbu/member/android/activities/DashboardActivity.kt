@@ -1,6 +1,7 @@
 package com.fobbu.member.android.activities
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
@@ -10,19 +11,26 @@ import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import com.fobbu.member.android.R
 import com.fobbu.member.android.fragments.HomeFragment
+import com.fobbu.member.android.fragments.RSAFragment
+import com.fobbu.member.android.interfaces.HeaderText
+import com.fobbu.member.android.tutorial.TutorialActivity
 import com.fobbu.member.android.utils.CommonClass
 import kotlinx.android.synthetic.main.activity_dashboard.*
 import kotlinx.android.synthetic.main.app_bar_dashboard.*
 import kotlinx.android.synthetic.main.inflate_drawer.*
 
-class DashboardActivity : AppCompatActivity() {
+class DashboardActivity : AppCompatActivity(), HeaderText {
+    override fun setTitle(title: String?) {
+
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)
         setDataToDrawer()
         drawerClicks()
         tabBarClicks()
-        changeFragment(HomeFragment(),resources.getString(R.string.home))
+        changeFragment(RSAFragment(),resources.getString(R.string.home))
     }
 
     private fun changeFragment(fragment: Fragment, tag: String) {
@@ -76,8 +84,15 @@ class DashboardActivity : AppCompatActivity() {
             drawer_layout.closeDrawer(GravityCompat.START)
 
             Handler().postDelayed({
-                //HANDLE WHERE SHOULD APP LAND IN
                 showLogoutPopup()
+            }, 500)
+        }
+
+        tvAddVehicles.setOnClickListener {
+            drawer_layout.closeDrawer(GravityCompat.START)
+
+            Handler().postDelayed({
+                startActivity(Intent(this, AddEditVehicleActivity::class.java))
             }, 500)
         }
     }

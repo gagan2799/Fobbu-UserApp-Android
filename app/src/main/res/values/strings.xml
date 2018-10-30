@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">FobbuMemberApp</string>
 
     ///TUTORIAL SCREEN
@@ -48,7 +48,7 @@
 
     ///SMS VERIFICATION
     <string name="sms_verification">SMS Verification</string>
-    <string name="confirm">Confirm</string>
+    <string name="confirm" tools:ignore="ExtraTranslation">Confirm</string>
     <string name="we_verifying">We are verifying your mobile no.</string>
     <string name="in_case_auto">In case the auto verification fails, you can manually enter the 4 digit OTP Sent on your mobile no.</string>
     <string name="resend_code"><u>Resend Code</u></string>
@@ -101,7 +101,23 @@
     <string name="vehicle_type">Vehicle Type</string>
     <string name="edit_vehicle">Edit Vehicle</string>
     <string name="your_vehicles">Your Vehicles</string>
+    <string name="add_brand">Please add vehicle brand</string>
+    <string name="add_reg_no">Please add vehicle reg.no</string>
+    <string name="add_sub_model">Please add sub model</string>
+    <string name="add_year">Please add year of make</string>
+    <string name="add_vehicle_type">Please add vehicle type</string>
     <string name="add_another_vehicle">Add Another Vehicle</string>
+
+    ///RSA SCREEN
+    <string name="flat_tyre">Flat\nTyre</string>
+    <string name="battery_jump">Battery\nJump Start</string>
+    <string name="vehicle_emergency">Vehicle\nEmergency</string>
+    <string name="rsa_textt">Road Side Assistance</string>
+    <string name="select_service_request">Please select your service request</string>
+    <string name="find_fobbu">Find Fobbu</string>
+    <string name="select_vehicle_type">Select Vehicle Type</string>
+    <string name="upload_vehicle">Upload Vehicle Pics</string>
+
 
 
     ///GENERAL TEXTS
@@ -112,6 +128,7 @@
     <string name="logout_heading">Logout</string>
     <string name="are_you_sure">Are you sure you want to logout ?</string>
     <string name="home">Home</string>
+    <string name="cancel">Cancel</string>
 
 
 </resources>
