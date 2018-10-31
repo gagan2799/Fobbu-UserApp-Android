@@ -117,6 +117,47 @@
     <string name="find_fobbu">Find Fobbu</string>
     <string name="select_vehicle_type">Select Vehicle Type</string>
     <string name="upload_vehicle">Upload Vehicle Pics</string>
+    <string name="please_wait">Please wait…</string>
+    <string name="finding_fobbu_for_u">we are finding a Fobbu for you</string>
+    <string name="awesome">Awesome</string>
+    <string name="fobbu_found">Fobbu has been found!</string>
+    <string name="wonderful">Wonderful…</string>
+    <string name="fobbu_confirmed_request">Fobbu has confirmed your request!</string>
+    <string name="fobbu_gathering_tools">While Fobbu is gathering tools it is strongly\nrecommended to Add your Vehicle</string>
+    <string name="building_live_track">building live track elements…</string>
+    <string name="ongoing_rsa">Ongoing RSA Request</string>
+    <string name="please_fobbu_gathering_tools">Please wait Fobbu is Gathering Tools</string>
+    <string name="fobbu_on_way">Fobbu is on his way please stay at your stranded location.</string>
+    <string name="share_4_digit_code">Please share 4 digit code</string>
+    <string name="code_validated">Code Validated!</string>
+    <string name="fobbu_will_access_your_vehicle">Fobbu will now asses your\nvehicle issue.</string>
+    <string name="fobbu_accesing_vehicle">Fobbu is assessing your vehicle.</string>
+    <string name="add_money_fobbu_wallet">Add Money in Fobbu Wallet</string>
+    <string name="share_your_rsa">Share your RSA</string>
+    <string name="save_rs_50">save Rs 50 on your first order</string>
+    <string name="vehicle_assessed">Vehicle Assessed!</string>
+    <string name="complete_assessment">Fobbu has completed assessment\nof your vehicle.</string>
+    <string name="building_work_order_summary">building work order summary…</string>
+    <string name="work_summary">Work Summary</string>
+    <string name="order_id">Order ID:</string>
+    <string name="service_type">Service Type:</string>
+    <string name="no_of_puncture">No of Punctures:</string>
+    <string name="no_of_valve">No. of valve/s</string>
+    <string name="no_of_tubes">No. of Tube/s</string>
+    <string name="total_amount">Total Amount</string>
+    <string name="confirm_pay">Confirm &amp; Pay</string>
+    <string name="payment_screen">Payment Screen</string>
+    <string name="proceed_to_pay">Proceed to pay</string>
+    <string name="get">GET</string>
+    <string name="work_order_payment">Work order &amp; Make payment</string>
+    <string name="set">SET</string>
+    <string name="fobbu_setting_vehicle">Fobbu is setting up your vehicle.</string>
+    <string name="go">GO</string>
+    <string name="work_done">Work done, Vroom the road…</string>
+    <string name="rate_review">Rate &amp; Review your experience</string>
+    <string name="wonderful_blue">Wonderful</string>
+    <string name="your_review_saved">Your review was saved. Share it with your friends!</string>
+    <string name="skip_this_step"><u>Skip this step</u></string>
 
 
 

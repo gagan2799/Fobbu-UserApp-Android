@@ -22,7 +22,6 @@ import android.support.v4.content.FileProvider
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
-import android.util.TypedValue
 import android.view.*
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -30,6 +29,7 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.fobbu.member.android.R
+import com.fobbu.member.android.activities.WaitingScreenBlue
 import com.fobbu.member.android.interfaces.HeaderText
 import java.io.ByteArrayOutputStream
 import java.io.File
@@ -53,6 +53,8 @@ class RSAFragment: Fragment()
     private lateinit var imgClose:ImageView
 
     private lateinit var rlBigProfile:RelativeLayout
+
+    private lateinit var tvFindFobbu:TextView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -111,6 +113,11 @@ class RSAFragment: Fragment()
 
             rlBigProfile.visibility=View.GONE
         }
+
+
+        tvFindFobbu.setOnClickListener {
+            showPaymentPopupFinal("Puncture cost is Rs 150\n(extra puncture will cost Rs 150/- per puncture)")
+        }
     }
 
     private fun initialise(view: View?) {
@@ -133,17 +140,19 @@ class RSAFragment: Fragment()
         imgBig = view.findViewById(R.id.imgBig)
 
         rlBigProfile= view.findViewById(R.id.rlBigProfile)
+
+        tvFindFobbu = view.findViewById(R.id.tvFindFobbu)
     }
 
 
     @SuppressLint("SetTextI18n")
-    fun showPaymentPopupFinal(id: String, name: String, amount: Double?) {
+    fun showPaymentPopupFinal( name: String) {
 
         val inflater = activity!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
         val cViewFinalPopup = inflater.inflate(R.layout.fragment_builder_confirm, null)
 
-       val builderFinal = Dialog(activity)
+       val builderFinal = Dialog(activity!!)
 
         builderFinal.requestWindowFeature(Window.FEATURE_NO_TITLE)
 
@@ -151,15 +160,23 @@ class RSAFragment: Fragment()
 
         builderFinal.setContentView(cViewFinalPopup)
 
-        builderFinal.getWindow()!!.setBackgroundDrawableResource(android.R.color.transparent)
+        builderFinal.window!!.setBackgroundDrawableResource(android.R.color.transparent)
+
+        val tvCancel = cViewFinalPopup.findViewById(R.id.tvCancel) as TextView
+
+        val tvText = cViewFinalPopup.findViewById(R.id.tvText) as TextView
+        tvText.text=name
 
         val tvConfirm = cViewFinalPopup.findViewById(R.id.tvConfirm) as TextView
 
+        tvCancel.setOnClickListener {
+            builderFinal.dismiss()
 
+        }
         tvConfirm.setOnClickListener {
             builderFinal.dismiss()
 
-
+            activity!!.startActivity(Intent(activity!!,WaitingScreenBlue::class.java))
         }
 
         builderFinal.window!!.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)

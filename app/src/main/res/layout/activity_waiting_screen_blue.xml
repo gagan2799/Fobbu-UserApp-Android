@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent"
+        android:background="@drawable/intro_background"
+        android:layout_height="match_parent">
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:id="@+id/rlLayout"
+            android:layout_height="match_parent">
+
+        <com.wang.avi.AVLoadingIndicatorView
+                android:id="@+id/avi"
+                style="@style/AVLoadingIndicatorView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="150dp"
+                app:indicatorColor="@color/white"
+                app:indicatorName="BallSpinFadeLoaderIndicator"/>
+
+        <TextView android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:textSize="@dimen/textsize_normal"
+                  android:textColor="@color/white"
+                  android:text="@string/please_wait"
+                  android:layout_below="@+id/avi"
+                  android:gravity="center"
+                  android:padding="10dp"
+                  android:layout_marginTop="15dp"
+                  android:id="@+id/tvTextOne"/>
+
+        <TextView android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:textSize="@dimen/textsize_normal"
+                  android:textColor="@color/red"
+                  android:text="@string/finding_fobbu_for_u"
+                  android:gravity="center"
+                  android:layout_below="@+id/tvTextOne"
+                  android:padding="10dp"
+                  android:id="@+id/tvTextTwo"/>
+
+        <TextView android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:textSize="@dimen/textsize_small"
+                  android:textColor="@color/white"
+                  android:text="@string/finding_fobbu_for_u"
+                  android:gravity="center"
+                  android:lineSpacingExtra="1.3dp"
+                  android:layout_below="@+id/tvTextTwo"
+                  android:visibility="gone"
+                  android:padding="10dp"
+                  android:id="@+id/tvTextThree"/>
+    </RelativeLayout>
+
+
+</RelativeLayout>

@@ -30,7 +30,7 @@
             android:layout_height="wrap_content">
 
         <TextView
-                android:textSize="@dimen/textsize_normal"
+                android:textSize="@dimen/textsize_small"
                 android:text="@string/select_service_request"
                 android:layout_width="match_parent"
                 android:padding="10dp"
@@ -297,8 +297,6 @@
                             android:src="@drawable/photo_camera"/>
 
                 </LinearLayout>
-
-
             </LinearLayout>
 
         </LinearLayout>
@@ -311,7 +309,7 @@
             android:layout_height="wrap_content"
             android:text="@string/find_fobbu"
             android:paddingRight="35dp"
-            android:textSize="@dimen/textsize_normal"
+            android:textSize="@dimen/textsize_small"
             android:paddingTop="18dp"
             android:paddingLeft="35dp"
             android:layout_alignParentBottom="true"

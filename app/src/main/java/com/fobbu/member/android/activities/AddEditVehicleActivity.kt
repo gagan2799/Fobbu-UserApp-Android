@@ -62,24 +62,53 @@ class AddEditVehicleActivity : AppCompatActivity() {
 
     private var dataList: ArrayList<Any> = ArrayList()
 
+    var fromWhere = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_edit_vehicle)
+        initialise()
         addClicks()
+    }
+
+    private fun initialise() {
+
+        webServiceApi = getEnv().getRetrofitMulti()
+
+        if (intent.hasExtra("from_where")) {
+            fromWhere = "RSA"
+            ivBack.visibility = View.GONE
+            tvEdit.visibility = View.GONE
+            ivList.visibility = View.GONE
+            tvEdit.visibility = View.GONE
+            tvSkip.visibility = View.VISIBLE
+        }
+    }
+
+    override fun onBackPressed() {
+        if (fromWhere == "RSA")
+            startActivity(Intent(this, WaitingScreenWhite::class.java).putExtra("from_where","building_live"))
+
+        finish()
     }
 
     private fun addClicks() {
 
-        webServiceApi = getEnv().getRetrofitMulti()
+        tvSkip.setOnClickListener {
+            if (fromWhere == "RSA") {
+                startActivity(Intent(this, WaitingScreenWhite::class.java).putExtra("from_where","building_live"))
+                finish()
+            }
+        }
 
         imgClose.setOnClickListener {
 
-            rlBigProfile.visibility=View.GONE
+            rlBigProfile.visibility = View.GONE
         }
 
         ivBack.setOnClickListener {
-            if(rlBigProfile.visibility==View.VISIBLE)
-                rlBigProfile.visibility=View.GONE
+            if (rlBigProfile.visibility == View.VISIBLE)
+                rlBigProfile.visibility = View.GONE
             else
                 finish()
         }
@@ -138,11 +167,31 @@ class AddEditVehicleActivity : AppCompatActivity() {
         tvAddEditVehicle.setOnClickListener {
 
             when {
-                etBrand.text.toString()=="" -> Toast.makeText(this,resources.getString(R.string.add_brand),Toast.LENGTH_SHORT).show()
-                etRegNumber.text.toString()=="" -> Toast.makeText(this,resources.getString(R.string.add_reg_no),Toast.LENGTH_SHORT).show()
-                etSubModel.text.toString()=="" -> Toast.makeText(this,resources.getString(R.string.add_sub_model),Toast.LENGTH_SHORT).show()
-                etYearsOfMake.text.toString()=="" -> Toast.makeText(this,resources.getString(R.string.add_year),Toast.LENGTH_SHORT).show()
-                vehicleType=="" -> Toast.makeText(this,resources.getString(R.string.add_vehicle_type),Toast.LENGTH_SHORT).show()
+                etBrand.text.toString() == "" -> Toast.makeText(
+                    this,
+                    resources.getString(R.string.add_brand),
+                    Toast.LENGTH_SHORT
+                ).show()
+                etRegNumber.text.toString() == "" -> Toast.makeText(
+                    this,
+                    resources.getString(R.string.add_reg_no),
+                    Toast.LENGTH_SHORT
+                ).show()
+                etSubModel.text.toString() == "" -> Toast.makeText(
+                    this,
+                    resources.getString(R.string.add_sub_model),
+                    Toast.LENGTH_SHORT
+                ).show()
+                etYearsOfMake.text.toString() == "" -> Toast.makeText(
+                    this,
+                    resources.getString(R.string.add_year),
+                    Toast.LENGTH_SHORT
+                ).show()
+                vehicleType == "" -> Toast.makeText(
+                    this,
+                    resources.getString(R.string.add_vehicle_type),
+                    Toast.LENGTH_SHORT
+                ).show()
                 else -> {
                     if (file1 != null && file1!!.exists())
                         dataList.add(file1!!)
@@ -172,25 +221,25 @@ class AddEditVehicleActivity : AppCompatActivity() {
 
             when (s) {
                 "1" -> {
-                    rlBigProfile.visibility=View.VISIBLE
+                    rlBigProfile.visibility = View.VISIBLE
                     Glide.with(this@AddEditVehicleActivity)
                         .load(file1)
                         .into(imgBig)
                 }
                 "2" -> {
-                    rlBigProfile.visibility=View.VISIBLE
+                    rlBigProfile.visibility = View.VISIBLE
                     Glide.with(this@AddEditVehicleActivity)
                         .load(file2)
                         .into(imgBig)
                 }
                 "3" -> {
-                    rlBigProfile.visibility=View.VISIBLE
+                    rlBigProfile.visibility = View.VISIBLE
                     Glide.with(this@AddEditVehicleActivity)
                         .load(file3)
                         .into(imgBig)
                 }
                 "4" -> {
-                    rlBigProfile.visibility=View.VISIBLE
+                    rlBigProfile.visibility = View.VISIBLE
                     Glide.with(this@AddEditVehicleActivity)
                         .load(file4)
                         .into(imgBig)
@@ -200,23 +249,23 @@ class AddEditVehicleActivity : AppCompatActivity() {
         alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Delete") { _, _ ->
             when (s) {
                 "1" -> {
-                    file1 =null
-                    isImageOn1=false
+                    file1 = null
+                    isImageOn1 = false
                     ivImage1.setImageResource(R.drawable.photo_camera)
                 }
                 "2" -> {
-                    file2 =null
-                    isImageOn2=false
+                    file2 = null
+                    isImageOn2 = false
                     ivImage2.setImageResource(R.drawable.photo_camera)
                 }
                 "3" -> {
-                    file3 =null
-                    isImageOn3=false
+                    file3 = null
+                    isImageOn3 = false
                     ivImage3.setImageResource(R.drawable.photo_camera)
                 }
                 "4" -> {
-                    file4 =null
-                    isImageOn4=false
+                    file4 = null
+                    isImageOn4 = false
                     ivImage4.setImageResource(R.drawable.photo_camera)
                 }
             }
@@ -517,7 +566,7 @@ class AddEditVehicleActivity : AppCompatActivity() {
         ) { dialog
             , _ ->
             dialog.dismiss()
-           finish()
+            finish()
         }
 
         alertDialog.show()

@@ -64,6 +64,15 @@
                 android:windowSoftInputMode="stateAlwaysHidden"
                 android:screenOrientation="portrait" />
 
+        <activity
+                android:name=".activities.WaitingScreenBlue"
+                android:windowSoftInputMode="stateAlwaysHidden"
+                android:screenOrientation="portrait" />
+
+        <activity
+                android:name=".activities.WaitingScreenWhite"
+                android:windowSoftInputMode="stateAlwaysHidden"
+                android:screenOrientation="portrait" />
 
         <provider
                 android:name="android.support.v4.content.FileProvider"

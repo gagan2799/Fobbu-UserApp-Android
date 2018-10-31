@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:layout_height="match_parent">
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:id="@+id/rlBuildingLiveTrack"
+            android:visibility="gone"
+            android:layout_height="match_parent">
+
+        <com.wang.avi.AVLoadingIndicatorView
+                android:id="@+id/avi"
+                style="@style/AVLoadingIndicatorView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="150dp"
+                app:indicatorColor="@color/colorPrimary"
+                app:indicatorName="BallSpinFadeLoaderIndicator"/>
+
+        <TextView android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:textSize="@dimen/textsize_normal"
+                  android:textColor="@color/colorPrimary"
+                  android:text="@string/please_wait"
+                  android:layout_below="@+id/avi"
+                  android:gravity="center"
+                  android:padding="10dp"
+                  android:layout_marginTop="15dp"
+                  android:id="@+id/tvTextOne"/>
+
+        <TextView android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:textSize="@dimen/textsize_small"
+                  android:textColor="@color/drawer_text_color"
+                  android:text="@string/building_live_track"
+                  android:gravity="center"
+                  android:layout_below="@+id/tvTextOne"
+                  android:id="@+id/tvTextTwo"/>
+
+        <TextView android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:textSize="@dimen/textsize_small"
+                  android:textColor="@color/white"
+                  android:text="@string/finding_fobbu_for_u"
+                  android:gravity="center"
+                  android:lineSpacingExtra="1.3dp"
+                  android:layout_below="@+id/tvTextTwo"
+                  android:visibility="gone"
+                  android:padding="10dp"
+                  android:id="@+id/tvTextThree"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:id="@+id/rlCodeValidated"
+            android:visibility="gone"
+            android:layout_height="match_parent">
+
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/success_check"
+                android:padding="10dp"
+                android:layout_marginTop="150dp"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/ivTick"/>
+
+        <TextView android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:textSize="@dimen/textsize_normal"
+                  android:textColor="@color/colorPrimary"
+                  android:text="@string/code_validated"
+                  android:layout_below="@+id/ivTick"
+                  android:id="@+id/tvCodeValidated"
+                  android:gravity="center"
+                  android:padding="10dp"/>
+
+        <TextView android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:lineSpacingExtra="1.3dp"
+                  android:textSize="@dimen/textsize_small"
+                  android:textColor="@color/drawer_text_color"
+                  android:text="@string/fobbu_will_access_your_vehicle"
+                  android:gravity="center"
+                  android:layout_below="@+id/tvCodeValidated"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:id="@+id/rlAccessingVehicle"
+            android:visibility="visible"
+            android:layout_height="match_parent">
+
+        <com.wang.avi.AVLoadingIndicatorView
+                android:id="@+id/avi_assessing"
+                style="@style/AVLoadingIndicatorView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="150dp"
+                app:indicatorColor="@color/colorPrimary"
+                app:indicatorName="BallSpinFadeLoaderIndicator"/>
+
+        <TextView android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:textSize="@dimen/textsize_normal"
+                  android:textColor="@color/colorPrimary"
+                  android:text="@string/please_wait"
+                  android:layout_below="@+id/avi_assessing"
+                  android:gravity="center"
+                  android:padding="10dp"
+                  android:layout_marginTop="15dp"
+                  android:id="@+id/tvTextPlease"/>
+
+        <TextView android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:textSize="@dimen/textsize_small"
+                  android:textColor="@color/drawer_text_color"
+                  android:text="@string/fobbu_accesing_vehicle"
+                  android:gravity="center"
+                  android:layout_below="@+id/tvTextPlease"
+                  android:id="@+id/tvTextAssessing"/>
+
+
+
+
+        <RelativeLayout
+                android:background="@drawable/rounded_blue_corners"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp"
+                android:layout_above="@+id/rlWallet"
+                android:id="@+id/rlShareRSA"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+            <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:layout_centerVertical="true"
+                    android:id="@+id/ivShare"
+                    android:layout_margin="10dp"
+                    android:src="@drawable/share"/>
+
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_toRightOf="@+id/ivShare"
+                    android:layout_width="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_height="wrap_content">
+
+                <TextView
+                        android:text="@string/share_your_rsa"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/textsize_small"
+                        android:lineSpacingExtra="1.4dp"
+                        android:padding="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                <TextView
+                        android:text="@string/save_rs_50"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/textsize_extra_small"
+                        android:lineSpacingExtra="1.4dp"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:visibility="gone"
+                        android:paddingBottom="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+            </LinearLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+                android:background="@drawable/rounded_red_corners"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="30dp"
+                android:id="@+id/rlWallet"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:layout_centerVertical="true"
+                    android:id="@+id/ivWallet"
+                    android:layout_margin="10dp"
+                    android:src="@drawable/fobbu_wallet"/>
+
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_toRightOf="@+id/ivWallet"
+                    android:layout_width="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_height="wrap_content">
+
+                <TextView
+                        android:text="@string/add_money_fobbu_wallet"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/textsize_small"
+                        android:lineSpacingExtra="1.4dp"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:paddingTop="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                <TextView
+                        android:text="@string/save_rs_50"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/textsize_extra_small"
+                        android:lineSpacingExtra="1.4dp"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:paddingBottom="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+            </LinearLayout>
+        </RelativeLayout>
+
+        <View android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:layout_alignBottom="@+id/rlShareRSA"
+              android:layout_alignRight="@+id/rlShareRSA"
+              android:layout_alignTop="@+id/rlShareRSA"
+              android:layout_alignLeft="@+id/rlShareRSA"
+              android:background="@color/white_transparent_80"/>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>
