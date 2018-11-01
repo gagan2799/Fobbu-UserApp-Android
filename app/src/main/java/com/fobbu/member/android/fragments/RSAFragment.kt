@@ -30,7 +30,7 @@ import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.fobbu.member.android.R
 import com.fobbu.member.android.activities.WaitingScreenBlue
-import com.fobbu.member.android.interfaces.HeaderText
+import com.fobbu.member.android.interfaces.HeaderIconChanges
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
@@ -38,7 +38,7 @@ import java.util.ArrayList
 
 class RSAFragment: Fragment()
 {
-    private var headerText: HeaderText? = null
+    private var headerIconChanges: HeaderIconChanges? = null
 
     private lateinit var llPhoto1:LinearLayout
     private lateinit var llPhoto2:LinearLayout
@@ -55,6 +55,22 @@ class RSAFragment: Fragment()
     private lateinit var rlBigProfile:RelativeLayout
 
     private lateinit var tvFindFobbu:TextView
+
+    private lateinit var ivBike:ImageView
+    private lateinit var ivCar:ImageView
+    var strVehicleType="2wheeler"
+
+    private lateinit var llFlatTyre:LinearLayout
+    private lateinit var llBattery:LinearLayout
+    private lateinit var llVehicleEmergency:LinearLayout
+
+    private lateinit var ivFlatTyre:ImageView
+    private lateinit var ivBattery:ImageView
+    private lateinit var ivEmergency:ImageView
+
+    private lateinit var tvFlatTyre:TextView
+    private lateinit var tvBatteryText:TextView
+    private lateinit var tvEmergencyText:TextView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -118,12 +134,56 @@ class RSAFragment: Fragment()
         tvFindFobbu.setOnClickListener {
             showPaymentPopupFinal("Puncture cost is Rs 150\n(extra puncture will cost Rs 150/- per puncture)")
         }
+
+        ivCar.setOnClickListener {
+            strVehicleType="4wheeler"
+            ivCar.setImageResource(R.drawable.car_blue)
+            ivBike.setImageResource(R.drawable.scooter_gray)
+        }
+
+        ivBike.setOnClickListener {
+            strVehicleType="2wheeler"
+            ivCar.setImageResource(R.drawable.car_gray)
+            ivBike.setImageResource(R.drawable.scooter_blue)
+        }
+
+        llFlatTyre.setOnClickListener {
+            ivFlatTyre.setImageResource(R.drawable.flat_tyre_blue)
+            ivBattery.setImageResource(R.drawable.battery_jump_start)
+            ivEmergency.setImageResource(R.drawable.vehicle_emergency)
+
+            tvFlatTyre.setTextColor(resources.getColor(R.color.colorPrimary))
+            tvBatteryText.setTextColor(resources.getColor(R.color.drawer_text_color))
+            tvEmergencyText.setTextColor(resources.getColor(R.color.drawer_text_color))
+
+        }
+        llBattery.setOnClickListener {
+            ivFlatTyre.setImageResource(R.drawable.flat_tyre_gray)
+            ivBattery.setImageResource(R.drawable.battery_jump_start_blue)
+            ivEmergency.setImageResource(R.drawable.vehicle_emergency)
+
+            tvFlatTyre.setTextColor(resources.getColor(R.color.drawer_text_color))
+            tvBatteryText.setTextColor(resources.getColor(R.color.colorPrimary))
+            tvEmergencyText.setTextColor(resources.getColor(R.color.drawer_text_color))
+
+        }
+
+        llVehicleEmergency.setOnClickListener {
+            ivFlatTyre.setImageResource(R.drawable.flat_tyre_gray)
+            ivBattery.setImageResource(R.drawable.battery_jump_start)
+            ivEmergency.setImageResource(R.drawable.vehicle_emergency)
+
+            tvFlatTyre.setTextColor(resources.getColor(R.color.drawer_text_color))
+            tvBatteryText.setTextColor(resources.getColor(R.color.drawer_text_color))
+            tvEmergencyText.setTextColor(resources.getColor(R.color.colorPrimary))
+
+        }
+
     }
 
     private fun initialise(view: View?) {
-        headerText = activity as HeaderText?
-
-        headerText!!.setTitle(resources.getString(R.string.rsa_textt))
+        headerIconChanges = activity as HeaderIconChanges?
+        headerIconChanges!!.changeHeaderIcons( true,false,false)
 
         llPhoto1 = view!!.findViewById(R.id.llPhoto1)
         llPhoto2 = view.findViewById(R.id.llPhoto2)
@@ -136,12 +196,26 @@ class RSAFragment: Fragment()
         ivImage4 = view.findViewById(R.id.ivImage4)
 
         imgClose = view.findViewById(R.id.imgClose)
-
         imgBig = view.findViewById(R.id.imgBig)
-
         rlBigProfile= view.findViewById(R.id.rlBigProfile)
 
         tvFindFobbu = view.findViewById(R.id.tvFindFobbu)
+
+        ivBike = view.findViewById(R.id.ivBike)
+        ivCar = view.findViewById(R.id.ivCar)
+
+        ivFlatTyre = view.findViewById(R.id.ivFlatTyre)
+        ivBattery = view.findViewById(R.id.ivBattery)
+        ivEmergency = view.findViewById(R.id.ivEmergency)
+
+        llFlatTyre = view.findViewById(R.id.llFlatTyre)
+        llBattery = view.findViewById(R.id.llBattery)
+        llVehicleEmergency = view.findViewById(R.id.llVehicleEmergency)
+
+        tvFlatTyre = view.findViewById(R.id.tvFlatTyre)
+        tvBatteryText = view.findViewById(R.id.tvBatteryText)
+        tvEmergencyText = view.findViewById(R.id.tvEmergencyText)
+
     }
 
 

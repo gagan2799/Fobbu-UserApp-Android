@@ -9,7 +9,6 @@
     <RelativeLayout
             android:id="@+id/rlTop"
             android:layout_width="match_parent"
-            android:background="@color/home_background"
             android:layout_height="wrap_content">
 
         <ImageView
@@ -17,6 +16,29 @@
                 android:layout_width="wrap_content"
                 android:padding="12dp"
                 android:src="@drawable/drawer"
+                android:layout_height="wrap_content"/>
+
+        <TextView
+                android:id="@+id/tvSOS"
+                android:textColor="@color/drawer_text_color"
+                android:layout_alignParentLeft="true"
+                android:padding="10dp"
+                android:gravity="center"
+                android:textSize="@dimen/textsize_small"
+                android:drawableTop="@drawable/sos"
+                android:text="@string/sos"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        <ImageView
+                android:id="@+id/ivCrossRSA"
+                android:src="@drawable/gray_cross"
+                android:layout_width="wrap_content"
+                android:padding="10dp"
+                android:visibility="gone"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
                 android:layout_height="wrap_content"/>
 
         <ImageView
@@ -33,8 +55,7 @@
             android:layout_width="match_parent"
             android:layout_below="@+id/rlTop"
             android:layout_above="@+id/llBottomBar"
-            android:layout_height="match_parent" />
-
+            android:layout_height="match_parent"/>
 
 
     <LinearLayout

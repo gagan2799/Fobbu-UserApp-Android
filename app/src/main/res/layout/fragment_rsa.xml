@@ -12,8 +12,8 @@
             android:text="@string/rsa_textt"
             android:gravity="center"
             android:id="@+id/tvRSA"
-            android:textSize="@dimen/textsize_normal"
-            android:padding="10dp"/>
+            android:textColor="@color/drawer_text_color"
+            android:textSize="@dimen/textsize_medium" />
 
     <View android:layout_width="match_parent"
           android:layout_height="1dp"
@@ -56,12 +56,14 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:gravity="center"
+                    android:id="@+id/llFlatTyre"
                     android:layout_weight="1">
 
                 <ImageView
                         android:layout_width="wrap_content"
                         android:src="@drawable/flat_tyre_blue"
                         android:layout_marginTop="10dp"
+                        android:id="@+id/ivFlatTyre"
                         android:layout_height="wrap_content"/>
 
                 <TextView
@@ -71,7 +73,7 @@
                         android:gravity="center"
                         android:id="@+id/tvFlatTyre"
                         android:layout_marginTop="5dp"
-                        android:textColor="@color/drawer_text_color"
+                        android:textColor="@color/colorPrimary"
                         android:text="@string/flat_tyre"
                         android:layout_height="wrap_content"/>
 
@@ -89,6 +91,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
+                    android:id="@+id/llBattery"
                     android:gravity="center"
                     android:layout_weight="1">
 
@@ -96,6 +99,7 @@
                         android:layout_width="wrap_content"
                         android:src="@drawable/battery_jump_start"
                         android:layout_marginTop="10dp"
+                        android:id="@+id/ivBattery"
                         android:layout_height="wrap_content"/>
 
                 <TextView
@@ -105,6 +109,7 @@
                         android:layout_marginTop="5dp"
                         android:textColor="@color/drawer_text_color"
                         android:gravity="center"
+                        android:id="@+id/tvBatteryText"
                         android:text="@string/battery_jump"
                         android:layout_height="wrap_content"/>
 
@@ -122,12 +127,14 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:gravity="center"
+                    android:id="@+id/llVehicleEmergency"
                     android:layout_weight="1">
 
                 <ImageView
                         android:layout_width="wrap_content"
                         android:src="@drawable/vehicle_emergency"
                         android:layout_marginTop="10dp"
+                        android:id="@+id/ivEmergency"
                         android:layout_height="wrap_content"/>
 
                 <TextView
@@ -135,6 +142,7 @@
                         android:layout_width="wrap_content"
                         android:padding="5dp"
                         android:gravity="center"
+                        android:id="@+id/tvEmergencyText"
                         android:textColor="@color/drawer_text_color"
                         android:layout_marginTop="5dp"
                         android:text="@string/vehicle_emergency"
@@ -316,10 +324,10 @@
             android:layout_gravity="center_horizontal"
             android:layout_centerHorizontal="true"
             android:singleLine="true"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="10dp"
             android:foreground="?attr/selectableItemBackground"
             android:paddingBottom="25dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/rounded_red"
             android:textColor="#ffffff"/>
 

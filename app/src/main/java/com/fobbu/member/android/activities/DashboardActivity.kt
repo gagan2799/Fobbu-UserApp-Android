@@ -9,20 +9,22 @@ import android.support.v4.app.Fragment
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
+import android.view.View
 import com.fobbu.member.android.R
 import com.fobbu.member.android.fragments.HomeFragment
 import com.fobbu.member.android.fragments.RSAFragment
-import com.fobbu.member.android.interfaces.HeaderText
-import com.fobbu.member.android.tutorial.TutorialActivity
+import com.fobbu.member.android.fragments.RSALiveFragment
+import com.fobbu.member.android.interfaces.ChangeRSAFragments
+import com.fobbu.member.android.interfaces.HeaderIconChanges
 import com.fobbu.member.android.utils.CommonClass
 import kotlinx.android.synthetic.main.activity_dashboard.*
 import kotlinx.android.synthetic.main.app_bar_dashboard.*
 import kotlinx.android.synthetic.main.inflate_drawer.*
 
-class DashboardActivity : AppCompatActivity(), HeaderText {
-    override fun setTitle(title: String?) {
+class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragments {
 
-    }
+
+    var fragmentTypeForRSA = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,46 +32,63 @@ class DashboardActivity : AppCompatActivity(), HeaderText {
         setDataToDrawer()
         drawerClicks()
         tabBarClicks()
-        changeFragment(RSAFragment(),resources.getString(R.string.home))
+        changeFragment(HomeFragment(), resources.getString(R.string.home))
     }
 
-    private fun changeFragment(fragment: Fragment, tag: String) {
-        val manager = supportFragmentManager
-        val transaction = manager.beginTransaction()
-        transaction.add(R.id.content_frame, fragment, tag)
-        if (tag != resources.getString(R.string.home)) {
-            transaction.addToBackStack(null)
-        }
-        transaction.commit()
-    }
-
+    ////BOTTOM BAR CLICKS HANDLED IN THIS METHOD
     private fun tabBarClicks() {
 
         llHome.setOnClickListener {
 
-            ivHome.setImageResource(R.drawable.meters_click_tabbar)
-            ivHome.setBackgroundColor(resources.getColor(R.color.white))
+            changeTabs(resources.getString(R.string.home))
 
-            ivRSA.setImageResource(R.drawable.car_tabbar)
-            ivRSA.setBackgroundColor(resources.getColor(R.color.colorPrimary))
+            changeFragment(HomeFragment(), resources.getString(R.string.home))
         }
 
         llRSA.setOnClickListener {
 
-            ivHome.setImageResource(R.drawable.meters_tabbar)
-            ivHome.setBackgroundColor(resources.getColor(R.color.colorPrimary))
+            changeTabs(resources.getString(R.string.rsa_home))
 
-            ivRSA.setImageResource(R.drawable.car_click_tabbar)
-            ivRSA.setBackgroundColor(resources.getColor(R.color.white))
+            setFragmentsFromStackForRSA(fragmentTypeForRSA)
         }
     }
 
-    @SuppressLint("SetTextI18n")
-    private fun setDataToDrawer() {
-        tvName.text = CommonClass(this,this).getString("display_name")
-        tvMembership.text = resources.getString(R.string.membership_id)+ CommonClass(this,this).getString("membership_id")
+    ////CHANGE TABS BACKGROUND WITH CLICK
+    private fun changeTabs(string: String) {
+
+        when(string)
+        {
+            resources.getString(R.string.home) ->
+            {
+                ivHome.setImageResource(R.drawable.meters_click_tabbar)
+                ivHome.setBackgroundColor(resources.getColor(R.color.white))
+
+                ivRSA.setImageResource(R.drawable.car_tabbar)
+                ivRSA.setBackgroundColor(resources.getColor(R.color.colorPrimary))
+            }
+            resources.getString(R.string.rsa_home) ->
+            {
+                ivHome.setImageResource(R.drawable.meters_tabbar)
+                ivHome.setBackgroundColor(resources.getColor(R.color.colorPrimary))
+
+                ivRSA.setImageResource(R.drawable.car_click_tabbar)
+                ivRSA.setBackgroundColor(resources.getColor(R.color.white))
+            }
+        }
     }
 
+
+
+    /////SET DATA TO DRAWER IF ANY CHANGES REQUIRED
+    @SuppressLint("SetTextI18n")
+    private fun setDataToDrawer() {
+        tvName.text = CommonClass(this, this).getString("display_name")
+        tvMembership.text = resources.getString(R.string.membership_id) +
+                CommonClass(this, this).getString("membership_id")
+    }
+
+
+    /////DRAWER CLICKS HANDLED HERE
     private fun drawerClicks() {
 
         ivDrawer.setOnClickListener {
@@ -96,6 +115,77 @@ class DashboardActivity : AppCompatActivity(), HeaderText {
             }, 500)
         }
     }
+
+
+    override fun onResume() {
+        super.onResume()
+
+        checkIfOnGoingRSAScreen()
+    }
+
+    ////CHECK IF RSA REQUEST IS ON WITH SCREENS
+    private fun checkIfOnGoingRSAScreen() {
+
+        if (CommonClass(this, this).getString("OnGoingRSA_Screen") == "YES") {
+            CommonClass(this, this).putString("OnGoingRSA_Screen", "")
+            fragmentTypeForRSA = CommonClass(this, this).getString("OnGoingRSA_Screen_Type")
+            setFragmentsFromStackForRSA(fragmentTypeForRSA)
+        }
+    }
+
+    override fun setRSAFragments(type: String) {
+        if (type != "")
+            fragmentTypeForRSA = type
+
+        setFragmentsFromStackForRSA(fragmentTypeForRSA)
+    }
+
+    ////SHOW HEADER ICONS AND CHANGES
+    override fun changeHeaderIcons(showDrawer: Boolean, showSOS: Boolean, showCrossCancelRSA: Boolean) {
+
+        if(showDrawer)
+            ivDrawer.visibility=View.VISIBLE
+        else
+            ivDrawer.visibility=View.GONE
+
+        if(showSOS)
+            tvSOS.visibility=View.VISIBLE
+        else
+            tvSOS.visibility=View.GONE
+
+        if(showCrossCancelRSA)
+            ivCrossRSA.visibility=View.VISIBLE
+        else
+            ivCrossRSA.visibility=View.GONE
+    }
+
+    /////CHANGE RSA FRAGMENTS
+    private fun setFragmentsFromStackForRSA(type: String) {
+
+        changeTabs(resources.getString(R.string.rsa_home))
+
+        fragmentTypeForRSA = type
+
+        val fragment: Fragment = when (fragmentTypeForRSA) {
+            resources.getString(R.string.rsa_home) -> RSAFragment()
+            resources.getString(R.string.rsa_live) -> RSALiveFragment()
+            else -> RSAFragment()
+        }
+
+        changeFragment(fragment, type)
+    }
+
+    /////CODE TO CHANGE FRAGMENTS IN APP
+    private fun changeFragment(fragment: Fragment, tag: String) {
+        val manager = supportFragmentManager
+        val transaction = manager.beginTransaction()
+        transaction.add(R.id.content_frame, fragment, tag)
+        if (tag != resources.getString(R.string.home)) {
+            transaction.addToBackStack(null)
+        }
+        transaction.commit()
+    }
+
 
     ///LOGOUT POPUP
     private fun showLogoutPopup() {

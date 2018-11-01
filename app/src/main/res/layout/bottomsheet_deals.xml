@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:id="@+id/bottomsheet"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_alignParentBottom="true"
+              android:background="#F3F3F3"
+              android:orientation="vertical"
+              android:layout_marginLeft="20dp"
+              android:layout_marginRight="20dp"
+              app:behavior_hideable="false"
+              app:behavior_peekHeight="20dp"
+              app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:background="@color/red"
+            android:id="@+id/rlBottomSheet"
+            android:orientation="horizontal">
+
+        <View
+                android:layout_width="50dp"
+                android:background="@color/white"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:layout_height="0.8dp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@color/red"
+            android:orientation="horizontal">
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:padding="10dp"
+                android:gravity="center"
+                android:id="@+id/tvUnlock"
+                android:textSize="@dimen/textsize_medium"
+                android:textColor="@color/white"
+                android:text="@string/unlock_your_lsd"/>
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:id="@+id/tvassured"
+                android:layout_below="@+id/tvUnlock"
+                android:textSize="@dimen/textsize_small"
+                android:textColor="@color/white"
+                android:text="@string/assured_cashback"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

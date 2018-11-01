@@ -77,7 +77,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
-
                 android:gravity="center_horizontal"
                 android:inputType="numberPassword"
                 android:imeOptions="actionNext"
@@ -85,7 +84,7 @@
                 android:singleLine="true"
                 android:background="@drawable/half_recatangle"
                 android:textColor="@color/black"
-                android:textSize="20sp"/>
+                android:textSize="@dimen/login_textsize_medium"/>
 
         <EditText
                 android:id="@+id/edPinTwo"
@@ -100,7 +99,7 @@
                 android:maxLength="1"
                 android:singleLine="true"
                 android:textColor="@color/black"
-                android:textSize="20sp"
+                android:textSize="@dimen/login_textsize_medium"
                 android:background="@drawable/half_recatangle"/>
 
         <EditText
@@ -116,7 +115,7 @@
                 android:maxLength="1"
                 android:singleLine="true"
                 android:textColor="@color/black"
-                android:textSize="20sp"
+                android:textSize="@dimen/login_textsize_medium"
                 android:background="@drawable/half_recatangle"/>
 
         <EditText
@@ -130,7 +129,7 @@
                 android:maxLength="1"
                 android:singleLine="true"
                 android:textColor="@color/black"
-                android:textSize="20sp"
+                android:textSize="@dimen/login_textsize_medium"
                 android:background="@drawable/half_recatangle"/>
 
     </LinearLayout>
@@ -173,7 +172,7 @@
                 android:singleLine="true"
                 android:background="@drawable/half_recatangle"
                 android:textColor="@color/black"
-                android:textSize="20sp"/>
+                android:textSize="@dimen/login_textsize_medium"/>
 
         <EditText
                 android:id="@+id/edPinSix"
@@ -188,7 +187,7 @@
                 android:maxLength="1"
                 android:singleLine="true"
                 android:textColor="@color/black"
-                android:textSize="20sp"
+                android:textSize="@dimen/login_textsize_medium"
                 android:background="@drawable/half_recatangle"/>
 
         <EditText
@@ -204,7 +203,7 @@
                 android:maxLength="1"
                 android:singleLine="true"
                 android:textColor="@color/black"
-                android:textSize="20sp"
+                android:textSize="@dimen/login_textsize_medium"
                 android:background="@drawable/half_recatangle"/>
 
         <EditText
@@ -219,7 +218,7 @@
                 android:maxLength="1"
                 android:singleLine="true"
                 android:textColor="@color/black"
-                android:textSize="20sp"
+                android:textSize="@dimen/login_textsize_medium"
                 android:background="@drawable/half_recatangle"/>
 
     </LinearLayout>
@@ -232,7 +231,7 @@
             android:layout_centerHorizontal="true"
             android:text="@string/generate"
             android:paddingRight="45dp"
-            android:textSize="@dimen/textsize_normal"
+            android:textSize="@dimen/login_textsize_medium"
             android:paddingTop="18dp"
             android:paddingLeft="45dp"
             android:singleLine="true"

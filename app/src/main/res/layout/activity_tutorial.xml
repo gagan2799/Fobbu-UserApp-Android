@@ -22,7 +22,7 @@
         android:layout_centerHorizontal="true"
         android:text="@string/try_fobbu"
         android:paddingRight="35dp"
-        android:textSize="@dimen/textsize_normal"
+        android:textSize="@dimen/textsize_medium"
         android:paddingTop="18dp"
         android:foreground="?attr/selectableItemBackground"
         android:paddingLeft="35dp"

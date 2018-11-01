@@ -154,14 +154,14 @@ class AddEditVehicleActivity : AppCompatActivity() {
 
         ivBike.setOnClickListener {
             vehicleType = "2wheeler"
-            ivBike.setImageResource(R.drawable.scooter_red)
-            ivCar.setImageResource(R.drawable.car_blue)
+            ivBike.setImageResource(R.drawable.scooter_blue)
+            ivCar.setImageResource(R.drawable.car_gray)
         }
 
         ivCar.setOnClickListener {
             vehicleType = "4wheeler"
-            ivBike.setImageResource(R.drawable.scooter_blue)
-            ivCar.setImageResource(R.drawable.car_red)
+            ivBike.setImageResource(R.drawable.scooter_gray)
+            ivCar.setImageResource(R.drawable.car_blue)
         }
 
         tvAddEditVehicle.setOnClickListener {
@@ -675,13 +675,23 @@ class AddEditVehicleActivity : AppCompatActivity() {
 
                     if (mainPojo!!.success == "true") {
 
-                        println("Success")
-                        CommonClass(
-                            this@AddEditVehicleActivity,
-                            this@AddEditVehicleActivity
-                        ).showToast(mainPojo.message)
+                        if (fromWhere == "RSA") {
+                            startActivity(Intent(this@AddEditVehicleActivity
+                                , WaitingScreenWhite::class.java).putExtra("from_where","new_vehicle_added"))
+                            finish()
+                        }
+                        else
+                        {
+                            println("Success")
+                            CommonClass(
+                                this@AddEditVehicleActivity,
+                                this@AddEditVehicleActivity
+                            ).showToast(mainPojo.message)
 
-                        finish()
+                            finish()
+                        }
+
+
 
                     } else {
                         CommonClass(

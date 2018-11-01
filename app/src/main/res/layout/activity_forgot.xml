@@ -47,7 +47,7 @@
         android:gravity="center"
         android:background="@drawable/half_recatangle"
         android:textColor="@color/black"
-        android:textSize="@dimen/textsize_normal"
+        android:textSize="@dimen/login_textsize_medium"
         android:id="@+id/etEmail"
         android:padding="10dp"/>
 
@@ -59,7 +59,7 @@
         android:layout_centerHorizontal="true"
         android:text="@string/reset"
         android:paddingRight="45dp"
-        android:textSize="@dimen/textsize_normal"
+        android:textSize="@dimen/login_textsize_medium"
         android:paddingTop="18dp"
         android:paddingLeft="45dp"
         android:singleLine="true"

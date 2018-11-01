@@ -23,19 +23,21 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:padding="8dp"
+                android:id="@+id/ivHead"
                 android:layout_alignParentTop="true"
                 android:src="@drawable/fobbu_logo_blue"/>
 
+
         <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/add_vehicle"
-                android:id="@+id/tvHeading"
+                android:gravity="center"
                 android:textAllCaps="true"
-                android:textSize="@dimen/textsize_normal"
-                android:textColor="@color/color_grey"
-                android:layout_below="@+id/ivBack"
-                android:layout_centerHorizontal="true"/>
+                android:id="@+id/tvHeading"
+                android:layout_below="@+id/ivHead"
+                android:textColor="@color/drawer_text_color"
+                android:textSize="@dimen/textsize_normal" />
 
     </RelativeLayout>
 
@@ -56,7 +58,7 @@
                 android:id="@+id/tvNew"
                 android:layout_marginLeft="40dp"
                 android:layout_centerVertical="true"
-                android:textSize="@dimen/textsize_normal"
+                android:textSize="@dimen/textsize_medium"
                 android:layout_height="wrap_content"/>
 
         <View
@@ -76,7 +78,7 @@
                 android:layout_toRightOf="@+id/tvNew"
                 android:id="@+id/tvEdit"
                 android:layout_marginLeft="50dp"
-                android:textSize="@dimen/textsize_normal"
+                android:textSize="@dimen/textsize_medium"
                 android:layout_height="wrap_content"/>
 
         <ImageView
@@ -110,7 +112,7 @@
                         android:layout_width="0dp"
                         android:layout_weight="0.7"
                         android:id="@+id/tvVehicleBrand"
-                        android:textSize="@dimen/textsize_medium"
+                        android:textSize="@dimen/textsize_small"
                         android:textColor="@color/color_grey"
                         android:text="@string/vehicle_brand"
                         android:layout_centerVertical="true"
@@ -124,7 +126,7 @@
                         android:id="@+id/etBrand"
                         android:layout_marginRight="40dp"
                         android:singleLine="true"
-                        android:textSize="@dimen/textsize_medium"
+                        android:textSize="@dimen/textsize_small"
                         android:padding="10dp"
                         android:imeOptions="actionNext"
                         android:layout_centerVertical="true"
@@ -142,7 +144,7 @@
                         android:layout_width="0dp"
                         android:layout_weight="0.7"
                         android:id="@+id/tvVehicleReg"
-                        android:textSize="@dimen/textsize_medium"
+                        android:textSize="@dimen/textsize_small"
                         android:textColor="@color/color_grey"
                         android:text="@string/vehicle_reg_no"
                         android:layout_centerVertical="true"
@@ -156,7 +158,7 @@
                         android:id="@+id/etRegNumber"
                         android:layout_marginRight="40dp"
                         android:singleLine="true"
-                        android:textSize="@dimen/textsize_medium"
+                        android:textSize="@dimen/textsize_small"
                         android:padding="10dp"
                         android:imeOptions="actionNext"
                         android:layout_centerVertical="true"
@@ -173,7 +175,7 @@
                         android:layout_width="0dp"
                         android:layout_weight="0.7"
                         android:id="@+id/tvSubModel"
-                        android:textSize="@dimen/textsize_medium"
+                        android:textSize="@dimen/textsize_small"
                         android:textColor="@color/color_grey"
                         android:text="@string/vehicle_sub_model"
                         android:layout_centerVertical="true"
@@ -187,7 +189,7 @@
                         android:id="@+id/etSubModel"
                         android:layout_marginRight="40dp"
                         android:singleLine="true"
-                        android:textSize="@dimen/textsize_medium"
+                        android:textSize="@dimen/textsize_small"
                         android:padding="10dp"
                         android:imeOptions="actionNext"
                         android:layout_centerVertical="true"
@@ -205,7 +207,7 @@
                         android:layout_width="0dp"
                         android:layout_weight="0.7"
                         android:id="@+id/tvYearsOfMake"
-                        android:textSize="@dimen/textsize_medium"
+                        android:textSize="@dimen/textsize_small"
                         android:textColor="@color/color_grey"
                         android:text="@string/year_of_make"
                         android:layout_centerVertical="true"
@@ -218,7 +220,7 @@
                         android:background="@drawable/border_line_grey"
                         android:id="@+id/etYearsOfMake"
                         android:layout_marginRight="40dp"
-                        android:textSize="@dimen/textsize_medium"
+                        android:textSize="@dimen/textsize_small"
                         android:padding="10dp"
                         android:singleLine="true"
                         android:imeOptions="actionDone"
@@ -238,7 +240,7 @@
                         android:layout_width="0dp"
                         android:layout_weight="0.7"
                         android:id="@+id/tvUploadPics"
-                        android:textSize="@dimen/textsize_medium"
+                        android:textSize="@dimen/textsize_small"
                         android:textColor="@color/color_grey"
                         android:text="@string/upload_pics"
                         android:layout_height="wrap_content"/>
@@ -327,7 +329,7 @@
                         android:layout_width="0dp"
                         android:layout_weight="0.7"
                         android:id="@+id/tvVehicleType"
-                        android:textSize="@dimen/textsize_medium"
+                        android:textSize="@dimen/textsize_small"
                         android:textColor="@color/color_grey"
                         android:text="@string/vehicle_type"
                         android:layout_centerVertical="true"
@@ -342,14 +344,14 @@
                         android:layout_height="wrap_content">
 
                     <ImageView
-                            android:src="@drawable/car_blue"
+                            android:src="@drawable/car_gray"
                             android:layout_width="wrap_content"
                             android:padding="10dp"
                             android:id="@+id/ivCar"
                             android:layout_height="wrap_content"/>
 
                     <ImageView
-                            android:src="@drawable/scooter_blue"
+                            android:src="@drawable/scooter_gray"
                             android:layout_width="wrap_content"
                             android:padding="10dp"
                             android:id="@+id/ivBike"
@@ -366,7 +368,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/add_vehicle"
                     android:paddingRight="35dp"
-                    android:textSize="@dimen/textsize_normal"
+                    android:textSize="@dimen/textsize_small"
                     android:paddingTop="18dp"
                     android:paddingLeft="35dp"
                     android:layout_gravity="center_horizontal"

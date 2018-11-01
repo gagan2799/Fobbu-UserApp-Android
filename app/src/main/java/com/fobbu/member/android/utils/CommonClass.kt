@@ -15,6 +15,7 @@ import com.fobbu.member.android.R
 import com.fobbu.member.android.activities.LoginActivity
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import org.json.JSONObject
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -75,6 +76,19 @@ class CommonClass(activity1: Activity, context1: Context)
         println("LIst $list")
 
         return list
+    }
+
+    fun errorMessage( response: String): String{
+        try {
+            val jsonObject = JSONObject(response)
+
+            return jsonObject.getString("message")
+        }
+        catch (e:java.lang.Exception)
+        {
+            e.printStackTrace()
+        }
+       return ""
     }
 
     fun isStringEmpty(text: String): Boolean

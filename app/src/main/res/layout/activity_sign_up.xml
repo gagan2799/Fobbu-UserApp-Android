@@ -49,7 +49,7 @@
         android:inputType="text"
         android:background="@drawable/half_recatangle"
         android:textColor="@color/black"
-        android:textSize="@dimen/textsize_normal"
+        android:textSize="@dimen/login_textsize_medium"
         android:id="@+id/etFullName"
         android:padding="10dp"/>
 
@@ -67,7 +67,7 @@
         android:imeOptions="actionNext"
         android:singleLine="true"
         android:textColor="@color/black"
-        android:textSize="@dimen/textsize_normal"
+        android:textSize="@dimen/login_textsize_medium"
         android:id="@+id/etMobile"
         android:padding="10dp"/>
 
@@ -85,7 +85,7 @@
         android:background="@drawable/half_recatangle"
         android:singleLine="true"
         android:textColor="@color/black"
-        android:textSize="@dimen/textsize_normal"
+        android:textSize="@dimen/login_textsize_medium"
         android:id="@+id/etEmail"
         android:padding="10dp"/>
 
@@ -103,7 +103,7 @@
         android:singleLine="true"
         android:inputType="textPassword"
         android:imeOptions="actionDone"
-        android:textSize="@dimen/textsize_normal"
+        android:textSize="@dimen/login_textsize_medium"
         android:id="@+id/etPassword"
         android:padding="10dp"/>
 
@@ -115,7 +115,7 @@
         android:padding="10dp"
         android:layout_below="@+id/etPassword"
         android:background="@drawable/border_line_grey"
-        android:textSize="@dimen/textsize_normal"
+        android:textSize="@dimen/login_textsize_medium"
         android:text="@string/selectGender"
         android:drawableRight="@drawable/dropdown"
         android:gravity="center"
@@ -144,7 +144,7 @@
         android:layout_centerHorizontal="true"
         android:text="@string/start_your_fobbu"
         android:paddingRight="25dp"
-        android:textSize="@dimen/textsize_normal"
+        android:textSize="@dimen/login_textsize_medium"
         android:paddingTop="18dp"
         android:gravity="center"
         android:clickable="true"

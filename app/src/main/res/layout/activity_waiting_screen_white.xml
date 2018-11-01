@@ -95,7 +95,7 @@
     <RelativeLayout
             android:layout_width="match_parent"
             android:id="@+id/rlAccessingVehicle"
-            android:visibility="visible"
+            android:visibility="gone"
             android:layout_height="match_parent">
 
         <com.wang.avi.AVLoadingIndicatorView
@@ -242,5 +242,114 @@
 
     </RelativeLayout>
 
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:id="@+id/rlVehicleAccessed"
+            android:visibility="gone"
+            android:layout_height="match_parent">
 
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/success_check"
+                android:padding="10dp"
+                android:layout_marginTop="150dp"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/ivTickV"/>
+
+        <TextView android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:textSize="@dimen/textsize_normal"
+                  android:textColor="@color/colorPrimary"
+                  android:text="@string/vehicle_assessed"
+                  android:layout_below="@+id/ivTickV"
+                  android:id="@+id/tvVehicleAssessd"
+                  android:gravity="center"
+                  android:padding="10dp"/>
+
+        <TextView android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:lineSpacingExtra="1.3dp"
+                  android:textSize="@dimen/textsize_small"
+                  android:textColor="@color/drawer_text_color"
+                  android:text="@string/complete_assessment"
+                  android:gravity="center"
+                  android:layout_below="@+id/tvVehicleAssessd"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:id="@+id/rlBuildingWorkSummary"
+            android:visibility="gone"
+            android:layout_height="match_parent">
+
+        <com.wang.avi.AVLoadingIndicatorView
+                android:id="@+id/avi_summary"
+                style="@style/AVLoadingIndicatorView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="150dp"
+                app:indicatorColor="@color/colorPrimary"
+                app:indicatorName="BallSpinFadeLoaderIndicator"/>
+
+        <TextView android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:textSize="@dimen/textsize_normal"
+                  android:textColor="@color/colorPrimary"
+                  android:text="@string/please_wait"
+                  android:layout_below="@+id/avi_summary"
+                  android:gravity="center"
+                  android:padding="10dp"
+                  android:layout_marginTop="15dp"
+                  android:id="@+id/tvTextSummary"/>
+
+        <TextView android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:textSize="@dimen/textsize_small"
+                  android:textColor="@color/drawer_text_color"
+                  android:text="@string/building_work_order_summary"
+                  android:gravity="center"
+                  android:layout_below="@+id/tvTextSummary"
+                  android:id="@+id/tvText"/>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:id="@+id/rlNewVehicleAdded"
+            android:layout_height="match_parent">
+
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/success_check"
+                android:padding="10dp"
+                android:layout_marginTop="150dp"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/ivTickNew"/>
+
+        <TextView android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:textSize="@dimen/textsize_normal"
+                  android:textColor="@color/colorPrimary"
+                  android:text="@string/awesome_exclamatory"
+                  android:layout_below="@+id/ivTickNew"
+                  android:id="@+id/tvVehicleAdd"
+                  android:gravity="center"
+                  android:padding="10dp"/>
+
+        <TextView android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:lineSpacingExtra="1.3dp"
+                  android:textSize="@dimen/textsize_small"
+                  android:textColor="@color/drawer_text_color"
+                  android:text="@string/new_vehicle_added"
+                  android:gravity="center"
+                  android:layout_below="@+id/tvVehicleAdd"/>
+
+    </RelativeLayout>
 </RelativeLayout>

@@ -120,6 +120,7 @@
     <string name="please_wait">Please wait…</string>
     <string name="finding_fobbu_for_u">we are finding a Fobbu for you</string>
     <string name="awesome">Awesome</string>
+    <string name="awesome_exclamatory">Awesome!</string>
     <string name="fobbu_found">Fobbu has been found!</string>
     <string name="wonderful">Wonderful…</string>
     <string name="fobbu_confirmed_request">Fobbu has confirmed your request!</string>
@@ -158,7 +159,18 @@
     <string name="wonderful_blue">Wonderful</string>
     <string name="your_review_saved">Your review was saved. Share it with your friends!</string>
     <string name="skip_this_step"><u>Skip this step</u></string>
+    <string name="new_vehicle_added">A new vehicle has been added…</string>
+    <string name="live_track">LIVE TRACK</string>
+    <string name="unlock_your_lsd">Unlock Your LSD\'s - I Bet you wont regret !</string>
+    <string name="assured_cashback">Assured cashback offers</string>
+    <string name="sos">SOS</string>
 
+    /////RSA FRAGMENTS TYPE
+    <string name="rsa_home">RSA_Home</string>
+    <string name="rsa_live">RSA_Live_Track</string>
+    <string name="rsa_work_summary">RSA_Work_Summary</string>
+    <string name="rsa_payment">RSA_Payment</string>
+    <string name="rsa_work_screen">RSA_Work_Screen</string>
 
 
     ///GENERAL TEXTS
