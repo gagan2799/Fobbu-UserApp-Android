@@ -60,4 +60,8 @@ interface WebServiceApi {
 
             : Call<MainPojo>
 
+
+    @GET("/partners/services")
+    fun fetchServices(): Call<MainPojo>
+
 }

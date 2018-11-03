@@ -35,7 +35,7 @@ class SplashActivity : AppCompatActivity() {
                 finish()
             }
             else -> {
-                startActivity(Intent(this,TutorialActivity::class.java))
+                startActivity(Intent(this,DashboardActivity::class.java))
                 finish()
             }
         }

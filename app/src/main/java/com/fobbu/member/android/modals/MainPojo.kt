@@ -29,4 +29,6 @@ class MainPojo
     var client_token : String = ""
 
     var list: ArrayList<HashMap<String, Any>> = ArrayList()
+
+    var services=ArrayList<HashMap<String,Any>>()
 }

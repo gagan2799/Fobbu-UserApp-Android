@@ -10,6 +10,9 @@ import android.graphics.Color
 import android.net.ConnectivityManager
 import android.os.Build
 import android.support.v4.app.ActivityCompat
+import android.view.Gravity
+import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import android.widget.Toast
 import com.fobbu.member.android.R
 import com.fobbu.member.android.activities.LoginActivity
@@ -246,6 +249,27 @@ class CommonClass(activity1: Activity, context1: Context)
             return true
         }
         return false
+    }
+
+    fun giveDynamicHeightRelativeGallery(): RelativeLayout.LayoutParams? {
+
+        val parms: RelativeLayout.LayoutParams
+        try {
+            val display = activity.windowManager.defaultDisplay
+            val width = display.width // ((display.getWidth()*20)/100)
+            var height = display.height// ((display.getHeight()*30)/100)
+
+            val layoutWidth = width / 3
+            val layoutHeight = width / 3
+
+            parms = RelativeLayout.LayoutParams(layoutWidth, RelativeLayout.LayoutParams.WRAP_CONTENT)
+
+            return parms
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+        return null
     }
 
 }

@@ -11,6 +11,7 @@ import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.fobbu.member.android.R
+import com.fobbu.member.android.apiInterface.MyApplication
 import com.fobbu.member.android.fragments.HomeFragment
 import com.fobbu.member.android.fragments.RSAFragment
 import com.fobbu.member.android.fragments.RSALiveFragment
@@ -207,5 +208,9 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
         }
 
         alertDialog.show()
+    }
+
+    private fun getEnv(): MyApplication {
+        return application as MyApplication
     }
 }

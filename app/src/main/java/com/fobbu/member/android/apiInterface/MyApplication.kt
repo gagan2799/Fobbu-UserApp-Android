@@ -23,7 +23,7 @@ class MyApplication : Application() {
 
     lateinit var webServiceApiMultipart: WebServiceApi
 
-    private var URL = "http://52.172.132.228:3000/"
+    private var URL = "http://104.211.100.239:3000/"
 
     override fun attachBaseContext(context: Context) {
         super.attachBaseContext(context)

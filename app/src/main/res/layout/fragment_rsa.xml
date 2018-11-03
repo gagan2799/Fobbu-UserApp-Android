@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent"
         android:background="@color/home_background"
         android:clickable="true"
         android:layout_height="match_parent">
@@ -13,7 +13,7 @@
             android:gravity="center"
             android:id="@+id/tvRSA"
             android:textColor="@color/drawer_text_color"
-            android:textSize="@dimen/textsize_medium" />
+            android:textSize="@dimen/textsize_medium"/>
 
     <View android:layout_width="match_parent"
           android:layout_height="1dp"
@@ -39,12 +39,20 @@
                 android:layout_height="wrap_content"/>
 
 
+        <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:id="@+id/recyclerViewServices"
+                android:layout_marginBottom="10dp"
+                android:layout_below="@+id/tvServiceRequest"
+                android:layout_height="wrap_content"/>
+
         <LinearLayout
                 android:orientation="horizontal"
                 android:weightSum="3.02"
                 android:id="@+id/llAssistance"
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="10dp"
+                android:visibility="gone"
                 android:layout_marginBottom="15dp"
                 android:layout_marginLeft="20dp"
                 android:layout_below="@+id/tvServiceRequest"
@@ -157,8 +165,18 @@
 
     <View android:layout_width="match_parent"
           android:layout_height="1dp"
+          android:id="@+id/view1"
           android:layout_below="@+id/rlServiceType"
           android:background="@color/view_grey"/>
+
+    <com.google.android.gms.maps.MapView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/mapView"
+            android:layout_width="match_parent"
+            android:layout_below="@+id/view1"
+            android:layout_above="@+id/llVehicle"
+            android:layout_height="match_parent"/>
+
 
     <LinearLayout
             android:layout_width="match_parent"
@@ -342,7 +360,7 @@
         <com.github.chrisbanes.photoview.PhotoView
                 android:id="@+id/imgBig"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"/>
 
         <ImageView
                 android:id="@+id/imgClose"
@@ -351,7 +369,25 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
                 android:padding="10dp"
-                android:src="@drawable/cross_white" />
+                android:src="@drawable/cross_white"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:id="@+id/rlLoader"
+            android:visibility="gone"
+            android:layout_height="match_parent">
+
+        <com.wang.avi.AVLoadingIndicatorView
+                android:id="@+id/avi"
+                style="@style/AVLoadingIndicatorView.Large"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                android:layout_centerInParent="true"
+                app:indicatorColor="@color/colorPrimary"
+                app:indicatorName="BallScaleMultipleIndicator"/>
 
     </RelativeLayout>
 
