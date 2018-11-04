@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "12915385217",
+    "firebase_url": "https://fobbumemberapp.firebaseio.com",
+    "project_id": "fobbumemberapp",
+    "storage_bucket": "fobbumemberapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:12915385217:android:152ff2064de0af78",
+        "android_client_info": {
+          "package_name": "com.fobbu.member.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "12915385217-ep1r5sdgai51urq7iem3kb43nln3huno.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fobbu.member.android",
+            "certificate_hash": "e2af10d482d2707583746c34fad60201af0957f5"
+          }
+        },
+        {
+          "client_id": "12915385217-jgf0oj153ce0rjrrefe70mn3p2b8ce31.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBwyFRajCrx3RqJkMMth7GdIq979_fZ7rE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "12915385217-jgf0oj153ce0rjrrefe70mn3p2b8ce31.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

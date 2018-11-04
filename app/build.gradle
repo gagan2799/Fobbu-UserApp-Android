@@ -3,6 +3,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 28
@@ -10,6 +11,7 @@ android {
         applicationId "com.fobbu.member.android"
         minSdkVersion 15
         targetSdkVersion 28
+        multiDexEnabled true
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -33,7 +35,7 @@ android {
             project.configurations.all {
                 resolutionStrategy.eachDependency { details ->
                     if (details.requested.group == 'com.google.android.gms'
-                            && !details.requested.name.contains('multidex') ) {
+                            && !details.requested.name.contains('multidex')) {
                         details.useVersion "12.0.1"
                     }
                 }
@@ -67,4 +69,5 @@ dependencies {
     implementation 'com.google.android.gms:play-services-maps:12.0.1'
     implementation 'com.google.android.gms:play-services:12.0.1'
     implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation 'com.google.firebase:firebase-messaging:12.0.1'
 }
