@@ -9,6 +9,9 @@ import com.fobbu.member.android.apiInterface.MyApplication
 import com.fobbu.member.android.apiInterface.WebServiceApi
 import com.fobbu.member.android.modals.MainPojo
 import com.fobbu.member.android.utils.CommonClass
+import com.google.android.gms.common.ConnectionResult
+import com.google.android.gms.common.GoogleApiAvailability
+import com.google.firebase.iid.FirebaseInstanceId
 import kotlinx.android.synthetic.main.activity_login.*
 import org.json.JSONObject
 import retrofit2.Call
@@ -23,6 +26,30 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         addClicks()
+        fetchDeviceToken()
+    }
+
+    private fun fetchDeviceToken() {
+        val api = GoogleApiAvailability.getInstance()
+
+        val code = api.isGooglePlayServicesAvailable(this@LoginActivity)
+
+        if (code == ConnectionResult.SUCCESS) {
+            // Do Your Stuff Here
+            if (FirebaseInstanceId.getInstance().token != null) {
+                val refreshedToken = FirebaseInstanceId.getInstance().token
+
+                System.out.println("RE 0 $refreshedToken")
+
+                System.out.println("SUCCESSS")
+
+                getSharedPreferences("Fobbu_Member_Prefs", MODE_PRIVATE).edit()
+                    .putString("device_token", refreshedToken).apply()
+            }
+
+        } else {
+            System.out.println("ERRROR")
+        }
     }
 
     private fun addClicks() {
@@ -72,16 +99,16 @@ class LoginActivity : AppCompatActivity() {
 
             rlLoader.visibility = View.VISIBLE
 
-            val callloginApi = webServiceApi.login(mobile, password)
+            val callloginApi = webServiceApi.login(mobile, password,token)
 
             callloginApi.enqueue(object : Callback<MainPojo> {
                 override fun onResponse(call: Call<MainPojo>, response: Response<MainPojo>) {
 
                     try {
 
-                        if (response.isSuccessful) {
+                        val mainPojo = response.body()
 
-                            val mainPojo = response.body()
+                        if (mainPojo!!.success =="true") {
 
                             CommonClass(this@LoginActivity, this@LoginActivity)
                                 .putString("_id", mainPojo!!.getData()._id)
@@ -107,6 +134,9 @@ class LoginActivity : AppCompatActivity() {
                             CommonClass(this@LoginActivity, this@LoginActivity)
                                 .putString("pin", mainPojo.pin)
 
+                            CommonClass(this@LoginActivity, this@LoginActivity)
+                                .putString("x_access_token", mainPojo.token)
+
                             val number = CommonClass(this@LoginActivity, this@LoginActivity)
                                 .getString("Local_Number")
 
@@ -124,11 +154,11 @@ class LoginActivity : AppCompatActivity() {
 
                         } else {
 
-                            val message = CommonClass(this@LoginActivity, this@LoginActivity)
-                                .errorMessage(response.errorBody()!!.string())
+                            /*val message = CommonClass(this@LoginActivity, this@LoginActivity)
+                                .errorMessage(response.errorBody()!!.string())*/
 
                             CommonClass(this@LoginActivity, this@LoginActivity)
-                                .showToast(message)
+                                .showToast(mainPojo.message)
                         }
                         rlLoader.visibility = View.GONE
 

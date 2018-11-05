@@ -33,7 +33,7 @@
 
         <ImageView
                 android:id="@+id/ivCrossRSA"
-                android:src="@drawable/gray_cross"
+                android:src="@drawable/cross_gray"
                 android:layout_width="wrap_content"
                 android:padding="10dp"
                 android:visibility="gone"

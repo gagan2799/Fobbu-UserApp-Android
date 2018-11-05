@@ -42,6 +42,7 @@ import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
 import java.util.*
+import kotlin.collections.HashMap
 
 class AddEditVehicleActivity : AppCompatActivity() {
 
@@ -87,16 +88,21 @@ class AddEditVehicleActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         if (fromWhere == "RSA")
-            startActivity(Intent(this, WaitingScreenWhite::class.java).putExtra("from_where","building_live"))
+            startActivity(Intent(this, WaitingScreenWhite::class.java).putExtra("from_where", "building_live"))
 
         finish()
     }
 
     private fun addClicks() {
 
+        ivList.setOnClickListener {
+            startActivity(Intent(this,VehicleListActivity::class.java))
+
+        }
+
         tvSkip.setOnClickListener {
             if (fromWhere == "RSA") {
-                startActivity(Intent(this, WaitingScreenWhite::class.java).putExtra("from_where","building_live"))
+                startActivity(Intent(this, WaitingScreenWhite::class.java).putExtra("from_where", "building_live"))
                 finish()
             }
         }
@@ -644,7 +650,7 @@ class AddEditVehicleActivity : AppCompatActivity() {
 
         val jsonDoc = JSONObject()
 
-        jsonDoc.put("user_id", CommonClass(this, this).getString("user_id"))
+        jsonDoc.put("user_id", CommonClass(this, this).getString("_id"))
         jsonDoc.put("vehicle_brand", etBrand.text.toString().trim())
         jsonDoc.put("vehicle_registration_number", etRegNumber.text.toString().trim())
         jsonDoc.put("vehicle_sub_model", etSubModel.text.toString().trim())
@@ -656,7 +662,9 @@ class AddEditVehicleActivity : AppCompatActivity() {
         val map = HashMap<String, RequestBody>()
         map["vehicle"] = partnerJsonBody
 
-        val validateUserApi = webServiceApi.addVehicle(map, fileList)
+        val tokenHeader = CommonClass(this, this).getString("x_access_token")
+
+        val validateUserApi = webServiceApi.addVehicle(map, fileList, tokenHeader)
 
         validateUserApi.enqueue(object : Callback<MainPojo> {
             override fun onFailure(call: Call<MainPojo>?, t: Throwable?) {
@@ -666,7 +674,6 @@ class AddEditVehicleActivity : AppCompatActivity() {
             }
 
             override fun onResponse(call: Call<MainPojo>?, response: Response<MainPojo>?) {
-                rlLoader.visibility = View.GONE
 
                 try {
                     val mainPojo = response!!.body()
@@ -676,12 +683,9 @@ class AddEditVehicleActivity : AppCompatActivity() {
                     if (mainPojo!!.success == "true") {
 
                         if (fromWhere == "RSA") {
-                            startActivity(Intent(this@AddEditVehicleActivity
-                                , WaitingScreenWhite::class.java).putExtra("from_where","new_vehicle_added"))
-                            finish()
-                        }
-                        else
-                        {
+                            callUpdateVehicle(mainPojo.getData()._id)
+                        } else {
+                            rlLoader.visibility = View.GONE
                             println("Success")
                             CommonClass(
                                 this@AddEditVehicleActivity,
@@ -690,10 +694,8 @@ class AddEditVehicleActivity : AppCompatActivity() {
 
                             finish()
                         }
-
-
-
                     } else {
+                        rlLoader.visibility = View.GONE
                         CommonClass(
                             this@AddEditVehicleActivity,
                             this@AddEditVehicleActivity
@@ -701,9 +703,67 @@ class AddEditVehicleActivity : AppCompatActivity() {
                     }
                 } catch (e: Exception) {
                     e.printStackTrace()
+                    rlLoader.visibility = View.GONE
                 }
             }
         })
+    }
+
+    //////////////////UPDATE FOBBU VEHICLE API /////////////////////////
+    private fun callUpdateVehicle(id: String) {
+
+        if (CommonClass(this, this).checkInternetConn(this)) {
+
+            val token = CommonClass(this@AddEditVehicleActivity, this@AddEditVehicleActivity)
+                .getString("x_access_token")
+
+            val requestId = CommonClass(this@AddEditVehicleActivity, this@AddEditVehicleActivity)
+                .getString("fobbu_request_id")
+
+            val hash = HashMap<String, String>()
+            hash["request_id"] = requestId
+            hash["vehicle"] = id
+
+            val callloginApi = webServiceApi.findFobbuRequestUpdateVehicle(hash, token)
+
+            callloginApi.enqueue(object : Callback<MainPojo> {
+                override fun onResponse(call: Call<MainPojo>, response: Response<MainPojo>) {
+                    rlLoader.visibility = View.GONE
+                    try {
+
+                        val mainPojo = response.body()
+
+                        if (mainPojo!!.success == "true") {
+
+                            startActivity(
+                                Intent(
+                                    this@AddEditVehicleActivity
+                                    , WaitingScreenWhite::class.java
+                                ).putExtra("from_where", "new_vehicle_added")
+                            )
+                            finish()
+
+                        } else {
+
+                            CommonClass(this@AddEditVehicleActivity, this@AddEditVehicleActivity)
+                                .showToast(mainPojo.message)
+                        }
+
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                        rlLoader.visibility = View.GONE
+                    }
+                }
+
+                override fun onFailure(call: Call<MainPojo>, t: Throwable) {
+                    rlLoader.visibility = View.GONE
+                    t.printStackTrace()
+                }
+            })
+        } else {
+
+            CommonClass(this, this).internetIssue(this)
+        }
     }
 
     private fun getEnv(): MyApplication {

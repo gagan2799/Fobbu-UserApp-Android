@@ -32,6 +32,7 @@ import android.widget.*
 import com.bumptech.glide.Glide
 import com.fobbu.member.android.R
 import com.fobbu.member.android.activities.WaitingScreenBlue
+import com.fobbu.member.android.activities.WaitingScreenWhite
 import com.fobbu.member.android.apiInterface.MyApplication
 import com.fobbu.member.android.apiInterface.WebServiceApi
 import com.fobbu.member.android.interfaces.HeaderIconChanges
@@ -48,7 +49,13 @@ import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.MapsInitializer
 import com.google.android.gms.maps.model.*
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_add_edit_vehicle.*
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import org.json.JSONObject
 import retrofit2.Call
+import retrofit2.Callback
 import retrofit2.Response
 import java.io.ByteArrayOutputStream
 import java.io.File
@@ -86,7 +93,11 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
     private lateinit var ivBike: ImageView
     private lateinit var ivCar: ImageView
-    var strVehicleType = "2wheeler"
+    private var strVehicleType = "2wheeler"
+    private var serviceSelected = ""
+    private var serviceSelectedAmount = ""
+    private var strLatitude = ""
+    private var strLongitude = ""
 
     private lateinit var llFlatTyre: LinearLayout
     private lateinit var llBattery: LinearLayout
@@ -104,6 +115,7 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
     private lateinit var recyclerViewServices: RecyclerView
     private lateinit var fobbuServiceAdapter: FobbuServiceAdapter
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -124,23 +136,59 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
         return view
     }
 
-    private fun mapInitialise(view: View?, savedInstanceState: Bundle?) {
-        mMapView = view!!.findViewById(R.id.mapView) as MapView
-        mMapView.onCreate(savedInstanceState)
-
-        mMapView.onResume()// needed to get the map to display immediately
-
-        try {
-            MapsInitializer.initialize(activity!!.applicationContext)
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-
-        checkWhenMapIsReady()
-    }
-
     private fun handleClick() {
 
+        chooseImagesClick()
+
+        tvFindFobbu.setOnClickListener {
+            showPaymentPopupFinal("Puncture cost is Rs $serviceSelectedAmount\n(extra puncture will cost Rs $serviceSelectedAmount per puncture)")
+        }
+
+        ivCar.setOnClickListener {
+            strVehicleType = "4wheeler"
+            ivCar.setImageResource(R.drawable.car_blue)
+            ivBike.setImageResource(R.drawable.scooter_gray)
+        }
+
+        ivBike.setOnClickListener {
+            strVehicleType = "2wheeler"
+            ivCar.setImageResource(R.drawable.car_gray)
+            ivBike.setImageResource(R.drawable.scooter_blue)
+        }
+
+        llFlatTyre.setOnClickListener {
+            ivFlatTyre.setImageResource(R.drawable.flat_tyre_blue)
+            ivBattery.setImageResource(R.drawable.battery_jump_start)
+            ivEmergency.setImageResource(R.drawable.vehicle_emergency)
+
+            tvFlatTyre.setTextColor(resources.getColor(R.color.colorPrimary))
+            tvBatteryText.setTextColor(resources.getColor(R.color.drawer_text_color))
+            tvEmergencyText.setTextColor(resources.getColor(R.color.drawer_text_color))
+        }
+
+        llBattery.setOnClickListener {
+            ivFlatTyre.setImageResource(R.drawable.flat_tyre_gray)
+            ivBattery.setImageResource(R.drawable.battery_jump_start_blue)
+            ivEmergency.setImageResource(R.drawable.vehicle_emergency)
+
+            tvFlatTyre.setTextColor(resources.getColor(R.color.drawer_text_color))
+            tvBatteryText.setTextColor(resources.getColor(R.color.colorPrimary))
+            tvEmergencyText.setTextColor(resources.getColor(R.color.drawer_text_color))
+        }
+
+        llVehicleEmergency.setOnClickListener {
+            ivFlatTyre.setImageResource(R.drawable.flat_tyre_gray)
+            ivBattery.setImageResource(R.drawable.battery_jump_start)
+            ivEmergency.setImageResource(R.drawable.vehicle_emergency)
+
+            tvFlatTyre.setTextColor(resources.getColor(R.color.drawer_text_color))
+            tvBatteryText.setTextColor(resources.getColor(R.color.drawer_text_color))
+            tvEmergencyText.setTextColor(resources.getColor(R.color.colorPrimary))
+
+        }
+    }
+
+    private fun chooseImagesClick() {
         llPhoto1.setOnClickListener {
 
             if (isImageOn1) {
@@ -182,55 +230,6 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
         imgClose.setOnClickListener {
 
             rlBigProfile.visibility = View.GONE
-        }
-
-
-        tvFindFobbu.setOnClickListener {
-            showPaymentPopupFinal("Puncture cost is Rs 150\n(extra puncture will cost Rs 150/- per puncture)")
-        }
-
-        ivCar.setOnClickListener {
-            strVehicleType = "4wheeler"
-            ivCar.setImageResource(R.drawable.car_blue)
-            ivBike.setImageResource(R.drawable.scooter_gray)
-        }
-
-        ivBike.setOnClickListener {
-            strVehicleType = "2wheeler"
-            ivCar.setImageResource(R.drawable.car_gray)
-            ivBike.setImageResource(R.drawable.scooter_blue)
-        }
-
-        llFlatTyre.setOnClickListener {
-            ivFlatTyre.setImageResource(R.drawable.flat_tyre_blue)
-            ivBattery.setImageResource(R.drawable.battery_jump_start)
-            ivEmergency.setImageResource(R.drawable.vehicle_emergency)
-
-            tvFlatTyre.setTextColor(resources.getColor(R.color.colorPrimary))
-            tvBatteryText.setTextColor(resources.getColor(R.color.drawer_text_color))
-            tvEmergencyText.setTextColor(resources.getColor(R.color.drawer_text_color))
-
-        }
-        llBattery.setOnClickListener {
-            ivFlatTyre.setImageResource(R.drawable.flat_tyre_gray)
-            ivBattery.setImageResource(R.drawable.battery_jump_start_blue)
-            ivEmergency.setImageResource(R.drawable.vehicle_emergency)
-
-            tvFlatTyre.setTextColor(resources.getColor(R.color.drawer_text_color))
-            tvBatteryText.setTextColor(resources.getColor(R.color.colorPrimary))
-            tvEmergencyText.setTextColor(resources.getColor(R.color.drawer_text_color))
-
-        }
-
-        llVehicleEmergency.setOnClickListener {
-            ivFlatTyre.setImageResource(R.drawable.flat_tyre_gray)
-            ivBattery.setImageResource(R.drawable.battery_jump_start)
-            ivEmergency.setImageResource(R.drawable.vehicle_emergency)
-
-            tvFlatTyre.setTextColor(resources.getColor(R.color.drawer_text_color))
-            tvBatteryText.setTextColor(resources.getColor(R.color.drawer_text_color))
-            tvEmergencyText.setTextColor(resources.getColor(R.color.colorPrimary))
-
         }
     }
 
@@ -316,7 +315,7 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
         tvConfirm.setOnClickListener {
             builderFinal.dismiss()
 
-            activity!!.startActivity(Intent(activity!!, WaitingScreenBlue::class.java))
+            findFobbuApi()
         }
 
         builderFinal.window!!.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
@@ -331,7 +330,9 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
         if (CommonClass(activity!!, activity!!).checkInternetConn(activity!!)) {
 
-            val searchServicesApi = webServiceApi!!.fetchServices()
+            val tokenHeader = CommonClass(activity!!, activity!!).getString("x_access_token")
+
+            val searchServicesApi = webServiceApi!!.fetchServices(tokenHeader)
 
             searchServicesApi.enqueue(object : retrofit2.Callback<MainPojo> {
                 override fun onResponse(call: Call<MainPojo>?, response: Response<MainPojo>?) {
@@ -345,6 +346,17 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                             dataListServices.add(serviceList[i])
                     }
                     println("service list $dataListServices")
+
+                    for (i in dataListServices.indices)
+                    {
+                        if(i==0) {
+                            dataListServices[i]["select"] = "1"
+
+                            serviceSelected = dataListServices[i]["_id"].toString()
+                            serviceSelectedAmount = dataListServices[i]["service_price"].toString()
+                        }else
+                            dataListServices[i]["select"]="0"
+                    }
 
                     fobbuServiceAdapter.notifyDataSetChanged()
 
@@ -375,29 +387,38 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
             holder.relativeLayout.layoutParams = CommonClass(activity!!, activity!!).giveDynamicHeightRelativeGallery()
 
-            if (dataListServices[position]["service_image"] != "")
-                Picasso.get().load(dataListServices[position]["service_image"].toString())
-                    .error(R.drawable.dummy_services)
-                    .placeholder(R.drawable.dummy_services)
-                    .into(holder.ivImage)
+            val image:String
 
             holder.tvText.text = dataListServices[position]["service_name"].toString()
 
-            if(dataListServices[position]["select"]=="1")
-            {
+            if (dataListServices[position]["select"] == "1") {
                 holder.tvText.setTextColor(resources.getColor(R.color.colorPrimary))
-            }
-            else
-            {
+
+                serviceSelected = dataListServices[position]["_id"].toString()
+                serviceSelectedAmount = dataListServices[position]["service_price"].toString()
+
+                image = dataListServices[position]["selected_image"].toString()
+
+            } else {
                 holder.tvText.setTextColor(resources.getColor(R.color.drawer_text_color))
+                image = dataListServices[position]["service_image"].toString()
             }
+
+            if (image != "")
+                Picasso.get().load(image)
+                    .error(R.drawable.dummy_services)
+                    .placeholder(R.drawable.dummy_services)
+                    .into(holder.ivImage)
+            else
+                holder.ivImage.setImageResource(R.drawable.dummy_services)
+
 
             holder.itemView.setOnClickListener {
 
                 if (dataListServices[position]["select"] == "1") {
 
-                    for (i in dataListServices.indices)
-                        dataListServices[i]["select"] = ""
+                    /*for (i in dataListServices.indices)
+                        dataListServices[i]["select"] = ""*/
 
                 } else {
 
@@ -408,7 +429,6 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                 }
                 fobbuServiceAdapter.notifyDataSetChanged()
             }
-
         }
 
         override fun getItemCount(): Int {
@@ -432,11 +452,94 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     }
 
 
+    //////////////////FIND FOBBU REQUEST API  /////////////////////////
+    private fun findFobbuApi() {
+        rlLoader.visibility = View.VISIBLE
+
+        val fileList = ArrayList<MultipartBody.Part>()
+
+        for (i in 0 until dataList.size) {
+            var imgProfile: MultipartBody.Part? = null
+            val file = File(dataList[i].toString())
+            // create RequestBody instance from file
+            val requestFile = RequestBody.create(MediaType.parse("image/jpeg"), file)
+            // MultipartBody.Part is used to send also the actual file name
+            imgProfile = MultipartBody.Part.createFormData("photos", file.name, requestFile)
+            fileList.add(imgProfile!!)
+        }
+
+        val userId = RequestBody.create(
+            MediaType.parse("text/plain"),
+            CommonClass(activity!!, activity!!).getString("_id")
+        )
+
+        val tokenHeader = CommonClass(activity!!, activity!!).getString("x_access_token")
+
+        val serviceSelected = RequestBody.create(MediaType.parse("text/plain"), serviceSelected)
+
+        val strLatitude = RequestBody.create(MediaType.parse("text/plain"), strLatitude)
+
+        val strLongitude = RequestBody.create(MediaType.parse("text/plain"), strLongitude)
+
+        val strVehicleType = RequestBody.create(MediaType.parse("text/plain"), strVehicleType)
+
+        val validateUserApi = webServiceApi!!.findFobbuRequest(
+            userId, serviceSelected, strLatitude, strLongitude,
+            strVehicleType, fileList, tokenHeader
+        )
+
+        validateUserApi.enqueue(object : Callback<MainPojo> {
+            override fun onFailure(call: Call<MainPojo>?, t: Throwable?) {
+                t!!.stackTrace
+                rlLoader.visibility = View.GONE
+                println("api failed")
+            }
+
+            override fun onResponse(call: Call<MainPojo>?, response: Response<MainPojo>?) {
+                rlLoader.visibility = View.GONE
+
+                try {
+                    val mainPojo = response!!.body()
+
+                    println("main pojo data $mainPojo")
+
+                    if (mainPojo!!.success == "true") {
+
+                        CommonClass(activity!!, activity!!).putString("fobbu_request_id", mainPojo.getData()._id)
+
+                        activity!!.startActivity(Intent(activity!!, WaitingScreenBlue::class.java))
+                    } else {
+                        CommonClass(activity!!, activity!!).showToast(mainPojo.message)
+                    }
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
+        })
+    }
+
+
     ////////////////////////FOR MAP/////////////////////////////////////////////////
 
     private var googleApiClient: GoogleApiClient? = null
     private var locationRequest = LocationRequest.create()!!
     var location = false
+
+
+    private fun mapInitialise(view: View?, savedInstanceState: Bundle?) {
+        mMapView = view!!.findViewById(R.id.mapView) as MapView
+        mMapView.onCreate(savedInstanceState)
+
+        mMapView.onResume()// needed to get the map to display immediately
+
+        try {
+            MapsInitializer.initialize(activity!!.applicationContext)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+        checkWhenMapIsReady()
+    }
 
     override fun onConnected(p0: Bundle?) {
     }
@@ -450,8 +553,8 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
         if (!location) {
 
-            // latitude = p0!!.latitude
-            // longitude = p0.longitude
+            strLatitude = p0.latitude.toString()
+            strLongitude = p0.longitude.toString()
 
             throwMarkerOnMap(p0.latitude.toString(), p0.longitude.toString())
 

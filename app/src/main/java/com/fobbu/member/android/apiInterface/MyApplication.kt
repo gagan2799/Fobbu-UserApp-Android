@@ -2,7 +2,9 @@ package com.fobbu.member.android.apiInterface
 
 import android.app.Application
 import android.content.Context
+import android.content.SharedPreferences
 import android.support.multidex.MultiDex
+import com.fobbu.member.android.utils.CommonClass
 import com.google.gson.GsonBuilder
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -16,6 +18,8 @@ import java.util.concurrent.TimeUnit
  * Created by abc on 29/1/18.
  */
 class MyApplication : Application() {
+
+    lateinit var myPrefs: SharedPreferences
 
     lateinit var retrofit: Retrofit
 
@@ -32,6 +36,8 @@ class MyApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+
+        myPrefs = this.getSharedPreferences("Fobbu_Member_Prefs", Context.MODE_PRIVATE)
 
         forSimpleAPI()
 

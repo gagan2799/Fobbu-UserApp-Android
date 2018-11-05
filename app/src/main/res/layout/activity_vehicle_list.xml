@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/grey_header">
+
+
+    <RelativeLayout
+            android:id="@+id/rlTop"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <ImageView
+                android:id="@+id/ivBack"
+                android:layout_width="wrap_content"
+                android:padding="8dp"
+                android:src="@drawable/cross_gray"
+                android:layout_height="wrap_content"/>
+
+        <ImageView
+                android:id="@+id/ivSearch"
+                android:layout_width="wrap_content"
+                android:padding="8dp"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/search"
+                android:layout_height="wrap_content"/>
+
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:padding="8dp"
+                android:id="@+id/ivHead"
+                android:layout_alignParentTop="true"
+                android:src="@drawable/fobbu_logo_blue"/>
+
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/your_vehicles"
+                android:gravity="center"
+                android:textAllCaps="true"
+                android:id="@+id/tvHeading"
+                android:layout_below="@+id/ivHead"
+                android:textColor="@color/drawer_text_color"
+                android:textSize="@dimen/textsize_normal"/>
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:background="@color/white"
+            android:layout_below="@+id/rlTop"
+            android:id="@+id/rlNameBar"
+            android:layout_marginTop="15dp"
+            android:layout_height="wrap_content">
+
+        <ImageView
+                android:layout_width="wrap_content"
+                android:padding="10dp"
+                android:id="@+id/tvScooter"
+                android:src="@drawable/scooter_red"
+                android:layout_marginLeft="40dp"
+                android:layout_centerVertical="true"
+                android:textSize="@dimen/textsize_medium"
+                android:layout_height="wrap_content"/>
+
+        <View
+                android:layout_width="match_parent"
+                android:layout_alignLeft="@+id/tvScooter"
+                android:layout_alignRight="@+id/tvScooter"
+                android:layout_below="@+id/tvScooter"
+                android:layout_marginTop="2dp"
+                android:id="@+id/view_scooter"
+                android:background="@color/red"
+                android:layout_height="1dp"/>
+
+        <ImageView
+                android:layout_width="wrap_content"
+                android:padding="10dp"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/tvScooter"
+                android:id="@+id/tvCar"
+                android:src="@drawable/car_gray"
+                android:layout_marginLeft="50dp"
+                android:textSize="@dimen/textsize_medium"
+                android:layout_height="wrap_content"/>
+
+
+        <View
+                android:layout_width="match_parent"
+                android:layout_alignLeft="@+id/tvCar"
+                android:layout_alignRight="@+id/tvCar"
+                android:layout_below="@+id/tvScooter"
+                android:layout_marginTop="2dp"
+                android:visibility="gone"
+                android:id="@+id/view_car"
+                android:background="@color/red"
+                android:layout_height="1dp"/>
+
+        <ImageView
+                android:layout_width="wrap_content"
+                android:src="@drawable/list"
+                android:layout_alignParentRight="true"
+                android:padding="10dp"
+                android:id="@+id/ivList"
+                android:layout_centerVertical="true"
+                android:layout_height="wrap_content"/>
+
+    </RelativeLayout>
+
+
+    <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:id="@+id/recyclerViewVehicles"
+            android:layout_below="@+id/rlNameBar"
+            android:layout_above="@+id/tvAddEditVehicle"
+            android:layout_height="match_parent"/>
+
+
+    <TextView
+            android:id="@+id/tvAddEditVehicle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/add_another_vehicle"
+            android:paddingRight="35dp"
+            android:textSize="@dimen/textsize_small"
+            android:paddingTop="18dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp"
+            android:paddingLeft="35dp"
+            android:layout_gravity="center_horizontal"
+            android:singleLine="true"
+            android:layout_marginTop="15dp"
+            android:foreground="?attr/selectableItemBackground"
+            android:paddingBottom="25dp"
+            android:background="@drawable/rounded_red"
+            android:textColor="@color/white"/>
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:id="@+id/rlLoader"
+            android:visibility="gone"
+            android:layout_height="match_parent">
+
+        <com.wang.avi.AVLoadingIndicatorView
+                android:id="@+id/avi"
+                style="@style/AVLoadingIndicatorView.Large"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                android:layout_centerInParent="true"
+                app:indicatorColor="@color/colorPrimary"
+                app:indicatorName="BallScaleMultipleIndicator"/>
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+            android:id="@+id/rlBigProfile"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/black"
+            android:clickable="true"
+            android:visibility="gone">
+
+        <com.github.chrisbanes.photoview.PhotoView
+                android:id="@+id/imgBig"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        <ImageView
+                android:id="@+id/imgClose"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:padding="10dp"
+                android:src="@drawable/cross_white"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

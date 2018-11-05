@@ -20,6 +20,8 @@ class MainPojo
 
     var pin: String = ""
 
+    var token: String = ""
+
     var lat_long: String = ""
 
     var success: String = ""
@@ -31,4 +33,6 @@ class MainPojo
     var list: ArrayList<HashMap<String, Any>> = ArrayList()
 
     var services=ArrayList<HashMap<String,Any>>()
+
+    var vehicles=ArrayList<HashMap<String,Any>>()
 }

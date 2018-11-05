@@ -28,7 +28,8 @@ interface WebServiceApi {
         @Field("email") email: String,
         @Field("password") password: String,
         @Field("mobile_number") mobile_number: String,
-        @Field("gender") gender: String
+        @Field("gender") gender: String,
+        @Field("device_token") device_token: String
 
     ): Call<MainPojo>
 
@@ -37,10 +38,10 @@ interface WebServiceApi {
     @POST("users/login")
     fun login(
         @Field("mobile_number") mobile_number: String,
-        @Field("password") assignee_password: String
+        @Field("password") assignee_password: String,
+        @Field("device_token") device_token: String
 
     ): Call<MainPojo>
-
 
 
     @FormUrlEncoded
@@ -51,17 +52,52 @@ interface WebServiceApi {
     ): Call<MainPojo>
 
 
+
     @JvmSuppressWildcards
     @Multipart
     @POST("users/vehicles")
     fun addVehicle(
         @PartMap  partMap:Map<String, RequestBody>,
-        @Part files :ArrayList<MultipartBody.Part> )
+        @Part files :ArrayList<MultipartBody.Part>,
+        @Header("x-access-token") token: String)
 
             : Call<MainPojo>
 
 
+
     @GET("/partners/services")
-    fun fetchServices(): Call<MainPojo>
+    fun fetchServices(
+        @Header("x-access-token") token: String
+    ): Call<MainPojo>
+
+
+
+    @JvmSuppressWildcards
+    @Multipart
+    @POST("users/requests")
+    fun findFobbuRequest(
+        @Part("user_id")  user_id: RequestBody,
+        @Part("service")  service: RequestBody,
+        @Part("latitude")  latitude: RequestBody,
+        @Part("longitude")  longitude: RequestBody,
+        @Part("vehicle_type")  vehicle_type: RequestBody,
+        @Part files :ArrayList<MultipartBody.Part>,
+        @Header("x-access-token") token: String): Call<MainPojo>
+
+
+
+    @PUT("users/requests")
+    fun findFobbuRequestUpdateVehicle(
+        @Body body: HashMap<String,String>,
+        @Header("x-access-token") token: String): Call<MainPojo>
+
+
+
+    @GET("users/vehicles")
+    fun fetchUserVehicles(
+        @Header("x-access-token") token: String,
+        @Query ("user_id") userId:String
+    ):Call<MainPojo>
+
 
 }

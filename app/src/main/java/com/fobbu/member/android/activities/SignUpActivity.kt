@@ -12,6 +12,9 @@ import com.fobbu.member.android.apiInterface.MyApplication
 import com.fobbu.member.android.apiInterface.WebServiceApi
 import com.fobbu.member.android.modals.MainPojo
 import com.fobbu.member.android.utils.CommonClass
+import com.google.android.gms.common.ConnectionResult
+import com.google.android.gms.common.GoogleApiAvailability
+import com.google.firebase.iid.FirebaseInstanceId
 import kotlinx.android.synthetic.main.activity_sign_up.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -27,6 +30,30 @@ class SignUpActivity : AppCompatActivity() {
         setContentView(R.layout.activity_sign_up)
         initialise()
         addClicks()
+        fetchDeviceToken()
+    }
+
+    private fun fetchDeviceToken() {
+        val api = GoogleApiAvailability.getInstance()
+
+        val code = api.isGooglePlayServicesAvailable(this@SignUpActivity)
+
+        if (code == ConnectionResult.SUCCESS) {
+            // Do Your Stuff Here
+            if (FirebaseInstanceId.getInstance().token != null) {
+                val refreshedToken = FirebaseInstanceId.getInstance().token
+
+                System.out.println("RE 0 $refreshedToken")
+
+                System.out.println("SUCCESSS")
+
+                getSharedPreferences("Fobbu_Member_Prefs", MODE_PRIVATE).edit()
+                    .putString("device_token", refreshedToken).apply()
+            }
+
+        } else {
+            System.out.println("ERRROR")
+        }
     }
 
     private fun initialise() {
@@ -118,7 +145,7 @@ class SignUpActivity : AppCompatActivity() {
             rlLoader.visibility = View.VISIBLE
 
             val callloginApi = webServiceApi.postSignUp(user_type,firstName,
-                lastName,display_name,email,password,mobile_number,gender)
+                lastName,display_name,email,password,mobile_number,gender,token)
 
             callloginApi.enqueue(object : Callback<MainPojo> {
                 override fun onResponse(call: Call<MainPojo>, response: Response<MainPojo>) {
@@ -152,6 +179,9 @@ class SignUpActivity : AppCompatActivity() {
 
                             CommonClass(this@SignUpActivity,this@SignUpActivity)
                                 .putString("pin",mainPojo.pin)
+
+                            CommonClass(this@SignUpActivity, this@SignUpActivity)
+                                .putString("x_access_token", mainPojo.token)
 
                             startActivity(Intent(this@SignUpActivity,SMSVerificationActivity::class.java))
 
