@@ -14,14 +14,14 @@
         <ImageView
                 android:id="@+id/ivBack"
                 android:layout_width="wrap_content"
-                android:padding="8dp"
+                android:padding="10dp"
                 android:src="@drawable/cross_gray"
                 android:layout_height="wrap_content"/>
 
         <ImageView
                 android:id="@+id/ivSearch"
                 android:layout_width="wrap_content"
-                android:padding="8dp"
+                android:padding="10dp"
                 android:layout_alignParentRight="true"
                 android:src="@drawable/search"
                 android:layout_height="wrap_content"/>
@@ -45,7 +45,7 @@
                 android:id="@+id/tvHeading"
                 android:layout_below="@+id/ivHead"
                 android:textColor="@color/drawer_text_color"
-                android:textSize="@dimen/textsize_normal"/>
+                android:textSize="@dimen/textsize_medium"/>
 
     </RelativeLayout>
 
@@ -60,7 +60,7 @@
 
         <ImageView
                 android:layout_width="wrap_content"
-                android:padding="10dp"
+                android:padding="8dp"
                 android:id="@+id/tvScooter"
                 android:src="@drawable/scooter_red"
                 android:layout_marginLeft="40dp"
@@ -80,7 +80,7 @@
 
         <ImageView
                 android:layout_width="wrap_content"
-                android:padding="10dp"
+                android:padding="8dp"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@+id/tvScooter"
                 android:id="@+id/tvCar"
@@ -101,14 +101,6 @@
                 android:background="@color/red"
                 android:layout_height="1dp"/>
 
-        <ImageView
-                android:layout_width="wrap_content"
-                android:src="@drawable/list"
-                android:layout_alignParentRight="true"
-                android:padding="10dp"
-                android:id="@+id/ivList"
-                android:layout_centerVertical="true"
-                android:layout_height="wrap_content"/>
 
     </RelativeLayout>
 
@@ -119,6 +111,16 @@
             android:layout_below="@+id/rlNameBar"
             android:layout_above="@+id/tvAddEditVehicle"
             android:layout_height="match_parent"/>
+
+    <TextView
+            android:id="@+id/tvNodata"
+            android:text="asfsdadaf"
+            android:textSize="@dimen/textsize_medium"
+            android:gravity="center"
+            android:textColor="@color/drawer_text_color"
+            android:layout_centerInParent="true"
+            android:layout_width="match_parent"
+              android:layout_height="wrap_content"/>
 
 
     <TextView

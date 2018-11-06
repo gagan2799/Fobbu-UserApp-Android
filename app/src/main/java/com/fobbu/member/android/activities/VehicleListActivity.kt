@@ -20,17 +20,18 @@ import kotlinx.android.synthetic.main.activity_vehicle_list.*
 import retrofit2.Call
 import retrofit2.Response
 import java.util.*
+import kotlin.collections.HashMap
 
 class VehicleListActivity : AppCompatActivity() {
 
     private lateinit var webServiceApi: WebServiceApi
 
     private var imageFrom = ""
-    private var vehicleType = ""
+    private var vehicleType = "2wheeler"
 
-    private var dataListMain: ArrayList<Any> = ArrayList()
-    private var dataListTwo: ArrayList<Any> = ArrayList()
-    private var dataListFour: ArrayList<Any> = ArrayList()
+    private var dataListMain: ArrayList<HashMap<String, Any>> = ArrayList()
+    private var dataListTwo: ArrayList<HashMap<String, Any>> = ArrayList()
+    private var dataListFour: ArrayList<HashMap<String, Any>> = ArrayList()
 
     var fromWhere = ""
 
@@ -52,9 +53,9 @@ class VehicleListActivity : AppCompatActivity() {
             fromWhere = "RSA"
 
         }
-        recyclerViewVehicles.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false)
-        vehicleAdapter =VehicleAdapter()
-        recyclerViewVehicles.adapter=vehicleAdapter
+        recyclerViewVehicles.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        vehicleAdapter = VehicleAdapter()
+        recyclerViewVehicles.adapter = vehicleAdapter
         vehicleAdapter.notifyDataSetChanged()
     }
 
@@ -67,6 +68,70 @@ class VehicleListActivity : AppCompatActivity() {
 
     private fun addClicks() {
 
+        ivBack.setOnClickListener {
+            finish()
+        }
+
+        tvScooter.setOnClickListener {
+
+            if(vehicleType!="2wheeler")
+            {
+                vehicleType ="2wheeler"
+
+                tvScooter.setImageResource(R.drawable.scooter_red)
+                view_scooter.visibility = View.VISIBLE
+
+                tvCar.setImageResource(R.drawable.car_gray)
+                view_car.visibility = View.GONE
+
+                dataListMain.clear()
+                dataListMain.addAll(dataListTwo)
+                vehicleAdapter.notifyDataSetChanged()
+
+                if(dataListMain.size>0)
+                {
+                    tvNodata.visibility=View.GONE
+                    recyclerViewVehicles.visibility=View.VISIBLE
+                }
+                else
+                {
+                    tvNodata.visibility=View.VISIBLE
+                    tvNodata.text="No 2 Wheeler Added"
+                    recyclerViewVehicles.visibility=View.GONE
+                }
+
+            }
+
+        }
+
+        tvCar.setOnClickListener {
+            if(vehicleType!="4wheeler") {
+
+                vehicleType ="4wheeler"
+                tvScooter.setImageResource(R.drawable.scooter_gray)
+                view_scooter.visibility = View.GONE
+
+                tvCar.setImageResource(R.drawable.car_red)
+                view_car.visibility = View.VISIBLE
+
+
+                dataListMain.clear()
+                dataListMain.addAll(dataListFour)
+                vehicleAdapter.notifyDataSetChanged()
+
+                if(dataListMain.size>0)
+                {
+                    tvNodata.visibility=View.GONE
+                    recyclerViewVehicles.visibility=View.VISIBLE
+                }
+                else
+                {
+                    tvNodata.visibility=View.VISIBLE
+                    tvNodata.text="No 4 Wheeler Added"
+                    recyclerViewVehicles.visibility=View.GONE
+                }
+            }
+        }
 
     }
 
@@ -76,13 +141,13 @@ class VehicleListActivity : AppCompatActivity() {
 
         rlLoader.visibility = View.VISIBLE
 
-        if (CommonClass(this,this).checkInternetConn(this)) {
+        if (CommonClass(this, this).checkInternetConn(this)) {
 
-            val tokenHeader = CommonClass(this,this).getString("x_access_token")
+            val tokenHeader = CommonClass(this, this).getString("x_access_token")
 
-            val userId = CommonClass(this,this).getString("_id")
+            val userId = CommonClass(this, this).getString("_id")
 
-            val searchServicesApi = webServiceApi.fetchUserVehicles(tokenHeader,userId)
+            val searchServicesApi = webServiceApi.fetchUserVehicles(tokenHeader, userId)
 
             searchServicesApi.enqueue(object : retrofit2.Callback<MainPojo> {
                 override fun onResponse(call: Call<MainPojo>?, response: Response<MainPojo>?) {
@@ -92,22 +157,33 @@ class VehicleListActivity : AppCompatActivity() {
 
                     val mainPojo = response!!.body()
 
-                    if(mainPojo!!.success=="true")
-                    {
+                    if (mainPojo!!.success == "true") {
                         dataListMain.clear()
                         dataListFour.clear()
                         dataListTwo.clear()
 
-                        for (i in mainPojo.vehicles.indices)
-                        {
-                            if(mainPojo.vehicles[i]["vehicle_type"]=="4wheeler")
+                        for (i in mainPojo.vehicles.indices) {
+                            if (mainPojo.vehicles[i]["vehicle_type"] == "4wheeler")
                                 dataListFour.add(mainPojo.vehicles[i])
                             else
                                 dataListTwo.add(mainPojo.vehicles[i])
                         }
-                    }
-                    else
-                    {
+
+                        dataListMain.addAll(dataListTwo)
+                        vehicleAdapter.notifyDataSetChanged()
+
+                        if(dataListMain.size>0)
+                        {
+                            tvNodata.visibility=View.GONE
+                            recyclerViewVehicles.visibility=View.VISIBLE
+                        }
+                        else
+                        {
+                            tvNodata.visibility=View.VISIBLE
+                            tvNodata.text="No 2 Wheeler Added"
+                            recyclerViewVehicles.visibility=View.GONE
+                        }
+                    } else {
 
                     }
                 }
@@ -134,6 +210,9 @@ class VehicleListActivity : AppCompatActivity() {
 
         override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
 
+            holder.tvVehicleName.text = dataListMain[position]["vehicle_brand"].toString()
+            holder.tvVehicleNumber.text = dataListMain[position]["vehicle_registration_number"].toString()
+            holder.tvYear.text = dataListMain[position]["make_of_year"].toString()
 
         }
 

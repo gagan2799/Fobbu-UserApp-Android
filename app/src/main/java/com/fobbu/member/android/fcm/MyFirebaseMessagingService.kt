@@ -30,6 +30,8 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         if (remoteMessage == null)
             return
 
+        Log.e(TAG, "Notification Body: $remoteMessage")
+
         // Check if message contains a notification payload.
         if (remoteMessage.notification != null) {
             Log.e(TAG, "Notification Body: " + remoteMessage.notification!!.title)
