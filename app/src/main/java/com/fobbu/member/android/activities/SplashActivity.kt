@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.animation.AnimationUtils
 import com.fobbu.member.android.R
+import com.fobbu.member.android.activities.loginActivity.LoginActivity
 import com.fobbu.member.android.tutorial.TutorialActivity
 import com.fobbu.member.android.utils.CommonClass
 import com.google.android.gms.common.ConnectionResult
@@ -40,7 +41,7 @@ class SplashActivity : AppCompatActivity() {
                 finish()
             }
             else -> {
-                startActivity(Intent(this,LoginActivity::class.java))
+                startActivity(Intent(this, LoginActivity::class.java))
                 finish()
             }
         }

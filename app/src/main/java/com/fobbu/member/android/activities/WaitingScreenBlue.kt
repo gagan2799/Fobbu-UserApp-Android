@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.fobbu.member.android.R
+import com.fobbu.member.android.activities.addEditVehicleActivity.AddEditVehicleActivity
 import kotlinx.android.synthetic.main.activity_waiting_screen_blue.*
 
 class WaitingScreenBlue : AppCompatActivity() {
@@ -37,7 +38,8 @@ class WaitingScreenBlue : AppCompatActivity() {
                 "2" -> {
                     strWhich="3"
 
-                    startActivity(Intent(this,AddEditVehicleActivity::class.java)
+                    startActivity(Intent(this,
+                        AddEditVehicleActivity::class.java)
                         .putExtra("from_where","RSA"))
                     finish()
                 }

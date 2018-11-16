@@ -10,12 +10,10 @@ import android.graphics.Color
 import android.net.ConnectivityManager
 import android.os.Build
 import android.support.v4.app.ActivityCompat
-import android.view.Gravity
-import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.Toast
 import com.fobbu.member.android.R
-import com.fobbu.member.android.activities.LoginActivity
+import com.fobbu.member.android.activities.loginActivity.LoginActivity
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import org.json.JSONObject
