@@ -1,4 +1,4 @@
-package com.fobbu.member.android.activities
+package com.fobbu.member.android.activities.signupActivity
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,10 +8,15 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import com.fobbu.member.android.R
+import com.fobbu.member.android.activities.SMSVerificationActivity
+import com.fobbu.member.android.activities.loginActivity.LoginActivity
+import com.fobbu.member.android.activities.signupActivity.presenter.SignUpActivityHandler
+import com.fobbu.member.android.activities.signupActivity.presenter.SignUpActivityPresenter
 import com.fobbu.member.android.apiInterface.MyApplication
 import com.fobbu.member.android.apiInterface.WebServiceApi
 import com.fobbu.member.android.modals.MainPojo
 import com.fobbu.member.android.utils.CommonClass
+import com.fobbu.member.android.view.ActivityView
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
 import com.google.firebase.iid.FirebaseInstanceId
@@ -20,14 +25,16 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class SignUpActivity : AppCompatActivity() {
+class SignUpActivity : AppCompatActivity(),ActivityView {
+
 
     private lateinit var dataAdaperSelectService: ArrayAdapter<String>
     private lateinit var webServiceApi: WebServiceApi
-
+    lateinit var signUpactivityHandler:SignUpActivityHandler
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
+        signUpactivityHandler= SignUpActivityPresenter(this,this)
         initialise()
         addClicks()
         fetchDeviceToken()
@@ -147,71 +154,56 @@ class SignUpActivity : AppCompatActivity() {
                 firstName = display_name
 
             rlLoader.visibility = View.VISIBLE
-
-            val callloginApi = webServiceApi.postSignUp(user_type,firstName,
+            signUpactivityHandler.sendSignUpData(user_type,firstName,
                 lastName,display_name,email,password,mobile_number,gender,token)
-
-            callloginApi.enqueue(object : Callback<MainPojo> {
-                override fun onResponse(call: Call<MainPojo>, response: Response<MainPojo>) {
-
-                    try {
-
-                        val mainPojo = response.body()
-
-                        if (mainPojo!!.success == "true") {
-
-                            CommonClass(this@SignUpActivity,this@SignUpActivity)
-                                .putString("_id",mainPojo.getData()._id)
-
-                            CommonClass(this@SignUpActivity,this@SignUpActivity)
-                                .putString("display_name",mainPojo.getData().display_name)
-
-                            CommonClass(this@SignUpActivity,this@SignUpActivity)
-                                .putString("email",mainPojo.getData().email)
-
-                            CommonClass(this@SignUpActivity,this@SignUpActivity)
-                                .putString("gender",mainPojo.getData().gender)
-
-                            CommonClass(this@SignUpActivity,this@SignUpActivity)
-                                .putString("mobile_number",mainPojo.getData().mobile_number)
-
-                            CommonClass(this@SignUpActivity,this@SignUpActivity)
-                                .putString("first_name",mainPojo.getData().first_name)
-
-                            CommonClass(this@SignUpActivity,this@SignUpActivity)
-                                .putString("last_name",mainPojo.getData().last_name)
-
-                            CommonClass(this@SignUpActivity,this@SignUpActivity)
-                                .putString("pin",mainPojo.pin)
-
-                            CommonClass(this@SignUpActivity, this@SignUpActivity)
-                                .putString("x_access_token", mainPojo.token)
-
-                            startActivity(Intent(this@SignUpActivity,SMSVerificationActivity::class.java))
-
-                            finish()
-
-                        } else {
-                            CommonClass(this@SignUpActivity, this@SignUpActivity)
-                                .showToast(mainPojo.message)
-                        }
-                        rlLoader.visibility = View.GONE
-
-                    } catch (e: Exception) {
-                        e.printStackTrace()
-                        rlLoader.visibility = View.GONE
-                    }
-                }
-
-                override fun onFailure(call: Call<MainPojo>, t: Throwable) {
-                    rlLoader.visibility = View.GONE
-                    t.printStackTrace()
-                }
-            })
         } else {
 
             CommonClass(this, this).internetIssue(this)
         }
+    }
+
+    override fun onRequestSuccessReport(mainPojo: MainPojo) {
+
+        rlLoader.visibility = View.GONE
+        if (mainPojo.success== "true")
+        {
+            CommonClass(this@SignUpActivity,this@SignUpActivity)
+                .putString("_id",mainPojo.getData()._id)
+
+            CommonClass(this@SignUpActivity,this@SignUpActivity)
+                .putString("display_name",mainPojo.getData().display_name)
+
+            CommonClass(this@SignUpActivity,this@SignUpActivity)
+                .putString("email",mainPojo.getData().email)
+
+            CommonClass(this@SignUpActivity,this@SignUpActivity)
+                .putString("gender",mainPojo.getData().gender)
+
+            CommonClass(this@SignUpActivity,this@SignUpActivity)
+                .putString("mobile_number",mainPojo.getData().mobile_number)
+
+            CommonClass(this@SignUpActivity,this@SignUpActivity)
+                .putString("first_name",mainPojo.getData().first_name)
+
+            CommonClass(this@SignUpActivity,this@SignUpActivity)
+                .putString("last_name",mainPojo.getData().last_name)
+
+            CommonClass(this@SignUpActivity,this@SignUpActivity)
+                .putString("pin",mainPojo.pin)
+
+            CommonClass(this@SignUpActivity, this@SignUpActivity)
+                .putString("x_access_token", mainPojo.token)
+
+            startActivity(Intent(this@SignUpActivity,
+                SMSVerificationActivity::class.java))
+
+            finish()
+
+        }else{
+            CommonClass(this@SignUpActivity, this@SignUpActivity)
+                .showToast(mainPojo.message)
+        }
+
     }
 
 

@@ -35,11 +35,11 @@
                 android:screenOrientation="portrait"/>
 
         <activity
-                android:name=".activities.LoginActivity"
+                android:name=".activities.loginActivity.LoginActivity"
                 android:windowSoftInputMode="stateVisible"
                 android:screenOrientation="portrait"/>
         <activity
-                android:name=".activities.SignUpActivity"
+                android:name=".activities.signupActivity.SignUpActivity"
                 android:screenOrientation="portrait"/>
 
         <activity
@@ -62,7 +62,7 @@
                 android:screenOrientation="portrait"/>
 
         <activity
-                android:name=".activities.AddEditVehicleActivity"
+                android:name=".activities.addEditVehicleActivity.AddEditVehicleActivity"
                 android:windowSoftInputMode="stateAlwaysHidden"
                 android:screenOrientation="portrait"/>
 
@@ -76,7 +76,7 @@
                 android:windowSoftInputMode="stateAlwaysHidden"
                 android:screenOrientation="portrait"/>
 
-        <activity android:name=".activities.VehicleListActivity"
+        <activity android:name=".activities.vehicleListActivity.VehicleListActivity"
                   android:screenOrientation="portrait"/>
 
         <provider

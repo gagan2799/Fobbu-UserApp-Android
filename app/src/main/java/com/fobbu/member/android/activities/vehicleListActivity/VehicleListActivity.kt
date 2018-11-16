@@ -1,4 +1,4 @@
-package com.fobbu.member.android.activities
+package com.fobbu.member.android.activities.vehicleListActivity
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,25 +9,29 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.RelativeLayout
 import android.widget.TextView
 import com.fobbu.member.android.R
+import com.fobbu.member.android.activities.WaitingScreenWhite
+import com.fobbu.member.android.activities.vehicleListActivity.presenter.VehicleListHandler
+import com.fobbu.member.android.activities.vehicleListActivity.presenter.VehicleListPresenter
 import com.fobbu.member.android.apiInterface.MyApplication
 import com.fobbu.member.android.apiInterface.WebServiceApi
 import com.fobbu.member.android.modals.MainPojo
 import com.fobbu.member.android.utils.CommonClass
+import com.fobbu.member.android.view.ActivityView
 import kotlinx.android.synthetic.main.activity_vehicle_list.*
 import retrofit2.Call
 import retrofit2.Response
 import java.util.*
 import kotlin.collections.HashMap
 
-class VehicleListActivity : AppCompatActivity() {
+class VehicleListActivity : AppCompatActivity(),ActivityView{
 
     private lateinit var webServiceApi: WebServiceApi
 
     private var imageFrom = ""
     private var vehicleType = "2wheeler"
+    lateinit var vehicleHandler:VehicleListHandler
 
     private var dataListMain: ArrayList<HashMap<String, Any>> = ArrayList()
     private var dataListTwo: ArrayList<HashMap<String, Any>> = ArrayList()
@@ -40,6 +44,7 @@ class VehicleListActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_vehicle_list)
+        vehicleHandler= VehicleListPresenter(this,this)
         initialise()
         addClicks()
         vehicleListApi()
@@ -147,7 +152,8 @@ class VehicleListActivity : AppCompatActivity() {
 
             val userId = CommonClass(this, this).getString("_id")
 
-            val searchServicesApi = webServiceApi.fetchUserVehicles(tokenHeader, userId)
+            vehicleHandler.sendVehicleData(tokenHeader,userId)
+           /* val searchServicesApi = webServiceApi.fetchUserVehicles(tokenHeader, userId)
 
             searchServicesApi.enqueue(object : retrofit2.Callback<MainPojo> {
                 override fun onResponse(call: Call<MainPojo>?, response: Response<MainPojo>?) {
@@ -193,7 +199,7 @@ class VehicleListActivity : AppCompatActivity() {
                     rlLoader.visibility = View.GONE
                     t!!.printStackTrace()
                 }
-            })
+            })*/
         }
     }
 
@@ -237,6 +243,41 @@ class VehicleListActivity : AppCompatActivity() {
         }
     }
 
+
+    override fun onRequestSuccessReport(mainPojo: MainPojo) {
+        rlLoader.visibility = View.GONE
+        if (mainPojo.success == "true")
+        {
+            dataListMain.clear()
+            dataListFour.clear()
+            dataListTwo.clear()
+
+            for (i in mainPojo.vehicles.indices) {
+                if (mainPojo.vehicles[i]["vehicle_type"] == "4wheeler")
+                    dataListFour.add(mainPojo.vehicles[i])
+                else
+                    dataListTwo.add(mainPojo.vehicles[i])
+            }
+
+            dataListMain.addAll(dataListTwo)
+            vehicleAdapter.notifyDataSetChanged()
+
+            if(dataListMain.size>0)
+            {
+                tvNodata.visibility=View.GONE
+                recyclerViewVehicles.visibility=View.VISIBLE
+            }
+            else
+            {
+                tvNodata.visibility=View.VISIBLE
+                tvNodata.text="No 2 Wheeler Added"
+                recyclerViewVehicles.visibility=View.GONE
+            }
+
+        }else{
+
+        }
+    }
 
     private fun getEnv(): MyApplication {
         return application as MyApplication

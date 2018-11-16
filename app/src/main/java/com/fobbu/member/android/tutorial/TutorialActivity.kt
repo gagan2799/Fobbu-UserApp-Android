@@ -8,10 +8,8 @@ import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
-import android.view.View
 import com.fobbu.member.android.R
-import com.fobbu.member.android.activities.LoginActivity
-import com.fobbu.member.android.activities.SignUpActivity
+import com.fobbu.member.android.activities.signupActivity.SignUpActivity
 import com.fobbu.member.android.utils.CommonClass
 import kotlinx.android.synthetic.main.activity_tutorial.*
 import me.relex.circleindicator.CircleIndicator
