@@ -505,9 +505,12 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
                     if (mainPojo!!.success == "true") {
 
+                        fleetRequestApi(mainPojo.getData()._id)
+
                         CommonClass(activity!!, activity!!).putString("fobbu_request_id", mainPojo.getData()._id)
 
                         activity!!.startActivity(Intent(activity!!, WaitingScreenBlue::class.java))
+
                     } else {
                         CommonClass(activity!!, activity!!).showToast(mainPojo.message)
                     }
@@ -516,6 +519,35 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                 }
             }
         })
+    }
+
+    private fun fleetRequestApi(id:String) {
+
+        if (CommonClass(activity!!, activity!!).checkInternetConn(activity!!)) {
+
+            val tokenHeader = CommonClass(activity!!, activity!!).getString("x_access_token")
+
+            val searchServicesApi = webServiceApi!!.findFleetOrUser(tokenHeader, id)
+
+            searchServicesApi.enqueue(object : retrofit2.Callback<MainPojo> {
+                override fun onResponse(call: Call<MainPojo>?, response: Response<MainPojo>?) {
+
+
+                    println(response.toString())
+
+                    val mainPojo = response!!.body()
+
+                    if (mainPojo!!.success == "true") {
+
+                    } else {
+                    }
+                }
+                override fun onFailure(call: Call<MainPojo>?, t: Throwable?) {
+
+                    t!!.printStackTrace()
+                }
+            })
+        }
     }
 
 

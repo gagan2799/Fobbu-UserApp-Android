@@ -6,12 +6,61 @@
         android:clickable="true"
         android:layout_height="match_parent">
 
+
+
+    <RelativeLayout
+            android:id="@+id/rlTopDrawer"
+            android:layout_width="match_parent"
+            android:background="@drawable/rounded_white_shadow"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_height="wrap_content">
+
+        <ImageView
+                android:id="@+id/ivDrawer"
+                android:layout_width="wrap_content"
+                android:padding="12dp"
+                android:src="@drawable/back_button"
+                android:layout_height="wrap_content"/>
+
+        <TextView
+                android:id="@+id/tvSOS"
+                android:textColor="@color/drawer_text_color"
+                android:layout_alignParentLeft="true"
+                android:padding="10dp"
+                android:gravity="center"
+                android:textSize="@dimen/textsize_small"
+                android:drawableTop="@drawable/sos"
+                android:text="@string/sos"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        <ImageView
+                android:id="@+id/ivCrossRSA"
+                android:src="@drawable/cross_gray"
+                android:layout_width="wrap_content"
+                android:padding="10dp"
+                android:visibility="gone"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_height="wrap_content"/>
+
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/fobbu_logo_blue"
+                android:layout_centerInParent="true"/>
+
+    </RelativeLayout>
+
     <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/rsa_textt"
             android:gravity="center"
             android:id="@+id/tvRSA"
+            android:layout_below="@+id/rlTopDrawer"
             android:textColor="@color/drawer_text_color"
             android:textSize="@dimen/textsize_medium"/>
 

@@ -96,10 +96,10 @@ interface WebServiceApi {
     ):Call<MainPojo>
 
 
-    @GET("users/requests")
+    @GET("users/request/{requestId}")
     fun findFleetOrUser(
         @Header("x-access-token") token: String,
-        @Query ("user_id") userId:String
+        @Path ("requestId") requestId:String
     ):Call<MainPojo>
 
 

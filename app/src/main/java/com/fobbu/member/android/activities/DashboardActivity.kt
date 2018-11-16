@@ -40,15 +40,10 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
     private fun tabBarClicks() {
 
         llHome.setOnClickListener {
-
-            changeTabs(resources.getString(R.string.home))
-
             changeFragment(HomeFragment(), resources.getString(R.string.home))
         }
 
         llRSA.setOnClickListener {
-
-            changeTabs(resources.getString(R.string.rsa_home))
 
             setFragmentsFromStackForRSA(fragmentTypeForRSA)
         }
@@ -56,28 +51,24 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
 
     ////CHANGE TABS BACKGROUND WITH CLICK
     private fun changeTabs(string: String) {
+        if (string == resources.getString(R.string.home)) {
+            ivHome.setImageResource(R.drawable.meters_click_tabbar)
+            ivHome.setBackgroundColor(resources.getColor(R.color.white))
 
-        when(string)
-        {
-            resources.getString(R.string.home) ->
-            {
-                ivHome.setImageResource(R.drawable.meters_click_tabbar)
-                ivHome.setBackgroundColor(resources.getColor(R.color.white))
+            ivRSA.setImageResource(R.drawable.car_tabbar)
+            ivRSA.setBackgroundColor(resources.getColor(R.color.colorPrimary))
 
-                ivRSA.setImageResource(R.drawable.car_tabbar)
-                ivRSA.setBackgroundColor(resources.getColor(R.color.colorPrimary))
-            }
-            resources.getString(R.string.rsa_home) ->
-            {
-                ivHome.setImageResource(R.drawable.meters_tabbar)
-                ivHome.setBackgroundColor(resources.getColor(R.color.colorPrimary))
+        } else if (string == resources.getString(R.string.rsa_home) || string == resources.getString(R.string.rsa_live)) {
+            rlTopDrawer.visibility = View.GONE
 
-                ivRSA.setImageResource(R.drawable.car_click_tabbar)
-                ivRSA.setBackgroundColor(resources.getColor(R.color.white))
-            }
+            ivHome.setImageResource(R.drawable.meters_tabbar)
+            ivHome.setBackgroundColor(resources.getColor(R.color.colorPrimary))
+
+            ivRSA.setImageResource(R.drawable.car_click_tabbar)
+            ivRSA.setBackgroundColor(resources.getColor(R.color.white))
         }
-    }
 
+    }
 
 
     /////SET DATA TO DRAWER IF ANY CHANGES REQUIRED
@@ -144,36 +135,38 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
     ////SHOW HEADER ICONS AND CHANGES
     override fun changeHeaderIcons(showDrawer: Boolean, showSOS: Boolean, showCrossCancelRSA: Boolean) {
 
-        if(showDrawer)
-            ivDrawer.visibility=View.VISIBLE
+        if (showDrawer)
+            ivDrawer.visibility = View.VISIBLE
         else
-            ivDrawer.visibility=View.GONE
+            ivDrawer.visibility = View.GONE
 
-        if(showSOS)
-            tvSOS.visibility=View.VISIBLE
+        if (showSOS)
+            tvSOS.visibility = View.VISIBLE
         else
-            tvSOS.visibility=View.GONE
+            tvSOS.visibility = View.GONE
 
-        if(showCrossCancelRSA)
-            ivCrossRSA.visibility=View.VISIBLE
+        if (showCrossCancelRSA)
+            ivCrossRSA.visibility = View.VISIBLE
         else
-            ivCrossRSA.visibility=View.GONE
+            ivCrossRSA.visibility = View.GONE
     }
 
     /////CHANGE RSA FRAGMENTS
-    private fun setFragmentsFromStackForRSA(type: String) {
-
-        changeTabs(resources.getString(R.string.rsa_home))
+    private fun setFragmentsFromStackForRSA( type: String) {
 
         fragmentTypeForRSA = type
 
         val fragment: Fragment = when (fragmentTypeForRSA) {
             resources.getString(R.string.rsa_home) -> RSAFragment()
             resources.getString(R.string.rsa_live) -> RSALiveFragment()
-            else -> RSAFragment()
+            else ->
+            {
+                fragmentTypeForRSA = resources.getString(R.string.rsa_home)
+                RSAFragment()
+            }
         }
 
-        changeFragment(fragment, type)
+        changeFragment(fragment, fragmentTypeForRSA)
     }
 
     /////CODE TO CHANGE FRAGMENTS IN APP
@@ -185,6 +178,8 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
             transaction.addToBackStack(null)
         }
         transaction.commit()
+
+        changeTabs(tag)
     }
 
 

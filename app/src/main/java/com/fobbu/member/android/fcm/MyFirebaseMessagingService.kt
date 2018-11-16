@@ -13,7 +13,6 @@ import com.fobbu.member.android.R
 import com.fobbu.member.android.activities.DashboardActivity
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
-import org.json.JSONObject
 
 
 /**
@@ -34,18 +33,18 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
         // Check if message contains a notification payload.
         if (remoteMessage.notification != null) {
-            Log.e(TAG, "Notification Body: " + remoteMessage.notification!!.title)
+            Log.e(TAG, "Notification Body: " + remoteMessage.data["type"])
 
             try {
-                val json = JSONObject(remoteMessage.notification!!.title)
-                sendNotification(remoteMessage.notification!!.body.toString(),json.getString("notification_type"))
+               // val json = JSONObject(remoteMessage.notification!!.title)
+                sendNotification(remoteMessage.data["type"].toString(),remoteMessage)
             } catch (e: Exception) {
                 Log.e(TAG, "Exception: " + e.message)
             }
             //handleNotification(remoteMessage!!.notification!!.body)
         }
 
-        // Check if message contains a data payload.
+        /*// Check if message contains a data payload.
         if (remoteMessage.data.isNotEmpty()) {
             Log.e(TAG, "Data Payload: " + remoteMessage.data.toString())
 
@@ -56,14 +55,23 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
                 Log.e(TAG, "Exception: " + e.message)
             }
 
-        }
+        }*/
     }
 
-    private fun sendNotification(message: String, type: String) {
+    private fun sendNotification(type: String, remoteMessage: RemoteMessage) {
 
         val intent: Intent? = Intent(this, DashboardActivity::class.java)
         intent!!.putExtra("from_fcm_notification", type)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+
+        if(type =="accept_request")
+        {
+            startActivity(Intent(this,DashboardActivity::class.java))
+        }
+        else if(type =="in_route_request")
+        {
+
+        }
 
         val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
 

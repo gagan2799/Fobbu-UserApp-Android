@@ -7,8 +7,11 @@
 
 
     <RelativeLayout
-            android:id="@+id/rlTop"
+            android:id="@+id/rlTopDrawer"
             android:layout_width="match_parent"
+            android:background="@drawable/rounded_white_shadow"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
             android:layout_height="wrap_content">
 
         <ImageView
@@ -53,7 +56,7 @@
     <FrameLayout
             android:id="@+id/content_frame"
             android:layout_width="match_parent"
-            android:layout_below="@+id/rlTop"
+            android:layout_below="@+id/rlTopDrawer"
             android:layout_above="@+id/llBottomBar"
             android:layout_height="match_parent"/>
 
