@@ -4,18 +4,19 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white">
+        android:background="@color/blue_transparent_back">
 
     <RelativeLayout
         android:id="@+id/rlTop"
         android:layout_width="match_parent"
-        android:background="@color/grey_header"
         android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/ivBack"
             android:layout_width="wrap_content"
             android:padding="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
             android:visibility="invisible"
             android:src="@drawable/back_button"
             android:layout_height="wrap_content" />
@@ -138,22 +139,20 @@
 
     <TextView
         android:id="@+id/tvStartFobbu"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/tvAlreadyRegistered"
-        android:layout_centerHorizontal="true"
         android:text="@string/start_your_fobbu"
-        android:paddingRight="25dp"
         android:textSize="@dimen/login_textsize_medium"
-        android:paddingTop="18dp"
-        android:gravity="center"
         android:clickable="true"
+        android:gravity="center"
+        android:padding="@dimen/red_rounded_rectangle_padding"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
         android:foreground="?attr/selectableItemBackground"
-        android:paddingLeft="25dp"
         android:singleLine="true"
-        android:paddingBottom="25dp"
         android:layout_marginBottom="10dp"
-        android:background="@drawable/rounded_red"
+        android:background="@drawable/red_rect_rounded"
         android:textColor="@color/white" />
 
     <TextView

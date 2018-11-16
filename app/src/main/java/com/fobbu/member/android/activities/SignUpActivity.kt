@@ -58,8 +58,8 @@ class SignUpActivity : AppCompatActivity() {
 
     private fun initialise() {
         webServiceApi = getEnv().getRetrofit()
-        val itemSelectGender = arrayOf(this.resources.getString(R.string.male),
-                this.resources.getString(R.string.female), this.resources.getString(R.string.other))
+        val itemSelectGender = arrayOf(this.resources.getString(R.string.other),this.resources.getString(R.string.male),
+                this.resources.getString(R.string.female))
         dataAdaperSelectService = ArrayAdapter(this, R.layout.spinnertype, itemSelectGender)
         spinnerSelectGender.adapter = dataAdaperSelectService
         spinnerSelectGender.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -107,6 +107,10 @@ class SignUpActivity : AppCompatActivity() {
 
                 etPassword.text.toString() =="" -> {
                     CommonClass(this, this).showToast(resources.getString(R.string.please_enter_password))
+                    etPassword.requestFocus()
+                }
+                tvGender.text.toString() ==resources.getString(R.string.other) -> {
+                    CommonClass(this, this).showToast(resources.getString(R.string.please_enter_gender))
                     etPassword.requestFocus()
                 }
                 else -> {

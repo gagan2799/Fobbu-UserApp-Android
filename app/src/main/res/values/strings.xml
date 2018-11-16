@@ -41,7 +41,8 @@
     <string name="selectGender">Select Gender</string>
     <string name="male">Male</string>
     <string name="female">Female</string>
-    <string name="other">Other</string>
+    <string name="other">Select Gender</string>
+    <string name="please_enter_gender">Please select Gender.</string>
 
     ///FORGOT PASSWORD
     <string name="forgot_password">Forgot Password</string>

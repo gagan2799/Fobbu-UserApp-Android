@@ -64,12 +64,10 @@ interface WebServiceApi {
             : Call<MainPojo>
 
 
-
     @GET("/partners/services")
     fun fetchServices(
         @Header("x-access-token") token: String
     ): Call<MainPojo>
-
 
 
     @JvmSuppressWildcards
@@ -85,16 +83,21 @@ interface WebServiceApi {
         @Header("x-access-token") token: String): Call<MainPojo>
 
 
-
     @PUT("users/requests")
     fun findFobbuRequestUpdateVehicle(
         @Body body: HashMap<String,String>,
         @Header("x-access-token") token: String): Call<MainPojo>
 
 
-
     @GET("users/vehicles")
     fun fetchUserVehicles(
+        @Header("x-access-token") token: String,
+        @Query ("user_id") userId:String
+    ):Call<MainPojo>
+
+
+    @GET("users/requests")
+    fun findFleetOrUser(
         @Header("x-access-token") token: String,
         @Query ("user_id") userId:String
     ):Call<MainPojo>

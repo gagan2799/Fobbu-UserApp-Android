@@ -15,6 +15,7 @@
     <dimen name="profile_screen">480px</dimen>
     <dimen name="margin_left">45dp</dimen>
     <dimen name="header_height">186dp</dimen>
+    <dimen name="red_rounded_rectangle_padding">15dp</dimen>
 
 
 

@@ -19,5 +19,6 @@
     <color name="home_background">#f9faff</color>
     <color name="color_grey">#666666</color>
     <color name="blue_transparent">#BF094D8D</color>
+    <color name="blue_transparent_back">#FAFAFF</color>
 
 </resources>
