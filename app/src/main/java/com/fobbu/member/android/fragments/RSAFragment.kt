@@ -24,7 +24,6 @@ import android.support.v4.content.FileProvider
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.*
@@ -32,7 +31,6 @@ import android.widget.*
 import com.bumptech.glide.Glide
 import com.fobbu.member.android.R
 import com.fobbu.member.android.activities.WaitingScreenBlue
-import com.fobbu.member.android.activities.WaitingScreenWhite
 import com.fobbu.member.android.apiInterface.MyApplication
 import com.fobbu.member.android.apiInterface.WebServiceApi
 import com.fobbu.member.android.interfaces.HeaderIconChanges
@@ -49,11 +47,9 @@ import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.MapsInitializer
 import com.google.android.gms.maps.model.*
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_add_edit_vehicle.*
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -61,8 +57,7 @@ import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
 import java.lang.Double
-import java.util.ArrayList
-import java.util.HashMap
+import java.util.*
 
 class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     GoogleApiClient.ConnectionCallbacks, LocationListener {
@@ -91,31 +86,45 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
     private lateinit var tvFindFobbu: TextView
 
-    private lateinit var ivBike: ImageView
-    private lateinit var ivCar: ImageView
     private var strVehicleType = "2wheeler"
     private var serviceSelected = ""
     private var serviceSelectedAmount = ""
     private var strLatitude = ""
     private var strLongitude = ""
 
-    private lateinit var llFlatTyre: LinearLayout
-    private lateinit var llBattery: LinearLayout
-    private lateinit var llVehicleEmergency: LinearLayout
-
-    private lateinit var ivFlatTyre: ImageView
-    private lateinit var ivBattery: ImageView
-    private lateinit var ivEmergency: ImageView
-
-    private lateinit var tvFlatTyre: TextView
-    private lateinit var tvBatteryText: TextView
-    private lateinit var tvEmergencyText: TextView
-
     private lateinit var rlLoader: RelativeLayout
 
     private lateinit var recyclerViewServices: RecyclerView
     private lateinit var fobbuServiceAdapter: FobbuServiceAdapter
 
+    private lateinit var ivBack: ImageView
+    private lateinit var llHomeServices: LinearLayout
+    private lateinit var llSubPoints: LinearLayout
+    private lateinit var llTwo: LinearLayout
+    private lateinit var llThree: LinearLayout
+
+    private lateinit var llScooterTwo: LinearLayout
+    private lateinit var llCarTwo: LinearLayout
+
+    private lateinit var llScooterThree: LinearLayout
+    private lateinit var llCarFuelDieselThree: LinearLayout
+    private lateinit var llCarFuelPetrolThree: LinearLayout
+
+    private lateinit var etVehicleNumber: EditText
+    private lateinit var tvHeading: TextView
+    private lateinit var tvSubheading: TextView
+
+    private lateinit var llUploadPics: LinearLayout
+    private lateinit var tvUploadPics: TextView
+    private lateinit var tvSkip: TextView
+
+    private lateinit var llFindFobbu: LinearLayout
+    private lateinit var tvHeadingFind: TextView
+    private lateinit var text1: TextView
+    private lateinit var text2: TextView
+    private lateinit var text3: TextView
+    private lateinit var text4: TextView
+    private lateinit var llTerms: LinearLayout
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -141,53 +150,77 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
         chooseImagesClick()
 
         tvFindFobbu.setOnClickListener {
-            showPaymentPopupFinal("Puncture cost is Rs $serviceSelectedAmount\n(extra puncture will cost Rs $serviceSelectedAmount per puncture)")
+            findFobbuApi()
+            //("Puncture cost is Rs $serviceSelectedAmount\n(extra puncture will cost Rs $serviceSelectedAmount per puncture)")
         }
 
-        ivCar.setOnClickListener {
-            strVehicleType = "4wheeler"
-            ivCar.setImageResource(R.drawable.car_blue)
-            ivBike.setImageResource(R.drawable.scooter_gray)
+        ivBack.setOnClickListener {
+
+            when {
+                llSubPoints.visibility == View.VISIBLE -> {
+                    llHomeServices.visibility = View.VISIBLE
+                    llSubPoints.visibility = View.GONE
+                    llUploadPics.visibility = View.GONE
+                    llFindFobbu.visibility = View.GONE
+                }
+                llUploadPics.visibility == View.VISIBLE -> {
+                    llHomeServices.visibility = View.GONE
+                    llSubPoints.visibility = View.VISIBLE
+                    llUploadPics.visibility = View.GONE
+                    llFindFobbu.visibility = View.GONE
+                }
+
+                llFindFobbu.visibility == View.VISIBLE -> {
+                    llHomeServices.visibility = View.GONE
+                    llSubPoints.visibility = View.GONE
+                    llUploadPics.visibility = View.VISIBLE
+                    llFindFobbu.visibility = View.GONE
+                }
+
+            }
         }
 
-        ivBike.setOnClickListener {
+        llScooterTwo.setOnClickListener {
             strVehicleType = "2wheeler"
-            ivCar.setImageResource(R.drawable.car_gray)
-            ivBike.setImageResource(R.drawable.scooter_blue)
+            llHomeServices.visibility = View.GONE
+            llSubPoints.visibility = View.GONE
+            llUploadPics.visibility = View.VISIBLE
+            llFindFobbu.visibility = View.GONE
         }
 
-        llFlatTyre.setOnClickListener {
-            ivFlatTyre.setImageResource(R.drawable.flat_tyre_blue)
-            ivBattery.setImageResource(R.drawable.battery_jump_start)
-            ivEmergency.setImageResource(R.drawable.vehicle_emergency)
-
-            tvFlatTyre.setTextColor(resources.getColor(R.color.colorPrimary))
-            tvBatteryText.setTextColor(resources.getColor(R.color.drawer_text_color))
-            tvEmergencyText.setTextColor(resources.getColor(R.color.drawer_text_color))
+        llScooterThree.setOnClickListener {
+            strVehicleType = "2wheeler"
+            llHomeServices.visibility = View.GONE
+            llSubPoints.visibility = View.GONE
+            llUploadPics.visibility = View.VISIBLE
+            llFindFobbu.visibility = View.GONE
         }
 
-        llBattery.setOnClickListener {
-            ivFlatTyre.setImageResource(R.drawable.flat_tyre_gray)
-            ivBattery.setImageResource(R.drawable.battery_jump_start_blue)
-            ivEmergency.setImageResource(R.drawable.vehicle_emergency)
-
-            tvFlatTyre.setTextColor(resources.getColor(R.color.drawer_text_color))
-            tvBatteryText.setTextColor(resources.getColor(R.color.colorPrimary))
-            tvEmergencyText.setTextColor(resources.getColor(R.color.drawer_text_color))
+        llCarTwo.setOnClickListener {
+            strVehicleType = "4wheeler"
+            llHomeServices.visibility = View.GONE
+            llSubPoints.visibility = View.GONE
+            llUploadPics.visibility = View.VISIBLE
+            llFindFobbu.visibility = View.GONE
         }
 
-        llVehicleEmergency.setOnClickListener {
-            ivFlatTyre.setImageResource(R.drawable.flat_tyre_gray)
-            ivBattery.setImageResource(R.drawable.battery_jump_start)
-            ivEmergency.setImageResource(R.drawable.vehicle_emergency)
-
-            tvFlatTyre.setTextColor(resources.getColor(R.color.drawer_text_color))
-            tvBatteryText.setTextColor(resources.getColor(R.color.drawer_text_color))
-            tvEmergencyText.setTextColor(resources.getColor(R.color.colorPrimary))
-
+        tvUploadPics.setOnClickListener {
+            llHomeServices.visibility = View.GONE
+            llSubPoints.visibility = View.GONE
+            llUploadPics.visibility = View.GONE
+            llFindFobbu.visibility = View.VISIBLE
         }
+
+        tvSkip.setOnClickListener {
+            llHomeServices.visibility = View.GONE
+            llSubPoints.visibility = View.GONE
+            llUploadPics.visibility = View.GONE
+            llFindFobbu.visibility = View.VISIBLE
+        }
+
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private fun chooseImagesClick() {
         llPhoto1.setOnClickListener {
 
@@ -231,6 +264,7 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
             rlBigProfile.visibility = View.GONE
         }
+
     }
 
     private fun initialise(view: View?) {
@@ -258,30 +292,43 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
         tvFindFobbu = view.findViewById(R.id.tvFindFobbu)
 
-        ivBike = view.findViewById(R.id.ivBike)
-        ivCar = view.findViewById(R.id.ivCar)
-
-        ivFlatTyre = view.findViewById(R.id.ivFlatTyre)
-        ivBattery = view.findViewById(R.id.ivBattery)
-        ivEmergency = view.findViewById(R.id.ivEmergency)
-
-        llFlatTyre = view.findViewById(R.id.llFlatTyre)
-        llBattery = view.findViewById(R.id.llBattery)
-        llVehicleEmergency = view.findViewById(R.id.llVehicleEmergency)
-
-        tvFlatTyre = view.findViewById(R.id.tvFlatTyre)
-        tvBatteryText = view.findViewById(R.id.tvBatteryText)
-        tvEmergencyText = view.findViewById(R.id.tvEmergencyText)
-
         recyclerViewServices = view.findViewById(R.id.recyclerViewServices)
-        recyclerViewServices.layoutManager = LinearLayoutManager(
-            activity!!, LinearLayoutManager.HORIZONTAL,
-            false
-        )
+        recyclerViewServices.layoutManager = GridLayoutManager(activity, 3)
         fobbuServiceAdapter = FobbuServiceAdapter()
         recyclerViewServices.adapter = fobbuServiceAdapter
         fobbuServiceAdapter.notifyDataSetChanged()
 
+        ivBack = view.findViewById(R.id.ivBack)
+
+        llHomeServices = view.findViewById(R.id.llHomeServices)
+        llSubPoints = view.findViewById(R.id.llSubPoints)
+        llThree = view.findViewById(R.id.llThree)
+        llTwo = view.findViewById(R.id.llTwo)
+
+        llCarTwo = view.findViewById(R.id.llCarTwo)
+        llScooterTwo = view.findViewById(R.id.llScooterTwo)
+
+        llCarFuelDieselThree = view.findViewById(R.id.llCarFuelDieselThree)
+        llCarFuelPetrolThree = view.findViewById(R.id.llCarFuelPetrolThree)
+        llScooterThree = view.findViewById(R.id.llScooterThree)
+
+
+        llUploadPics = view.findViewById(R.id.llUploadPics)
+        tvSkip = view.findViewById(R.id.tvSkip)
+        tvUploadPics = view.findViewById(R.id.tvUploadPics)
+
+
+        tvSubheading = view.findViewById(R.id.tvSubheading)
+        tvHeading = view.findViewById(R.id.tvHeading)
+
+        etVehicleNumber = view.findViewById(R.id.etVehicleNumber)
+
+        llFindFobbu = view.findViewById(R.id.llFindFobbu)
+        text1 = view.findViewById(R.id.text1)
+        text2 = view.findViewById(R.id.text2)
+        text3 = view.findViewById(R.id.text3)
+        text4 = view.findViewById(R.id.text4)
+        llTerms =view.findViewById(R.id.llTerms)
     }
 
     @SuppressLint("SetTextI18n")
@@ -315,7 +362,7 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
         tvConfirm.setOnClickListener {
             builderFinal.dismiss()
 
-            findFobbuApi()
+
         }
 
         builderFinal.window!!.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
@@ -347,15 +394,14 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                     }
                     println("service list $dataListServices")
 
-                    for (i in dataListServices.indices)
-                    {
-                        if(i==0) {
+                    for (i in dataListServices.indices) {
+                        if (i == 0) {
                             dataListServices[i]["select"] = "1"
 
                             serviceSelected = dataListServices[i]["_id"].toString()
                             serviceSelectedAmount = dataListServices[i]["service_price"].toString()
-                        }else
-                            dataListServices[i]["select"]="0"
+                        } else
+                            dataListServices[i]["select"] = "0"
                     }
 
                     fobbuServiceAdapter.notifyDataSetChanged()
@@ -387,47 +433,59 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
             holder.relativeLayout.layoutParams = CommonClass(activity!!, activity!!).giveDynamicHeightRelativeGallery()
 
-            val image:String
-
             holder.tvText.text = dataListServices[position]["service_name"].toString()
 
-            if (dataListServices[position]["select"] == "1") {
-                holder.tvText.setTextColor(resources.getColor(R.color.colorPrimary))
-
-                serviceSelected = dataListServices[position]["_id"].toString()
-                serviceSelectedAmount = dataListServices[position]["service_price"].toString()
-
-                image = dataListServices[position]["selected_image"].toString()
-
-            } else {
-                holder.tvText.setTextColor(resources.getColor(R.color.drawer_text_color))
-                image = dataListServices[position]["service_image"].toString()
-            }
-
-            if (image != "")
-                Picasso.get().load(image)
+            if (dataListServices[position]["service_image"].toString() != "")
+                Picasso.get().load(dataListServices[position]["service_image"].toString())
                     .error(R.drawable.dummy_services)
-                    .placeholder(R.drawable.dummy_services)
                     .into(holder.ivImage)
             else
                 holder.ivImage.setImageResource(R.drawable.dummy_services)
 
-
             holder.itemView.setOnClickListener {
 
-                if (dataListServices[position]["select"] == "1") {
+                llHomeServices.visibility = View.GONE
+                llSubPoints.visibility = View.VISIBLE
 
-                    /*for (i in dataListServices.indices)
-                        dataListServices[i]["select"] = ""*/
+                serviceSelected = dataListServices[position]["service_name"].toString()
 
-                } else {
-
-                    for (i in dataListServices.indices)
-                        dataListServices[i]["select"] = ""
-
-                    dataListServices[position]["select"] = "1"
+                when (serviceSelected) {
+                    "Flat Tyre" -> {
+                        llThree.visibility = View.GONE
+                        llTwo.visibility = View.VISIBLE
+                        tvHeading.text = resources.getString(R.string.flat_tyre_worries)
+                        tvSubheading.text = resources.getString(R.string.fix_on_the_spot)
+                    }
+                    "Jump Start" -> {
+                        llThree.visibility = View.GONE
+                        llTwo.visibility = View.VISIBLE
+                        tvHeading.text = resources.getString(R.string.dead_battery_worries)
+                        tvSubheading.text = resources.getString(R.string.jump_start)
+                    }
+                    "Fuel Delivery" -> {
+                        llThree.visibility = View.VISIBLE
+                        llTwo.visibility = View.GONE
+                        tvHeading.text = resources.getString(R.string.empty_tanks_worries)
+                        tvSubheading.text = resources.getString(R.string.deliver_real_quick)
+                    }
+                    "Burst Tyre" -> {
+                        llThree.visibility = View.GONE
+                        llTwo.visibility = View.VISIBLE
+                        tvHeading.text = resources.getString(R.string.burst_tyre_worries)
+                        tvSubheading.text = resources.getString(R.string.help_you_fix)
+                    }
+                    "Towing" -> {
+                        llThree.visibility = View.GONE
+                        llTwo.visibility = View.VISIBLE
+                        tvHeading.text = resources.getString(R.string.double_trouble)
+                        tvSubheading.text = resources.getString(R.string.we_will_connect_towing)
+                    }
+                    else -> {
+                        llHomeServices.visibility = View.VISIBLE
+                        llSubPoints.visibility = View.GONE
+                    }
                 }
-                fobbuServiceAdapter.notifyDataSetChanged()
+
             }
         }
 
@@ -521,7 +579,7 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
         })
     }
 
-    private fun fleetRequestApi(id:String) {
+    private fun fleetRequestApi(id: String) {
 
         if (CommonClass(activity!!, activity!!).checkInternetConn(activity!!)) {
 
@@ -532,7 +590,6 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
             searchServicesApi.enqueue(object : retrofit2.Callback<MainPojo> {
                 override fun onResponse(call: Call<MainPojo>?, response: Response<MainPojo>?) {
 
-
                     println(response.toString())
 
                     val mainPojo = response!!.body()
@@ -542,6 +599,7 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                     } else {
                     }
                 }
+
                 override fun onFailure(call: Call<MainPojo>?, t: Throwable?) {
 
                     t!!.printStackTrace()

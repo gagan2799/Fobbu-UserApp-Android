@@ -116,6 +116,25 @@
     <string name="vehicle_emergency">Vehicle\nEmergency</string>
     <string name="rsa_textt">Road Side Assistance</string>
     <string name="select_service_request">Please select your service request</string>
+    <string name="whats_keeping_stranded">What\'s keeping you stranded ?</string>
+    <string name="hello">Hello</string>
+    <string name="flat_tyre_worries">Flat Tyre? No Worries</string>
+    <string name="burst_tyre_worries">Burst Tyre? No Worries</string>
+    <string name="few_pics_please">Few pics please !</string>
+    <string name="mind_it_upload">Mind it you upload your vehicle pics :)</string>
+    <string name="double_trouble">Double Trouble ! No worries</string>
+    <string name="dead_battery_worries">Dead Battery? No Worries</string>
+    <string name="empty_tanks_worries">Empty Tank? No Worries</string>
+    <string name="deliver_real_quick">we will deliver real quick !</string>
+    <string name="jump_start">We will jumpstart in a flash!</string>
+    <string name="bike_scooter">Bike/Scooter</string>
+    <string name="petrol">(Petrol)</string>
+    <string name="diesel">(Diesel)</string>
+    <string name="car_suv">Car/Suv</string>
+    <string name="fix_on_the_spot">We will fix it on the spot…</string>
+    <string name="help_you_fix">We help you fix it…</string>
+    <string name="we_will_connect_towing">We will connect you to our towing partner</string>
+    <string name="enter_vehicle_no">Enter Vehicle No.</string>
     <string name="find_fobbu">Find Fobbu</string>
     <string name="select_vehicle_type">Select Vehicle Type</string>
     <string name="upload_vehicle">Upload Vehicle Pics</string>
@@ -166,6 +185,12 @@
     <string name="unlock_your_lsd">Unlock Your LSD\'s - I Bet you wont regret !</string>
     <string name="assured_cashback">Assured cashback offers</string>
     <string name="sos">SOS</string>
+    <string name="tyre_1">1. The above cost is for one tyre puncture repair.</string>
+    <string name="tyre_2">2. Addition tyre repair will cost Rs 125/-</string>
+    <string name="tyre_3">3. We will charge Rs 200/- if you cancel when fobbu reaches</string>
+    <string name="tyre_4">4. #No Surge #No Hidden Cost #All inclusive</string>
+    <string name="terms">By clicking "Find Fobbu" you agree to our</string>
+    <string name="conditions"><u>terms &amp; conditions</u></string>
 
     /////RSA FRAGMENTS TYPE
     <string name="rsa_home">RSA_Home</string>
