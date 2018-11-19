@@ -10,7 +10,7 @@ import android.os.Build
 import android.support.v4.app.NotificationCompat
 import android.util.Log
 import com.fobbu.member.android.R
-import com.fobbu.member.android.activities.DashboardActivity
+import com.fobbu.member.android.activities.dashboardActivity.DashboardActivity
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 
@@ -66,7 +66,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
         if(type =="accept_request")
         {
-            startActivity(Intent(this,DashboardActivity::class.java))
+            startActivity(Intent(this, DashboardActivity::class.java))
         }
         else if(type =="in_route_request")
         {

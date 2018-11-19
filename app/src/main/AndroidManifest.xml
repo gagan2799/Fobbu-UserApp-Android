@@ -12,15 +12,15 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
-            android:allowBackup="false"
-            tools:replace="android:allowBackup"
             android:name=".apiInterface.MyApplication"
+            android:allowBackup="false"
             android:icon="@mipmap/app_icon"
             android:label="@string/app_name"
             android:roundIcon="@mipmap/app_icon_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
-            tools:ignore="GoogleAppIndexingWarning">
+            tools:ignore="GoogleAppIndexingWarning"
+            tools:replace="android:allowBackup">
         <activity
                 android:name=".activities.SplashActivity"
                 android:screenOrientation="portrait">
@@ -33,51 +33,43 @@
         <activity
                 android:name=".tutorial.TutorialActivity"
                 android:screenOrientation="portrait"/>
-
         <activity
                 android:name=".activities.loginActivity.LoginActivity"
-                android:windowSoftInputMode="stateVisible"
-                android:screenOrientation="portrait"/>
+                android:screenOrientation="portrait"
+                android:windowSoftInputMode="stateVisible"/>
         <activity
                 android:name=".activities.signupActivity.SignUpActivity"
                 android:screenOrientation="portrait"/>
-
         <activity
-                android:name=".activities.ForgotPasswordActivity"
+                android:name=".activities.forgotPasswordActivity.ForgotPasswordActivity"
                 android:screenOrientation="portrait"/>
-
         <activity
-                android:name=".activities.SMSVerificationActivity"
-                android:windowSoftInputMode="stateVisible"
-                android:screenOrientation="portrait"/>
-
+                android:name=".activities.smsVerificationActivity.SMSVerificationActivity"
+                android:screenOrientation="portrait"
+                android:windowSoftInputMode="stateVisible"/>
         <activity
-                android:name=".activities.GeneratePINActivity"
-                android:windowSoftInputMode="stateVisible"
-                android:screenOrientation="portrait"/>
-
+                android:name=".activities.generatePinActivity.GeneratePINActivity"
+                android:screenOrientation="portrait"
+                android:windowSoftInputMode="stateVisible"/>
         <activity
-                android:name=".activities.DashboardActivity"
-                android:windowSoftInputMode="stateAlwaysHidden"
-                android:screenOrientation="portrait"/>
-
+                android:name=".activities.dashboardActivity.DashboardActivity"
+                android:screenOrientation="portrait"
+                android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
                 android:name=".activities.addEditVehicleActivity.AddEditVehicleActivity"
-                android:windowSoftInputMode="stateAlwaysHidden"
-                android:screenOrientation="portrait"/>
-
+                android:screenOrientation="portrait"
+                android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
-                android:name=".activities.WaitingScreenBlue"
-                android:windowSoftInputMode="stateAlwaysHidden"
-                android:screenOrientation="portrait"/>
-
+                android:name=".activities.waitingScreenBlue.WaitingScreenBlue"
+                android:screenOrientation="portrait"
+                android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
-                android:name=".activities.WaitingScreenWhite"
-                android:windowSoftInputMode="stateAlwaysHidden"
+                android:name=".activities.waitingScreenWhite.WaitingScreenWhite"
+                android:screenOrientation="portrait"
+                android:windowSoftInputMode="stateAlwaysHidden"/>
+        <activity
+                android:name=".activities.vehicleListActivity.VehicleListActivity"
                 android:screenOrientation="portrait"/>
-
-        <activity android:name=".activities.vehicleListActivity.VehicleListActivity"
-                  android:screenOrientation="portrait"/>
 
         <provider
                 android:name="android.support.v4.content.FileProvider"
@@ -96,18 +88,19 @@
                 android:name="com.google.android.geo.API_KEY"
                 android:value="@string/google_maps_key"/>
 
-
-        <service
-                android:name=".fcm.MyFirebaseMessagingService">
+        <service android:name=".fcm.MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT"/>
             </intent-filter>
         </service>
-        <service android:name=".fcm.MyFirebaseInstanceIDService">
+        <service android:name=".fcm.myFirebaseInstanceIDService.MyFirebaseInstanceIDService">
             <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
             </intent-filter>
         </service>
+
+        <activity android:name=".activities.CancelRSAActivity">
+        </activity>
     </application>
 
 </manifest>

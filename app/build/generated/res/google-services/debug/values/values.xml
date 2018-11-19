@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">12915385217-jgf0oj153ce0rjrrefe70mn3p2b8ce31.apps.googleusercontent.com</string>
+    <string name="firebase_database_url" translatable="false">https://fobbumemberapp.firebaseio.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">12915385217</string>
+    <string name="google_api_key" translatable="false">AIzaSyBwyFRajCrx3RqJkMMth7GdIq979_fZ7rE</string>
+    <string name="google_app_id" translatable="false">1:12915385217:android:152ff2064de0af78</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyBwyFRajCrx3RqJkMMth7GdIq979_fZ7rE</string>
+    <string name="google_storage_bucket" translatable="false">fobbumemberapp.appspot.com</string>
+    <string name="project_id" translatable="false">fobbumemberapp</string>
+</resources>

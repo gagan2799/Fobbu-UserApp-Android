@@ -7,8 +7,9 @@ import android.util.Patterns
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.SpinnerAdapter
 import com.fobbu.member.android.R
-import com.fobbu.member.android.activities.SMSVerificationActivity
+import com.fobbu.member.android.activities.smsVerificationActivity.SMSVerificationActivity
 import com.fobbu.member.android.activities.loginActivity.LoginActivity
 import com.fobbu.member.android.activities.signupActivity.presenter.SignUpActivityHandler
 import com.fobbu.member.android.activities.signupActivity.presenter.SignUpActivityPresenter
@@ -21,12 +22,8 @@ import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
 import com.google.firebase.iid.FirebaseInstanceId
 import kotlinx.android.synthetic.main.activity_sign_up.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class SignUpActivity : AppCompatActivity(),ActivityView {
-
 
     private lateinit var dataAdaperSelectService: ArrayAdapter<String>
     private lateinit var webServiceApi: WebServiceApi
@@ -40,6 +37,8 @@ class SignUpActivity : AppCompatActivity(),ActivityView {
         fetchDeviceToken()
     }
 
+
+    // Method for fetching device token
     private fun fetchDeviceToken() {
         val api = GoogleApiAvailability.getInstance()
 
@@ -63,12 +62,13 @@ class SignUpActivity : AppCompatActivity(),ActivityView {
         }
     }
 
+    // Method for initializing all the variables that are used in the class
     private fun initialise() {
         webServiceApi = getEnv().getRetrofit()
         val itemSelectGender = arrayOf(this.resources.getString(R.string.other),this.resources.getString(R.string.male),
                 this.resources.getString(R.string.female))
         dataAdaperSelectService = ArrayAdapter(this, R.layout.spinnertype, itemSelectGender)
-        spinnerSelectGender.adapter = dataAdaperSelectService
+        spinnerSelectGender.adapter = dataAdaperSelectService as SpinnerAdapter?
         spinnerSelectGender.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(p0: AdapterView<*>?) {
             }
@@ -78,6 +78,7 @@ class SignUpActivity : AppCompatActivity(),ActivityView {
         }
     }
 
+    // Functionality of  all clicks present in the activity are handled here
     private fun addClicks() {
 
         tvGender.setOnClickListener {
@@ -133,6 +134,8 @@ class SignUpActivity : AppCompatActivity(),ActivityView {
     }
 
     //////////////////SIGN UP API USER/////////////////////////
+
+    // Signup API (API-users/signup)
     private fun callSignUpAPIUser(user_type: String,display_name:String,
                                   email:String,password:String,mobile_number:String,gender:String ) {
 
@@ -153,7 +156,7 @@ class SignUpActivity : AppCompatActivity(),ActivityView {
             else
                 firstName = display_name
 
-            rlLoader.visibility = View.VISIBLE
+           // rlLoader.visibility = View.VISIBLE
             signUpactivityHandler.sendSignUpData(user_type,firstName,
                 lastName,display_name,email,password,mobile_number,gender,token)
         } else {
@@ -162,9 +165,10 @@ class SignUpActivity : AppCompatActivity(),ActivityView {
         }
     }
 
+    // Signup API Response (API-users/signup)
     override fun onRequestSuccessReport(mainPojo: MainPojo) {
 
-        rlLoader.visibility = View.GONE
+       // rlLoader.visibility = View.GONE
         if (mainPojo.success== "true")
         {
             CommonClass(this@SignUpActivity,this@SignUpActivity)
@@ -205,6 +209,15 @@ class SignUpActivity : AppCompatActivity(),ActivityView {
         }
 
     }
+
+    override fun showLoader() {
+        rlLoader.visibility=View.VISIBLE
+    }
+
+    override fun hideLoader() {
+        rlLoader.visibility=View.GONE
+    }
+
 
 
     private fun getEnv(): MyApplication {

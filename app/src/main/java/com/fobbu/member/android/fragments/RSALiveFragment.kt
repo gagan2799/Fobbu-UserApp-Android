@@ -18,7 +18,7 @@ import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
 import com.fobbu.member.android.R
-import com.fobbu.member.android.activities.WaitingScreenBlue
+import com.fobbu.member.android.activities.waitingScreenBlue.WaitingScreenBlue
 import com.fobbu.member.android.interfaces.HeaderIconChanges
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient

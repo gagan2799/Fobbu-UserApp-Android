@@ -103,4 +103,9 @@ interface WebServiceApi {
     ):Call<MainPojo>
 
 
+    @POST("users/update_device_token")
+    fun updateDeviceTokenFCM(@Body mapData:HashMap<String,String>,
+                             @Header("x-access-token") token:String):Call<MainPojo>
+
+
 }

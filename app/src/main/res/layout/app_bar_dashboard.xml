@@ -42,7 +42,8 @@
                 android:visibility="gone"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"/>
 
         <ImageView
                 android:layout_width="wrap_content"
@@ -50,7 +51,28 @@
                 android:src="@drawable/fobbu_logo_blue"
                 android:layout_centerInParent="true"/>
 
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:id="@+id/imageViewOptionMenuDash"
+                android:src="@drawable/option"
+                android:visibility="gone"
+                android:layout_alignParentEnd="true"/>
     </RelativeLayout>
+
+    <LinearLayout
+            android:layout_width="wrap_content"
+            android:visibility="gone"
+            android:id="@+id/linearLayoutOptionMenu"
+            android:layout_alignParentRight="true"
+            android:layout_height="wrap_content"
+    android:orientation="vertical">
+        <include
+                layout="@layout/option_menu_layout"
+        />
+    </LinearLayout>
 
 
     <FrameLayout

@@ -1,0 +1,26 @@
+{
+    "logs": [
+        {
+            "outputFile": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-xxhdpi-v4/values-xxhdpi-v4.xml",
+            "map": [
+                {
+                    "source": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/res/values-xxhdpi/dimen.xml",
+                    "from": {
+                        "startLines": "16,6,15,13,14,17,9,7,8,5,3,4",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "573,196,530,430,483,619,346,249,300,149,56,103",
+                        "endColumns": "45,52,42,52,46,60,51,50,45,46,46,45",
+                        "endOffsets": "614,244,568,478,525,675,393,295,341,191,98,144"
+                    },
+                    "to": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,101,154,197,250,297,358,410,461,507,554,601",
+                        "endColumns": "45,52,42,52,46,60,51,50,45,46,46,45",
+                        "endOffsets": "96,149,192,245,292,353,405,456,502,549,596,642"
+                    }
+                }
+            ]
+        }
+    ]
+}

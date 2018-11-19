@@ -4,8 +4,10 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import com.fobbu.member.android.R
+import com.fobbu.member.android.activities.dashboardActivity.DashboardActivity
 import com.fobbu.member.android.activities.loginActivity.LoginActivity
 import com.fobbu.member.android.tutorial.TutorialActivity
 import com.fobbu.member.android.utils.CommonClass
@@ -20,15 +22,22 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
         fade()
+       /* val animationLeft:Animation= AnimationUtils.loadAnimation(this
+            ,R.anim.slide_left)
+        imageViewRightSplash.startAnimation(animationLeft)
 
+        val animationRight:Animation= AnimationUtils.loadAnimation(this,R.anim.slide_right)
+        imageViewLeftSplash.startAnimation(animationRight)*/
         fetchDeviceToken()
 
         Handler().postDelayed({
             //HANDLE WHERE SHOULD APP LAND IN
             navigateToScreen()
+
         }, 3000)
     }
 
+    // Method for launching different screens
     private fun navigateToScreen() {
 
         when {
@@ -37,7 +46,7 @@ class SplashActivity : AppCompatActivity() {
                 finish()
             }
             CommonClass(this,this).getString("mobile_number")!="" -> {
-                startActivity(Intent(this,DashboardActivity::class.java))
+                startActivity(Intent(this, DashboardActivity::class.java))
                 finish()
             }
             else -> {
@@ -47,12 +56,14 @@ class SplashActivity : AppCompatActivity() {
         }
     }
 
+    // Method for fade animation
     private fun fade() {
         val animation1 = AnimationUtils.loadAnimation(applicationContext, R.anim.fade)
         ivCenter.startAnimation(animation1)
         ivFobbuText.startAnimation(animation1)
     }
 
+    // Method for fetching device token
     private fun fetchDeviceToken() {
         val api = GoogleApiAvailability.getInstance()
 
