@@ -49,21 +49,23 @@
         android:textColor="@color/colorPrimary" />
 
     <TextView
-        android:id="@+id/tvTryFobbu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/circleIndicator"
-        android:layout_centerHorizontal="true"
-        android:text="@string/try_fobbu"
-        android:paddingRight="40dp"
-        android:paddingTop="18dp"
-        android:textSize="@dimen/textsize_medium"
-        android:paddingLeft="40dp"
-        android:paddingBottom="25dp"
-        android:layout_marginBottom="15dp"
-        android:visibility="invisible"
-        android:background="@drawable/rounded_red"
-        android:textColor="#ffffff" />
+            android:id="@+id/tvTryFobbu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/circleIndicator"
+            android:layout_centerHorizontal="true"
+            android:text="@string/try_fobbu"
+            android:textSize="@dimen/textsize_medium"
+            android:padding="@dimen/red_rounded_rectangle_padding"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:gravity="center"
+            android:foreground="?attr/selectableItemBackground"
+            android:singleLine="true"
+            android:visibility="invisible"
+            android:background="@drawable/red_rect_rounded"
+            android:layout_marginBottom="15dp"
+            android:textColor="@color/white" />
 
     <me.relex.circleindicator.CircleIndicator
         android:id="@+id/circleIndicator"

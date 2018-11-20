@@ -34,6 +34,7 @@ import com.fobbu.member.android.activities.WaitingScreenBlue
 import com.fobbu.member.android.apiInterface.MyApplication
 import com.fobbu.member.android.apiInterface.WebServiceApi
 import com.fobbu.member.android.interfaces.HeaderIconChanges
+import com.fobbu.member.android.interfaces.TopBarChanges
 import com.fobbu.member.android.modals.MainPojo
 import com.fobbu.member.android.utils.CommonClass
 import com.google.android.gms.common.ConnectionResult
@@ -59,7 +60,7 @@ import java.io.FileOutputStream
 import java.lang.Double
 import java.util.*
 
-class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
+class RSAFragment : Fragment(),  GoogleApiClient.OnConnectionFailedListener,
     GoogleApiClient.ConnectionCallbacks, LocationListener {
 
 
@@ -91,6 +92,9 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     private var serviceSelectedAmount = ""
     private var strLatitude = ""
     private var strLongitude = ""
+    private var strFuelType = ""
+    private var strTowingType = ""
+    private var ifTowRequired=false
 
     private lateinit var rlLoader: RelativeLayout
 
@@ -126,6 +130,35 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     private lateinit var text4: TextView
     private lateinit var llTerms: LinearLayout
 
+    private lateinit var llTextAll: LinearLayout
+    private lateinit var llTowing: LinearLayout
+    private lateinit var llLifting: LinearLayout
+    private lateinit var llFlatbed: LinearLayout
+
+    private lateinit var tvFlatBedText: TextView
+    private lateinit var tvFlatBedPrice: TextView
+    private lateinit var tvLiftingText: TextView
+    private lateinit var tvLiftingPrice: TextView
+
+    private lateinit var viewLeftTop: View
+    private lateinit var viewLeftBottom: View
+    private lateinit var viewRightTop: View
+    private lateinit var viewRightBottom: View
+    private var strBurstTopLeft = ""
+    private var strBurstTopRight = ""
+    private var strBurstBottomLeft = ""
+    private var strBurstBottomRight = ""
+
+    private lateinit var tvYes: TextView
+    private lateinit var tvNo: TextView
+    private var strHaveSpareTyre = "yes"
+    private lateinit var llMarkTyreBurst: LinearLayout
+
+    private lateinit var tvContinue:TextView
+    private lateinit var llTowRequired:LinearLayout
+    private lateinit var rlTopDrawer:RelativeLayout
+    private var topBarChanges: TopBarChanges? = null
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_rsa, container, false)
@@ -158,16 +191,44 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
             when {
                 llSubPoints.visibility == View.VISIBLE -> {
+
+                    topBarChanges!!.showGoneTopBar(true)
                     llHomeServices.visibility = View.VISIBLE
+                    rlTopDrawer.visibility = View.GONE
                     llSubPoints.visibility = View.GONE
                     llUploadPics.visibility = View.GONE
                     llFindFobbu.visibility = View.GONE
+                    llMarkTyreBurst.visibility = View.GONE
                 }
+
                 llUploadPics.visibility == View.VISIBLE -> {
-                    llHomeServices.visibility = View.GONE
-                    llSubPoints.visibility = View.VISIBLE
-                    llUploadPics.visibility = View.GONE
-                    llFindFobbu.visibility = View.GONE
+
+                    when {
+                        serviceSelected == "Burst Tyre" -> {
+                            llHomeServices.visibility = View.GONE
+                            llSubPoints.visibility = View.GONE
+                            llUploadPics.visibility = View.GONE
+                            llFindFobbu.visibility = View.GONE
+                            llMarkTyreBurst.visibility = View.VISIBLE
+                            llTowRequired.visibility = View.GONE
+                        }
+                        ifTowRequired -> {
+                            llHomeServices.visibility = View.GONE
+                            llSubPoints.visibility = View.GONE
+                            llUploadPics.visibility = View.GONE
+                            llFindFobbu.visibility = View.GONE
+                            llMarkTyreBurst.visibility = View.GONE
+                            llTowRequired.visibility = View.VISIBLE
+                        }
+                        else -> {
+                            llHomeServices.visibility = View.GONE
+                            llSubPoints.visibility = View.VISIBLE
+                            llUploadPics.visibility = View.GONE
+                            llFindFobbu.visibility = View.GONE
+                            llMarkTyreBurst.visibility = View.GONE
+                            llTowRequired.visibility = View.GONE
+                        }
+                    }
                 }
 
                 llFindFobbu.visibility == View.VISIBLE -> {
@@ -177,31 +238,104 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                     llFindFobbu.visibility = View.GONE
                 }
 
+                llMarkTyreBurst.visibility == View.VISIBLE -> {
+                    llHomeServices.visibility = View.GONE
+                    llSubPoints.visibility = View.VISIBLE
+                    llUploadPics.visibility = View.GONE
+                    llFindFobbu.visibility = View.GONE
+                    llMarkTyreBurst.visibility = View.GONE
+                }
+
+                llTowRequired.visibility == View.VISIBLE -> {
+                    llHomeServices.visibility = View.GONE
+                    llSubPoints.visibility = View.GONE
+                    llUploadPics.visibility = View.GONE
+                    llFindFobbu.visibility = View.GONE
+                    llMarkTyreBurst.visibility = View.VISIBLE
+                    llTowRequired.visibility = View.GONE
+                    ifTowRequired=false
+                }
             }
         }
 
         llScooterTwo.setOnClickListener {
+
+            if (serviceSelected == "Burst Tyre") {
+                llHomeServices.visibility = View.GONE
+                llSubPoints.visibility = View.GONE
+                llUploadPics.visibility = View.GONE
+                llFindFobbu.visibility = View.GONE
+                llMarkTyreBurst.visibility = View.VISIBLE
+            } else {
+                llHomeServices.visibility = View.GONE
+                llSubPoints.visibility = View.GONE
+                llUploadPics.visibility = View.VISIBLE
+                llFindFobbu.visibility = View.GONE
+                llMarkTyreBurst.visibility = View.GONE
+            }
+
             strVehicleType = "2wheeler"
-            llHomeServices.visibility = View.GONE
-            llSubPoints.visibility = View.GONE
-            llUploadPics.visibility = View.VISIBLE
-            llFindFobbu.visibility = View.GONE
         }
 
         llScooterThree.setOnClickListener {
             strVehicleType = "2wheeler"
+            strFuelType = "petrol"
             llHomeServices.visibility = View.GONE
             llSubPoints.visibility = View.GONE
             llUploadPics.visibility = View.VISIBLE
             llFindFobbu.visibility = View.GONE
+            llMarkTyreBurst.visibility = View.GONE
+        }
+
+        llCarFuelDieselThree.setOnClickListener {
+            strVehicleType = "2wheeler"
+            strFuelType = "diesel"
+            llHomeServices.visibility = View.GONE
+            llSubPoints.visibility = View.GONE
+            llUploadPics.visibility = View.VISIBLE
+            llMarkTyreBurst.visibility = View.GONE
+            llFindFobbu.visibility = View.GONE
+        }
+
+        llCarFuelPetrolThree.setOnClickListener {
+            strVehicleType = "2wheeler"
+            strFuelType = "petrol"
+            llHomeServices.visibility = View.GONE
+            llSubPoints.visibility = View.GONE
+            llUploadPics.visibility = View.VISIBLE
+            llMarkTyreBurst.visibility = View.GONE
+            llFindFobbu.visibility = View.GONE
+        }
+
+        tvContinue.setOnClickListener {
+
+            llHomeServices.visibility = View.GONE
+            llSubPoints.visibility = View.GONE
+            llUploadPics.visibility = View.VISIBLE
+            llFindFobbu.visibility = View.GONE
+            llMarkTyreBurst.visibility = View.GONE
+            llTowRequired.visibility = View.GONE
+
+            serviceSelected ="Towing"
+            ifTowRequired=true
         }
 
         llCarTwo.setOnClickListener {
             strVehicleType = "4wheeler"
-            llHomeServices.visibility = View.GONE
-            llSubPoints.visibility = View.GONE
-            llUploadPics.visibility = View.VISIBLE
-            llFindFobbu.visibility = View.GONE
+
+            if (serviceSelected == "Burst Tyre") {
+                llHomeServices.visibility = View.GONE
+                llSubPoints.visibility = View.GONE
+                llUploadPics.visibility = View.GONE
+                llFindFobbu.visibility = View.GONE
+                llMarkTyreBurst.visibility = View.VISIBLE
+            } else {
+                llHomeServices.visibility = View.GONE
+                llSubPoints.visibility = View.GONE
+                llUploadPics.visibility = View.VISIBLE
+                llFindFobbu.visibility = View.GONE
+                llMarkTyreBurst.visibility = View.GONE
+            }
         }
 
         tvUploadPics.setOnClickListener {
@@ -209,6 +343,65 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
             llSubPoints.visibility = View.GONE
             llUploadPics.visibility = View.GONE
             llFindFobbu.visibility = View.VISIBLE
+
+
+            when (serviceSelected) {
+                "Flat Tyre" -> {
+                    text1.text = resources.getString(R.string.tyre_1)
+                    text2.text = resources.getString(R.string.tyre_2)
+                    text3.text = resources.getString(R.string.tyre_3)
+                    text4.text = resources.getString(R.string.tyre_4)
+                    llTowing.visibility = View.GONE
+                    llTextAll.visibility = View.VISIBLE
+                }
+                "Jump Start" -> {
+                    text1.text = resources.getString(R.string.tyre_1_battery)
+                    text2.text = resources.getString(R.string.tyre_2)
+                    text3.text = resources.getString(R.string.tyre_3)
+                    text4.text = resources.getString(R.string.tyre_4)
+                    llTowing.visibility = View.GONE
+                    llTextAll.visibility = View.VISIBLE
+                }
+                "Fuel Delivery" -> {
+
+                    if (strFuelType == "petrol") {
+                        text1.text = resources.getString(R.string.tyre_1_fuel_petrol)
+                        text2.text = resources.getString(R.string.tyre_2_fuel_petrol)
+                    } else {
+                        text1.text = resources.getString(R.string.tyre_1_fuel_diesel)
+                        text2.text = resources.getString(R.string.tyre_2_fuel_diesel)
+                    }
+
+                    text3.text = resources.getString(R.string.tyre_3_fuel_diesel)
+                    text4.text = resources.getString(R.string.tyre_4_fuel_diesel)
+                    llTowing.visibility = View.GONE
+                    llTextAll.visibility = View.VISIBLE
+                }
+                "Burst Tyre" -> {
+                    text1.text = resources.getString(R.string.tyre_1_burst)
+                    text2.text = resources.getString(R.string.tyre_2)
+                    text3.text = resources.getString(R.string.tyre_3)
+                    text4.text = resources.getString(R.string.tyre_4)
+                    llTowing.visibility = View.GONE
+                    llTextAll.visibility = View.VISIBLE
+                }
+                "Towing" -> {
+                    text1.text = resources.getString(R.string.tyre_1)
+                    text2.text = resources.getString(R.string.tyre_2)
+                    text3.text = resources.getString(R.string.tyre_3)
+                    text4.text = resources.getString(R.string.tyre_4)
+                    llTowing.visibility = View.VISIBLE
+                    llTextAll.visibility = View.GONE
+                }
+                else -> {
+                    text1.text = resources.getString(R.string.tyre_1)
+                    text2.text = resources.getString(R.string.tyre_2)
+                    text3.text = resources.getString(R.string.tyre_3)
+                    text4.text = resources.getString(R.string.tyre_4)
+                    llTowing.visibility = View.GONE
+                    llTextAll.visibility = View.VISIBLE
+                }
+            }
         }
 
         tvSkip.setOnClickListener {
@@ -218,7 +411,102 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
             llFindFobbu.visibility = View.VISIBLE
         }
 
+        llFlatbed.setOnClickListener {
+            strTowingType = "Flatbed"
+            tvFlatBedPrice.setTextColor(resources.getColor(R.color.colorPrimary))
+            tvFlatBedText.setTextColor(resources.getColor(R.color.colorPrimary))
+            tvLiftingText.setTextColor(resources.getColor(R.color.drawer_text_color))
+            tvLiftingPrice.setTextColor(resources.getColor(R.color.drawer_text_color))
+        }
+
+        llLifting.setOnClickListener {
+            strTowingType = "Lifting"
+            tvFlatBedPrice.setTextColor(resources.getColor(R.color.drawer_text_color))
+            tvFlatBedText.setTextColor(resources.getColor(R.color.drawer_text_color))
+            tvLiftingText.setTextColor(resources.getColor(R.color.colorPrimary))
+            tvLiftingPrice.setTextColor(resources.getColor(R.color.colorPrimary))
+        }
+
+        viewLeftTop.setOnClickListener {
+
+            if (strBurstTopLeft == "") {
+                strBurstTopLeft = "1"
+                viewLeftTop.setBackgroundResource(R.drawable.red_circle)
+            } else {
+                strBurstTopLeft = ""
+                viewLeftTop.setBackgroundResource(R.drawable.border_circle)
+            }
+        }
+
+        viewLeftBottom.setOnClickListener {
+
+            if (strBurstBottomLeft == "") {
+                strBurstBottomLeft = "1"
+                viewLeftBottom.setBackgroundResource(R.drawable.red_circle)
+            } else {
+                strBurstBottomLeft = ""
+                viewLeftBottom.setBackgroundResource(R.drawable.border_circle)
+            }
+        }
+
+        viewRightTop.setOnClickListener {
+
+            if (strBurstTopRight == "") {
+                strBurstTopRight = "1"
+                viewRightTop.setBackgroundResource(R.drawable.red_circle)
+            } else {
+                strBurstTopRight = ""
+                viewRightTop.setBackgroundResource(R.drawable.border_circle)
+            }
+        }
+
+        viewRightBottom.setOnClickListener {
+
+            if (strBurstBottomRight == "") {
+                strBurstBottomRight = "1"
+                viewRightBottom.setBackgroundResource(R.drawable.red_circle)
+            } else {
+                strBurstBottomRight = ""
+                viewRightBottom.setBackgroundResource(R.drawable.border_circle)
+            }
+        }
+
+        tvYes.setOnClickListener {
+
+            strHaveSpareTyre = "yes"
+            tvYes.setBackgroundResource(R.drawable.rounded_blue_background)
+            tvYes.setTextColor(resources.getColor(R.color.white))
+            tvNo.setTextColor(resources.getColor(R.color.drawer_text_color))
+            tvNo.setBackgroundResource(R.drawable.rounded_white_background)
+
+            llHomeServices.visibility = View.GONE
+            llSubPoints.visibility = View.GONE
+            llUploadPics.visibility = View.VISIBLE
+            llFindFobbu.visibility = View.GONE
+            llMarkTyreBurst.visibility = View.GONE
+            llTowRequired.visibility = View.GONE
+        }
+
+        tvNo.setOnClickListener {
+
+            strHaveSpareTyre = "no"
+            tvYes.setBackgroundResource(R.drawable.rounded_white_background)
+            tvNo.setBackgroundResource(R.drawable.rounded_blue_background)
+            tvYes.setTextColor(resources.getColor(R.color.drawer_text_color))
+            tvNo.setTextColor(resources.getColor(R.color.white))
+
+            llHomeServices.visibility = View.GONE
+            llSubPoints.visibility = View.GONE
+            llUploadPics.visibility = View.GONE
+            llFindFobbu.visibility = View.GONE
+            llMarkTyreBurst.visibility = View.GONE
+            llTowRequired.visibility = View.VISIBLE
+        }
+
     }
+
+
+
 
     @SuppressLint("ClickableViewAccessibility")
     private fun chooseImagesClick() {
@@ -274,7 +562,11 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
         headerIconChanges = activity as HeaderIconChanges?
         headerIconChanges!!.changeHeaderIcons(true, false, false)
 
+        topBarChanges = activity as TopBarChanges
+        topBarChanges!!.showGoneTopBar(true)
+
         rlLoader = view!!.findViewById(R.id.rlLoader)
+        rlTopDrawer = view.findViewById(R.id.rlTopDrawer)
 
         llPhoto1 = view.findViewById(R.id.llPhoto1)
         llPhoto2 = view.findViewById(R.id.llPhoto2)
@@ -293,7 +585,7 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
         tvFindFobbu = view.findViewById(R.id.tvFindFobbu)
 
         recyclerViewServices = view.findViewById(R.id.recyclerViewServices)
-        recyclerViewServices.layoutManager = GridLayoutManager(activity, 3)
+        recyclerViewServices.layoutManager = GridLayoutManager(activity, 3) as RecyclerView.LayoutManager?
         fobbuServiceAdapter = FobbuServiceAdapter()
         recyclerViewServices.adapter = fobbuServiceAdapter
         fobbuServiceAdapter.notifyDataSetChanged()
@@ -328,7 +620,31 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
         text2 = view.findViewById(R.id.text2)
         text3 = view.findViewById(R.id.text3)
         text4 = view.findViewById(R.id.text4)
-        llTerms =view.findViewById(R.id.llTerms)
+        llTerms = view.findViewById(R.id.llTerms)
+
+        llTowing = view.findViewById(R.id.llTowing)
+        llTextAll = view.findViewById(R.id.llTextAll)
+
+        llLifting = view.findViewById(R.id.llLifting)
+        llFlatbed = view.findViewById(R.id.llFlatbed)
+
+        tvFlatBedPrice = view.findViewById(R.id.tvFlatBedPrice)
+        tvFlatBedText = view.findViewById(R.id.tvFlatBedText)
+        tvLiftingPrice = view.findViewById(R.id.tvLiftingPrice)
+        tvLiftingText = view.findViewById(R.id.tvLiftingText)
+
+        viewLeftTop = view.findViewById(R.id.viewLeftTop)
+        viewLeftBottom = view.findViewById(R.id.viewLeftBottom)
+        viewRightBottom = view.findViewById(R.id.viewRightBottom)
+        viewRightTop = view.findViewById(R.id.viewRightTop)
+
+        tvNo = view.findViewById(R.id.tvNo)
+        tvYes = view.findViewById(R.id.tvYes)
+
+        llMarkTyreBurst = view.findViewById(R.id.llMarkTyreBurst)
+
+        tvContinue = view.findViewById(R.id.tvContinue)
+        llTowRequired= view.findViewById(R.id.llTowRequired)
     }
 
     @SuppressLint("SetTextI18n")
@@ -453,36 +769,47 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                     "Flat Tyre" -> {
                         llThree.visibility = View.GONE
                         llTwo.visibility = View.VISIBLE
+                        topBarChanges!!.showGoneTopBar(false)
+                        rlTopDrawer.visibility = View.VISIBLE
                         tvHeading.text = resources.getString(R.string.flat_tyre_worries)
                         tvSubheading.text = resources.getString(R.string.fix_on_the_spot)
                     }
                     "Jump Start" -> {
                         llThree.visibility = View.GONE
                         llTwo.visibility = View.VISIBLE
+                        topBarChanges!!.showGoneTopBar(false)
+                        rlTopDrawer.visibility = View.VISIBLE
                         tvHeading.text = resources.getString(R.string.dead_battery_worries)
                         tvSubheading.text = resources.getString(R.string.jump_start)
                     }
                     "Fuel Delivery" -> {
                         llThree.visibility = View.VISIBLE
                         llTwo.visibility = View.GONE
+                        topBarChanges!!.showGoneTopBar(false)
+                        rlTopDrawer.visibility = View.VISIBLE
                         tvHeading.text = resources.getString(R.string.empty_tanks_worries)
                         tvSubheading.text = resources.getString(R.string.deliver_real_quick)
                     }
                     "Burst Tyre" -> {
                         llThree.visibility = View.GONE
                         llTwo.visibility = View.VISIBLE
+                        topBarChanges!!.showGoneTopBar(false)
+                        rlTopDrawer.visibility = View.VISIBLE
                         tvHeading.text = resources.getString(R.string.burst_tyre_worries)
                         tvSubheading.text = resources.getString(R.string.help_you_fix)
                     }
                     "Towing" -> {
                         llThree.visibility = View.GONE
                         llTwo.visibility = View.VISIBLE
+                        topBarChanges!!.showGoneTopBar(false)
+                        rlTopDrawer.visibility = View.VISIBLE
                         tvHeading.text = resources.getString(R.string.double_trouble)
                         tvSubheading.text = resources.getString(R.string.we_will_connect_towing)
                     }
                     else -> {
                         llHomeServices.visibility = View.VISIBLE
                         llSubPoints.visibility = View.GONE
+                        rlTopDrawer.visibility = View.GONE
                     }
                 }
 

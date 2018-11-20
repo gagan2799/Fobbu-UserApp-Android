@@ -18,12 +18,13 @@ import com.fobbu.member.android.fragments.RSAFragment
 import com.fobbu.member.android.fragments.RSALiveFragment
 import com.fobbu.member.android.interfaces.ChangeRSAFragments
 import com.fobbu.member.android.interfaces.HeaderIconChanges
+import com.fobbu.member.android.interfaces.TopBarChanges
 import com.fobbu.member.android.utils.CommonClass
 import kotlinx.android.synthetic.main.activity_dashboard.*
 import kotlinx.android.synthetic.main.app_bar_dashboard.*
 import kotlinx.android.synthetic.main.inflate_drawer.*
 
-class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragments {
+class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragments,TopBarChanges {
 
 
     var fragmentTypeForRSA = ""
@@ -35,6 +36,13 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
         drawerClicks()
         tabBarClicks()
         changeFragment(HomeFragment(), resources.getString(R.string.home))
+    }
+
+    override fun showGoneTopBar(showDrawer: Boolean) {
+        if(showDrawer)
+            rlTopDrawer.visibility=View.VISIBLE
+        else
+            rlTopDrawer.visibility=View.GONE
     }
 
     ////BOTTOM BAR CLICKS HANDLED IN THIS METHOD
@@ -60,7 +68,6 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
             ivRSA.setBackgroundColor(resources.getColor(R.color.colorPrimary))
 
         } else if (string == resources.getString(R.string.rsa_home) || string == resources.getString(R.string.rsa_live)) {
-            rlTopDrawer.visibility = View.GONE
 
             ivHome.setImageResource(R.drawable.meters_tabbar)
             ivHome.setBackgroundColor(resources.getColor(R.color.colorPrimary))

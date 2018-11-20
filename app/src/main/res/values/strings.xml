@@ -185,12 +185,31 @@
     <string name="unlock_your_lsd">Unlock Your LSD\'s - I Bet you wont regret !</string>
     <string name="assured_cashback">Assured cashback offers</string>
     <string name="sos">SOS</string>
+    <string name="tyre_1_fuel_petrol">1. Above is delivery charge for 4L of petrol.</string>
+    <string name="tyre_2_fuel_petrol">2. 4L of petrol will be delivered on actual cost.</string>
+    <string name="tyre_1_fuel_diesel">1. Above is delivery charge for 4L of diesel.</string>
+    <string name="tyre_2_fuel_diesel">2. 4L of diesel will be delivered on actual cost.</string>
+    <string name="tyre_3_fuel_diesel">3. Fobbu will click and upload your valid DL.</string>
+    <string name="tyre_4_fuel_diesel">4. Fuel will be filled in front of you by Fobbu only.</string>
+    <string name="tyre_1_battery">1. The above is service charge for battery jumpstart.</string>
+    <string name="tyre_1_burst">1. Above is service charge for replacing spare tyre.</string>
     <string name="tyre_1">1. The above cost is for one tyre puncture repair.</string>
     <string name="tyre_2">2. Addition tyre repair will cost Rs 125/-</string>
     <string name="tyre_3">3. We will charge Rs 200/- if you cancel when fobbu reaches</string>
     <string name="tyre_4">4. #No Surge #No Hidden Cost #All inclusive</string>
     <string name="terms">By clicking "Find Fobbu" you agree to our</string>
     <string name="conditions"><u>terms &amp; conditions</u></string>
+    <string name="tow_required">Tow Required</string>
+    <string name="continue_">Continue</string>
+    <string name="tow_service_required">This type of service requires a mechanic shop.\nLet\'s change your service to a tow and\nget you the help you need.</string>
+    <string name="lifting">Lifting</string>
+    <string name="flatbed">Flatbed</string>
+    <string name="tow_1">1. Charge of Rs 1000/- if you cancel when fobbu reaches</string>
+    <string name="working_spare_tyre">I have a working  Spare tyre</string>
+    <string name="mark_tyre_burst">Mark the Tyre Burst</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+
 
     /////RSA FRAGMENTS TYPE
     <string name="rsa_home">RSA_Home</string>

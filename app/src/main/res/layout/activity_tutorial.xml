@@ -16,19 +16,20 @@
 
     <TextView
         android:id="@+id/tvTryFobbu"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/circleIndicator"
         android:layout_centerHorizontal="true"
         android:text="@string/try_fobbu"
-        android:paddingRight="35dp"
         android:textSize="@dimen/textsize_medium"
-        android:paddingTop="18dp"
+        android:padding="@dimen/red_rounded_rectangle_padding"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:gravity="center"
         android:foreground="?attr/selectableItemBackground"
-        android:paddingLeft="35dp"
-        android:paddingBottom="25dp"
+        android:singleLine="true"
+        android:background="@drawable/red_rect_rounded"
         android:layout_marginBottom="15dp"
-        android:background="@drawable/rounded_red"
         android:textColor="@color/white" />
 
     <me.relex.circleindicator.CircleIndicator

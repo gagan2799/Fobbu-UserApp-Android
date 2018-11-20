@@ -9,6 +9,7 @@ import android.widget.LinearLayout
 import com.fobbu.member.android.R
 import com.fobbu.member.android.interfaces.ChangeRSAFragments
 import com.fobbu.member.android.interfaces.HeaderIconChanges
+import com.fobbu.member.android.interfaces.TopBarChanges
 
 class HomeFragment : Fragment() {
 
@@ -17,6 +18,7 @@ class HomeFragment : Fragment() {
     private lateinit var llRSA: LinearLayout
 
     private var headerIconChanges: HeaderIconChanges? = null
+    private var topBarChanges:TopBarChanges?=null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -44,10 +46,11 @@ class HomeFragment : Fragment() {
         headerIconChanges = activity as HeaderIconChanges?
         headerIconChanges!!.changeHeaderIcons(true, false, false)
 
+        topBarChanges = activity as TopBarChanges
+        topBarChanges!!.showGoneTopBar(true)
+
         changeRSAFragments = activity!! as ChangeRSAFragments
 
         llRSA = view!!.findViewById(R.id.llRSA)
-
-
     }
 }
