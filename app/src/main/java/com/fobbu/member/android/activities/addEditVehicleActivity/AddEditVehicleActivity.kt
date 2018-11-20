@@ -26,30 +26,26 @@ import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.fobbu.member.android.R
 import com.fobbu.member.android.activities.vehicleListActivity.VehicleListActivity
-import com.fobbu.member.android.activities.WaitingScreenWhite
+import com.fobbu.member.android.activities.waitingScreenWhite.WaitingScreenWhite
 import com.fobbu.member.android.activities.addEditVehicleActivity.presenter.AddEditActivityHandler
 import com.fobbu.member.android.activities.addEditVehicleActivity.presenter.AddEditVehiclePresenter
+import com.fobbu.member.android.activities.addEditVehicleActivity.view.AddEditVehicleAcivityView
 import com.fobbu.member.android.apiInterface.MyApplication
 import com.fobbu.member.android.apiInterface.WebServiceApi
 import com.fobbu.member.android.modals.MainPojo
 import com.fobbu.member.android.utils.CommonClass
-import com.fobbu.member.android.view.ActivityView
 import kotlinx.android.synthetic.main.activity_add_edit_vehicle.*
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import org.json.JSONObject
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
 import java.util.*
 import kotlin.collections.HashMap
 
-class AddEditVehicleActivity : AppCompatActivity(),ActivityView {
-
+class AddEditVehicleActivity : AppCompatActivity(),AddEditVehicleAcivityView {
 
     private lateinit var webServiceApi: WebServiceApi
     lateinit var addEditActivityHandler: AddEditActivityHandler
@@ -79,6 +75,7 @@ class AddEditVehicleActivity : AppCompatActivity(),ActivityView {
         addClicks()
     }
 
+    // all the initialization of the class is done here
     private fun initialise() {
 
         webServiceApi = getEnv().getRetrofitMulti()
@@ -100,6 +97,7 @@ class AddEditVehicleActivity : AppCompatActivity(),ActivityView {
         finish()
     }
 
+    // all the clicks  are handled in this method
     private fun addClicks() {
 
         ivList.setOnClickListener {
@@ -132,7 +130,7 @@ class AddEditVehicleActivity : AppCompatActivity(),ActivityView {
                 showPopupViewDelete("1")
             } else {
                 imageFrom = "1"
-                showDocPopup()
+                uploadImagesPopup()
             }
 
         }
@@ -143,7 +141,7 @@ class AddEditVehicleActivity : AppCompatActivity(),ActivityView {
                 showPopupViewDelete("2")
             } else {
                 imageFrom = "2"
-                showDocPopup()
+                uploadImagesPopup()
             }
         }
 
@@ -152,7 +150,7 @@ class AddEditVehicleActivity : AppCompatActivity(),ActivityView {
                 showPopupViewDelete("3")
             } else {
                 imageFrom = "3"
-                showDocPopup()
+                uploadImagesPopup()
             }
         }
 
@@ -161,7 +159,7 @@ class AddEditVehicleActivity : AppCompatActivity(),ActivityView {
                 showPopupViewDelete("4")
             } else {
                 imageFrom = "4"
-                showDocPopup()
+                uploadImagesPopup()
             }
         }
 
@@ -225,6 +223,8 @@ class AddEditVehicleActivity : AppCompatActivity(),ActivityView {
         }
     }
 
+
+    //Method for  deleting selected images
     private fun showPopupViewDelete(s: String) {
 
         val alertDialog = AlertDialog.Builder(this).create()
@@ -291,7 +291,8 @@ class AddEditVehicleActivity : AppCompatActivity(),ActivityView {
         alertDialog.show()
     }
 
-    private fun showDocPopup() {
+    //Method for uploading car images
+    private fun uploadImagesPopup() {
 
         val alertDialog = AlertDialog.Builder(this).create()
         alertDialog.setTitle("Upload Car Images")
@@ -381,6 +382,8 @@ class AddEditVehicleActivity : AppCompatActivity(),ActivityView {
 
     private var mFileTemp: File? = null
 
+
+    // Method for opening camera and capturing images
     private fun takePicture() {
 
         createFileAndDeleteOldFile()
@@ -408,6 +411,7 @@ class AddEditVehicleActivity : AppCompatActivity(),ActivityView {
         }
     }
 
+    //Method for creating files and deleting old ones
     private fun createFileAndDeleteOldFile() {
         mFileTemp =
                 File(Environment.getExternalStorageDirectory(), "vehicle_images" + System.currentTimeMillis() + ".jpg")
@@ -416,6 +420,7 @@ class AddEditVehicleActivity : AppCompatActivity(),ActivityView {
         }
     }
 
+    //Method for opening gallery
     private fun openGallery() {
 
         val photoPickerIntent = Intent(Intent.ACTION_PICK)
@@ -568,6 +573,8 @@ class AddEditVehicleActivity : AppCompatActivity(),ActivityView {
         super.onActivityResult(requestCode, resultCode, data)
     }
 
+
+    //Method to dislpay message to the user about the permission required by the application
     private fun showMessageDialog(message: String) {
         val alertDialog = AlertDialog.Builder(
             this@AddEditVehicleActivity!!
@@ -590,6 +597,8 @@ class AddEditVehicleActivity : AppCompatActivity(),ActivityView {
 
     }
 
+
+    //Method for compressing image
     private fun compressImage(imgFile: File): File {
         val bos = ByteArrayOutputStream()
 
@@ -610,6 +619,7 @@ class AddEditVehicleActivity : AppCompatActivity(),ActivityView {
 
     }
 
+    // method for changing the orientation of the images
     private fun imageRotation(bitmap: Bitmap, path: String): Bitmap {
         val ei = ExifInterface(path)
         val orientation = ei.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL)
@@ -631,6 +641,8 @@ class AddEditVehicleActivity : AppCompatActivity(),ActivityView {
         return rotatedBitmap
     }
 
+
+    // Method for rotating image
     private fun rotateImage(source: Bitmap, angle: Float): Bitmap {
         val matrix = Matrix()
         matrix.postRotate(angle)
@@ -639,6 +651,8 @@ class AddEditVehicleActivity : AppCompatActivity(),ActivityView {
     }
 
     //////////////////ADD EDIT VEHICLE API  /////////////////////////
+
+    //Add vehicle API (API-users/vehicles)
     private fun addVehicleApi() {
 
         val fileList = ArrayList<MultipartBody.Part>()
@@ -653,7 +667,7 @@ class AddEditVehicleActivity : AppCompatActivity(),ActivityView {
             fileList.add(imgProfile!!)
         }
 
-        rlLoader.visibility = View.VISIBLE
+     //  rlLoader.visibility = View.VISIBLE
 
         val jsonDoc = JSONObject()
 
@@ -672,54 +686,40 @@ class AddEditVehicleActivity : AppCompatActivity(),ActivityView {
         val tokenHeader = CommonClass(this, this).getString("x_access_token")
 
         addEditActivityHandler.sendAddEditData(map,fileList,tokenHeader)
-        /*val validateUserApi = webServiceApi.addVehicle(map, fileList, tokenHeader)
 
-        validateUserApi.enqueue(object : Callback<MainPojo> {
-            override fun onFailure(call: Call<MainPojo>?, t: Throwable?) {
-                t!!.stackTrace
-                rlLoader.visibility = View.GONE
-                println("api failed")
+    }
+
+    // Add Vehicle Api Response (API-users/vehicles)
+    override fun onRequestSuccessReport(mainPojo: MainPojo) {
+        //rlLoader.visibility = View.GONE
+
+        if (mainPojo.success =="true")
+        {
+
+            if (fromWhere == "RSA") {
+                callUpdateVehicle(mainPojo.getData()._id)
+            } else {
+
+                println("Success")
+                CommonClass(
+                    this@AddEditVehicleActivity,
+                    this@AddEditVehicleActivity
+                ).showToast(mainPojo.message)
+
+                finish()
             }
+        }else{
 
-            override fun onResponse(call: Call<MainPojo>?, response: Response<MainPojo>?) {
-
-                try {
-                    val mainPojo = response!!.body()
-
-                    println("main pojo data $mainPojo")
-
-                    if (mainPojo!!.success == "true") {
-
-                        if (fromWhere == "RSA") {
-                            callUpdateVehicle(mainPojo.getData()._id)
-                        } else {
-                            rlLoader.visibility = View.GONE
-                            println("Success")
-                            CommonClass(
-                                this@AddEditVehicleActivity,
-                                this@AddEditVehicleActivity
-                            ).showToast(mainPojo.message)
-
-                            finish()
-                        }
-                        //
-                    } else {
-                        rlLoader.visibility = View.GONE
-                        CommonClass(
-                            this@AddEditVehicleActivity,
-                            this@AddEditVehicleActivity
-                        ).showToast(mainPojo.message)
-                        //
-                    }
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                    rlLoader.visibility = View.GONE
-                }
-            }
-        })*/
+            CommonClass(
+                this@AddEditVehicleActivity,
+                this@AddEditVehicleActivity
+            ).showToast(mainPojo.message)
+        }
     }
 
     //////////////////UPDATE FOBBU VEHICLE API /////////////////////////
+
+    //Update FOBBU Vehicle API (API-users/requests)
     private fun callUpdateVehicle(id: String) {
 
         if (CommonClass(this, this).checkInternetConn(this)) {
@@ -729,78 +729,51 @@ class AddEditVehicleActivity : AppCompatActivity(),ActivityView {
 
             val requestId = CommonClass(this@AddEditVehicleActivity, this@AddEditVehicleActivity)
                 .getString("fobbu_request_id")
-
+           // rlLoader.visibility = View.VISIBLE
             val hash = HashMap<String, String>()
             hash["request_id"] = requestId
             hash["vehicle"] = id
 
-            val callloginApi = webServiceApi.findFobbuRequestUpdateVehicle(hash, token)
+            addEditActivityHandler.findFobbuRequestUpdateVehicle(hash,token)
 
-            callloginApi.enqueue(object : Callback<MainPojo> {
-                override fun onResponse(call: Call<MainPojo>, response: Response<MainPojo>) {
-                    rlLoader.visibility = View.GONE
-                    try {
-
-                        val mainPojo = response.body()
-
-                        if (mainPojo!!.success == "true") {
-
-                            startActivity(
-                                Intent(
-                                    this@AddEditVehicleActivity
-                                    , WaitingScreenWhite::class.java
-                                ).putExtra("from_where", "new_vehicle_added")
-                            )
-                            finish()
-
-                        } else {
-
-                            CommonClass(this@AddEditVehicleActivity, this@AddEditVehicleActivity)
-                                .showToast(mainPojo.message)
-                        }
-
-                    } catch (e: Exception) {
-                        e.printStackTrace()
-                        rlLoader.visibility = View.GONE
-                    }
-                }
-
-                override fun onFailure(call: Call<MainPojo>, t: Throwable) {
-                    rlLoader.visibility = View.GONE
-                    t.printStackTrace()
-                }
-            })
         } else {
 
             CommonClass(this, this).internetIssue(this)
         }
     }
 
-    override fun onRequestSuccessReport(mainPojo: MainPojo) {
-       if (mainPojo.success =="true")
-       {
 
-           if (fromWhere == "RSA") {
-               callUpdateVehicle(mainPojo.getData()._id)
-           } else {
-               rlLoader.visibility = View.GONE
-               println("Success")
-               CommonClass(
-                   this@AddEditVehicleActivity,
-                   this@AddEditVehicleActivity
-               ).showToast(mainPojo.message)
+    // Update FOBBU Vehicle API Response (API-users/requests)
+    override fun onRequestSuccessUpdateVehicle(mainPojo: MainPojo) {
+       // rlLoader.visibility = View.GONE
+        if (mainPojo!!.success == "true") {
 
-               finish()
-           }
-       }else{
+            startActivity(
+                Intent(
+                    this@AddEditVehicleActivity
+                    , WaitingScreenWhite::class.java
+                ).putExtra("from_where", "new_vehicle_added")
+            )
+            finish()
 
-           rlLoader.visibility = View.GONE
-           CommonClass(
-               this@AddEditVehicleActivity,
-               this@AddEditVehicleActivity
-           ).showToast(mainPojo.message)
-       }
+        } else {
+
+            CommonClass(this@AddEditVehicleActivity, this@AddEditVehicleActivity)
+                .showToast(mainPojo.message)
+        }
+
     }
+
+    override fun showLoader() {
+        rlLoader.visibility=View.VISIBLE
+    }
+
+    override fun hideLoader() {
+        rlLoader.visibility=View.GONE
+    }
+
+
+
     private fun getEnv(): MyApplication {
         return application as MyApplication
     }

@@ -5,9 +5,9 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.fobbu.member.android.R
-import com.fobbu.member.android.activities.DashboardActivity
-import com.fobbu.member.android.activities.ForgotPasswordActivity
-import com.fobbu.member.android.activities.GeneratePINActivity
+import com.fobbu.member.android.activities.dashboardActivity.DashboardActivity
+import com.fobbu.member.android.activities.forgotPasswordActivity.ForgotPasswordActivity
+import com.fobbu.member.android.activities.generatePinActivity.GeneratePINActivity
 import com.fobbu.member.android.activities.signupActivity.SignUpActivity
 import com.fobbu.member.android.activities.loginActivity.presenter.LoginActivityHandler
 import com.fobbu.member.android.activities.loginActivity.presenter.LoginActivityPresenter
@@ -24,7 +24,6 @@ import kotlinx.android.synthetic.main.activity_login.*
 class LoginActivity : AppCompatActivity(),ActivityView {
 
 
-
     private lateinit var webServiceApi: WebServiceApi
     lateinit var loginActivityHandler:LoginActivityHandler
 
@@ -36,6 +35,8 @@ class LoginActivity : AppCompatActivity(),ActivityView {
         fetchDeviceToken()
     }
 
+
+    // Method for fetching device token
     private fun fetchDeviceToken() {
         val api = GoogleApiAvailability.getInstance()
 
@@ -59,6 +60,7 @@ class LoginActivity : AppCompatActivity(),ActivityView {
         }
     }
 
+    // Functionality of  all clicks present in the activity are handled here
     private fun addClicks() {
         webServiceApi = getEnv().getRetrofit()
 
@@ -98,13 +100,15 @@ class LoginActivity : AppCompatActivity(),ActivityView {
     }
 
     //////////////////LOGIN API USER/////////////////////////
+
+    // Login API (API-users/login)
     private fun callLoginAPIUser(mobile: String, password: String) {
 
         if (CommonClass(this, this).checkInternetConn(this)) {
 
             val token = CommonClass(this@LoginActivity, this@LoginActivity).getString("device_token")
 
-            rlLoader.visibility = View.VISIBLE
+           // rlLoader.visibility = View.VISIBLE
 
             loginActivityHandler.sendLoginData(mobile,password,token)
 
@@ -114,11 +118,12 @@ class LoginActivity : AppCompatActivity(),ActivityView {
         }
     }
 
+    // Login API Response (API-users/login)
     override fun onRequestSuccessReport(mainPojo: MainPojo) {
 
         if (mainPojo.success == "true")
         {
-            rlLoader.visibility = View.GONE
+           // rlLoader.visibility = View.GONE
             /*Toast.makeText(this,""+mainPojo.message, Toast.LENGTH_SHORT).show()*/
 
             CommonClass(this@LoginActivity, this@LoginActivity)
@@ -163,7 +168,7 @@ class LoginActivity : AppCompatActivity(),ActivityView {
 
             finish()
         }else{
-            rlLoader.visibility = View.GONE
+           // rlLoader.visibility = View.GONE
 /*
             val message = CommonClass(this@LoginActivity, this@LoginActivity)
             .errorMessage(response.errorBody()!!.string())*/
@@ -174,6 +179,14 @@ class LoginActivity : AppCompatActivity(),ActivityView {
         }
 
     }
+    override fun showLoader() {
+        rlLoader.visibility=View.VISIBLE
+    }
+
+    override fun hideLoader() {
+        rlLoader.visibility=View.GONE
+    }
+
     private fun getEnv(): MyApplication {
         return application as MyApplication
     }

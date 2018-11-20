@@ -9,14 +9,16 @@
     <string name="rsa_tutorial_text">on road, at home, at work, or on travel\nnever be stranded…</string>
     <string name="ods">ODS</string>
     <string name="ods_fullform">( On Demand Services )</string>
-    <string name="ods_tutorial_text">turn your Vehicle repair/service into\ntap driven experience, effective and fun…</string>
+    <string name="ods_tutorial_text">turn your Vehicle repair/service into\ntap driven experience, effective and fun…
+    </string>
     <string name="lsd">Lsd</string>
     <string name="lsd_fullform">( Local Steal Deals )</string>
-    <string name="lsd_tutorial_text">big savings from tons of local offers and\ndiscount customized only for you…</string>
+    <string name="lsd_tutorial_text">big savings from tons of local offers and\ndiscount customized only for you…
+    </string>
     <string name="keep_driving">Keep Driving, be Safe…</string>
     <string name="keep_driving_text">ready to experience the whole new\nway you drive your vehicle ?</string>
 
-     ///SPLASH SCREEN
+    ///SPLASH SCREEN
     <string name="splash_text">Help when you need it!</string>
 
     ///LOGIN SCREEN
@@ -24,7 +26,9 @@
     <string name="mobile_number">Mobile No.</string>
     <string name="password">Password</string>
     <string name="start_your_fobbu">Start your Fobbu</string>
-    <string name="forgot_password_ques"><u>Forgot Password ?</u></string>
+    <string name="forgot_password_ques">
+        <u>Forgot Password ?</u>
+    </string>
     <string name="please_enter_mobile">Please enter Mobile no.</string>
     <string name="please_enter_password">Please enter Password.</string>
 
@@ -32,7 +36,9 @@
     <string name="signup">Sign Up</string>
     <string name="full_name">Full Name</string>
     <string name="email_id">Email ID</string>
-    <string name="already_registered"><u>Already Registered?</u></string>
+    <string name="already_registered">
+        <u>Already Registered?</u>
+    </string>
     <string name="by_signing_up">By Signing up, agree to our</string>
     <string name="terms_of_service">Terms of Service</string>
     <string name="please_enter_full_name">Please enter Full Name.</string>
@@ -52,8 +58,12 @@
     <string name="sms_verification">SMS Verification</string>
     <string name="confirm" tools:ignore="ExtraTranslation">Confirm</string>
     <string name="we_verifying">We are verifying your mobile no.</string>
-    <string name="in_case_auto">In case the auto verification fails, you can manually enter the 4 digit OTP Sent on your mobile no.</string>
-    <string name="resend_code"><u>Resend Code</u></string>
+    <string name="in_case_auto">In case the auto verification fails, you can manually enter the 4 digit OTP Sent on your
+        mobile no.
+    </string>
+    <string name="resend_code">
+        <u>Resend Code</u>
+    </string>
     <string name="sms_success">OTP verified successfully.</string>
     <string name="sms_fail">Wrong OTP. PLease try again.</string>
 
@@ -61,7 +71,9 @@
     <string name="generate_pin">Generate PIN</string>
     <string name="please_generate">Please generate a new pin\n for your Fobbu mobile app.</string>
     <string name="generate">Generate</string>
-    <string name="do_it_later"><u>Do it Later</u></string>
+    <string name="do_it_later">
+        <u>Do it Later</u>
+    </string>
     <string name="succesfully_set_pin">PIN Set Successfully.</string>
     <string name="pin_dont_match">PIN don\'t match.</string>
     <string name="new_pin">New PIN</string>
@@ -84,7 +96,7 @@
     <string name="complete_profile">Complete Profile</string>
     <string name="add_money">Add Money</string>
     <string name="cashback">CASH BACK</string>
-    <string name="your_membership_id">Your Membership ID is </string>
+    <string name="your_membership_id">Your Membership ID is</string>
     <string name="killer_saving">Killer Savings</string>
     <string name="customized_only_for_u">Customized only for you…</string>
     <string name="rsa_text">Road Side\nAssistance</string>
@@ -95,11 +107,11 @@
     ///ADD VEHICLE
     <string name="new_text">New</string>
     <string name="edit">Edit</string>
-    <string name="vehicle_brand">Vehicle Brand   </string>
+    <string name="vehicle_brand">Vehicle Brand</string>
     <string name="vehicle_reg_no">Vehicle Reg. No.</string>
-    <string name="vehicle_sub_model">Sub Model       </string>
-    <string name="year_of_make">Year of Make    </string>
-    <string name="upload_pics">Upload Pics     </string>
+    <string name="vehicle_sub_model">Sub Model</string>
+    <string name="year_of_make">Year of Make</string>
+    <string name="upload_pics">Upload Pics</string>
     <string name="vehicle_type">Vehicle Type</string>
     <string name="edit_vehicle">Edit Vehicle</string>
     <string name="your_vehicles">Your Vehicles</string>
@@ -145,7 +157,9 @@
     <string name="fobbu_found">Fobbu has been found!</string>
     <string name="wonderful">Wonderful…</string>
     <string name="fobbu_confirmed_request">Fobbu has confirmed your request!</string>
-    <string name="fobbu_gathering_tools">While Fobbu is gathering tools it is strongly\nrecommended to Add your Vehicle</string>
+    <string name="fobbu_gathering_tools">While Fobbu is gathering tools it is strongly\nrecommended to Add your
+        Vehicle
+    </string>
     <string name="building_live_track">building live track elements…</string>
     <string name="ongoing_rsa">Ongoing RSA Request</string>
     <string name="please_fobbu_gathering_tools">Please wait Fobbu is Gathering Tools</string>
@@ -179,7 +193,9 @@
     <string name="rate_review">Rate &amp; Review your experience</string>
     <string name="wonderful_blue">Wonderful</string>
     <string name="your_review_saved">Your review was saved. Share it with your friends!</string>
-    <string name="skip_this_step"><u>Skip this step</u></string>
+    <string name="skip_this_step">
+        <u>Skip this step</u>
+    </string>
     <string name="new_vehicle_added">A new vehicle has been added…</string>
     <string name="live_track">LIVE TRACK</string>
     <string name="unlock_your_lsd">Unlock Your LSD\'s - I Bet you wont regret !</string>
@@ -221,13 +237,18 @@
 
     ///GENERAL TEXTS
     <string name="networkIssue">Network Issue</string>
-    <string name="noInternet">Fobbu has failed to retrieve data. Please check your internet connection and try again.</string>
+    <string name="noInternet">Fobbu has failed to retrieve data. Please check your internet connection and try again.
+    </string>
     <string name="cancelled">Cancel</string>
     <string name="setting">Go to Setting</string>
     <string name="logout_heading">Logout</string>
     <string name="are_you_sure">Are you sure you want to logout ?</string>
     <string name="home">Home</string>
     <string name="cancel">Cancel</string>
+    <string name="cancel_rsa">Cancel RSA</string>
+    <string name="cancel_request_screen">Cancel Request Screen</string>
+    <string name="work_already_done">Work already done</string>
+    <string name="cancel_request">Cancel Request</string>
 
 
 </resources>

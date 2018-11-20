@@ -1,0 +1,26 @@
+{
+    "logs": [
+        {
+            "outputFile": "D:\\GIT\\user-app-android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-xhdpi-v4\\values-xhdpi-v4.xml",
+            "map": [
+                {
+                    "source": "D:\\GIT\\user-app-android\\app\\src\\main\\res\\values-xhdpi\\dimen.xml",
+                    "from": {
+                        "startLines": "16,6,18,15,13,14,17,9,7,8,5,3,4",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "589,202,698,545,443,497,636,355,256,308,154,59,107",
+                        "endColumns": "45,52,42,42,52,46,60,51,50,45,46,46,45",
+                        "endOffsets": "630,250,736,583,491,539,692,402,302,349,196,101,148"
+                    },
+                    "to": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,101,154,197,240,293,340,401,453,504,550,597,644",
+                        "endColumns": "45,52,42,42,52,46,60,51,50,45,46,46,45",
+                        "endOffsets": "96,149,192,235,288,335,396,448,499,545,592,639,685"
+                    }
+                }
+            ]
+        }
+    ]
+}

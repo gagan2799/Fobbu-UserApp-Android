@@ -1,5 +1,6 @@
 package com.fobbu.member.android.activities.vehicleListActivity
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -11,7 +12,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.fobbu.member.android.R
-import com.fobbu.member.android.activities.WaitingScreenWhite
+import com.fobbu.member.android.activities.vehicleListActivity.adapter.VehicleAdapter
+import com.fobbu.member.android.activities.waitingScreenWhite.WaitingScreenWhite
 import com.fobbu.member.android.activities.vehicleListActivity.presenter.VehicleListHandler
 import com.fobbu.member.android.activities.vehicleListActivity.presenter.VehicleListPresenter
 import com.fobbu.member.android.apiInterface.MyApplication
@@ -20,12 +22,11 @@ import com.fobbu.member.android.modals.MainPojo
 import com.fobbu.member.android.utils.CommonClass
 import com.fobbu.member.android.view.ActivityView
 import kotlinx.android.synthetic.main.activity_vehicle_list.*
-import retrofit2.Call
-import retrofit2.Response
 import java.util.*
 import kotlin.collections.HashMap
 
 class VehicleListActivity : AppCompatActivity(),ActivityView{
+
 
     private lateinit var webServiceApi: WebServiceApi
 
@@ -50,6 +51,7 @@ class VehicleListActivity : AppCompatActivity(),ActivityView{
         vehicleListApi()
     }
 
+    //// All initialise in this method for this class
     private fun initialise() {
 
         webServiceApi = getEnv().getRetrofit()
@@ -58,11 +60,14 @@ class VehicleListActivity : AppCompatActivity(),ActivityView{
             fromWhere = "RSA"
 
         }
+
+        /// Vehicle Adapter handled here
         recyclerViewVehicles.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        vehicleAdapter = VehicleAdapter()
+        vehicleAdapter = VehicleAdapter(this,dataListMain)
         recyclerViewVehicles.adapter = vehicleAdapter
         vehicleAdapter.notifyDataSetChanged()
     }
+
 
     override fun onBackPressed() {
         if (fromWhere == "RSA")
@@ -71,6 +76,8 @@ class VehicleListActivity : AppCompatActivity(),ActivityView{
         finish()
     }
 
+    /// All click on buttons handled here
+    @SuppressLint("SetTextI18n")
     private fun addClicks() {
 
         ivBack.setOnClickListener {
@@ -140,11 +147,12 @@ class VehicleListActivity : AppCompatActivity(),ActivityView{
 
     }
 
-
     /////////////////////////////FOR API"S//////////////////////////////////////////////////
+
+    /// Vehicle List API  (API - users/vehicles)
     private fun vehicleListApi() {
 
-        rlLoader.visibility = View.VISIBLE
+       // rlLoaderVehicleList.visibility = View.VISIBLE
 
         if (CommonClass(this, this).checkInternetConn(this)) {
 
@@ -153,99 +161,15 @@ class VehicleListActivity : AppCompatActivity(),ActivityView{
             val userId = CommonClass(this, this).getString("_id")
 
             vehicleHandler.sendVehicleData(tokenHeader,userId)
-           /* val searchServicesApi = webServiceApi.fetchUserVehicles(tokenHeader, userId)
 
-            searchServicesApi.enqueue(object : retrofit2.Callback<MainPojo> {
-                override fun onResponse(call: Call<MainPojo>?, response: Response<MainPojo>?) {
-                    rlLoader.visibility = View.GONE
-
-                    println(response.toString())
-
-                    val mainPojo = response!!.body()
-
-                    if (mainPojo!!.success == "true") {
-                        dataListMain.clear()
-                        dataListFour.clear()
-                        dataListTwo.clear()
-
-                        for (i in mainPojo.vehicles.indices) {
-                            if (mainPojo.vehicles[i]["vehicle_type"] == "4wheeler")
-                                dataListFour.add(mainPojo.vehicles[i])
-                            else
-                                dataListTwo.add(mainPojo.vehicles[i])
-                        }
-
-                        dataListMain.addAll(dataListTwo)
-                        vehicleAdapter.notifyDataSetChanged()
-
-                        if(dataListMain.size>0)
-                        {
-                            tvNodata.visibility=View.GONE
-                            recyclerViewVehicles.visibility=View.VISIBLE
-                        }
-                        else
-                        {
-                            tvNodata.visibility=View.VISIBLE
-                            tvNodata.text="No 2 Wheeler Added"
-                            recyclerViewVehicles.visibility=View.GONE
-                        }
-                    } else {
-
-                    }
-                }
-
-                override fun onFailure(call: Call<MainPojo>?, t: Throwable?) {
-
-                    rlLoader.visibility = View.GONE
-                    t!!.printStackTrace()
-                }
-            })*/
-        }
-    }
-
-    inner class VehicleAdapter : RecyclerView.Adapter<VehicleAdapter.MyViewHolder>() {
-
-        override fun onCreateViewHolder(p0: ViewGroup, p1: Int): MyViewHolder {
-            val view = LayoutInflater.from(this@VehicleListActivity).inflate(
-                R.layout.inflate_vehicle_adapter
-                , p0, false
-            )
-
-            return MyViewHolder(view)
-        }
-
-        override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-
-            holder.tvVehicleName.text = dataListMain[position]["vehicle_brand"].toString()
-            holder.tvVehicleNumber.text = dataListMain[position]["vehicle_registration_number"].toString()
-            holder.tvYear.text = dataListMain[position]["make_of_year"].toString()
-
-        }
-
-        override fun getItemCount(): Int {
-            return (dataListMain.size)
-        }
-
-        override fun getItemId(position: Int): Long {
-            return position.toLong()
-        }
-
-        override fun getItemViewType(position: Int): Int {
-            return position
-        }
-
-        inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-
-            var ivImage = view.findViewById(R.id.ivImage) as ImageView
-            var tvVehicleName = view.findViewById(R.id.tvVehicleName) as TextView
-            var tvYear = view.findViewById(R.id.tvYear) as TextView
-            var tvVehicleNumber = view.findViewById(R.id.tvVehicleNumber) as TextView
         }
     }
 
 
+    /// Vehicle List Response (API -users/vehicles )
+    @SuppressLint("SetTextI18n")
     override fun onRequestSuccessReport(mainPojo: MainPojo) {
-        rlLoader.visibility = View.GONE
+       // rlLoaderVehicleList.visibility = View.GONE
         if (mainPojo.success == "true")
         {
             dataListMain.clear()
@@ -278,6 +202,15 @@ class VehicleListActivity : AppCompatActivity(),ActivityView{
 
         }
     }
+
+    override fun showLoader() {
+        rlLoaderVehicleList.visibility=View.VISIBLE
+    }
+
+    override fun hideLoader() {
+        rlLoaderVehicleList.visibility=View.GONE
+    }
+
 
     private fun getEnv(): MyApplication {
         return application as MyApplication

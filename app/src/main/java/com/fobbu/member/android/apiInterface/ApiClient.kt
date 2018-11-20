@@ -1,6 +1,7 @@
 package com.fobbu.member.android.apiInterface
 
 import android.app.Activity
+import android.widget.Toast
 import com.fobbu.member.android.apiInterface.Handler.ResponseHandler
 import com.fobbu.member.android.modals.MainPojo
 import okhttp3.MultipartBody
@@ -14,6 +15,8 @@ import retrofit2.http.Multipart
 class ApiClient(var activity: Activity) {
 
      private var webServiceApi:WebServiceApi = getEnv().getRetrofit()
+
+     private  var webServiceMultipart:WebServiceApi=getEnv().getRetrofitMulti()
 
 
 
@@ -57,7 +60,7 @@ class ApiClient(var activity: Activity) {
     //add_edit_vechile_api
     fun getAddEditVehicleData(map:Map<String,RequestBody>,list:ArrayList<MultipartBody.Part>,tokenHeader:String,responseHandler: ResponseHandler)
     {
-        webServiceApi.addVehicle(map,list,tokenHeader).enqueue(object :Callback<MainPojo>
+        webServiceMultipart.addVehicle(map,list,tokenHeader).enqueue(object :Callback<MainPojo>
         {
             override fun onFailure(call: Call<MainPojo>, t: Throwable) {
                 responseHandler.onServerError(""+t.message)
@@ -86,6 +89,40 @@ class ApiClient(var activity: Activity) {
 
         })
     }
+
+    // vehicle list update api
+    fun findFobbuRequestUpdateVehicle(haspmap:HashMap<String,String>,token:String,responseHandler: ResponseHandler)
+    {
+        webServiceApi.findFobbuRequestUpdateVehicle(haspmap,token).enqueue(object :Callback<MainPojo>
+        {
+            override fun onFailure(call: Call<MainPojo>, t: Throwable) {
+                responseHandler.onServerError(""+t.message)
+            }
+
+            override fun onResponse(call: Call<MainPojo>, response: Response<MainPojo>) {
+               handleSuccess(response,responseHandler)
+            }
+
+        }
+        )
+    }
+
+    // forgot password api
+     fun forgotPassword(email:String,responseHandler: ResponseHandler)
+    {
+        webServiceApi.forgotPassword(email).enqueue(object :Callback<MainPojo>
+        {
+            override fun onFailure(call: Call<MainPojo>, t: Throwable) {
+                responseHandler.onServerError(""+t.message)
+            }
+
+            override fun onResponse(call: Call<MainPojo>, response: Response<MainPojo>) {
+                handleSuccess(response,responseHandler)
+            }
+
+        })
+    }
+
 
     // method for handling the response
     fun handleSuccess(response:Response<MainPojo>,responseHandler: ResponseHandler)
