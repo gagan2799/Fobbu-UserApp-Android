@@ -17,8 +17,11 @@ anim design_snackbar_in
 anim design_snackbar_out
 anim fade
 anim fadefast
+anim pop_in
+anim slide_down
 anim slide_left
 anim slide_right
+anim slide_up
 animator design_appbar_state_list_animator
 animator design_fab_hide_motion_spec
 animator design_fab_show_motion_spec
@@ -1433,6 +1436,7 @@ drawable gray_cross
 drawable half_recatangle
 drawable help_drawer
 drawable helpline
+drawable helpline_draw
 drawable helpline_white
 drawable ic_audiotrack_dark
 drawable ic_audiotrack_light
@@ -1772,6 +1776,7 @@ drawable unfilled_radio
 drawable upi_payment
 drawable vehicle_emergency
 drawable vehicle_emergency_big
+drawable verified
 drawable verify_input_field
 drawable wallet
 drawable whatsapp
@@ -1835,6 +1840,7 @@ id book_now
 id bottom
 id bottomsheet
 id button
+id buttonCancelRequestRSA
 id buttonPanel
 id button_0
 id button_1
@@ -2014,7 +2020,14 @@ id left
 id light
 id line1
 id line3
+id linearLayoutCancellation
+id linearLayoutFindCustomer
+id linearLayoutNoMoney
+id linearLayoutNoMoneyBelow
 id linearLayoutOptionMenu
+id linearLayoutOtherWork
+id linearLayoutWorkDone
+id linearLayoutWorkDoneBelow
 id listMode
 id list_item
 id live_stream_indicator
@@ -2205,6 +2218,7 @@ id textStart
 id textTitle
 id textViewCallHelpline
 id textViewCancelRSA
+id textViewCancellationRSA
 id text_input_password_toggle
 id text_list_view
 id textinput_counter
@@ -2369,6 +2383,7 @@ layout abc_select_dialog_material
 layout abc_tooltip
 layout activity_add_edit_vehicle
 layout activity_cancel_rsa
+layout activity_cancellation_message
 layout activity_dashboard
 layout activity_forgot
 layout activity_generate_pin
@@ -2510,6 +2525,8 @@ string building_live_track
 string building_work_order_summary
 string by_signing_up
 string cancel
+string cancel_request
+string cancel_request_screen
 string cancel_rsa
 string cancelled
 string cashback
@@ -2756,6 +2773,7 @@ string wallet_buy_button_place_holder
 string we_verifying
 string wonderful
 string wonderful_blue
+string work_already_done
 string work_done
 string work_order_payment
 string work_summary
@@ -2968,6 +2986,7 @@ style CastExpandedController
 style CastIntroOverlay
 style CastMiniController
 style CustomCastTheme
+style DialogTheme
 style MyDialogTheme
 style Platform_AppCompat
 style Platform_AppCompat_Light
@@ -3167,6 +3186,7 @@ style ThemeOverlay_MaterialComponents_TextInputEditText_OutlinedBox
 style ThemeOverlay_MaterialComponents_TextInputEditText_OutlinedBox_Dense
 style ThemeOverlay_MediaRouter_Dark
 style ThemeOverlay_MediaRouter_Light
+style Transparent
 style WalletFragmentDefaultButtonTextAppearance
 style WalletFragmentDefaultDetailsHeaderTextAppearance
 style WalletFragmentDefaultDetailsTextAppearance

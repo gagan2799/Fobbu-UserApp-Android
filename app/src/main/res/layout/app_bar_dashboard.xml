@@ -58,7 +58,6 @@
                 android:layout_centerVertical="true"
                 android:id="@+id/imageViewOptionMenuDash"
                 android:src="@drawable/option"
-                android:visibility="gone"
                 android:layout_alignParentEnd="true"/>
     </RelativeLayout>
 

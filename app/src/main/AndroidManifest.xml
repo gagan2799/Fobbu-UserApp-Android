@@ -99,7 +99,11 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".activities.CancelRSAActivity">
+        <activity
+                android:name=".activities.CancelRsaActivity.CancelRSAActivity"
+                android:theme="@style/Transparent">
+        </activity>
+        <activity android:name=".activities.CancellationMessageActivity.CancellationMessageActivity">
         </activity>
     </application>
 

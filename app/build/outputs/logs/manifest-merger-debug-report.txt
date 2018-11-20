@@ -11,10 +11,10 @@ INJECTED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/mai
 	android:name
 		ADDED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:75:17-71
 manifest
-ADDED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:2:1-106:12
-INJECTED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:2:1-106:12
-INJECTED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:2:1-106:12
-INJECTED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:2:1-106:12
+ADDED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:2:1-110:12
+INJECTED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:2:1-110:12
+INJECTED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:2:1-110:12
+INJECTED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:2:1-110:12
 MERGED from [com.android.support:multidex:1.0.3] /home/robin/.gradle/caches/transforms-1/files-1.1/multidex-1.0.3.aar/86c7f20d6ef3280f9204a6f40054ce9e/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:design:28.0.0] /home/robin/.gradle/caches/transforms-1/files-1.1/design-28.0.0.aar/15f5a17aa151a673c001a76a04cadfd4/AndroidManifest.xml:17:1-24:12
 MERGED from [com.google.android.gms:play-services:12.0.1] /home/robin/.gradle/caches/transforms-1/files-1.1/play-services-12.0.1.aar/099434bedf5083fa71bd1fdb326a32db/AndroidManifest.xml:2:1-6:12
@@ -161,22 +161,22 @@ MERGED from [com.google.android.gms:play-services-vision-common-license:12.0.1] 
 MERGED from [com.google.android.gms:play-services-vision-license:12.0.1] /home/robin/.gradle/caches/transforms-1/files-1.1/play-services-vision-license-12.0.1.aar/1a0c51a7971487427938923897ec6762/AndroidManifest.xml:17:1-24:12
 MERGED from [com.google.android.gms:play-services-wallet-license:12.0.1] /home/robin/.gradle/caches/transforms-1/files-1.1/play-services-wallet-license-12.0.1.aar/662be9fde14b17bca87b75170eb90ebe/AndroidManifest.xml:17:1-24:12
 MERGED from [com.google.android.gms:play-services-wearable-license:12.0.1] /home/robin/.gradle/caches/transforms-1/files-1.1/play-services-wearable-license-12.0.1.aar/c88a7228e1951b6305ee987322500992/AndroidManifest.xml:17:1-24:12
-INJECTED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:2:1-106:12
-INJECTED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:2:1-106:12
-INJECTED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:2:1-106:12
+INJECTED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:2:1-110:12
+INJECTED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:2:1-110:12
+INJECTED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:2:1-110:12
 	package
 		ADDED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:4:11-45
 		INJECTED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml
 		INJECTED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml
 	android:versionName
 		INJECTED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml
-		ADDED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:2:1-106:12
+		ADDED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:2:1-110:12
 		INJECTED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml
 	xmlns:tools
 		ADDED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:3:11-57
 	android:versionCode
 		INJECTED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml
-		ADDED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:2:1-106:12
+		ADDED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:2:1-110:12
 		INJECTED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml
 	xmlns:android
 		ADDED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:2:11-69
@@ -251,7 +251,7 @@ ADDED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/A
 	android:name
 		ADDED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:12:22-77
 application
-ADDED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:14:5-104:19
+ADDED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:14:5-108:19
 MERGED from [com.android.support:design:28.0.0] /home/robin/.gradle/caches/transforms-1/files-1.1/design-28.0.0.aar/15f5a17aa151a673c001a76a04cadfd4/AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:design:28.0.0] /home/robin/.gradle/caches/transforms-1/files-1.1/design-28.0.0.aar/15f5a17aa151a673c001a76a04cadfd4/AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.gms:play-services:12.0.1] /home/robin/.gradle/caches/transforms-1/files-1.1/play-services-12.0.1.aar/099434bedf5083fa71bd1fdb326a32db/AndroidManifest.xml:5:5-20
@@ -605,10 +605,16 @@ action#com.google.firebase.INSTANCE_ID_EVENT
 ADDED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:98:17-79
 	android:name
 		ADDED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:98:25-77
-activity#com.fobbu.member.android.activities.CancelRSAActivity
-ADDED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:102:9-103:20
+activity#com.fobbu.member.android.activities.CancelRsaActivity.CancelRSAActivity
+ADDED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:102:9-105:20
+	android:theme
+		ADDED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:104:17-51
 	android:name
-		ADDED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:102:19-63
+		ADDED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:103:17-79
+activity#com.fobbu.member.android.activities.CancellationMessageActivity.CancellationMessageActivity
+ADDED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:106:9-107:20
+	android:name
+		ADDED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:106:19-101
 uses-sdk
 INJECTED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml

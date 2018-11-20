@@ -202,6 +202,9 @@
     <string name="home">Home</string>
     <string name="cancel">Cancel</string>
     <string name="cancel_rsa">Cancel RSA</string>
+    <string name="cancel_request_screen">Cancel Request Screen</string>
+    <string name="work_already_done">Work already done</string>
+    <string name="cancel_request">Cancel Request</string>
 
 
 </resources>

@@ -117,7 +117,11 @@
             </intent-filter>
         </service>
 
-        <activity android:name="com.fobbu.member.android.activities.CancelRSAActivity" >
+        <activity
+            android:name="com.fobbu.member.android.activities.CancelRsaActivity.CancelRSAActivity"
+            android:theme="@style/Transparent" >
+        </activity>
+        <activity android:name="com.fobbu.member.android.activities.CancellationMessageActivity.CancellationMessageActivity" >
         </activity>
 
         <receiver android:name="com.google.android.gms.cast.framework.media.MediaIntentReceiver" />

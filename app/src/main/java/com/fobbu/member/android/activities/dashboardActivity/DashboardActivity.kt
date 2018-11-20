@@ -1,6 +1,7 @@
 package com.fobbu.member.android.activities.dashboardActivity
 
 import android.annotation.SuppressLint
+import android.app.Dialog
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
@@ -10,11 +11,10 @@ import android.support.v4.view.GravityCompat
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.view.Gravity
-import android.view.LayoutInflater
 import android.view.View
 import android.view.WindowManager
 import com.fobbu.member.android.R
-import com.fobbu.member.android.activities.CancelRSAActivity
+import com.fobbu.member.android.activities.CancelRsaActivity.CancelRSAActivity
 import com.fobbu.member.android.activities.addEditVehicleActivity.AddEditVehicleActivity
 import com.fobbu.member.android.apiInterface.MyApplication
 import com.fobbu.member.android.fragments.HomeFragment
@@ -27,7 +27,6 @@ import kotlinx.android.synthetic.main.activity_dashboard.*
 import kotlinx.android.synthetic.main.app_bar_dashboard.*
 import kotlinx.android.synthetic.main.inflate_drawer.*
 import kotlinx.android.synthetic.main.option_menu_layout.*
-import kotlinx.android.synthetic.main.option_menu_layout.view.*
 
 class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragments {
 
@@ -41,14 +40,14 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
         drawerClicks()
         tabBarClicks()
         changeFragment(HomeFragment(), resources.getString(R.string.home))
-    }
+}
 
     ////BOTTOM BAR CLICKS HANDLED IN THIS METHOD
+
     private fun tabBarClicks() {
 
         imageViewOptionMenuDash.setOnClickListener {
             showOptionLayout()
-
            // linearLayoutOptionMenu.visibility=View.VISIBLE
         }
 
@@ -62,23 +61,25 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
         }
     }
 
+
     private fun showOptionLayout() {
-       val builder= AlertDialog.Builder(this)
-        val view:View=LayoutInflater.from(this).inflate(R.layout.option_menu_layout,null)
-        builder.setView(view)
-        val dialog:AlertDialog= builder.create()
-        var layoutParams= WindowManager.LayoutParams()
+        val dialog:Dialog= Dialog(this)
+        dialog.setContentView(R.layout.option_menu_layout)
+        var layoutParams=WindowManager.LayoutParams()
         layoutParams=dialog.window.attributes
-       // layoutParams.gravity=Gravity.TOP or Gravity.RIGHT
-       /* layoutParams.x = -170
-        layoutParams.y=50*/
-        //layoutParams.width=180
-      //  layoutParams.height=200
-        dialog.window.attributes=layoutParams
-        view.textViewCancelRSA.setOnClickListener {
-            startActivity(Intent(this, CancelRSAActivity::class.java))
+        layoutParams.gravity=Gravity.TOP or Gravity.RIGHT
+        layoutParams.x=-100
+        layoutParams.y=-100
+        layoutParams.windowAnimations=R.style.DialogTheme
+
+        dialog.textViewCancelRSA.setOnClickListener {
+            dialog.dismiss()
+            startActivity(Intent(this, CancelRSAActivity::class.java)
+                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK))
+            overridePendingTransition(R.anim.slide_down,R.anim.fade)
         }
         dialog.show()
+
 
     }
 
