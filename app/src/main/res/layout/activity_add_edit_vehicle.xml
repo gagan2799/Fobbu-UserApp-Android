@@ -15,39 +15,40 @@
                 android:id="@+id/ivBack"
                 android:layout_width="wrap_content"
                 android:padding="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="8dp"
                 android:src="@drawable/back_button"
                 android:layout_height="wrap_content"/>
 
         <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true"
-                android:padding="8dp"
+                android:padding="16dp"
                 android:id="@+id/ivHead"
-                android:layout_alignParentTop="true"
                 android:src="@drawable/fobbu_logo_blue"/>
-
-
-        <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/add_vehicle"
-                android:gravity="center"
-                android:textAllCaps="true"
-                android:id="@+id/tvHeading"
-                android:layout_below="@+id/ivHead"
-                android:textColor="@color/drawer_text_color"
-                android:textSize="@dimen/textsize_normal" />
 
     </RelativeLayout>
 
 
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/add_vehicle"
+            android:gravity="center"
+            android:textAllCaps="true"
+            android:id="@+id/tvHeading"
+            android:layout_below="@+id/rlTop"
+            android:textColor="@color/drawer_text_color"
+            android:textSize="@dimen/textsize_normal" />
+
     <RelativeLayout
             android:layout_width="match_parent"
             android:background="@color/white"
-            android:layout_below="@+id/rlTop"
+            android:layout_below="@+id/tvHeading"
             android:id="@+id/rlNameBar"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="10dp"
             android:layout_height="wrap_content">
 
         <TextView
@@ -364,19 +365,18 @@
 
             <TextView
                     android:id="@+id/tvAddEditVehicle"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/add_vehicle"
-                    android:paddingRight="35dp"
                     android:textSize="@dimen/textsize_small"
-                    android:paddingTop="18dp"
-                    android:paddingLeft="35dp"
-                    android:layout_gravity="center_horizontal"
-                    android:singleLine="true"
                     android:layout_marginTop="25dp"
+                    android:gravity="center"
+                    android:padding="@dimen/red_rounded_rectangle_padding"
+                    android:layout_marginRight="40dp"
                     android:foreground="?attr/selectableItemBackground"
-                    android:paddingBottom="25dp"
-                    android:background="@drawable/rounded_red"
+                    android:singleLine="true"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/red_rect_rounded"
                     android:textColor="@color/white"/>
 
             <TextView

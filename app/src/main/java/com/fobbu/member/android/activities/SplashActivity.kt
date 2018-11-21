@@ -4,37 +4,37 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import com.fobbu.member.android.R
 import com.fobbu.member.android.activities.dashboardActivity.DashboardActivity
-import com.fobbu.member.android.activities.loginActivity.LoginActivity
+import com.fobbu.member.android.activities.loginSignupModule.LoginActivity
 import com.fobbu.member.android.tutorial.TutorialActivity
 import com.fobbu.member.android.utils.CommonClass
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
 import com.google.firebase.iid.FirebaseInstanceId
 import kotlinx.android.synthetic.main.activity_splash.*
+import kotlinx.android.synthetic.main.inflate_vehicle_adapter.*
+import java.lang.Exception
 
 class SplashActivity : AppCompatActivity() {
+
+
+    lateinit var animationRight: Animation
+    lateinit var animationLeft: Animation
+    lateinit var animationFade: Animation
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
-        fade()
-       /* val animationLeft:Animation= AnimationUtils.loadAnimation(this
-            ,R.anim.slide_left)
-        imageViewRightSplash.startAnimation(animationLeft)
 
-        val animationRight:Animation= AnimationUtils.loadAnimation(this,R.anim.slide_right)
-        imageViewLeftSplash.startAnimation(animationRight)*/
+        splashAnimation()
+
         fetchDeviceToken()
 
-        Handler().postDelayed({
-            //HANDLE WHERE SHOULD APP LAND IN
-            navigateToScreen()
 
-        }, 3000)
     }
 
     // Method for launching different screens
@@ -56,11 +56,84 @@ class SplashActivity : AppCompatActivity() {
         }
     }
 
-    // Method for fade animation
-    private fun fade() {
-        val animation1 = AnimationUtils.loadAnimation(applicationContext, R.anim.fade)
-        ivCenter.startAnimation(animation1)
-        ivFobbuText.startAnimation(animation1)
+
+    override fun onStop() {
+        super.onStop()
+         try {
+             linearLayoutImageLeft.clearAnimation()
+             animationRight.setAnimationListener(null)
+         }catch (e:Exception)
+         {
+
+         }
+    }
+
+    // Method to manage all the animations of the activity
+    private fun splashAnimation() {
+
+        // slide left animation
+        animationLeft= AnimationUtils.loadAnimation(this
+            ,R.anim.slide_left)
+        linearLayoutImageLeft.clearAnimation()
+
+        //slide right animation
+        animationRight = AnimationUtils.loadAnimation(this,R.anim.slide_right)
+        linearLayoutImageRight.clearAnimation()
+
+        // fade animation
+        animationFade= AnimationUtils.loadAnimation(applicationContext, R.anim.fade)
+        ivCenter.clearAnimation()
+        ivCenter.animation=animationFade
+        ivFobbuText.startAnimation(animationFade)
+
+        // animation listener on fade animation
+        animationFade.setAnimationListener(object :Animation.AnimationListener
+        {
+            override fun onAnimationRepeat(p0: Animation?) {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
+
+            override fun onAnimationEnd(p0: Animation?) {
+
+                linearLayoutImageLeft.startAnimation(animationLeft)
+                linearLayoutImageRight.startAnimation(animationRight)
+                linearLayoutCarScooterSplash.visibility=View.VISIBLE
+                imageViewLeftSplash.visibility=View.VISIBLE
+
+                // animation listener on slide right animation
+                animationRight.setAnimationListener(object :Animation.AnimationListener
+                {
+                    override fun onAnimationRepeat(p0: Animation?) {
+                    }
+
+                    override fun onAnimationEnd(p0: Animation?) {
+                        linearLayoutBottomTextSplash.visibility=View.VISIBLE
+
+                        // slide from bottom to up animation
+                        val animationBottomToTop:Animation=AnimationUtils.loadAnimation(applicationContext,R.anim.bottoms_up)
+                        linearLayoutBottomTextSplash.startAnimation(animationBottomToTop)
+
+                        // handler for shooting next activity after certain time period
+                        Handler().postDelayed({
+                            //HANDLE WHERE SHOULD APP LAND IN
+                            navigateToScreen()
+
+                        }, 3000)
+                    }
+
+                    override fun onAnimationStart(p0: Animation?) {
+                    }
+
+                })
+            }
+
+            override fun onAnimationStart(p0: Animation?) {
+                ivCenter.startAnimation(animationFade)
+
+            }
+
+        })
+
     }
 
     // Method for fetching device token

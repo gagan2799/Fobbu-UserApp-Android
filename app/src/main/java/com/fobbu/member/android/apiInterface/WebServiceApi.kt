@@ -18,37 +18,21 @@ import retrofit2.http.Multipart
  */
 interface WebServiceApi {
 
-    @FormUrlEncoded
+
     @POST("users/signup")
     fun postSignUp(
-        @Field("user_type") user_type: String,
-        @Field("first_name") first_name: String,
-        @Field("last_name") last_name: String,
-        @Field("display_name") display_name: String,
-        @Field("email") email: String,
-        @Field("password") password: String,
-        @Field("mobile_number") mobile_number: String,
-        @Field("gender") gender: String,
-        @Field("device_token") device_token: String
-
+        @Body map:HashMap<String,String>
     ): Call<MainPojo>
 
 
-    @FormUrlEncoded
     @POST("users/login")
-    fun login(
-        @Field("mobile_number") mobile_number: String,
-        @Field("password") assignee_password: String,
-        @Field("device_token") device_token: String
-
-    ): Call<MainPojo>
+    fun login(@Body body: HashMap<String,String> ): Call<MainPojo>
 
 
-    @FormUrlEncoded
+
     @POST("users/forgot-password")
     fun forgotPassword(
-        @Field("email") email: String
-
+        @Body mapData: HashMap<String, String>
     ): Call<MainPojo>
 
 
@@ -92,7 +76,7 @@ interface WebServiceApi {
     @GET("users/vehicles")
     fun fetchUserVehicles(
         @Header("x-access-token") token: String,
-        @Query ("user_id") userId:String
+        @Body mapData: HashMap<String, String>
     ):Call<MainPojo>
 
 
@@ -107,5 +91,11 @@ interface WebServiceApi {
     fun updateDeviceTokenFCM(@Body mapData:HashMap<String,String>,
                              @Header("x-access-token") token:String):Call<MainPojo>
 
+    @POST("partners/request/change_status")
+    fun cancellationRequest(@Body mapData:HashMap<String,String>,
+                            @Header("x-access-token") token:String) :Call<MainPojo>
+
+    @GET("users/reason?type=user")
+    fun getCancellationReason(@Header("x-access-token") token:String):Call<MainPojo>
 
 }

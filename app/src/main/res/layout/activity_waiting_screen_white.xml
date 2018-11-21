@@ -129,9 +129,6 @@
                   android:layout_below="@+id/tvTextPlease"
                   android:id="@+id/tvTextAssessing"/>
 
-
-
-
         <RelativeLayout
                 android:background="@drawable/rounded_blue_corners"
                 android:layout_marginLeft="20dp"

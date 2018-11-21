@@ -23,7 +23,12 @@ class ApiClient(var activity: Activity) {
    //login api
     fun getLoginData(mobile:String, password:String, token:String, responseHandler: ResponseHandler)
    {
-       webServiceApi.login(mobile,password,token).enqueue(object :Callback<MainPojo>
+       val map=HashMap<String,String>()
+       map["mobile_number"]=mobile
+       map["password"]=password
+       map["device_token"]=token
+
+       webServiceApi.login(map).enqueue(object :Callback<MainPojo>
        {
            override fun onFailure(call: Call<MainPojo>, t: Throwable) {
                responseHandler.onServerError(""+t.message)
@@ -42,7 +47,18 @@ class ApiClient(var activity: Activity) {
      fun getSignupData(user_type: String,firstName:String,lastName:String,displayName:String,email:String,password:String,
     mobile:String,gender:String,token:String,responseHandler: ResponseHandler)
     {
-        webServiceApi.postSignUp(user_type,firstName,lastName,displayName,email,password,mobile,gender,token)
+        val map=HashMap<String,String>()
+        map["user_type"]=user_type
+        map["first_name"]=firstName
+        map["last_name"]=lastName
+        map["display_name"]=displayName
+        map["email"]=email
+        map["password"]=password
+        map["mobile_number"]=mobile
+        map["gender"]=gender
+        map["device_token"]=token
+
+        webServiceApi.postSignUp(map)
             .enqueue(object:Callback<MainPojo>
             {
                 override fun onFailure(call: Call<MainPojo>, t: Throwable) {
@@ -77,7 +93,9 @@ class ApiClient(var activity: Activity) {
     //vehicle_list_api
     fun getVichleListData(token:String,userId:String,responseHandler: ResponseHandler)
     {
-        webServiceApi.fetchUserVehicles(token,userId).enqueue(object :Callback<MainPojo>
+        val map=HashMap<String,String>()
+        map["user_id"]=userId
+        webServiceApi.fetchUserVehicles(token,map).enqueue(object :Callback<MainPojo>
         {
             override fun onFailure(call: Call<MainPojo>, t: Throwable) {
                 responseHandler.onServerError(""+t.message)
@@ -110,7 +128,9 @@ class ApiClient(var activity: Activity) {
     // forgot password api
      fun forgotPassword(email:String,responseHandler: ResponseHandler)
     {
-        webServiceApi.forgotPassword(email).enqueue(object :Callback<MainPojo>
+        val map=HashMap<String,String>()
+        map["email"]=email
+        webServiceApi.forgotPassword(map).enqueue(object :Callback<MainPojo>
         {
             override fun onFailure(call: Call<MainPojo>, t: Throwable) {
                 responseHandler.onServerError(""+t.message)
@@ -122,6 +142,45 @@ class ApiClient(var activity: Activity) {
 
         })
     }
+
+    // request change status api(Cancellation Request)
+     fun cancellationRequest (reason:String,requestId:String,token:String,responseHandler: ResponseHandler)
+    {
+        val map=HashMap<String,String>()
+        map["reason_of_cancellation"]=reason
+        map["status"]="cancelled_by_user"
+        map["request_id"]=requestId
+        webServiceApi.cancellationRequest(map,token).enqueue(object :Callback<MainPojo>
+        {
+            override fun onFailure(call: Call<MainPojo>, t: Throwable) {
+                responseHandler.onServerError(""+t.message)
+            }
+
+            override fun onResponse(call: Call<MainPojo>, response: Response<MainPojo>) {
+                handleSuccess(response,responseHandler)
+            }
+
+        })
+
+    }
+
+
+    // cancel reasons Api
+    fun cancelReasons(token:String,responseHandler: ResponseHandler)
+    {
+        webServiceApi.getCancellationReason(token).enqueue(object :Callback<MainPojo>
+        {
+            override fun onFailure(call: Call<MainPojo>, t: Throwable) {
+                responseHandler.onServerError(""+t.message)
+            }
+
+            override fun onResponse(call: Call<MainPojo>, response: Response<MainPojo>) {
+                handleSuccess(response,responseHandler)
+            }
+
+        })
+    }
+
 
 
     // method for handling the response

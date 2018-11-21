@@ -34,21 +34,21 @@
                 android:name=".tutorial.TutorialActivity"
                 android:screenOrientation="portrait"/>
         <activity
-                android:name=".activities.loginActivity.LoginActivity"
+                android:name=".activities.loginSignupModule.LoginActivity"
                 android:screenOrientation="portrait"
                 android:windowSoftInputMode="stateVisible"/>
         <activity
-                android:name=".activities.signupActivity.SignUpActivity"
+                android:name=".activities.loginSignupModule.SignUpActivity"
                 android:screenOrientation="portrait"/>
         <activity
-                android:name=".activities.forgotPasswordActivity.ForgotPasswordActivity"
+                android:name=".activities.loginSignupModule.ForgotPasswordActivity"
                 android:screenOrientation="portrait"/>
         <activity
-                android:name=".activities.smsVerificationActivity.SMSVerificationActivity"
+                android:name=".activities.loginSignupModule.SMSVerificationActivity"
                 android:screenOrientation="portrait"
                 android:windowSoftInputMode="stateVisible"/>
         <activity
-                android:name=".activities.generatePinActivity.GeneratePINActivity"
+                android:name=".activities.loginSignupModule.GeneratePINActivity"
                 android:screenOrientation="portrait"
                 android:windowSoftInputMode="stateVisible"/>
         <activity
@@ -56,19 +56,19 @@
                 android:screenOrientation="portrait"
                 android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
-                android:name=".activities.addEditVehicleActivity.AddEditVehicleActivity"
+                android:name=".activities.vehicleModule.AddEditVehicleActivity"
                 android:screenOrientation="portrait"
                 android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
-                android:name=".activities.waitingScreenBlue.WaitingScreenBlue"
+                android:name=".activities.waitingScreenModule.WaitingScreenBlue"
                 android:screenOrientation="portrait"
                 android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
-                android:name=".activities.waitingScreenWhite.WaitingScreenWhite"
+                android:name=".activities.waitingScreenModule.WaitingScreenWhite"
                 android:screenOrientation="portrait"
                 android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
-                android:name=".activities.vehicleListActivity.VehicleListActivity"
+                android:name=".activities.vehicleModule.VehicleListActivity"
                 android:screenOrientation="portrait"/>
 
         <provider
@@ -100,10 +100,10 @@
         </service>
 
         <activity
-                android:name=".activities.cancelRsaActivity.CancelRSAActivity"
+                android:name=".activities.rsaModule.RSARequestCancelActivity"
                 android:theme="@style/Transparent">
         </activity>
-        <activity android:name=".activities.cancellationMessageActivity.CancellationMessageActivity">
+        <activity android:name=".activities.rsaModule.CancellationSuccessMessageActivity">
         </activity>
     </application>
 

@@ -23,30 +23,6 @@
 
     </RelativeLayout>
 
-    <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            android:layout_centerInParent="true"
-    android:orientation="horizontal">
-        <ImageView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="50dp"
-                android:scaleType="fitEnd"
-                android:layout_marginRight="5dp"
-        android:id="@+id/imageViewLeftSplash"
-        android:src="@drawable/car_docs_tabbar"/>
-        <ImageView
-                android:layout_width="0dp"
-                android:layout_marginLeft="5dp"
-                android:layout_weight="1"
-                android:layout_height="50dp"
-                android:scaleType="fitStart"
-                android:id="@+id/imageViewRightSplash"
-                android:src="@drawable/car_docs_tabbar"/>
-
-    </LinearLayout>
 
     <ImageView
             android:id="@+id/ivCenter"
@@ -63,34 +39,90 @@
             android:layout_alignParentBottom="true">
 
 
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:visibility="gone"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/linearLayoutCarScooterSplash"
+                android:layout_centerInParent="true"
+                android:orientation="horizontal">
+
+            <LinearLayout
+                    android:layout_width="0dp"
+                    android:gravity="end"
+                    android:id="@+id/linearLayoutImageRight"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+                <ImageView
+                        android:visibility="invisible"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:scaleType="fitEnd"
+                        android:layout_marginRight="10dp"
+                        android:id="@+id/imageViewLeftSplash"
+                        android:src="@drawable/splash_scooter"/>
+
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="0dp"
+                          android:id="@+id/linearLayoutImageLeft"
+                          android:layout_weight="1"
+                          android:layout_height="wrap_content">
+                <ImageView
+                        android:layout_gravity="end"
+                        android:layout_width="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_height="wrap_content"
+                        android:scaleType="fitStart"
+                        android:id="@+id/imageViewRightSplash"
+                        android:src="@drawable/splash_car"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
         <ImageView
                 android:id="@+id/ivFobbuCar"
+                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:layout_centerHorizontal="true"
                 android:src="@drawable/splash_vehicles" />
-
-        <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp"
-                android:id="@+id/view"
-                android:layout_alignLeft="@+id/ivFobbuCar"
-                android:layout_alignRight="@+id/ivFobbuCar"
-                android:layout_below="@+id/ivFobbuCar"
-                android:background="@color/white" />
-
-        <TextView
+        <LinearLayout
+                android:layout_below="@+id/linearLayoutCarScooterSplash"
                 android:layout_width="wrap_content"
+                android:visibility="gone"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/view"
-                android:textColor="@color/white"
-                android:textSize="@dimen/textsize_small"
-                android:text="@string/splash_text"
-                android:layout_centerHorizontal="true"
-                android:id="@+id/tvText"/>
+                android:layout_centerInParent="true"
+        android:id="@+id/linearLayoutBottomTextSplash"
+        android:orientation="vertical">
+            <View
+                    android:layout_width="100dp"
+                    android:layout_height="1dp"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_centerInParent="true"
+                    android:id="@+id/view"
+                    android:background="@color/white" />
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/view"
+                    android:textColor="@color/white"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textSize="@dimen/textsize_small"
+                    android:text="@string/splash_text"
+                    android:layout_centerHorizontal="true"
+                    android:id="@+id/tvText"/>
+
+        </LinearLayout>
+
 
 
 

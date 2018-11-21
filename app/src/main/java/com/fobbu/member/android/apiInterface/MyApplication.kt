@@ -94,7 +94,7 @@ class MyApplication : Application() {
             val original = chain.request()
 
             val request = original.newBuilder()
-                .header("Content-Type", "application/x-www-form-urlencoded")
+                .header("Content-Type", "application/json")
                 .header("API-KEY", "fobbu")
                 .method(original.method(), original.body())
                 .build()

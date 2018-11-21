@@ -13,7 +13,7 @@ import android.support.v4.app.ActivityCompat
 import android.widget.RelativeLayout
 import android.widget.Toast
 import com.fobbu.member.android.R
-import com.fobbu.member.android.activities.loginActivity.LoginActivity
+import com.fobbu.member.android.activities.loginSignupModule.LoginActivity
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import org.json.JSONObject
@@ -39,6 +39,14 @@ class CommonClass(activity1: Activity, context1: Context)
         val prefsEditor = myPrefs.edit()
 
         prefsEditor.putString(preference, value).apply()
+    }
+
+    fun removeString(KEY:String)
+    {
+        val myPrefs = context.getSharedPreferences("Fobbu_Member_Prefs", Context.MODE_PRIVATE)
+        val prefsEditor = myPrefs.edit()
+        prefsEditor.remove(KEY)
+        prefsEditor.apply()
     }
 
     fun getString( preference: String): String {
