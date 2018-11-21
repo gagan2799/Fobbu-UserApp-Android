@@ -51,21 +51,21 @@
             android:name="com.fobbu.member.android.tutorial.TutorialActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.fobbu.member.android.activities.loginActivity.LoginActivity"
+            android:name="com.fobbu.member.android.activities.loginSignupModule.LoginActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateVisible" />
         <activity
-            android:name="com.fobbu.member.android.activities.signupActivity.SignUpActivity"
+            android:name="com.fobbu.member.android.activities.loginSignupModule.SignUpActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.fobbu.member.android.activities.forgotPasswordActivity.ForgotPasswordActivity"
+            android:name="com.fobbu.member.android.activities.loginSignupModule.ForgotPasswordActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.fobbu.member.android.activities.smsVerificationActivity.SMSVerificationActivity"
+            android:name="com.fobbu.member.android.activities.loginSignupModule.SMSVerificationActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateVisible" />
         <activity
-            android:name="com.fobbu.member.android.activities.generatePinActivity.GeneratePINActivity"
+            android:name="com.fobbu.member.android.activities.loginSignupModule.GeneratePINActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateVisible" />
         <activity
@@ -73,19 +73,19 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
-            android:name="com.fobbu.member.android.activities.addEditVehicleActivity.AddEditVehicleActivity"
+            android:name="com.fobbu.member.android.activities.vehicleModule.AddEditVehicleActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
-            android:name="com.fobbu.member.android.activities.waitingScreenBlue.WaitingScreenBlue"
+            android:name="com.fobbu.member.android.activities.waitingScreenModule.WaitingScreenBlue"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
-            android:name="com.fobbu.member.android.activities.waitingScreenWhite.WaitingScreenWhite"
+            android:name="com.fobbu.member.android.activities.waitingScreenModule.WaitingScreenWhite"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
-            android:name="com.fobbu.member.android.activities.vehicleListActivity.VehicleListActivity"
+            android:name="com.fobbu.member.android.activities.vehicleModule.VehicleListActivity"
             android:screenOrientation="portrait" />
 
         <provider
@@ -117,10 +117,10 @@
         </service>
 
         <activity
-            android:name="com.fobbu.member.android.activities.cancelRsaActivity.CancelRSAActivity"
+            android:name="com.fobbu.member.android.activities.rsaModule.RSARequestCancelActivity"
             android:theme="@style/Transparent" >
         </activity>
-        <activity android:name="com.fobbu.member.android.activities.cancellationMessageActivity.CancellationMessageActivity" >
+        <activity android:name="com.fobbu.member.android.activities.rsaModule.CancellationSuccessMessageActivity" >
         </activity>
 
         <receiver android:name="com.google.android.gms.cast.framework.media.MediaIntentReceiver" />

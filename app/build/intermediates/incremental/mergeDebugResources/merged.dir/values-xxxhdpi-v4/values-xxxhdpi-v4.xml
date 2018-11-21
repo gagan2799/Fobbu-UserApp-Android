@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="header_height">186dp</dimen>
+    <dimen name="login_textsize_medium">20sp</dimen>
+    <dimen name="map_height">300dp</dimen>
+    <dimen name="margin_left">45dp</dimen>
+    <dimen name="profile_drawer_image">330px</dimen>
+    <dimen name="profile_screen">480px</dimen>
+    <dimen name="red_rounded_rectangle_padding">15dp</dimen>
+    <dimen name="textsize_extra_large">30sp</dimen>
+    <dimen name="textsize_extra_small">12sp</dimen>
+    <dimen name="textsize_large">28sp</dimen>
+    <dimen name="textsize_medium">18sp</dimen>
+    <dimen name="textsize_normal">24sp</dimen>
+    <dimen name="textsize_small">14sp</dimen>
+</resources>

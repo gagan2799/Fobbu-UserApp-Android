@@ -3,7 +3,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white">
+        android:background="@color/blue_transparent_back">
 
     <RelativeLayout
         android:id="@+id/rlTop"
@@ -15,6 +15,8 @@
             android:id="@+id/ivBack"
             android:layout_width="wrap_content"
             android:padding="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
             android:src="@drawable/back_button"
             android:layout_height="wrap_content" />
 
@@ -25,6 +27,7 @@
             android:id="@+id/tvLogin"
             android:textAllCaps="true"
             android:textSize="@dimen/textsize_large"
+
             android:textColor="@color/red"
             android:layout_below="@+id/ivBack"
             android:layout_centerHorizontal="true"/>

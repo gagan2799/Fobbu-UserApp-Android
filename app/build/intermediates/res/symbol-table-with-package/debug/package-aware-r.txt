@@ -11,6 +11,7 @@ anim abc_slide_out_bottom
 anim abc_slide_out_top
 anim abc_tooltip_enter
 anim abc_tooltip_exit
+anim bottoms_up
 anim design_bottom_sheet_slide_in
 anim design_bottom_sheet_slide_out
 anim design_snackbar_in
@@ -1293,6 +1294,7 @@ drawable blue_eadio_unfilled
 drawable blue_radio_filled
 drawable border_circle
 drawable border_line_grey
+drawable border_line_white
 drawable burst_tyre_selected
 drawable busy
 drawable call
@@ -1742,6 +1744,7 @@ drawable round_check_green
 drawable rounded_blue
 drawable rounded_blue_background
 drawable rounded_blue_corners
+drawable rounded_green_background
 drawable rounded_red
 drawable rounded_red_corners
 drawable rounded_white
@@ -1763,6 +1766,8 @@ drawable sms
 drawable sos
 drawable sos_orange
 drawable splash_background
+drawable splash_car
+drawable splash_scooter
 drawable splash_vehicles
 drawable star_filled
 drawable star_unfilled
@@ -1847,7 +1852,6 @@ id book_now
 id bottom
 id bottomsheet
 id button
-id buttonCancelRequestRSA
 id buttonPanel
 id button_0
 id button_1
@@ -1973,6 +1977,7 @@ id ifRoom
 id image
 id imageViewLeftSplash
 id imageViewOptionMenuDash
+id imageViewRecycleRsaCancel
 id imageViewRightSplash
 id imgBig
 id imgClose
@@ -2026,14 +2031,13 @@ id left
 id light
 id line1
 id line3
+id linearLayoutBottomTextSplash
 id linearLayoutCancellation
-id linearLayoutFindCustomer
-id linearLayoutNoMoney
-id linearLayoutNoMoneyBelow
+id linearLayoutCarScooterSplash
+id linearLayoutImageLeft
+id linearLayoutImageRight
 id linearLayoutOptionMenu
-id linearLayoutOtherWork
-id linearLayoutWorkDone
-id linearLayoutWorkDoneBelow
+id linearLayoutRsaCancel
 id listMode
 id list_item
 id live_stream_indicator
@@ -2139,6 +2143,7 @@ id progressBar
 id progress_circular
 id progress_horizontal
 id radio
+id recyclerViewCancelRsa
 id recyclerViewServices
 id recyclerViewVehicles
 id relativeLayout
@@ -2154,6 +2159,7 @@ id rlBottomSheet
 id rlBuildingLiveTrack
 id rlBuildingWorkSummary
 id rlCodeValidated
+id rlInformation
 id rlLayout
 id rlLoader
 id rlLoaderVehicleList
@@ -2242,6 +2248,7 @@ id textTitle
 id textViewCallHelpline
 id textViewCancelRSA
 id textViewCancellationRSA
+id textViewRsaCancelRecycle
 id text_input_password_toggle
 id text_list_view
 id textinput_counter
@@ -2267,7 +2274,9 @@ id tvAddEmergencyVehicle
 id tvAddVehicles
 id tvAlreadyRegistered
 id tvCancel
+id tvCancelRequest
 id tvCar
+id tvCode
 id tvCodeValidated
 id tvConfirm
 id tvConfirmPin
@@ -2459,6 +2468,7 @@ layout fragment_home
 layout fragment_rsa
 layout fragment_rsa_live
 layout inflate_drawer
+layout inflate_rsa_recycler_layout
 layout inflate_tutorials
 layout inflate_vehicle_adapter
 layout mr_chooser_dialog
@@ -2770,6 +2780,7 @@ string please_enter_mobile
 string please_enter_password
 string please_fobbu_gathering_tools
 string please_generate
+string please_select_one_issue
 string please_wait
 string proceed_to_pay
 string project_id

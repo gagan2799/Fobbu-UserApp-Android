@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="header_height">136dp</dimen>
+    <dimen name="login_textsize_medium">10sp</dimen>
+    <dimen name="map_height">200dp</dimen>
+    <dimen name="margin_left">45dp</dimen>
+    <dimen name="profile_drawer_image">180px</dimen>
+    <dimen name="profile_screen">290px</dimen>
+    <dimen name="red_rounded_rectangle_padding">15dp</dimen>
+    <dimen name="textsize_extra_large">19sp</dimen>
+    <dimen name="textsize_extra_small">7sp</dimen>
+    <dimen name="textsize_large">17sp</dimen>
+    <dimen name="textsize_medium">9sp</dimen>
+    <dimen name="textsize_normal">14sp</dimen>
+    <dimen name="textsize_small">8sp</dimen>
+    <style name="Base.Widget.AppCompat.DrawerArrowToggle" parent="Base.Widget.AppCompat.DrawerArrowToggle.Common">
+          <item name="barLength">18.66dp</item>
+          <item name="gapBetweenBars">3.33dp</item>
+          <item name="drawableSize">24dp</item>
+     </style>
+</resources>
