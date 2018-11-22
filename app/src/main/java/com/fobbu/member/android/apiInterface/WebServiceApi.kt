@@ -58,6 +58,7 @@ interface WebServiceApi {
     @Multipart
     @POST("users/requests")
     fun findFobbuRequest(
+        /*@Body mapData: HashMap<String, RequestBody>,*/
         @Part("user_id")  user_id: RequestBody,
         @Part("service")  service: RequestBody,
         @Part("latitude")  latitude: RequestBody,

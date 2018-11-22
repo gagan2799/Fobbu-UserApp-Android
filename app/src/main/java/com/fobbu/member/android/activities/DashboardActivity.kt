@@ -205,7 +205,7 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
             else ->
             {
                 fragmentTypeForRSA = resources.getString(R.string.rsa_home)
-                RSALiveFragment()
+                RSAFragment()
             }
         }
 

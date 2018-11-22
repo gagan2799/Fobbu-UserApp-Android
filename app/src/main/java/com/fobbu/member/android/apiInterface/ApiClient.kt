@@ -181,6 +181,62 @@ class ApiClient(var activity: Activity) {
         })
     }
 
+    // fetch service Api (Rsa Fragment)
+     fun fetchService(token:String,responseHandler: ResponseHandler)
+    {
+        webServiceApi.fetchServices(token).enqueue(object :Callback<MainPojo>
+        {
+            override fun onResponse(call: Call<MainPojo>, response: Response<MainPojo>) {
+                handleSuccess(response,responseHandler)
+            }
+
+            override fun onFailure(call: Call<MainPojo>, t: Throwable) {
+                responseHandler.onServerError(""+t.message)
+            }
+
+        })
+    }
+
+    // find fobbu Request(RSA Fragment)
+     fun findFobbuRequest(userId:RequestBody,serviceSelected:RequestBody,strtLatitude:RequestBody,strLongitude:RequestBody
+    ,strVehicleType:RequestBody,fileList:ArrayList<MultipartBody.Part>,token:String,responseHandler: ResponseHandler)
+    {
+        /*val  map= HashMap<String,RequestBody>()
+        map["user_id"]=userId
+        map["service"]=serviceSelected
+        map["latitude"]=strtLatitude
+        map["longitude"]=strLongitude
+        map["vehicle_type"]=strVehicleType*/
+        webServiceMultipart.findFobbuRequest(userId,serviceSelected,strtLatitude,strLongitude,strVehicleType,fileList,token)
+            .enqueue(object :Callback<MainPojo>
+            {
+                override fun onFailure(call: Call<MainPojo>, t: Throwable) {
+                    responseHandler.onServerError(""+t.message)
+                }
+
+                override fun onResponse(call: Call<MainPojo>, response: Response<MainPojo>) {
+                    handleSuccess(response,responseHandler)
+                }
+
+            })
+    }
+
+    // fleet request api(RSA Fragment)
+    fun findFleetOrUser (token:String,requestId:String,responseHandler: ResponseHandler)
+    {
+        webServiceApi.findFleetOrUser(token,requestId).enqueue(object :Callback<MainPojo>
+        {
+            override fun onFailure(call: Call<MainPojo>, t: Throwable) {
+                responseHandler.onServerError(""+t.message)
+            }
+
+            override fun onResponse(call: Call<MainPojo>, response: Response<MainPojo>) {
+                handleSuccess(response,responseHandler)
+            }
+
+        })
+    }
+
 
 
     // method for handling the response
@@ -194,6 +250,7 @@ class ApiClient(var activity: Activity) {
             }
         }else{
             responseHandler.onError(""+response.message())
+            println("main pojo data $response")
         }
     }
 

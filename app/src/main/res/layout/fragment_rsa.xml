@@ -203,27 +203,35 @@
                             android:gravity="center_vertical|center"
                             android:layout_height="wrap_content">
 
-                        <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:orientation="vertical"
-                                android:gravity="center"
-                                android:id="@+id/llScooterTwo"
-                                android:layout_height="wrap_content">
-
-                            <ImageView
+                        <LinearLayout android:layout_width="0dp"
+                                      android:layout_weight="1"
+                                      android:id="@+id/linearLayoutScooterLeftTwo"
+                                      android:gravity="end"
+                                      android:layout_height="wrap_content">
+                            <LinearLayout
                                     android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:src="@drawable/scooter_selected"/>
+                                    android:orientation="vertical"
+                                    android:gravity="center"
+                                    android:id="@+id/llScooterTwo"
+                                    android:layout_height="wrap_content">
 
-                            <TextView
-                                    android:layout_width="wrap_content"
-                                    android:text="@string/bike_scooter"
-                                    android:padding="5dp"
-                                    android:textSize="@dimen/textsize_medium"
-                                    android:textColor="@color/drawer_text_color"
-                                    android:layout_height="wrap_content"/>
+                                <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:src="@drawable/scooter_selected"/>
 
+                                <TextView
+                                        android:layout_width="wrap_content"
+                                        android:text="@string/bike_scooter"
+                                        android:padding="5dp"
+                                        android:textSize="@dimen/textsize_medium"
+                                        android:textColor="@color/drawer_text_color"
+                                        android:layout_height="wrap_content"/>
+
+                            </LinearLayout>
                         </LinearLayout>
+
+
 
 
                         <View android:layout_width="1dp"
@@ -231,30 +239,38 @@
                               android:background="@color/view_grey"
                               android:layout_margin="10dp"/>
 
-                        <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:orientation="vertical"
-                                android:gravity="center"
-                                android:id="@+id/llCarTwo"
-                                android:layout_height="wrap_content">
 
-                            <ImageView
+                        <LinearLayout android:layout_width="0dp"
+                                      android:layout_weight="1"
+                                      android:gravity="start"
+                                      android:id="@+id/linearLayoutCarRightTwo"
+                                      android:layout_height="wrap_content">
+                            <LinearLayout
                                     android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:src="@drawable/car_selected"/>
+                                    android:orientation="vertical"
+                                    android:gravity="center"
+                                    android:id="@+id/llCarTwo"
+                                    android:layout_height="wrap_content">
 
-                            <TextView
-                                    android:layout_width="wrap_content"
-                                    android:text="@string/car_suv"
-                                    android:paddingBottom="5dp"
-                                    android:paddingTop="5dp"
-                                    android:paddingRight="10dp"
-                                    android:paddingLeft="10dp"
-                                    android:textSize="@dimen/textsize_medium"
-                                    android:textColor="@color/drawer_text_color"
-                                    android:layout_height="wrap_content"/>
+                                <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:src="@drawable/car_selected"/>
 
+                                <TextView
+                                        android:layout_width="wrap_content"
+                                        android:text="@string/car_suv"
+                                        android:paddingBottom="5dp"
+                                        android:paddingTop="5dp"
+                                        android:paddingRight="10dp"
+                                        android:paddingLeft="10dp"
+                                        android:textSize="@dimen/textsize_medium"
+                                        android:textColor="@color/drawer_text_color"
+                                        android:layout_height="wrap_content"/>
+
+                            </LinearLayout>
                         </LinearLayout>
+
 
                     </LinearLayout>
 
@@ -267,110 +283,133 @@
                             android:visibility="gone"
                             android:gravity="center_vertical|center"
                             android:layout_height="wrap_content">
-
-                        <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:orientation="vertical"
-                                android:gravity="center"
-                                android:id="@+id/llScooterThree"
-                                android:layout_height="wrap_content">
-
-                            <ImageView
+                        <LinearLayout android:layout_width="0dp"
+                                      android:layout_weight="1"
+                                      android:gravity="end"
+                                      android:layout_height="wrap_content"
+                        >
+                            <LinearLayout
                                     android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:src="@drawable/scooter_selected"/>
+                                    android:orientation="vertical"
+                                    android:gravity="center"
+                                    android:id="@+id/llScooterThree"
+                                    android:layout_height="wrap_content">
 
-                            <TextView
-                                    android:layout_width="wrap_content"
-                                    android:text="@string/bike_scooter"
-                                    android:padding="5dp"
-                                    android:textSize="@dimen/textsize_medium"
-                                    android:textColor="@color/drawer_text_color"
-                                    android:layout_height="wrap_content"/>
+                                <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:src="@drawable/scooter_selected"/>
 
-                            <TextView
-                                    android:layout_width="wrap_content"
-                                    android:text="@string/petrol"
-                                    android:textSize="@dimen/textsize_medium"
-                                    android:textColor="@color/drawer_text_color"
-                                    android:layout_height="wrap_content"/>
+                                <TextView
+                                        android:layout_width="wrap_content"
+                                        android:text="@string/bike_scooter"
+                                        android:padding="5dp"
+                                        android:textSize="@dimen/textsize_medium"
+                                        android:textColor="@color/drawer_text_color"
+                                        android:layout_height="wrap_content"/>
 
+                                <TextView
+                                        android:layout_width="wrap_content"
+                                        android:text="@string/petrol"
+                                        android:textSize="@dimen/textsize_medium"
+                                        android:textColor="@color/drawer_text_color"
+                                        android:layout_height="wrap_content"/>
+
+                            </LinearLayout>
                         </LinearLayout>
+
+
 
 
                         <View android:layout_width="1dp"
                               android:layout_height="match_parent"
                               android:background="@color/view_grey"
-                              android:layout_margin="10dp"/>
+                              />
 
-                        <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:orientation="vertical"
-                                android:gravity="center"
-                                android:id="@+id/llCarFuelDieselThree"
-                                android:layout_height="wrap_content">
-
-                            <ImageView
+                        <LinearLayout android:layout_width="0dp"
+                                      android:layout_weight="1"
+                                      android:gravity="center"
+                                      android:layout_height="wrap_content"
+                        >
+                            <LinearLayout
                                     android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:src="@drawable/suv_selected"/>
+                                    android:orientation="vertical"
+                                    android:gravity="center"
+                                    android:id="@+id/llCarFuelDieselThree"
+                                    android:layout_height="wrap_content">
 
-                            <TextView
-                                    android:layout_width="wrap_content"
-                                    android:text="@string/car_suv"
-                                    android:paddingBottom="5dp"
-                                    android:paddingTop="5dp"
-                                    android:paddingRight="10dp"
-                                    android:paddingLeft="10dp"
-                                    android:textSize="@dimen/textsize_medium"
-                                    android:textColor="@color/drawer_text_color"
-                                    android:layout_height="wrap_content"/>
+                                <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:src="@drawable/suv_selected"/>
 
-                            <TextView
-                                    android:layout_width="wrap_content"
-                                    android:text="@string/diesel"
-                                    android:textSize="@dimen/textsize_medium"
-                                    android:textColor="@color/drawer_text_color"
-                                    android:layout_height="wrap_content"/>
+                                <TextView
+                                        android:layout_width="wrap_content"
+                                        android:text="@string/car_suv"
+                                        android:paddingBottom="5dp"
+                                        android:paddingTop="5dp"
+                                        android:paddingRight="10dp"
+                                        android:paddingLeft="10dp"
+                                        android:textSize="@dimen/textsize_medium"
+                                        android:textColor="@color/drawer_text_color"
+                                        android:layout_height="wrap_content"/>
 
+                                <TextView
+                                        android:layout_width="wrap_content"
+                                        android:text="@string/diesel"
+                                        android:textSize="@dimen/textsize_medium"
+                                        android:textColor="@color/drawer_text_color"
+                                        android:layout_height="wrap_content"/>
+
+                            </LinearLayout>
                         </LinearLayout>
+
 
                         <View android:layout_width="1dp"
                               android:layout_height="match_parent"
-                              android:background="@color/view_grey"
-                              android:layout_margin="10dp"/>
+                              android:background="@color/view_grey"/>
 
-                        <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:orientation="vertical"
-                                android:gravity="center"
-                                android:id="@+id/llCarFuelPetrolThree"
-                                android:layout_height="wrap_content">
-
-                            <ImageView
+                        <LinearLayout android:layout_width="0dp"
+                                      android:layout_weight="1"
+                                      android:gravity="start"
+                                      android:layout_height="wrap_content"
+                        >
+                            <LinearLayout
                                     android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:src="@drawable/car_selected"/>
+                                    android:orientation="vertical"
+                                    android:gravity="center"
+                                    android:id="@+id/llCarFuelPetrolThree"
+                                    android:layout_height="wrap_content">
 
-                            <TextView
-                                    android:layout_width="wrap_content"
-                                    android:text="@string/car_suv"
-                                    android:paddingBottom="5dp"
-                                    android:paddingTop="5dp"
-                                    android:paddingRight="10dp"
-                                    android:paddingLeft="10dp"
-                                    android:textSize="@dimen/textsize_medium"
-                                    android:textColor="@color/drawer_text_color"
-                                    android:layout_height="wrap_content"/>
+                                <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:src="@drawable/car_selected"/>
 
-                            <TextView
-                                    android:layout_width="wrap_content"
-                                    android:text="@string/petrol"
-                                    android:textSize="@dimen/textsize_medium"
-                                    android:textColor="@color/drawer_text_color"
-                                    android:layout_height="wrap_content"/>
+                                <TextView
+                                        android:layout_width="wrap_content"
+                                        android:text="@string/car_suv"
+                                        android:paddingBottom="5dp"
+                                        android:paddingTop="5dp"
+                                        android:paddingRight="10dp"
+                                        android:paddingLeft="10dp"
+                                        android:textSize="@dimen/textsize_medium"
+                                        android:textColor="@color/drawer_text_color"
+                                        android:layout_height="wrap_content"/>
 
-                        </LinearLayout>
+                                <TextView
+                                        android:layout_width="wrap_content"
+                                        android:text="@string/petrol"
+                                        android:textSize="@dimen/textsize_medium"
+                                        android:textColor="@color/drawer_text_color"
+                                        android:layout_height="wrap_content"/>
+
+                            </LinearLayout>
+                        </LinearLayout>                              android:layout_margin="10dp"/>
+
+
+
+
 
                     </LinearLayout>
 

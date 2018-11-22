@@ -214,14 +214,18 @@
     <string name="tyre_3">3. We will charge Rs 200/- if you cancel when fobbu reaches</string>
     <string name="tyre_4">4. #No Surge #No Hidden Cost #All inclusive</string>
     <string name="terms">By clicking "Find Fobbu" you agree to our</string>
-    <string name="conditions"><u>terms &amp; conditions</u></string>
+    <string name="conditions">
+        <u>terms &amp; conditions</u>
+    </string>
     <string name="tow_required">Tow Required</string>
     <string name="continue_">Continue</string>
-    <string name="tow_service_required">This type of service requires a mechanic shop.\nLet\'s change your service to a tow and\nget you the help you need.</string>
+    <string name="tow_service_required">This type of service requires a mechanic shop.\nLet\'s change your service to a
+        tow and\nget you the help you need.
+    </string>
     <string name="lifting">Lifting</string>
     <string name="flatbed">Flatbed</string>
     <string name="tow_1">1. Charge of Rs 1000/- if you cancel when fobbu reaches</string>
-    <string name="working_spare_tyre">I have a working  Spare tyre</string>
+    <string name="working_spare_tyre">I have a working Spare tyre</string>
     <string name="mark_tyre_burst">Mark the Tyre Burst</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
@@ -250,6 +254,10 @@
     <string name="work_already_done">Work already done</string>
     <string name="cancel_request">Cancel Request</string>
     <string name="please_select_one_issue">Please select one issue first.</string>
+    <!--  <string name="work_summary">Work Summary</string>
+    <string name="order_id">Order ID:</string>
+    <string name="confirm_pay"><![CDATA[Confirm & Pay]]></string>-->
+    <string name="_0002534">#0002534</string>
 
 
 </resources>

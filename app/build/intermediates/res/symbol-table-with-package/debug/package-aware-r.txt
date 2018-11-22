@@ -17,6 +17,7 @@ anim design_bottom_sheet_slide_out
 anim design_snackbar_in
 anim design_snackbar_out
 anim fade
+anim fade_rsa
 anim fadefast
 anim pop_in
 anim slide_down
@@ -1074,6 +1075,7 @@ dimen design_tab_text_size_2line
 dimen design_textinput_caption_translate_y
 dimen disabled_alpha_material_dark
 dimen disabled_alpha_material_light
+dimen dp_20
 dimen fastscroll_default_thickness
 dimen fastscroll_margin
 dimen fastscroll_minimum_range
@@ -1394,6 +1396,7 @@ drawable complete_profile
 drawable credit_card
 drawable cross_gray
 drawable cross_white
+drawable dashed_line
 drawable design_bottom_navigation_item_background
 drawable design_fab_background
 drawable design_ic_visibility
@@ -1796,6 +1799,7 @@ drawable wheels_saings
 drawable white_radius
 drawable wokr_already
 drawable wonderful
+drawable work_summary_drawable
 id ALT
 id CTRL
 id FUNCTION
@@ -1977,6 +1981,7 @@ id ifRoom
 id image
 id imageViewLeftSplash
 id imageViewOptionMenuDash
+id imageViewOptionMenuWorkSummary
 id imageViewRecycleRsaCancel
 id imageViewRightSplash
 id imgBig
@@ -2033,11 +2038,15 @@ id line1
 id line3
 id linearLayoutBottomTextSplash
 id linearLayoutCancellation
+id linearLayoutCarRightTwo
 id linearLayoutCarScooterSplash
+id linearLayoutFlatTyresWork
+id linearLayoutFuelWork
 id linearLayoutImageLeft
 id linearLayoutImageRight
 id linearLayoutOptionMenu
 id linearLayoutRsaCancel
+id linearLayoutScooterLeftTwo
 id listMode
 id list_item
 id live_stream_indicator
@@ -2147,6 +2156,7 @@ id recyclerViewCancelRsa
 id recyclerViewServices
 id recyclerViewVehicles
 id relativeLayout
+id relativeLayoutWorkSummaryToolBar
 id rfc822
 id right
 id right_icon
@@ -2245,10 +2255,23 @@ id textSpacerNoButtons
 id textSpacerNoTitle
 id textStart
 id textTitle
+id textViewAmountDeliveryWork
+id textViewAmountFuelWork
+id textViewAmountPuncturesWork
+id textViewAmountTubesWork
+id textViewAmountValvesWork
 id textViewCallHelpline
 id textViewCancelRSA
 id textViewCancellationRSA
+id textViewConfirmAndPay
+id textViewNoTubesWork
+id textViewNoValvesWork
+id textViewNumberPuncturesWork
+id textViewOrderIdWork
+id textViewQuantityFuelWork
 id textViewRsaCancelRecycle
+id textViewServiceTypeWork
+id textViewTotalAmount
 id text_input_password_toggle
 id text_list_view
 id textinput_counter
@@ -2434,6 +2457,7 @@ layout activity_dashboard
 layout activity_forgot
 layout activity_generate_pin
 layout activity_login
+layout activity_payment_mode
 layout activity_sign_up
 layout activity_sms_verification
 layout activity_splash
@@ -2441,6 +2465,7 @@ layout activity_tutorial
 layout activity_vehicle_list
 layout activity_waiting_screen_blue
 layout activity_waiting_screen_white
+layout activity_work_summary
 layout app_bar_dashboard
 layout bottomsheet_deals
 layout cast_expanded_controller_activity
@@ -2510,6 +2535,7 @@ mipmap app_icon
 mipmap app_icon_round
 mipmap ic_launcher
 mipmap ic_launcher_round
+string _0002534
 string abc_action_bar_home_description
 string abc_action_bar_up_description
 string abc_action_menu_overflow_description
