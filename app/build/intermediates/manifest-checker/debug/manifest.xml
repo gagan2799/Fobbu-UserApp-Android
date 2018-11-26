@@ -129,6 +129,8 @@
         </activity>
         <activity android:name="com.fobbu.member.android.activities.paymentModule.PaymentModeActivity" >
         </activity>
+        <activity android:name="com.fobbu.member.android.activities.paymentModule.GetSetGoActivity" >
+        </activity>
 
         <receiver android:name="com.google.android.gms.cast.framework.media.MediaIntentReceiver" />
 

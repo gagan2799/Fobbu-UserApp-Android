@@ -1,23 +1,23 @@
 [
     {
-        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable_common_google_signin_btn_text_light_normal.xml.flat",
-        "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/play-services-base-12.0.1.aar/57d7f6855b26a14510f48549d3968840/res/drawable/common_google_signin_btn_text_light_normal.xml"
-    },
-    {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_abc_scrubber_track_mtrl_alpha.9.png.flat",
         "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/8b2647e4d6f90733320c66bc0dae852b/res/drawable-hdpi-v4/abc_scrubber_track_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable_common_google_signin_btn_text_light_normal.xml.flat",
+        "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/play-services-base-12.0.1.aar/57d7f6855b26a14510f48549d3968840/res/drawable/common_google_signin_btn_text_light_normal.xml"
     },
     {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi_wheels_saings.png.flat",
         "source": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/res/drawable-xxxhdpi/wheels_saings.png"
     },
     {
-        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_abc_text_select_handle_middle_mtrl_light.png.flat",
-        "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/8b2647e4d6f90733320c66bc0dae852b/res/drawable-mdpi-v4/abc_text_select_handle_middle_mtrl_light.png"
-    },
-    {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_ic_mr_button_connected_10_dark.png.flat",
         "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/mediarouter-v7-26.1.0.aar/82a35fc31339186c48f70adf6693290f/res/drawable-xxhdpi-v4/ic_mr_button_connected_10_dark.png"
+    },
+    {
+        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_abc_text_select_handle_middle_mtrl_light.png.flat",
+        "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/8b2647e4d6f90733320c66bc0dae852b/res/drawable-mdpi-v4/abc_text_select_handle_middle_mtrl_light.png"
     },
     {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_ic_media_play_dark.png.flat",
@@ -124,12 +124,12 @@
         "source": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/res/drawable-xxhdpi/tracker.png"
     },
     {
-        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_ic_vol_type_speaker_dark.png.flat",
-        "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/mediarouter-v7-26.1.0.aar/82a35fc31339186c48f70adf6693290f/res/drawable-hdpi-v4/ic_vol_type_speaker_dark.png"
-    },
-    {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable_work_summary_drawable.xml.flat",
         "source": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/res/drawable/work_summary_drawable.xml"
+    },
+    {
+        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_ic_vol_type_speaker_dark.png.flat",
+        "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/mediarouter-v7-26.1.0.aar/82a35fc31339186c48f70adf6693290f/res/drawable-hdpi-v4/ic_vol_type_speaker_dark.png"
     },
     {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_abc_ic_menu_share_mtrl_alpha.png.flat",
@@ -148,12 +148,12 @@
         "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/mediarouter-v7-26.1.0.aar/82a35fc31339186c48f70adf6693290f/res/drawable-xxhdpi-v4/ic_mr_button_connected_28_dark.png"
     },
     {
-        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/layout_activity_forgot.xml.flat",
-        "source": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/res/layout/activity_forgot.xml"
-    },
-    {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/layout-v21_notification_template_icon_group.xml.flat",
         "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/039c28797e5175886ed63fb98e346303/res/layout-v21/notification_template_icon_group.xml"
+    },
+    {
+        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/layout_activity_forgot.xml.flat",
+        "source": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/res/layout/activity_forgot.xml"
     },
     {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-hdpi_success_check.png.flat",
@@ -248,12 +248,12 @@
         "source": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/res/drawable-xxhdpi/thumbs_up.png"
     },
     {
-        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_ic_plusone_standard_off_client.png.flat",
-        "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/play-services-plus-12.0.1.aar/21b9f71abc691ac7120826629213a102/res/drawable-xhdpi-v4/ic_plusone_standard_off_client.png"
-    },
-    {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_quantum_ic_forward_30_white_36.png.flat",
         "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/play-services-cast-framework-12.0.1.aar/8750718b48cced1522846415165619aa/res/drawable-hdpi-v4/quantum_ic_forward_30_white_36.png"
+    },
+    {
+        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_ic_plusone_standard_off_client.png.flat",
+        "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/play-services-plus-12.0.1.aar/21b9f71abc691ac7120826629213a102/res/drawable-xhdpi-v4/ic_plusone_standard_off_client.png"
     },
     {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_abc_tab_indicator_mtrl_alpha.9.png.flat",
@@ -280,16 +280,20 @@
         "source": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/res/drawable-xxhdpi/meters_tabbar.png"
     },
     {
-        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/color_abc_tint_btn_checkable.xml.flat",
-        "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/8b2647e4d6f90733320c66bc0dae852b/res/color/abc_tint_btn_checkable.xml"
-    },
-    {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-v21_abc_btn_colored_material.xml.flat",
         "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/8b2647e4d6f90733320c66bc0dae852b/res/drawable-v21/abc_btn_colored_material.xml"
     },
     {
+        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/color_abc_tint_btn_checkable.xml.flat",
+        "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/8b2647e4d6f90733320c66bc0dae852b/res/color/abc_tint_btn_checkable.xml"
+    },
+    {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_ic_media_pause_dark.png.flat",
         "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/mediarouter-v7-26.1.0.aar/82a35fc31339186c48f70adf6693290f/res/drawable-xhdpi-v4/ic_media_pause_dark.png"
+    },
+    {
+        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/layout_inflate_review_pop_up.xml.flat",
+        "source": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/res/layout/inflate_review_pop_up.xml"
     },
     {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable_mr_dialog_close_light.xml.flat",
@@ -328,12 +332,12 @@
         "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/8b2647e4d6f90733320c66bc0dae852b/res/drawable-xxhdpi-v4/abc_scrubber_primary_mtrl_alpha.9.png"
     },
     {
-        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-v21_abc_edit_text_material.xml.flat",
-        "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/8b2647e4d6f90733320c66bc0dae852b/res/drawable-v21/abc_edit_text_material.xml"
-    },
-    {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_cross_gray.png.flat",
         "source": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/res/drawable-xxhdpi/cross_gray.png"
+    },
+    {
+        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-v21_abc_edit_text_material.xml.flat",
+        "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/8b2647e4d6f90733320c66bc0dae852b/res/drawable-v21/abc_edit_text_material.xml"
     },
     {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_notification_bg_low_normal.9.png.flat",
@@ -356,12 +360,12 @@
         "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/mediarouter-v7-26.1.0.aar/82a35fc31339186c48f70adf6693290f/res/drawable-xhdpi-v4/ic_vol_type_speaker_group_dark.png"
     },
     {
-        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi_padlock.png.flat",
-        "source": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/res/drawable-xxxhdpi/padlock.png"
-    },
-    {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-hdpi_man_riding_bike.png.flat",
         "source": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/res/drawable-hdpi/man_riding_bike.png"
+    },
+    {
+        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi_padlock.png.flat",
+        "source": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/res/drawable-xxxhdpi/padlock.png"
     },
     {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_ic_mr_button_connecting_21_dark.png.flat",
@@ -432,28 +436,28 @@
         "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/mediarouter-v7-26.1.0.aar/82a35fc31339186c48f70adf6693290f/res/drawable-xhdpi-v4/ic_mr_button_connected_08_light.png"
     },
     {
-        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_fobbu_pay.png.flat",
-        "source": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/res/drawable-xxhdpi/fobbu_pay.png"
+        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_ic_mr_button_connected_27_light.png.flat",
+        "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/mediarouter-v7-26.1.0.aar/82a35fc31339186c48f70adf6693290f/res/drawable-xxhdpi-v4/ic_mr_button_connected_27_light.png"
     },
     {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_abc_scrubber_control_off_mtrl_alpha.png.flat",
         "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/8b2647e4d6f90733320c66bc0dae852b/res/drawable-xhdpi-v4/abc_scrubber_control_off_mtrl_alpha.png"
     },
     {
-        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_ic_mr_button_connected_27_light.png.flat",
-        "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/mediarouter-v7-26.1.0.aar/82a35fc31339186c48f70adf6693290f/res/drawable-xxhdpi-v4/ic_mr_button_connected_27_light.png"
+        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_fobbu_pay.png.flat",
+        "source": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/res/drawable-xxhdpi/fobbu_pay.png"
     },
     {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_ic_mr_button_connected_21_light.png.flat",
         "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/mediarouter-v7-26.1.0.aar/82a35fc31339186c48f70adf6693290f/res/drawable-xxhdpi-v4/ic_mr_button_connected_21_light.png"
     },
     {
-        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_common_google_signin_btn_text_dark_normal_background.9.png.flat",
-        "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/play-services-base-12.0.1.aar/57d7f6855b26a14510f48549d3968840/res/drawable-hdpi-v4/common_google_signin_btn_text_dark_normal_background.9.png"
-    },
-    {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/layout_design_layout_tab_icon.xml.flat",
         "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/design-28.0.0.aar/15f5a17aa151a673c001a76a04cadfd4/res/layout/design_layout_tab_icon.xml"
+    },
+    {
+        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_common_google_signin_btn_text_dark_normal_background.9.png.flat",
+        "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/play-services-base-12.0.1.aar/57d7f6855b26a14510f48549d3968840/res/drawable-hdpi-v4/common_google_signin_btn_text_dark_normal_background.9.png"
     },
     {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_ic_mr_button_connected_12_light.png.flat",
@@ -476,12 +480,12 @@
         "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/mediarouter-v7-26.1.0.aar/82a35fc31339186c48f70adf6693290f/res/drawable-xxhdpi-v4/ic_mr_button_connected_03_light.png"
     },
     {
-        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi_dropdown.png.flat",
-        "source": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/res/drawable-xxxhdpi/dropdown.png"
-    },
-    {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_edit_pic_drawer.png.flat",
         "source": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/res/drawable-xxhdpi/edit_pic_drawer.png"
+    },
+    {
+        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi_dropdown.png.flat",
+        "source": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/res/drawable-xxxhdpi/dropdown.png"
     },
     {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_check_mark_blue.png.flat",
@@ -560,12 +564,12 @@
         "source": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/res/drawable-xxxhdpi/check_mark_green.png"
     },
     {
-        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_ic_mr_button_connecting_20_light.png.flat",
-        "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/mediarouter-v7-26.1.0.aar/82a35fc31339186c48f70adf6693290f/res/drawable-xhdpi-v4/ic_mr_button_connecting_20_light.png"
-    },
-    {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_quantum_ic_stop_grey600_48.png.flat",
         "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/play-services-cast-framework-12.0.1.aar/8750718b48cced1522846415165619aa/res/drawable-hdpi-v4/quantum_ic_stop_grey600_48.png"
+    },
+    {
+        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_ic_mr_button_connecting_20_light.png.flat",
+        "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/mediarouter-v7-26.1.0.aar/82a35fc31339186c48f70adf6693290f/res/drawable-xhdpi-v4/ic_mr_button_connecting_20_light.png"
     },
     {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xhdpi_splash_background.png.flat",
@@ -652,12 +656,12 @@
         "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/mediarouter-v7-26.1.0.aar/82a35fc31339186c48f70adf6693290f/res/drawable-xxhdpi-v4/ic_mr_button_connected_19_dark.png"
     },
     {
-        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/interpolator_mtrl_linear.xml.flat",
-        "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/design-28.0.0.aar/15f5a17aa151a673c001a76a04cadfd4/res/interpolator/mtrl_linear.xml"
-    },
-    {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-v21_design_bottom_navigation_item_background.xml.flat",
         "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/design-28.0.0.aar/15f5a17aa151a673c001a76a04cadfd4/res/drawable-v21/design_bottom_navigation_item_background.xml"
+    },
+    {
+        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/interpolator_mtrl_linear.xml.flat",
+        "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/design-28.0.0.aar/15f5a17aa151a673c001a76a04cadfd4/res/interpolator/mtrl_linear.xml"
     },
     {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_quantum_ic_pause_circle_filled_grey600_36.png.flat",
@@ -688,12 +692,12 @@
         "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/play-services-cast-framework-12.0.1.aar/8750718b48cced1522846415165619aa/res/drawable-xhdpi-v4/quantum_ic_cast_connected_white_24.png"
     },
     {
-        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/color_mtrl_tabs_legacy_text_color_selector.xml.flat",
-        "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/design-28.0.0.aar/15f5a17aa151a673c001a76a04cadfd4/res/color/mtrl_tabs_legacy_text_color_selector.xml"
-    },
-    {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_ic_mr_button_connected_23_dark.png.flat",
         "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/mediarouter-v7-26.1.0.aar/82a35fc31339186c48f70adf6693290f/res/drawable-xhdpi-v4/ic_mr_button_connected_23_dark.png"
+    },
+    {
+        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/color_mtrl_tabs_legacy_text_color_selector.xml.flat",
+        "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/design-28.0.0.aar/15f5a17aa151a673c001a76a04cadfd4/res/color/mtrl_tabs_legacy_text_color_selector.xml"
     },
     {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/mipmap-xxxhdpi_app_icon_round.png.flat",
@@ -732,12 +736,12 @@
         "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/play-services-base-12.0.1.aar/57d7f6855b26a14510f48549d3968840/res/drawable/common_google_signin_btn_text_dark.xml"
     },
     {
-        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable_common_google_signin_btn_icon_disabled.xml.flat",
-        "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/play-services-base-12.0.1.aar/57d7f6855b26a14510f48549d3968840/res/drawable/common_google_signin_btn_icon_disabled.xml"
-    },
-    {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable_rounded_white.xml.flat",
         "source": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/res/drawable/rounded_white.xml"
+    },
+    {
+        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable_common_google_signin_btn_icon_disabled.xml.flat",
+        "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/play-services-base-12.0.1.aar/57d7f6855b26a14510f48549d3968840/res/drawable/common_google_signin_btn_icon_disabled.xml"
     },
     {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi_sms.png.flat",
@@ -884,16 +888,16 @@
         "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/play-services-cast-framework-12.0.1.aar/8750718b48cced1522846415165619aa/res/drawable/cast_expanded_controller_bg_gradient_light.xml"
     },
     {
-        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/anim_abc_slide_out_bottom.xml.flat",
-        "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/8b2647e4d6f90733320c66bc0dae852b/res/anim/abc_slide_out_bottom.xml"
+        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/layout_abc_action_bar_up_container.xml.flat",
+        "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/8b2647e4d6f90733320c66bc0dae852b/res/layout/abc_action_bar_up_container.xml"
     },
     {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_ic_mr_button_connecting_10_light.png.flat",
         "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/mediarouter-v7-26.1.0.aar/82a35fc31339186c48f70adf6693290f/res/drawable-xxhdpi-v4/ic_mr_button_connecting_10_light.png"
     },
     {
-        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/layout_abc_action_bar_up_container.xml.flat",
-        "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/8b2647e4d6f90733320c66bc0dae852b/res/layout/abc_action_bar_up_container.xml"
+        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/anim_abc_slide_out_bottom.xml.flat",
+        "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/8b2647e4d6f90733320c66bc0dae852b/res/anim/abc_slide_out_bottom.xml"
     },
     {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_ic_mr_button_connected_00_dark.png.flat",
@@ -944,12 +948,12 @@
         "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/mediarouter-v7-26.1.0.aar/82a35fc31339186c48f70adf6693290f/res/drawable-hdpi-v4/ic_vol_type_tv_dark.png"
     },
     {
-        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_notify_panel_notification_icon_bg.png.flat",
-        "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/039c28797e5175886ed63fb98e346303/res/drawable-xhdpi-v4/notify_panel_notification_icon_bg.png"
-    },
-    {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_ic_media_pause_light.png.flat",
         "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/mediarouter-v7-26.1.0.aar/82a35fc31339186c48f70adf6693290f/res/drawable-mdpi-v4/ic_media_pause_light.png"
+    },
+    {
+        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_notify_panel_notification_icon_bg.png.flat",
+        "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/039c28797e5175886ed63fb98e346303/res/drawable-xhdpi-v4/notify_panel_notification_icon_bg.png"
     },
     {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_abc_textfield_default_mtrl_alpha.9.png.flat",
@@ -972,12 +976,12 @@
         "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/039c28797e5175886ed63fb98e346303/res/drawable/notification_icon_background.xml"
     },
     {
-        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_abc_btn_switch_to_on_mtrl_00012.9.png.flat",
-        "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/8b2647e4d6f90733320c66bc0dae852b/res/drawable-xxxhdpi-v4/abc_btn_switch_to_on_mtrl_00012.9.png"
-    },
-    {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-hdpi_towing_selected.png.flat",
         "source": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/res/drawable-hdpi/towing_selected.png"
+    },
+    {
+        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_abc_btn_switch_to_on_mtrl_00012.9.png.flat",
+        "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/8b2647e4d6f90733320c66bc0dae852b/res/drawable-xxxhdpi-v4/abc_btn_switch_to_on_mtrl_00012.9.png"
     },
     {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable_abc_ic_voice_search_api_material.xml.flat",
@@ -1080,12 +1084,12 @@
         "source": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/res/drawable-xxhdpi/dummy_pic.png"
     },
     {
-        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_quantum_ic_play_circle_filled_white_36.png.flat",
-        "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/play-services-cast-framework-12.0.1.aar/8750718b48cced1522846415165619aa/res/drawable-xxhdpi-v4/quantum_ic_play_circle_filled_white_36.png"
-    },
-    {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_common_google_signin_btn_text_dark_normal_background.9.png.flat",
         "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/play-services-base-12.0.1.aar/57d7f6855b26a14510f48549d3968840/res/drawable-xhdpi-v4/common_google_signin_btn_text_dark_normal_background.9.png"
+    },
+    {
+        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_quantum_ic_play_circle_filled_white_36.png.flat",
+        "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/play-services-cast-framework-12.0.1.aar/8750718b48cced1522846415165619aa/res/drawable-xxhdpi-v4/quantum_ic_play_circle_filled_white_36.png"
     },
     {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_helpline_white.png.flat",
@@ -1112,24 +1116,24 @@
         "source": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/res/drawable-hdpi/car_wash.png"
     },
     {
-        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi_fobbu_splash.png.flat",
-        "source": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/res/drawable-xxxhdpi/fobbu_splash.png"
-    },
-    {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable_mr_dialog_material_background_light.xml.flat",
         "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/mediarouter-v7-26.1.0.aar/82a35fc31339186c48f70adf6693290f/res/drawable/mr_dialog_material_background_light.xml"
+    },
+    {
+        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi_fobbu_splash.png.flat",
+        "source": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/res/drawable-xxxhdpi/fobbu_splash.png"
     },
     {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_abc_textfield_activated_mtrl_alpha.9.png.flat",
         "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/8b2647e4d6f90733320c66bc0dae852b/res/drawable-xxhdpi-v4/abc_textfield_activated_mtrl_alpha.9.png"
     },
     {
-        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_checkbox_uncheck.png.flat",
-        "source": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/res/drawable-xxhdpi/checkbox_uncheck.png"
-    },
-    {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi_fuel_delivery_selected.png.flat",
         "source": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/res/drawable-xxxhdpi/fuel_delivery_selected.png"
+    },
+    {
+        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_checkbox_uncheck.png.flat",
+        "source": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/res/drawable-xxhdpi/checkbox_uncheck.png"
     },
     {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_ic_mr_button_connected_13_dark.png.flat",
@@ -1156,12 +1160,12 @@
         "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/mediarouter-v7-26.1.0.aar/82a35fc31339186c48f70adf6693290f/res/drawable-xxhdpi-v4/ic_mr_button_connecting_20_light.png"
     },
     {
-        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/layout_abc_cascading_menu_item_layout.xml.flat",
-        "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/8b2647e4d6f90733320c66bc0dae852b/res/layout/abc_cascading_menu_item_layout.xml"
-    },
-    {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi_tips_car.png.flat",
         "source": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/res/drawable-xxxhdpi/tips_car.png"
+    },
+    {
+        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/layout_abc_cascading_menu_item_layout.xml.flat",
+        "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/8b2647e4d6f90733320c66bc0dae852b/res/layout/abc_cascading_menu_item_layout.xml"
     },
     {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_ic_mr_button_connected_23_dark.png.flat",
@@ -1172,12 +1176,12 @@
         "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/play-services-cast-framework-12.0.1.aar/8750718b48cced1522846415165619aa/res/drawable-xxhdpi-v4/quantum_ic_skip_previous_grey600_36.png"
     },
     {
-        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi_dontno_selected.png.flat",
-        "source": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/res/drawable-xxxhdpi/dontno_selected.png"
-    },
-    {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_ic_mr_button_connecting_30_dark.png.flat",
         "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/mediarouter-v7-26.1.0.aar/82a35fc31339186c48f70adf6693290f/res/drawable-xxhdpi-v4/ic_mr_button_connecting_30_dark.png"
+    },
+    {
+        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi_dontno_selected.png.flat",
+        "source": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/res/drawable-xxxhdpi/dontno_selected.png"
     },
     {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_quantum_ic_replay_10_white_24.png.flat",
@@ -1196,12 +1200,12 @@
         "source": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/res/drawable-xxhdpi/secondgif.gif"
     },
     {
-        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_ic_mr_button_connecting_02_light.png.flat",
-        "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/mediarouter-v7-26.1.0.aar/82a35fc31339186c48f70adf6693290f/res/drawable-xxhdpi-v4/ic_mr_button_connecting_02_light.png"
-    },
-    {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/layout_abc_screen_toolbar.xml.flat",
         "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/8b2647e4d6f90733320c66bc0dae852b/res/layout/abc_screen_toolbar.xml"
+    },
+    {
+        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_ic_mr_button_connecting_02_light.png.flat",
+        "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/mediarouter-v7-26.1.0.aar/82a35fc31339186c48f70adf6693290f/res/drawable-xxhdpi-v4/ic_mr_button_connecting_02_light.png"
     },
     {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_ic_group_expand_15.png.flat",
@@ -1232,12 +1236,12 @@
         "source": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/res/drawable-xxxhdpi/arrow_drawer.png"
     },
     {
-        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_quantum_ic_stop_grey600_36.png.flat",
-        "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/play-services-cast-framework-12.0.1.aar/8750718b48cced1522846415165619aa/res/drawable-xxxhdpi-v4/quantum_ic_stop_grey600_36.png"
-    },
-    {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/interpolator_mtrl_linear_out_slow_in.xml.flat",
         "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/design-28.0.0.aar/15f5a17aa151a673c001a76a04cadfd4/res/interpolator/mtrl_linear_out_slow_in.xml"
+    },
+    {
+        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_quantum_ic_stop_grey600_36.png.flat",
+        "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/play-services-cast-framework-12.0.1.aar/8750718b48cced1522846415165619aa/res/drawable-xxxhdpi-v4/quantum_ic_stop_grey600_36.png"
     },
     {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/color_mtrl_tabs_colored_ripple_color.xml.flat",
@@ -1268,12 +1272,12 @@
         "source": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/res/drawable-xhdpi/wokr_already.png"
     },
     {
-        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_ic_mr_button_connecting_03_dark.png.flat",
-        "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/mediarouter-v7-26.1.0.aar/82a35fc31339186c48f70adf6693290f/res/drawable-xhdpi-v4/ic_mr_button_connecting_03_dark.png"
-    },
-    {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_ic_group_collapse_10.png.flat",
         "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/mediarouter-v7-26.1.0.aar/82a35fc31339186c48f70adf6693290f/res/drawable-xxxhdpi-v4/ic_group_collapse_10.png"
+    },
+    {
+        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_ic_mr_button_connecting_03_dark.png.flat",
+        "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/mediarouter-v7-26.1.0.aar/82a35fc31339186c48f70adf6693290f/res/drawable-xhdpi-v4/ic_mr_button_connecting_03_dark.png"
     },
     {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/layout_abc_screen_simple_overlay_action_mode.xml.flat",
@@ -1400,12 +1404,12 @@
         "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/mediarouter-v7-26.1.0.aar/82a35fc31339186c48f70adf6693290f/res/drawable-xxhdpi-v4/ic_dialog_close_light.png"
     },
     {
-        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/color_mtrl_chip_close_icon_tint.xml.flat",
-        "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/design-28.0.0.aar/15f5a17aa151a673c001a76a04cadfd4/res/color/mtrl_chip_close_icon_tint.xml"
-    },
-    {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_notification_bg_normal.9.png.flat",
         "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/039c28797e5175886ed63fb98e346303/res/drawable-xhdpi-v4/notification_bg_normal.9.png"
+    },
+    {
+        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/color_mtrl_chip_close_icon_tint.xml.flat",
+        "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/design-28.0.0.aar/15f5a17aa151a673c001a76a04cadfd4/res/color/mtrl_chip_close_icon_tint.xml"
     },
     {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_ic_vol_type_speaker_light.png.flat",
@@ -1508,12 +1512,12 @@
         "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/play-services-plus-12.0.1.aar/21b9f71abc691ac7120826629213a102/res/drawable-tvdpi-v4/ic_plusone_medium_off_client.png"
     },
     {
-        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_ic_mr_button_connected_18_dark.png.flat",
-        "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/mediarouter-v7-26.1.0.aar/82a35fc31339186c48f70adf6693290f/res/drawable-xxhdpi-v4/ic_mr_button_connected_18_dark.png"
-    },
-    {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi_my_order_drawer.png.flat",
         "source": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/res/drawable-xxxhdpi/my_order_drawer.png"
+    },
+    {
+        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_ic_mr_button_connected_18_dark.png.flat",
+        "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/mediarouter-v7-26.1.0.aar/82a35fc31339186c48f70adf6693290f/res/drawable-xxhdpi-v4/ic_mr_button_connected_18_dark.png"
     },
     {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/layout_activity_splash.xml.flat",
@@ -1608,16 +1612,16 @@
         "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/mediarouter-v7-26.1.0.aar/82a35fc31339186c48f70adf6693290f/res/drawable-xxhdpi-v4/ic_mr_button_disabled_dark.png"
     },
     {
-        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_quantum_ic_replay_30_white_36.png.flat",
-        "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/play-services-cast-framework-12.0.1.aar/8750718b48cced1522846415165619aa/res/drawable-xxhdpi-v4/quantum_ic_replay_30_white_36.png"
+        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xhdpi_flatbed_selected.png.flat",
+        "source": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/res/drawable-xhdpi/flatbed_selected.png"
     },
     {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_password.png.flat",
         "source": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/res/drawable-xxhdpi/password.png"
     },
     {
-        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xhdpi_flatbed_selected.png.flat",
-        "source": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/res/drawable-xhdpi/flatbed_selected.png"
+        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_quantum_ic_replay_30_white_36.png.flat",
+        "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/play-services-cast-framework-12.0.1.aar/8750718b48cced1522846415165619aa/res/drawable-xxhdpi-v4/quantum_ic_replay_30_white_36.png"
     },
     {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_ic_mr_button_connected_19_light.png.flat",
@@ -1628,16 +1632,16 @@
         "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/mediarouter-v7-26.1.0.aar/82a35fc31339186c48f70adf6693290f/res/drawable-xxhdpi-v4/ic_mr_button_connected_28_light.png"
     },
     {
-        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_ic_mr_button_connected_22_light.png.flat",
-        "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/mediarouter-v7-26.1.0.aar/82a35fc31339186c48f70adf6693290f/res/drawable-xxhdpi-v4/ic_mr_button_connected_22_light.png"
+        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_quantum_ic_closed_caption_white_36.png.flat",
+        "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/play-services-cast-framework-12.0.1.aar/8750718b48cced1522846415165619aa/res/drawable-xxxhdpi-v4/quantum_ic_closed_caption_white_36.png"
     },
     {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/layout_activity_cancel_rsa.xml.flat",
         "source": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/res/layout/activity_cancel_rsa.xml"
     },
     {
-        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_quantum_ic_closed_caption_white_36.png.flat",
-        "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/play-services-cast-framework-12.0.1.aar/8750718b48cced1522846415165619aa/res/drawable-xxxhdpi-v4/quantum_ic_closed_caption_white_36.png"
+        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_ic_mr_button_connected_22_light.png.flat",
+        "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/mediarouter-v7-26.1.0.aar/82a35fc31339186c48f70adf6693290f/res/drawable-xxhdpi-v4/ic_mr_button_connected_22_light.png"
     },
     {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_ic_mr_button_connected_04_dark.png.flat",
@@ -1664,12 +1668,12 @@
         "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/mediarouter-v7-26.1.0.aar/82a35fc31339186c48f70adf6693290f/res/drawable-mdpi-v4/ic_vol_type_speaker_group_dark.png"
     },
     {
-        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-hdpi_cross_white.png.flat",
-        "source": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/res/drawable-hdpi/cross_white.png"
-    },
-    {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_no_money.png.flat",
         "source": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/res/drawable-xxhdpi/no_money.png"
+    },
+    {
+        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-hdpi_cross_white.png.flat",
+        "source": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/res/drawable-hdpi/cross_white.png"
     },
     {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_cast_abc_scrubber_control_to_pressed_mtrl_000.png.flat",
@@ -1728,12 +1732,12 @@
         "source": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/res/drawable-xxxhdpi/splash_car.png"
     },
     {
-        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_my_passbook_drawer.png.flat",
-        "source": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/res/drawable-xxhdpi/my_passbook_drawer.png"
-    },
-    {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_abc_scrubber_control_to_pressed_mtrl_005.png.flat",
         "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/8b2647e4d6f90733320c66bc0dae852b/res/drawable-mdpi-v4/abc_scrubber_control_to_pressed_mtrl_005.png"
+    },
+    {
+        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_my_passbook_drawer.png.flat",
+        "source": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/res/drawable-xxhdpi/my_passbook_drawer.png"
     },
     {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_abc_btn_switch_to_on_mtrl_00012.9.png.flat",
@@ -1784,12 +1788,12 @@
         "source": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/res/drawable-xxhdpi/burst_tyre_selected.png"
     },
     {
-        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_quantum_ic_replay_30_white_24.png.flat",
-        "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/play-services-cast-framework-12.0.1.aar/8750718b48cced1522846415165619aa/res/drawable-xxxhdpi-v4/quantum_ic_replay_30_white_24.png"
-    },
-    {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_abc_ic_menu_paste_mtrl_am_alpha.png.flat",
         "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/8b2647e4d6f90733320c66bc0dae852b/res/drawable-xxxhdpi-v4/abc_ic_menu_paste_mtrl_am_alpha.png"
+    },
+    {
+        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_quantum_ic_replay_30_white_24.png.flat",
+        "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/play-services-cast-framework-12.0.1.aar/8750718b48cced1522846415165619aa/res/drawable-xxxhdpi-v4/quantum_ic_replay_30_white_24.png"
     },
     {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_quantum_ic_cast_white_36.png.flat",
@@ -2028,28 +2032,28 @@
         "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/mediarouter-v7-26.1.0.aar/82a35fc31339186c48f70adf6693290f/res/drawable-mdpi-v4/ic_media_stop_dark.png"
     },
     {
-        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_cast_ic_stop_circle_filled_grey600.png.flat",
-        "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/play-services-cast-framework-12.0.1.aar/8750718b48cced1522846415165619aa/res/drawable-xhdpi-v4/cast_ic_stop_circle_filled_grey600.png"
-    },
-    {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_notify_panel_notification_icon_bg.png.flat",
         "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/039c28797e5175886ed63fb98e346303/res/drawable-mdpi-v4/notify_panel_notification_icon_bg.png"
     },
     {
-        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_ic_mr_button_connecting_13_dark.png.flat",
-        "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/mediarouter-v7-26.1.0.aar/82a35fc31339186c48f70adf6693290f/res/drawable-xxhdpi-v4/ic_mr_button_connecting_13_dark.png"
+        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_cast_ic_stop_circle_filled_grey600.png.flat",
+        "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/play-services-cast-framework-12.0.1.aar/8750718b48cced1522846415165619aa/res/drawable-xhdpi-v4/cast_ic_stop_circle_filled_grey600.png"
     },
     {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/layout_abc_action_menu_item_layout.xml.flat",
         "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/8b2647e4d6f90733320c66bc0dae852b/res/layout/abc_action_menu_item_layout.xml"
     },
     {
-        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xhdpi_star_unfilled.png.flat",
-        "source": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/res/drawable-xhdpi/star_unfilled.png"
+        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_ic_mr_button_connecting_13_dark.png.flat",
+        "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/mediarouter-v7-26.1.0.aar/82a35fc31339186c48f70adf6693290f/res/drawable-xxhdpi-v4/ic_mr_button_connecting_13_dark.png"
     },
     {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_ic_mr_button_connected_28_light.png.flat",
         "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/mediarouter-v7-26.1.0.aar/82a35fc31339186c48f70adf6693290f/res/drawable-xhdpi-v4/ic_mr_button_connected_28_light.png"
+    },
+    {
+        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xhdpi_star_unfilled.png.flat",
+        "source": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/res/drawable-xhdpi/star_unfilled.png"
     },
     {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_quantum_ic_pause_grey600_36.png.flat",
@@ -2092,16 +2096,16 @@
         "source": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/res/drawable-xxhdpi/intro_background.png"
     },
     {
-        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi_cancel_red.png.flat",
-        "source": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/res/drawable-xxxhdpi/cancel_red.png"
+        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_quantum_ic_play_circle_filled_grey600_36.png.flat",
+        "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/play-services-cast-framework-12.0.1.aar/8750718b48cced1522846415165619aa/res/drawable-hdpi-v4/quantum_ic_play_circle_filled_grey600_36.png"
     },
     {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_abc_scrubber_control_to_pressed_mtrl_000.png.flat",
         "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/8b2647e4d6f90733320c66bc0dae852b/res/drawable-mdpi-v4/abc_scrubber_control_to_pressed_mtrl_000.png"
     },
     {
-        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_quantum_ic_play_circle_filled_grey600_36.png.flat",
-        "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/play-services-cast-framework-12.0.1.aar/8750718b48cced1522846415165619aa/res/drawable-hdpi-v4/quantum_ic_play_circle_filled_grey600_36.png"
+        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi_cancel_red.png.flat",
+        "source": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/res/drawable-xxxhdpi/cancel_red.png"
     },
     {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_abc_scrubber_primary_mtrl_alpha.9.png.flat",
@@ -2136,24 +2140,24 @@
         "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/mediarouter-v7-26.1.0.aar/82a35fc31339186c48f70adf6693290f/res/drawable-xhdpi-v4/ic_mr_button_connected_26_dark.png"
     },
     {
-        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_quantum_ic_stop_grey600_48.png.flat",
-        "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/play-services-cast-framework-12.0.1.aar/8750718b48cced1522846415165619aa/res/drawable-xxxhdpi-v4/quantum_ic_stop_grey600_48.png"
+        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable_abc_ratingbar_small_material.xml.flat",
+        "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/8b2647e4d6f90733320c66bc0dae852b/res/drawable/abc_ratingbar_small_material.xml"
     },
     {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/layout_activity_sms_verification.xml.flat",
         "source": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/res/layout/activity_sms_verification.xml"
     },
     {
-        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable_abc_ratingbar_small_material.xml.flat",
-        "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/8b2647e4d6f90733320c66bc0dae852b/res/drawable/abc_ratingbar_small_material.xml"
-    },
-    {
-        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xhdpi_meters_click_tabbar.png.flat",
-        "source": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/res/drawable-xhdpi/meters_click_tabbar.png"
+        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_quantum_ic_stop_grey600_48.png.flat",
+        "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/play-services-cast-framework-12.0.1.aar/8750718b48cced1522846415165619aa/res/drawable-xxxhdpi-v4/quantum_ic_stop_grey600_48.png"
     },
     {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_ic_mr_button_connecting_12_light.png.flat",
         "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/mediarouter-v7-26.1.0.aar/82a35fc31339186c48f70adf6693290f/res/drawable-xhdpi-v4/ic_mr_button_connecting_12_light.png"
+    },
+    {
+        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xhdpi_meters_click_tabbar.png.flat",
+        "source": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/res/drawable-xhdpi/meters_click_tabbar.png"
     },
     {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_ic_mr_button_connecting_00_light.png.flat",
@@ -2232,12 +2236,12 @@
         "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/play-services-cast-12.0.1.aar/b3173311d8b72e77bbfd6634094daf8e/res/drawable-xxhdpi-v4/cast_ic_notification_on.png"
     },
     {
-        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/interpolator-v21_mtrl_linear_out_slow_in.xml.flat",
-        "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/design-28.0.0.aar/15f5a17aa151a673c001a76a04cadfd4/res/interpolator-v21/mtrl_linear_out_slow_in.xml"
-    },
-    {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_quantum_ic_volume_off_grey600_36.png.flat",
         "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/play-services-cast-framework-12.0.1.aar/8750718b48cced1522846415165619aa/res/drawable-hdpi-v4/quantum_ic_volume_off_grey600_36.png"
+    },
+    {
+        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/interpolator-v21_mtrl_linear_out_slow_in.xml.flat",
+        "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/design-28.0.0.aar/15f5a17aa151a673c001a76a04cadfd4/res/interpolator-v21/mtrl_linear_out_slow_in.xml"
     },
     {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi_fobbu_text_white.png.flat",
@@ -2276,12 +2280,12 @@
         "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/mediarouter-v7-26.1.0.aar/82a35fc31339186c48f70adf6693290f/res/drawable-xhdpi-v4/ic_mr_button_connected_25_light.png"
     },
     {
-        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_design_ic_visibility.png.flat",
-        "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/design-28.0.0.aar/15f5a17aa151a673c001a76a04cadfd4/res/drawable-hdpi-v4/design_ic_visibility.png"
-    },
-    {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_battery_jump_start_blue.png.flat",
         "source": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/res/drawable-xxhdpi/battery_jump_start_blue.png"
+    },
+    {
+        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_design_ic_visibility.png.flat",
+        "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/design-28.0.0.aar/15f5a17aa151a673c001a76a04cadfd4/res/drawable-hdpi-v4/design_ic_visibility.png"
     },
     {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_quantum_ic_forward_30_grey600_36.png.flat",
@@ -2364,12 +2368,12 @@
         "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/8b2647e4d6f90733320c66bc0dae852b/res/drawable/abc_switch_thumb_material.xml"
     },
     {
-        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xhdpi_mechanic_with_cap_blue.png.flat",
-        "source": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/res/drawable-xhdpi/mechanic_with_cap_blue.png"
-    },
-    {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi_filled_radio.png.flat",
         "source": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/res/drawable-xxxhdpi/filled_radio.png"
+    },
+    {
+        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xhdpi_mechanic_with_cap_blue.png.flat",
+        "source": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/res/drawable-xhdpi/mechanic_with_cap_blue.png"
     },
     {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_ic_mr_button_connected_24_dark.png.flat",
@@ -2392,12 +2396,12 @@
         "source": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/res/drawable-xhdpi/flat_tyre.png"
     },
     {
-        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_googleg_standard_color_18.png.flat",
-        "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/play-services-base-12.0.1.aar/57d7f6855b26a14510f48549d3968840/res/drawable-hdpi-v4/googleg_standard_color_18.png"
-    },
-    {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_ic_mr_button_connected_19_dark.png.flat",
         "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/mediarouter-v7-26.1.0.aar/82a35fc31339186c48f70adf6693290f/res/drawable-xhdpi-v4/ic_mr_button_connected_19_dark.png"
+    },
+    {
+        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_googleg_standard_color_18.png.flat",
+        "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/play-services-base-12.0.1.aar/57d7f6855b26a14510f48549d3968840/res/drawable-hdpi-v4/googleg_standard_color_18.png"
     },
     {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable_cast_ic_mini_controller_stop.xml.flat",
@@ -3240,6 +3244,10 @@
         "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/8b2647e4d6f90733320c66bc0dae852b/res/layout/abc_popup_menu_item_layout.xml"
     },
     {
+        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/layout_inflate_message_pop_up.xml.flat",
+        "source": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/res/layout/inflate_message_pop_up.xml"
+    },
+    {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi_checkbox_uncheck.png.flat",
         "source": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/res/drawable-xxxhdpi/checkbox_uncheck.png"
     },
@@ -3470,6 +3478,10 @@
     {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xhdpi_fobbu_splash.png.flat",
         "source": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/res/drawable-xhdpi/fobbu_splash.png"
+    },
+    {
+        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable_rating_bar_empty.xml.flat",
+        "source": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/res/drawable/rating_bar_empty.xml"
     },
     {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/animator_mtrl_fab_hide_motion_spec.xml.flat",
@@ -4364,6 +4376,10 @@
         "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/mediarouter-v7-26.1.0.aar/82a35fc31339186c48f70adf6693290f/res/drawable-xxhdpi-v4/ic_mr_button_connecting_28_light.png"
     },
     {
+        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable_rating_bar_filled.xml.flat",
+        "source": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/res/drawable/rating_bar_filled.xml"
+    },
+    {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_abc_scrubber_primary_mtrl_alpha.9.png.flat",
         "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/8b2647e4d6f90733320c66bc0dae852b/res/drawable-mdpi-v4/abc_scrubber_primary_mtrl_alpha.9.png"
     },
@@ -4450,6 +4466,10 @@
     {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-hdpi_checkbox_checked.png.flat",
         "source": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/res/drawable-hdpi/checkbox_checked.png"
+    },
+    {
+        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable_rating_star_draw.xml.flat",
+        "source": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/res/drawable/rating_star_draw.xml"
     },
     {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/layout_design_navigation_item_header.xml.flat",
@@ -5146,6 +5166,10 @@
     {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_cancel.png.flat",
         "source": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/res/drawable-xxhdpi/cancel.png"
+    },
+    {
+        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/layout_activity_get_set_go.xml.flat",
+        "source": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/res/layout/activity_get_set_go.xml"
     },
     {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-hdpi_tools.png.flat",
@@ -6090,6 +6114,10 @@
     {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-hdpi_earn_freebies.png.flat",
         "source": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/res/drawable-hdpi/earn_freebies.png"
+    },
+    {
+        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable_circular_red.xml.flat",
+        "source": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/res/drawable/circular_red.xml"
     },
     {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_ic_mr_button_connecting_24_light.png.flat",
@@ -7038,6 +7066,10 @@
     {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/layout-v16_notification_template_custom_big.xml.flat",
         "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/039c28797e5175886ed63fb98e346303/res/layout-v16/notification_template_custom_big.xml"
+    },
+    {
+        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable_circular_draw.xml.flat",
+        "source": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/res/drawable/circular_draw.xml"
     },
     {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_abc_text_select_handle_right_mtrl_light.png.flat",

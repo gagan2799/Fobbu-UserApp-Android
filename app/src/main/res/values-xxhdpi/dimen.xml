@@ -8,7 +8,8 @@
     <dimen name="textsize_extra_small">9sp</dimen>
     <dimen name="textsize_large">24sp</dimen>
     <dimen name="textsize_extra_large">28sp</dimen>
-
+    <dimen name="rating_min_height">36dp</dimen>
+    <dimen name="rating_min_width">36dp</dimen>
 
     //Profile Pic drawer size
     <dimen name="profile_drawer_image">290px</dimen>
@@ -17,7 +18,7 @@
     <dimen name="header_height">186dp</dimen>
     <dimen name="red_rounded_rectangle_padding">15dp</dimen>
     <dimen name="map_height">240dp</dimen>
-
+    <dimen name="margin_top_work_summary">6dp</dimen>
 
 
 </resources>

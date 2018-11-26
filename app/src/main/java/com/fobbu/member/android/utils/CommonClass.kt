@@ -2,6 +2,7 @@ package com.fobbu.member.android.utils
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.Dialog
 import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
@@ -10,12 +11,17 @@ import android.graphics.Color
 import android.net.ConnectivityManager
 import android.os.Build
 import android.support.v4.app.ActivityCompat
+import android.support.v4.content.ContextCompat.startActivity
+import android.view.Gravity
+import android.view.WindowManager
 import android.widget.RelativeLayout
 import android.widget.Toast
 import com.fobbu.member.android.R
 import com.fobbu.member.android.activities.loginSignupModule.LoginActivity
+import com.fobbu.member.android.activities.rsaModule.RSARequestCancelActivity
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import kotlinx.android.synthetic.main.option_menu_layout.*
 import org.json.JSONObject
 import java.text.ParseException
 import java.text.SimpleDateFormat
@@ -277,5 +283,7 @@ class CommonClass(activity1: Activity, context1: Context)
 
         return null
     }
+
+
 
 }

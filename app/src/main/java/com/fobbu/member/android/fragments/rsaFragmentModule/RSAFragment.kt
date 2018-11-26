@@ -593,9 +593,6 @@ class RSAFragment : Fragment(),  GoogleApiClient.OnConnectionFailedListener,
         headerIconChanges = activity as HeaderIconChanges?
         headerIconChanges!!.changeHeaderIcons(true, false, false)
 
-        topBarChanges = activity as TopBarChanges
-        topBarChanges!!.showGoneTopBar(true)
-
         rlLoader = view!!.findViewById(R.id.rlLoader)
         rlTopDrawer = view.findViewById(R.id.rlTopDrawer)
 
@@ -897,6 +894,7 @@ class RSAFragment : Fragment(),  GoogleApiClient.OnConnectionFailedListener,
                 fleetRequestApi(mainPojo.getData()._id)
 
                 CommonClass(activity!!, activity!!).putString("fobbu_request_id", mainPojo.getData()._id)
+                CommonClass(activity!!, activity!!).putString("service_name_selected",serviceSelected)
 
                 activity!!.startActivity(Intent(activity!!, WaitingScreenBlue::class.java))
 
@@ -942,6 +940,8 @@ class RSAFragment : Fragment(),  GoogleApiClient.OnConnectionFailedListener,
 
 
 
+
+
     //  initializing map in this method
     private fun mapInitialise(view: View?, savedInstanceState: Bundle?) {
         mMapView = view!!.findViewById(R.id.mapView) as MapView
@@ -957,6 +957,7 @@ class RSAFragment : Fragment(),  GoogleApiClient.OnConnectionFailedListener,
 
         checkWhenMapIsReady()
     }
+
 
     override fun onConnected(p0: Bundle?) {
         checkGPSEnable()
@@ -1102,6 +1103,8 @@ class RSAFragment : Fragment(),  GoogleApiClient.OnConnectionFailedListener,
     override fun onResume() {
         super.onResume()
         mMapView.onResume()
+        topBarChanges = activity as TopBarChanges
+        topBarChanges!!.showGoneTopBar(true)
     }
 
     override fun onPause() {
@@ -1618,6 +1621,7 @@ class RSAFragment : Fragment(),  GoogleApiClient.OnConnectionFailedListener,
     override fun hideLoader() {
         rlLoader.visibility = View.GONE
     }
+
 
 
 

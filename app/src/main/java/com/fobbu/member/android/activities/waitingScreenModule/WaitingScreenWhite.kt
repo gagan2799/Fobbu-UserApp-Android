@@ -1,9 +1,11 @@
 package com.fobbu.member.android.activities.waitingScreenModule
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.fobbu.member.android.R
+import com.fobbu.member.android.activities.paymentModule.WorkSummaryActivity
 import com.fobbu.member.android.interfaces.ChangeRSAFragments
 import com.fobbu.member.android.utils.CommonClass
 import kotlinx.android.synthetic.main.activity_waiting_screen_white.*
@@ -56,7 +58,8 @@ class WaitingScreenWhite : AppCompatActivity() {
         }
 
         rlBuildingWorkSummary.setOnClickListener {
-
+            startActivity(Intent(this,WorkSummaryActivity::class.java)
+                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK))
         }
     }
 

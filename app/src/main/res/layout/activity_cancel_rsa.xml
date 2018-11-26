@@ -38,6 +38,7 @@
             android:layout_centerInParent="true"
             android:layout_height="wrap_content"
             android:id="@+id/tvHeading"
+            android:textColor="@color/color_grey"
             android:textSize="@dimen/textsize_normal"
             android:text="@string/cancel_request_screen"/>
 

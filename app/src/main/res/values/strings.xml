@@ -258,6 +258,33 @@
     <string name="order_id">Order ID:</string>
     <string name="confirm_pay"><![CDATA[Confirm & Pay]]></string>-->
     <string name="_0002534">#0002534</string>
+    <string name="bank_accounts">Bank Accounts</string>
+    <string name="saved_cards">Saved Cards</string>
+    <string name="upi_payments">Upi Payments</string>
+    <string name="wallets">Wallets</string>
+    <string name="ongoing_rsa_request">Ongoing RSA Request</string>
+    <string name="sit_back_relax_n_while_fobbu_fills_fuel">
+        <![CDATA[Sit back & Relax,   While Fobbu fills fuel]]></string>
+    <string name="sit_back_relax"><![CDATA[Sit back & Relax]]></string>
+    <string name="write_a_review">Write a review</string>
+    <string name="submit">Submit</string>
+    <string name="not_now">Not Now</string>
+    <string name="otp_validate_and_upload_dl">Otp,validate and upload DL</string>
+    <string name="fobbu_is_setting_up_your_vehicle">Fobbu is setting up your vehicle</string>
+    <string name="work_done_vroom_the_roads">Work done, Vroom the roads</string>
+    <string name="call_helpline">Call Helpline</string>
+    <string name="flat_tyres">Flat Tyres</string>
+    <string name="quantity_of_fuel_d">Quantity of Fuel (D)</string>
+    <string name="_4">4</string>
+    <string name="amount">Amount</string>
+    <string name="fobbu_will_set_your_vehicle">Fobbu will set your vehicle.</string>
+    <string name="otp_and_payment_recevied">Otp and payment received</string>
+    <string name="while_fobbu_fills_fuel">While Fobbu fills fuel.</string>
+    <string name="share_your_experience">Share Your Experience</string>
+    <string name="wonderful_review">Wonderful</string>
+    <string name="your_review_was_saved_share_it_with_your_friens">Your review was saved. Share it with your friens!
+    </string>
+    <string name="message">Message</string>
 
 
 </resources>

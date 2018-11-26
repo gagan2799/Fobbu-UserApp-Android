@@ -30,4 +30,23 @@
         <item name="android:windowAnimationStyle">@android:style/Animation</item>
     </style>
 
+    <style name="RatingBarSmall" parent="android:Widget.RatingBar">
+        <item name="android:progressDrawable">@drawable/rating_star_draw</item>
+        <item name="android:minHeight">16dp</item>
+        <item name="android:maxHeight">35dp</item>
+    </style>
+
+    <style name="TextLabel" parent="TextAppearance.Design.Hint">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+
+    <style name="color_grey" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/color_grey</item>
+    </style>
+
+
+    <style name="color_red" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/red</item>
+    </style>
 </resources>

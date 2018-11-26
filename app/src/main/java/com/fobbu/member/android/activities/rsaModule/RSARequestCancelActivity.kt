@@ -4,8 +4,11 @@ import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.support.annotation.RequiresApi
 import android.support.v7.widget.GridLayoutManager
 import android.util.Log
 import android.view.LayoutInflater
@@ -35,11 +38,21 @@ class RSARequestCancelActivity : AppCompatActivity(), ActivityView {
     lateinit var rsaHandler: RsaCancelRequestHandler
     lateinit var rsaRecyclerAdapter: RsaRecyclerAdapter
     var row_index: Int = 0
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.activity_cancel_rsa)
+        //window.decorView.systemUiVisibility=View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+        window.navigationBarColor=resources.getColor(R.color.white)
+        Handler().postDelayed(object :Runnable
+        {
+            override fun run() {
+                window.navigationBarColor=resources.getColor(R.color.black)
+            }
+
+        },1000)
+
 
         rsaHandler = RsaCancelRequestPresenter(this, this)
         rsaHandler.cancelReasons(CommonClass(this, this).getString("x_access_token"))
@@ -47,10 +60,12 @@ class RSARequestCancelActivity : AppCompatActivity(), ActivityView {
 
     }
 
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     private fun clicks() {
 
         ivBack.setOnClickListener {
             finish()
+            window.navigationBarColor=resources.getColor(R.color.white)
             overridePendingTransition(R.anim.fade, R.anim.slide_up)
         }
 
@@ -167,9 +182,11 @@ class RSARequestCancelActivity : AppCompatActivity(), ActivityView {
         builderFinal.show()
     }
 
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onBackPressed() {
         super.onBackPressed()
         finish()
+        window.navigationBarColor=resources.getColor(R.color.white)
         overridePendingTransition(R.anim.fade, R.anim.slide_up)
     }
 

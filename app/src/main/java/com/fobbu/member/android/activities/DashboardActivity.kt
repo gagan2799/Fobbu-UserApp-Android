@@ -33,6 +33,7 @@ import kotlinx.android.synthetic.main.option_menu_layout.*
 class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragments,TopBarChanges {
 
 
+    private var topBarChanges: TopBarChanges? = null
     var fragmentTypeForRSA = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -251,4 +252,16 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
     private fun getEnv(): MyApplication {
         return application as MyApplication
     }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        var f:Fragment= supportFragmentManager.findFragmentById(R.id.content_frame)!!
+        if(f is HomeFragment)
+        {
+            rlTopDrawer.visibility=View.VISIBLE
+            changeTabs(resources.getString(R.string.home))
+        }
+
+    }
+
 }

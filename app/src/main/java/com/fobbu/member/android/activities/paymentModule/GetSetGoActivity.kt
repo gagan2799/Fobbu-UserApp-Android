@@ -1,0 +1,187 @@
+package com.fobbu.member.android.activities.paymentModule
+
+import android.app.AlertDialog
+import android.app.Dialog
+import android.content.Intent
+import android.os.Build
+import android.support.v7.app.AppCompatActivity
+import android.os.Bundle
+import android.os.Handler
+import android.support.annotation.RequiresApi
+import android.view.Gravity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.WindowManager
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
+import android.widget.Toast
+import com.fobbu.member.android.R
+import com.fobbu.member.android.activities.rsaModule.RSARequestCancelActivity
+import com.fobbu.member.android.utils.CommonClass
+import kotlinx.android.synthetic.main.activity_get_set_go.*
+import kotlinx.android.synthetic.main.inflate_review_pop_up.view.*
+import kotlinx.android.synthetic.main.option_menu_layout.*
+
+class GetSetGoActivity : AppCompatActivity() {
+
+    @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_get_set_go)
+        clicks()
+        manageService(CommonClass(this,this).getString("service_name_selected"))
+    }
+
+    @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
+    private fun clicks() {
+
+        buttonSubmitGet.setOnClickListener {
+            openWonderfulPopUp()
+        }
+
+        linearLayoutGet.setOnClickListener {
+            viewGetAbove.setBackgroundColor(resources.getColor(R.color.red))
+            viewGetBelow.setBackgroundColor(resources.getColor(R.color.red))
+            linearLayoutGetMiddle.background=resources.getDrawable(R.drawable.circular_red)
+            textViewGet.setTextColor(resources.getColor(R.color.red))
+            textViewGetDetails.setTextColor(resources.getColor(R.color.red))
+            textViewNumberGet.visibility= View.GONE
+            imageViewWhiteCheckGet.visibility=View.VISIBLE
+        }
+
+        linearLayoutSet.setOnClickListener {
+            if (textViewNumberGet.visibility== View.GONE)
+            {
+                viewSetAbove.setBackgroundColor(resources.getColor(R.color.red))
+                viewSetBelow.setBackgroundColor(resources.getColor(R.color.red))
+                linearLayoutSetMiddle.background=resources.getDrawable(R.drawable.circular_red)
+                textViewSet.setTextColor(resources.getColor(R.color.red))
+                textViewSetDetails.setTextColor(resources.getColor(R.color.red))
+                textViewNumberSet.visibility= View.GONE
+                imageViewWhiteCheckSet.visibility=View.VISIBLE
+            }else{
+                Toast.makeText(this,"Validation process is not complete yet.", Toast.LENGTH_SHORT).show()
+            }
+
+        }
+
+        linearLayoutGo.setOnClickListener {
+            if(textViewNumberGet.visibility == View.VISIBLE)
+            {
+                Toast.makeText(this,"Validation process is not complete yet.", Toast.LENGTH_SHORT).show()
+            }else{
+                if (textViewNumberSet.visibility== View.GONE)
+                {
+                    viewGoAbove.setBackgroundColor(resources.getColor(R.color.red))
+                    viewGoBelow.setBackgroundColor(resources.getColor(R.color.red))
+                    linearLayoutGoMiddle.background=resources.getDrawable(R.drawable.circular_red)
+                    textViewGo.setTextColor(resources.getColor(R.color.red))
+                    textViewGoDetails.setTextColor(resources.getColor(R.color.red))
+                    textViewNumberGo.visibility= View.GONE
+                    imageViewWhiteCheckGo.visibility=View.VISIBLE
+                    Handler().postDelayed({
+                        linearLayoutServiceGetSet.visibility= View.GONE
+                        linearlayoutReviewGet.visibility=View.VISIBLE
+                        textViewHeadingGet.text = "Share Your Experience"
+                        textViewHeadingGet.setTextColor(resources.getColor(R.color.color_grey))
+                        val animation:Animation= AnimationUtils.loadAnimation(this,R.anim.fade)
+                        linearlayoutReviewGet.startAnimation(animation)
+                    },1000)
+                }
+                else{
+                    Toast.makeText(this,"Fobbu is setting up your vehicle.", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+        }
+
+
+        imageViewOptionMenuGetSetSummary.setOnClickListener {
+           // showOptionPopUp()
+            shareIt()
+        }
+
+    }
+
+    private fun shareIt() {
+        val intent:Intent= Intent(android.content.Intent.ACTION_SEND)
+        intent.type = "text/plain"
+        val shareBody:String="Here is the share content body"
+        intent.putExtra(android.content.Intent.EXTRA_SUBJECT,"Subject Here")
+        intent.putExtra(android.content.Intent.EXTRA_TEXT,shareBody)
+        startActivity(Intent.createChooser(intent,"Share via"))
+    }
+
+    private fun openWonderfulPopUp() {
+        val builder:AlertDialog.Builder= AlertDialog.Builder(this)
+        val view:View= LayoutInflater.from(this).inflate(R.layout.inflate_review_pop_up,null)
+        builder.setView(view)
+        val dialog:AlertDialog= builder.create()
+        view.imageViewrFacebookReview.setOnClickListener {
+            dialog.dismiss()
+        }
+        view.imageViewrTwitterReview.setOnClickListener {
+            dialog.dismiss()
+        }
+        dialog.show()
+    }
+
+
+    private fun showOptionPopUp() {
+        val dialog: Dialog = Dialog(this)
+        dialog.setContentView(R.layout.option_menu_layout)
+        var layoutParams= WindowManager.LayoutParams()
+        layoutParams=dialog.window.attributes
+        layoutParams.gravity= Gravity.TOP or Gravity.RIGHT
+        layoutParams.x=-100
+        layoutParams.y=-100
+        layoutParams.windowAnimations=R.style.DialogTheme
+
+        dialog.textViewCancelRSA.setOnClickListener {
+            dialog.dismiss()
+            startActivity(
+                Intent(this, RSARequestCancelActivity::class.java)
+                    .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK))
+            overridePendingTransition(R.anim.slide_down,R.anim.fade)
+
+        }
+        dialog.show()
+
+
+    }
+    private fun manageService(string: String) {
+        when(string)
+        {
+            "Flat Tyre" ->{
+                imageViewRequestType.setImageResource(R.drawable.mechanic_with_cap_blue)
+                textViewServiceDetailsGet.text=getString(R.string.fobbu_will_set_your_vehicle)
+                textViewGetDetails.text=resources.getString(R.string.work_order_payment)
+            }
+            "Jump Start"->{
+                imageViewRequestType.setImageResource(R.drawable.mechanic_with_cap_blue)
+                textViewServiceDetailsGet.text=getString(R.string.fobbu_will_set_your_vehicle)
+                textViewGetDetails.text=getString(R.string.otp_and_payment_recevied)
+            }
+            "Fuel Delivery"->{
+                imageViewRequestType.setImageResource(R.drawable.fuel_station)
+                textViewServiceDetailsGet.text=getString(R.string.while_fobbu_fills_fuel)
+                textViewGetDetails.text=getString(R.string.otp_validate_and_upload_dl)
+            }
+            "Burst Tyre"->{
+                imageViewRequestType.setImageResource(R.drawable.mechanic_with_cap_blue)
+                textViewServiceDetailsGet.text=getString(R.string.fobbu_will_set_your_vehicle)
+                textViewGetDetails.text=resources.getString(R.string.otp_and_payment_recevied)
+            }
+            "Towing"->{
+                linearLayoutServiceGetSet.visibility= View.GONE
+                linearlayoutReviewGet.visibility=View.VISIBLE
+                textViewHeadingGet.text = getString(R.string.share_your_experience)
+                textViewHeadingGet.setTextColor(resources.getColor(R.color.color_grey))
+                linearLayoutGo.visibility=View.GONE
+                linearLayoutGet.visibility=View.GONE
+                linearLayoutSet.visibility=View.GONE
+            }
+        }
+    }
+
+}
