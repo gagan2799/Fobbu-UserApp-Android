@@ -1,5 +1,6 @@
 package com.fobbu.member.android.fcm
 
+import android.app.ActivityManager
 import android.app.Notification
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -11,6 +12,7 @@ import android.support.v4.app.NotificationCompat
 import android.util.Log
 import com.fobbu.member.android.R
 import com.fobbu.member.android.activities.dashboardActivity.DashboardActivity
+import com.fobbu.member.android.activities.waitingScreenModule.WaitingScreenBlue
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 
@@ -37,41 +39,55 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
             try {
                // val json = JSONObject(remoteMessage.notification!!.title)
-                sendNotification(remoteMessage.data["type"].toString(),remoteMessage)
+
+                if(!isAppIsInBackground(this)){
+
+                    ifAppIsOpen(type)
+                }
+                else
+                {
+                    ifAppIsNotOpenSendNotification(remoteMessage.data["type"].toString(),remoteMessage)
+                }
+
+
             } catch (e: Exception) {
                 Log.e(TAG, "Exception: " + e.message)
             }
             //handleNotification(remoteMessage!!.notification!!.body)
         }
-
-        /*// Check if message contains a data payload.
-        if (remoteMessage.data.isNotEmpty()) {
-            Log.e(TAG, "Data Payload: " + remoteMessage.data.toString())
-
-            try {
-                val json = JSONObject(remoteMessage.data.toString())
-                //handleDataMessage(json)
-            } catch (e: Exception) {
-                Log.e(TAG, "Exception: " + e.message)
-            }
-
-        }*/
     }
 
-    private fun sendNotification(type: String, remoteMessage: RemoteMessage) {
+    private fun ifAppIsOpen(type: String) {
 
-        val intent: Intent? = Intent(this, DashboardActivity::class.java)
-        intent!!.putExtra("from_fcm_notification", type)
+        if(type ==FcmPushTypes.Types.accept)
+        {
+            startActivity(Intent(this, WaitingScreenBlue::class.java).putExtra("navigate_to", "1"))
+        }
+        else if(type ==FcmPushTypes.Types.inRouteRequest)
+        {
+            val intent =Intent()
+            intent.action = FcmPushTypes.Types.inRouteRequestBroadCast
+            intent.putExtra("navigate_to",FcmPushTypes.Types.inRouteRequest)
+            sendBroadcast(intent)
+        }
+
+    }
+
+    private fun ifAppIsNotOpenSendNotification(type: String, remoteMessage: RemoteMessage) {
+
+        val intent = Intent(this, DashboardActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
 
-        if(type =="accept_request")
+        if(type ==FcmPushTypes.Types.accept)
         {
-            startActivity(Intent(this, DashboardActivity::class.java))
+            intent.putExtra("from_push",type)
         }
-        else if(type =="in_route_request")
+        else if(type ==FcmPushTypes.Types.inRouteRequest)
         {
+            intent.putExtra("from_push",type)
+        }
 
-        }
+        startActivity(intent)
 
         val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
 
@@ -105,5 +121,34 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         val whiteIcon = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP
 
         return if (whiteIcon) R.mipmap.app_icon else R.mipmap.app_icon
+    }
+
+
+    /**
+     * Method checks if the app is in background or not
+     */
+    fun isAppIsInBackground(context: Context): Boolean {
+        var isInBackground = true
+        val am = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT_WATCH) {
+            val runningProcesses = am.runningAppProcesses
+            for (processInfo in runningProcesses) {
+                if (processInfo.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND) {
+                    for (activeProcess in processInfo.pkgList) {
+                        if (activeProcess == context.packageName) {
+                            isInBackground = false
+                        }
+                    }
+                }
+            }
+        } else {
+            val taskInfo = am.getRunningTasks(1)
+            val componentInfo = taskInfo[0].topActivity
+            if (componentInfo.packageName == context.packageName) {
+                isInBackground = false
+            }
+        }
+
+        return isInBackground
     }
 }

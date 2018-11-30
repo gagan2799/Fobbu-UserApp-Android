@@ -1,4 +1,4 @@
-#Mon Nov 26 15:16:42 IST 2018
-base.0=/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/transforms/dexMerger/debug/1
+#Thu Nov 29 09:57:15 IST 2018
+base.0=D\:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\1
 path.0=classes.dex
 renamed.0=classes.dex

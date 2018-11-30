@@ -2,6 +2,7 @@ package com.fobbu.member.android.activities.waitingScreenModule
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.fobbu.member.android.R
@@ -38,11 +39,7 @@ class WaitingScreenWhite : AppCompatActivity() {
 
         rlBuildingLiveTrack.setOnClickListener {
 
-            CommonClass(this, this).putString("OnGoingRSA_Screen", "YES")
-
-            CommonClass(this, this).putString("OnGoingRSA_Screen_Type", resources.getString(R.string.rsa_live))
-
-            finish()
+            goToRsaLiveScreen()
         }
 
         rlCodeValidated.setOnClickListener {
@@ -58,9 +55,20 @@ class WaitingScreenWhite : AppCompatActivity() {
         }
 
         rlBuildingWorkSummary.setOnClickListener {
-            startActivity(Intent(this,WorkSummaryActivity::class.java)
-                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK))
+            startActivity(
+                Intent(this, WorkSummaryActivity::class.java)
+                    .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+            )
         }
+    }
+
+    ///GOING TO RSA LIVE SCREEN
+    private fun goToRsaLiveScreen() {
+        CommonClass(this, this).putString("OnGoingRSA_Screen", "YES")
+
+        CommonClass(this, this).putString("OnGoingRSA_Screen_Type", resources.getString(R.string.rsa_live))
+
+        finish()
     }
 
     // method for switching layouts
@@ -74,6 +82,10 @@ class WaitingScreenWhite : AppCompatActivity() {
                 rlBuildingWorkSummary.visibility = View.GONE
                 rlNewVehicleAdded.visibility = View.GONE
                 rlVehicleAccessed.visibility = View.GONE
+
+                Handler().postDelayed({
+                    goToRsaLiveScreen()
+                }, 3000)
             }
             "code_valid" -> {
                 rlBuildingLiveTrack.visibility = View.GONE

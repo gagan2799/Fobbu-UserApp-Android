@@ -1,5 +1,6 @@
 package com.fobbu.member.android.activities.paymentModule
 
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
@@ -11,6 +12,7 @@ import com.fobbu.member.android.activities.rsaModule.RSARequestCancelActivity
 import kotlinx.android.synthetic.main.activity_work_summary.*
 import kotlinx.android.synthetic.main.option_menu_layout.*
 
+@Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class WorkSummaryActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,7 +20,6 @@ class WorkSummaryActivity : AppCompatActivity() {
         setContentView(R.layout.activity_work_summary)
 
         clicks()
-
     }
 
     // Method for handling click  functionality of the Class
@@ -36,10 +37,11 @@ class WorkSummaryActivity : AppCompatActivity() {
     }
 
 
+    @SuppressLint("RtlHardcoded")
     private fun showOptionLayout() {
         val dialog: Dialog = Dialog(this)
         dialog.setContentView(R.layout.option_menu_layout)
-        var layoutParams= WindowManager.LayoutParams()
+        val layoutParams: WindowManager.LayoutParams
         layoutParams=dialog.window.attributes
         layoutParams.gravity= Gravity.TOP or Gravity.RIGHT
         layoutParams.x=-100
@@ -54,7 +56,5 @@ class WorkSummaryActivity : AppCompatActivity() {
             overridePendingTransition(R.anim.slide_down,R.anim.fade)
         }
         dialog.show()
-
-
     }
 }

@@ -1,114 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
 <instant-run
-    abi="x86"
-    api-level="27"
+    abi="armeabi-v7a,armeabi"
+    api-level="23"
     build-mode="COLD"
-    density="420dpi"
+    density="xxhdpi"
     format="10"
+    ir-eligibility="CLASS_ADDED"
     plugin-version="3.2.1"
-    timestamp="1543225621939"
-    token="5121713096985442983"
+    timestamp="1543557323769"
+    token="-6116544737908349471"
     verifier="COLD_SWAP_REQUESTED" >
 
     <task
         name="javac"
-        duration="0" />
+        duration="1367" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="0" />
+        duration="416" />
     <task
         name="verifier"
-        duration="0" />
+        duration="143" />
+
+    <artifact
+        location="D:\GIT\Fobbu\user-app-android\app\build\intermediates\split-apk\debug\slices\slice_2.apk"
+        type="SPLIT" />
+    <artifact
+        location="D:\GIT\Fobbu\user-app-android\app\build\intermediates\split-apk\debug\slices\slice_3.apk"
+        type="SPLIT" />
+    <artifact
+        location="D:\GIT\Fobbu\user-app-android\app\build\intermediates\split-apk\debug\slices\slice_4.apk"
+        type="SPLIT" />
+    <artifact
+        location="D:\GIT\Fobbu\user-app-android\app\build\intermediates\split-apk\debug\slices\slice_6.apk"
+        type="SPLIT" />
+    <artifact
+        location="D:\GIT\Fobbu\user-app-android\app\build\intermediates\split-apk\debug\slices\slice_5.apk"
+        type="SPLIT" />
+    <artifact
+        location="D:\GIT\Fobbu\user-app-android\app\build\intermediates\instant-run-apk\debug\app-debug.apk"
+        type="SPLIT_MAIN" />
 
     <build
         build-mode="FULL"
-        timestamp="1543223041385"
+        timestamp="1543552542640"
         verifier="FULL_BUILD_REQUESTED" >
         <artifact
-            location="/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/resources/instant-run/debug/resources-debug.apk"
+            location="D:\GIT\Fobbu\user-app-android\app\build\intermediates\split-apk\debug\slices\slice_2.apk"
             type="SPLIT" />
         <artifact
-            location="/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/split-apk/debug/slices/slice_1.apk"
+            location="D:\GIT\Fobbu\user-app-android\app\build\intermediates\split-apk\debug\slices\slice_4.apk"
             type="SPLIT" />
         <artifact
-            location="/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/split-apk/debug/slices/slice_0.apk"
-            type="SPLIT" />
-        <artifact
-            location="/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/split-apk/debug/slices/slice_2.apk"
-            type="SPLIT" />
-        <artifact
-            location="/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/split-apk/debug/slices/slice_4.apk"
-            type="SPLIT" />
-        <artifact
-            location="/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/split-apk/debug/slices/slice_3.apk"
-            type="SPLIT" />
-        <artifact
-            location="/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/split-apk/debug/slices/slice_6.apk"
-            type="SPLIT" />
-        <artifact
-            location="/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/split-apk/debug/slices/slice_5.apk"
-            type="SPLIT" />
-        <artifact
-            location="/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/split-apk/debug/slices/slice_7.apk"
-            type="SPLIT" />
-        <artifact
-            location="/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/split-apk/debug/slices/slice_8.apk"
-            type="SPLIT" />
-        <artifact
-            location="/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/split-apk/debug/slices/slice_9.apk"
-            type="SPLIT" />
-        <artifact
-            location="/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/split-apk/debug/dep/dependencies.apk"
-            type="SPLIT" />
-        <artifact
-            location="/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/instant-run-apk/debug/app-debug.apk"
+            location="D:\GIT\Fobbu\user-app-android\app\build\intermediates\instant-run-apk\debug\app-debug.apk"
             type="SPLIT_MAIN" />
+        <artifact
+            location="D:\GIT\Fobbu\user-app-android\app\build\intermediates\split-apk\debug\slices\slice_0.apk"
+            type="SPLIT" />
+        <artifact
+            location="D:\GIT\Fobbu\user-app-android\app\build\intermediates\split-apk\debug\slices\slice_6.apk"
+            type="SPLIT" />
+        <artifact
+            location="D:\GIT\Fobbu\user-app-android\app\build\intermediates\split-apk\debug\slices\slice_5.apk"
+            type="SPLIT" />
+        <artifact
+            location="D:\GIT\Fobbu\user-app-android\app\build\intermediates\split-apk\debug\slices\slice_7.apk"
+            type="SPLIT" />
+        <artifact
+            location="D:\GIT\Fobbu\user-app-android\app\build\intermediates\split-apk\debug\dep\dependencies.apk"
+            type="SPLIT" />
+        <artifact
+            location="D:\GIT\Fobbu\user-app-android\app\build\intermediates\split-apk\debug\slices\slice_9.apk"
+            type="SPLIT" />
+        <artifact
+            location="D:\GIT\Fobbu\user-app-android\app\build\intermediates\split-apk\debug\slices\slice_3.apk"
+            type="SPLIT" />
+        <artifact
+            location="D:\GIT\Fobbu\user-app-android\app\build\intermediates\split-apk\debug\slices\slice_8.apk"
+            type="SPLIT" />
+        <artifact
+            location="D:\GIT\Fobbu\user-app-android\app\build\intermediates\split-apk\debug\slices\slice_1.apk"
+            type="SPLIT" />
     </build>
     <build
         build-mode="COLD"
-        ir-eligibility="R_CLASS_CHANGE"
-        timestamp="1543225597066"
+        ir-eligibility="CLASS_ADDED"
+        timestamp="1543557323769"
         verifier="COLD_SWAP_REQUESTED" >
         <artifact
-            location="/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/resources/instant-run/debug/resources-debug.apk"
+            location="D:\GIT\Fobbu\user-app-android\app\build\intermediates\split-apk\debug\slices\slice_2.apk"
             type="SPLIT" />
         <artifact
-            location="/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/split-apk/debug/slices/slice_1.apk"
+            location="D:\GIT\Fobbu\user-app-android\app\build\intermediates\split-apk\debug\slices\slice_3.apk"
             type="SPLIT" />
         <artifact
-            location="/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/split-apk/debug/slices/slice_0.apk"
+            location="D:\GIT\Fobbu\user-app-android\app\build\intermediates\split-apk\debug\slices\slice_4.apk"
             type="SPLIT" />
         <artifact
-            location="/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/split-apk/debug/slices/slice_2.apk"
+            location="D:\GIT\Fobbu\user-app-android\app\build\intermediates\split-apk\debug\slices\slice_6.apk"
             type="SPLIT" />
         <artifact
-            location="/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/split-apk/debug/slices/slice_4.apk"
+            location="D:\GIT\Fobbu\user-app-android\app\build\intermediates\split-apk\debug\slices\slice_5.apk"
             type="SPLIT" />
         <artifact
-            location="/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/split-apk/debug/slices/slice_3.apk"
-            type="SPLIT" />
-        <artifact
-            location="/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/split-apk/debug/slices/slice_6.apk"
-            type="SPLIT" />
-        <artifact
-            location="/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/split-apk/debug/slices/slice_5.apk"
-            type="SPLIT" />
-        <artifact
-            location="/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/split-apk/debug/slices/slice_7.apk"
-            type="SPLIT" />
-        <artifact
-            location="/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/split-apk/debug/slices/slice_8.apk"
-            type="SPLIT" />
-        <artifact
-            location="/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/split-apk/debug/slices/slice_9.apk"
-            type="SPLIT" />
+            location="D:\GIT\Fobbu\user-app-android\app\build\intermediates\instant-run-apk\debug\app-debug.apk"
+            type="SPLIT_MAIN" />
     </build>
-    <build
-        build-mode="COLD"
-        timestamp="1543225621939"
-        verifier="COLD_SWAP_REQUESTED" />
 
 </instant-run>
