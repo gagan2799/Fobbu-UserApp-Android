@@ -2,9 +2,7 @@ package com.fobbu.member.android.fragments
 
 import android.annotation.SuppressLint
 import android.app.Dialog
-import android.content.Context
-import android.content.Intent
-import android.content.IntentSender
+import android.content.*
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
@@ -22,6 +20,7 @@ import com.fobbu.member.android.R
 
 import com.fobbu.member.android.activities.waitingScreenModule.WaitingScreenBlue
 import com.fobbu.member.android.activities.waitingScreenModule.WaitingScreenWhite
+import com.fobbu.member.android.fcm.FcmPushTypes
 
 
 import com.fobbu.member.android.interfaces.HeaderIconChanges
@@ -81,22 +80,19 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
         rlInformation.setOnClickListener {
 
-            if (strWhere=="")
-            {
-                ivTool.setImageResource(R.drawable.man_riding_bike)
-                tvText.text=resources.getString(R.string.fobbu_on_way)
-                strWhere="share"
-            }
-            else if(strWhere=="share")
-            {
-                strWhere="next"
-                ivTool.setImageResource(R.drawable.mechanic_with_cap)
-                tvText.text=resources.getString(R.string.share_4_digit_code)
-                tvCode.visibility=View.VISIBLE
-            }
-            else
-            {
-                startActivity(Intent(activity!!, WaitingScreenWhite::class.java).putExtra("from_where", "code_valid"))
+            when (strWhere) {
+                "" -> {
+                    ivTool.setImageResource(R.drawable.man_riding_bike)
+                    tvText.text=resources.getString(R.string.fobbu_on_way)
+                    strWhere="share"
+                }
+                "share" -> {
+                    strWhere="next"
+                    ivTool.setImageResource(R.drawable.mechanic_with_cap)
+                    tvText.text=resources.getString(R.string.share_4_digit_code)
+                    tvCode.visibility=View.VISIBLE
+                }
+                else -> startActivity(Intent(activity!!, WaitingScreenWhite::class.java).putExtra("from_where", "code_valid"))
             }
         }
 
@@ -342,11 +338,6 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     }
 
 
-    override fun onResume() {
-        super.onResume()
-        mMapView.onResume()
-    }
-
     override fun onPause() {
         super.onPause()
         mMapView.onPause()
@@ -375,6 +366,35 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
             return null
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mMapView.onResume()
+
+        val filter = IntentFilter(FcmPushTypes.Types.inRouteRequestBroadCast)
+        activity!!.registerReceiver(changeRSALiveScreenReceiver, filter)
+    }
+
+    private val changeRSALiveScreenReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+
+            when {
+                intent.getStringExtra("navigate_to")== FcmPushTypes.Types.inRouteRequest -> {
+                    ivTool.setImageResource(R.drawable.man_riding_bike)
+                    tvText.text=resources.getString(R.string.fobbu_on_way)
+                    strWhere="share"
+                }
+                intent.getStringExtra("navigate_to")== FcmPushTypes.Types.share4DigitCode -> {
+                    ivTool.setImageResource(R.drawable.mechanic_with_cap)
+                    tvText.text=resources.getString(R.string.share_4_digit_code)
+                    tvCode.visibility=View.VISIBLE
+                }
+                intent.getStringExtra("navigate_to")== FcmPushTypes.Types.shareCodeValidated -> startActivity(Intent(activity!!, WaitingScreenWhite::class.java).putExtra("from_where", "code_valid"))
+            }
+
+        }
+
     }
 
 

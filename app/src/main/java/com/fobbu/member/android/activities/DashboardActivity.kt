@@ -2,7 +2,10 @@ package com.fobbu.member.android.activities.dashboardActivity
 
 import android.annotation.SuppressLint
 import android.app.Dialog
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
@@ -16,7 +19,10 @@ import android.view.WindowManager
 import com.fobbu.member.android.R
 import com.fobbu.member.android.activities.rsaModule.RSARequestCancelActivity
 import com.fobbu.member.android.activities.vehicleModule.AddEditVehicleActivity
+import com.fobbu.member.android.activities.waitingScreenModule.WaitingScreenBlue
+import com.fobbu.member.android.activities.waitingScreenModule.WaitingScreenWhite
 import com.fobbu.member.android.apiInterface.MyApplication
+import com.fobbu.member.android.fcm.FcmPushTypes
 import com.fobbu.member.android.fragments.HomeFragment
 
 import com.fobbu.member.android.fragments.RSALiveFragment
@@ -25,12 +31,14 @@ import com.fobbu.member.android.interfaces.ChangeRSAFragments
 import com.fobbu.member.android.interfaces.HeaderIconChanges
 import com.fobbu.member.android.interfaces.TopBarChanges
 import com.fobbu.member.android.utils.CommonClass
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.activity_dashboard.*
 import kotlinx.android.synthetic.main.app_bar_dashboard.*
 import kotlinx.android.synthetic.main.inflate_drawer.*
 import kotlinx.android.synthetic.main.option_menu_layout.*
 
-class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragments,TopBarChanges {
+class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragments, TopBarChanges {
 
 
     private var topBarChanges: TopBarChanges? = null
@@ -42,14 +50,14 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
         setDataToDrawer()
         drawerClicks()
         tabBarClicks()
-        changeFragment(HomeFragment(), resources.getString(R.string.home))
-}
+        checkAndNavigateFromPush()
+    }
 
     override fun showGoneTopBar(showDrawer: Boolean) {
-        if(showDrawer)
-            rlTopDrawer.visibility=View.VISIBLE
+        if (showDrawer)
+            rlTopDrawer.visibility = View.VISIBLE
         else
-            rlTopDrawer.visibility=View.GONE
+            rlTopDrawer.visibility = View.GONE
     }
 
     ////BOTTOM BAR CLICKS HANDLED IN THIS METHOD
@@ -58,7 +66,7 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
 
         imageViewOptionMenuDash.setOnClickListener {
             showOptionLayout()
-           // linearLayoutOptionMenu.visibility=View.VISIBLE
+            // linearLayoutOptionMenu.visibility=View.VISIBLE
         }
 
         llHome.setOnClickListener {
@@ -71,22 +79,24 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
         }
     }
 
-
+    //// This is for Cancel and Call Helpline
     private fun showOptionLayout() {
-        val dialog:Dialog= Dialog(this)
+        val dialog: Dialog = Dialog(this)
         dialog.setContentView(R.layout.option_menu_layout)
-        var layoutParams=WindowManager.LayoutParams()
-        layoutParams=dialog.window.attributes
-        layoutParams.gravity=Gravity.TOP or Gravity.RIGHT
-        layoutParams.x=-100
-        layoutParams.y=-100
-        layoutParams.windowAnimations=R.style.DialogTheme
+        var layoutParams = WindowManager.LayoutParams()
+        layoutParams = dialog.window.attributes
+        layoutParams.gravity = Gravity.TOP or Gravity.RIGHT
+        layoutParams.x = -100
+        layoutParams.y = -100
+        layoutParams.windowAnimations = R.style.DialogTheme
 
         dialog.textViewCancelRSA.setOnClickListener {
             dialog.dismiss()
-            startActivity(Intent(this, RSARequestCancelActivity::class.java)
-                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK))
-            overridePendingTransition(R.anim.slide_down,R.anim.fade)
+            startActivity(
+                Intent(this, RSARequestCancelActivity::class.java)
+                    .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+            )
+            overridePendingTransition(R.anim.slide_down, R.anim.fade)
         }
         dialog.show()
 
@@ -112,7 +122,6 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
         }
 
     }
-
 
     /////SET DATA TO DRAWER IF ANY CHANGES REQUIRED
     @SuppressLint("SetTextI18n")
@@ -152,12 +161,6 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
     }
 
 
-    override fun onResume() {
-        super.onResume()
-
-        checkIfOnGoingRSAScreen()
-    }
-
     ////CHECK IF RSA REQUEST IS ON WITH SCREENS
     private fun checkIfOnGoingRSAScreen() {
 
@@ -196,15 +199,14 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
     }
 
     /////CHANGE RSA FRAGMENTS
-    private fun setFragmentsFromStackForRSA( type: String) {
+    private fun setFragmentsFromStackForRSA(type: String) {
 
         fragmentTypeForRSA = type
 
         val fragment: Fragment = when (fragmentTypeForRSA) {
             resources.getString(R.string.rsa_home) -> RSAFragment()
             resources.getString(R.string.rsa_live) -> RSALiveFragment()
-            else ->
-            {
+            else -> {
                 fragmentTypeForRSA = resources.getString(R.string.rsa_home)
                 RSAFragment()
             }
@@ -225,7 +227,6 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
 
         changeTabs(tag)
     }
-
 
     ///LOGOUT POPUP
     private fun showLogoutPopup() {
@@ -255,11 +256,50 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
 
     override fun onBackPressed() {
         super.onBackPressed()
-        var f:Fragment= supportFragmentManager.findFragmentById(R.id.content_frame)!!
-        if(f is HomeFragment)
-        {
-            rlTopDrawer.visibility=View.VISIBLE
+        val f: Fragment = supportFragmentManager.findFragmentById(R.id.content_frame)!!
+        if (f is HomeFragment) {
+            rlTopDrawer.visibility = View.VISIBLE
             changeTabs(resources.getString(R.string.home))
+        }
+
+    }
+
+    private fun checkAndNavigateFromPush() {
+
+        if (intent.hasExtra("from_push")) {
+            val type: String = intent.getStringExtra("from_push")
+            when (type) {
+
+                FcmPushTypes.Types.accept -> {
+                    startActivity(Intent(this, WaitingScreenBlue::class.java).putExtra("navigate_to", "1"))
+                }
+                FcmPushTypes.Types.inRouteRequest -> {
+
+                    CommonClass(this, this).putString("OnGoingRSA_Screen", "YES")
+                    CommonClass(this, this).putString("OnGoingRSA_Screen_Type", resources.getString(R.string.rsa_live))
+                    checkIfOnGoingRSAScreen()
+                }
+                else -> {
+
+                }
+            }
+        } else
+            changeFragment(HomeFragment(), resources.getString(R.string.home))
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        checkIfOnGoingRSAScreen()
+
+       /* val filter = IntentFilter(FcmPushTypes.Types.inRouteRequestBroadCast)
+        registerReceiver(changeRSALiveScreenReceiver, filter)*/
+    }
+
+    private val changeRSALiveScreenReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+
+
         }
 
     }

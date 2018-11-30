@@ -896,7 +896,8 @@ class RSAFragment : Fragment(),  GoogleApiClient.OnConnectionFailedListener,
                 CommonClass(activity!!, activity!!).putString("fobbu_request_id", mainPojo.getData()._id)
                 CommonClass(activity!!, activity!!).putString("service_name_selected",serviceSelected)
 
-                activity!!.startActivity(Intent(activity!!, WaitingScreenBlue::class.java))
+                activity!!.startActivity(Intent(activity!!, WaitingScreenBlue::class.java)
+                    .putExtra("navigate_to", "0"))
 
             } else {
                 CommonClass(activity!!, activity!!).showToast(mainPojo.message)
