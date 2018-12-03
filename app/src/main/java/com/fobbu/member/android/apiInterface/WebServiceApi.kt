@@ -77,7 +77,7 @@ interface WebServiceApi {
     @GET("users/vehicles")
     fun fetchUserVehicles(
         @Header("x-access-token") token: String,
-        @Body mapData: HashMap<String, String>
+        @Query ("user_id") user_id:String
     ):Call<MainPojo>
 
 

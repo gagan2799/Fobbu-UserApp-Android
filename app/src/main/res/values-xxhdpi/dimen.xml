@@ -17,7 +17,7 @@
     <dimen name="margin_left">45dp</dimen>
     <dimen name="header_height">186dp</dimen>
     <dimen name="red_rounded_rectangle_padding">15dp</dimen>
-    <dimen name="map_height">240dp</dimen>
+    <dimen name="map_height">280dp</dimen>
     <dimen name="margin_top_work_summary">6dp</dimen>
 
 

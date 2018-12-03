@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
-<LinearLayout
+<RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="150dp"
         xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
         android:orientation="vertical"
         android:padding="1dp"
         android:layout_height="wrap_content">
+
     <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             app:cardElevation="10dp">
 
-        <LinearLayout
-                android:layout_width="match_parent" android:layout_height="match_parent"
+        <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
                 android:orientation="vertical">
 
             <TextView
@@ -23,56 +25,68 @@
                     android:text="FOBBU"
                     android:textColor="@color/color_grey"
                     android:textSize="@dimen/textsize_large"
+                    android:id="@+id/tvText"
                     android:layout_marginTop="15dp"
+                    android:layout_centerHorizontal="true"
                     android:layout_marginBottom="10dp"
                     android:layout_gravity="center"
                     android:gravity="center_vertical"
             />
 
-            <View android:layout_width="match_parent"
-                  android:layout_height="0.8dp"
-                  android:alpha=".50"
-                  android:background="@color/color_grey"/>
+            <View
+                    android:layout_width="150dp"
+                    android:layout_height="0.8dp"
+                    android:alpha=".50"
+                    android:layout_alignParentLeft="true"
+                    android:id="@+id/view"
+                    android:layout_below="@+id/tvText"
+                    android:background="@color/color_grey"/>
 
 
             <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/textViewCancelRSA"
                     android:text="@string/cancel_rsa"
                     android:layout_marginTop="25dp"
                     android:layout_gravity="bottom"
+                    android:layout_below="@+id/view"
                     android:gravity="center_vertical"
+                    android:layout_centerHorizontal="true"
                     android:drawablePadding="10dp"
                     android:textSize="@dimen/textsize_medium"
+                    android:layout_marginEnd="15dp"
                     android:textColor="@color/color_grey"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
                     android:drawableLeft="@drawable/cancel_red"
-                    android:drawableStart="@drawable/cancel_red"/>
+                    android:drawableStart="@drawable/cancel_red"
+                    android:layout_marginStart="10dp"/>
 
             <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/textViewCallHelpline"
                     android:text="@string/call_helpline"
-                    android:layout_marginLeft="10dp"
                     android:layout_marginTop="20dp"
+                    android:layout_marginEnd="15dp"
                     android:layout_gravity="bottom"
+                    android:layout_centerHorizontal="true"
                     android:gravity="center_vertical"
                     android:drawablePadding="10dp"
+                    android:layout_below="@+id/textViewCancelRSA"
                     android:textSize="@dimen/textsize_medium"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
                     android:textColor="@color/color_grey"
                     android:layout_marginBottom="30dp"
                     android:drawableLeft="@drawable/helpline"
-                    android:drawableStart="@drawable/helpline"/>
+                    android:drawableStart="@drawable/helpline"
+                    android:layout_marginStart="10dp"/>
 
-
-
-
-        </LinearLayout>
+        </RelativeLayout>
 
     </android.support.v7.widget.CardView>
 
 
-
-</LinearLayout>
+</RelativeLayout>

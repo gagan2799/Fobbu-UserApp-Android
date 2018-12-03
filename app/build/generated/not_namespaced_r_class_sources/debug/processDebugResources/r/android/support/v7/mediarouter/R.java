@@ -934,8 +934,8 @@ public final class R {
         public static final int topPanel = 0x7f09020c;
         public static final int uniform = 0x7f090263;
         public static final int up = 0x7f090265;
-        public static final int volume_item_container = 0x7f09027c;
-        public static final int wrap_content = 0x7f090280;
+        public static final int volume_item_container = 0x7f090280;
+        public static final int wrap_content = 0x7f090284;
     }
     public static final class integer {
         private integer() {}

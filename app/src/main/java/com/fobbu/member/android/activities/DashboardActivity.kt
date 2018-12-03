@@ -40,9 +40,10 @@ import kotlinx.android.synthetic.main.option_menu_layout.*
 
 class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragments, TopBarChanges {
 
-
     private var topBarChanges: TopBarChanges? = null
     var fragmentTypeForRSA = ""
+    private lateinit var fragmentEarlier: Fragment
+    var fragmentEarlierBool = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,7 +62,6 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
     }
 
     ////BOTTOM BAR CLICKS HANDLED IN THIS METHOD
-
     private fun tabBarClicks() {
 
         imageViewOptionMenuDash.setOnClickListener {
@@ -81,9 +81,9 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
 
     //// This is for Cancel and Call Helpline
     private fun showOptionLayout() {
-        val dialog: Dialog = Dialog(this)
+        val dialog = Dialog(this)
         dialog.setContentView(R.layout.option_menu_layout)
-        var layoutParams = WindowManager.LayoutParams()
+        val layoutParams: WindowManager.LayoutParams
         layoutParams = dialog.window.attributes
         layoutParams.gravity = Gravity.TOP or Gravity.RIGHT
         layoutParams.x = -100
@@ -112,6 +112,9 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
             ivRSA.setImageResource(R.drawable.car_tabbar)
             ivRSA.setBackgroundColor(resources.getColor(R.color.colorPrimary))
 
+            viewHome.visibility=View.VISIBLE
+            viewRSA.visibility=View.INVISIBLE
+
         } else if (string == resources.getString(R.string.rsa_home) || string == resources.getString(R.string.rsa_live)) {
 
             ivHome.setImageResource(R.drawable.meters_tabbar)
@@ -119,6 +122,8 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
 
             ivRSA.setImageResource(R.drawable.car_click_tabbar)
             ivRSA.setBackgroundColor(resources.getColor(R.color.white))
+            viewHome.visibility=View.INVISIBLE
+            viewRSA.visibility=View.VISIBLE
         }
 
     }
@@ -165,7 +170,7 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
     private fun checkIfOnGoingRSAScreen() {
 
         if (CommonClass(this, this).getString("OnGoingRSA_Screen") == "YES") {
-            CommonClass(this, this).putString("OnGoingRSA_Screen", "")
+          //  CommonClass(this, this).putString("OnGoingRSA_Screen", "")
             fragmentTypeForRSA = CommonClass(this, this).getString("OnGoingRSA_Screen_Type")
             setFragmentsFromStackForRSA(fragmentTypeForRSA)
         }
@@ -219,12 +224,18 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
     private fun changeFragment(fragment: Fragment, tag: String) {
         val manager = supportFragmentManager
         val transaction = manager.beginTransaction()
-        transaction.add(R.id.content_frame, fragment, tag)
+
+        if (!fragmentEarlierBool)
+            transaction.add(R.id.content_frame, fragment, tag)
+        else
+            transaction.remove(fragmentEarlier).add(R.id.content_frame, fragment, tag)
+
         if (tag != resources.getString(R.string.home)) {
             transaction.addToBackStack(null)
         }
         transaction.commit()
-
+        fragmentEarlier = fragment
+        fragmentEarlierBool=true
         changeTabs(tag)
     }
 
@@ -261,6 +272,10 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
             rlTopDrawer.visibility = View.VISIBLE
             changeTabs(resources.getString(R.string.home))
         }
+        else if(f is RSALiveFragment)
+        {
+
+        }
 
     }
 
@@ -292,8 +307,8 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
 
         checkIfOnGoingRSAScreen()
 
-       /* val filter = IntentFilter(FcmPushTypes.Types.inRouteRequestBroadCast)
-        registerReceiver(changeRSALiveScreenReceiver, filter)*/
+        /* val filter = IntentFilter(FcmPushTypes.Types.inRouteRequestBroadCast)
+         registerReceiver(changeRSALiveScreenReceiver, filter)*/
     }
 
     private val changeRSALiveScreenReceiver = object : BroadcastReceiver() {

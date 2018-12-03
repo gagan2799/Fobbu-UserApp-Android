@@ -95,7 +95,7 @@ class ApiClient(var activity: Activity) {
     {
         val map=HashMap<String,String>()
         map["user_id"]=userId
-        webServiceApi.fetchUserVehicles(token,map).enqueue(object :Callback<MainPojo>
+        webServiceApi.fetchUserVehicles(token,userId).enqueue(object :Callback<MainPojo>
         {
             override fun onFailure(call: Call<MainPojo>, t: Throwable) {
                 responseHandler.onServerError(""+t.message)
@@ -104,7 +104,6 @@ class ApiClient(var activity: Activity) {
             override fun onResponse(call: Call<MainPojo>, response: Response<MainPojo>) {
                 handleSuccess(response,responseHandler)
             }
-
         })
     }
 

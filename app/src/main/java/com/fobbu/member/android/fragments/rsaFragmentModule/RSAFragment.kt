@@ -75,8 +75,8 @@ import java.io.FileOutputStream
 import java.lang.Double
 import java.util.*
 
-class RSAFragment : Fragment(),  GoogleApiClient.OnConnectionFailedListener,
-    GoogleApiClient.ConnectionCallbacks, LocationListener,RsaFragmentView {
+class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
+    GoogleApiClient.ConnectionCallbacks, LocationListener, RsaFragmentView {
 
 
     lateinit var mMapView: MapView
@@ -110,7 +110,7 @@ class RSAFragment : Fragment(),  GoogleApiClient.OnConnectionFailedListener,
     private var strLongitude = ""
     private var strFuelType = ""
     private var strTowingType = ""
-    private var ifTowRequired=false
+    private var ifTowRequired = false
 
     private lateinit var rlLoader: RelativeLayout
 
@@ -170,13 +170,12 @@ class RSAFragment : Fragment(),  GoogleApiClient.OnConnectionFailedListener,
     private var strHaveSpareTyre = "yes"
     private lateinit var llMarkTyreBurst: LinearLayout
 
-    private lateinit var tvContinue:TextView
-    private lateinit var llTowRequired:LinearLayout
-    private lateinit var rlTopDrawer:RelativeLayout
+    private lateinit var tvContinue: TextView
+    private lateinit var llTowRequired: LinearLayout
+    private lateinit var rlTopDrawer: RelativeLayout
     private var topBarChanges: TopBarChanges? = null
 
-    lateinit var rsaFragmentHandler:RsaFragmentHandler
-
+    lateinit var rsaFragmentHandler: RsaFragmentHandler
 
 
     @SuppressLint("NewApi")
@@ -195,7 +194,7 @@ class RSAFragment : Fragment(),  GoogleApiClient.OnConnectionFailedListener,
             setUpGoogleClient()
 
             handleClick()
-            rsaFragmentHandler=RsaFragmnetPresenter(activity!!,this)
+            rsaFragmentHandler = RsaFragmnetPresenter(activity!!, this)
             serviceListApi()
         }
         return view
@@ -280,7 +279,7 @@ class RSAFragment : Fragment(),  GoogleApiClient.OnConnectionFailedListener,
                     llFindFobbu.visibility = View.GONE
                     llMarkTyreBurst.visibility = View.VISIBLE
                     llTowRequired.visibility = View.GONE
-                    ifTowRequired=false
+                    ifTowRequired = false
                 }
             }
         }
@@ -343,8 +342,8 @@ class RSAFragment : Fragment(),  GoogleApiClient.OnConnectionFailedListener,
             llMarkTyreBurst.visibility = View.GONE
             llTowRequired.visibility = View.GONE
 
-            serviceSelected ="Towing"
-            ifTowRequired=true
+            serviceSelected = "Towing"
+            ifTowRequired = true
         }
 
         llCarTwo.setOnClickListener {
@@ -533,8 +532,6 @@ class RSAFragment : Fragment(),  GoogleApiClient.OnConnectionFailedListener,
     }
 
 
-
-
     // method for capturing images
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
@@ -614,92 +611,93 @@ class RSAFragment : Fragment(),  GoogleApiClient.OnConnectionFailedListener,
 
         recyclerViewServices = view.findViewById(R.id.recyclerViewServices)
         recyclerViewServices.layoutManager = GridLayoutManager(activity, 3) as RecyclerView.LayoutManager?
-        fobbuServiceAdapter = FobbuServiceAdapter(activity!!,dataListServices)
+        fobbuServiceAdapter = FobbuServiceAdapter(activity!!, dataListServices)
         recyclerViewServices.adapter = fobbuServiceAdapter
         recyclerViewServices.addOnItemTouchListener(
-           RecyclerItemClickListener(activity!!,object :RecyclerItemClickListener.OnItemClickListener
-           {
-               override fun onItemClick(view: View, position: Int) {
+            RecyclerItemClickListener(activity!!, object : RecyclerItemClickListener.OnItemClickListener {
+                override fun onItemClick(view: View, position: Int) {
 
-                   serviceSelected = dataListServices[position]["service_name"].toString()
-                   serviceSelectedID = dataListServices[position]["_id"].toString()
+                    serviceSelected = dataListServices[position]["service_name"].toString()
+                    serviceSelectedID = dataListServices[position]["_id"].toString()
 
-                   when (serviceSelected) {
-                       "Flat Tyre" -> {
-                           llHomeServices.visibility = View.GONE
-                           llSubPoints.visibility = View.VISIBLE
-                           llThree.visibility = View.GONE
-                           llTwo.visibility = View.VISIBLE
-                           setAnimationRight(linearLayoutCarRightTwo, activity!!)
-                           setAnimationLeft(linearLayoutScooterLeftTwo,activity!!)
-                           topBarChanges!!.showGoneTopBar(false)
-                           rlTopDrawer.visibility = View.VISIBLE
-                           tvHeading.text = resources.getString(R.string.flat_tyre_worries)
-                           tvSubheading.text = resources.getString(R.string.fix_on_the_spot)
-                       }
-                       "Jump Start" -> {
-                           llHomeServices.visibility = View.GONE
-                           llSubPoints.visibility = View.VISIBLE
-                           llThree.visibility = View.GONE
-                           llTwo.visibility = View.VISIBLE
-                           setAnimationRight(linearLayoutCarRightTwo, activity!!)
-                           setAnimationLeft(linearLayoutScooterLeftTwo,activity!!)
-                           topBarChanges!!.showGoneTopBar(false)
-                           rlTopDrawer.visibility = View.VISIBLE
-                           tvHeading.text = resources.getString(R.string.dead_battery_worries)
-                           tvSubheading.text = resources.getString(R.string.jump_start)
-                       }
-                       "Fuel Delivery" -> {
-                           llHomeServices.visibility = View.GONE
-                           llSubPoints.visibility = View.VISIBLE
-                           llThree.visibility = View.VISIBLE
-                           llTwo.visibility = View.GONE
-                           setAnimationRight(llCarFuelPetrolThree, activity!!)
-                           setAnimationLeft(llScooterThree,activity!!)
-                           setAnimationFade(llCarFuelDieselThree,activity!!)
-                           topBarChanges!!.showGoneTopBar(false)
-                           rlTopDrawer.visibility = View.VISIBLE
-                           tvHeading.text = resources.getString(R.string.empty_tanks_worries)
-                           tvSubheading.text = resources.getString(R.string.deliver_real_quick)
-                       }
-                       "Burst Tyre" -> {
-                           llHomeServices.visibility = View.GONE
-                           llSubPoints.visibility = View.VISIBLE
-                           llThree.visibility = View.GONE
-                           llTwo.visibility = View.VISIBLE
-                           setAnimationRight(linearLayoutCarRightTwo, activity!!)
-                           setAnimationLeft(linearLayoutScooterLeftTwo,activity!!)
-                           topBarChanges!!.showGoneTopBar(false)
-                           rlTopDrawer.visibility = View.VISIBLE
-                           tvHeading.text = resources.getString(R.string.burst_tyre_worries)
-                           tvSubheading.text = resources.getString(R.string.help_you_fix)
-                       }
-                       "Towing" -> {
-                           llHomeServices.visibility = View.GONE
-                           llSubPoints.visibility = View.VISIBLE
-                           llThree.visibility = View.GONE
-                           llTwo.visibility = View.VISIBLE
-                           setAnimationRight(linearLayoutCarRightTwo, activity!!)
-                           setAnimationLeft(linearLayoutScooterLeftTwo,activity!!)
-                           topBarChanges!!.showGoneTopBar(false)
-                           rlTopDrawer.visibility = View.VISIBLE
-                           tvHeading.text = resources.getString(R.string.double_trouble)
-                           tvSubheading.text = resources.getString(R.string.we_will_connect_towing)
-                       }
-                       "I donno ?" ->{
-                           startActivity(Intent(activity,WorkSummaryActivity::class.java)
-                               .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK ))
-                      }
-                       else -> {
-                           llHomeServices.visibility = View.VISIBLE
-                           llSubPoints.visibility = View.GONE
-                           rlTopDrawer.visibility = View.GONE
-                       }
-                   }
+                    when (serviceSelected) {
+                        "Flat Tyre" -> {
+                            llHomeServices.visibility = View.GONE
+                            llSubPoints.visibility = View.VISIBLE
+                            llThree.visibility = View.GONE
+                            llTwo.visibility = View.VISIBLE
+                            setAnimationRight(linearLayoutCarRightTwo, activity!!)
+                            setAnimationLeft(linearLayoutScooterLeftTwo, activity!!)
+                            topBarChanges!!.showGoneTopBar(false)
+                            rlTopDrawer.visibility = View.VISIBLE
+                            tvHeading.text = resources.getString(R.string.flat_tyre_worries)
+                            tvSubheading.text = resources.getString(R.string.fix_on_the_spot)
+                        }
+                        "Jump Start" -> {
+                            llHomeServices.visibility = View.GONE
+                            llSubPoints.visibility = View.VISIBLE
+                            llThree.visibility = View.GONE
+                            llTwo.visibility = View.VISIBLE
+                            setAnimationRight(linearLayoutCarRightTwo, activity!!)
+                            setAnimationLeft(linearLayoutScooterLeftTwo, activity!!)
+                            topBarChanges!!.showGoneTopBar(false)
+                            rlTopDrawer.visibility = View.VISIBLE
+                            tvHeading.text = resources.getString(R.string.dead_battery_worries)
+                            tvSubheading.text = resources.getString(R.string.jump_start)
+                        }
+                        "Fuel Delivery" -> {
+                            llHomeServices.visibility = View.GONE
+                            llSubPoints.visibility = View.VISIBLE
+                            llThree.visibility = View.VISIBLE
+                            llTwo.visibility = View.GONE
+                            setAnimationRight(llCarFuelPetrolThree, activity!!)
+                            setAnimationLeft(llScooterThree, activity!!)
+                            setAnimationFade(llCarFuelDieselThree, activity!!)
+                            topBarChanges!!.showGoneTopBar(false)
+                            rlTopDrawer.visibility = View.VISIBLE
+                            tvHeading.text = resources.getString(R.string.empty_tanks_worries)
+                            tvSubheading.text = resources.getString(R.string.deliver_real_quick)
+                        }
+                        "Burst Tyre" -> {
+                            llHomeServices.visibility = View.GONE
+                            llSubPoints.visibility = View.VISIBLE
+                            llThree.visibility = View.GONE
+                            llTwo.visibility = View.VISIBLE
+                            setAnimationRight(linearLayoutCarRightTwo, activity!!)
+                            setAnimationLeft(linearLayoutScooterLeftTwo, activity!!)
+                            topBarChanges!!.showGoneTopBar(false)
+                            rlTopDrawer.visibility = View.VISIBLE
+                            tvHeading.text = resources.getString(R.string.burst_tyre_worries)
+                            tvSubheading.text = resources.getString(R.string.help_you_fix)
+                        }
+                        "Towing" -> {
+                            llHomeServices.visibility = View.GONE
+                            llSubPoints.visibility = View.VISIBLE
+                            llThree.visibility = View.GONE
+                            llTwo.visibility = View.VISIBLE
+                            setAnimationRight(linearLayoutCarRightTwo, activity!!)
+                            setAnimationLeft(linearLayoutScooterLeftTwo, activity!!)
+                            topBarChanges!!.showGoneTopBar(false)
+                            rlTopDrawer.visibility = View.VISIBLE
+                            tvHeading.text = resources.getString(R.string.double_trouble)
+                            tvSubheading.text = resources.getString(R.string.we_will_connect_towing)
+                        }
+                        "I donno ?" -> {
+                            startActivity(
+                                Intent(activity, WorkSummaryActivity::class.java)
+                                    .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+                            )
+                        }
+                        else -> {
+                            llHomeServices.visibility = View.VISIBLE
+                            llSubPoints.visibility = View.GONE
+                            rlTopDrawer.visibility = View.GONE
+                        }
+                    }
 
-               }
+                }
 
-           })
+            })
         )
         fobbuServiceAdapter.notifyDataSetChanged()
 
@@ -757,9 +755,8 @@ class RSAFragment : Fragment(),  GoogleApiClient.OnConnectionFailedListener,
         llMarkTyreBurst = view.findViewById(R.id.llMarkTyreBurst)
 
         tvContinue = view.findViewById(R.id.tvContinue)
-        llTowRequired= view.findViewById(R.id.llTowRequired)
+        llTowRequired = view.findViewById(R.id.llTowRequired)
     }
-
 
 
     // method for opening dialog for payment
@@ -803,9 +800,7 @@ class RSAFragment : Fragment(),  GoogleApiClient.OnConnectionFailedListener,
     }
 
 
-
     /////////////////////////////FOR API"S//////////////////////////////////////////////////
-
 
 
     // fetch service Api (API-partners/services)
@@ -843,9 +838,7 @@ class RSAFragment : Fragment(),  GoogleApiClient.OnConnectionFailedListener,
     }
 
 
-
     //////////////////FIND FOBBU REQUEST API  /////////////////////////
-
 
 
     // find fobbu Api (API-users/requests)
@@ -878,8 +871,10 @@ class RSAFragment : Fragment(),  GoogleApiClient.OnConnectionFailedListener,
         val strVehicleType = RequestBody.create(MediaType.parse("text/plain"), strVehicleType)
 
 
-        rsaFragmentHandler.findFobbuRequest(userId,serviceSelected,strLatitude,strLongitude
-        ,strVehicleType,fileList,tokenHeader)
+        rsaFragmentHandler.findFobbuRequest(
+            userId, serviceSelected, strLatitude, strLongitude
+            , strVehicleType, fileList, tokenHeader
+        )
     }
 
     // handle  find  fobbu Api response (API-users/requests)
@@ -894,10 +889,12 @@ class RSAFragment : Fragment(),  GoogleApiClient.OnConnectionFailedListener,
                 fleetRequestApi(mainPojo.getData()._id)
 
                 CommonClass(activity!!, activity!!).putString("fobbu_request_id", mainPojo.getData()._id)
-                CommonClass(activity!!, activity!!).putString("service_name_selected",serviceSelected)
+                CommonClass(activity!!, activity!!).putString("service_name_selected", serviceSelected)
 
-                activity!!.startActivity(Intent(activity!!, WaitingScreenBlue::class.java)
-                    .putExtra("navigate_to", "0"))
+                activity!!.startActivity(
+                    Intent(activity!!, WaitingScreenBlue::class.java)
+                        .putExtra("navigate_to", "0")
+                )
 
             } else {
                 CommonClass(activity!!, activity!!).showToast(mainPojo.message)
@@ -906,7 +903,6 @@ class RSAFragment : Fragment(),  GoogleApiClient.OnConnectionFailedListener,
             e.printStackTrace()
         }
     }
-
 
 
     //////////////////FLEET REQUEST API  /////////////////////////
@@ -919,7 +915,7 @@ class RSAFragment : Fragment(),  GoogleApiClient.OnConnectionFailedListener,
 
             val tokenHeader = CommonClass(activity!!, activity!!).getString("x_access_token")
 
-            rsaFragmentHandler.findFleetOrUser(tokenHeader,id)
+            rsaFragmentHandler.findFleetOrUser(tokenHeader, id)
         }
     }
 
@@ -932,15 +928,11 @@ class RSAFragment : Fragment(),  GoogleApiClient.OnConnectionFailedListener,
     }
 
 
-
     ////////////////////////FOR MAP/////////////////////////////////////////////////
 
     private var googleApiClient: GoogleApiClient? = null
     private var locationRequest = LocationRequest.create()!!
     var location = false
-
-
-
 
 
     //  initializing map in this method
@@ -1010,7 +1002,10 @@ class RSAFragment : Fragment(),  GoogleApiClient.OnConnectionFailedListener,
 
             if (permission != PackageManager.PERMISSION_GRANTED) {
 
-                 requestPermissions(arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), locationPermissionRequestCode)
+                requestPermissions(
+                    arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+                    locationPermissionRequestCode
+                )
 
             } else {
                 enableGPSAutoMatically()
@@ -1021,8 +1016,7 @@ class RSAFragment : Fragment(),  GoogleApiClient.OnConnectionFailedListener,
     }
 
     // setting up google client for map in this method
-    private fun setUpGoogleClient()
-    {
+    private fun setUpGoogleClient() {
         googleApiClient = GoogleApiClient.Builder(context!!)
             .addApi(LocationServices.API)
             .addConnectionCallbacks(this)
@@ -1035,7 +1029,7 @@ class RSAFragment : Fragment(),  GoogleApiClient.OnConnectionFailedListener,
     @SuppressLint("MissingPermission")
     fun enableGPSAutoMatically() {
 
-        if(googleApiClient!!.isConnected) {
+        if (googleApiClient!!.isConnected) {
 
             locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
             locationRequest.interval = (1000 * 3).toLong()
@@ -1104,8 +1098,19 @@ class RSAFragment : Fragment(),  GoogleApiClient.OnConnectionFailedListener,
     override fun onResume() {
         super.onResume()
         mMapView.onResume()
+
         topBarChanges = activity as TopBarChanges
-        topBarChanges!!.showGoneTopBar(true)
+
+        if (llSubPoints.visibility == View.VISIBLE ||
+            llUploadPics.visibility == View.VISIBLE ||
+            llFindFobbu.visibility == View.VISIBLE ||
+            llMarkTyreBurst.visibility == View.VISIBLE ||
+            llTowRequired.visibility == View.VISIBLE
+        )
+            topBarChanges!!.showGoneTopBar(false)
+        else
+            topBarChanges!!.showGoneTopBar(true)
+
     }
 
     override fun onPause() {
@@ -1595,22 +1600,21 @@ class RSAFragment : Fragment(),  GoogleApiClient.OnConnectionFailedListener,
     }
 
     // Method for setting Slide Right Animation
-    fun setAnimationRight( layout:LinearLayout, activity:Activity) {
+    fun setAnimationRight(layout: LinearLayout, activity: Activity) {
 
-        val animation:Animation=AnimationUtils.loadAnimation(activity,R.anim.slide_left)
+        val animation: Animation = AnimationUtils.loadAnimation(activity, R.anim.slide_left)
         layout.startAnimation(animation)
     }
 
     // Method for setting Slide Left Animation
-    fun setAnimationLeft(layout:LinearLayout,activity:Activity) {
-        val animation:Animation=AnimationUtils.loadAnimation(activity,R.anim.slide_right)
+    fun setAnimationLeft(layout: LinearLayout, activity: Activity) {
+        val animation: Animation = AnimationUtils.loadAnimation(activity, R.anim.slide_right)
         layout.startAnimation(animation)
     }
 
     // Method for setting Slide Fade Animation
-    fun setAnimationFade(layout:LinearLayout,activity: Activity)
-    {
-        val animation:Animation=AnimationUtils.loadAnimation(activity,R.anim.fade_rsa)
+    fun setAnimationFade(layout: LinearLayout, activity: Activity) {
+        val animation: Animation = AnimationUtils.loadAnimation(activity, R.anim.fade_rsa)
         layout.startAnimation(animation)
     }
 
@@ -1622,8 +1626,6 @@ class RSAFragment : Fragment(),  GoogleApiClient.OnConnectionFailedListener,
     override fun hideLoader() {
         rlLoader.visibility = View.GONE
     }
-
-
 
 
 }

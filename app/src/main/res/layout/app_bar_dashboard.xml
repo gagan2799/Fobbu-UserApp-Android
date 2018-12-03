@@ -68,7 +68,7 @@
             android:id="@+id/linearLayoutOptionMenu"
             android:layout_alignParentRight="true"
             android:layout_height="wrap_content"
-    android:orientation="vertical">
+            android:orientation="vertical">
         <include
                 layout="@layout/option_menu_layout"
         />
@@ -99,14 +99,31 @@
                 android:id="@+id/llHome"
                 android:layout_weight="1">
 
-            <ImageView
-                    android:layout_width="wrap_content"
-                    android:padding="10dp"
-                    android:background="@color/white"
-                    android:id="@+id/ivHome"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/meters_click_tabbar"
-            />
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                <View android:layout_width="match_parent"
+                      android:layout_height="2dp"
+                      android:id="@+id/viewHome"
+                      android:layout_alignLeft="@+id/ivHome"
+                      android:layout_alignRight="@+id/ivHome"
+                      android:background="@color/red"
+                      android:layout_alignStart="@+id/ivHome"
+                      android:layout_alignEnd="@+id/ivHome"/>
+
+                <ImageView
+                        android:layout_width="wrap_content"
+                        android:padding="10dp"
+                        android:background="@color/white"
+                        android:id="@+id/ivHome"
+                        android:layout_centerHorizontal="true"
+                        android:layout_below="@+id/viewHome"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/meters_click_tabbar"
+                />
+            </RelativeLayout>
+
 
         </LinearLayout>
 
@@ -117,13 +134,33 @@
                 android:id="@+id/llRSA"
                 android:layout_weight="1">
 
-            <ImageView
-                    android:layout_width="wrap_content"
-                    android:padding="10dp"
-                    android:id="@+id/ivRSA"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/car_tabbar"
-            />
+
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                <View android:layout_width="match_parent"
+                      android:layout_height="2dp"
+                      android:id="@+id/viewRSA"
+                      android:visibility="invisible"
+                      android:layout_alignLeft="@+id/ivRSA"
+                      android:layout_alignRight="@+id/ivRSA"
+                      android:background="@color/red"
+                      android:layout_alignStart="@+id/ivRSA"
+                      android:layout_alignEnd="@+id/ivRSA"/>
+
+                <ImageView
+                        android:layout_width="wrap_content"
+                        android:padding="10dp"
+                        android:id="@+id/ivRSA"
+                        android:layout_centerHorizontal="true"
+                        android:layout_below="@+id/viewRSA"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/car_tabbar"
+                />
+            </RelativeLayout>
+
+
 
         </LinearLayout>
 
@@ -133,12 +170,32 @@
                 android:gravity="center"
                 android:layout_weight="1">
 
-            <ImageView
-                    android:layout_width="wrap_content"
-                    android:padding="10dp"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/car_docs_tabbar"
-            />
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                <View android:layout_width="match_parent"
+                      android:layout_height="2dp"
+                      android:id="@+id/viewList"
+                      android:layout_alignLeft="@+id/ivList"
+                      android:layout_alignRight="@+id/ivList"
+                      android:background="@color/red"
+                      android:visibility="invisible"
+                      android:layout_alignStart="@+id/ivList"
+                      android:layout_alignEnd="@+id/ivList"/>
+
+                <ImageView
+                        android:layout_width="wrap_content"
+                        android:padding="10dp"
+                        android:layout_below="@+id/viewList"
+                        android:id="@+id/ivList"
+                        android:layout_centerHorizontal="true"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/car_docs_tabbar"
+                />
+            </RelativeLayout>
+
+
 
         </LinearLayout>
 
@@ -148,12 +205,33 @@
                 android:gravity="center"
                 android:layout_weight="1">
 
-            <ImageView
-                    android:layout_width="wrap_content"
-                    android:padding="10dp"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/offer_tabbar"
-            />
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                <View android:layout_width="match_parent"
+                      android:layout_height="2dp"
+                      android:id="@+id/viewDeals"
+                      android:layout_alignLeft="@+id/ivDeals"
+                      android:layout_alignRight="@+id/ivDeals"
+                      android:background="@color/red"
+                      android:visibility="invisible"
+                      android:layout_alignStart="@+id/ivDeals"
+                      android:layout_alignEnd="@+id/ivDeals"/>
+
+                <ImageView
+                        android:layout_width="wrap_content"
+                        android:padding="10dp"
+                        android:id="@+id/ivDeals"
+                        android:layout_centerHorizontal="true"
+                        android:layout_below="@+id/viewDeals"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/offer_tabbar"
+                />
+            </RelativeLayout>
+
+
+
 
         </LinearLayout>
 

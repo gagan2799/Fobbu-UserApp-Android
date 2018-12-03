@@ -203,6 +203,7 @@ class RSARequestCancelActivity : AppCompatActivity(), ActivityView {
                 setRecycler()
             } else {
                 CommonClass(this, this).removeString("fobbu_request_id")
+                CommonClass(this, this).putString("OnGoingRSA_Screen", "")
                 showPopUp(this)
             }
 

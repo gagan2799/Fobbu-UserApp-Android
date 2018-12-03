@@ -2,7 +2,7 @@
 <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
+        xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
         android:background="@color/blue_transparent_back"
         android:clickable="true"
         android:layout_height="match_parent">
@@ -81,13 +81,14 @@
 
                 <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:id="@+id/llHomeServices"
                         android:visibility="visible"
                         android:orientation="vertical">
 
                     <RelativeLayout
                             android:layout_width="match_parent"
+                            android:layout_marginTop="10dp"
                             android:layout_height="wrap_content">
 
                         <View android:layout_width="50dp"
@@ -144,6 +145,7 @@
 
                     <RelativeLayout
                             android:layout_width="match_parent"
+                            android:layout_marginTop="10dp"
                             android:layout_height="wrap_content">
 
                         <View android:layout_width="50dp"
@@ -185,14 +187,16 @@
                             android:layout_height="wrap_content"
                             android:id="@+id/etVehicleNumber"
                             android:singleLine="true"
-                            android:textSize="@dimen/textsize_medium"
+                            android:textSize="@dimen/textsize_normal"
                             android:background="@drawable/border_line_grey"
                             android:padding="10dp"
                             android:gravity="center"
+                            android:inputType="textCapCharacters"
+                            android:textAllCaps="true"
                             android:hint="@string/enter_vehicle_no"
                             android:layout_marginLeft="50dp"
                             android:layout_marginTop="10dp"
-                            android:layout_marginRight="50dp"/>
+                            android:layout_marginRight="50dp" tools:ignore="TextFields"/>
 
 
                     <LinearLayout
@@ -424,6 +428,7 @@
 
                     <RelativeLayout
                             android:layout_width="match_parent"
+                            android:layout_marginTop="10dp"
                             android:layout_height="wrap_content">
 
                         <View android:layout_width="50dp"
@@ -470,8 +475,8 @@
                                 android:layout_width="match_parent"
                                 android:orientation="horizontal"
                                 android:weightSum="4"
-                                android:layout_marginLeft="15dp"
-                                android:layout_marginRight="15dp"
+                                android:layout_marginLeft="20dp"
+                                android:layout_marginRight="20dp"
                                 android:gravity="bottom"
                                 android:layout_marginBottom="10dp"
                                 android:layout_height="match_parent">
@@ -587,6 +592,7 @@
 
                         <RelativeLayout
                                 android:layout_width="match_parent"
+                                android:layout_marginTop="10dp"
                                 android:layout_height="wrap_content">
 
                             <View android:layout_width="50dp"
@@ -876,6 +882,7 @@
 
                     <RelativeLayout
                             android:layout_width="match_parent"
+                            android:layout_marginTop="10dp"
                             android:layout_height="wrap_content">
 
                         <View android:layout_width="50dp"
@@ -1040,6 +1047,7 @@
 
                     <RelativeLayout
                             android:layout_width="match_parent"
+                            android:layout_marginTop="10dp"
                             android:layout_height="wrap_content">
 
                         <View android:layout_width="50dp"

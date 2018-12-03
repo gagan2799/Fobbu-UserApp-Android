@@ -475,8 +475,8 @@ public final class R {
         public static final int title_view = 0x7f090209;
         public static final int toolbar = 0x7f09020a;
         public static final int url = 0x7f090266;
-        public static final int wide = 0x7f09027d;
-        public static final int wrap_content = 0x7f090280;
+        public static final int wide = 0x7f090281;
+        public static final int wrap_content = 0x7f090284;
     }
     public static final class integer {
         private integer() {}
