@@ -245,6 +245,10 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
         mMapView.getMapAsync { mMap ->
             googleMap = mMap
 
+            googleMap.uiSettings.isMyLocationButtonEnabled = true
+
+            googleMap.isMyLocationEnabled=true
+
             googleMap.setInfoWindowAdapter(InfoWindow())
         }
     }
@@ -336,7 +340,6 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
         googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
     }
-
 
     override fun onPause() {
         super.onPause()

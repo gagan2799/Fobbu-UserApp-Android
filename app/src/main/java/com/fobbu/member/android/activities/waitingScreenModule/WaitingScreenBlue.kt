@@ -78,9 +78,8 @@ class WaitingScreenBlue : AppCompatActivity() {
                 "2" -> {
                     strWhich="3"
 
-                    startActivity(Intent(this,
-                        AddEditVehicleActivity::class.java)
-                        .putExtra("from_where","RSA"))
+                    startActivity(Intent(this, WaitingScreenWhite::class.java)
+                        .putExtra("from_where", "building_live"))
                     finish()
                 }
             }

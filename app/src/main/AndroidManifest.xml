@@ -100,6 +100,7 @@
         </service>
 
         <activity
+
                 android:name=".activities.rsaModule.RSARequestCancelActivity"
                 android:theme="@style/Transparent">
         </activity>

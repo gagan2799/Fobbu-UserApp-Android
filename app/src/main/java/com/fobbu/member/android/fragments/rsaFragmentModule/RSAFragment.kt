@@ -9,10 +9,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentSender
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.graphics.Color
-import android.graphics.Matrix
+import android.graphics.*
 import android.location.Location
 import android.media.ExifInterface
 import android.net.Uri
@@ -69,9 +66,7 @@ import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.io.ByteArrayOutputStream
-import java.io.File
-import java.io.FileOutputStream
+import java.io.*
 import java.lang.Double
 import java.util.*
 
@@ -629,7 +624,13 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                             setAnimationRight(linearLayoutCarRightTwo, activity!!)
                             setAnimationLeft(linearLayoutScooterLeftTwo, activity!!)
                             topBarChanges!!.showGoneTopBar(false)
-                            rlTopDrawer.visibility = View.VISIBLE
+
+                            Handler().postDelayed(
+                                {
+                                    rlTopDrawer.visibility = View.VISIBLE
+                                }, 200
+                            )
+
                             tvHeading.text = resources.getString(R.string.flat_tyre_worries)
                             tvSubheading.text = resources.getString(R.string.fix_on_the_spot)
                         }
@@ -816,7 +817,7 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     override fun fetchingServiceReport(mainPojo: MainPojo) {
         //val mainPojo = response!!.body()
         val serviceList = mainPojo!!.services
-        dataList.clear()
+        dataListServices.clear()
         for (i in serviceList.indices) {
             if (serviceList[i]["service_type"].toString() == "RSA")
                 dataListServices.add(serviceList[i])
@@ -985,6 +986,7 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
         mMapView.getMapAsync { mMap ->
             googleMap = mMap
 
+            googleMap.isMyLocationEnabled = true
             googleMap.setInfoWindowAdapter(InfoWindow())
 
         }
@@ -1006,7 +1008,6 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                     arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
                     locationPermissionRequestCode
                 )
-
             } else {
                 enableGPSAutoMatically()
             }
@@ -1439,7 +1440,7 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                     //val imgFile = File(path)
                     println("IMAGE FILE 1$imgFile")
 
-                    //dataList.add(imgFile)
+                    dataList.add(imgFile)
                     if (imgFile.exists()) {
                         when (imageFrom) {
                             "1" -> {
@@ -1484,7 +1485,7 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                     val imgFile = compressImage(File(mFileTemp!!.path))
                     println("IMAGE FILE 2  $imgFile")
 
-                    // dataList.add(imgFile)
+                    dataList.add(imgFile)
                     if (imgFile.exists()) {
                         when (imageFrom) {
                             "1" -> {
@@ -1547,12 +1548,17 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
     // Method for compressing image
     private fun compressImage(imgFile: File): File {
+        //////old code
         val bos = ByteArrayOutputStream()
 
         // var myBitmap = BitmapFactory.decodeFile(imgFile.absolutePath)
         val myBitmap = imageRotation(BitmapFactory.decodeFile(imgFile.absolutePath), imgFile.absolutePath)
 
-        myBitmap.compress(Bitmap.CompressFormat.JPEG, 25, bos)
+        val nh = (myBitmap.height * (512.0 / myBitmap.width)).toInt()
+
+        val scaled = Bitmap.createScaledBitmap(myBitmap, 512, nh, true)
+
+        scaled.compress(Bitmap.CompressFormat.JPEG, 80, bos)
 
         val bitmapdata = bos.toByteArray()
 
@@ -1561,9 +1567,7 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
         fos.write(bitmapdata)
         fos.flush()
         fos.close()
-
         return f
-
     }
 
     // Method for rotating images

@@ -56,13 +56,11 @@ class TutorialFragment1 : Fragment() {
 
     override fun onDestroy() {
         super.onDestroy()
-
         try {
             activity!!.unregisterReceiver(startGif)
         } catch (e: Exception) {
             e.printStackTrace()
         }
-
     }
 
     private val startGif = object : BroadcastReceiver() {
@@ -70,7 +68,7 @@ class TutorialFragment1 : Fragment() {
 
             //System.out.println("BROADCAST RECEIVED POSITION " + intent.getStringExtra("position"));
 
-            var position = Integer.valueOf(intent.getStringExtra("position"))
+            val position = Integer.valueOf(intent.getStringExtra("position"))
 
             activity!!.runOnUiThread {
                 if (position == 0)

@@ -79,6 +79,8 @@ class VehicleListActivity : AppCompatActivity(),ActivityView{
             finish()
         }
 
+        tvAddEditVehicle.setOnClickListener { finish() }
+
         tvScooter.setOnClickListener {
 
             if(vehicleType!="2wheeler")
@@ -106,7 +108,6 @@ class VehicleListActivity : AppCompatActivity(),ActivityView{
                     tvNodata.text="No 2 Wheeler Added"
                     recyclerViewVehicles.visibility=View.GONE
                 }
-
             }
 
         }

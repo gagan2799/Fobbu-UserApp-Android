@@ -33,19 +33,17 @@ class SplashActivity : AppCompatActivity() {
         splashAnimation()
 
         fetchDeviceToken()
-
-
     }
 
     // Method for launching different screens
     private fun navigateToScreen() {
 
         when {
-            CommonClass(this,this).getString("CoachMark_first_time")=="" -> {
-                startActivity(Intent(this,TutorialActivity::class.java))
+            CommonClass(this, this).getString("CoachMark_first_time") == "" -> {
+                startActivity(Intent(this, TutorialActivity::class.java))
                 finish()
             }
-            CommonClass(this,this).getString("mobile_number")!="" -> {
+            CommonClass(this, this).getString("mobile_number") != "" -> {
                 startActivity(Intent(this, DashboardActivity::class.java))
                 finish()
             }
@@ -59,36 +57,36 @@ class SplashActivity : AppCompatActivity() {
 
     override fun onStop() {
         super.onStop()
-         try {
-             linearLayoutImageLeft.clearAnimation()
-             animationRight.setAnimationListener(null)
-         }catch (e:Exception)
-         {
-
-         }
+        try {
+            linearLayoutImageLeft.clearAnimation()
+            animationRight.setAnimationListener(null)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
     // Method to manage all the animations of the activity
     private fun splashAnimation() {
 
         // slide left animation
-        animationLeft= AnimationUtils.loadAnimation(this
-            ,R.anim.slide_left)
+        animationLeft = AnimationUtils.loadAnimation(
+            this
+            , R.anim.slide_left
+        )
         linearLayoutImageLeft.clearAnimation()
 
         //slide right animation
-        animationRight = AnimationUtils.loadAnimation(this,R.anim.slide_right)
+        animationRight = AnimationUtils.loadAnimation(this, R.anim.slide_right)
         linearLayoutImageRight.clearAnimation()
 
         // fade animation
-        animationFade= AnimationUtils.loadAnimation(applicationContext, R.anim.fade)
+        animationFade = AnimationUtils.loadAnimation(applicationContext, R.anim.fade)
         ivCenter.clearAnimation()
-        ivCenter.animation=animationFade
+        ivCenter.animation = animationFade
         ivFobbuText.startAnimation(animationFade)
 
         // animation listener on fade animation
-        animationFade.setAnimationListener(object :Animation.AnimationListener
-        {
+        animationFade.setAnimationListener(object : Animation.AnimationListener {
             override fun onAnimationRepeat(p0: Animation?) {
                 TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
             }
@@ -97,20 +95,20 @@ class SplashActivity : AppCompatActivity() {
 
                 linearLayoutImageLeft.startAnimation(animationLeft)
                 linearLayoutImageRight.startAnimation(animationRight)
-                linearLayoutCarScooterSplash.visibility=View.VISIBLE
-                imageViewLeftSplash.visibility=View.VISIBLE
+                linearLayoutCarScooterSplash.visibility = View.VISIBLE
+                imageViewLeftSplash.visibility = View.VISIBLE
 
                 // animation listener on slide right animation
-                animationRight.setAnimationListener(object :Animation.AnimationListener
-                {
+                animationRight.setAnimationListener(object : Animation.AnimationListener {
                     override fun onAnimationRepeat(p0: Animation?) {
                     }
 
                     override fun onAnimationEnd(p0: Animation?) {
-                        linearLayoutBottomTextSplash.visibility=View.VISIBLE
+                        linearLayoutBottomTextSplash.visibility = View.VISIBLE
 
                         // slide from bottom to up animation
-                        val animationBottomToTop:Animation=AnimationUtils.loadAnimation(applicationContext,R.anim.bottoms_up)
+                        val animationBottomToTop: Animation =
+                            AnimationUtils.loadAnimation(applicationContext, R.anim.bottoms_up)
                         linearLayoutBottomTextSplash.startAnimation(animationBottomToTop)
 
                         // handler for shooting next activity after certain time period

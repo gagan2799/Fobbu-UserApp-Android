@@ -1434,6 +1434,7 @@ drawable flat_tyre_blue
 drawable flat_tyre_gray
 drawable flat_tyre_selected
 drawable flatbed_selected
+drawable fobbu_cancel_logo
 drawable fobbu_logo_blue
 drawable fobbu_pay
 drawable fobbu_splash
@@ -2212,7 +2213,6 @@ id rlNameBar
 id rlNewVehicleAdded
 id rlPic
 id rlProfilePic
-id rlServiceType
 id rlShareRSA
 id rlTerms
 id rlTop
@@ -2427,7 +2427,6 @@ id url
 id useLogo
 id vertical
 id view
-id view1
 id viewBottom
 id viewDeals
 id viewGetAbove

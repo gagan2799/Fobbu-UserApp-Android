@@ -31,7 +31,7 @@ class MyFirebaseInstanceIDService : FirebaseInstanceIdService() {
     lateinit var myPrefs: SharedPreferences
 
     lateinit var prefsEditor: SharedPreferences.Editor
-    private val BASE_URL: String = "http://104.211.100.239:3000/"
+    private val BASE_URL: String = "http://13.127.103.243:3000/"
     lateinit var webServiceApi: WebServiceApi
 
 

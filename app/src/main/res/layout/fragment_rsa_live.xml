@@ -19,7 +19,7 @@
                 android:gravity="center"
                 android:id="@+id/tvRSA"
                 android:textColor="@color/red"
-                android:textSize="@dimen/textsize_medium"/>
+                android:textSize="@dimen/textsize_normal"/>
 
         <View android:layout_width="match_parent"
               android:layout_height="1dp"
@@ -42,7 +42,9 @@
                     android:background="@color/view_grey"
                     android:layout_centerVertical="true"
                     android:layout_toLeftOf="@+id/rlPic"
-                    android:layout_marginLeft="50dp"/>
+                    android:layout_marginLeft="50dp"
+                    android:layout_toStartOf="@+id/rlPic"
+                    android:layout_marginStart="50dp"/>
 
             <RelativeLayout
                     android:id="@+id/rlPic"
@@ -50,7 +52,6 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true">
-
 
                 <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/imgProfile"
@@ -133,7 +134,10 @@
                     android:src="@drawable/dotted"
                     android:layout_marginRight="50dp"
                     android:layout_marginLeft="5dp"
-                    android:layerType="software"/>
+                    android:layerType="software"
+                    android:layout_marginEnd="50dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_toEndOf="@+id/tvTrack"/>
 
         </RelativeLayout>
 
@@ -153,7 +157,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
 
-            <RelativeLayout android:layout_width="match_parent"
+            <RelativeLayout
+                    android:layout_width="match_parent"
                             android:layout_below="@+id/ivTool"
                             android:gravity="center"
                             android:layout_marginBottom="10dp"
@@ -166,11 +171,9 @@
                         android:textSize="@dimen/textsize_small"
                         android:id="@+id/tvText"
                         android:layout_centerVertical="true"
-                        android:paddingRight="10dp"
+                        android:padding="10dp"
                         android:text="@string/please_fobbu_gathering_tools"
-                        android:gravity="center"
-                        android:paddingLeft="10dp"
-                        android:paddingBottom="10dp"/>
+                        android:gravity="center" />
 
                 <TextView
                         android:layout_width="wrap_content"
@@ -180,20 +183,19 @@
                         android:id="@+id/tvCode"
                         android:layout_toRightOf="@+id/tvText"
                         android:text="1234"
+                        android:layout_centerVertical="true"
+                        android:visibility="gone"
                         android:background="@drawable/rounded_green_background"
                         android:gravity="center"
-                        android:visibility="gone"
                         android:paddingTop="5dp"
                         android:paddingBottom="5dp"
                         android:paddingLeft="2dp"
-                        android:paddingRight="2dp" />
+                        android:paddingRight="2dp"
+                        android:layout_toEndOf="@+id/tvText"/>
 
             </RelativeLayout>
 
-
         </RelativeLayout>
-
-
 
         <com.google.android.gms.maps.MapView
                 xmlns:android="http://schemas.android.com/apk/res/android"

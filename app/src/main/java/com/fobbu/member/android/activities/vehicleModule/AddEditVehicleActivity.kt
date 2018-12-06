@@ -601,13 +601,19 @@ class AddEditVehicleActivity : AppCompatActivity(),
 
 
     //Method for compressing image
+    // Method for compressing image
     private fun compressImage(imgFile: File): File {
+        //////old code
         val bos = ByteArrayOutputStream()
 
         // var myBitmap = BitmapFactory.decodeFile(imgFile.absolutePath)
         val myBitmap = imageRotation(BitmapFactory.decodeFile(imgFile.absolutePath), imgFile.absolutePath)
 
-        myBitmap.compress(Bitmap.CompressFormat.JPEG, 25, bos)
+        val nh = (myBitmap.height * (512.0 / myBitmap.width)).toInt()
+
+        val scaled = Bitmap.createScaledBitmap(myBitmap, 512, nh, true)
+
+        scaled.compress(Bitmap.CompressFormat.JPEG, 80, bos)
 
         val bitmapdata = bos.toByteArray()
 
@@ -616,9 +622,7 @@ class AddEditVehicleActivity : AppCompatActivity(),
         fos.write(bitmapdata)
         fos.flush()
         fos.close()
-
         return f
-
     }
 
     // method for changing the orientation of the images

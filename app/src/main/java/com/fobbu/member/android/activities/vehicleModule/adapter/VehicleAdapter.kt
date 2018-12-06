@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.fobbu.member.android.R
+import com.squareup.picasso.Picasso
 
 class VehicleAdapter(internal var activity: Activity, internal  var dataListMain:ArrayList<HashMap<String,Any>>):
     RecyclerView.Adapter<VehicleAdapter.MyViewHolder>() {
@@ -30,6 +31,18 @@ class VehicleAdapter(internal var activity: Activity, internal  var dataListMain
         holder.tvVehicleNumber.text = dataListMain[position]["vehicle_registration_number"].toString()
         holder.tvYear.text = dataListMain[position]["make_of_year"].toString()
 
+        if(dataListMain[position].containsKey("images")) {
+            val listImages = dataListMain[position]["images"] as ArrayList<String>
+
+            if (listImages.size > 0)
+                Picasso.get().load(listImages[0])
+                    .error(R.drawable.dummy_services)
+                    .into(holder.ivImage)
+            else
+                holder.ivImage.setImageResource(R.drawable.dummy_services)
+        }
+        else
+            holder.ivImage.setImageResource(R.drawable.dummy_services)
     }
 
     inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
