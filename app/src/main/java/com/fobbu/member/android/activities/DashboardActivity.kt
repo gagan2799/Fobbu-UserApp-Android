@@ -276,7 +276,6 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
         {
 
         }
-
     }
 
     private fun checkAndNavigateFromPush() {

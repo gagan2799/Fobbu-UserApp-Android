@@ -37,6 +37,8 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         if (remoteMessage.notification != null) {
             Log.e(TAG, "Notification Body: " + remoteMessage.data["type"])
 
+            type = remoteMessage.data["type"].toString()
+
             try {
                // val json = JSONObject(remoteMessage.notification!!.title)
 
@@ -46,7 +48,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
                 }
                 else
                 {
-                    ifAppIsNotOpenSendNotification(remoteMessage.data["type"].toString(),remoteMessage)
+                    ifAppIsNotOpenSendNotification(type,remoteMessage)
                 }
 
 
@@ -61,7 +63,10 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
         if(type ==FcmPushTypes.Types.accept)
         {
-            startActivity(Intent(this, WaitingScreenBlue::class.java).putExtra("navigate_to", "1"))
+            val intent =Intent()
+            intent.action = FcmPushTypes.Types.acceptRequestBroadCast
+            intent.putExtra("navigate_to","1")
+            sendBroadcast(intent)
         }
         else if(type ==FcmPushTypes.Types.inRouteRequest)
         {
@@ -70,12 +75,12 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             intent.putExtra("navigate_to",FcmPushTypes.Types.inRouteRequest)
             sendBroadcast(intent)
         }
-
     }
 
     private fun ifAppIsNotOpenSendNotification(type: String, remoteMessage: RemoteMessage) {
 
         val intent = Intent(this, DashboardActivity::class.java)
+
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
 
         if(type ==FcmPushTypes.Types.accept)

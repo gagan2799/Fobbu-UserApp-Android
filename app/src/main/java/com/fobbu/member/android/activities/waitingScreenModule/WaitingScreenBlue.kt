@@ -1,13 +1,18 @@
 package com.fobbu.member.android.activities.waitingScreenModule
 
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
 import android.os.Handler
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.fobbu.member.android.R
 import com.fobbu.member.android.activities.vehicleModule.AddEditVehicleActivity
+import com.fobbu.member.android.fcm.FcmPushTypes
 import kotlinx.android.synthetic.main.activity_waiting_screen_blue.*
+import java.lang.Exception
 
 class WaitingScreenBlue : AppCompatActivity() {
     private var strWhich = "0"
@@ -89,5 +94,32 @@ class WaitingScreenBlue : AppCompatActivity() {
 
     override fun onBackPressed() {
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        val filter = IntentFilter(FcmPushTypes.Types.acceptRequestBroadCast)
+         registerReceiver(changeRSALiveScreenReceiver, filter)
+    }
+
+    private val changeRSALiveScreenReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+
+            strWhich = intent.getStringExtra("navigate_to")
+            changeLayout()
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        try {
+            unregisterReceiver(changeRSALiveScreenReceiver)
+        }
+        catch (e:Exception)
+        {
+
+        }
     }
 }
