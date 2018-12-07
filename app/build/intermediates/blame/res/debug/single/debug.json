@@ -6892,12 +6892,12 @@
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\8535e9c43b1934f846f2a7844fab5ef5\\res\\drawable-ldrtl-hdpi-v17\\abc_ic_menu_copy_mtrl_am_alpha.png"
     },
     {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_fuel_delivery_selected.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xhdpi\\fuel_delivery_selected.png"
-    },
-    {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_fobbu_cancel_logo.png.flat",
         "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-hdpi\\fobbu_cancel_logo.png"
+    },
+    {
+        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_fuel_delivery_selected.png.flat",
+        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xhdpi\\fuel_delivery_selected.png"
     },
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_lsd_hover.png.flat",

@@ -236,6 +236,23 @@ class ApiClient(var activity: Activity) {
         })
     }
 
+    // service request API
+
+    fun getService(token:String,requestId: String, responseHandler: ResponseHandler)
+    {
+        webServiceApi.getServices(token,requestId).enqueue(object :Callback<MainPojo>
+        {
+            override fun onFailure(call: Call<MainPojo>, t: Throwable) {
+                responseHandler.onServerError("""Server Error:${t.message}""")
+            }
+
+            override fun onResponse(call: Call<MainPojo>, response: Response<MainPojo>) {
+                handleSuccess(response,responseHandler)
+            }
+
+        })
+    }
+
 
 
     // method for handling the response

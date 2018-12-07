@@ -986,7 +986,14 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
         mMapView.getMapAsync { mMap ->
             googleMap = mMap
 
-            googleMap.isMyLocationEnabled = true
+            val permission =
+                ContextCompat.checkSelfPermission(context!!, android.Manifest.permission.ACCESS_FINE_LOCATION)
+
+            if (permission == PackageManager.PERMISSION_GRANTED) {
+                googleMap.isMyLocationEnabled = true
+            }
+
+
             googleMap.setInfoWindowAdapter(InfoWindow())
 
         }

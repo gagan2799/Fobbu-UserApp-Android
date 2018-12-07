@@ -16,15 +16,21 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
+import com.bumptech.glide.Glide
 import com.fobbu.member.android.R
 
 import com.fobbu.member.android.activities.waitingScreenModule.WaitingScreenBlue
 import com.fobbu.member.android.activities.waitingScreenModule.WaitingScreenWhite
 import com.fobbu.member.android.fcm.FcmPushTypes
+import com.fobbu.member.android.fragments.rsaFragmentModule.presenter.RsaLiveHandler
+import com.fobbu.member.android.fragments.rsaFragmentModule.presenter.RsaLivePresenter
 
 
 import com.fobbu.member.android.interfaces.HeaderIconChanges
 import com.fobbu.member.android.interfaces.TopBarChanges
+import com.fobbu.member.android.modals.MainPojo
+import com.fobbu.member.android.utils.CommonClass
+import com.fobbu.member.android.view.ActivityView
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.common.api.PendingResult
@@ -35,10 +41,13 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.MapsInitializer
 import com.google.android.gms.maps.model.*
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.fragment_rsa_live.*
 import java.lang.Double
 
 class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
-    GoogleApiClient.ConnectionCallbacks, LocationListener {
+    GoogleApiClient.ConnectionCallbacks, LocationListener ,ActivityView{
+
 
     private var headerIconChanges: HeaderIconChanges? = null
 
@@ -51,17 +60,19 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     private var strLatitude = ""
     private var strLongitude = ""
 
+    lateinit var rsaLiveHandler:RsaLiveHandler
+
     private lateinit var rlInformation:RelativeLayout
     private lateinit var ivTool:ImageView
     private lateinit var tvText:TextView
     private lateinit var tvCode:TextView
     private  var strWhere=""
     private var topBarChanges: TopBarChanges?=null
+    var mobileNumber=""
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_rsa_live, container, false)
-
         if (view != null) {
 
             mapInitialise(view, savedInstanceState)
@@ -71,7 +82,11 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
             initialise(view)
 
             handleClick()
+
+            rsaLiveHandler=RsaLivePresenter(this.activity!!,this)
+            rsaLiveHandler.getService(CommonClass(activity!!, activity!!).getString("x_access_token"),CommonClass(this.activity!!, this.activity!!).getString("fobbu_request_id"))
         }
+
 
         return view
     }
@@ -400,5 +415,26 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
     }
 
+
+    override fun onRequestSuccessReport(mainPojo: MainPojo) {
+     if (mainPojo.success=="true")
+     {
+
+         val list=ArrayList<HashMap<String,Any>>()
+         if (!mainPojo.getData().partner.profile.isNullOrBlank()){
+             Picasso.get().load(mainPojo.getData().partner.profile).error(R.drawable.dummy_pic).into(imgProfile)
+         }
+         tvName.text= mainPojo.getData().partner.display_name
+         mobileNumber=mainPojo.getData().partner.mobile_number
+
+     }
+    }
+
+    override fun showLoader() {
+    }
+
+    override fun hideLoader() {
+
+    }
 
 }

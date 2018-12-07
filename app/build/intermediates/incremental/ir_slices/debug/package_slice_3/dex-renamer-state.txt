@@ -1,4 +1,0 @@
-#Fri Dec 07 09:51:27 IST 2018
-base.0=D\:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\3
-path.0=classes.dex
-renamed.0=classes.dex

@@ -1,20 +1,20 @@
 package com.fobbu.member.android.fcm
 
-import android.app.ActivityManager
-import android.app.Notification
-import android.app.NotificationManager
-import android.app.PendingIntent
+import android.annotation.SuppressLint
+import android.app.*
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.media.RingtoneManager
 import android.os.Build
+import android.support.annotation.RequiresApi
 import android.support.v4.app.NotificationCompat
 import android.util.Log
 import com.fobbu.member.android.R
 import com.fobbu.member.android.activities.dashboardActivity.DashboardActivity
-import com.fobbu.member.android.activities.waitingScreenModule.WaitingScreenBlue
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
+import org.json.JSONObject
 
 
 /**
@@ -23,8 +23,9 @@ import com.google.firebase.messaging.RemoteMessage
 class MyFirebaseMessagingService : FirebaseMessagingService() {
     internal var type: String = ""
     internal var value = ""
-    internal var message = ""
     private val TAG = "Firebase Msg"
+    val NOTIF_CHANNEL_ID = "com.fobbu.member.android_channel_id_090909"
+
 
     override fun onMessageReceived(remoteMessage: RemoteMessage?) {//Displaying data in log
 
@@ -33,89 +34,152 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
         Log.e(TAG, "Notification Body: $remoteMessage")
 
-        // Check if message contains a notification payload.
-        if (remoteMessage.notification != null) {
-            Log.e(TAG, "Notification Body: " + remoteMessage.data["type"])
+        Log.e(TAG, "Notification Body: " + remoteMessage.data["type"])
 
-            type = remoteMessage.data["type"].toString()
+        val dataMap: Map<String, String> = remoteMessage.data
 
-            try {
-               // val json = JSONObject(remoteMessage.notification!!.title)
+        type = remoteMessage.data["type"].toString()
 
-                if(!isAppIsInBackground(this)){
+        try {
+            // val json = JSONObject(remoteMessage.notification!!.title)
 
-                    ifAppIsOpen(type)
-                }
-                else
-                {
-                    ifAppIsNotOpenSendNotification(type,remoteMessage)
-                }
+            if (!isAppIsInBackground(this)) {
 
+                ifAppIsOpen(dataMap)
+            } else {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    sendNotificationPush(dataMap)
+                } else
+                    ifAppIsNotOpenSendNotification(dataMap)
 
-            } catch (e: Exception) {
-                Log.e(TAG, "Exception: " + e.message)
             }
-            //handleNotification(remoteMessage!!.notification!!.body)
+
+
+        } catch (e: Exception) {
+            Log.e(TAG, "Exception: " + e.message)
         }
+        //handleNotification(remoteMessage!!.notification!!.body)
+
     }
 
-    private fun ifAppIsOpen(type: String) {
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private fun sendNotificationPush(map: Map<String, String>) {
 
-        if(type ==FcmPushTypes.Types.accept)
-        {
-            val intent =Intent()
+        val nm = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        @SuppressLint("WrongConstant") val nc =
+            NotificationChannel(NOTIF_CHANNEL_ID, TAG, NotificationManager.IMPORTANCE_MAX)
+        nc.description = ""
+        nc.enableLights(true)
+        nc.lightColor = Color.GREEN
+        nm.createNotificationChannel(nc)
+
+        val intent = Intent(this, DashboardActivity::class.java)
+
+        val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+
+        val json = JSONObject(map["notification"])
+
+        if (json["type"] == FcmPushTypes.Types.accept) {
+            intent.putExtra("from_push", json["type"].toString())
+        } else if (json["type"] == FcmPushTypes.Types.inRouteRequest) {
+            intent.putExtra("from_push", json["type"].toString())
+        }
+
+        val pendingIntent = PendingIntent.getActivity(
+            this, 0, intent,
+            PendingIntent.FLAG_ONE_SHOT
+        )
+
+        val notificationBuilder = NotificationCompat.Builder(
+            this, NOTIF_CHANNEL_ID
+        )
+            .setSmallIcon(getNotificationIcon())
+
+            .setContentTitle(map["body"]).setContentText(map["body"])
+
+            .setStyle(NotificationCompat.BigTextStyle().bigText(map["body"]))
+
+            .setDefaults(Notification.DEFAULT_ALL) // must requires VIBRATE permission
+
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
+
+            .setAutoCancel(true)
+
+            .setSound(defaultSoundUri)
+
+            .setChannelId(NOTIF_CHANNEL_ID)
+
+            .setContentIntent(pendingIntent)
+
+        nm.notify(0, notificationBuilder.build())
+
+    }
+
+    private fun ifAppIsOpen(map: Map<String, String>) {
+
+        val json = JSONObject(map["notification"])
+
+        if (json["type"] == FcmPushTypes.Types.accept) {
+            val intent = Intent()
             intent.action = FcmPushTypes.Types.acceptRequestBroadCast
-            intent.putExtra("navigate_to","1")
+            intent.putExtra("navigate_to", "1")
             sendBroadcast(intent)
-        }
-        else if(type ==FcmPushTypes.Types.inRouteRequest)
-        {
-            val intent =Intent()
+        } else if (json["type"] == FcmPushTypes.Types.inRouteRequest) {
+            val intent = Intent()
             intent.action = FcmPushTypes.Types.inRouteRequestBroadCast
-            intent.putExtra("navigate_to",FcmPushTypes.Types.inRouteRequest)
+            intent.putExtra("navigate_to", FcmPushTypes.Types.inRouteRequest)
             sendBroadcast(intent)
         }
     }
 
-    private fun ifAppIsNotOpenSendNotification(type: String, remoteMessage: RemoteMessage) {
+    private fun ifAppIsNotOpenSendNotification(map: Map<String, String>) {
 
         val intent = Intent(this, DashboardActivity::class.java)
 
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
 
-        if(type ==FcmPushTypes.Types.accept)
-        {
-            intent.putExtra("from_push",type)
-        }
-        else if(type ==FcmPushTypes.Types.inRouteRequest)
-        {
-            intent.putExtra("from_push",type)
+        val json = JSONObject(map["notification"])
+
+        if (json["type"] == FcmPushTypes.Types.accept) {
+            intent.putExtra("from_push", json["type"].toString())
+        } else if (json["type"] == FcmPushTypes.Types.inRouteRequest) {
+            intent.putExtra("from_push", json["type"].toString())
         }
 
         startActivity(intent)
 
         val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
 
-        val pendingIntent = PendingIntent.getActivity(this, 0, intent,
-                PendingIntent.FLAG_ONE_SHOT)
+        val pendingIntent = PendingIntent.getActivity(
+            this, 0, intent,
+            PendingIntent.FLAG_ONE_SHOT
+        )
 
         val notificationBuilder = NotificationCompat.Builder(
-                this)
-                .setSmallIcon(getNotificationIcon())
+            this
+        )
+            .setSmallIcon(getNotificationIcon())
 
-                .setContentTitle(resources.getString(R.string.app_name)).setContentText(message)
+            .setContentTitle(resources.getString(R.string.app_name)).setContentText(map["body"])
 
-                .setStyle(NotificationCompat.BigTextStyle().bigText(message))
+            .setStyle(NotificationCompat.BigTextStyle().bigText(map["body"]))
 
-                .setDefaults(Notification.DEFAULT_ALL) // must requires VIBRATE permission
+            .setDefaults(Notification.DEFAULT_ALL) // must requires VIBRATE permission
 
-                .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
 
-                .setAutoCancel(true)
+            .setAutoCancel(true)
 
-                .setSound(defaultSoundUri)
+            .setSound(defaultSoundUri)
 
-                .setContentIntent(pendingIntent)
+            .setContentIntent(pendingIntent)
 
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 

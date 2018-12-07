@@ -99,4 +99,10 @@ interface WebServiceApi {
     @GET("users/reason?type=user")
     fun getCancellationReason(@Header("x-access-token") token:String):Call<MainPojo>
 
+
+    @GET("users/requests")
+    fun getServices(
+        @Header("x-access-token") token:String,
+        @Query("request_id") requestID:String):Call<MainPojo>
+
 }

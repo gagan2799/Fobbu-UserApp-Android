@@ -12,6 +12,7 @@ class Data
     var display_name: String = ""
     var email: String = ""
     var pin: String = ""
+    var partner=Partner()
 
 
 }
