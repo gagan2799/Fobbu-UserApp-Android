@@ -1,6 +1,7 @@
 package com.fobbu.member.android.activities.vehicleModule.adapter
 
 import android.app.Activity
+import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -8,10 +9,13 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.fobbu.member.android.R
+import com.fobbu.member.android.activities.vehicleModule.AddEditVehicleActivity
 import com.squareup.picasso.Picasso
 
 class VehicleAdapter(internal var activity: Activity, internal  var dataListMain:ArrayList<HashMap<String,Any>>):
+
     RecyclerView.Adapter<VehicleAdapter.MyViewHolder>() {
+
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): MyViewHolder {
         val view = LayoutInflater.from(activity).inflate(
             R.layout.inflate_vehicle_adapter
@@ -43,6 +47,13 @@ class VehicleAdapter(internal var activity: Activity, internal  var dataListMain
         }
         else
             holder.ivImage.setImageResource(R.drawable.dummy_services)
+
+        holder.itemView.setOnClickListener {
+
+            activity.startActivity(Intent(activity,AddEditVehicleActivity::class.java).putExtra("vehicle_edit",
+                dataListMain[position]))
+        }
+
     }
 
     inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {

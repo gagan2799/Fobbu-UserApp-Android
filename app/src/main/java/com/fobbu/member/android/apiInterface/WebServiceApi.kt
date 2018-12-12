@@ -47,6 +47,14 @@ interface WebServiceApi {
 
             : Call<MainPojo>
 
+    @JvmSuppressWildcards
+    @Multipart
+    @POST("users/vehicles/update_vehicle")
+    fun editVehicle(
+        @PartMap body: Map<String,RequestBody>,
+        @Part files :ArrayList<MultipartBody.Part>,
+        @Header("x-access-token") token: String): Call<MainPojo>
+
 
     @GET("/partners/services")
     fun fetchServices(

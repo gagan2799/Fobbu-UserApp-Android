@@ -67,6 +67,7 @@
                 android:layout_alignLeft="@+id/tvNew"
                 android:layout_alignRight="@+id/tvNew"
                 android:layout_below="@+id/tvNew"
+                android:id="@+id/viewNew"
                 android:background="@color/red"
                 android:layout_height="1dp"/>
 
@@ -81,6 +82,16 @@
                 android:layout_marginLeft="50dp"
                 android:textSize="@dimen/textsize_medium"
                 android:layout_height="wrap_content"/>
+
+        <View
+                android:layout_width="match_parent"
+                android:layout_alignLeft="@+id/tvEdit"
+                android:layout_alignRight="@+id/tvEdit"
+                android:layout_below="@+id/tvEdit"
+                android:id="@+id/viewEdit"
+                android:visibility="gone"
+                android:background="@color/red"
+                android:layout_height="1dp"/>
 
         <ImageView
                 android:layout_width="wrap_content"
@@ -368,11 +379,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/add_vehicle"
-                    android:textSize="@dimen/textsize_small"
                     android:layout_marginTop="25dp"
                     android:gravity="center"
                     android:padding="@dimen/red_rounded_rectangle_padding"
                     android:layout_marginRight="40dp"
+                    android:textSize="@dimen/login_textsize_medium"
                     android:foreground="?attr/selectableItemBackground"
                     android:singleLine="true"
                     android:layout_marginBottom="10dp"

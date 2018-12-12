@@ -34,7 +34,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
         Log.e(TAG, "Notification Body: $remoteMessage")
 
-        Log.e(TAG, "Notification Body: " + remoteMessage.data["type"])
+        Log.e(TAG, "Notification Body: " + remoteMessage.data)
 
         val dataMap: Map<String, String> = remoteMessage.data
 

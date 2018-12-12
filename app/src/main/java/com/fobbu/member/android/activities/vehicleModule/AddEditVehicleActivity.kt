@@ -34,15 +34,18 @@ import com.fobbu.member.android.apiInterface.MyApplication
 import com.fobbu.member.android.apiInterface.WebServiceApi
 import com.fobbu.member.android.modals.MainPojo
 import com.fobbu.member.android.utils.CommonClass
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_add_edit_vehicle.*
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import org.json.JSONArray
 import org.json.JSONObject
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
 import java.util.*
+import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
 class AddEditVehicleActivity : AppCompatActivity(),
@@ -66,13 +69,16 @@ class AddEditVehicleActivity : AppCompatActivity(),
 
     private var dataList: ArrayList<Any> = ArrayList()
 
-    var fromWhere = ""
+    private var hashMapEdit = HashMap<String, Any>()
+
+    private var fromWhere = ""
+    private var listImagesEdit = ArrayList<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_edit_vehicle)
-        addEditActivityHandler=
-                AddEditVehiclePresenter(this, this)
+
+        addEditActivityHandler = AddEditVehiclePresenter(this, this)
         initialise()
         addClicks()
     }
@@ -89,6 +95,72 @@ class AddEditVehicleActivity : AppCompatActivity(),
             ivList.visibility = View.GONE
             tvEdit.visibility = View.GONE
             tvSkip.visibility = View.VISIBLE
+        }
+
+        if (intent.hasExtra("vehicle_edit")) {
+            hashMapEdit = intent.getSerializableExtra("vehicle_edit") as HashMap<String, Any>
+            etBrand.setText(hashMapEdit["vehicle_brand"].toString())
+            etRegNumber.setText(hashMapEdit["vehicle_registration_number"].toString())
+            etSubModel.setText(hashMapEdit["vehicle_sub_model"].toString())
+            etYearsOfMake.setText(hashMapEdit["make_of_year"].toString())
+
+            vehicleType = hashMapEdit["vehicle_type"].toString()
+
+            if (vehicleType == "2wheeler") {
+                ivBike.setImageResource(R.drawable.scooter_blue)
+                ivCar.setImageResource(R.drawable.car_gray)
+            } else {
+                ivBike.setImageResource(R.drawable.scooter_gray)
+                ivCar.setImageResource(R.drawable.car_blue)
+            }
+
+            tvNew.setTextColor(resources.getColor(R.color.color_grey))
+            tvEdit.setTextColor(resources.getColor(R.color.red))
+
+            viewEdit.visibility = View.VISIBLE
+            viewNew.visibility = View.GONE
+            tvAddEditVehicle.text = resources.getString(R.string.edit_vehicle)
+            tvHeading.text = resources.getString(R.string.edit_vehicle)
+
+            listImagesEdit = hashMapEdit["images"] as ArrayList<String>
+
+            for (i in listImagesEdit.indices) {
+                when (i) {
+                    0 -> {
+                        if (listImagesEdit[i] != "")
+                            Picasso.get().load(listImagesEdit[i])
+                                .error(R.drawable.photo_camera)
+                                .into(ivImage1)
+                        isImageOn1 = true
+
+                    }
+                    1 -> {
+                        if (listImagesEdit[i] != "")
+                            Picasso.get().load(listImagesEdit[i])
+                                .error(R.drawable.photo_camera)
+                                .into(ivImage2)
+
+                        isImageOn2 = true
+                    }
+                    2 -> {
+                        if (listImagesEdit[i] != "")
+                            Picasso.get().load(listImagesEdit[i])
+                                .error(R.drawable.photo_camera)
+                                .into(ivImage3)
+
+                        isImageOn3 = true
+                    }
+                    else -> {
+                        Picasso.get().load(listImagesEdit[i])
+                            .error(R.drawable.photo_camera)
+                            .into(ivImage4)
+                        isImageOn4 = true
+                    }
+                }
+
+            }
+
+
         }
     }
 
@@ -206,6 +278,7 @@ class AddEditVehicleActivity : AppCompatActivity(),
                     Toast.LENGTH_SHORT
                 ).show()
                 else -> {
+
                     if (file1 != null && file1!!.exists())
                         dataList.add(file1!!)
 
@@ -218,7 +291,13 @@ class AddEditVehicleActivity : AppCompatActivity(),
                     if (file4 != null && file4!!.exists())
                         dataList.add(file4!!)
 
-                    addVehicleApi()
+                    if (tvAddEditVehicle.text == resources.getString(R.string.edit_vehicle)) {
+                        editVehicleApi()
+                    } else {
+
+                        addVehicleApi()
+                    }
+
                 }
             }
 
@@ -236,50 +315,94 @@ class AddEditVehicleActivity : AppCompatActivity(),
 
             when (s) {
                 "1" -> {
+
+                    if (tvHeading.text == resources.getString(R.string.edit_vehicle)) {
+                        Glide.with(this@AddEditVehicleActivity)
+                            .load(listImagesEdit[0])
+                            .into(imgBig)
+                    } else {
+                        Glide.with(this@AddEditVehicleActivity)
+                            .load(file1)
+                            .into(imgBig)
+                    }
                     rlBigProfile.visibility = View.VISIBLE
-                    Glide.with(this@AddEditVehicleActivity)
-                        .load(file1)
-                        .into(imgBig)
+
                 }
                 "2" -> {
+                    if (tvHeading.text == resources.getString(R.string.edit_vehicle)) {
+                        Glide.with(this@AddEditVehicleActivity)
+                            .load(listImagesEdit[1])
+                            .into(imgBig)
+                    } else {
+                        Glide.with(this@AddEditVehicleActivity)
+                            .load(file2)
+                            .into(imgBig)
+                    }
                     rlBigProfile.visibility = View.VISIBLE
-                    Glide.with(this@AddEditVehicleActivity)
-                        .load(file2)
-                        .into(imgBig)
                 }
                 "3" -> {
+                    if (tvHeading.text == resources.getString(R.string.edit_vehicle)) {
+                        Glide.with(this@AddEditVehicleActivity)
+                            .load(listImagesEdit[2])
+                            .into(imgBig)
+                    } else {
+                        Glide.with(this@AddEditVehicleActivity)
+                            .load(file3)
+                            .into(imgBig)
+                    }
                     rlBigProfile.visibility = View.VISIBLE
-                    Glide.with(this@AddEditVehicleActivity)
-                        .load(file3)
-                        .into(imgBig)
                 }
                 "4" -> {
+                    if (tvHeading.text == resources.getString(R.string.edit_vehicle)) {
+                        Glide.with(this@AddEditVehicleActivity)
+                            .load(listImagesEdit[3])
+                            .into(imgBig)
+                    } else {
+                        Glide.with(this@AddEditVehicleActivity)
+                            .load(file4)
+                            .into(imgBig)
+                    }
                     rlBigProfile.visibility = View.VISIBLE
-                    Glide.with(this@AddEditVehicleActivity)
-                        .load(file4)
-                        .into(imgBig)
                 }
             }
         }
         alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Delete") { _, _ ->
             when (s) {
                 "1" -> {
-                    file1 = null
+
+                    if (tvHeading.text != resources.getString(R.string.edit_vehicle)) {
+                        file1 = null
+                    } else {
+                        listImagesEdit.removeAt(0)
+                    }
+
                     isImageOn1 = false
                     ivImage1.setImageResource(R.drawable.photo_camera)
                 }
                 "2" -> {
-                    file2 = null
+                    if (tvHeading.text != resources.getString(R.string.edit_vehicle)) {
+                        file2 = null
+                    } else {
+                        listImagesEdit.removeAt(1)
+                    }
                     isImageOn2 = false
                     ivImage2.setImageResource(R.drawable.photo_camera)
                 }
                 "3" -> {
-                    file3 = null
+                    if (tvHeading.text != resources.getString(R.string.edit_vehicle)) {
+                        file3 = null
+                    } else {
+                        listImagesEdit.removeAt(2)
+                    }
                     isImageOn3 = false
                     ivImage3.setImageResource(R.drawable.photo_camera)
                 }
                 "4" -> {
-                    file4 = null
+                    if (tvHeading.text != resources.getString(R.string.edit_vehicle)) {
+                        file4 = null
+                    } else {
+                        listImagesEdit.removeAt(3)
+                    }
                     isImageOn4 = false
                     ivImage4.setImageResource(R.drawable.photo_camera)
                 }
@@ -673,7 +796,7 @@ class AddEditVehicleActivity : AppCompatActivity(),
             fileList.add(imgProfile!!)
         }
 
-     //  rlLoader.visibility = View.VISIBLE
+        //  rlLoader.visibility = View.VISIBLE
 
         val jsonDoc = JSONObject()
 
@@ -691,7 +814,7 @@ class AddEditVehicleActivity : AppCompatActivity(),
 
         val tokenHeader = CommonClass(this, this).getString("x_access_token")
 
-        addEditActivityHandler.sendAddEditData(map,fileList,tokenHeader)
+        addEditActivityHandler.sendAddEditData(map, fileList, tokenHeader)
 
     }
 
@@ -699,8 +822,7 @@ class AddEditVehicleActivity : AppCompatActivity(),
     override fun onRequestSuccessReport(mainPojo: MainPojo) {
         //rlLoader.visibility = View.GONE
 
-        if (mainPojo.success =="true")
-        {
+        if (mainPojo.success == "true") {
 
             if (fromWhere == "RSA") {
                 callUpdateVehicle(mainPojo.getData()._id)
@@ -714,7 +836,7 @@ class AddEditVehicleActivity : AppCompatActivity(),
 
                 finish()
             }
-        }else{
+        } else {
 
             CommonClass(
                 this@AddEditVehicleActivity,
@@ -723,8 +845,93 @@ class AddEditVehicleActivity : AppCompatActivity(),
         }
     }
 
-    //////////////////UPDATE FOBBU VEHICLE API /////////////////////////
 
+    //EDIT vehicle API (API-users/vehicles)
+    private fun editVehicleApi() {
+
+        val fileList = ArrayList<MultipartBody.Part>()
+
+        for (i in 0 until dataList.size) {
+            var imgProfile: MultipartBody.Part? = null
+            val file = File(dataList[i].toString())
+            // create RequestBody instance from file
+            val requestFile = RequestBody.create(MediaType.parse("image/jpeg"), file)
+            // MultipartBody.Part is used to send also the actual file name
+            imgProfile = MultipartBody.Part.createFormData("photos", file.name, requestFile)
+            fileList.add(imgProfile!!)
+        }
+
+
+
+        val list=JSONArray()
+       // val list=ArrayList<String>()
+
+        for (i in listImagesEdit.indices)
+        {
+            if(listImagesEdit[i].contains("vehicles/"))
+            {
+                val separated = listImagesEdit[i].split("vehicles/".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
+                val jsonObject = separated[1]
+                list.put(jsonObject)
+                //list.add(separated[1])
+            }
+        }
+
+
+        println("ALREADY LIST GOING VALUE IS $list")
+
+
+        val bodyUserId = RequestBody.create(MediaType.parse("text/plain"), CommonClass(this, this).getString("_id"))
+        val bodyVehicleBrand = RequestBody.create(MediaType.parse("text/plain"), etBrand.text.toString().trim())
+        val bodyVehicleRegistrationNumber = RequestBody.create(MediaType.parse("text/plain"), etRegNumber.text.toString().trim())
+        val bodyVehicleSubModel = RequestBody.create(MediaType.parse("text/plain"), etSubModel.text.toString().trim())
+        val bodyMakeOfYear = RequestBody.create(MediaType.parse("text/plain"), etYearsOfMake.text.toString().trim())
+        val bodyVehicleType = RequestBody.create(MediaType.parse("text/plain"), vehicleType)
+        val bodyVehicleId = RequestBody.create(MediaType.parse("text/plain"), hashMapEdit["_id"].toString())
+        val bodyVehicleImages = RequestBody.create(MediaType.parse("text/plain"), list.toString())
+
+
+        val map = HashMap<String, RequestBody>()
+        map["user_id"] = bodyUserId
+        map["vehicle_brand"] = bodyVehicleBrand
+        map["vehicle_registration_number"] = bodyVehicleRegistrationNumber
+        map["vehicle_sub_model"] = bodyVehicleSubModel
+        map["make_of_year"] = bodyMakeOfYear
+        map["vehicle_type"] = bodyVehicleType
+        map["vehicle_id"] = bodyVehicleId
+        map["images"] = bodyVehicleImages
+
+
+
+
+        val tokenHeader = CommonClass(this, this).getString("x_access_token")
+
+        addEditActivityHandler.sendEditData(map, fileList, tokenHeader)
+
+    }
+
+    override fun onRequestSuccessReportEdit(mainPojo: MainPojo) {
+        if (mainPojo.success == "true") {
+
+                println("Success")
+                CommonClass(
+                    this@AddEditVehicleActivity,
+                    this@AddEditVehicleActivity
+                ).showToast(mainPojo.message)
+
+                finish()
+
+        } else {
+
+            CommonClass(
+                this@AddEditVehicleActivity,
+                this@AddEditVehicleActivity
+            ).showToast(mainPojo.message)
+        }
+    }
+
+
+    //////////////////UPDATE FOBBU VEHICLE API /////////////////////////
     //Update FOBBU Vehicle API (API-users/requests)
     private fun callUpdateVehicle(id: String) {
 
@@ -735,12 +942,12 @@ class AddEditVehicleActivity : AppCompatActivity(),
 
             val requestId = CommonClass(this@AddEditVehicleActivity, this@AddEditVehicleActivity)
                 .getString("fobbu_request_id")
-           // rlLoader.visibility = View.VISIBLE
+            // rlLoader.visibility = View.VISIBLE
             val hash = HashMap<String, String>()
             hash["request_id"] = requestId
             hash["vehicle"] = id
 
-            addEditActivityHandler.findFobbuRequestUpdateVehicle(hash,token)
+            addEditActivityHandler.findFobbuRequestUpdateVehicle(hash, token)
 
         } else {
 
@@ -751,7 +958,7 @@ class AddEditVehicleActivity : AppCompatActivity(),
 
     // Update FOBBU Vehicle API Response (API-users/requests)
     override fun onRequestSuccessUpdateVehicle(mainPojo: MainPojo) {
-       // rlLoader.visibility = View.GONE
+        // rlLoader.visibility = View.GONE
         if (mainPojo!!.success == "true") {
 
             startActivity(
@@ -771,13 +978,12 @@ class AddEditVehicleActivity : AppCompatActivity(),
     }
 
     override fun showLoader() {
-        rlLoader.visibility=View.VISIBLE
+        rlLoader.visibility = View.VISIBLE
     }
 
     override fun hideLoader() {
-        rlLoader.visibility=View.GONE
+        rlLoader.visibility = View.GONE
     }
-
 
 
     private fun getEnv(): MyApplication {

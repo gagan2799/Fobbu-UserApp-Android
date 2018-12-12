@@ -129,7 +129,7 @@
                                           android:padding="10dp"
                                           android:layout_centerInParent="true"
                                           android:text="@string/hello"
-                                          android:textSize="@dimen/textsize_normal"
+                                          android:textSize="@dimen/extra_large"
                                           android:id="@+id/tvName"/>
 
                                 <View android:layout_width="50dp"
@@ -142,7 +142,7 @@
                             </RelativeLayout>
 
                             <TextView
-                                    android:textSize="@dimen/textsize_medium"
+                                    android:textSize="@dimen/extra_large"
                                     android:text="@string/whats_keeping_stranded"
                                     android:layout_width="match_parent"
                                     android:paddingBottom="10dp"

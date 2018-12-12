@@ -6,4 +6,5 @@ import okhttp3.RequestBody
 interface AddEditActivityHandler {
      fun sendAddEditData(map:Map<String, RequestBody>, list:ArrayList<MultipartBody.Part>, tokenHeader:String)
      fun findFobbuRequestUpdateVehicle(map:HashMap<String,String>,token:String)
+     fun sendEditData(map:Map<String, RequestBody>, list:ArrayList<MultipartBody.Part>, tokenHeader:String)
 }

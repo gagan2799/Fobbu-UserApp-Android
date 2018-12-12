@@ -1077,6 +1077,7 @@ dimen design_textinput_caption_translate_y
 dimen disabled_alpha_material_dark
 dimen disabled_alpha_material_light
 dimen dp_20
+dimen extra_large
 dimen fastscroll_default_thickness
 dimen fastscroll_margin
 dimen fastscroll_minimum_range
@@ -1091,10 +1092,12 @@ dimen hint_pressed_alpha_material_light
 dimen item_touch_helper_max_drag_scroll_per_frame
 dimen item_touch_helper_swipe_escape_max_velocity
 dimen item_touch_helper_swipe_escape_velocity
+dimen large
 dimen login_textsize_medium
 dimen map_height
 dimen margin_left
 dimen margin_top_work_summary
+dimen medium
 dimen mr_controller_volume_group_list_item_height
 dimen mr_controller_volume_group_list_item_icon_size
 dimen mr_controller_volume_group_list_max_height
@@ -1179,6 +1182,7 @@ dimen profile_screen
 dimen rating_min_height
 dimen rating_min_width
 dimen red_rounded_rectangle_padding
+dimen small
 dimen subtitle_corner_radius
 dimen subtitle_outline_width
 dimen subtitle_shadow_offset
@@ -2429,6 +2433,7 @@ id vertical
 id view
 id viewBottom
 id viewDeals
+id viewEdit
 id viewGetAbove
 id viewGetBelow
 id viewGoAbove
@@ -2437,6 +2442,7 @@ id viewHome
 id viewLeftBottom
 id viewLeftTop
 id viewList
+id viewNew
 id viewPager
 id viewRSA
 id viewRightBottom

@@ -21,4 +21,9 @@
     <dimen name="margin_top_work_summary">6dp</dimen>
 
 
+    <dimen name="small">14px</dimen>
+    <dimen name="medium">20px</dimen>
+    <dimen name="large">22px</dimen>
+    <dimen name="extra_large">26px</dimen>
+
 </resources>

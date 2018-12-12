@@ -17,7 +17,7 @@ class AddEditVehiclePresenter(internal  var activity:Activity,internal  var acti
 
     override fun findFobbuRequestUpdateVehicle(map: HashMap<String, String>, token: String) {
 
-        var   apiClient=ApiClient(activity)
+        val apiClient=ApiClient(activity)
         activityView.showLoader()
         apiClient.findFobbuRequestUpdateVehicle(map,token,object :ResponseHandler
         {
@@ -45,7 +45,7 @@ class AddEditVehiclePresenter(internal  var activity:Activity,internal  var acti
         list: ArrayList<MultipartBody.Part>,
         tokenHeader: String
     ) {
-        var apiClient= ApiClient(activity)
+        val apiClient= ApiClient(activity)
         activityView.showLoader()
         apiClient.getAddEditVehicleData(map,list,tokenHeader,object :ResponseHandler
         {
@@ -56,15 +56,45 @@ class AddEditVehiclePresenter(internal  var activity:Activity,internal  var acti
 
             override fun onError(message: String) {
                 activityView.hideLoader()
-                Toast.makeText(activity,"Error:"+message, Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity, "Error:$message", Toast.LENGTH_SHORT).show()
             }
 
             override fun onServerError(message: String) {
                 activityView.hideLoader()
-                Toast.makeText(activity,"Server Error:"+message, Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity, "Server Error:$message", Toast.LENGTH_SHORT).show()
+            }
+
+        })
+    }
+
+
+    override fun sendEditData(
+        map: Map<String, RequestBody>,
+        list: ArrayList<MultipartBody.Part>,
+        tokenHeader: String
+    ) {
+        val apiClient= ApiClient(activity)
+        activityView.showLoader()
+        apiClient.getEditVehicleData(map,list,tokenHeader,object :ResponseHandler
+        {
+            override fun onSuccess(mainPojo: MainPojo) {
+                activityView.hideLoader()
+                activityView.onRequestSuccessReportEdit(mainPojo)
+            }
+
+            override fun onError(message: String) {
+                activityView.hideLoader()
+                Toast.makeText(activity, "Error:$message", Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onServerError(message: String) {
+                activityView.hideLoader()
+                Toast.makeText(activity, "Server Error:$message", Toast.LENGTH_SHORT).show()
             }
 
         })
 
     }
+
+
 }

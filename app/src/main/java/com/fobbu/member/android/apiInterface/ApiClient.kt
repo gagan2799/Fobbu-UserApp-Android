@@ -89,6 +89,22 @@ class ApiClient(var activity: Activity) {
         })
     }
 
+    // edit_vehicle_api
+    fun getEditVehicleData(map:Map<String,RequestBody>,list:ArrayList<MultipartBody.Part>,tokenHeader:String,responseHandler: ResponseHandler)
+    {
+        webServiceMultipart.editVehicle(map,list,tokenHeader).enqueue(object :Callback<MainPojo>
+        {
+            override fun onFailure(call: Call<MainPojo>, t: Throwable) {
+                responseHandler.onServerError(""+t.message)
+            }
+
+            override fun onResponse(call: Call<MainPojo>, response: Response<MainPojo>) {
+                handleSuccess(response,responseHandler)
+            }
+
+        })
+    }
+
 
     //vehicle_list_api
     fun getVichleListData(token:String,userId:String,responseHandler: ResponseHandler)
@@ -237,7 +253,6 @@ class ApiClient(var activity: Activity) {
     }
 
     // service request API
-
     fun getService(token:String,requestId: String, responseHandler: ResponseHandler)
     {
         webServiceApi.getServices(token,requestId).enqueue(object :Callback<MainPojo>

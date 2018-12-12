@@ -43,6 +43,11 @@ class VehicleListActivity : AppCompatActivity(),ActivityView{
         vehicleHandler= VehicleListPresenter(this, this)
         initialise()
         addClicks()
+    }
+
+    override fun onResume() {
+        super.onResume()
+
         vehicleListApi()
     }
 
@@ -109,7 +114,6 @@ class VehicleListActivity : AppCompatActivity(),ActivityView{
                     recyclerViewVehicles.visibility=View.GONE
                 }
             }
-
         }
 
         tvCar.setOnClickListener {
@@ -179,20 +183,53 @@ class VehicleListActivity : AppCompatActivity(),ActivityView{
                     dataListTwo.add(mainPojo.vehicles[i])
             }
 
-            dataListMain.addAll(dataListTwo)
-            vehicleAdapter.notifyDataSetChanged()
-
-            if(dataListMain.size>0)
+            if (vehicleType=="4wheeler")
             {
-                tvNodata.visibility=View.GONE
-                recyclerViewVehicles.visibility=View.VISIBLE
+                tvScooter.setImageResource(R.drawable.scooter_gray)
+                view_scooter.visibility = View.GONE
+
+                tvCar.setImageResource(R.drawable.car_red)
+                view_car.visibility = View.VISIBLE
+
+                dataListMain.addAll(dataListFour)
+                vehicleAdapter.notifyDataSetChanged()
+
+                if(dataListMain.size>0)
+                {
+                    tvNodata.visibility=View.GONE
+                    recyclerViewVehicles.visibility=View.VISIBLE
+                }
+                else
+                {
+                    tvNodata.visibility=View.VISIBLE
+                    tvNodata.text="No 2 Wheeler Added"
+                    recyclerViewVehicles.visibility=View.GONE
+                }
             }
             else
             {
-                tvNodata.visibility=View.VISIBLE
-                tvNodata.text="No 2 Wheeler Added"
-                recyclerViewVehicles.visibility=View.GONE
+                tvScooter.setImageResource(R.drawable.scooter_red)
+                view_scooter.visibility = View.VISIBLE
+
+                tvCar.setImageResource(R.drawable.car_gray)
+                view_car.visibility = View.GONE
+
+                dataListMain.addAll(dataListTwo)
+                vehicleAdapter.notifyDataSetChanged()
+
+                if(dataListMain.size>0)
+                {
+                    tvNodata.visibility=View.GONE
+                    recyclerViewVehicles.visibility=View.VISIBLE
+                }
+                else
+                {
+                    tvNodata.visibility=View.VISIBLE
+                    tvNodata.text="No 2 Wheeler Added"
+                    recyclerViewVehicles.visibility=View.GONE
+                }
             }
+
 
         }else{
 

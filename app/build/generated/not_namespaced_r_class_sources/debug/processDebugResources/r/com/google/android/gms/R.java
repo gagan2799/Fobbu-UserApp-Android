@@ -209,16 +209,16 @@ public final class R {
         public static final int cast_notification_image_size = 0x7f070068;
         public static final int cast_tracks_chooser_dialog_no_message_text_size = 0x7f070069;
         public static final int cast_tracks_chooser_dialog_row_text_size = 0x7f07006a;
-        public static final int place_autocomplete_button_padding = 0x7f0700f8;
-        public static final int place_autocomplete_powered_by_google_height = 0x7f0700f9;
-        public static final int place_autocomplete_powered_by_google_start = 0x7f0700fa;
-        public static final int place_autocomplete_prediction_height = 0x7f0700fb;
-        public static final int place_autocomplete_prediction_horizontal_margin = 0x7f0700fc;
-        public static final int place_autocomplete_prediction_primary_text = 0x7f0700fd;
-        public static final int place_autocomplete_prediction_secondary_text = 0x7f0700fe;
-        public static final int place_autocomplete_progress_horizontal_margin = 0x7f0700ff;
-        public static final int place_autocomplete_progress_size = 0x7f070100;
-        public static final int place_autocomplete_separator_start = 0x7f070101;
+        public static final int place_autocomplete_button_padding = 0x7f0700fb;
+        public static final int place_autocomplete_powered_by_google_height = 0x7f0700fc;
+        public static final int place_autocomplete_powered_by_google_start = 0x7f0700fd;
+        public static final int place_autocomplete_prediction_height = 0x7f0700fe;
+        public static final int place_autocomplete_prediction_horizontal_margin = 0x7f0700ff;
+        public static final int place_autocomplete_prediction_primary_text = 0x7f070100;
+        public static final int place_autocomplete_prediction_secondary_text = 0x7f070101;
+        public static final int place_autocomplete_progress_horizontal_margin = 0x7f070102;
+        public static final int place_autocomplete_progress_size = 0x7f070103;
+        public static final int place_autocomplete_separator_start = 0x7f070104;
     }
     public static final class drawable {
         private drawable() {}
@@ -475,8 +475,8 @@ public final class R {
         public static final int title_view = 0x7f090208;
         public static final int toolbar = 0x7f090209;
         public static final int url = 0x7f090265;
-        public static final int wide = 0x7f09027f;
-        public static final int wrap_content = 0x7f090282;
+        public static final int wide = 0x7f090281;
+        public static final int wrap_content = 0x7f090284;
     }
     public static final class integer {
         private integer() {}
