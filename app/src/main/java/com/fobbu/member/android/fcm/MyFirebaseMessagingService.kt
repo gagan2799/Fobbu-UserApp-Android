@@ -48,7 +48,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
                 ifAppIsOpen(dataMap)
             } else {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    sendNotificationPush(dataMap)
+                    sendNotificationPushO(dataMap)
                 } else
                     ifAppIsNotOpenSendNotification(dataMap)
 
@@ -63,7 +63,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    private fun sendNotificationPush(map: Map<String, String>) {
+    private fun sendNotificationPushO(map: Map<String, String>) {
 
         val nm = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         @SuppressLint("WrongConstant") val nc =
@@ -77,18 +77,21 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
         val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
 
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
 
         val json = JSONObject(map["notification"])
 
-        if (json["type"] == FcmPushTypes.Types.accept) {
-            intent.putExtra("from_push", json["type"].toString())
-        } else if (json["type"] == FcmPushTypes.Types.inRouteRequest) {
-            intent.putExtra("from_push", json["type"].toString())
+        when {
+            json["type"] == FcmPushTypes.Types.accept -> intent.putExtra("from_push", json["type"].toString())
+            json["type"] == FcmPushTypes.Types.inRouteRequest -> intent.putExtra("from_push", json["type"].toString())
+            json["type"] == FcmPushTypes.Types.newPin -> {
+                intent.putExtra("from_push", FcmPushTypes.Types.newPin)
+                intent.putExtra("otp",json["otp"].toString())
+            }
+            json["type"] == FcmPushTypes.Types.otpVerified -> intent.putExtra("from_push", FcmPushTypes.Types.otpVerified)
+            json["type"] == FcmPushTypes.Types.moneyRequested -> intent.putExtra("from_push", FcmPushTypes.Types.moneyRequested)
+
         }
 
         val pendingIntent = PendingIntent.getActivity(
@@ -125,16 +128,39 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
         val json = JSONObject(map["notification"])
 
-        if (json["type"] == FcmPushTypes.Types.accept) {
-            val intent = Intent()
-            intent.action = FcmPushTypes.Types.acceptRequestBroadCast
-            intent.putExtra("navigate_to", "1")
-            sendBroadcast(intent)
-        } else if (json["type"] == FcmPushTypes.Types.inRouteRequest) {
-            val intent = Intent()
-            intent.action = FcmPushTypes.Types.inRouteRequestBroadCast
-            intent.putExtra("navigate_to", FcmPushTypes.Types.inRouteRequest)
-            sendBroadcast(intent)
+        when {
+            json["type"] == FcmPushTypes.Types.accept -> {
+                val intent = Intent()
+                intent.action = FcmPushTypes.Types.acceptRequestBroadCast
+                intent.putExtra("navigate_to", "1")
+                sendBroadcast(intent)
+            }
+            json["type"] == FcmPushTypes.Types.inRouteRequest -> {
+                val intent = Intent()
+                intent.action = FcmPushTypes.Types.inRouteRequestBroadCast
+                intent.putExtra("navigate_to", FcmPushTypes.Types.inRouteRequest)
+                sendBroadcast(intent)
+            }
+            json["type"] == FcmPushTypes.Types.newPin -> {
+                val intent = Intent()
+                intent.action = FcmPushTypes.Types.inRouteRequestBroadCast
+                intent.putExtra("navigate_to", FcmPushTypes.Types.newPin)
+                intent.putExtra("otp",json["otp"].toString())
+                sendBroadcast(intent)
+            }
+            json["type"] == FcmPushTypes.Types.otpVerified -> {
+                val intent = Intent()
+                intent.action = FcmPushTypes.Types.inRouteRequestBroadCast
+                intent.putExtra("navigate_to", FcmPushTypes.Types.otpVerified)
+                sendBroadcast(intent)
+            }
+
+            json["type"] == FcmPushTypes.Types.moneyRequested -> {
+                val intent = Intent()
+                intent.action = FcmPushTypes.Types.moneyRequestedBroadcast
+                intent.putExtra("navigate_to", FcmPushTypes.Types.moneyRequested)
+                sendBroadcast(intent)
+            }
         }
     }
 
@@ -147,13 +173,17 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
         val json = JSONObject(map["notification"])
 
-        if (json["type"] == FcmPushTypes.Types.accept) {
-            intent.putExtra("from_push", json["type"].toString())
-        } else if (json["type"] == FcmPushTypes.Types.inRouteRequest) {
-            intent.putExtra("from_push", json["type"].toString())
+        // must requires VIBRATE permission
+        when {
+            json["type"] == FcmPushTypes.Types.accept -> intent.putExtra("from_push", json["type"].toString())
+            json["type"] == FcmPushTypes.Types.inRouteRequest -> intent.putExtra("from_push", json["type"].toString())
+            json["type"] == FcmPushTypes.Types.newPin -> {
+                intent.putExtra("from_push", FcmPushTypes.Types.newPin)
+                intent.putExtra("otp",json["otp"].toString())
+            }
+            json["type"] == FcmPushTypes.Types.otpVerified -> intent.putExtra("from_push", FcmPushTypes.Types.otpVerified)
+            json["type"] == FcmPushTypes.Types.moneyRequested -> intent.putExtra("from_push", FcmPushTypes.Types.moneyRequested)
         }
-
-        startActivity(intent)
 
         val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
 
@@ -196,7 +226,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
     /**
      * Method checks if the app is in background or not
      */
-    fun isAppIsInBackground(context: Context): Boolean {
+    private fun isAppIsInBackground(context: Context): Boolean {
         var isInBackground = true
         val am = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT_WATCH) {

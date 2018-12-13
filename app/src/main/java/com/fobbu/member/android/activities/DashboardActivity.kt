@@ -27,6 +27,7 @@ import com.fobbu.member.android.fragments.HomeFragment
 
 import com.fobbu.member.android.fragments.RSALiveFragment
 import com.fobbu.member.android.fragments.rsaFragmentModule.RSAFragment
+import com.fobbu.member.android.fragments.rsaFragmentModule.RsaClassType
 import com.fobbu.member.android.interfaces.ChangeRSAFragments
 import com.fobbu.member.android.interfaces.HeaderIconChanges
 import com.fobbu.member.android.interfaces.TopBarChanges
@@ -169,9 +170,9 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
     ////CHECK IF RSA REQUEST IS ON WITH SCREENS
     private fun checkIfOnGoingRSAScreen() {
 
-        if (CommonClass(this, this).getString("OnGoingRSA_Screen") == "YES") {
-          //  CommonClass(this, this).putString("OnGoingRSA_Screen", "")
-            fragmentTypeForRSA = CommonClass(this, this).getString("OnGoingRSA_Screen_Type")
+        if (CommonClass(this, this).getString(RsaClassType.RsaTypes.onGoingRsaScreen) == "YES") {
+
+            fragmentTypeForRSA = CommonClass(this, this).getString(RsaClassType.RsaTypes.onGoingRsaScreenType)
             setFragmentsFromStackForRSA(fragmentTypeForRSA)
         }
     }
@@ -289,9 +290,33 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
                 }
                 FcmPushTypes.Types.inRouteRequest -> {
 
-                    CommonClass(this, this).putString("OnGoingRSA_Screen", "YES")
-                    CommonClass(this, this).putString("OnGoingRSA_Screen_Type", resources.getString(R.string.rsa_live))
+                    CommonClass(this, this).putString(RsaClassType.RsaTypes.onGoingRsaScreen, "YES")
+                    CommonClass(this, this).putString(RsaClassType.RsaTypes.onGoingRsaScreenType, resources.getString(R.string.rsa_live))
                     checkIfOnGoingRSAScreen()
+                }
+                FcmPushTypes.Types.newPin -> {
+
+                    CommonClass(this, this).putString(RsaClassType.RsaTypes.onGoingRsaScreen, "YES")
+                    CommonClass(this, this).putString(RsaClassType.RsaTypes.onGoingRsaScreenType,
+                        resources.getString(R.string.rsa_live))
+                    CommonClass(this, this).putString(RsaClassType.RsaTypes.onGoingRsaLiveScreenType,
+                        FcmPushTypes.Types.newPin)
+                    CommonClass(this, this).putString(RsaClassType.RsaTypes.onGoingRsaLivePIN,
+                        intent.getStringExtra("otp"))
+                    checkIfOnGoingRSAScreen()
+                }
+                FcmPushTypes.Types.otpVerified -> {
+
+                    CommonClass(this, this).putString(RsaClassType.RsaTypes.onGoingRsaScreen, "YES")
+                    CommonClass(this, this).putString(RsaClassType.RsaTypes.onGoingRsaScreenType, resources.getString(R.string.rsa_live))
+                    CommonClass(this, this).putString(RsaClassType.RsaTypes.onGoingRsaLiveScreenType,
+                        FcmPushTypes.Types.otpVerified)
+                    checkIfOnGoingRSAScreen()
+                }
+                FcmPushTypes.Types.moneyRequested -> {
+
+                    CommonClass(this, this).putString(RsaClassType.RsaTypes.onGoingRsaScreen, "YES")
+                    startActivity(Intent(this, WaitingScreenWhite::class.java).putExtra("from_where", "vehicle_accessed"))
                 }
                 else -> {
 

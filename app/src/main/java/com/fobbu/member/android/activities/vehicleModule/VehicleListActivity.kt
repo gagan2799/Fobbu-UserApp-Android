@@ -126,7 +126,6 @@ class VehicleListActivity : AppCompatActivity(),ActivityView{
                 tvCar.setImageResource(R.drawable.car_red)
                 view_car.visibility = View.VISIBLE
 
-
                 dataListMain.clear()
                 dataListMain.addAll(dataListFour)
                 vehicleAdapter.notifyDataSetChanged()
@@ -229,8 +228,6 @@ class VehicleListActivity : AppCompatActivity(),ActivityView{
                     recyclerViewVehicles.visibility=View.GONE
                 }
             }
-
-
         }else{
 
         }
@@ -243,7 +240,6 @@ class VehicleListActivity : AppCompatActivity(),ActivityView{
     override fun hideLoader() {
         rlLoaderVehicleList.visibility=View.GONE
     }
-
 
     private fun getEnv(): MyApplication {
         return application as MyApplication

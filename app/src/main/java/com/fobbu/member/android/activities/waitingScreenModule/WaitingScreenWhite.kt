@@ -1,15 +1,21 @@
 package com.fobbu.member.android.activities.waitingScreenModule
 
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
 import android.os.Handler
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.fobbu.member.android.R
 import com.fobbu.member.android.activities.paymentModule.WorkSummaryActivity
+import com.fobbu.member.android.fcm.FcmPushTypes
+import com.fobbu.member.android.fragments.rsaFragmentModule.RsaClassType
 import com.fobbu.member.android.interfaces.ChangeRSAFragments
 import com.fobbu.member.android.utils.CommonClass
 import kotlinx.android.synthetic.main.activity_waiting_screen_white.*
+import java.lang.Exception
 
 class WaitingScreenWhite : AppCompatActivity() {
 
@@ -64,9 +70,9 @@ class WaitingScreenWhite : AppCompatActivity() {
 
     ///GOING TO RSA LIVE SCREEN
     private fun goToRsaLiveScreen() {
-        CommonClass(this, this).putString("OnGoingRSA_Screen", "YES")
+        CommonClass(this, this).putString(RsaClassType.RsaTypes.onGoingRsaScreen, "YES")
 
-        CommonClass(this, this).putString("OnGoingRSA_Screen_Type", resources.getString(R.string.rsa_live))
+        CommonClass(this, this).putString(RsaClassType.RsaTypes.onGoingRsaScreenType, resources.getString(R.string.rsa_live))
 
         finish()
     }
@@ -85,7 +91,7 @@ class WaitingScreenWhite : AppCompatActivity() {
 
                 Handler().postDelayed({
                     goToRsaLiveScreen()
-                }, 3000)
+                }, 1000)
             }
             "code_valid" -> {
                 rlBuildingLiveTrack.visibility = View.GONE
@@ -94,6 +100,10 @@ class WaitingScreenWhite : AppCompatActivity() {
                 rlBuildingWorkSummary.visibility = View.GONE
                 rlNewVehicleAdded.visibility = View.GONE
                 rlVehicleAccessed.visibility = View.GONE
+
+                Handler().postDelayed({
+                    switchLayouts("wallet_accessing")
+                }, 1500)
             }
             "wallet_accessing" -> {
                 rlAccessingVehicle.visibility = View.VISIBLE
@@ -110,6 +120,10 @@ class WaitingScreenWhite : AppCompatActivity() {
                 rlCodeValidated.visibility = View.GONE
                 rlNewVehicleAdded.visibility = View.GONE
                 rlBuildingWorkSummary.visibility = View.GONE
+
+                Handler().postDelayed({
+                    switchLayouts("building_work_summary")
+                }, 1000)
             }
             "building_work_summary" -> {
                 rlVehicleAccessed.visibility = View.GONE
@@ -118,6 +132,14 @@ class WaitingScreenWhite : AppCompatActivity() {
                 rlCodeValidated.visibility = View.GONE
                 rlNewVehicleAdded.visibility = View.GONE
                 rlBuildingWorkSummary.visibility = View.VISIBLE
+
+                Handler().postDelayed({
+                    startActivity(
+                        Intent(this, WorkSummaryActivity::class.java)
+                            .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+                    )
+                    finish()
+                }, 1000)
             }
             "new_vehicle_added" -> {
                 rlNewVehicleAdded.visibility = View.VISIBLE
@@ -128,6 +150,44 @@ class WaitingScreenWhite : AppCompatActivity() {
                 rlBuildingWorkSummary.visibility = View.GONE
             }
         }
+    }
+
+    override fun onBackPressed() {
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        val filter = IntentFilter(FcmPushTypes.Types.moneyRequestedBroadcast)
+        registerReceiver(changeRSALiveScreenReceiver, filter)
+    }
+
+    private val changeRSALiveScreenReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+
+            println("ON RECEIVE BROADCAST WHITE SCREEN " + intent.getStringExtra("navigate_to"))
+
+            when {
+                intent.getStringExtra("navigate_to") == FcmPushTypes.Types.moneyRequested -> {
+                    switchLayouts("vehicle_accessed")
+                }
+
+            }
+
+        }
+
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        try {
+            unregisterReceiver(changeRSALiveScreenReceiver)
+        } catch (e: Exception) {
+
+        }
+
     }
 
 }

@@ -22,6 +22,7 @@ import com.fobbu.member.android.R
 import com.fobbu.member.android.activities.waitingScreenModule.WaitingScreenBlue
 import com.fobbu.member.android.activities.waitingScreenModule.WaitingScreenWhite
 import com.fobbu.member.android.fcm.FcmPushTypes
+import com.fobbu.member.android.fragments.rsaFragmentModule.RsaClassType
 import com.fobbu.member.android.fragments.rsaFragmentModule.presenter.RsaLiveHandler
 import com.fobbu.member.android.fragments.rsaFragmentModule.presenter.RsaLivePresenter
 
@@ -66,6 +67,8 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     private lateinit var ivTool:ImageView
     private lateinit var tvText:TextView
     private lateinit var tvCode:TextView
+    private lateinit var tvName:TextView
+    private lateinit var imgProfile:ImageView
     private  var strWhere=""
     private var topBarChanges: TopBarChanges?=null
     var mobileNumber=""
@@ -128,6 +131,31 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
         ivTool = view.findViewById(R.id.ivTool)
         tvText = view.findViewById(R.id.tvText)
         tvCode = view.findViewById(R.id.tvCode)
+        imgProfile =view.findViewById(R.id.imgProfile)
+        tvName =view.findViewById(R.id.tvName)
+
+        when {
+            CommonClass(activity!!, activity!!).getString(RsaClassType.RsaTypes.onGoingRsaLiveScreenType)
+                    == FcmPushTypes.Types.inRouteRequest -> {
+                ivTool.setImageResource(R.drawable.man_riding_bike)
+                tvText.text = resources.getString(R.string.fobbu_on_way)
+                strWhere = "share"
+            }
+            CommonClass(activity!!, activity!!).getString(RsaClassType.RsaTypes.onGoingRsaLiveScreenType)
+                    == FcmPushTypes.Types.newPin -> {
+                ivTool.setImageResource(R.drawable.mechanic_with_cap)
+                tvText.text = resources.getString(R.string.share_4_digit_code)
+                tvCode.text = CommonClass(activity!!, activity!!).getString(RsaClassType.RsaTypes.onGoingRsaLivePIN)
+                tvCode.visibility = View.VISIBLE
+            }
+            CommonClass(activity!!, activity!!).getString(RsaClassType.RsaTypes.onGoingRsaLiveScreenType)
+                    == FcmPushTypes.Types.otpVerified -> startActivity(
+                Intent(
+                    activity!!,
+                    WaitingScreenWhite::class.java
+                ).putExtra("from_where", "code_valid")
+            )
+        }
     }
 
     @SuppressLint("SetTextI18n", "InflateParams")
@@ -397,30 +425,31 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     private val changeRSALiveScreenReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
 
+            println("ON RECEIVE BROADCAST "+ intent.getStringExtra("navigate_to"))
+
             when {
                 intent.getStringExtra("navigate_to")== FcmPushTypes.Types.inRouteRequest -> {
                     ivTool.setImageResource(R.drawable.man_riding_bike)
                     tvText.text=resources.getString(R.string.fobbu_on_way)
                     strWhere="share"
                 }
-                intent.getStringExtra("navigate_to")== FcmPushTypes.Types.share4DigitCode -> {
+                intent.getStringExtra("navigate_to")== FcmPushTypes.Types.newPin -> {
                     ivTool.setImageResource(R.drawable.mechanic_with_cap)
                     tvText.text=resources.getString(R.string.share_4_digit_code)
+                    tvCode.text=intent.getStringExtra("otp")
                     tvCode.visibility=View.VISIBLE
                 }
-                intent.getStringExtra("navigate_to")== FcmPushTypes.Types.shareCodeValidated -> startActivity(Intent(activity!!, WaitingScreenWhite::class.java).putExtra("from_where", "code_valid"))
+                intent.getStringExtra("navigate_to")== FcmPushTypes.Types.otpVerified -> startActivity(Intent(activity!!, WaitingScreenWhite::class.java).putExtra("from_where", "code_valid"))
             }
-
         }
-
     }
 
 
     override fun onRequestSuccessReport(mainPojo: MainPojo) {
      if (mainPojo.success=="true")
      {
+         println("MAIN POJO "+ mainPojo.getData().partner.profile)
 
-         val list=ArrayList<HashMap<String,Any>>()
          if (!mainPojo.getData().partner.profile.isNullOrBlank()){
              Picasso.get().load(mainPojo.getData().partner.profile).error(R.drawable.dummy_pic).into(imgProfile)
          }

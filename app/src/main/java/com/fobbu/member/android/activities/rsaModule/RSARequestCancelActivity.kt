@@ -21,6 +21,7 @@ import com.fobbu.member.android.R
 import com.fobbu.member.android.activities.rsaModule.adapter.RsaRecyclerAdapter
 import com.fobbu.member.android.activities.rsaModule.presenter.RsaCancelRequestHandler
 import com.fobbu.member.android.activities.rsaModule.presenter.RsaCancelRequestPresenter
+import com.fobbu.member.android.fragments.rsaFragmentModule.RsaClassType
 import com.fobbu.member.android.modals.MainPojo
 import com.fobbu.member.android.utils.CommonClass
 import com.fobbu.member.android.view.ActivityView
@@ -203,7 +204,7 @@ class RSARequestCancelActivity : AppCompatActivity(), ActivityView {
                 setRecycler()
             } else {
                 CommonClass(this, this).removeString("fobbu_request_id")
-                CommonClass(this, this).putString("OnGoingRSA_Screen", "")
+                CommonClass(this, this).putString(RsaClassType.RsaTypes.onGoingRsaScreen, "")
                 showPopUp(this)
             }
 
