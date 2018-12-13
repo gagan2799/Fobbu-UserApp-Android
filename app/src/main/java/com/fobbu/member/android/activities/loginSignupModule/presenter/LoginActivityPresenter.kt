@@ -6,6 +6,7 @@ import android.widget.Toast
 import com.fobbu.member.android.apiInterface.ApiClient
 import com.fobbu.member.android.apiInterface.Handler.ResponseHandler
 import com.fobbu.member.android.modals.MainPojo
+import com.fobbu.member.android.utils.CommonClass
 import com.fobbu.member.android.view.ActivityView
 
 class LoginActivityPresenter(var activity :Activity, var loginActivityView: ActivityView):
@@ -17,6 +18,10 @@ class LoginActivityPresenter(var activity :Activity, var loginActivityView: Acti
         loginActivityView.showLoader()
         apiClient.getLoginData(mobile,password,token,object :ResponseHandler
         {
+
+            override fun on401() {
+                CommonClass(activity,activity).clearPreference()
+            }
             override fun onSuccess(mainPojo: MainPojo) {
                 loginActivityView.hideLoader()
                 loginActivityView.onRequestSuccessReport(mainPojo)

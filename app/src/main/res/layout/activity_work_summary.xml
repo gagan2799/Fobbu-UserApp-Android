@@ -309,7 +309,15 @@
 
 
             </LinearLayout>
-            <LinearLayout
+
+
+            <android.support.v7.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/recyclerViewWorkSummary"
+            />
+
+            <!--<LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
@@ -519,7 +527,7 @@
                         android:background="@drawable/dashed_line"/>
 
 
-            </LinearLayout>
+            </LinearLayout>-->
 
             <LinearLayout
                     android:layout_width="match_parent"
@@ -532,7 +540,7 @@
                         android:layout_weight="1"
                         android:gravity="start"
                         android:layout_height="wrap_content"
-                        android:text="Total Amount"
+                        android:text="@string/total_amount"
                         android:textColor="@color/red"
                         android:textSize="@dimen/textsize_normal"
                 />
@@ -542,7 +550,6 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:text="624"
                         android:id="@+id/textViewTotalAmount"
                         android:gravity="end"
                         android:textColor="@color/red"

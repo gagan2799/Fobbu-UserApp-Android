@@ -5,6 +5,7 @@ import android.widget.Toast
 import com.fobbu.member.android.apiInterface.ApiClient
 import com.fobbu.member.android.apiInterface.Handler.ResponseHandler
 import com.fobbu.member.android.modals.MainPojo
+import com.fobbu.member.android.utils.CommonClass
 import com.fobbu.member.android.view.ActivityView
 
 class RsaLivePresenter (private var activity:Activity,private var activityView: ActivityView):RsaLiveHandler{
@@ -13,6 +14,11 @@ class RsaLivePresenter (private var activity:Activity,private var activityView: 
     override fun getService(token:String,requesID: String) {
         val apiClient= ApiClient(activity)
         apiClient.getService(token,requesID,object :ResponseHandler{
+
+            override fun on401() {
+                CommonClass(activity,activity).clearPreference()
+            }
+
             override fun onSuccess(mainPojo: MainPojo) {
                 activityView.onRequestSuccessReport(mainPojo)
             }

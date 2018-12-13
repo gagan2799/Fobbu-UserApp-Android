@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+        <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_height="wrap_content"
+                android:gravity="start">
+
+            <TextView
+                    android:id="@+id/textViewSubServiceWork"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/no_of_puncture"
+                    android:textColor="@color/color_grey"
+                    android:textSize="@dimen/textsize_medium"
+            />
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/textsize_normal"
+                    android:textColor="@color/color_grey"
+                    android:text="@string/_4"
+                    android:id="@+id/textViewNumberSubServiceWork"
+                    android:layout_marginTop="5dp"
+            />
+
+
+        </LinearLayout>
+        <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_height="wrap_content"
+                android:gravity="end">
+
+            <TextView
+                    android:id="@+id/textViewAmountWork"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Amount"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/textsize_medium"
+            />
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/textsize_normal"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:text="312"
+                    android:id="@+id/textViewNumericAmountWork"
+                    android:layout_marginTop="5dp"
+            />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+    <View
+            android:layerType="software"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:background="@drawable/dashed_line"/>
+</LinearLayout>

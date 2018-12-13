@@ -8,4 +8,5 @@ interface ResponseHandler
     fun onSuccess(mainPojo: MainPojo)
     fun onError(message:String)
     fun onServerError(message:String)
+    fun on401()
 }

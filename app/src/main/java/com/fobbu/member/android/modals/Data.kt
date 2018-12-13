@@ -13,6 +13,8 @@ class Data
     var email: String = ""
     var pin: String = ""
     var partner=Partner()
+    var addition_services=ArrayList<HashMap<String,Any>>()
+
 
 
 }

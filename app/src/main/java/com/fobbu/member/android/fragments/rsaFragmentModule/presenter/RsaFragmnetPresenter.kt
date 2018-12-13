@@ -6,6 +6,7 @@ import com.fobbu.member.android.apiInterface.ApiClient
 import com.fobbu.member.android.apiInterface.Handler.ResponseHandler
 import com.fobbu.member.android.fragments.rsaFragmentModule.view.RsaFragmentView
 import com.fobbu.member.android.modals.MainPojo
+import com.fobbu.member.android.utils.CommonClass
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 
@@ -20,6 +21,9 @@ class RsaFragmnetPresenter(private var activity: Activity,private var rsaFragmen
         rsaFragmentView.showLoader()
     apiClient.fetchService(token,object :ResponseHandler
     {
+        override fun on401() {
+            CommonClass(activity,activity).clearPreference()
+        }
         override fun onSuccess(mainPojo: MainPojo) {
             rsaFragmentView.hideLoader()
             rsaFragmentView.fetchingServiceReport(mainPojo)
@@ -53,6 +57,9 @@ class RsaFragmnetPresenter(private var activity: Activity,private var rsaFragmen
         rsaFragmentView.showLoader()
         apiClient.findFobbuRequest(userId,serviceSelected,strtLatitude,strLongitude,strVehicleType,fileList,token,object :ResponseHandler
         {
+            override fun on401() {
+                CommonClass(activity,activity).clearPreference()
+            }
             override fun onSuccess(mainPojo: MainPojo) {
                 rsaFragmentView.hideLoader()
                 rsaFragmentView.findingFobbuReport(mainPojo)
@@ -76,6 +83,11 @@ class RsaFragmnetPresenter(private var activity: Activity,private var rsaFragmen
     override fun findFleetOrUser(token: String, requestId: String) {
         apiClient.findFleetOrUser(token,requestId,object :ResponseHandler
         {
+
+            override fun on401() {
+                CommonClass(activity,activity).clearPreference()
+            }
+
             override fun onSuccess(mainPojo: MainPojo) {
                 rsaFragmentView.fleetSuccessReport(mainPojo)
             }

@@ -113,4 +113,13 @@ interface WebServiceApi {
         @Header("x-access-token") token:String,
         @Query("request_id") requestID:String):Call<MainPojo>
 
+
+
+
+    @POST("users/request/make_payment")
+    fun makePayment(@Body mapData:HashMap<String,String>,
+                            @Header("x-access-token") token:String) :Call<MainPojo>
+
+
+
 }

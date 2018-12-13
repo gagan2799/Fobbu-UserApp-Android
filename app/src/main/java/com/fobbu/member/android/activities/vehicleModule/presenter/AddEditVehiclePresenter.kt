@@ -7,6 +7,7 @@ import com.fobbu.member.android.activities.vehicleModule.view.AddEditVehicleAciv
 import com.fobbu.member.android.apiInterface.ApiClient
 import com.fobbu.member.android.apiInterface.Handler.ResponseHandler
 import com.fobbu.member.android.modals.MainPojo
+import com.fobbu.member.android.utils.CommonClass
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 
@@ -21,6 +22,11 @@ class AddEditVehiclePresenter(internal  var activity:Activity,internal  var acti
         activityView.showLoader()
         apiClient.findFobbuRequestUpdateVehicle(map,token,object :ResponseHandler
         {
+
+            override fun on401() {
+                CommonClass(activity,activity).clearPreference()
+            }
+
             override fun onSuccess(mainPojo: MainPojo) {
                 activityView.hideLoader()
                 activityView.onRequestSuccessUpdateVehicle(mainPojo)
@@ -49,6 +55,11 @@ class AddEditVehiclePresenter(internal  var activity:Activity,internal  var acti
         activityView.showLoader()
         apiClient.getAddEditVehicleData(map,list,tokenHeader,object :ResponseHandler
         {
+
+            override fun on401() {
+                CommonClass(activity,activity).clearPreference()
+            }
+
             override fun onSuccess(mainPojo: MainPojo) {
                 activityView.hideLoader()
                 activityView.onRequestSuccessReport(mainPojo)
@@ -77,6 +88,11 @@ class AddEditVehiclePresenter(internal  var activity:Activity,internal  var acti
         activityView.showLoader()
         apiClient.getEditVehicleData(map,list,tokenHeader,object :ResponseHandler
         {
+
+            override fun on401() {
+                CommonClass(activity,activity).clearPreference()
+            }
+
             override fun onSuccess(mainPojo: MainPojo) {
                 activityView.hideLoader()
                 activityView.onRequestSuccessReportEdit(mainPojo)

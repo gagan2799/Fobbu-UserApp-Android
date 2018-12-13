@@ -5,6 +5,7 @@ import android.widget.Toast
 import com.fobbu.member.android.apiInterface.ApiClient
 import com.fobbu.member.android.apiInterface.Handler.ResponseHandler
 import com.fobbu.member.android.modals.MainPojo
+import com.fobbu.member.android.utils.CommonClass
 import com.fobbu.member.android.view.ActivityView
 
 class ForgotPasswordPresenter (internal var activity:Activity,internal var activityView:ActivityView):
@@ -16,6 +17,10 @@ class ForgotPasswordPresenter (internal var activity:Activity,internal var activ
 
         apiClient.forgotPassword(email,object :ResponseHandler
         {
+            override fun on401() {
+                CommonClass(activity,activity).clearPreference()
+            }
+
             override fun onSuccess(mainPojo: MainPojo) {
                 activityView.hideLoader()
                 activityView.onRequestSuccessReport(mainPojo)

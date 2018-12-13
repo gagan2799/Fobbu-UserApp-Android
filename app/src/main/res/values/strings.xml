@@ -26,6 +26,7 @@
     <string name="mobile_number">Mobile No.</string>
     <string name="password">Password</string>
     <string name="start_your_fobbu">Start your Fobbu</string>
+    <string name="no_of">No of " "</string>
     <string name="forgot_password_ques">
         <u>Forgot Password ?</u>
     </string>
@@ -180,7 +181,7 @@
     <string name="no_of_puncture">No of Punctures:</string>
     <string name="no_of_valve">No. of valve/s</string>
     <string name="no_of_tubes">No. of Tube/s</string>
-    <string name="total_amount">Total Amount</string>
+
     <string name="confirm_pay">Confirm &amp; Pay</string>
     <string name="payment_screen">Payment Screen</string>
     <string name="proceed_to_pay">Proceed to pay</string>
@@ -285,6 +286,9 @@
     <string name="your_review_was_saved_share_it_with_your_friens">Your review was saved. Share it with your friens!
     </string>
     <string name="message">Message</string>
+    <string name="total_amount">Total Amount</string>
+    <string name="requestID_not_provided">Request ID is not provided.</string>
+    <string name="internet_is_unavailable">Internet is unavailable.Please try again in some time.</string>
 
 
 </resources>

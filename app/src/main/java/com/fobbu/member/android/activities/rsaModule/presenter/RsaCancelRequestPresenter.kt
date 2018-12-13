@@ -5,6 +5,7 @@ import android.widget.Toast
 import com.fobbu.member.android.apiInterface.ApiClient
 import com.fobbu.member.android.apiInterface.Handler.ResponseHandler
 import com.fobbu.member.android.modals.MainPojo
+import com.fobbu.member.android.utils.CommonClass
 import com.fobbu.member.android.view.ActivityView
 
 class RsaCancelRequestPresenter (private var activity:Activity,private var activityView: ActivityView):RsaCancelRequestHandler {
@@ -15,6 +16,11 @@ class RsaCancelRequestPresenter (private var activity:Activity,private var activ
         val apiClient=ApiClient(activity)
         apiClient.cancellationRequest(reason,requestID,token,object :ResponseHandler
         {
+
+            override fun on401() {
+                CommonClass(activity,activity).clearPreference()
+            }
+
             override fun onSuccess(mainPojo: MainPojo) {
                 activityView.onRequestSuccessReport(mainPojo)
             }
@@ -36,6 +42,10 @@ class RsaCancelRequestPresenter (private var activity:Activity,private var activ
         val  apiClient=ApiClient(activity)
         apiClient.cancelReasons(token,object :ResponseHandler
         {
+
+            override fun on401() {
+                CommonClass(activity,activity).clearPreference()
+            }
             override fun onSuccess(mainPojo: MainPojo) {
                 activityView.onRequestSuccessReport(mainPojo)
             }

@@ -5,22 +5,52 @@ import android.app.Dialog
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.widget.LinearLayoutManager
 import android.view.Gravity
 import android.view.WindowManager
+import android.widget.Toast
 import com.fobbu.member.android.R
+import com.fobbu.member.android.activities.paymentModule.adapter.WorkSummaryAdapter
 import com.fobbu.member.android.activities.rsaModule.RSARequestCancelActivity
+import com.fobbu.member.android.fragments.rsaFragmentModule.presenter.RsaLiveHandler
+import com.fobbu.member.android.fragments.rsaFragmentModule.presenter.RsaLivePresenter
+import com.fobbu.member.android.modals.MainPojo
+import com.fobbu.member.android.utils.CommonClass
+import com.fobbu.member.android.view.ActivityView
 import kotlinx.android.synthetic.main.activity_work_summary.*
 import kotlinx.android.synthetic.main.option_menu_layout.*
+import kotlin.collections.ArrayList
 
 @Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-class WorkSummaryActivity : AppCompatActivity() {
+class WorkSummaryActivity : AppCompatActivity(),ActivityView {
+
+
+    private lateinit var rsaLiveHandler:RsaLiveHandler
+
+    lateinit var workSummaryAdapter:WorkSummaryAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_work_summary)
 
+        initView()
+
         clicks()
     }
+
+
+    // method for handling all the initialization of this class
+    private fun initView() {
+
+        rsaLiveHandler=RsaLivePresenter(this,this)
+
+        if (CommonClass(this,this).checkInternetConn(this))
+        {
+            rsaLiveHandler.getService(CommonClass(this,this).getString("x_access_token"),CommonClass(this, this).getString("fobbu_request_id"))
+        }
+    }
+
+
 
     // Method for handling click  functionality of the Class
     private fun clicks() {
@@ -56,5 +86,41 @@ class WorkSummaryActivity : AppCompatActivity() {
             overridePendingTransition(R.anim.slide_down,R.anim.fade)
         }
         dialog.show()
+    }
+
+    override fun onRequestSuccessReport(mainPojo: MainPojo) {
+        if (mainPojo.success=="true")
+        {
+            setUpRecycler(mainPojo.getData().addition_services)
+            var totalAmount:Long=0
+
+            for (i in mainPojo.getData().addition_services.indices)
+            {
+                val no_of_service: Long = (mainPojo.getData().addition_services[i]["number_of_services"] as Double).toLong()
+                val service_price: Long = (mainPojo.getData().addition_services[i]["service_price"] as Double).toLong()
+
+                totalAmount =
+                        totalAmount.plus(no_of_service*service_price)
+            }
+
+            textViewTotalAmount.text=totalAmount.toString()
+
+        }else{
+            Toast.makeText(this,mainPojo.message, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun setUpRecycler(addition_services: ArrayList<HashMap<String, Any>>) {
+        workSummaryAdapter= WorkSummaryAdapter(addition_services,this)
+        recyclerViewWorkSummary.layoutManager=LinearLayoutManager(this)
+        recyclerViewWorkSummary.adapter=workSummaryAdapter
+    }
+
+    override fun showLoader() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun hideLoader() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }

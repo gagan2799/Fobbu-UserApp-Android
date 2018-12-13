@@ -2066,7 +2066,6 @@ id linearLayoutCancellation
 id linearLayoutCarRightTwo
 id linearLayoutCarScooterSplash
 id linearLayoutCardsPayment
-id linearLayoutFlatTyresWork
 id linearLayoutFuelWork
 id linearLayoutGet
 id linearLayoutGetMiddle
@@ -2194,6 +2193,7 @@ id ratinBarGetSet
 id recyclerViewCancelRsa
 id recyclerViewServices
 id recyclerViewVehicles
+id recyclerViewWorkSummary
 id relativeLayout
 id relativeLayoutGetSetToolBar
 id relativeLayoutWorkSummaryToolBar
@@ -2296,9 +2296,7 @@ id textStart
 id textTitle
 id textViewAmountDeliveryWork
 id textViewAmountFuelWork
-id textViewAmountPuncturesWork
-id textViewAmountTubesWork
-id textViewAmountValvesWork
+id textViewAmountWork
 id textViewCallHelpline
 id textViewCancelRSA
 id textViewCancellationRSA
@@ -2308,12 +2306,11 @@ id textViewGetDetails
 id textViewGo
 id textViewGoDetails
 id textViewHeadingGet
-id textViewNoTubesWork
-id textViewNoValvesWork
 id textViewNumberGet
 id textViewNumberGo
-id textViewNumberPuncturesWork
 id textViewNumberSet
+id textViewNumberSubServiceWork
+id textViewNumericAmountWork
 id textViewOrderIdWork
 id textViewQuantityFuelWork
 id textViewRsaCancelRecycle
@@ -2322,6 +2319,7 @@ id textViewServiceTypeWork
 id textViewSet
 id textViewSetDetails
 id textViewSmsShare
+id textViewSubServiceWork
 id textViewTotalAmount
 id textViewWhatsAppShare
 id text_input_password_toggle
@@ -2562,6 +2560,7 @@ layout inflate_review_pop_up
 layout inflate_rsa_recycler_layout
 layout inflate_tutorials
 layout inflate_vehicle_adapter
+layout inflate_work_summary
 layout mr_chooser_dialog
 layout mr_chooser_list_item
 layout mr_controller_material_dialog_b
@@ -2802,6 +2801,7 @@ string help_you_fix
 string hide_bottom_view_on_scroll_behavior
 string home
 string in_case_auto
+string internet_is_unavailable
 string jump_start
 string keep_driving
 string keep_driving_text
@@ -2851,6 +2851,7 @@ string new_text
 string new_vehicle_added
 string no
 string noInternet
+string no_of
 string no_of_puncture
 string no_of_tubes
 string no_of_valve
@@ -2890,6 +2891,7 @@ string proceed_to_pay
 string project_id
 string quantity_of_fuel_d
 string rate_review
+string requestID_not_provided
 string resend_code
 string reset
 string rsa

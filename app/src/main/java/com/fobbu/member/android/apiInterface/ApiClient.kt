@@ -258,7 +258,27 @@ class ApiClient(var activity: Activity) {
         webServiceApi.getServices(token,requestId).enqueue(object :Callback<MainPojo>
         {
             override fun onFailure(call: Call<MainPojo>, t: Throwable) {
-                responseHandler.onServerError("""Server Error:${t.message}""")
+                responseHandler.onServerError("""Server Error: ${t.message}""")
+            }
+
+            override fun onResponse(call: Call<MainPojo>, response: Response<MainPojo>) {
+                handleSuccess(response,responseHandler)
+            }
+
+        })
+    }
+
+
+    //make payment API
+
+    fun makePayment(token:String,requestId: String,responseHandler: ResponseHandler)
+    {
+        val map=HashMap<String,String>()
+        map["request_id"]=requestId
+        webServiceApi.makePayment(map,token).enqueue(object :Callback<MainPojo>
+        {
+            override fun onFailure(call: Call<MainPojo>, t: Throwable) {
+                responseHandler.onServerError("""Server Error: ${t.message}""")
             }
 
             override fun onResponse(call: Call<MainPojo>, response: Response<MainPojo>) {
@@ -277,10 +297,18 @@ class ApiClient(var activity: Activity) {
         {
             if (response.body()!= null)
             {
-                responseHandler.onSuccess(response.body()!!)
+                if (response.code()== 200)
+                {
+                    responseHandler.onSuccess(response.body()!!)
+                }
+
             }
-        }else{
-            responseHandler.onError(""+response.message())
+        }
+        else if (response.code() == 401)
+            responseHandler.on401()
+
+        else{
+            responseHandler.onError("Error: "+response.message())
             println("main pojo data $response")
         }
     }
