@@ -10,6 +10,8 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.http.Multipart
+import java.util.*
+import kotlin.collections.HashMap
 
 
 class ApiClient(var activity: Activity) {
@@ -276,6 +278,44 @@ class ApiClient(var activity: Activity) {
         val map=HashMap<String,String>()
         map["request_id"]=requestId
         webServiceApi.makePayment(map,token).enqueue(object :Callback<MainPojo>
+        {
+            override fun onFailure(call: Call<MainPojo>, t: Throwable) {
+                responseHandler.onServerError("""Server Error: ${t.message}""")
+            }
+
+            override fun onResponse(call: Call<MainPojo>, response: Response<MainPojo>) {
+                handleSuccess(response,responseHandler)
+            }
+
+        })
+    }
+
+    // update device token API
+    fun logout(userID:String,token:String,responseHandler: ResponseHandler)
+    {
+        val hashmap = HashMap<String, String>()
+        hashmap["device_token"] = " "
+        hashmap["user_id"] = userID
+        webServiceApi.updateDeviceTokenFCM(hashmap,token).enqueue(object :Callback<MainPojo>
+        {
+            override fun onFailure(call: Call<MainPojo>, t: Throwable) {
+                responseHandler.onServerError("""Server Error: ${t.message}""")
+            }
+
+            override fun onResponse(call: Call<MainPojo>, response: Response<MainPojo>) {
+                handleSuccess(response,responseHandler)
+            }
+
+        })
+    }
+
+    // delete vehicel API
+    fun deleteVehicle(token:String,vehicleID:String,userID:String,responseHandler: ResponseHandler)
+    {
+        val map=HashMap<String,String>()
+        map["vehicle_id"]=vehicleID
+        map["user_id"]=userID
+        webServiceApi.deleteVehicle(token,map).enqueue(object :Callback<MainPojo>
         {
             override fun onFailure(call: Call<MainPojo>, t: Throwable) {
                 responseHandler.onServerError("""Server Error: ${t.message}""")

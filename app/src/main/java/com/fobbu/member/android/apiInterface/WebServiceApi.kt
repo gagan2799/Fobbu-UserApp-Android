@@ -120,6 +120,12 @@ interface WebServiceApi {
     fun makePayment(@Body mapData:HashMap<String,String>,
                             @Header("x-access-token") token:String) :Call<MainPojo>
 
+    @HTTP(method = "DELETE", path = "/users/vehicles", hasBody = true)
+    fun deleteVehicle(
+        @Header("x-access-token") token: String,
+        @Body partMap:Map<String, String>
+    ): Call<MainPojo>
+
 
 
 }

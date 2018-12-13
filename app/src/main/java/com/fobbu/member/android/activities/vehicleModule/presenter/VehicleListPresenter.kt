@@ -15,11 +15,36 @@ import com.fobbu.member.android.view.ActivityView
 class VehicleListPresenter(internal  var activity: Activity,internal var activityView: ActivityView):
     VehicleListHandler {
 
+    val apiClient= ApiClient(activity)
+
+
+    override fun deleteVehicle(token: String, vehicleId: String, userId: String) {
+        apiClient.deleteVehicle(token,vehicleId,userId,object :ResponseHandler
+        {
+            override fun onSuccess(mainPojo: MainPojo) {
+                activityView.onRequestSuccessReport(mainPojo)
+            }
+
+            override fun onError(message: String) {
+                Toast.makeText(activity, message, Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onServerError(message: String) {
+                Toast.makeText(activity, message, Toast.LENGTH_SHORT).show()
+            }
+
+            override fun on401() {
+                CommonClass(activity,activity).clearPreference()
+            }
+
+        })
+    }
+
     override fun sendVehicleData(token: String, userid: String) {
 
         activityView.showLoader()
 
-        val apiClient= ApiClient(activity)
+
 
         apiClient.getVichleListData(token,userid,object :ResponseHandler
         {

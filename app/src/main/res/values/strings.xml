@@ -247,7 +247,9 @@
     <string name="cancelled">Cancel</string>
     <string name="setting">Go to Setting</string>
     <string name="logout_heading">Logout</string>
+    <string name="Delete">Delete</string>
     <string name="are_you_sure">Are you sure you want to logout ?</string>
+    <string name="are_you_sure_you_want_to_delete">Are you sure you want to delete this information from list ?</string>
     <string name="home">Home</string>
     <string name="cancel">Cancel</string>
     <string name="cancel_rsa">Cancel RSA</string>

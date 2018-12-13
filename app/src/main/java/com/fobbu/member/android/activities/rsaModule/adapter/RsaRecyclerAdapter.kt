@@ -1,12 +1,16 @@
 package com.fobbu.member.android.activities.rsaModule.adapter
 
+import android.annotation.TargetApi
 import android.app.Activity
+import android.os.Build
+import android.support.annotation.RequiresApi
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import android.widget.TextView
 import com.fobbu.member.android.R
 import com.squareup.picasso.Picasso
@@ -27,6 +31,8 @@ class RsaRecyclerAdapter(private var activtiy:Activity, private var textList: Ar
         return textList.size
     }
 
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
     override fun onBindViewHolder(holder: MyRsaViewHolder, position: Int) {
 
         if (textList[position]["image"].toString() != "")
@@ -41,11 +47,16 @@ class RsaRecyclerAdapter(private var activtiy:Activity, private var textList: Ar
 
         if(textList[position]["select"]=="1")
         {
-            holder.linearLayoutRsaCancel.setBackgroundColor(activtiy.resources.getColor(R.color.color_grey))
+        /*    holder.linearLayoutRsaCancel.setBackgroundColor(activtiy.resources.getColor(R.color.color_grey))
             holder.textViewRSaRecycler.setTextColor(activtiy.resources.getColor(R.color.white))
+      */
+            holder.textViewRSaRecycler.setTextColor(activtiy.resources.getColor(R.color.red))
+            holder.relativeLayoutCancelBorder.background= activtiy.getDrawable(R.drawable.red_border)
+
         }
         else
         {
+            holder.relativeLayoutCancelBorder.background= activtiy.getDrawable(R.drawable.border_line_grey)
             holder.linearLayoutRsaCancel.setBackgroundColor(activtiy.resources.getColor(R.color.white))
             holder.textViewRSaRecycler.setTextColor(activtiy.resources.getColor(R.color.drawer_text_color))
         }
@@ -58,6 +69,7 @@ class RsaRecyclerAdapter(private var activtiy:Activity, private var textList: Ar
          var imageViewRsaRecycler:ImageView= view.findViewById(R.id.imageViewRecycleRsaCancel)
          var linearLayoutRsaCancel:LinearLayout= view.findViewById(R.id.linearLayoutRsaCancel)
          var textViewRSaRecycler: TextView = view.findViewById(R.id.textViewRsaCancelRecycle)
+         var relativeLayoutCancelBorder: RelativeLayout = view.findViewById(R.id.relativeLayoutCancelBorder)
      }
 
 

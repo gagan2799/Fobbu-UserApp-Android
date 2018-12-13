@@ -1754,6 +1754,7 @@ drawable quantum_ic_volume_up_white_36
 drawable rating_bar_empty
 drawable rating_bar_filled
 drawable rating_star_draw
+drawable red_border
 drawable red_circle
 drawable red_rect_rounded
 drawable red_rectangle
@@ -2195,6 +2196,7 @@ id recyclerViewServices
 id recyclerViewVehicles
 id recyclerViewWorkSummary
 id relativeLayout
+id relativeLayoutCancelBorder
 id relativeLayoutGetSetToolBar
 id relativeLayoutWorkSummaryToolBar
 id rfc822

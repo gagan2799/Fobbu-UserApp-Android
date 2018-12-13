@@ -134,7 +134,7 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
         imgProfile =view.findViewById(R.id.imgProfile)
         tvName =view.findViewById(R.id.tvName)
 
-        when {
+        /*when {
             CommonClass(activity!!, activity!!).getString(RsaClassType.RsaTypes.onGoingRsaLiveScreenType)
                     == FcmPushTypes.Types.inRouteRequest -> {
                 ivTool.setImageResource(R.drawable.man_riding_bike)
@@ -149,13 +149,19 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                 tvCode.visibility = View.VISIBLE
             }
             CommonClass(activity!!, activity!!).getString(RsaClassType.RsaTypes.onGoingRsaLiveScreenType)
-                    == FcmPushTypes.Types.otpVerified -> startActivity(
-                Intent(
-                    activity!!,
-                    WaitingScreenWhite::class.java
-                ).putExtra("from_where", "code_valid")
-            )
-        }
+                    == FcmPushTypes.Types.otpVerified -> {
+                startActivity(
+                    Intent(
+                        activity!!,
+                        WaitingScreenWhite::class.java
+                    ).putExtra("from_where", "code_valid")
+                )
+            }
+            else ->
+            {
+
+            }
+        }*/
     }
 
     @SuppressLint("SetTextI18n", "InflateParams")

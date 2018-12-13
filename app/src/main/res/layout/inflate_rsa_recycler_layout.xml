@@ -16,12 +16,15 @@
         <RelativeLayout
                 android:layout_width="wrap_content"
                 android:padding="10dp"
+                android:id="@+id/relativeLayoutCancelBorder"
                 android:layout_margin="5dp"
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:background="@drawable/border_line_grey"
                 android:layout_height="wrap_content">
+
             <ImageView
+                    android:layout_margin="10dp"
                     android:layout_centerInParent="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

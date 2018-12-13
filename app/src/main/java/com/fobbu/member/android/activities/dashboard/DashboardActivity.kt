@@ -1,6 +1,7 @@
 package com.fobbu.member.android.activities.dashboardActivity
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.app.Dialog
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -16,7 +17,10 @@ import android.support.v7.app.AppCompatActivity
 import android.view.Gravity
 import android.view.View
 import android.view.WindowManager
+import android.widget.Toast
 import com.fobbu.member.android.R
+import com.fobbu.member.android.activities.dashboard.presenter.DashboardHandler
+import com.fobbu.member.android.activities.dashboard.presenter.DashboardPresenter
 import com.fobbu.member.android.activities.rsaModule.RSARequestCancelActivity
 import com.fobbu.member.android.activities.vehicleModule.AddEditVehicleActivity
 import com.fobbu.member.android.activities.waitingScreenModule.WaitingScreenBlue
@@ -31,7 +35,9 @@ import com.fobbu.member.android.fragments.rsaFragmentModule.RsaClassType
 import com.fobbu.member.android.interfaces.ChangeRSAFragments
 import com.fobbu.member.android.interfaces.HeaderIconChanges
 import com.fobbu.member.android.interfaces.TopBarChanges
+import com.fobbu.member.android.modals.MainPojo
 import com.fobbu.member.android.utils.CommonClass
+import com.fobbu.member.android.view.ActivityView
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.activity_dashboard.*
@@ -39,16 +45,20 @@ import kotlinx.android.synthetic.main.app_bar_dashboard.*
 import kotlinx.android.synthetic.main.inflate_drawer.*
 import kotlinx.android.synthetic.main.option_menu_layout.*
 
-class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragments, TopBarChanges {
+class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragments, TopBarChanges,ActivityView {
+
 
     private var topBarChanges: TopBarChanges? = null
     var fragmentTypeForRSA = ""
     private lateinit var fragmentEarlier: Fragment
     var fragmentEarlierBool = false
+    private lateinit var dashboardHandler:DashboardHandler
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)
+
+        dashboardHandler=DashboardPresenter(this,this)
         setDataToDrawer()
         drawerClicks()
         tabBarClicks()
@@ -152,6 +162,7 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
         tvLogout.setOnClickListener {
             drawer_layout.closeDrawer(GravityCompat.START)
 
+
             Handler().postDelayed({
                 showLogoutPopup()
             }, 500)
@@ -248,7 +259,16 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
         alertDialog.setMessage(resources.getString(R.string.are_you_sure))
         alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "OK") { _, _ ->
             alertDialog.dismiss()
-            CommonClass(this, this).clearPreference()
+            if (CommonClass(this,this).checkInternetConn(this))
+            {
+                val tokenHeader = CommonClass(this, this).getString("x_access_token")
+
+                val userId = CommonClass(this, this).getString("_id")
+
+                dashboardHandler.logout(userId,tokenHeader)
+            }
+
+
             //logoutApi()
         }
         alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "CANCEL") { _, _ ->
@@ -341,6 +361,24 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
 
         }
 
+    }
+
+
+    override fun onRequestSuccessReport(mainPojo: MainPojo) {
+        if (mainPojo.success=="true")
+        {
+            CommonClass(this,this).clearPreference()
+        }else{
+            Toast.makeText(this,mainPojo.message, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    override fun showLoader() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun hideLoader() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
 }
