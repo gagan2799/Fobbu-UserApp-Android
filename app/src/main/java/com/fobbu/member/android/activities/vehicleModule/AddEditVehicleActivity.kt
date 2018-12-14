@@ -51,6 +51,7 @@ import kotlin.collections.HashMap
 class AddEditVehicleActivity : AppCompatActivity(),
     AddEditVehicleAcivityView {
 
+
     private lateinit var webServiceApi: WebServiceApi
     lateinit var addEditActivityHandler: AddEditActivityHandler
 
@@ -796,6 +797,8 @@ class AddEditVehicleActivity : AppCompatActivity(),
             fileList.add(imgProfile!!)
         }
 
+
+
         //  rlLoader.visibility = View.VISIBLE
 
         val jsonDoc = JSONObject()
@@ -988,5 +991,9 @@ class AddEditVehicleActivity : AppCompatActivity(),
 
     private fun getEnv(): MyApplication {
         return application as MyApplication
+    }
+
+    override fun onDeleteVehicleSuccessUpdateVehicle(mainPojo: MainPojo) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }

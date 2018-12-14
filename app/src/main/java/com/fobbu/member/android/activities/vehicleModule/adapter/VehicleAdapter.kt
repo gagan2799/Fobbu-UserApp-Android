@@ -10,10 +10,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import com.fobbu.member.android.R
 import com.fobbu.member.android.activities.vehicleModule.AddEditVehicleActivity
-import com.fobbu.member.android.activities.vehicleModule.presenter.VehicleListHandler
 import com.fobbu.member.android.activities.vehicleModule.presenter.VehicleListPresenter
+import com.fobbu.member.android.interfaces.DeleteVehicleClickListener
 import com.fobbu.member.android.modals.MainPojo
 import com.fobbu.member.android.utils.CommonClass
 import com.fobbu.member.android.view.ActivityView
@@ -21,10 +22,12 @@ import com.squareup.picasso.Picasso
 
 class VehicleAdapter(internal var activity: Activity, internal  var dataListMain:ArrayList<HashMap<String,Any>>):
 
-    RecyclerView.Adapter<VehicleAdapter.MyViewHolder>(),ActivityView {
+    RecyclerView.Adapter<VehicleAdapter.MyViewHolder>() {
+
+    var clickListener:DeleteVehicleClickListener=activity!! as DeleteVehicleClickListener
 
 
-    lateinit var vehicleListHandlerFactory  :VehicleListHandler
+
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): MyViewHolder {
         val view = LayoutInflater.from(activity).inflate(
             R.layout.inflate_vehicle_adapter
@@ -40,7 +43,7 @@ class VehicleAdapter(internal var activity: Activity, internal  var dataListMain
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
 
-        vehicleListHandlerFactory=VehicleListPresenter(activity,this)
+
         holder.tvVehicleName.text = dataListMain[position]["vehicle_brand"].toString()
         holder.tvVehicleNumber.text = dataListMain[position]["vehicle_registration_number"].toString()
         holder.tvYear.text = dataListMain[position]["make_of_year"].toString()
@@ -66,42 +69,17 @@ class VehicleAdapter(internal var activity: Activity, internal  var dataListMain
 
 
         holder.ivDELETE.setOnClickListener{
+            //deleteVehicle(position)
 
+            clickListener.onViewClick(dataListMain[position]["_id"].toString())
         }
+
 
     }
 
 
-    ///LOGOUT POPUP
-    private fun showLogoutPopup() {
-
-        val alertDialog = AlertDialog.Builder(activity).create()
-        alertDialog.setTitle(activity.resources.getString(R.string.Delete))
-        alertDialog.setMessage(activity.resources.getString(R.string.are_you_sure_you_want_to_delete))
-        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "OK") { _, _ ->
-            alertDialog.dismiss()
-            if (CommonClass(activity,activity).checkInternetConn(activity))
-            {
-                val tokenHeader = CommonClass(activity, activity).getString("x_access_token")
-
-                val userId = CommonClass(activity, activity).getString("_id")
-
-                /*vehicleListHandlerFactory.deleteVehicle(tokenHeader,)*/
-            }
 
 
-            //logoutApi()
-        }
-        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "CANCEL") { _, _ ->
-            alertDialog.dismiss()
-        }
-        alertDialog.setOnShowListener {
-            alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.BLACK)
-            alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.BLACK)
-        }
-
-        alertDialog.show()
-    }
     inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         var ivImage = view.findViewById(R.id.ivImage) as ImageView
@@ -109,18 +87,11 @@ class VehicleAdapter(internal var activity: Activity, internal  var dataListMain
         var tvYear = view.findViewById(R.id.tvYear) as TextView
         var tvVehicleNumber = view.findViewById(R.id.tvVehicleNumber) as TextView
         var ivDELETE = view.findViewById(R.id.ivDelete) as ImageView
+
     }
 
-    override fun onRequestSuccessReport(mainPojo: MainPojo) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
 
-    override fun showLoader() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
 
-    override fun hideLoader() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
 
 }
+

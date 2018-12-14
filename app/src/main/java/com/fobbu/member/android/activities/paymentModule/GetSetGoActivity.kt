@@ -16,18 +16,32 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.Toast
 import com.fobbu.member.android.R
+import com.fobbu.member.android.activities.dashboardActivity.DashboardActivity
+import com.fobbu.member.android.activities.paymentModule.presenter.GetSetGoHandler
+import com.fobbu.member.android.activities.paymentModule.presenter.GetSetGoPresenter
 import com.fobbu.member.android.activities.rsaModule.RSARequestCancelActivity
+import com.fobbu.member.android.fragments.rsaFragmentModule.RsaClassType
+import com.fobbu.member.android.modals.MainPojo
 import com.fobbu.member.android.utils.CommonClass
+import com.fobbu.member.android.view.ActivityView
 import kotlinx.android.synthetic.main.activity_get_set_go.*
 import kotlinx.android.synthetic.main.inflate_review_pop_up.view.*
 import kotlinx.android.synthetic.main.option_menu_layout.*
+import okhttp3.MediaType
+import okhttp3.RequestBody
 
-class GetSetGoActivity : AppCompatActivity() {
+class GetSetGoActivity : AppCompatActivity(),ActivityView {
+
+
+    lateinit var getSetGoHandler:GetSetGoHandler
+
 
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_get_set_go)
+
+        getSetGoHandler=GetSetGoPresenter(this,this)
         clicks()
         manageService(CommonClass(this,this).getString("service_name_selected"))
     }
@@ -36,7 +50,26 @@ class GetSetGoActivity : AppCompatActivity() {
     private fun clicks() {
 
         buttonSubmitGet.setOnClickListener {
-            openWonderfulPopUp()
+
+            if (CommonClass(this,this).checkInternetConn(this))
+            {
+                if (!editTextReviewGet.text.isEmpty() )
+                {
+                    //println("requestID"+CommonClass(this,this).getString("fobbu_request_id"))
+                    getSetGoHandler.postReviews(
+                        RequestBody.create(MediaType.parse("text/plain"),CommonClass(this,this).getString("fobbu_request_id")),
+                        RequestBody.create(MediaType.parse("text/plain"),ratinBarGetSet.rating.toString()),
+                        RequestBody.create(MediaType.parse("text/plain"),editTextReviewGet.text.toString()),
+                        CommonClass(this,this).getString("x_access_token")
+                )
+                }else{
+                    Toast.makeText(this,getString(R.string.provide_review), Toast.LENGTH_SHORT).show()
+
+                }
+            }else{
+                Toast.makeText(this,getString(R.string.internet_is_unavailable), Toast.LENGTH_SHORT).show()
+            }
+
         }
 
         linearLayoutGet.setOnClickListener {
@@ -117,6 +150,14 @@ class GetSetGoActivity : AppCompatActivity() {
         val view:View= LayoutInflater.from(this).inflate(R.layout.inflate_review_pop_up,null)
         builder.setView(view)
         val dialog:AlertDialog= builder.create()
+        view.llWonderFul.setOnClickListener{
+
+            startActivity(Intent(this,DashboardActivity::class.java)
+                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK))
+
+            CommonClass(this,this).workDoneReviewSend()
+             dialog.dismiss()
+        }
         view.imageViewrFacebookReview.setOnClickListener {
             dialog.dismiss()
         }
@@ -183,5 +224,24 @@ class GetSetGoActivity : AppCompatActivity() {
             }
         }
     }
+
+    override fun onRequestSuccessReport(mainPojo: MainPojo) {
+
+        if (mainPojo.success=="true")
+        {
+            openWonderfulPopUp()
+        }else{
+            Toast.makeText(this,mainPojo.message, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    override fun showLoader() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun hideLoader() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
 
 }

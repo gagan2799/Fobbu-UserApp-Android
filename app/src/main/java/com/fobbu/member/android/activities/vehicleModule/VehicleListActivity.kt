@@ -2,17 +2,24 @@ package com.fobbu.member.android.activities.vehicleModule
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
+import android.widget.Toast
 import com.fobbu.member.android.R
 import com.fobbu.member.android.activities.vehicleModule.adapter.VehicleAdapter
+import com.fobbu.member.android.activities.vehicleModule.presenter.AddEditActivityHandler
+import com.fobbu.member.android.activities.vehicleModule.presenter.AddEditVehiclePresenter
 import com.fobbu.member.android.activities.vehicleModule.presenter.VehicleListHandler
 import com.fobbu.member.android.activities.vehicleModule.presenter.VehicleListPresenter
+import com.fobbu.member.android.activities.vehicleModule.view.AddEditVehicleAcivityView
 import com.fobbu.member.android.activities.waitingScreenModule.WaitingScreenWhite
 import com.fobbu.member.android.apiInterface.MyApplication
 import com.fobbu.member.android.apiInterface.WebServiceApi
+import com.fobbu.member.android.interfaces.DeleteVehicleClickListener
 import com.fobbu.member.android.modals.MainPojo
 import com.fobbu.member.android.utils.CommonClass
 import com.fobbu.member.android.view.ActivityView
@@ -20,7 +27,8 @@ import kotlinx.android.synthetic.main.activity_vehicle_list.*
 import java.util.*
 import kotlin.collections.HashMap
 
-class VehicleListActivity : AppCompatActivity(),ActivityView{
+class VehicleListActivity : AppCompatActivity(),ActivityView,DeleteVehicleClickListener,AddEditVehicleAcivityView{
+
 
 
     private lateinit var webServiceApi: WebServiceApi
@@ -28,6 +36,7 @@ class VehicleListActivity : AppCompatActivity(),ActivityView{
     private var imageFrom = ""
     private var vehicleType = "2wheeler"
     lateinit var vehicleHandler: VehicleListHandler
+    lateinit var addEditHandler: AddEditActivityHandler
 
     private var dataListMain: ArrayList<HashMap<String, Any>> = ArrayList()
     private var dataListTwo: ArrayList<HashMap<String, Any>> = ArrayList()
@@ -35,12 +44,13 @@ class VehicleListActivity : AppCompatActivity(),ActivityView{
 
     var fromWhere = ""
 
+    var vehicleID=""
+
     private lateinit var vehicleAdapter: VehicleAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_vehicle_list)
-        vehicleHandler= VehicleListPresenter(this, this)
         initialise()
         addClicks()
     }
@@ -53,6 +63,10 @@ class VehicleListActivity : AppCompatActivity(),ActivityView{
 
     //// All initialise in this method for this class
     private fun initialise() {
+
+
+        vehicleHandler= VehicleListPresenter(this, this)
+        addEditHandler= AddEditVehiclePresenter(this, this)
 
         webServiceApi = getEnv().getRetrofit()
 
@@ -146,6 +160,9 @@ class VehicleListActivity : AppCompatActivity(),ActivityView{
 
     }
 
+    override fun onViewClick(vehicleID: String) {
+        deleteVehicle(vehicleID)
+    }
     /////////////////////////////FOR API"S//////////////////////////////////////////////////
 
     /// Vehicle List API  (API - users/vehicles)
@@ -174,6 +191,7 @@ class VehicleListActivity : AppCompatActivity(),ActivityView{
             dataListMain.clear()
             dataListFour.clear()
             dataListTwo.clear()
+
 
             for (i in mainPojo.vehicles.indices) {
                 if (mainPojo.vehicles[i]["vehicle_type"] == "4wheeler")
@@ -204,6 +222,9 @@ class VehicleListActivity : AppCompatActivity(),ActivityView{
                     tvNodata.text="No 2 Wheeler Added"
                     recyclerViewVehicles.visibility=View.GONE
                 }
+
+
+
             }
             else
             {
@@ -244,4 +265,85 @@ class VehicleListActivity : AppCompatActivity(),ActivityView{
     private fun getEnv(): MyApplication {
         return application as MyApplication
     }
+
+    ///DELETE VEHICLE  POPUP
+    private fun deleteVehicle(vehicleID: String) {
+
+        this.vehicleID =vehicleID
+        val alertDialog = AlertDialog.Builder(this).create()
+        alertDialog.setTitle(resources.getString(R.string.Delete))
+        alertDialog.setMessage(resources.getString(R.string.are_you_sure_you_want_to_delete))
+        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "OK") { _, _ ->
+            alertDialog.dismiss()
+            if (CommonClass(this,this).checkInternetConn(this))
+            {
+                val tokenHeader = CommonClass(this, this).getString("x_access_token")
+
+                val userId = CommonClass(this, this).getString("_id")
+
+                addEditHandler.deleteVehicle(tokenHeader,vehicleID,userId)
+
+
+            }
+
+        }
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "CANCEL") { _, _ ->
+            alertDialog.dismiss()
+        }
+        alertDialog.setOnShowListener {
+            alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.BLACK)
+            alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.BLACK)
+        }
+
+        alertDialog.show()
+    }
+
+
+    override fun onRequestSuccessReportEdit(mainPojo: MainPojo) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun onRequestSuccessUpdateVehicle(mainPojo: MainPojo) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun onDeleteVehicleSuccessUpdateVehicle(mainPojo: MainPojo) {
+
+        if (mainPojo.success=="true")
+        {
+            for (i in dataListMain.size-1 downTo 0)
+            {
+                if (vehicleID==dataListMain[i]["_id"])
+                {
+                    dataListMain.removeAt(i)
+                    break
+                }
+            }
+
+            for (i in dataListTwo.size-1 downTo 0)
+            {
+                if (vehicleID==dataListTwo[i]["_id"])
+                {
+                    dataListTwo.removeAt(i)
+                    break
+
+                }
+            }
+
+            for (i in dataListFour.size-1 downTo 0)
+            {
+                if (vehicleID==dataListFour[i]["_id"])
+                {
+                    dataListFour.removeAt(i)
+                    break
+                }
+            }
+            vehicleAdapter.notifyDataSetChanged()
+            println("data list$dataListMain")
+        }else
+        {
+            Toast.makeText(this,mainPojo.message, Toast.LENGTH_SHORT).show()
+        }
+    }
+
 }

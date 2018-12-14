@@ -309,13 +309,30 @@ class ApiClient(var activity: Activity) {
         })
     }
 
-    // delete vehicel API
+    // delete vehicle API
     fun deleteVehicle(token:String,vehicleID:String,userID:String,responseHandler: ResponseHandler)
     {
         val map=HashMap<String,String>()
         map["vehicle_id"]=vehicleID
         map["user_id"]=userID
         webServiceApi.deleteVehicle(token,map).enqueue(object :Callback<MainPojo>
+        {
+            override fun onFailure(call: Call<MainPojo>, t: Throwable) {
+                responseHandler.onServerError("""Server Error: ${t.message}""")
+            }
+
+            override fun onResponse(call: Call<MainPojo>, response: Response<MainPojo>) {
+                handleSuccess(response,responseHandler)
+            }
+
+        })
+    }
+
+
+    // provide rating api
+    fun postReviews(requestID:RequestBody,rating:RequestBody,reviews:RequestBody,token:String,responseHandler: ResponseHandler)
+    {
+        webServiceMultipart.postReviews(requestID,rating,reviews,token).enqueue(object :Callback<MainPojo>
         {
             override fun onFailure(call: Call<MainPojo>, t: Throwable) {
                 responseHandler.onServerError("""Server Error: ${t.message}""")

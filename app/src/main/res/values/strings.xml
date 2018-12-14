@@ -285,12 +285,13 @@
     <string name="while_fobbu_fills_fuel">While Fobbu fills fuel.</string>
     <string name="share_your_experience">Share Your Experience</string>
     <string name="wonderful_review">Wonderful</string>
-    <string name="your_review_was_saved_share_it_with_your_friens">Your review was saved. Share it with your friens!
+    <string name="your_review_was_saved_share_it_with_your_friens">Your review was saved. Share it with your friends!
     </string>
     <string name="message">Message</string>
     <string name="total_amount">Total Amount</string>
     <string name="requestID_not_provided">Request ID is not provided.</string>
     <string name="internet_is_unavailable">Internet is unavailable.Please try again in some time.</string>
+    <string name="provide_review">Provide some review!</string>
 
 
 </resources>

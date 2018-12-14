@@ -113,4 +113,30 @@ class AddEditVehiclePresenter(internal  var activity:Activity,internal  var acti
     }
 
 
+
+    // method for handling api of deleting vehicle
+    override fun deleteVehicle(token: String, vehicleId: String, userId: String) {
+        val apiClient= ApiClient(activity)
+        apiClient.deleteVehicle(token,vehicleId,userId,object :ResponseHandler
+        {
+            override fun onSuccess(mainPojo: MainPojo) {
+                activityView.onDeleteVehicleSuccessUpdateVehicle(mainPojo)
+            }
+
+            override fun onError(message: String) {
+                Toast.makeText(activity, message, Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onServerError(message: String) {
+                Toast.makeText(activity, message, Toast.LENGTH_SHORT).show()
+            }
+
+            override fun on401() {
+                CommonClass(activity,activity).clearPreference()
+            }
+
+        })
+    }
+
+
 }

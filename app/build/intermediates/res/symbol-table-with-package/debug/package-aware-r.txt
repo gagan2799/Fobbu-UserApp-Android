@@ -2032,6 +2032,7 @@ id ivCenter
 id ivCrossDrawer
 id ivCrossRSA
 id ivDeals
+id ivDelete
 id ivDrawer
 id ivEdit
 id ivFobbuText
@@ -2118,6 +2119,7 @@ id llTowRequired
 id llTowing
 id llTwo
 id llUploadPics
+id llWonderFul
 id loading_indicator
 id logo_only
 id mapView
@@ -2602,6 +2604,7 @@ mipmap app_icon
 mipmap app_icon_round
 mipmap ic_launcher
 mipmap ic_launcher_round
+string Delete
 string _0002534
 string _4
 string abc_action_bar_home_description
@@ -2658,6 +2661,7 @@ string amount
 string app_name
 string appbar_scrolling_view_behavior
 string are_you_sure
+string are_you_sure_you_want_to_delete
 string assured_cashback
 string awesome
 string awesome_exclamatory
@@ -2891,6 +2895,7 @@ string please_select_one_issue
 string please_wait
 string proceed_to_pay
 string project_id
+string provide_review
 string quantity_of_fuel_d
 string rate_review
 string requestID_not_provided

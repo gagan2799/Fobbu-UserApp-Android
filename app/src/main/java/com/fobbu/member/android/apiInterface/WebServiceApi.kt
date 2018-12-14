@@ -118,7 +118,7 @@ interface WebServiceApi {
 
     @POST("users/request/make_payment")
     fun makePayment(@Body mapData:HashMap<String,String>,
-                            @Header("x-access-token") token:String) :Call<MainPojo>
+                    @Header("x-access-token") token:String) :Call<MainPojo>
 
     @HTTP(method = "DELETE", path = "/users/vehicles", hasBody = true)
     fun deleteVehicle(
@@ -127,5 +127,12 @@ interface WebServiceApi {
     ): Call<MainPojo>
 
 
+    @POST("users/request/provide_ratings")
+    @Multipart
+    @JvmSuppressWildcards
+    fun postReviews(@Part("request_id") requestID:RequestBody,
+                    @Part("ratings") rating:RequestBody,
+                    @Part("comments") reviews:RequestBody,
+                    @Header("x-access-token") token:String):Call<MainPojo>
 
 }
