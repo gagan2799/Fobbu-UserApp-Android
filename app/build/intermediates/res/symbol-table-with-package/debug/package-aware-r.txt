@@ -1428,6 +1428,7 @@ drawable email
 drawable error
 drawable error_draw
 drawable face_id
+drawable facebook
 drawable filled_radio
 drawable filter
 drawable finallgif
@@ -1438,6 +1439,7 @@ drawable flat_tyre_blue
 drawable flat_tyre_gray
 drawable flat_tyre_selected
 drawable flatbed_selected
+drawable flatbed_selected_blue
 drawable fobbu_cancel_logo
 drawable fobbu_logo_blue
 drawable fobbu_pay
@@ -1645,6 +1647,7 @@ drawable ic_vol_type_tv_dark
 drawable ic_vol_type_tv_light
 drawable intro_background
 drawable lifting
+drawable lifting_selected_blue
 drawable list
 drawable lock_drawer
 drawable lsd_hover
@@ -1802,6 +1805,7 @@ drawable tracker
 drawable trash_bin
 drawable triangle
 drawable triangle_car
+drawable twitter
 drawable unfilled_radio
 drawable upi_payment
 drawable vehicle_emergency
@@ -2035,6 +2039,7 @@ id ivDeals
 id ivDelete
 id ivDrawer
 id ivEdit
+id ivFlatBed
 id ivFobbuText
 id ivHead
 id ivHome
@@ -2044,6 +2049,7 @@ id ivImage2
 id ivImage3
 id ivImage4
 id ivImageDone
+id ivLifting
 id ivList
 id ivProfileDrawer
 id ivRSA
@@ -2090,6 +2096,7 @@ id listMode
 id list_item
 id live_stream_indicator
 id live_stream_seek_bar
+id llAddNewVehicle
 id llAssistance
 id llBottom
 id llBottomBar
@@ -2889,6 +2896,7 @@ string please_enter_full_name
 string please_enter_gender
 string please_enter_mobile
 string please_enter_password
+string please_enter_vehicle_number
 string please_fobbu_gathering_tools
 string please_generate
 string please_select_one_issue

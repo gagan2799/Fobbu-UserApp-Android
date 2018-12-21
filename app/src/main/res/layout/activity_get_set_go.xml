@@ -123,8 +123,10 @@
                                 style="@style/TextLabel"
                                 android:textColor="@color/color_grey"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
+                                android:layout_height="match_parent"
                                 android:id="@+id/editTextReviewGet"
+                                android:layout_gravity="top"
+                                android:gravity="top"
                                 android:background="@android:color/transparent"
                                 android:hint="@string/write_a_review"
                         />
@@ -406,6 +408,7 @@
                     android:layout_height="wrap_content"
                     android:paddingLeft="60dp"
                     android:paddingRight="60dp"
+                    android:layout_marginBottom="20dp"
                     android:id="@+id/linearLayoutGo"
                     android:layout_below="@+id/linearLayoutSet"
                     android:orientation="vertical">

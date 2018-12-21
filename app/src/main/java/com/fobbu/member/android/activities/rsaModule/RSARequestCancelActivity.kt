@@ -85,11 +85,7 @@ class RSARequestCancelActivity : AppCompatActivity(), ActivityView {
 
             if(isSelected)
             {
-                rsaHandler.cancelRequest(
-                    reason,
-                    CommonClass(this, this).getString("fobbu_request_id"),
-                    CommonClass(this, this).getString("x_access_token")
-                )
+               showPopUp(this,reason)
             }
             else
             {
@@ -97,8 +93,6 @@ class RSARequestCancelActivity : AppCompatActivity(), ActivityView {
                     ,Toast.LENGTH_SHORT).show()
             }
 
-
-            //showPopUp(this)
         }
     }
 
@@ -138,7 +132,7 @@ class RSARequestCancelActivity : AppCompatActivity(), ActivityView {
         rsaRecyclerAdapter.notifyDataSetChanged()
     }
 
-    private fun showPopUp(activity: Activity) {
+    private fun showPopUp(activity: Activity,string: String) {
         val inflater = activity!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
         val cViewFinalPopup = inflater.inflate(R.layout.fragment_builder_confirm, null)
@@ -168,13 +162,14 @@ class RSARequestCancelActivity : AppCompatActivity(), ActivityView {
         }
         tvConfirm.setOnClickListener {
             builderFinal.dismiss()
-            startActivity(
-                Intent(
-                    this,
-                    CancellationSuccessMessageActivity::class.java
-                )
+
+            rsaHandler.cancelRequest(
+                string,
+                CommonClass(this, this).getString("fobbu_request_id"),
+                CommonClass(this, this).getString("x_access_token")
             )
-            finish()
+
+
             //
         }
 
@@ -205,7 +200,17 @@ class RSARequestCancelActivity : AppCompatActivity(), ActivityView {
             } else {
                 CommonClass(this, this).removeString("fobbu_request_id")
                 CommonClass(this, this).putString(RsaClassType.RsaTypes.onGoingRsaScreen, "")
-                showPopUp(this)
+                CommonClass(this, this).putString(RsaClassType.RsaTypes.onGoingRsaScreenType, "")
+
+
+                startActivity(
+                    Intent(
+                        this,
+                        CancellationSuccessMessageActivity::class.java
+                    )
+                )
+                finish()
+
             }
 
         } else {

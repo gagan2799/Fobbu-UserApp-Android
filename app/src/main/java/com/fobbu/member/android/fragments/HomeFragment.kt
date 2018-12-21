@@ -1,5 +1,6 @@
 package com.fobbu.member.android.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -7,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import com.fobbu.member.android.R
+import com.fobbu.member.android.activities.vehicleModule.AddEditVehicleActivity
 import com.fobbu.member.android.interfaces.ChangeRSAFragments
 import com.fobbu.member.android.interfaces.HeaderIconChanges
 import com.fobbu.member.android.interfaces.TopBarChanges
@@ -19,6 +21,8 @@ class HomeFragment : Fragment() {
 
     private var headerIconChanges: HeaderIconChanges? = null
     private var topBarChanges:TopBarChanges?=null
+
+    private lateinit var llAddNewVehicle:LinearLayout
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -39,6 +43,10 @@ class HomeFragment : Fragment() {
             changeRSAFragments!!.setRSAFragments("")
         }
 
+        llAddNewVehicle.setOnClickListener {
+            activity!!.startActivity(Intent(activity!!, AddEditVehicleActivity::class.java))
+        }
+
     }
 
     private fun initialise(view: View?) {
@@ -50,6 +58,8 @@ class HomeFragment : Fragment() {
         topBarChanges!!.showGoneTopBar(true)
 
         changeRSAFragments = activity!! as ChangeRSAFragments
+
+        llAddNewVehicle = view!!.findViewById(R.id.llAddNewVehicle)
 
         llRSA = view!!.findViewById(R.id.llRSA)
     }

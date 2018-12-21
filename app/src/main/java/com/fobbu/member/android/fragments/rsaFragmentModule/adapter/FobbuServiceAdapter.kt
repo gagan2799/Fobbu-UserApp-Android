@@ -37,66 +37,6 @@ class FobbuServiceAdapter(private var activity: Activity, private var dataListSe
                 .into(holder.ivImage)
         else
             holder.ivImage.setImageResource(R.drawable.dummy_services)
-
-      /*  holder.itemView.setOnClickListener {
-
-            llHomeServices.visibility = View.GONE
-            llSubPoints.visibility = View.VISIBLE
-
-            serviceSelected = dataListServices[position]["service_name"].toString()
-            serviceSelectedID = dataListServices[position]["_id"].toString()
-
-            when (serviceSelected) {
-                "Flat Tyre" -> {
-                    llThree.visibility = View.GONE
-                    llTwo.visibility = View.VISIBLE
-                    setAnimationRight(llCarTwo, activity!!)
-                    setAnimationLeft(llScooterTwo,activity!!)
-                    topBarChanges!!.showGoneTopBar(false)
-                    rlTopDrawer.visibility = View.VISIBLE
-                    tvHeading.text = resources.getString(R.string.flat_tyre_worries)
-                    tvSubheading.text = resources.getString(R.string.fix_on_the_spot)
-                }
-                "Jump Start" -> {
-                    llThree.visibility = View.GONE
-                    llTwo.visibility = View.VISIBLE
-                    topBarChanges!!.showGoneTopBar(false)
-                    rlTopDrawer.visibility = View.VISIBLE
-                    tvHeading.text = resources.getString(R.string.dead_battery_worries)
-                    tvSubheading.text = resources.getString(R.string.jump_start)
-                }
-                "Fuel Delivery" -> {
-                    llThree.visibility = View.VISIBLE
-                    llTwo.visibility = View.GONE
-                    topBarChanges!!.showGoneTopBar(false)
-                    rlTopDrawer.visibility = View.VISIBLE
-                    tvHeading.text = resources.getString(R.string.empty_tanks_worries)
-                    tvSubheading.text = resources.getString(R.string.deliver_real_quick)
-                }
-                "Burst Tyre" -> {
-                    llThree.visibility = View.GONE
-                    llTwo.visibility = View.VISIBLE
-                    topBarChanges!!.showGoneTopBar(false)
-                    rlTopDrawer.visibility = View.VISIBLE
-                    tvHeading.text = resources.getString(R.string.burst_tyre_worries)
-                    tvSubheading.text = resources.getString(R.string.help_you_fix)
-                }
-                "Towing" -> {
-                    llThree.visibility = View.GONE
-                    llTwo.visibility = View.VISIBLE
-                    topBarChanges!!.showGoneTopBar(false)
-                    rlTopDrawer.visibility = View.VISIBLE
-                    tvHeading.text = resources.getString(R.string.double_trouble)
-                    tvSubheading.text = resources.getString(R.string.we_will_connect_towing)
-                }
-                else -> {
-                    llHomeServices.visibility = View.VISIBLE
-                    llSubPoints.visibility = View.GONE
-                    rlTopDrawer.visibility = View.GONE
-                }
-            }
-
-        }*/
     }
 
     override fun getItemCount(): Int {

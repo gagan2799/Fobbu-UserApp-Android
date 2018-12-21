@@ -12,6 +12,7 @@ class FcmPushTypes
         var moneyRequested = "money_requested"
         var moneyRequestedBroadcast="money_requested_broadcast"
         var startedWork="in_progress"
+        var startedWorkBroadcast="in_progress_started_work"
         var workEnded="completed"
         var requestCancelled="cancelled_by_partner"
     }

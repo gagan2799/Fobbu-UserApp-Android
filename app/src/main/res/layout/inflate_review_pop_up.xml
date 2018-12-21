@@ -48,7 +48,7 @@
                 android:layout_marginRight="10dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/imageViewrTwitterReview"
-                android:src="@drawable/wokr_already"/>
+                android:src="@drawable/twitter"/>
         <ImageView
                 android:layout_width="0dp"
                 android:layout_weight="1"
@@ -56,7 +56,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/imageViewrFacebookReview"
-                android:src="@drawable/wokr_already"/>
+                android:src="@drawable/facebook"/>
 
     </LinearLayout>
 

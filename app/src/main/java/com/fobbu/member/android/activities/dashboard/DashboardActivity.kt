@@ -21,6 +21,7 @@ import android.widget.Toast
 import com.fobbu.member.android.R
 import com.fobbu.member.android.activities.dashboard.presenter.DashboardHandler
 import com.fobbu.member.android.activities.dashboard.presenter.DashboardPresenter
+import com.fobbu.member.android.activities.paymentModule.GetSetGoActivity
 import com.fobbu.member.android.activities.rsaModule.RSARequestCancelActivity
 import com.fobbu.member.android.activities.vehicleModule.AddEditVehicleActivity
 import com.fobbu.member.android.activities.waitingScreenModule.WaitingScreenBlue
@@ -337,6 +338,16 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
 
                     CommonClass(this, this).putString(RsaClassType.RsaTypes.onGoingRsaScreen, "YES")
                     startActivity(Intent(this, WaitingScreenWhite::class.java).putExtra("from_where", "vehicle_accessed"))
+                }
+                FcmPushTypes.Types.startedWork -> {
+
+                    CommonClass(this, this).putString(RsaClassType.RsaTypes.onGoingRsaScreen, "YES")
+                    startActivity(Intent(this, GetSetGoActivity::class.java).putExtra("navigate_to", "Get"))
+                }
+                FcmPushTypes.Types.workEnded -> {
+
+                    CommonClass(this, this).putString(RsaClassType.RsaTypes.onGoingRsaScreen, "YES")
+                    startActivity(Intent(this, GetSetGoActivity::class.java).putExtra("navigate_to", ""))
                 }
                 else -> {
 

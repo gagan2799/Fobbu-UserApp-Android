@@ -49,7 +49,6 @@ class MyApplication : Application() {
 
         loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
 
-
         val httpClient = OkHttpClient.Builder()
         httpClient.networkInterceptors().add(Interceptor { chain ->
             val original = chain.request()
@@ -88,7 +87,6 @@ class MyApplication : Application() {
 
         loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
 
-
         val httpClient = OkHttpClient.Builder()
         httpClient.networkInterceptors().add(Interceptor { chain ->
             val original = chain.request()
@@ -106,7 +104,6 @@ class MyApplication : Application() {
         httpClient.writeTimeout((2 * 60).toLong(), TimeUnit.SECONDS)
 
         val client = httpClient.build()
-
 
         val okHttpClient = OkHttpClient.Builder().addInterceptor(loggingInterceptor)
             .readTimeout(60, TimeUnit.SECONDS)

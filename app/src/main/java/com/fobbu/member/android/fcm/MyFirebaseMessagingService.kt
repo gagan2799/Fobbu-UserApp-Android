@@ -91,6 +91,8 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             }
             json["type"] == FcmPushTypes.Types.otpVerified -> intent.putExtra("from_push", FcmPushTypes.Types.otpVerified)
             json["type"] == FcmPushTypes.Types.moneyRequested -> intent.putExtra("from_push", FcmPushTypes.Types.moneyRequested)
+            json["type"] == FcmPushTypes.Types.startedWork -> intent.putExtra("from_push", FcmPushTypes.Types.startedWork)
+            json["type"] == FcmPushTypes.Types.workEnded -> intent.putExtra("from_push", FcmPushTypes.Types.workEnded)
 
         }
 
@@ -161,6 +163,18 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
                 intent.putExtra("navigate_to", FcmPushTypes.Types.moneyRequested)
                 sendBroadcast(intent)
             }
+            json["type"] == FcmPushTypes.Types.startedWork -> {
+                val intent = Intent()
+                intent.action = FcmPushTypes.Types.startedWorkBroadcast
+                intent.putExtra("navigate_to", FcmPushTypes.Types.startedWork)
+                sendBroadcast(intent)
+            }
+            json["type"] == FcmPushTypes.Types.workEnded -> {
+                val intent = Intent()
+                intent.action = FcmPushTypes.Types.startedWorkBroadcast
+                intent.putExtra("navigate_to", FcmPushTypes.Types.workEnded)
+                sendBroadcast(intent)
+            }
         }
     }
 
@@ -183,6 +197,8 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             }
             json["type"] == FcmPushTypes.Types.otpVerified -> intent.putExtra("from_push", FcmPushTypes.Types.otpVerified)
             json["type"] == FcmPushTypes.Types.moneyRequested -> intent.putExtra("from_push", FcmPushTypes.Types.moneyRequested)
+            json["type"] == FcmPushTypes.Types.startedWork -> intent.putExtra("from_push", FcmPushTypes.Types.startedWork)
+            json["type"] == FcmPushTypes.Types.workEnded -> intent.putExtra("from_push", FcmPushTypes.Types.workEnded)
         }
 
         val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)

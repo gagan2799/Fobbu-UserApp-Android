@@ -18,7 +18,6 @@ import retrofit2.http.Multipart
  */
 interface WebServiceApi {
 
-
     @POST("users/signup")
     fun postSignUp(
         @Body map:HashMap<String,String>
@@ -29,12 +28,10 @@ interface WebServiceApi {
     fun login(@Body body: HashMap<String,String> ): Call<MainPojo>
 
 
-
     @POST("users/forgot-password")
     fun forgotPassword(
         @Body mapData: HashMap<String, String>
     ): Call<MainPojo>
-
 
 
     @JvmSuppressWildcards
@@ -112,8 +109,6 @@ interface WebServiceApi {
     fun getServices(
         @Header("x-access-token") token:String,
         @Query("request_id") requestID:String):Call<MainPojo>
-
-
 
 
     @POST("users/request/make_payment")
