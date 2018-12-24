@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Tue Dec 18 17:45:45 IST 2018
+#Mon Dec 24 18:09:49 IST 2018
 4.path=lib/mips/libpl_droidsonroids_gif.so
 8.set=NATIVE_RESOURCE
 6.path=lib/mips64/libpl_droidsonroids_gif.so

@@ -168,8 +168,6 @@ class RSARequestCancelActivity : AppCompatActivity(), ActivityView {
                 CommonClass(this, this).getString("fobbu_request_id"),
                 CommonClass(this, this).getString("x_access_token")
             )
-
-
             //
         }
 
