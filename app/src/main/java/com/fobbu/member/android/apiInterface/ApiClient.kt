@@ -29,6 +29,7 @@ class ApiClient(var activity: Activity) {
        map["mobile_number"]=mobile
        map["password"]=password
        map["device_token"]=token
+       map["device_type"]="android"
 
        webServiceApi.login(map).enqueue(object :Callback<MainPojo>
        {
@@ -59,6 +60,7 @@ class ApiClient(var activity: Activity) {
         map["mobile_number"]=mobile
         map["gender"]=gender
         map["device_token"]=token
+        map["device_type"]="android"
 
         webServiceApi.postSignUp(map)
             .enqueue(object:Callback<MainPojo>
@@ -296,6 +298,7 @@ class ApiClient(var activity: Activity) {
         val hashmap = HashMap<String, String>()
         hashmap["device_token"] = " "
         hashmap["user_id"] = userID
+        hashmap["device_type"]="android"
         webServiceApi.updateDeviceTokenFCM(hashmap,token).enqueue(object :Callback<MainPojo>
         {
             override fun onFailure(call: Call<MainPojo>, t: Throwable) {

@@ -48,10 +48,6 @@
         "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-hdpi\\padlock.png"
     },
     {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_dontno_selected.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-hdpi\\dontno_selected.png"
-    },
-    {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4_quantum_ic_forward_30_white_24.png.flat",
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-cast-framework-12.0.1.aar\\83b45e13542c3f3250e9e8f36424e7ea\\res\\drawable-xxxhdpi-v4\\quantum_ic_forward_30_white_24.png"
     },
@@ -70,10 +66,6 @@
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4_abc_ic_star_half_black_48dp.png.flat",
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\8535e9c43b1934f846f2a7844fab5ef5\\res\\drawable-xxxhdpi-v4\\abc_ic_star_half_black_48dp.png"
-    },
-    {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi_ic_launcher_round.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher_round.png"
     },
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_ic_mr_button_connected_29_dark.png.flat",
@@ -328,10 +320,6 @@
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-26.1.0.aar\\ba51fb5c7329c305d5aeda44cd9a9a8c\\res\\drawable-xhdpi-v4\\ic_mr_button_connecting_15_light.png"
     },
     {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_battery_jump_start_gray.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xxhdpi\\battery_jump_start_gray.png"
-    },
-    {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_car_gray.png.flat",
         "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-hdpi\\car_gray.png"
     },
@@ -400,10 +388,6 @@
         "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\mipmap-hdpi\\app_icon.png"
     },
     {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_triangle.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xxxhdpi\\triangle.png"
-    },
-    {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4_ic_mr_button_connected_09_dark.png.flat",
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-26.1.0.aar\\ba51fb5c7329c305d5aeda44cd9a9a8c\\res\\drawable-xxhdpi-v4\\ic_mr_button_connected_09_dark.png"
     },
@@ -428,12 +412,12 @@
         "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xxxhdpi\\power_drawer.png"
     },
     {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4_ic_plusone_standard_off_client.png.flat",
-        "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-plus-12.0.1.aar\\13c52c6747abbf76a221116516aa90c0\\res\\drawable-mdpi-v4\\ic_plusone_standard_off_client.png"
-    },
-    {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable_common_google_signin_btn_icon_dark_normal.xml.flat",
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-12.0.1.aar\\ba22961accc03e72cd6e36903da2e695\\res\\drawable\\common_google_signin_btn_icon_dark_normal.xml"
+    },
+    {
+        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4_ic_plusone_standard_off_client.png.flat",
+        "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-plus-12.0.1.aar\\13c52c6747abbf76a221116516aa90c0\\res\\drawable-mdpi-v4\\ic_plusone_standard_off_client.png"
     },
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_ic_mr_button_connecting_24_light.png.flat",
@@ -512,10 +496,6 @@
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\8535e9c43b1934f846f2a7844fab5ef5\\res\\drawable-xhdpi-v4\\abc_ic_star_black_48dp.png"
     },
     {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_flat_tyre_blue.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xxhdpi\\flat_tyre_blue.png"
-    },
-    {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\layout_rsa_services_adapter.xml.flat",
         "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\layout\\rsa_services_adapter.xml"
     },
@@ -540,12 +520,12 @@
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\design-28.0.0.aar\\4363baf4f3b032b7d1de4fcaae5cd5dd\\res\\animator\\mtrl_fab_show_motion_spec.xml"
     },
     {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_add_emergence.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xxxhdpi\\add_emergence.png"
-    },
-    {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_notification_bg_normal.9.png.flat",
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-28.0.0.aar\\4429440aeca2260e411a4bc3f2fb9033\\res\\drawable-xhdpi-v4\\notification_bg_normal.9.png"
+    },
+    {
+        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_add_emergence.png.flat",
+        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xxxhdpi\\add_emergence.png"
     },
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_cancel_red.png.flat",
@@ -678,10 +658,6 @@
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_fobbu_wallet.png.flat",
         "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-hdpi\\fobbu_wallet.png"
-    },
-    {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_rsa_red.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xxxhdpi\\rsa_red.png"
     },
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_car_docs_tabbar.png.flat",
@@ -888,10 +864,6 @@
         "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xhdpi\\towing_selected.png"
     },
     {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_vehicle_emergency_big.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-hdpi\\vehicle_emergency_big.png"
-    },
-    {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_abc_ic_star_half_black_16dp.png.flat",
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\8535e9c43b1934f846f2a7844fab5ef5\\res\\drawable-xhdpi-v4\\abc_ic_star_half_black_16dp.png"
     },
@@ -934,10 +906,6 @@
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4_ic_mr_button_connected_02_light.png.flat",
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-26.1.0.aar\\ba51fb5c7329c305d5aeda44cd9a9a8c\\res\\drawable-xxhdpi-v4\\ic_mr_button_connected_02_light.png"
-    },
-    {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_flat_tyre_gray.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xxxhdpi\\flat_tyre_gray.png"
     },
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_list.png.flat",
@@ -1088,10 +1056,6 @@
         "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-hdpi\\check_white.png"
     },
     {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_dontno_selected.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xxhdpi\\dontno_selected.png"
-    },
-    {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4_quantum_ic_forward_10_white_24.png.flat",
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-cast-framework-12.0.1.aar\\83b45e13542c3f3250e9e8f36424e7ea\\res\\drawable-mdpi-v4\\quantum_ic_forward_10_white_24.png"
     },
@@ -1194,10 +1158,6 @@
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4_ic_group_collapse_09.png.flat",
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-26.1.0.aar\\ba51fb5c7329c305d5aeda44cd9a9a8c\\res\\drawable-xxxhdpi-v4\\ic_group_collapse_09.png"
-    },
-    {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_flat_tyre.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xhdpi\\flat_tyre.png"
     },
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\animator_mtrl_btn_state_list_anim.xml.flat",
@@ -1336,10 +1296,6 @@
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-plus-12.0.1.aar\\13c52c6747abbf76a221116516aa90c0\\res\\drawable-mdpi-v4\\ic_plusone_medium_off_client.png"
     },
     {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_splash_vehicles.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xxxhdpi\\splash_vehicles.png"
-    },
-    {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_check_mark_blue.png.flat",
         "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xhdpi\\check_mark_blue.png"
     },
@@ -1428,10 +1384,6 @@
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-26.1.0.aar\\ba51fb5c7329c305d5aeda44cd9a9a8c\\res\\drawable-xhdpi-v4\\ic_mr_button_connected_15_dark.png"
     },
     {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_burst_tyre_selected.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xxxhdpi\\burst_tyre_selected.png"
-    },
-    {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\layout_abc_action_menu_item_layout.xml.flat",
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\8535e9c43b1934f846f2a7844fab5ef5\\res\\layout\\abc_action_menu_item_layout.xml"
     },
@@ -1498,10 +1450,6 @@
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4_ic_mr_button_connected_19_dark.png.flat",
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-26.1.0.aar\\ba51fb5c7329c305d5aeda44cd9a9a8c\\res\\drawable-xxhdpi-v4\\ic_mr_button_connected_19_dark.png"
-    },
-    {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_signin_input_field.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xxhdpi\\signin_input_field.png"
     },
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_common_google_signin_btn_icon_dark_normal_background.9.png.flat",
@@ -1572,10 +1520,6 @@
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-cast-12.0.1.aar\\ea64fa70f70315147b18f477e287f38b\\res\\drawable-mdpi-v4\\cast_ic_notification_on.png"
     },
     {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_verify_input_field.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-hdpi\\verify_input_field.png"
-    },
-    {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_member_card.png.flat",
         "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xhdpi\\member_card.png"
     },
@@ -1598,10 +1542,6 @@
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4_abc_list_longpressed_holo.9.png.flat",
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\8535e9c43b1934f846f2a7844fab5ef5\\res\\drawable-hdpi-v4\\abc_list_longpressed_holo.9.png"
-    },
-    {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_battery_jump_start_gray.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xxxhdpi\\battery_jump_start_gray.png"
     },
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\layout_design_navigation_menu_item.xml.flat",
@@ -1628,12 +1568,12 @@
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-26.1.0.aar\\ba51fb5c7329c305d5aeda44cd9a9a8c\\res\\drawable-xhdpi-v4\\ic_mr_button_connecting_07_dark.png"
     },
     {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_ic_mr_button_connected_12_dark.png.flat",
-        "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-26.1.0.aar\\ba51fb5c7329c305d5aeda44cd9a9a8c\\res\\drawable-xhdpi-v4\\ic_mr_button_connected_12_dark.png"
-    },
-    {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_suv_selected.png.flat",
         "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xxhdpi\\suv_selected.png"
+    },
+    {
+        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_ic_mr_button_connected_12_dark.png.flat",
+        "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-26.1.0.aar\\ba51fb5c7329c305d5aeda44cd9a9a8c\\res\\drawable-xhdpi-v4\\ic_mr_button_connected_12_dark.png"
     },
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4_abc_btn_radio_to_on_mtrl_000.png.flat",
@@ -1764,24 +1704,12 @@
         "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xxxhdpi\\car_click_tabbar.png"
     },
     {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_burst_tyre_selected.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-hdpi\\burst_tyre_selected.png"
-    },
-    {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_call_icon_white.png.flat",
         "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xxxhdpi\\call_icon_white.png"
     },
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4_ic_plusone_tall_off_client.png.flat",
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-plus-12.0.1.aar\\13c52c6747abbf76a221116516aa90c0\\res\\drawable-mdpi-v4\\ic_plusone_tall_off_client.png"
-    },
-    {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_flat_tyre_selected.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xxhdpi\\flat_tyre_selected.png"
-    },
-    {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_vehicle_emergency_big.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xxxhdpi\\vehicle_emergency_big.png"
     },
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_add_emergence.png.flat",
@@ -1874,10 +1802,6 @@
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable_cast_ic_notification_stop_live_stream.xml.flat",
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-cast-framework-12.0.1.aar\\83b45e13542c3f3250e9e8f36424e7ea\\res\\drawable\\cast_ic_notification_stop_live_stream.xml"
-    },
-    {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi_ic_launcher_round.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher_round.png"
     },
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4_common_google_signin_btn_text_dark_normal_background.9.png.flat",
@@ -2022,10 +1946,6 @@
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable_dotted.xml.flat",
         "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable\\dotted.xml"
-    },
-    {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi_ic_launcher_round.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher_round.png"
     },
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\layout_design_layout_tab_text.xml.flat",
@@ -2184,10 +2104,6 @@
         "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xhdpi\\mechanic_with_cap_blue.png"
     },
     {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_verify_input_field.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xxhdpi\\verify_input_field.png"
-    },
-    {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4_abc_cab_background_top_mtrl_alpha.9.png.flat",
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\8535e9c43b1934f846f2a7844fab5ef5\\res\\drawable-hdpi-v4\\abc_cab_background_top_mtrl_alpha.9.png"
     },
@@ -2238,10 +2154,6 @@
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_call_icon_white.png.flat",
         "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xhdpi\\call_icon_white.png"
-    },
-    {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_flat_tyre.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-hdpi\\flat_tyre.png"
     },
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_wonderful.png.flat",
@@ -2366,10 +2278,6 @@
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_wheels_saings.png.flat",
         "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-hdpi\\wheels_saings.png"
-    },
-    {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_flat_tyre_blue.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xxxhdpi\\flat_tyre_blue.png"
     },
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_bank.png.flat",
@@ -2552,10 +2460,6 @@
         "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xxhdpi\\intro_background.png"
     },
     {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_flat_tyre_blue.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xhdpi\\flat_tyre_blue.png"
-    },
-    {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_trash_bin.png.flat",
         "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xxhdpi\\trash_bin.png"
     },
@@ -2602,10 +2506,6 @@
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4_ic_mr_button_connecting_14_dark.png.flat",
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-26.1.0.aar\\ba51fb5c7329c305d5aeda44cd9a9a8c\\res\\drawable-xxhdpi-v4\\ic_mr_button_connecting_14_dark.png"
-    },
-    {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_vehicle_emergency.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xxxhdpi\\vehicle_emergency.png"
     },
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_abc_list_pressed_holo_dark.9.png.flat",
@@ -2656,14 +2556,6 @@
         "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xxhdpi\\car_engine_saving.png"
     },
     {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_burst_tyre_selected.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xxhdpi\\burst_tyre_selected.png"
-    },
-    {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_ic_launcher.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher.png"
-    },
-    {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\color_abc_primary_text_disable_only_material_dark.xml.flat",
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\8535e9c43b1934f846f2a7844fab5ef5\\res\\color\\abc_primary_text_disable_only_material_dark.xml"
     },
@@ -2708,10 +2600,6 @@
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-places-12.0.1.aar\\6185b4d2ed4d4424b53c4aba4d6510db\\res\\layout\\place_autocomplete_item_prediction.xml"
     },
     {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_battery_jump_start_blue.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-hdpi\\battery_jump_start_blue.png"
-    },
-    {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4_quantum_ic_stop_grey600_48.png.flat",
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-cast-framework-12.0.1.aar\\83b45e13542c3f3250e9e8f36424e7ea\\res\\drawable-hdpi-v4\\quantum_ic_stop_grey600_48.png"
     },
@@ -2722,10 +2610,6 @@
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v21_design_ic_visibility.xml.flat",
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\design-28.0.0.aar\\4363baf4f3b032b7d1de4fcaae5cd5dd\\res\\drawable-anydpi-v21\\design_ic_visibility.xml"
-    },
-    {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi_ic_launcher.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher.png"
     },
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4_ic_vol_type_speaker_dark.png.flat",
@@ -2770,10 +2654,6 @@
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4_abc_ic_star_half_black_16dp.png.flat",
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\8535e9c43b1934f846f2a7844fab5ef5\\res\\drawable-hdpi-v4\\abc_ic_star_half_black_16dp.png"
-    },
-    {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_flat_tyre_gray.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-hdpi\\flat_tyre_gray.png"
     },
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4_ic_group_expand_01.png.flat",
@@ -2932,10 +2812,6 @@
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\8535e9c43b1934f846f2a7844fab5ef5\\res\\drawable-mdpi-v4\\abc_scrubber_primary_mtrl_alpha.9.png"
     },
     {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_flat_tyre_gray.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xhdpi\\flat_tyre_gray.png"
-    },
-    {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_cast_ic_stop_circle_filled_grey600.png.flat",
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-cast-framework-12.0.1.aar\\83b45e13542c3f3250e9e8f36424e7ea\\res\\drawable-xhdpi-v4\\cast_ic_stop_circle_filled_grey600.png"
     },
@@ -2946,10 +2822,6 @@
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_call.png.flat",
         "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xxxhdpi\\call.png"
-    },
-    {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi_ic_launcher.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher.png"
     },
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4_abc_ic_menu_share_mtrl_alpha.png.flat",
@@ -3112,10 +2984,6 @@
         "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xxhdpi\\whatsapp.png"
     },
     {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_battery_jump_start.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xxhdpi\\battery_jump_start.png"
-    },
-    {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\layout_abc_list_menu_item_layout.xml.flat",
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\8535e9c43b1934f846f2a7844fab5ef5\\res\\layout\\abc_list_menu_item_layout.xml"
     },
@@ -3130,10 +2998,6 @@
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\layout_design_navigation_item_header.xml.flat",
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\design-28.0.0.aar\\4363baf4f3b032b7d1de4fcaae5cd5dd\\res\\layout\\design_navigation_item_header.xml"
-    },
-    {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_triangle.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xhdpi\\triangle.png"
     },
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_quantum_ic_volume_off_grey600_36.png.flat",
@@ -3232,10 +3096,6 @@
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-places-12.0.1.aar\\6185b4d2ed4d4424b53c4aba4d6510db\\res\\drawable-xxhdpi-v4\\places_ic_clear.png"
     },
     {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_flat_tyre.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xxhdpi\\flat_tyre.png"
-    },
-    {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable_border_line_white.xml.flat",
         "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable\\border_line_white.xml"
     },
@@ -3278,10 +3138,6 @@
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_lifting.png.flat",
         "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xxxhdpi\\lifting.png"
-    },
-    {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_tips_car.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xxhdpi\\tips_car.png"
     },
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4_ic_group_expand_11.png.flat",
@@ -3428,10 +3284,6 @@
         "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable\\half_recatangle.xml"
     },
     {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_battery_jump_start_blue.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xhdpi\\battery_jump_start_blue.png"
-    },
-    {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_ic_media_play_light.png.flat",
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-26.1.0.aar\\ba51fb5c7329c305d5aeda44cd9a9a8c\\res\\drawable-xhdpi-v4\\ic_media_play_light.png"
     },
@@ -3514,10 +3366,6 @@
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_check_form.png.flat",
         "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xhdpi\\check_form.png"
-    },
-    {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_finallgif.gif.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xxhdpi\\finallgif.gif"
     },
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_ic_mr_button_connected_30_light.png.flat",
@@ -3620,10 +3468,6 @@
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-26.1.0.aar\\ba51fb5c7329c305d5aeda44cd9a9a8c\\res\\drawable-xxxhdpi-v4\\ic_group_expand_05.png"
     },
     {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_flat_tyre.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xxxhdpi\\flat_tyre.png"
-    },
-    {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4_ic_mr_button_connecting_20_dark.png.flat",
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-26.1.0.aar\\ba51fb5c7329c305d5aeda44cd9a9a8c\\res\\drawable-xxhdpi-v4\\ic_mr_button_connecting_20_dark.png"
     },
@@ -3646,10 +3490,6 @@
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\layout_fragment_rsa.xml.flat",
         "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\layout\\fragment_rsa.xml"
-    },
-    {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_tips_car.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xxxhdpi\\tips_car.png"
     },
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_ic_mr_button_connecting_00_dark.png.flat",
@@ -3868,10 +3708,6 @@
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-26.1.0.aar\\ba51fb5c7329c305d5aeda44cd9a9a8c\\res\\drawable-xxhdpi-v4\\ic_mr_button_connecting_23_light.png"
     },
     {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_fuel_delivery_selected.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xxxhdpi\\fuel_delivery_selected.png"
-    },
-    {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4_quantum_ic_volume_off_grey600_36.png.flat",
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-cast-framework-12.0.1.aar\\83b45e13542c3f3250e9e8f36424e7ea\\res\\drawable-hdpi-v4\\quantum_ic_volume_off_grey600_36.png"
     },
@@ -3982,10 +3818,6 @@
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4_quantum_ic_forward_30_grey600_36.png.flat",
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-cast-framework-12.0.1.aar\\83b45e13542c3f3250e9e8f36424e7ea\\res\\drawable-xxhdpi-v4\\quantum_ic_forward_30_grey600_36.png"
-    },
-    {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_battery_jump_start_selected.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xxxhdpi\\battery_jump_start_selected.png"
     },
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_fobbu_cancel_logo.png.flat",
@@ -4252,12 +4084,12 @@
         "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xxxhdpi\\edit_red.png"
     },
     {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4_abc_text_select_handle_right_mtrl_dark.png.flat",
-        "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\8535e9c43b1934f846f2a7844fab5ef5\\res\\drawable-mdpi-v4\\abc_text_select_handle_right_mtrl_dark.png"
-    },
-    {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4_quantum_ic_clear_white_24.png.flat",
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-cast-framework-12.0.1.aar\\83b45e13542c3f3250e9e8f36424e7ea\\res\\drawable-hdpi-v4\\quantum_ic_clear_white_24.png"
+    },
+    {
+        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4_abc_text_select_handle_right_mtrl_dark.png.flat",
+        "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\8535e9c43b1934f846f2a7844fab5ef5\\res\\drawable-mdpi-v4\\abc_text_select_handle_right_mtrl_dark.png"
     },
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_whatsapp.png.flat",
@@ -4344,10 +4176,6 @@
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\design-28.0.0.aar\\4363baf4f3b032b7d1de4fcaae5cd5dd\\res\\anim\\design_bottom_sheet_slide_out.xml"
     },
     {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_signin_input_field.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-hdpi\\signin_input_field.png"
-    },
-    {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_ic_mr_button_connecting_30_light.png.flat",
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-26.1.0.aar\\ba51fb5c7329c305d5aeda44cd9a9a8c\\res\\drawable-xhdpi-v4\\ic_mr_button_connecting_30_light.png"
     },
@@ -4370,10 +4198,6 @@
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4_quantum_ic_clear_white_24.png.flat",
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-cast-framework-12.0.1.aar\\83b45e13542c3f3250e9e8f36424e7ea\\res\\drawable-mdpi-v4\\quantum_ic_clear_white_24.png"
-    },
-    {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_tips_car.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xhdpi\\tips_car.png"
     },
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\layout_notification_template_lines_media.xml.flat",
@@ -4440,16 +4264,8 @@
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-cast-framework-12.0.1.aar\\83b45e13542c3f3250e9e8f36424e7ea\\res\\drawable-mdpi-v4\\quantum_ic_volume_off_grey600_36.png"
     },
     {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_battery_jump_start.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-hdpi\\battery_jump_start.png"
-    },
-    {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_help_drawer.png.flat",
         "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xxxhdpi\\help_drawer.png"
-    },
-    {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_tips_car.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-hdpi\\tips_car.png"
     },
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable_dashed_line.xml.flat",
@@ -4490,10 +4306,6 @@
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4_ic_mr_button_connected_30_dark.png.flat",
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-26.1.0.aar\\ba51fb5c7329c305d5aeda44cd9a9a8c\\res\\drawable-xxhdpi-v4\\ic_mr_button_connected_30_dark.png"
-    },
-    {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_battery_jump_start.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xxxhdpi\\battery_jump_start.png"
     },
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\layout-v26_abc_screen_toolbar.xml.flat",
@@ -4546,14 +4358,6 @@
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_suv_selected.png.flat",
         "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xhdpi\\suv_selected.png"
-    },
-    {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_battery_jump_start_blue.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xxxhdpi\\battery_jump_start_blue.png"
-    },
-    {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_battery_jump_start_selected.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xxhdpi\\battery_jump_start_selected.png"
     },
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_ic_mr_button_connected_08_dark.png.flat",
@@ -4744,10 +4548,6 @@
         "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-hdpi\\fobbu_text_white.png"
     },
     {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_splash_vehicles.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xhdpi\\splash_vehicles.png"
-    },
-    {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_not_find.png.flat",
         "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xhdpi\\not_find.png"
     },
@@ -4888,10 +4688,6 @@
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-26.1.0.aar\\ba51fb5c7329c305d5aeda44cd9a9a8c\\res\\drawable-xhdpi-v4\\ic_mr_button_connected_22_dark.png"
     },
     {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_battery_jump_start_blue.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xxhdpi\\battery_jump_start_blue.png"
-    },
-    {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4_abc_ic_menu_copy_mtrl_am_alpha.png.flat",
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\8535e9c43b1934f846f2a7844fab5ef5\\res\\drawable-xxxhdpi-v4\\abc_ic_menu_copy_mtrl_am_alpha.png"
     },
@@ -4996,10 +4792,6 @@
         "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\mipmap-xhdpi\\app_icon.png"
     },
     {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi_ic_launcher.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher.png"
-    },
-    {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4_ic_vol_type_tv_light.png.flat",
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-26.1.0.aar\\ba51fb5c7329c305d5aeda44cd9a9a8c\\res\\drawable-hdpi-v4\\ic_vol_type_tv_light.png"
     },
@@ -5060,10 +4852,6 @@
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-26.1.0.aar\\ba51fb5c7329c305d5aeda44cd9a9a8c\\res\\drawable-xxhdpi-v4\\ic_mr_button_connecting_23_dark.png"
     },
     {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_signin_input_field.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xxxhdpi\\signin_input_field.png"
-    },
-    {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_sos.png.flat",
         "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-hdpi\\sos.png"
     },
@@ -5090,10 +4878,6 @@
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable_cast_ic_expanded_controller_forward30.xml.flat",
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-cast-framework-12.0.1.aar\\83b45e13542c3f3250e9e8f36424e7ea\\res\\drawable\\cast_ic_expanded_controller_forward30.xml"
-    },
-    {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_triangle.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-hdpi\\triangle.png"
     },
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4_quantum_ic_pause_white_24.png.flat",
@@ -5192,10 +4976,6 @@
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-12.0.1.aar\\ba22961accc03e72cd6e36903da2e695\\res\\color\\common_google_signin_btn_text_light.xml"
     },
     {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi_ic_launcher.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher.png"
-    },
-    {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4_quantum_ic_refresh_white_24.png.flat",
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-cast-framework-12.0.1.aar\\83b45e13542c3f3250e9e8f36424e7ea\\res\\drawable-mdpi-v4\\quantum_ic_refresh_white_24.png"
     },
@@ -5268,14 +5048,6 @@
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-cast-framework-12.0.1.aar\\83b45e13542c3f3250e9e8f36424e7ea\\res\\drawable-mdpi-v4\\quantum_ic_replay_10_white_24.png"
     },
     {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_flat_tyre_selected.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xhdpi\\flat_tyre_selected.png"
-    },
-    {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_vehicle_emergency.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-hdpi\\vehicle_emergency.png"
-    },
-    {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable_cast_ic_mini_controller_pause.xml.flat",
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-cast-framework-12.0.1.aar\\83b45e13542c3f3250e9e8f36424e7ea\\res\\drawable\\cast_ic_mini_controller_pause.xml"
     },
@@ -5292,12 +5064,12 @@
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-26.1.0.aar\\ba51fb5c7329c305d5aeda44cd9a9a8c\\res\\interpolator\\mr_linear_out_slow_in.xml"
     },
     {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4_abc_ab_share_pack_mtrl_alpha.9.png.flat",
-        "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\8535e9c43b1934f846f2a7844fab5ef5\\res\\drawable-mdpi-v4\\abc_ab_share_pack_mtrl_alpha.9.png"
-    },
-    {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable_rounded_red_corners.xml.flat",
         "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable\\rounded_red_corners.xml"
+    },
+    {
+        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4_abc_ab_share_pack_mtrl_alpha.9.png.flat",
+        "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\8535e9c43b1934f846f2a7844fab5ef5\\res\\drawable-mdpi-v4\\abc_ab_share_pack_mtrl_alpha.9.png"
     },
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4_abc_list_selector_disabled_holo_dark.9.png.flat",
@@ -5444,12 +5216,12 @@
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-cast-framework-12.0.1.aar\\83b45e13542c3f3250e9e8f36424e7ea\\res\\drawable-xxxhdpi-v4\\quantum_ic_replay_30_white_24.png"
     },
     {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_arrow_drawer.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-hdpi\\arrow_drawer.png"
-    },
-    {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable_rounded_blue_corners.xml.flat",
         "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable\\rounded_blue_corners.xml"
+    },
+    {
+        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_arrow_drawer.png.flat",
+        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-hdpi\\arrow_drawer.png"
     },
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4_abc_scrubber_control_off_mtrl_alpha.png.flat",
@@ -5476,20 +5248,12 @@
         "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable\\rounded_green_background.xml"
     },
     {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_dontno_selected.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xxxhdpi\\dontno_selected.png"
-    },
-    {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\color_abc_secondary_text_material_light.xml.flat",
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\8535e9c43b1934f846f2a7844fab5ef5\\res\\color\\abc_secondary_text_material_light.xml"
     },
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable_cast_ic_notification_rewind30.xml.flat",
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-cast-framework-12.0.1.aar\\83b45e13542c3f3250e9e8f36424e7ea\\res\\drawable\\cast_ic_notification_rewind30.xml"
-    },
-    {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_signin_input_field.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xhdpi\\signin_input_field.png"
     },
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_mark_car.png.flat",
@@ -5542,10 +5306,6 @@
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_check_mark_small.png.flat",
         "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xxxhdpi\\check_mark_small.png"
-    },
-    {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_flat_tyre_selected.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-hdpi\\flat_tyre_selected.png"
     },
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_my_passbook_drawer.png.flat",
@@ -5704,10 +5464,6 @@
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-26.1.0.aar\\ba51fb5c7329c305d5aeda44cd9a9a8c\\res\\drawable-xxhdpi-v4\\ic_mr_button_disabled_light.png"
     },
     {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_burst_tyre_selected.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xhdpi\\burst_tyre_selected.png"
-    },
-    {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable_cast_ic_notification_skip_prev.xml.flat",
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-cast-framework-12.0.1.aar\\83b45e13542c3f3250e9e8f36424e7ea\\res\\drawable\\cast_ic_notification_skip_prev.xml"
     },
@@ -5764,10 +5520,6 @@
         "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-hdpi\\help_drawer.png"
     },
     {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_lsd_hover.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-hdpi\\lsd_hover.png"
-    },
-    {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_notification_bg_low_normal.9.png.flat",
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-28.0.0.aar\\4429440aeca2260e411a4bc3f2fb9033\\res\\drawable-xhdpi-v4\\notification_bg_low_normal.9.png"
     },
@@ -5822,10 +5574,6 @@
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_cast_ic_notification_2.png.flat",
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-cast-12.0.1.aar\\ea64fa70f70315147b18f477e287f38b\\res\\drawable-xhdpi-v4\\cast_ic_notification_2.png"
-    },
-    {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_battery_jump_start_gray.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xhdpi\\battery_jump_start_gray.png"
     },
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_quantum_ic_skip_previous_grey600_36.png.flat",
@@ -6168,10 +5916,6 @@
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\8535e9c43b1934f846f2a7844fab5ef5\\res\\drawable-xxhdpi-v4\\abc_ic_star_black_36dp.png"
     },
     {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_fuel_delivery_selected.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xxhdpi\\fuel_delivery_selected.png"
-    },
-    {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4_ic_mr_button_connecting_00_light.png.flat",
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-26.1.0.aar\\ba51fb5c7329c305d5aeda44cd9a9a8c\\res\\drawable-xxhdpi-v4\\ic_mr_button_connecting_00_light.png"
     },
@@ -6210,10 +5954,6 @@
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_fobbu_logo_blue.png.flat",
         "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xxhdpi\\fobbu_logo_blue.png"
-    },
-    {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_fuel_delivery_selected.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-hdpi\\fuel_delivery_selected.png"
     },
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_abc_btn_check_to_on_mtrl_000.png.flat",
@@ -6270,14 +6010,6 @@
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_flatbed_selected.png.flat",
         "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xhdpi\\flatbed_selected.png"
-    },
-    {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi_ic_launcher_round.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher_round.png"
-    },
-    {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_vehicle_emergency.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xxhdpi\\vehicle_emergency.png"
     },
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4_ic_mr_button_connecting_30_light.png.flat",
@@ -6560,14 +6292,6 @@
         "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-hdpi\\credit_card.png"
     },
     {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_vehicle_emergency_big.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xxhdpi\\vehicle_emergency_big.png"
-    },
-    {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_rsa_hover.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xxxhdpi\\rsa_hover.png"
-    },
-    {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4_quantum_ic_volume_up_white_36.png.flat",
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-cast-framework-12.0.1.aar\\83b45e13542c3f3250e9e8f36424e7ea\\res\\drawable-xxxhdpi-v4\\quantum_ic_volume_up_white_36.png"
     },
@@ -6614,10 +6338,6 @@
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_fingerprints.png.flat",
         "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xhdpi\\fingerprints.png"
-    },
-    {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_vehicle_emergency.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xhdpi\\vehicle_emergency.png"
     },
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_check_mark_green.png.flat",
@@ -6698,14 +6418,6 @@
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_gray_cross.png.flat",
         "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-hdpi\\gray_cross.png"
-    },
-    {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_verify_input_field.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xhdpi\\verify_input_field.png"
-    },
-    {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_flat_tyre_selected.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xxxhdpi\\flat_tyre_selected.png"
     },
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_places_ic_clear.png.flat",
@@ -6792,10 +6504,6 @@
         "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\layout\\activity_login.xml"
     },
     {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_triangle.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xxhdpi\\triangle.png"
-    },
-    {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_powered_by_google_light.png.flat",
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-places-12.0.1.aar\\6185b4d2ed4d4424b53c4aba4d6510db\\res\\drawable-xhdpi-v4\\powered_by_google_light.png"
     },
@@ -6868,14 +6576,6 @@
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\circleindicator-1.2.2.aar\\234e070667376cb6be5856e5f40b2700\\res\\drawable\\white_radius.xml"
     },
     {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_lsd_hover.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xhdpi\\lsd_hover.png"
-    },
-    {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_battery_jump_start_selected.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xhdpi\\battery_jump_start_selected.png"
-    },
-    {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_upi_payment.png.flat",
         "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xhdpi\\upi_payment.png"
     },
@@ -6914,10 +6614,6 @@
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_ic_mr_button_connected_01_light.png.flat",
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-26.1.0.aar\\ba51fb5c7329c305d5aeda44cd9a9a8c\\res\\drawable-xhdpi-v4\\ic_mr_button_connected_01_light.png"
-    },
-    {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_dontno_selected.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xhdpi\\dontno_selected.png"
     },
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_payment_setting_drawer.png.flat",
@@ -6964,10 +6660,6 @@
         "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-hdpi\\fobbu_cancel_logo.png"
     },
     {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_fuel_delivery_selected.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xhdpi\\fuel_delivery_selected.png"
-    },
-    {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_lsd_hover.png.flat",
         "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xxhdpi\\lsd_hover.png"
     },
@@ -6978,10 +6670,6 @@
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_cast_ic_notification_on.png.flat",
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-cast-12.0.1.aar\\ea64fa70f70315147b18f477e287f38b\\res\\drawable-xhdpi-v4\\cast_ic_notification_on.png"
-    },
-    {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_vehicle_emergency_big.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xhdpi\\vehicle_emergency_big.png"
     },
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4_abc_btn_check_to_on_mtrl_000.png.flat",
@@ -7020,10 +6708,6 @@
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-cast-framework-12.0.1.aar\\83b45e13542c3f3250e9e8f36424e7ea\\res\\drawable-mdpi-v4\\quantum_ic_skip_previous_white_36.png"
     },
     {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_battery_jump_start_gray.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-hdpi\\battery_jump_start_gray.png"
-    },
-    {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4_abc_list_focused_holo.9.png.flat",
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\8535e9c43b1934f846f2a7844fab5ef5\\res\\drawable-xxhdpi-v4\\abc_list_focused_holo.9.png"
     },
@@ -7054,10 +6738,6 @@
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_triangle_car.png.flat",
         "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xxhdpi\\triangle_car.png"
-    },
-    {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_ic_launcher_round.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher_round.png"
     },
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4_abc_btn_radio_to_on_mtrl_015.png.flat",
@@ -7248,20 +6928,16 @@
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\design-28.0.0.aar\\4363baf4f3b032b7d1de4fcaae5cd5dd\\res\\drawable-v21\\avd_show_password.xml"
     },
     {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_abc_ic_menu_share_mtrl_alpha.png.flat",
-        "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\8535e9c43b1934f846f2a7844fab5ef5\\res\\drawable-xhdpi-v4\\abc_ic_menu_share_mtrl_alpha.png"
-    },
-    {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable_mtrl_snackbar_background.xml.flat",
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\design-28.0.0.aar\\4363baf4f3b032b7d1de4fcaae5cd5dd\\res\\drawable\\mtrl_snackbar_background.xml"
     },
     {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\color_mtrl_tabs_icon_color_selector_colored.xml.flat",
-        "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\design-28.0.0.aar\\4363baf4f3b032b7d1de4fcaae5cd5dd\\res\\color\\mtrl_tabs_icon_color_selector_colored.xml"
+        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_abc_ic_menu_share_mtrl_alpha.png.flat",
+        "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\8535e9c43b1934f846f2a7844fab5ef5\\res\\drawable-xhdpi-v4\\abc_ic_menu_share_mtrl_alpha.png"
     },
     {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_flat_tyre_blue.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-hdpi\\flat_tyre_blue.png"
+        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\color_mtrl_tabs_icon_color_selector_colored.xml.flat",
+        "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\design-28.0.0.aar\\4363baf4f3b032b7d1de4fcaae5cd5dd\\res\\color\\mtrl_tabs_icon_color_selector_colored.xml"
     },
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable_rounded_white_shadow.xml.flat",
@@ -7370,10 +7046,6 @@
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4_abc_scrubber_control_to_pressed_mtrl_005.png.flat",
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\8535e9c43b1934f846f2a7844fab5ef5\\res\\drawable-hdpi-v4\\abc_scrubber_control_to_pressed_mtrl_005.png"
-    },
-    {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_verify_input_field.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xxxhdpi\\verify_input_field.png"
     },
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable_abc_item_background_holo_light.xml.flat",
@@ -7520,10 +7192,6 @@
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-26.1.0.aar\\ba51fb5c7329c305d5aeda44cd9a9a8c\\res\\drawable-xxhdpi-v4\\ic_mr_button_disconnected_dark.png"
     },
     {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_flat_tyre_gray.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xxhdpi\\flat_tyre_gray.png"
-    },
-    {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4_quantum_ic_art_track_grey600_48.png.flat",
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-cast-framework-12.0.1.aar\\83b45e13542c3f3250e9e8f36424e7ea\\res\\drawable-xxxhdpi-v4\\quantum_ic_art_track_grey600_48.png"
     },
@@ -7588,10 +7256,6 @@
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-26.1.0.aar\\ba51fb5c7329c305d5aeda44cd9a9a8c\\res\\drawable-mdpi-v4\\ic_audiotrack_light.png"
     },
     {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_splash_vehicles.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-hdpi\\splash_vehicles.png"
-    },
-    {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_not_find.png.flat",
         "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xxhdpi\\not_find.png"
     },
@@ -7634,10 +7298,6 @@
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4_design_ic_visibility.png.flat",
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\design-28.0.0.aar\\4363baf4f3b032b7d1de4fcaae5cd5dd\\res\\drawable-xxhdpi-v4\\design_ic_visibility.png"
-    },
-    {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_splash_vehicles.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xxhdpi\\splash_vehicles.png"
     },
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable_red_rectangle.xml.flat",
@@ -7720,10 +7380,6 @@
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-26.1.0.aar\\ba51fb5c7329c305d5aeda44cd9a9a8c\\res\\drawable-xhdpi-v4\\ic_mr_button_connected_28_dark.png"
     },
     {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_battery_jump_start.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xhdpi\\battery_jump_start.png"
-    },
-    {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4_quantum_ic_replay_30_grey600_36.png.flat",
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-cast-framework-12.0.1.aar\\83b45e13542c3f3250e9e8f36424e7ea\\res\\drawable-xxhdpi-v4\\quantum_ic_replay_30_grey600_36.png"
     },
@@ -7770,10 +7426,6 @@
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4_ic_group_collapse_02.png.flat",
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-26.1.0.aar\\ba51fb5c7329c305d5aeda44cd9a9a8c\\res\\drawable-xxxhdpi-v4\\ic_group_collapse_02.png"
-    },
-    {
-        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_battery_jump_start_selected.png.flat",
-        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-hdpi\\battery_jump_start_selected.png"
     },
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable_cast_ic_notification_pause.xml.flat",

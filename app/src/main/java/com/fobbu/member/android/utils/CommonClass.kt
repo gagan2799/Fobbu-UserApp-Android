@@ -232,7 +232,7 @@ class CommonClass(activity1: Activity, context1: Context)
                 }
             }
 
-        } catch (e: ParseException) {
+        } catch (e: Exception) {
             // TODO Auto-generated catch block
             e.printStackTrace()
             return false

@@ -65,6 +65,7 @@ class MyFirebaseInstanceIDService : FirebaseInstanceIdService() {
             val hashmap = HashMap<String, String>()
             hashmap["device_token"] = refreshedToken
             hashmap["user_id"] = refreshedId
+            hashmap["device_type"]="android"
 
             webServiceApi.updateDeviceTokenFCM(hashmap, accessToken).enqueue(object : Callback<MainPojo> {
                 override fun onFailure(call: Call<MainPojo>, t: Throwable) {
