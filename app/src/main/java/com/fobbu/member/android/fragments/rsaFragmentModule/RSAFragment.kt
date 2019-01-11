@@ -149,8 +149,8 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     private lateinit var tvFlatBedPrice: TextView
     private lateinit var tvLiftingText: TextView
     private lateinit var tvLiftingPrice: TextView
-    private lateinit var ivLifting:ImageView
-    private lateinit var ivFlatBed:ImageView
+    private lateinit var ivLifting: ImageView
+    private lateinit var ivFlatBed: ImageView
 
     private lateinit var viewLeftTop: View
     private lateinit var viewLeftBottom: View
@@ -286,12 +286,10 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
         llScooterTwo.setOnClickListener {
 
-            if(etVehicleNumber.text.isNullOrBlank())
-            {
-                Toast.makeText(activity,resources.getString(R.string.please_enter_vehicle_number),Toast.LENGTH_SHORT).show()
-            }
-            else
-            {
+            if (etVehicleNumber.text.isNullOrBlank()) {
+                Toast.makeText(activity, resources.getString(R.string.please_enter_vehicle_number), Toast.LENGTH_SHORT)
+                    .show()
+            } else {
                 if (serviceSelected == RsaConstants.ServiceName.burstTyre) {
                     llHomeServices.visibility = View.GONE
                     llSubPoints.visibility = View.GONE
@@ -312,12 +310,10 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
         llScooterThree.setOnClickListener {
 
-            if(etVehicleNumber.text.isNullOrBlank())
-            {
-                Toast.makeText(activity,resources.getString(R.string.please_enter_vehicle_number),Toast.LENGTH_SHORT).show()
-            }
-            else
-            {
+            if (etVehicleNumber.text.isNullOrBlank()) {
+                Toast.makeText(activity, resources.getString(R.string.please_enter_vehicle_number), Toast.LENGTH_SHORT)
+                    .show()
+            } else {
                 strVehicleType = "2wheeler"
                 strFuelType = "petrol"
                 llHomeServices.visibility = View.GONE
@@ -330,12 +326,10 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
         llCarFuelDieselThree.setOnClickListener {
 
-            if(etVehicleNumber.text.isNullOrBlank())
-            {
-                Toast.makeText(activity,resources.getString(R.string.please_enter_vehicle_number),Toast.LENGTH_SHORT).show()
-            }
-            else
-            {
+            if (etVehicleNumber.text.isNullOrBlank()) {
+                Toast.makeText(activity, resources.getString(R.string.please_enter_vehicle_number), Toast.LENGTH_SHORT)
+                    .show()
+            } else {
                 strVehicleType = "2wheeler"
                 strFuelType = "diesel"
                 llHomeServices.visibility = View.GONE
@@ -348,12 +342,10 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
         llCarFuelPetrolThree.setOnClickListener {
 
-            if(etVehicleNumber.text.isNullOrBlank())
-            {
-                Toast.makeText(activity,resources.getString(R.string.please_enter_vehicle_number),Toast.LENGTH_SHORT).show()
-            }
-            else
-            {
+            if (etVehicleNumber.text.isNullOrBlank()) {
+                Toast.makeText(activity, resources.getString(R.string.please_enter_vehicle_number), Toast.LENGTH_SHORT)
+                    .show()
+            } else {
                 strVehicleType = "2wheeler"
                 strFuelType = "petrol"
                 llHomeServices.visibility = View.GONE
@@ -379,12 +371,10 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
         llCarTwo.setOnClickListener {
 
-            if(etVehicleNumber.text.isNullOrBlank())
-            {
-                Toast.makeText(activity,resources.getString(R.string.please_enter_vehicle_number),Toast.LENGTH_SHORT).show()
-            }
-            else
-            {
+            if (etVehicleNumber.text.isNullOrBlank()) {
+                Toast.makeText(activity, resources.getString(R.string.please_enter_vehicle_number), Toast.LENGTH_SHORT)
+                    .show()
+            } else {
                 strVehicleType = "4wheeler"
 
                 if (serviceSelected == RsaConstants.ServiceName.burstTyre) {
@@ -404,7 +394,7 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
         }
 
         tvUploadPics.setOnClickListener {
-           showMainFindFobbuView()
+            showMainFindFobbuView()
         }
 
         tvSkip.setOnClickListener {
@@ -685,7 +675,7 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
         etVehicleNumber = view.findViewById(R.id.etVehicleNumber)
 
         llFindFobbu = view.findViewById(R.id.llFindFobbu)
-        tvHeadingFind=view.findViewById(R.id.tvHeadingFind)
+        tvHeadingFind = view.findViewById(R.id.tvHeadingFind)
         text1 = view.findViewById(R.id.text1)
         text2 = view.findViewById(R.id.text2)
         text3 = view.findViewById(R.id.text3)
@@ -731,14 +721,12 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
                     serviceSelected = dataListServices[position]["static_name"].toString()
                     serviceSelectedID = dataListServices[position]["_id"].toString()
-                    serviceSelectedAmount =dataListServices[position]["service_price"].toString()
+                    serviceSelectedAmount = dataListServices[position]["service_price"].toString()
 
-                    if(serviceSelectedAmount.contains("\\.".toRegex()))
-                    {
-                          tvHeadingFind.text= "Rs ${serviceSelectedAmount.split("\\.".toRegex())[0]}/-"
-                    }
-                    else
-                        tvHeadingFind.text= "Rs $serviceSelectedAmount/-"
+                    if (serviceSelectedAmount.contains("\\.".toRegex())) {
+                        tvHeadingFind.text = "Rs ${serviceSelectedAmount.split("\\.".toRegex())[0]}/-"
+                    } else
+                        tvHeadingFind.text = "Rs $serviceSelectedAmount/-"
 
 
 
@@ -1078,7 +1066,9 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
             result.setResultCallback { p0 ->
                 val status: Status = p0.status
-                p0.locationSettingsStates
+
+                println("STATUS OF LOCATION "+ status)
+
                 when (status.statusCode) {
                     LocationSettingsStatusCodes.SUCCESS -> {
                         try {
@@ -1094,6 +1084,10 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                     }
                     LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE -> {
 
+                    }
+
+                    LocationSettingsStatusCodes.CANCELED -> {
+                        checkGPSEnable()
                     }
                 }
             }
@@ -1437,14 +1431,14 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                     checkGPSEnable()
                 } else {
 
-                    return
+                    checkGPSEnable()
                 }
             }
         }
     }
 
     @SuppressLint("Recycle")
-    public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode != AppCompatActivity.RESULT_OK) {
             return
         }

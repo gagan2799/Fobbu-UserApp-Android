@@ -51,7 +51,6 @@ import kotlin.collections.HashMap
 class AddEditVehicleActivity : AppCompatActivity(),
     AddEditVehicleAcivityView {
 
-
     private lateinit var webServiceApi: WebServiceApi
     lateinit var addEditActivityHandler: AddEditActivityHandler
 
@@ -443,7 +442,7 @@ class AddEditVehicleActivity : AppCompatActivity(),
                 openGallery()
             }
         }
-        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Camera") { dialogInterface, i ->
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Camera") { _, _ ->
             val apiLevel = android.os.Build.VERSION.SDK_INT
 
             if (apiLevel >= 23) {
