@@ -52,7 +52,6 @@ class RsaRecyclerAdapter(private var activtiy:Activity, private var textList: Ar
       */
             holder.textViewRSaRecycler.setTextColor(activtiy.resources.getColor(R.color.red))
             holder.relativeLayoutCancelBorder.background= activtiy.getDrawable(R.drawable.red_border)
-
         }
         else
         {
@@ -60,7 +59,6 @@ class RsaRecyclerAdapter(private var activtiy:Activity, private var textList: Ar
             holder.linearLayoutRsaCancel.setBackgroundColor(activtiy.resources.getColor(R.color.white))
             holder.textViewRSaRecycler.setTextColor(activtiy.resources.getColor(R.color.drawer_text_color))
         }
-
     }
 
 

@@ -52,7 +52,7 @@ class GetSetGoActivity : AppCompatActivity(), ActivityView {
 
         getSetGoHandler = GetSetGoPresenter(this, this)
         clicks()
-        manageService(CommonClass(this, this).getString("service_name_selected"))
+        manageService(CommonClass(this, this).getString(RsaConstants.ServiceSaved.serviceNameSelected))
 
         if (intent.hasExtra("navigate_to")) {
             when {
@@ -74,11 +74,11 @@ class GetSetGoActivity : AppCompatActivity(), ActivityView {
 
                     hideKeyboard()
 
-                    //println("requestID"+CommonClass(this,this).getString("fobbu_request_id"))
+                    //println("requestID"+CommonClass(this,this).getString(RsaConstants.ServiceSaved.fobbuRequestId))
                     getSetGoHandler.postReviews(
                         RequestBody.create(
                             MediaType.parse("text/plain"),
-                            CommonClass(this, this).getString("fobbu_request_id")
+                            CommonClass(this, this).getString(RsaConstants.ServiceSaved.fobbuRequestId)
                         ),
                         RequestBody.create(MediaType.parse("text/plain"), ratinBarGetSet.rating.toString()),
                         RequestBody.create(MediaType.parse("text/plain"), editTextReviewGet.text.toString()),
@@ -255,7 +255,7 @@ class GetSetGoActivity : AppCompatActivity(), ActivityView {
 
         if (mainPojo.success == "true") {
 
-            CommonClass(this, this).removeString("fobbu_request_id")
+            CommonClass(this, this).removeString(RsaConstants.ServiceSaved.fobbuRequestId)
             CommonClass(this, this).putString(RsaClassType.RsaTypes.onGoingRsaScreen, "")
             CommonClass(this, this).putString(RsaClassType.RsaTypes.onGoingRsaScreenType, "")
 

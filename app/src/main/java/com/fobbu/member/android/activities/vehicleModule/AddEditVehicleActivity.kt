@@ -32,6 +32,7 @@ import com.fobbu.member.android.activities.waitingScreenModule.WaitingScreenWhit
 
 import com.fobbu.member.android.apiInterface.MyApplication
 import com.fobbu.member.android.apiInterface.WebServiceApi
+import com.fobbu.member.android.fragments.rsaFragmentModule.RsaConstants
 import com.fobbu.member.android.modals.MainPojo
 import com.fobbu.member.android.utils.CommonClass
 import com.squareup.picasso.Picasso
@@ -943,7 +944,7 @@ class AddEditVehicleActivity : AppCompatActivity(),
                 .getString("x_access_token")
 
             val requestId = CommonClass(this@AddEditVehicleActivity, this@AddEditVehicleActivity)
-                .getString("fobbu_request_id")
+                .getString(RsaConstants.ServiceSaved.fobbuRequestId)
             // rlLoader.visibility = View.VISIBLE
             val hash = HashMap<String, String>()
             hash["request_id"] = requestId

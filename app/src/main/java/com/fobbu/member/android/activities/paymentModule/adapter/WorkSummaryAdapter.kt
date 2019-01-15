@@ -20,7 +20,6 @@ class WorkSummaryAdapter(private var serviceMap:ArrayList<HashMap<String,Any>>, 
     }
 
 
-
     override fun getItemCount(): Int {
         return serviceMap.size
     }
@@ -29,12 +28,10 @@ class WorkSummaryAdapter(private var serviceMap:ArrayList<HashMap<String,Any>>, 
     override fun onBindViewHolder(holder: MyWorkViewHolder, position: Int) {
         val no_of_service: Long = (serviceMap[position]["number_of_services"] as Double).toLong()
         val service_price: Long = (serviceMap[position]["service_price"] as Double).toLong()
-        holder.textViewSubServiceWork.text= """${context.getString(R.string.no_of)}${serviceMap[position]["service_name"]}"""
+        holder.textViewSubServiceWork.text= serviceMap[position]["service_name"].toString()
         holder.textViewNumberSubServiceWork.text= no_of_service.toString()
         amount= ((no_of_service*service_price).toString())
         holder.textViewNumericAmountWork.text=  amount
-
-
     }
 
 

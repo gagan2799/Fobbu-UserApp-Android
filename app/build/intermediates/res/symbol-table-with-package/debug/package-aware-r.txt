@@ -2883,6 +2883,7 @@ string please_generate
 string please_select_one_issue
 string please_wait
 string proceed_to_pay
+string proceed_to_payment
 string project_id
 string provide_review
 string quantity_of_fuel_d

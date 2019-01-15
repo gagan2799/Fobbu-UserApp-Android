@@ -15,6 +15,10 @@ class Data
     var partner=Partner()
     var addition_services=ArrayList<HashMap<String,Any>>()
 
+    var order_id: String = ""
 
+    var total_price: String = ""
+
+    var service_name: String = ""
 
 }

@@ -23,6 +23,7 @@ import com.fobbu.member.android.activities.waitingScreenModule.WaitingScreenBlue
 import com.fobbu.member.android.activities.waitingScreenModule.WaitingScreenWhite
 import com.fobbu.member.android.fcm.FcmPushTypes
 import com.fobbu.member.android.fragments.rsaFragmentModule.RsaClassType
+import com.fobbu.member.android.fragments.rsaFragmentModule.RsaConstants
 import com.fobbu.member.android.fragments.rsaFragmentModule.presenter.RsaLiveHandler
 import com.fobbu.member.android.fragments.rsaFragmentModule.presenter.RsaLivePresenter
 
@@ -87,7 +88,8 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
             handleClick()
 
             rsaLiveHandler=RsaLivePresenter(this.activity!!,this)
-            rsaLiveHandler.getService(CommonClass(activity!!, activity!!).getString("x_access_token"),CommonClass(this.activity!!, this.activity!!).getString("fobbu_request_id"))
+            rsaLiveHandler.getService(CommonClass(activity!!, activity!!).getString("x_access_token"),CommonClass(this.activity!!, this.activity!!).getString(
+                RsaConstants.ServiceSaved.fobbuRequestId))
         }
 
 

@@ -12,6 +12,7 @@ import android.widget.Toast
 import com.fobbu.member.android.R
 import com.fobbu.member.android.activities.paymentModule.adapter.WorkSummaryAdapter
 import com.fobbu.member.android.activities.rsaModule.RSARequestCancelActivity
+import com.fobbu.member.android.fragments.rsaFragmentModule.RsaConstants
 import com.fobbu.member.android.fragments.rsaFragmentModule.presenter.RsaLiveHandler
 import com.fobbu.member.android.fragments.rsaFragmentModule.presenter.RsaLivePresenter
 import com.fobbu.member.android.modals.MainPojo
@@ -46,7 +47,8 @@ class WorkSummaryActivity : AppCompatActivity(),ActivityView {
 
         if (CommonClass(this,this).checkInternetConn(this))
         {
-            rsaLiveHandler.getService(CommonClass(this,this).getString("x_access_token"),CommonClass(this, this).getString("fobbu_request_id"))
+            rsaLiveHandler.getService(CommonClass(this,this).getString("x_access_token"),CommonClass(this, this).getString(
+                RsaConstants.ServiceSaved.fobbuRequestId))
         }
     }
 
@@ -91,19 +93,35 @@ class WorkSummaryActivity : AppCompatActivity(),ActivityView {
     override fun onRequestSuccessReport(mainPojo: MainPojo) {
         if (mainPojo.success=="true")
         {
-            setUpRecycler(mainPojo.getData().addition_services)
-            var totalAmount:Long=0
 
-            for (i in mainPojo.getData().addition_services.indices)
+            if(mainPojo.getData().addition_services.size>0)
             {
-                val no_of_service: Long = (mainPojo.getData().addition_services[i]["number_of_services"] as Double).toLong()
-                val service_price: Long = (mainPojo.getData().addition_services[i]["service_price"] as Double).toLong()
+                setUpRecycler(mainPojo.getData().addition_services)
+                var totalAmount: Long = 0
 
-                totalAmount =
-                        totalAmount.plus(no_of_service*service_price)
+                for (i in mainPojo.getData().addition_services.indices) {
+                    val noOfService: Long =
+                        (mainPojo.getData().addition_services[i]["number_of_services"] as Double).toLong()
+                    val servicePrice: Long =
+                        (mainPojo.getData().addition_services[i]["service_price"] as Double).toLong()
+
+                    totalAmount = totalAmount.plus(noOfService * servicePrice)
+                }
+
+                textViewTotalAmount.text = totalAmount.toString()
+
+                textViewServiceTypeWork.text=(mainPojo.getData().service_name)
+
+                textViewOrderIdWork.text=(mainPojo.getData().order_id)
             }
+            else
+            {
+                textViewTotalAmount.text = (mainPojo.getData().total_price )
 
-            textViewTotalAmount.text=totalAmount.toString()
+                textViewServiceTypeWork.text=(mainPojo.getData().service_name)
+
+                textViewOrderIdWork.text=(mainPojo.getData().order_id)
+            }
 
         }else{
             Toast.makeText(this,mainPojo.message, Toast.LENGTH_SHORT).show()

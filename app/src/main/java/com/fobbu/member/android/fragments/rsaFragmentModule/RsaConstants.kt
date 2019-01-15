@@ -12,4 +12,10 @@ class RsaConstants
         var iDunno="i_donno"
 
     }
+
+    object ServiceSaved
+    {
+        var fobbuRequestId="fobbu_request_id"
+        var serviceNameSelected="service_name_selected"
+    }
 }

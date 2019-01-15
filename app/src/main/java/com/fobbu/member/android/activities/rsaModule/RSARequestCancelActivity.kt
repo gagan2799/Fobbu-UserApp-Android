@@ -22,6 +22,7 @@ import com.fobbu.member.android.activities.rsaModule.adapter.RsaRecyclerAdapter
 import com.fobbu.member.android.activities.rsaModule.presenter.RsaCancelRequestHandler
 import com.fobbu.member.android.activities.rsaModule.presenter.RsaCancelRequestPresenter
 import com.fobbu.member.android.fragments.rsaFragmentModule.RsaClassType
+import com.fobbu.member.android.fragments.rsaFragmentModule.RsaConstants
 import com.fobbu.member.android.modals.MainPojo
 import com.fobbu.member.android.utils.CommonClass
 import com.fobbu.member.android.view.ActivityView
@@ -165,7 +166,7 @@ class RSARequestCancelActivity : AppCompatActivity(), ActivityView {
 
             rsaHandler.cancelRequest(
                 string,
-                CommonClass(this, this).getString("fobbu_request_id"),
+                CommonClass(this, this).getString(RsaConstants.ServiceSaved.fobbuRequestId),
                 CommonClass(this, this).getString("x_access_token")
             )
             //
@@ -196,7 +197,7 @@ class RSARequestCancelActivity : AppCompatActivity(), ActivityView {
 
                 setRecycler()
             } else {
-                CommonClass(this, this).removeString("fobbu_request_id")
+                CommonClass(this, this).removeString(RsaConstants.ServiceSaved.fobbuRequestId)
                 CommonClass(this, this).putString(RsaClassType.RsaTypes.onGoingRsaScreen, "")
                 CommonClass(this, this).putString(RsaClassType.RsaTypes.onGoingRsaScreenType, "")
 

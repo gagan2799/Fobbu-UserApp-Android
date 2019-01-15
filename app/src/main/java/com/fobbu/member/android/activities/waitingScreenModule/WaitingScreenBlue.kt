@@ -9,8 +9,11 @@ import android.os.Handler
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.fobbu.member.android.R
+import com.fobbu.member.android.activities.paymentModule.WorkSummaryActivity
 import com.fobbu.member.android.activities.vehicleModule.AddEditVehicleActivity
 import com.fobbu.member.android.fcm.FcmPushTypes
+import com.fobbu.member.android.fragments.rsaFragmentModule.RsaConstants
+import com.fobbu.member.android.utils.CommonClass
 import kotlinx.android.synthetic.main.activity_waiting_screen_blue.*
 import java.lang.Exception
 
@@ -46,9 +49,27 @@ class WaitingScreenBlue : AppCompatActivity() {
                 strWhich="3"
                 tvTextOne.text=resources.getString(R.string.wonderful)
                 tvTextTwo.text=resources.getString(R.string.fobbu_confirmed_request)
-                tvTextThree.text=resources.getString(R.string.fobbu_gathering_tools)
                 tvTextThree.visibility=View.VISIBLE
-                Handler().postDelayed({ changeLayout() },1000)
+
+
+                if(CommonClass(this,this).getString(RsaConstants.ServiceSaved.fobbuRequestId) ==
+                    RsaConstants.ServiceName.flatTyre)
+                {
+                    tvTextThree.text=resources.getString(R.string.fobbu_gathering_tools)
+                    Handler().postDelayed({ changeLayout() },1000)
+                }
+                else
+                {
+                    tvTextThree.text=resources.getString(R.string.proceed_to_payment)
+
+                    Handler().postDelayed({
+                        startActivity(Intent(this, WorkSummaryActivity::class.java) )
+                        finish()
+                    },1000)
+
+                }
+
+
             }
             "3" -> {
                 strWhich="3"

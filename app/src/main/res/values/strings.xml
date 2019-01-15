@@ -185,6 +185,7 @@
     <string name="confirm_pay">Confirm &amp; Pay</string>
     <string name="payment_screen">Payment Screen</string>
     <string name="proceed_to_pay">Proceed to pay</string>
+    <string name="proceed_to_payment">proceeding to payment</string>
     <string name="get">GET</string>
     <string name="work_order_payment">Work order &amp; Make payment</string>
     <string name="set">SET</string>

@@ -8,9 +8,13 @@ import android.view.Gravity
 import android.view.WindowManager
 import android.widget.Toast
 import com.fobbu.member.android.R
+import com.fobbu.member.android.activities.dashboardActivity.DashboardActivity
 import com.fobbu.member.android.activities.paymentModule.presenter.PaymentModeHandler
 import com.fobbu.member.android.activities.paymentModule.presenter.PaymentModePresenter
 import com.fobbu.member.android.activities.rsaModule.RSARequestCancelActivity
+import com.fobbu.member.android.activities.waitingScreenModule.WaitingScreenWhite
+import com.fobbu.member.android.fragments.rsaFragmentModule.RsaClassType
+import com.fobbu.member.android.fragments.rsaFragmentModule.RsaConstants
 import com.fobbu.member.android.modals.MainPojo
 import com.fobbu.member.android.utils.CommonClass
 import com.fobbu.member.android.view.ActivityView
@@ -51,10 +55,10 @@ class PaymentModeActivity : AppCompatActivity() , ActivityView{
 
             if (CommonClass(this,this).checkInternetConn(this))
             {
-                if (!CommonClass(this, this).getString("fobbu_request_id").isEmpty()) {
+                if (!CommonClass(this, this).getString(RsaConstants.ServiceSaved.fobbuRequestId).isEmpty()) {
                     paymentModeHandler.makePayment(
                         CommonClass(this, this).getString("x_access_token"),
-                        CommonClass(this, this).getString("fobbu_request_id")
+                        CommonClass(this, this).getString(RsaConstants.ServiceSaved.fobbuRequestId)
                     )
                 }
                     else {
@@ -64,9 +68,6 @@ class PaymentModeActivity : AppCompatActivity() , ActivityView{
             else {
                 Toast.makeText(this,getString(R.string.internet_is_unavailable), Toast.LENGTH_SHORT).show()
             }
-
-
-
         }
 
     }
@@ -98,9 +99,30 @@ class PaymentModeActivity : AppCompatActivity() , ActivityView{
     override fun onRequestSuccessReport(mainPojo: MainPojo) {
      if (mainPojo.success=="true")
      {
-         startActivity(Intent(this,GetSetGoActivity::class.java)
-             .setFlags
-                 (Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK))
+         if(CommonClass(this,this).getString(RsaConstants.ServiceSaved.fobbuRequestId) ==
+             RsaConstants.ServiceName.flatTyre)
+         {
+             startActivity(Intent(this,GetSetGoActivity::class.java)
+                 .setFlags
+                     (Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK))
+
+             finish()
+         }
+         else
+         {
+
+             startActivity(Intent(this,DashboardActivity::class.java)
+                 .setFlags
+                     (Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK))
+
+             CommonClass(this, this).putString(RsaClassType.RsaTypes.onGoingRsaScreen, "YES")
+
+             CommonClass(this, this).putString(RsaClassType.RsaTypes.onGoingRsaScreenType, resources.getString(R.string.rsa_live))
+
+             finish()
+         }
+
+
      }else{
          Toast.makeText(this,mainPojo.message, Toast.LENGTH_SHORT).show()
      }

@@ -20,6 +20,7 @@ import com.fobbu.member.android.R
 import com.fobbu.member.android.activities.loginSignupModule.LoginActivity
 import com.fobbu.member.android.activities.rsaModule.RSARequestCancelActivity
 import com.fobbu.member.android.fragments.rsaFragmentModule.RsaClassType
+import com.fobbu.member.android.fragments.rsaFragmentModule.RsaConstants
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.option_menu_layout.*
@@ -122,7 +123,7 @@ class CommonClass(activity1: Activity, context1: Context)
         val prefsEditor: SharedPreferences.Editor
 
         prefsEditor = myPrefs.edit()
-        prefsEditor.remove("fobbu_request_id")
+        prefsEditor.remove(RsaConstants.ServiceSaved.fobbuRequestId)
         prefsEditor.putString(RsaClassType.RsaTypes.onGoingRsaScreen, "")
         prefsEditor.apply()
     }

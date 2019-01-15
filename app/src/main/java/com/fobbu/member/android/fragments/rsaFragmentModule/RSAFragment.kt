@@ -612,7 +612,6 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
             rlBigProfile.visibility = View.GONE
         }
-
     }
 
     // initializing all the variables of the class in this method
@@ -896,8 +895,8 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
                 fleetRequestApi(mainPojo.getData()._id)
 
-                CommonClass(activity!!, activity!!).putString("fobbu_request_id", mainPojo.getData()._id)
-                CommonClass(activity!!, activity!!).putString("service_name_selected", serviceSelected)
+                CommonClass(activity!!, activity!!).putString(RsaConstants.ServiceSaved.fobbuRequestId, mainPojo.getData()._id)
+                CommonClass(activity!!, activity!!).putString(RsaConstants.ServiceSaved.serviceNameSelected, serviceSelected)
 
                 activity!!.startActivity(
                     Intent(activity!!, WaitingScreenBlue::class.java)
@@ -1596,7 +1595,6 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
         val orientation = ei.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL)
 
         var rotatedBitmap: Bitmap = bitmap
-        println("orientation $orientation")
 
         when (orientation) {
             ExifInterface.ORIENTATION_ROTATE_90 ->
@@ -1642,7 +1640,6 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
         layout.startAnimation(animation)
     }
 
-
     override fun showLoader() {
         rlLoader.visibility = View.VISIBLE
     }
@@ -1650,6 +1647,4 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     override fun hideLoader() {
         rlLoader.visibility = View.GONE
     }
-
-
 }
