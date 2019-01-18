@@ -15,8 +15,6 @@ class MainPojo
         return data
     }
 
-
-
     var message: String = ""
 
     var pin: String = ""

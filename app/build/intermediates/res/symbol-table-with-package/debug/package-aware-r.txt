@@ -761,6 +761,7 @@ color background_floating_material_light
 color background_material_dark
 color background_material_light
 color black
+color black_transparent_60
 color blue
 color blue_transparent
 color blue_transparent_back
@@ -1771,6 +1772,8 @@ drawable shadow
 drawable shadow_background
 drawable share
 drawable sms
+drawable solid_color_grey
+drawable solid_color_red
 drawable sos
 drawable sos_orange
 drawable splash_background
@@ -2029,11 +2032,13 @@ id ivImage1
 id ivImage2
 id ivImage3
 id ivImage4
-id ivImageDone
+id ivImageCall
+id ivLeftDotted
 id ivLifting
 id ivList
 id ivProfileDrawer
 id ivRSA
+id ivRightDotted
 id ivSearch
 id ivShare
 id ivTick
@@ -2208,9 +2213,11 @@ id rlLoaderVehicleList
 id rlNameBar
 id rlNewVehicleAdded
 id rlPic
+id rlPickingFuel
 id rlProfilePic
 id rlShareRSA
 id rlTerms
+id rlTools
 id rlTop
 id rlTopDrawer
 id rlTrack
@@ -2376,6 +2383,7 @@ id tvNewPin
 id tvNo
 id tvNodata
 id tvPaymentSettings
+id tvPickingFuel
 id tvRSA
 id tvResendCode
 id tvReset
@@ -2880,6 +2888,7 @@ string please_enter_password
 string please_enter_vehicle_number
 string please_fobbu_gathering_tools
 string please_generate
+string please_hang_on_fobbu_is_picking_up_the_fuel
 string please_select_one_issue
 string please_wait
 string proceed_to_pay
@@ -2970,6 +2979,7 @@ string wallet_buy_button_place_holder
 string wallets
 string we_verifying
 string we_will_connect_towing
+string we_will_live_track_it_nonce_the_fobbu_is_on_his_way
 string whats_keeping_stranded
 string while_fobbu_fills_fuel
 string wonderful

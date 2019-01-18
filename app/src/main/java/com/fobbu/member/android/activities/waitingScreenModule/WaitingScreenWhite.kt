@@ -104,8 +104,10 @@ class WaitingScreenWhite : AppCompatActivity() {
                 rlNewVehicleAdded.visibility = View.GONE
                 rlVehicleAccessed.visibility = View.GONE
 
-                if(CommonClass(this,this).getString(RsaConstants.ServiceSaved.fobbuRequestId) ==
-                    RsaConstants.ServiceName.flatTyre)
+                if(CommonClass(this,this).getString(RsaConstants.ServiceSaved.serviceNameSelected) ==
+                    RsaConstants.ServiceName.flatTyre ||
+                    CommonClass(this,this).getString(RsaConstants.ServiceSaved.serviceNameSelected) ==
+                    RsaConstants.ServiceName.burstTyre)
                 {
                     Handler().postDelayed({
                         switchLayouts("wallet_accessing")

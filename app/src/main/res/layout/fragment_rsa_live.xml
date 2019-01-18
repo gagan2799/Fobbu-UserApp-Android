@@ -65,11 +65,13 @@
                 <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/ivImageDone"
+                        android:id="@+id/ivImageCall"
                         android:layout_marginLeft="-20dp"
                         android:layout_toRightOf="@+id/imgProfile"
                         android:layout_alignBottom="@+id/imgProfile"
-                        android:src="@drawable/call"/>
+                        android:src="@drawable/call"
+                        android:layout_marginStart="-20dp"
+                        android:layout_toEndOf="@+id/imgProfile"/>
 
             </RelativeLayout>
 
@@ -90,7 +92,7 @@
                 android:padding="6dp"
                 android:gravity="center"
                 android:id="@+id/tvName"
-                android:text="aSCAscaCSAcsacaacas"
+                android:text=""
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
@@ -107,6 +109,7 @@
                     android:layout_toLeftOf="@+id/tvTrack"
                     android:layout_centerVertical="true"
                     android:src="@drawable/dotted"
+                    android:id="@+id/ivLeftDotted"
                     android:layout_marginRight="5dp"
                     android:layout_marginLeft="50dp"
                     android:layerType="software"/>
@@ -117,9 +120,9 @@
                     android:text="@string/live_track"
                     android:textSize="@dimen/textsize_small"
                     android:textColor="@color/white"
-                    android:background="@color/red"
                     android:paddingTop="5dp"
                     android:id="@+id/tvTrack"
+                    android:background="@color/red"
                     android:layout_centerHorizontal="true"
                     android:paddingBottom="5dp"
                     android:paddingLeft="20dp"
@@ -133,6 +136,7 @@
                     android:layout_centerVertical="true"
                     android:src="@drawable/dotted"
                     android:layout_marginRight="50dp"
+                    android:id="@+id/ivRightDotted"
                     android:layout_marginLeft="5dp"
                     android:layerType="software"
                     android:layout_marginEnd="50dp"
@@ -148,52 +152,75 @@
                 android:id="@+id/rlInformation"
                 android:layout_height="wrap_content">
 
-            <ImageView
-                    android:src="@drawable/tools"
-                    android:padding="5dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="8dp"
-                    android:id="@+id/ivTool"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-
             <RelativeLayout
+                    android:id="@+id/rlTools"
                     android:layout_width="match_parent"
-                            android:layout_below="@+id/ivTool"
-                            android:gravity="center"
-                            android:layout_marginBottom="10dp"
-                            android:layout_height="wrap_content">
+                    android:layout_height="wrap_content">
 
-                <TextView
+                <ImageView
+                        android:src="@drawable/tools"
+                        android:padding="5dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="8dp"
+                        android:id="@+id/ivTool"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/red"
-                        android:textSize="@dimen/textsize_small"
-                        android:id="@+id/tvText"
-                        android:layout_centerVertical="true"
-                        android:padding="10dp"
-                        android:text="@string/please_fobbu_gathering_tools"
-                        android:gravity="center" />
+                        android:layout_height="wrap_content"/>
 
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/textsize_normal"
-                        android:id="@+id/tvCode"
-                        android:layout_toRightOf="@+id/tvText"
-                        android:text="1234"
-                        android:layout_centerVertical="true"
-                        android:visibility="gone"
-                        android:background="@drawable/rounded_green_background"
+                <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_below="@+id/ivTool"
                         android:gravity="center"
-                        android:paddingTop="5dp"
-                        android:paddingBottom="5dp"
-                        android:paddingLeft="2dp"
-                        android:paddingRight="2dp"
-                        android:layout_toEndOf="@+id/tvText"/>
+                        android:layout_marginBottom="10dp"
+                        android:layout_height="wrap_content">
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/red"
+                            android:textSize="@dimen/textsize_small"
+                            android:id="@+id/tvText"
+                            android:layout_centerVertical="true"
+                            android:padding="10dp"
+                            android:text="@string/please_fobbu_gathering_tools"
+                            android:gravity="center"/>
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/textsize_normal"
+                            android:id="@+id/tvCode"
+                            android:layout_toRightOf="@+id/tvText"
+                            android:text="1234"
+                            android:layout_centerVertical="true"
+                            android:visibility="gone"
+                            android:background="@drawable/rounded_green_background"
+                            android:gravity="center"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:paddingLeft="2dp"
+                            android:paddingRight="2dp"
+                            android:layout_toEndOf="@+id/tvText"/>
+
+                </RelativeLayout>
+
 
             </RelativeLayout>
+
+
+            <TextView
+                    android:id="@+id/tvPickingFuel"
+                    android:text="@string/please_hang_on_fobbu_is_picking_up_the_fuel"
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:visibility="gone"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:textSize="@dimen/textsize_small"
+                    android:textColor="@color/red"
+                    android:layout_height="wrap_content"/>
+
 
         </RelativeLayout>
 
@@ -203,6 +230,30 @@
                 android:layout_width="match_parent"
                 android:layout_below="@+id/rlInformation"
                 android:layout_height="match_parent"/>
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clickable="true"
+                android:id="@+id/rlPickingFuel"
+                android:visibility="gone"
+                android:layout_alignLeft="@+id/mapView"
+                android:layout_alignRight="@+id/mapView"
+                android:layout_alignTop="@+id/mapView"
+                android:layout_alignBottom="@+id/mapView"
+                android:background="@color/black_transparent_60">
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:textColor="@color/white"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:lineSpacingExtra="1.9dp"
+                    android:textSize="@dimen/textsize_normal"
+                    android:text="@string/we_will_live_track_it_nonce_the_fobbu_is_on_his_way"
+                    android:layout_height="wrap_content"/>
+
+        </RelativeLayout>
 
     </RelativeLayout>
 

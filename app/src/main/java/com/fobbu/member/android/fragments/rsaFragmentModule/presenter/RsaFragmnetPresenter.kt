@@ -32,11 +32,13 @@ class RsaFragmnetPresenter(private var activity: Activity,private var rsaFragmen
         override fun onError(message: String) {
             rsaFragmentView.hideLoader()
             Toast.makeText(activity,"Error:$message", Toast.LENGTH_SHORT).show()
+            println("ERRROR -- >>> "+ message)
         }
 
         override fun onServerError(message: String) {
             rsaFragmentView.hideLoader()
             Toast.makeText(activity,"Server Error:$message", Toast.LENGTH_SHORT).show()
+            println("ERRROR -- >>> "+ message)
         }
 
     })
@@ -51,11 +53,12 @@ class RsaFragmnetPresenter(private var activity: Activity,private var rsaFragmen
         strtLatitude: RequestBody,
         strLongitude: RequestBody,
         strVehicleType: RequestBody,
+        strVehicleNumber: RequestBody,
         fileList: ArrayList<MultipartBody.Part>,
         token: String
     ) {
         rsaFragmentView.showLoader()
-        apiClient.findFobbuRequest(userId,serviceSelected,strtLatitude,strLongitude,strVehicleType,fileList,token,object :ResponseHandler
+        apiClient.findFobbuRequest(userId,serviceSelected,strtLatitude,strLongitude,strVehicleType,strVehicleNumber,fileList,token,object :ResponseHandler
         {
             override fun on401() {
                 CommonClass(activity,activity).clearPreference()
@@ -68,11 +71,13 @@ class RsaFragmnetPresenter(private var activity: Activity,private var rsaFragmen
             override fun onError(message: String) {
                 rsaFragmentView.hideLoader()
                 Toast.makeText(activity,"Error:$message", Toast.LENGTH_SHORT).show()
+                println("ERRROR -- >>> "+ message)
             }
 
             override fun onServerError(message: String) {
                 rsaFragmentView.hideLoader()
                 Toast.makeText(activity,"Server Error:$message", Toast.LENGTH_SHORT).show()
+                println("ERRROR -- >>> "+ message)
             }
 
         })

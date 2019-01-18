@@ -99,8 +99,12 @@ class PaymentModeActivity : AppCompatActivity() , ActivityView{
     override fun onRequestSuccessReport(mainPojo: MainPojo) {
      if (mainPojo.success=="true")
      {
-         if(CommonClass(this,this).getString(RsaConstants.ServiceSaved.fobbuRequestId) ==
-             RsaConstants.ServiceName.flatTyre)
+         if(CommonClass(this,this).getString(RsaConstants.ServiceSaved.serviceNameSelected) ==
+             RsaConstants.ServiceName.flatTyre
+             ||
+             CommonClass(this,this).getString(RsaConstants.ServiceSaved.serviceNameSelected) ==
+             RsaConstants.ServiceName.burstTyre)
+
          {
              startActivity(Intent(this,GetSetGoActivity::class.java)
                  .setFlags

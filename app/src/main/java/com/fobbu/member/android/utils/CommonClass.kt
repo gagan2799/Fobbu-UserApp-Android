@@ -9,6 +9,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Color
 import android.net.ConnectivityManager
+import android.net.Uri
 import android.os.Build
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat.startActivity
@@ -33,15 +34,14 @@ import java.util.*
 /**
  * Created by abc on 12/1/18.
  */
-class CommonClass(activity1: Activity, context1: Context)
-{
-    private var activity : Activity = activity1
+class CommonClass(activity1: Activity, context1: Context) {
+    private var activity: Activity = activity1
 
     private var context: Context = context1
 
-    var aPI_KEY : String = "Fobbu"
+    var aPI_KEY: String = "Fobbu"
 
-    fun putString( preference: String, value: String) {
+    fun putString(preference: String, value: String) {
         val myPrefs = context.getSharedPreferences("Fobbu_Member_Prefs", Context.MODE_PRIVATE)
 
         val prefsEditor = myPrefs.edit()
@@ -49,21 +49,20 @@ class CommonClass(activity1: Activity, context1: Context)
         prefsEditor.putString(preference, value).apply()
     }
 
-    fun removeString(KEY:String)
-    {
+    fun removeString(KEY: String) {
         val myPrefs = context.getSharedPreferences("Fobbu_Member_Prefs", Context.MODE_PRIVATE)
         val prefsEditor = myPrefs.edit()
         prefsEditor.remove(KEY)
         prefsEditor.apply()
     }
 
-    fun getString( preference: String): String {
+    fun getString(preference: String): String {
         val myPrefs = context.getSharedPreferences("Fobbu_Member_Prefs", Context.MODE_PRIVATE)
 
         return myPrefs.getString(preference, "")
     }
 
-    fun putStringList( preference: String, value: ArrayList<HashMap<String,Any>>) {
+    fun putStringList(preference: String, value: ArrayList<HashMap<String, Any>>) {
         val myPrefs = context.getSharedPreferences("Fobbu_Member_Prefs", Context.MODE_PRIVATE)
 
         val prefsEditor = myPrefs.edit()
@@ -78,38 +77,35 @@ class CommonClass(activity1: Activity, context1: Context)
 
     }
 
-    fun getStringList( preference: String): ArrayList<HashMap<String,Any>> {
+    fun getStringList(preference: String): ArrayList<HashMap<String, Any>> {
 
         val myPrefs = context.getSharedPreferences("Fobbu_Member_Prefs", Context.MODE_PRIVATE)
 
         val gson = Gson()
 
-        val json: String = myPrefs.getString(preference,"")
+        val json: String = myPrefs.getString(preference, "")
 
-        val type= object : TypeToken<ArrayList<HashMap<String, Any>>>(){}.type
+        val type = object : TypeToken<ArrayList<HashMap<String, Any>>>() {}.type
 
-        val list : ArrayList<HashMap<String,Any>> = gson.fromJson(json,type)
+        val list: ArrayList<HashMap<String, Any>> = gson.fromJson(json, type)
 
         println("LIst $list")
 
         return list
     }
 
-    fun errorMessage( response: String): String{
+    fun errorMessage(response: String): String {
         try {
             val jsonObject = JSONObject(response)
 
             return jsonObject.getString("message")
-        }
-        catch (e:java.lang.Exception)
-        {
+        } catch (e: java.lang.Exception) {
             e.printStackTrace()
         }
-       return ""
+        return ""
     }
 
-    fun isStringEmpty(text: String): Boolean
-    {
+    fun isStringEmpty(text: String): Boolean {
         return text.isEmpty()
     }
 
@@ -117,8 +113,7 @@ class CommonClass(activity1: Activity, context1: Context)
         Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
     }
 
-    fun workDoneReviewSend()
-    {
+    fun workDoneReviewSend() {
         val myPrefs: SharedPreferences = context.getSharedPreferences("Fobbu_Member_Prefs", Context.MODE_PRIVATE)
         val prefsEditor: SharedPreferences.Editor
 
@@ -127,26 +122,26 @@ class CommonClass(activity1: Activity, context1: Context)
         prefsEditor.putString(RsaClassType.RsaTypes.onGoingRsaScreen, "")
         prefsEditor.apply()
     }
+
     @SuppressLint("ObsoleteSdkInt")
-    fun clearPreference()
-    {
+    fun clearPreference() {
         val myPrefs: SharedPreferences = context.getSharedPreferences("Fobbu_Member_Prefs", Context.MODE_PRIVATE)
 
         val prefsEditor: SharedPreferences.Editor
 
         prefsEditor = myPrefs.edit()
 
-        val number = myPrefs.getString("Local_Number","")
+        val number = myPrefs.getString("Local_Number", "")
 
-        val pin = myPrefs.getString("Local_Pin","")
+        val pin = myPrefs.getString("Local_Pin", "")
 
         prefsEditor.clear()
 
         prefsEditor.apply()
 
-        prefsEditor.putString("Local_Number",number).apply()
+        prefsEditor.putString("Local_Number", number).apply()
 
-        prefsEditor.putString("Local_Pin",pin).apply()
+        prefsEditor.putString("Local_Pin", pin).apply()
 
         prefsEditor.putString("CoachMark_first_time", "true").commit()
 
@@ -186,17 +181,23 @@ class CommonClass(activity1: Activity, context1: Context)
     }
 
 
-    fun internetIssue(context: Context){
+    fun internetIssue(context: Context) {
 
         val alertDialog = android.app.AlertDialog.Builder(context).create()
         alertDialog.setTitle(context.resources.getString(R.string.networkIssue))
         alertDialog.setMessage(context.resources.getString(R.string.noInternet))
-        alertDialog.setButton(android.app.AlertDialog.BUTTON_NEGATIVE, context.resources.getString(R.string.setting)) { dialogInterface, i ->
+        alertDialog.setButton(
+            android.app.AlertDialog.BUTTON_NEGATIVE,
+            context.resources.getString(R.string.setting)
+        ) { dialogInterface, i ->
             alertDialog.dismiss()
 
             context.startActivity(Intent(android.provider.Settings.ACTION_SETTINGS))
         }
-        alertDialog.setButton(android.app.AlertDialog.BUTTON_POSITIVE, context.resources.getString(R.string.cancelled)) { _, _ ->
+        alertDialog.setButton(
+            android.app.AlertDialog.BUTTON_POSITIVE,
+            context.resources.getString(R.string.cancelled)
+        ) { _, _ ->
             alertDialog.dismiss()
         }
         alertDialog.setOnShowListener {
@@ -215,7 +216,7 @@ class CommonClass(activity1: Activity, context1: Context)
             // String inputText = "Tue May 21 14:32:00 GMT 2012";
 
             val inputFormat = SimpleDateFormat("dd/MM/yyyy HH:mm:ss")
-           // inputFormat.timeZone = TimeZone.getTimeZone("GMT")
+            // inputFormat.timeZone = TimeZone.getTimeZone("GMT")
 
             // Adjust locale and zone appropriately
             val expire = inputFormat.parse(expired)
@@ -244,17 +245,17 @@ class CommonClass(activity1: Activity, context1: Context)
 
     @SuppressLint("SimpleDateFormat")
     fun compareTwoDates(start: String, end: String): Boolean {
-    val sdf = SimpleDateFormat("yyyy-MM-dd")
+        val sdf = SimpleDateFormat("yyyy-MM-dd")
 
-    val strStartDate = sdf.parse(start)
+        val strStartDate = sdf.parse(start)
 
-    val strEndDate = sdf.parse(end)
+        val strEndDate = sdf.parse(end)
 
-    if (strEndDate.after(strStartDate)) {
-        return true
+        if (strEndDate.after(strStartDate)) {
+            return true
+        }
+        return false
     }
-    return false
-}
 
     @SuppressLint("SimpleDateFormat")
     fun getDesireFormat(input: String, output: String, dateString: String): String {
@@ -265,8 +266,7 @@ class CommonClass(activity1: Activity, context1: Context)
     }
 
     @SuppressLint("SimpleDateFormat")
-    fun compareDates(date : String) : Boolean
-    {
+    fun compareDates(date: String): Boolean {
         val sdf = SimpleDateFormat("dd/MM/yyyy")
         val strDate = sdf.parse(date)
         if (Date().after(strDate)) {
@@ -296,6 +296,20 @@ class CommonClass(activity1: Activity, context1: Context)
         return null
     }
 
+    fun callOnPhone(number: String) {
+
+        try {
+            val intent = Intent(Intent.ACTION_CALL)
+
+            intent.data = Uri.parse("tel:$number")
+            activity.startActivity(intent)
+        }
+        catch (e:java.lang.Exception)
+        {
+            e.printStackTrace()
+        }
+
+    }
 
 
 }

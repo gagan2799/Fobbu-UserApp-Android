@@ -12,6 +12,7 @@ class Data
     var display_name: String = ""
     var email: String = ""
     var pin: String = ""
+    var user=User()
     var partner=Partner()
     var addition_services=ArrayList<HashMap<String,Any>>()
 

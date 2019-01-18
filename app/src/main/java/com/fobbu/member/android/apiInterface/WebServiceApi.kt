@@ -69,6 +69,7 @@ interface WebServiceApi {
         @Part("latitude")  latitude: RequestBody,
         @Part("longitude")  longitude: RequestBody,
         @Part("vehicle_type")  vehicle_type: RequestBody,
+        @Part("vehicle_number")vehicle_number: RequestBody,
         @Part files :ArrayList<MultipartBody.Part>,
         @Header("x-access-token") token: String): Call<MainPojo>
 

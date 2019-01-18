@@ -879,10 +879,12 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
         val strVehicleType = RequestBody.create(MediaType.parse("text/plain"), strVehicleType)
 
+        val strVehicleNumber = RequestBody.create(MediaType.parse("text/plain"), etVehicleNumber.text.toString())
+
 
         rsaFragmentHandler.findFobbuRequest(
             userId, serviceSelected, strLatitude, strLongitude
-            , strVehicleType, fileList, tokenHeader
+            , strVehicleType,strVehicleNumber, fileList, tokenHeader
         )
     }
 
@@ -891,7 +893,7 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
         try {
             // val mainPojo = response!!.body()
 
-            if (mainPojo!!.success == "true") {
+            if (mainPojo.success == "true") {
 
                 fleetRequestApi(mainPojo.getData()._id)
 
@@ -913,7 +915,6 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
 
     //////////////////FLEET REQUEST API  /////////////////////////
-
 
     // Fleet request Api (API-users/request/{requestId})
     private fun fleetRequestApi(id: String) {

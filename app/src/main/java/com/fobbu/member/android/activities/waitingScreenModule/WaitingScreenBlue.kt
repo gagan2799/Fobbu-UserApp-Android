@@ -52,8 +52,11 @@ class WaitingScreenBlue : AppCompatActivity() {
                 tvTextThree.visibility=View.VISIBLE
 
 
-                if(CommonClass(this,this).getString(RsaConstants.ServiceSaved.fobbuRequestId) ==
-                    RsaConstants.ServiceName.flatTyre)
+                if(CommonClass(this,this).getString(RsaConstants.ServiceSaved.serviceNameSelected) ==
+                    RsaConstants.ServiceName.flatTyre
+                    ||
+                    CommonClass(this,this).getString(RsaConstants.ServiceSaved.serviceNameSelected) ==
+                    RsaConstants.ServiceName.burstTyre)
                 {
                     tvTextThree.text=resources.getString(R.string.fobbu_gathering_tools)
                     Handler().postDelayed({ changeLayout() },1000)

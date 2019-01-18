@@ -218,7 +218,7 @@ class ApiClient(var activity: Activity) {
 
     // find fobbu Request(RSA Fragment)
      fun findFobbuRequest(userId:RequestBody,serviceSelected:RequestBody,strtLatitude:RequestBody,strLongitude:RequestBody
-    ,strVehicleType:RequestBody,fileList:ArrayList<MultipartBody.Part>,token:String,responseHandler: ResponseHandler)
+    ,strVehicleType:RequestBody,strVehicleNumber:RequestBody,fileList:ArrayList<MultipartBody.Part>,token:String,responseHandler: ResponseHandler)
     {
         /*val  map= HashMap<String,RequestBody>()
         map["user_id"]=userId
@@ -226,7 +226,7 @@ class ApiClient(var activity: Activity) {
         map["latitude"]=strtLatitude
         map["longitude"]=strLongitude
         map["vehicle_type"]=strVehicleType*/
-        webServiceMultipart.findFobbuRequest(userId,serviceSelected,strtLatitude,strLongitude,strVehicleType,fileList,token)
+        webServiceMultipart.findFobbuRequest(userId,serviceSelected,strtLatitude,strLongitude,strVehicleType,strVehicleNumber,fileList,token)
             .enqueue(object :Callback<MainPojo>
             {
                 override fun onFailure(call: Call<MainPojo>, t: Throwable) {

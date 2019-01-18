@@ -1,16 +1,22 @@
 package com.fobbu.member.android.fragments
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.*
 import android.content.pm.PackageManager
 import android.location.Location
+import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.support.annotation.RequiresApi
 import android.support.design.widget.BottomSheetBehavior
 import android.support.design.widget.CoordinatorLayout
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
+import android.support.v7.app.AlertDialog
+import android.util.Log
 import android.view.*
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -44,11 +50,12 @@ import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.MapsInitializer
 import com.google.android.gms.maps.model.*
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_waiting_screen_blue.*
 import kotlinx.android.synthetic.main.fragment_rsa_live.*
 import java.lang.Double
 
 class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
-    GoogleApiClient.ConnectionCallbacks, LocationListener ,ActivityView{
+    GoogleApiClient.ConnectionCallbacks, LocationListener, ActivityView {
 
 
     private var headerIconChanges: HeaderIconChanges? = null
@@ -62,23 +69,30 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     private var strLatitude = ""
     private var strLongitude = ""
 
-    lateinit var rsaLiveHandler:RsaLiveHandler
+    lateinit var rsaLiveHandler: RsaLiveHandler
 
-    private lateinit var rlInformation:RelativeLayout
-    private lateinit var ivTool:ImageView
-    private lateinit var tvText:TextView
-    private lateinit var tvCode:TextView
-    private lateinit var tvName:TextView
-    private lateinit var imgProfile:ImageView
-    private  var strWhere=""
-    private var topBarChanges: TopBarChanges?=null
-    var mobileNumber=""
+    private lateinit var rlInformation: RelativeLayout
+    private lateinit var ivTool: ImageView
+    private lateinit var tvText: TextView
+    private lateinit var tvCode: TextView
+    private lateinit var tvName: TextView
+    private lateinit var imgProfile: ImageView
+    private var strWhere = ""
+    private var topBarChanges: TopBarChanges? = null
+    private var mobileNumber = ""
+    private lateinit var ivImageCall:ImageView
+
+    private lateinit var ivLeftDotted: ImageView
+    private lateinit var ivRightDotted: ImageView
+    private lateinit var tvTrack: TextView
+    private lateinit var rlPickingFuel: RelativeLayout
+    private lateinit var tvPickingFuel: TextView
+    private lateinit var rlTools: RelativeLayout
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_rsa_live, container, false)
         if (view != null) {
-
             mapInitialise(view, savedInstanceState)
 
             checkGPSEnable()
@@ -87,15 +101,19 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
             handleClick()
 
-            rsaLiveHandler=RsaLivePresenter(this.activity!!,this)
-            rsaLiveHandler.getService(CommonClass(activity!!, activity!!).getString("x_access_token"),CommonClass(this.activity!!, this.activity!!).getString(
-                RsaConstants.ServiceSaved.fobbuRequestId))
+            rsaLiveHandler = RsaLivePresenter(this.activity!!, this)
+            rsaLiveHandler.getService(
+                CommonClass(activity!!, activity!!).getString("x_access_token"),
+                CommonClass(this.activity!!, this.activity!!).getString(
+                    RsaConstants.ServiceSaved.fobbuRequestId
+                )
+            )
         }
-
 
         return view
     }
 
+    @SuppressLint("ResourceAsColor")
     private fun handleClick() {
 
         rlInformation.setOnClickListener {
@@ -103,21 +121,38 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
             when (strWhere) {
                 "" -> {
                     ivTool.setImageResource(R.drawable.man_riding_bike)
-                    tvText.text=resources.getString(R.string.fobbu_on_way)
-                    strWhere="share"
+                    tvText.text = resources.getString(R.string.fobbu_on_way)
+                    strWhere = "share"
+
+                    ivLeftDotted.setImageResource(R.drawable.dotted)
+                    ivRightDotted.setImageResource(R.drawable.dotted)
+                    tvTrack.setBackgroundResource(R.drawable.solid_color_grey)
+                    rlPickingFuel.visibility = View.GONE
+                    tvPickingFuel.visibility = View.GONE
+                    rlTools.visibility = View.VISIBLE
                 }
                 "share" -> {
-                    strWhere="next"
+                    strWhere = "next"
                     ivTool.setImageResource(R.drawable.mechanic_with_cap)
-                    tvText.text=resources.getString(R.string.share_4_digit_code)
-                    tvCode.visibility=View.VISIBLE
+                    tvText.text = resources.getString(R.string.share_4_digit_code)
+                    tvCode.visibility = View.VISIBLE
                 }
-                else -> startActivity(Intent(activity!!, WaitingScreenWhite::class.java).putExtra("from_where", "code_valid"))
+                else -> startActivity(
+                    Intent(activity!!, WaitingScreenWhite::class.java).putExtra(
+                        "from_where",
+                        "code_valid"
+                    )
+                )
             }
+        }
+
+        ivImageCall.setOnClickListener {
+            checkPermissionForCall()
         }
 
     }
 
+    @SuppressLint("ResourceAsColor")
     private fun initialise(view: View?) {
 
         headerIconChanges = activity as HeaderIconChanges?
@@ -133,37 +168,30 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
         ivTool = view.findViewById(R.id.ivTool)
         tvText = view.findViewById(R.id.tvText)
         tvCode = view.findViewById(R.id.tvCode)
-        imgProfile =view.findViewById(R.id.imgProfile)
-        tvName =view.findViewById(R.id.tvName)
+        imgProfile = view.findViewById(R.id.imgProfile)
+        tvName = view.findViewById(R.id.tvName)
 
-        /*when {
-            CommonClass(activity!!, activity!!).getString(RsaClassType.RsaTypes.onGoingRsaLiveScreenType)
-                    == FcmPushTypes.Types.inRouteRequest -> {
-                ivTool.setImageResource(R.drawable.man_riding_bike)
-                tvText.text = resources.getString(R.string.fobbu_on_way)
-                strWhere = "share"
-            }
-            CommonClass(activity!!, activity!!).getString(RsaClassType.RsaTypes.onGoingRsaLiveScreenType)
-                    == FcmPushTypes.Types.newPin -> {
-                ivTool.setImageResource(R.drawable.mechanic_with_cap)
-                tvText.text = resources.getString(R.string.share_4_digit_code)
-                tvCode.text = CommonClass(activity!!, activity!!).getString(RsaClassType.RsaTypes.onGoingRsaLivePIN)
-                tvCode.visibility = View.VISIBLE
-            }
-            CommonClass(activity!!, activity!!).getString(RsaClassType.RsaTypes.onGoingRsaLiveScreenType)
-                    == FcmPushTypes.Types.otpVerified -> {
-                startActivity(
-                    Intent(
-                        activity!!,
-                        WaitingScreenWhite::class.java
-                    ).putExtra("from_where", "code_valid")
-                )
-            }
-            else ->
-            {
+        ivLeftDotted = view.findViewById(R.id.ivLeftDotted)
+        ivRightDotted = view.findViewById(R.id.ivRightDotted)
+        tvTrack = view.findViewById(R.id.tvTrack)
+        rlPickingFuel = view.findViewById(R.id.rlPickingFuel)
+        tvPickingFuel = view.findViewById(R.id.tvPickingFuel)
+        rlTools = view.findViewById(R.id.rlTools)
 
-            }
-        }*/
+        ivImageCall = view.findViewById(R.id.ivImageCall)
+
+
+        if (CommonClass(activity!!, activity!!).getString(RsaConstants.ServiceSaved.serviceNameSelected) ==
+            RsaConstants.ServiceName.fuelDelivery
+        ) {
+            ivLeftDotted.setImageResource(R.drawable.dotted_gray)
+            ivRightDotted.setImageResource(R.drawable.dotted_gray)
+            tvTrack.setBackgroundResource(R.drawable.solid_color_grey)
+            rlPickingFuel.visibility = View.VISIBLE
+            tvPickingFuel.visibility = View.VISIBLE
+            rlTools.visibility = View.GONE
+        }
+
     }
 
     @SuppressLint("SetTextI18n", "InflateParams")
@@ -298,7 +326,7 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
             googleMap.uiSettings.isMyLocationButtonEnabled = true
 
-            googleMap.isMyLocationEnabled=true
+            googleMap.isMyLocationEnabled = true
 
             googleMap.setInfoWindowAdapter(InfoWindow())
         }
@@ -431,46 +459,137 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     }
 
     private val changeRSALiveScreenReceiver = object : BroadcastReceiver() {
+        @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
+        @SuppressLint("ResourceAsColor")
         override fun onReceive(context: Context, intent: Intent) {
 
-            println("ON RECEIVE BROADCAST "+ intent.getStringExtra("navigate_to"))
+            println("ON RECEIVE BROADCAST " + intent.getStringExtra("navigate_to"))
 
             when {
-                intent.getStringExtra("navigate_to")== FcmPushTypes.Types.inRouteRequest -> {
+                intent.getStringExtra("navigate_to") == FcmPushTypes.Types.inRouteRequest -> {
                     ivTool.setImageResource(R.drawable.man_riding_bike)
-                    tvText.text=resources.getString(R.string.fobbu_on_way)
-                    strWhere="share"
+                    tvText.text = resources.getString(R.string.fobbu_on_way)
+                    strWhere = "share"
+
+                    ivLeftDotted.setImageResource(R.drawable.dotted)
+                    ivRightDotted.setImageResource(R.drawable.dotted)
+                    tvTrack.background = resources.getDrawable(R.drawable.solid_color_red)
+                    rlPickingFuel.visibility = View.GONE
+                    tvPickingFuel.visibility = View.GONE
+                    rlTools.visibility = View.VISIBLE
+
                 }
-                intent.getStringExtra("navigate_to")== FcmPushTypes.Types.newPin -> {
+                intent.getStringExtra("navigate_to") == FcmPushTypes.Types.newPin -> {
                     ivTool.setImageResource(R.drawable.mechanic_with_cap)
-                    tvText.text=resources.getString(R.string.share_4_digit_code)
-                    tvCode.text=intent.getStringExtra("otp")
-                    tvCode.visibility=View.VISIBLE
+                    tvText.text = resources.getString(R.string.share_4_digit_code)
+                    tvCode.text = intent.getStringExtra("otp")
+                    tvCode.visibility = View.VISIBLE
                 }
-                intent.getStringExtra("navigate_to")== FcmPushTypes.Types.otpVerified -> startActivity(Intent(activity!!, WaitingScreenWhite::class.java).putExtra("from_where", "code_valid"))
+                intent.getStringExtra("navigate_to") == FcmPushTypes.Types.otpVerified -> startActivity(
+                    Intent(
+                        activity!!,
+                        WaitingScreenWhite::class.java
+                    ).putExtra("from_where", "code_valid")
+                )
             }
         }
     }
 
 
     override fun onRequestSuccessReport(mainPojo: MainPojo) {
-     if (mainPojo.success=="true")
-     {
-         println("MAIN POJO "+ mainPojo.getData().partner.profile)
+        if (mainPojo.success == "true") {
+            println("MAIN POJO " + mainPojo.getData().partner.profile)
 
-         if (!mainPojo.getData().partner.profile.isNullOrBlank()){
-             Picasso.get().load(mainPojo.getData().partner.profile).error(R.drawable.dummy_pic).into(imgProfile)
-         }
-         tvName.text= mainPojo.getData().partner.display_name
-         mobileNumber=mainPojo.getData().partner.mobile_number
+            if (!mainPojo.getData().user.profile.isNullOrBlank()) {
+                Picasso.get().load(mainPojo.getData().partner.profile).error(R.drawable.dummy_pic).into(imgProfile)
+            }
+            tvName.text = mainPojo.getData().user.display_name
+            mobileNumber = mainPojo.getData().user.mobile_number
 
-     }
+        }
     }
 
     override fun showLoader() {
     }
 
     override fun hideLoader() {
+
+    }
+
+    fun checkPermissionForCall() {
+        val apiLevel = android.os.Build.VERSION.SDK_INT
+
+        if (apiLevel >= 23) {
+            //phone state
+
+            val permission1 =
+                ContextCompat.checkSelfPermission(activity!!, android.Manifest.permission.CALL_PHONE)
+
+            if (permission1 != PackageManager.PERMISSION_GRANTED) {
+                makeRequest()
+            } else {
+                dialNumber()
+            }
+        } else {
+            dialNumber()
+        }
+    }
+
+    private fun dialNumber() {
+
+        if (mobileNumber != "")
+            CommonClass(activity!!, activity!!).callOnPhone(mobileNumber)
+    }
+
+    private fun makeRequest() {
+        requestPermissions(
+            arrayOf(
+                "android.permission.CALL_PHONE"
+            ),
+            1
+        )
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+        when (requestCode) {
+            1 -> {
+                if (grantResults.isEmpty() || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                    Log.i("", "Permission has been denied by user")
+                    showMessageDialog(
+                        "You need to allow the permissions from\n" +
+                                "Phone Settings -> Apps --> Fobbu Member --> Permissions\n" +
+                                "to allow the permissions"
+                    )
+
+                } else {
+                    Log.i("", "Permission has been granted by user")
+
+                    dialNumber()
+                }
+                return
+            }
+        }
+    }
+
+    // Method for opening dialog containing message
+    private fun showMessageDialog(message: String) {
+        val alertDialog = AlertDialog.Builder(
+            activity!!
+            , R.style.MyDialogTheme
+        ).create()
+        alertDialog.setMessage(message)
+        alertDialog.setButton(
+            AlertDialog.BUTTON_POSITIVE, "Ok"
+        ) { dialog
+            , _ ->
+            dialog.dismiss()
+        }
+
+        alertDialog.show()
+
+        val messageText: TextView = alertDialog!!.findViewById(android.R.id.message)!!
+
+        messageText.gravity = Gravity.LEFT
 
     }
 
