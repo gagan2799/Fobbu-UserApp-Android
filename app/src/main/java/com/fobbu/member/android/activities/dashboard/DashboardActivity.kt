@@ -1,12 +1,10 @@
 package com.fobbu.member.android.activities.dashboardActivity
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.app.Dialog
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.content.IntentFilter
 import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
@@ -21,6 +19,7 @@ import android.widget.Toast
 import com.fobbu.member.android.R
 import com.fobbu.member.android.activities.dashboard.presenter.DashboardHandler
 import com.fobbu.member.android.activities.dashboard.presenter.DashboardPresenter
+import com.fobbu.member.android.activities.orderAndPassbookModule.MyOrder.MyOrders
 import com.fobbu.member.android.activities.paymentModule.GetSetGoActivity
 import com.fobbu.member.android.activities.rsaModule.RSARequestCancelActivity
 import com.fobbu.member.android.activities.vehicleModule.AddEditVehicleActivity
@@ -39,8 +38,6 @@ import com.fobbu.member.android.interfaces.TopBarChanges
 import com.fobbu.member.android.modals.MainPojo
 import com.fobbu.member.android.utils.CommonClass
 import com.fobbu.member.android.view.ActivityView
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.activity_dashboard.*
 import kotlinx.android.synthetic.main.app_bar_dashboard.*
 import kotlinx.android.synthetic.main.inflate_drawer.*
@@ -160,9 +157,16 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
             drawer_layout.closeDrawer(GravityCompat.START)
         }
 
-        tvLogout.setOnClickListener {
+        tvMyOrders.setOnClickListener {
             drawer_layout.closeDrawer(GravityCompat.START)
 
+            Handler().postDelayed({
+                startActivity(Intent(this, MyOrders::class.java))
+            },500)
+        }
+
+        tvLogout.setOnClickListener {
+            drawer_layout.closeDrawer(GravityCompat.START)
 
             Handler().postDelayed({
                 showLogoutPopup()

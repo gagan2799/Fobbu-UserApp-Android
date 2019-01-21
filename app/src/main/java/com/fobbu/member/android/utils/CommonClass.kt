@@ -11,10 +11,12 @@ import android.graphics.Color
 import android.net.ConnectivityManager
 import android.net.Uri
 import android.os.Build
+import android.support.annotation.RequiresApi
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat.startActivity
-import android.view.Gravity
-import android.view.WindowManager
+import android.support.v4.view.MenuItemCompat
+import android.support.v7.widget.Toolbar
+import android.view.*
 import android.widget.RelativeLayout
 import android.widget.Toast
 import com.fobbu.member.android.R
@@ -38,6 +40,7 @@ class CommonClass(activity1: Activity, context1: Context) {
     private var activity: Activity = activity1
 
     private var context: Context = context1
+
 
     var aPI_KEY: String = "Fobbu"
 
@@ -93,6 +96,7 @@ class CommonClass(activity1: Activity, context1: Context) {
 
         return list
     }
+
 
     fun errorMessage(response: String): String {
         try {

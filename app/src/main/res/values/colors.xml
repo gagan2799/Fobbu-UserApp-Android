@@ -13,6 +13,7 @@
     <color name="red">#D53A32</color>
     <color name="orange">#FF5733  </color>
     <color name="view_grey">#E6E6E6</color>
+    <color name="order_screen_background">#f9f9f9</color>
 
     <color name="blue">#00A0E3</color>
     <color name="grey_header">#fafafa</color>
