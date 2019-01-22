@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        app:layout_behavior="android.support.design.widget.BottomSheetBehavior"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        app:behavior_hideable="true"
+        android:orientation="vertical"
+        android:background="@color/white"
+>
+
+   <RelativeLayout
+           android:gravity="center_vertical"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content">
+       <LinearLayout
+               android:layout_alignParentStart="true"
+               android:orientation="vertical"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_alignParentLeft="true">
+           <TextView
+                   android:layout_width="wrap_content" android:layout_height="wrap_content"
+           android:text="@string/today"
+                     android:textSize="@dimen/textsize_medium"
+           android:textColor="@color/black"
+           android:textStyle="bold"/>
+
+           <TextView
+                   android:id="@+id/tvPassbookToday"
+                   android:layout_width="wrap_content" android:layout_height="wrap_content"
+                     android:text="02 Feb"
+                     android:textSize="@dimen/textsize_small"
+                     android:textColor="@color/color_grey"
+           />
+
+       </LinearLayout>
+
+       <ImageView
+               android:id="@+id/ivTodayCheckPb"
+               android:layout_centerVertical="true"
+               android:src="@drawable/check_mark_blue"
+               android:layout_alignParentEnd="true"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_alignParentRight="true"/>
+
+   </RelativeLayout>
+
+    <RelativeLayout
+            android:layout_marginTop="25dp"
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <LinearLayout
+                android:layout_alignParentStart="true"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true">
+            <TextView
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Yesterday"
+                    android:textSize="@dimen/textsize_medium"
+                    android:textColor="@color/black"
+                    />
+
+            <TextView
+                    android:id="@+id/tvPassbookYesterday"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="01 Feb"
+                    android:textSize="@dimen/textsize_small"
+                    android:textColor="@color/color_grey"
+            />
+
+        </LinearLayout>
+
+        <ImageView
+                android:id="@+id/ivYesterdayCheckPb"
+                android:visibility="gone"
+                android:layout_centerVertical="true"
+                android:src="@drawable/check_mark_blue"
+                android:layout_alignParentEnd="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+            android:layout_marginTop="25dp"
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <LinearLayout
+                android:layout_alignParentStart="true"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true">
+            <TextView
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="@string/week"
+                    android:textSize="@dimen/textsize_medium"
+                    android:textColor="@color/black"
+            />
+
+            <TextView
+                    android:id="@+id/tvPassbookWeek"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="01 Feb to 07Feb"
+                    android:textSize="@dimen/textsize_small"
+                    android:textColor="@color/color_grey"
+            />
+
+        </LinearLayout>
+
+        <ImageView
+                android:id="@+id/ivWeekCheckPb"
+                android:visibility="gone"
+                android:layout_centerVertical="true"
+                android:src="@drawable/check_mark_blue"
+                android:layout_alignParentEnd="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"/>
+
+    </RelativeLayout>
+
+
+        <LinearLayout
+                android:id="@+id/llCustomDatePB"
+                android:layout_marginTop="25dp"
+                android:layout_alignParentStart="true"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true">
+            <TextView
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="@string/custom_date"
+                    android:textSize="@dimen/textsize_medium"
+                    android:textColor="@color/black"
+            />
+
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                <TextView
+                        android:gravity="center"
+                        android:layout_width="0dp"
+                        android:padding="10dp"
+                        android:id="@+id/tvStartDatePB"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/gray_rounded_rect"
+                        android:layout_height="wrap_content"
+                        android:text="@string/start_date"
+                        android:textSize="@dimen/textsize_small"
+                        android:textColor="@color/color_grey"
+                />
+                <TextView
+                        android:gravity="center"
+                        android:id="@+id/tvEndDatePB"
+                        android:layout_margin="5dp"
+                        android:layout_width="0dp"
+                        android:padding="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/gray_rounded_rect"
+                        android:layout_height="wrap_content"
+                        android:text="@string/end_date"
+                        android:textSize="@dimen/textsize_small"
+                        android:textColor="@color/color_grey"
+                />
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+
+
+
+
+</LinearLayout>

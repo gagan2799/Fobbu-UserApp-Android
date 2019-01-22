@@ -19,7 +19,9 @@ import android.widget.Toast
 import com.fobbu.member.android.R
 import com.fobbu.member.android.activities.dashboard.presenter.DashboardHandler
 import com.fobbu.member.android.activities.dashboard.presenter.DashboardPresenter
-import com.fobbu.member.android.activities.orderAndPassbookModule.MyOrder.MyOrders
+import com.fobbu.member.android.activities.emergencyContacts.EmergencyContactsActivity
+import com.fobbu.member.android.activities.orderAndPassbookModule.MyOrder.MyOrdersActivity
+import com.fobbu.member.android.activities.orderAndPassbookModule.passbook.MyPassbookActivity
 import com.fobbu.member.android.activities.paymentModule.GetSetGoActivity
 import com.fobbu.member.android.activities.rsaModule.RSARequestCancelActivity
 import com.fobbu.member.android.activities.vehicleModule.AddEditVehicleActivity
@@ -161,9 +163,28 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
             drawer_layout.closeDrawer(GravityCompat.START)
 
             Handler().postDelayed({
-                startActivity(Intent(this, MyOrders::class.java))
+                startActivity(Intent(this, MyOrdersActivity::class.java))
             },500)
         }
+
+        tvMyPassbook.setOnClickListener {
+            drawer_layout.closeDrawer(GravityCompat.START)
+
+            Handler().postDelayed({
+                startActivity(Intent(this, MyPassbookActivity::class.java))
+            },500)
+        }
+
+        tvAddEmergencyContacts.setOnClickListener {
+            drawer_layout.closeDrawer(GravityCompat.START)
+
+            Handler().postDelayed({
+                startActivity(Intent(this, EmergencyContactsActivity::class.java))
+            },500)
+        }
+
+
+
 
         tvLogout.setOnClickListener {
             drawer_layout.closeDrawer(GravityCompat.START)
@@ -388,12 +409,14 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
         }
     }
 
-    override fun showLoader() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun showLoader()
+    {
+
     }
 
-    override fun hideLoader() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun hideLoader()
+    {
+
     }
 
 }

@@ -4,6 +4,7 @@ import android.app.Activity
 import android.widget.Toast
 import com.fobbu.member.android.apiInterface.Handler.ResponseHandler
 import com.fobbu.member.android.modals.MainPojo
+import com.squareup.picasso.RequestHandler
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
@@ -11,6 +12,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.http.Multipart
 import java.util.*
+import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
 
@@ -348,6 +350,46 @@ class ApiClient(var activity: Activity) {
         })
     }
 
+
+    // get_requests API
+    fun getOrder(type:String,page:String,token:String,responseHandler: ResponseHandler)
+    {
+        webServiceApi.getOrders(type,page,token).enqueue(object :Callback<MainPojo>
+        {
+            override fun onFailure(call: Call<MainPojo>, t: Throwable)
+            {
+                responseHandler.onServerError("""Server Error: ${t.message}""")
+            }
+
+            override fun onResponse(call: Call<MainPojo>, response: Response<MainPojo>)
+            {
+            handleSuccess(response,responseHandler)
+            }
+
+        })
+    }
+
+
+    // POST emergencycontacts API
+    fun postEmergencyContacts (contactList:ArrayList<HashMap<String,String>>,token:String,responseHandler: ResponseHandler)
+    {
+       val map=HashMap<String,Any>()
+           map["contacts"]=contactList
+
+        webServiceApi.postEmergencyContacts(contactList, token).enqueue(object :Callback<MainPojo>
+        {
+            override fun onFailure(call: Call<MainPojo>, t: Throwable)
+            {
+                responseHandler.onServerError("""Server Error: ${t.message}""")
+            }
+
+            override fun onResponse(call: Call<MainPojo>, response: Response<MainPojo>)
+            {
+                handleSuccess(response,responseHandler)
+            }
+        })
+
+    }
 
 
     // method for handling the response

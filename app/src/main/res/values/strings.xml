@@ -35,7 +35,6 @@
 
     ///SIGNUP SCREEN
     <string name="signup">Sign Up</string>
-    <string name="full_name">Full Name</string>
     <string name="email_id">Email ID</string>
     <string name="already_registered">
         <u>Already Registered?</u>
@@ -84,7 +83,6 @@
     <string name="my_orders">My Orders</string>
     <string name="my_passbook">My Passbook</string>
     <string name="add_vehicle">Add Vehicle</string>
-    <string name="add_emergency_contacts">Add Emergency Contacts</string>
     <string name="payment_settings">Payment Settings</string>
     <string name="freebies">Freebies</string>
     <string name="help">Help</string>
@@ -107,7 +105,6 @@
 
     ///ADD VEHICLE
     <string name="new_text">New</string>
-    <string name="edit">Edit</string>
     <string name="vehicle_brand">Vehicle Brand</string>
     <string name="vehicle_reg_no">Vehicle Reg. No.</string>
     <string name="vehicle_sub_model">Sub Model</string>
@@ -299,6 +296,34 @@
     </string>
     <string name="please_hang_on_fobbu_is_picking_up_the_fuel">Please Hang on…\nFobbu is picking up the fuel…</string>
     <string name="free">Free</string>
+    <string name="rs">Rs " "</string>
+    <string name="order_detail">Order Detail</string>
+    <string name="order_id_detail">Order ID:</string>
+    <string name="rs_300">Rs 300</string>
+    <string name="paymnet_successfully_done_for_this_order">Paymnet Successfully done for this order</string>
+    <string name="send_invoice_to_registered_email_id">Send invoice to registered email id.</string>
+    <string name="fobbu_wallet">Fobbu Wallet</string>
+    <string name="download_statement">Download Statement</string>
+    <string name="recent_v">Recent v</string>
+    <string name="payment">Payment:" "</string>
+    <string name="_12_32_pm_05_jan_2019">12 32 pm 05 jan 2019</string>
+    <string name="today">Today</string>
+    <string name="select_date_range">Select date range</string>
+    <string name="custom_date">Custom Date</string>
+    <string name="week">Week</string>
+    <string name="start_date">Start Date</string>
+    <string name="end_date">End Date</string>
+    <string name="payment_details">Payment Details</string>
+    <string name="paid">paid</string>
+    <string name="total_amount_paid">Total Amount Paid</string>
+    <string name="payment_mode">Payment Mode:</string>
+    <string name="transaction_id">Transaction ID:</string>
+    <string name="add_emergency_contacts">Add Emergency Contacts</string>
+    <string name="add">Add</string>
+    <string name="edit">Edit</string>
+    <string name="full_name">Full Name</string>
+    <string name="relationship">Relationship</string>
+    <string name="always_share_with_my_emergency_contacts">Always share with my emergency contacts</string>
 
 
 </resources>

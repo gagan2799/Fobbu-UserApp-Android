@@ -49,4 +49,15 @@
     <style name="color_red" parent="TextAppearance.AppCompat">
         <item name="android:textColor">@color/red</item>
     </style>
-</resources>
+
+
+    <style name="BottomDialogSlide">
+        <item name="android:windowEnterAnimation">@anim/slide_bottom_to_up</item>
+        <item name="android:windowExitAnimation">@anim/slide_from_pos_to_bottom</item>
+    </style>
+
+    <style name="CustomPickerTheme" parent="Theme.AppCompat.Light.Dialog">
+    <item name="colorAccent">@color/green</item>
+</style>
+
+        </resources>

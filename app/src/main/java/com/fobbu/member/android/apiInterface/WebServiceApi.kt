@@ -131,4 +131,13 @@ interface WebServiceApi {
                     @Part("comments") reviews:RequestBody,
                     @Header("x-access-token") token:String):Call<MainPojo>
 
+    @GET("users/get_requests")
+    fun getOrders(@Query("type") type:String,
+                  @Query("page") pageCount:String,
+                  @Header("x-access-token") token:String):Call<MainPojo>
+
+    @POST("users/emergencycontacts")
+    fun postEmergencyContacts(@Body mapData: HashMap<String,Any>,
+                              @Header("x-access-token") token: String):Call<MainPojo>
+
 }

@@ -14,18 +14,21 @@ import com.fobbu.member.android.utils.CommonClass
 import com.fobbu.member.android.view.ActivityView
 import kotlinx.android.synthetic.main.activity_forgot.*
 
-class ForgotPasswordActivity : AppCompatActivity(),ActivityView {
-
-
-
+class ForgotPasswordActivity : AppCompatActivity(),ActivityView
+{
     private lateinit var webServiceApi: WebServiceApi
+
     lateinit var forgotPasswordHandler: ForgotPasswordHandler
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?)
+    {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_forgot)
+
         forgotPasswordHandler=
                 ForgotPasswordPresenter(this, this)
+
         addClicks()
     }
 
@@ -82,7 +85,8 @@ class ForgotPasswordActivity : AppCompatActivity(),ActivityView {
         }
     }
 
-    override fun showLoader() {
+    override fun showLoader()
+    {
         rlLoader.visibility=View.VISIBLE
     }
 

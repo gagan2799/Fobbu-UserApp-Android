@@ -26,7 +26,8 @@ class DashboardPresenter(var activity:Activity,var activityView: ActivityView):D
                 Toast.makeText(activity,message, Toast.LENGTH_SHORT).show()
             }
 
-            override fun on401() {
+            override fun on401()
+            {
                 CommonClass(activity,activity).clearPreference()
             }
 

@@ -126,7 +126,7 @@
                     android:textSize="@dimen/textsize_medium"/>
 
             <TextView
-                    android:id="@+id/tvAddEmergencyVehicle"
+                    android:id="@+id/tvAddEmergencyContacts"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/add_emergence"

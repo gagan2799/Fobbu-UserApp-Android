@@ -38,7 +38,6 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/app_icon_round"
         android:supportsRtl="true"
-        android:testOnly="true"
         android:theme="@style/AppTheme" >
         <activity
             android:name="com.fobbu.member.android.activities.SplashActivity"
@@ -132,9 +131,17 @@
         </activity>
         <activity android:name="com.fobbu.member.android.activities.paymentModule.GetSetGoActivity" >
         </activity>
-        <activity android:name="com.fobbu.member.android.activities.orderAndPassbookModule.MyOrder.MyOrders" >
+        <activity android:name="com.fobbu.member.android.activities.orderAndPassbookModule.MyOrder.MyOrdersActivity" >
         </activity>
-        <activity android:name="com.fobbu.member.android.activities.orderAndPassbookModule.MyPassbook" >
+        <activity android:name="com.fobbu.member.android.activities.orderAndPassbookModule.passbook.MyPassbookActivity" >
+        </activity>
+        <activity android:name="com.fobbu.member.android.activities.orderAndPassbookModule.OrderDetail.OrderDetailActivity" >
+        </activity>
+        <activity android:name="com.fobbu.member.android.activities.orderAndPassbookModule.OrderDetail.adapter.MainActivity" >
+        </activity>
+        <activity android:name="com.fobbu.member.android.activities.orderAndPassbookModule.passbookDetail.PassbookDetailActivity" >
+        </activity>
+        <activity android:name="com.fobbu.member.android.activities.emergencyContacts.EmergencyContactsActivity" >
         </activity>
 
         <receiver android:name="com.google.android.gms.cast.framework.media.MediaIntentReceiver" />

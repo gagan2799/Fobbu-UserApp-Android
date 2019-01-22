@@ -31,8 +31,9 @@ import org.json.JSONObject
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.Calendar.*
 
-@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
+@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS", "UNREACHABLE_CODE")
 /**
  * Created by abc on 12/1/18.
  */
@@ -225,7 +226,7 @@ class CommonClass(activity1: Activity, context1: Context) {
             // Adjust locale and zone appropriately
             val expire = inputFormat.parse(expired)
 
-            val currentDate = Calendar.getInstance().time
+            val currentDate = getInstance().time
             if (currentDate.after(expire)) { // expiry date is either equal to or before current time
 
                 return false
@@ -300,6 +301,7 @@ class CommonClass(activity1: Activity, context1: Context) {
         return null
     }
 
+    @SuppressLint("MissingPermission")
     fun callOnPhone(number: String) {
 
         try {
@@ -313,6 +315,34 @@ class CommonClass(activity1: Activity, context1: Context) {
             e.printStackTrace()
         }
 
+    }
+
+
+    @SuppressLint("SimpleDateFormat")
+    fun getCurrentDate(today:String):String
+    {
+        val c:Date = getInstance().time
+        System.out.println("Current time => $c")
+
+        val df:SimpleDateFormat  =  SimpleDateFormat("dd MMM")
+
+        df.format(c)
+
+        return   df.format(c).toString()
+       /* else
+        {
+            val date = df.parse(df.format(c).toString())
+
+            val cal = Calendar.getInstance()
+
+            cal.time=date
+
+            cal.add(Calendar.DATE, -1)
+
+            df.format(cal.time)
+
+            df.toString()
+        }*/
     }
 
 

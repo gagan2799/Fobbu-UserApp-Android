@@ -9,9 +9,10 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.fobbu.member.android.R
+import com.fobbu.member.android.utils.CommonClass
 
 
-class OrderAdapter(var activity: Activity):RecyclerView.Adapter<OrderAdapter.OrderViewHolder>()
+class OrderAdapter(var activity: Activity,var dataList:ArrayList<HashMap<String,Any>>):RecyclerView.Adapter<OrderAdapter.OrderViewHolder>()
 {
         override fun onCreateViewHolder(parent: ViewGroup, p1: Int): OrderViewHolder
         {
@@ -20,20 +21,22 @@ class OrderAdapter(var activity: Activity):RecyclerView.Adapter<OrderAdapter.Ord
 
         override fun getItemCount(): Int
         {
-            return  10
+            return  dataList.size
         }
 
         @SuppressLint("SetTextI18n")
         override fun onBindViewHolder(holder: OrderViewHolder, pos: Int)
         {
-          /*  holder.tvOrderID.text= activity.resources.getString(R.string.order_id)+((dataList[pos][FobbuConstants.Constant.orderId] as Double).toLong())
+            val hashMap= dataList[pos]
 
-            holder.tvOrderTime.text=BaseActivity().getDesireFormat("yyyy-MM-dd'T'HH:mm:ss.SSS","HH:mm aa dd MMM yyyy",dataList[pos][FobbuConstants.Constant.created].toString())
+            holder.tvOrderID.text= activity.resources.getString(R.string.order_id)+((hashMap["order_id"] as Double).toLong())
 
-            holder.tvOrderType.text=dataList[pos][FobbuConstants.Constant.serviceName].toString()
+            holder.tvOrderTime.text=CommonClass(activity,activity).getDesireFormat("yyyy-MM-dd'T'HH:mm:ss.SSS","HH:mm aa dd MMM yyyy",hashMap["created"].toString())
 
-            holder.tvOrderTotal.text=activity.resources.getString(R.string.rs)+((dataList[pos][FobbuConstants.Constant.totalPrice] as Double).toLong())
-  */      }
+            holder.tvOrderType.text=hashMap["service_type"].toString()
+
+            holder.tvOrderTotal.text=activity.resources.getString(R.string.rs)+((hashMap["total_price"] as Double).toLong())
+        }
 
 
         class OrderViewHolder(view : View): RecyclerView.ViewHolder(view)

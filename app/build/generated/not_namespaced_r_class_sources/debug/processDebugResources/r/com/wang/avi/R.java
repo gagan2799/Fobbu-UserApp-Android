@@ -22,14 +22,14 @@ public final class R {
     public static final class string {
         private string() {}
 
-        public static final int app_name = 0x7f0e0036;
+        public static final int app_name = 0x7f0f0039;
     }
     public static final class style {
         private style() {}
 
-        public static final int AVLoadingIndicatorView = 0x7f0f0000;
-        public static final int AVLoadingIndicatorView_Large = 0x7f0f0001;
-        public static final int AVLoadingIndicatorView_Small = 0x7f0f0002;
+        public static final int AVLoadingIndicatorView = 0x7f100000;
+        public static final int AVLoadingIndicatorView_Large = 0x7f100001;
+        public static final int AVLoadingIndicatorView_Small = 0x7f100002;
     }
     public static final class styleable {
         private styleable() {}

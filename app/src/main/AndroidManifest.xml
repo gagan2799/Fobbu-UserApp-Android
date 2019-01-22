@@ -114,9 +114,17 @@
         </activity>
         <activity android:name=".activities.paymentModule.GetSetGoActivity">
         </activity>
-        <activity android:name=".activities.orderAndPassbookModule.MyOrder.MyOrders">
+        <activity android:name=".activities.orderAndPassbookModule.MyOrder.MyOrdersActivity">
         </activity>
-        <activity android:name=".activities.orderAndPassbookModule.passbook.MyPassbook">
+        <activity android:name=".activities.orderAndPassbookModule.passbook.MyPassbookActivity">
+        </activity>
+        <activity android:name=".activities.orderAndPassbookModule.OrderDetail.OrderDetailActivity">
+        </activity>
+        <activity android:name=".activities.orderAndPassbookModule.OrderDetail.adapter.MainActivity">
+        </activity>
+        <activity android:name=".activities.orderAndPassbookModule.passbookDetail.PassbookDetailActivity">
+        </activity>
+        <activity android:name=".activities.emergencyContacts.EmergencyContactsActivity">
         </activity>
     </application>
 

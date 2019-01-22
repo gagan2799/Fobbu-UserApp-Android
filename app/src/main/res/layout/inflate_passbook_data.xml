@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_marginBottom="8dp"
+        android:layout_height="wrap_content">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+        <ImageView
+                android:id="@+id/ivPassbookCheck"
+                android:src="@drawable/check_mark_small"
+                android:layout_width="0dp"
+                android:layout_marginRight="8dp"
+                android:layout_weight="0.5"
+                android:scaleType="fitEnd"
+                android:layout_gravity="center_vertical"
+                android:layout_height="wrap_content"
+        />
+        <RelativeLayout android:layout_width="0dp"
+                        android:layout_weight="5"
+                        android:gravity="center_vertical"
+                        android:layout_height="wrap_content">
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:textStyle="bold"
+                    android:layout_alignParentStart="true"
+                    android:gravity="center"
+                    android:textSize="@dimen/textsize_medium"
+                    android:textColor="@color/green"
+                    android:text="@string/payment"
+                    android:id="@+id/tvPaymentPassbook"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"/>
+
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+            android:id="@+id/tvPaymentTypePassbook"
+                      android:gravity="center"
+                      android:textColor="@color/color_grey"
+                      android:textSize="@dimen/textsize_small"
+                      android:layout_toRightOf="@+id/tvPaymentPassbook"
+            android:text="@string/fobbu_wallet"/>
+        </RelativeLayout>
+
+
+
+
+        <TextView
+                android:id="@+id/tvPaymentReceived"
+                android:layout_width="0dp"
+                android:layout_weight="5"
+                android:textStyle="bold"
+                android:gravity="end"
+                android:textSize="@dimen/textsize_medium"
+                android:textColor="@color/green"
+                android:text="@string/rs_300"
+                android:layout_height="wrap_content"
+        />
+
+    </LinearLayout>
+
+    <LinearLayout
+            android:layout_marginTop="2dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+        <ImageView
+                android:src="@drawable/check_mark_small"
+                android:layout_width="0dp"
+                android:visibility="invisible"
+                android:layout_marginRight="8dp"
+                android:layout_weight="0.5"
+                android:scaleType="fitEnd"
+                android:layout_gravity="center_vertical"
+                android:layout_height="wrap_content"
+        />
+        <TextView
+                android:id="@+id/tvPassbookOrderId"
+                android:layout_width="0dp"
+                android:layout_weight="5"
+                android:gravity="start"
+                android:textSize="@dimen/textsize_medium"
+                android:textColor="@color/color_grey"
+                android:text="Order id: 589"
+                android:layout_height="wrap_content"
+        />
+
+
+
+
+
+        <TextView
+                android:layout_width="0dp"
+                android:layout_weight="5"
+                android:textStyle="bold"
+                android:gravity="end"
+                android:visibility="invisible"
+                android:textSize="@dimen/textsize_medium"
+                android:textColor="@color/green"
+                android:text="@string/rs_300"
+                android:layout_height="wrap_content"
+        />
+
+    </LinearLayout>
+
+    <LinearLayout
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+        <ImageView
+                android:layout_width="0dp"
+                android:layout_marginRight="8dp"
+                android:layout_weight="0.5"
+                android:visibility="invisible"
+                android:scaleType="fitEnd"
+                android:layout_gravity="center_vertical"
+                android:layout_height="wrap_content"
+        />
+
+        <TextView
+                android:id="@+id/tvPassbookTime"
+                android:layout_width="0dp"
+                android:layout_weight="5"
+                android:gravity="start"
+                android:textSize="@dimen/textsize_small"
+                android:textColor="@color/color_grey"
+                android:text="@string/_12_32_pm_05_jan_2019"
+                android:layout_height="wrap_content"
+        />
+
+        <TextView
+                android:id="@+id/tvPassbookCommission"
+                android:layout_width="0dp"
+                android:layout_weight="5"
+                android:gravity="end"
+                android:textSize="@dimen/textsize_medium"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_height="wrap_content"
+        />
+
+    </LinearLayout>
+
+    <View
+            android:layout_marginTop="8dp"
+            android:layerType="software"
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="@drawable/dashed_line"/>
+
+</LinearLayout>
