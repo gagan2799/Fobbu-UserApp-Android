@@ -16,6 +16,8 @@ import com.fobbu.member.android.activities.emergencyContacts.presenter.Emergency
 import com.fobbu.member.android.activities.emergencyContacts.presenter.EmergencyPresenter
 import com.fobbu.member.android.modals.MainPojo
 import com.fobbu.member.android.view.ActivityView
+import org.json.JSONArray
+import org.json.JSONObject
 
 
 class EmergencyContactsActivity : AppCompatActivity(),ActivityView
@@ -28,7 +30,7 @@ class EmergencyContactsActivity : AppCompatActivity(),ActivityView
 
     private val contactList=ArrayList<HashMap<String,String>>()
 
-    lateinit var emergencyHandler:EmergencyHandler
+    private lateinit var emergencyHandler:EmergencyHandler
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
@@ -77,6 +79,14 @@ class EmergencyContactsActivity : AppCompatActivity(),ActivityView
             {
                 val selectedItem = parent.getItemAtPosition(position).toString()
                 tvRelationship.text=spinnerEmergency.selectedItem.toString()
+                if (tvRelationship.text.toString()=="Relationship")
+                {
+                    tvRelationship.setTextColor(resources.getColor(R.color.view_grey))
+                }
+                else
+                {
+                    tvRelationship.setTextColor(resources.getColor(R.color.color_grey))
+                }
             } // to close the onItemSelected
 
             override fun onNothingSelected(parent: AdapterView<*>) {
@@ -91,6 +101,15 @@ class EmergencyContactsActivity : AppCompatActivity(),ActivityView
             {
                 val selectedItem = parent.getItemAtPosition(position).toString()
                 tv2ndRelationship.text=spinner2ndEmergency.selectedItem.toString()
+
+                if (tv2ndRelationship.text.toString()=="Relationship")
+                {
+                    tv2ndRelationship.setTextColor(resources.getColor(R.color.view_grey))
+                }
+                else
+                {
+                    tv2ndRelationship.setTextColor(resources.getColor(R.color.color_grey))
+                }
             } // to close the onItemSelected
 
             override fun onNothingSelected(parent: AdapterView<*>) {
@@ -119,7 +138,8 @@ class EmergencyContactsActivity : AppCompatActivity(),ActivityView
                         etMobileEmergency.text.toString(),tvRelationship.text.toString())
 
                     saveToLocalList(et2ndFullNameEmergency.text.toString(),
-                        et2ndFullNameEmergency.text.toString(),tv2ndRelationship.text.toString())
+                        et2ndMobileEmergency.text.toString(),tv2ndRelationship.text.toString())
+
 
                     if (contactList.size<1)
                         Toast.makeText(this,"Please provide atleast one emergency contact", Toast.LENGTH_SHORT).show()
@@ -159,18 +179,19 @@ class EmergencyContactsActivity : AppCompatActivity(),ActivityView
 
             }
             else->{
-                hashMap["name"]=name
+               hashMap["name"]=name
                 hashMap["mobile_number"]=mobileNumber
                 hashMap["relationship"]=relatonship
                 //deleteRowFromList(saveToLocalList)
                 contactList.add(hashMap)
+
             }
         }
         println("SAVED LIST $contactList")
     }
 
     //##################POST emergency contacts API####################//
-    fun postEmergencyContacts()
+    private fun postEmergencyContacts()
     {
         if (commonClass.checkInternetConn(this))
             emergencyHandler.postEmergencyContracts(contactList,
@@ -195,7 +216,7 @@ class EmergencyContactsActivity : AppCompatActivity(),ActivityView
 
     override fun showLoader()
     {
-    rlLoader.visibility=View.VISIBLE
+    rlLoader.visibility=View.GONE
 
         avi.show()
     }

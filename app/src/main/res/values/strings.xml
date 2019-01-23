@@ -324,6 +324,25 @@
     <string name="full_name">Full Name</string>
     <string name="relationship">Relationship</string>
     <string name="always_share_with_my_emergency_contacts">Always share with my emergency contacts</string>
+    <string name="view_qr_code">View QR Code</string>
+    <string name="earn_freebies">Earn Freebies</string>
+    <string name="free_vehicle_wash">Free vehicle wash</string>
+    <string name="learn_more">Learn More…</string>
+    <string name="invite_friends_to_fobbu_once_they_sign_up_and_use_any_service_you_get_a_free_vehicle_wash">Invite
+        friends to fobbu.Once they Signup and use any service you get a free Vehicle wash
+    </string>
+    <string name="invite_friends">Invite Friends</string>
+    <string name="need_help">Need Help?</string>
+    <string name="tell_us_what_you_are_looking_for">Tell us what you are looking for…</string>
+    <string name="change_pass">Change Password</string>
+    <string name="change_pin">Change PIN</string>
+    <string name="face_id_settings">Face ID Settings</string>
+    <string name="fingerprint_settings">Fingerprint Settings</string>
+    <string name="pass">Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="current_password">Current Password</string>
+    <string name="generate_new_pin">Generate New pin</string>
+    <string name="current_pin">Current Pin</string>
 
 
 </resources>

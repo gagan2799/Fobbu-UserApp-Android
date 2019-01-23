@@ -20,10 +20,14 @@ import com.fobbu.member.android.R
 import com.fobbu.member.android.activities.dashboard.presenter.DashboardHandler
 import com.fobbu.member.android.activities.dashboard.presenter.DashboardPresenter
 import com.fobbu.member.android.activities.emergencyContacts.EmergencyContactsActivity
+import com.fobbu.member.android.activities.freebies.FreebiesActivity
+import com.fobbu.member.android.activities.help.HelpActivity
 import com.fobbu.member.android.activities.orderAndPassbookModule.MyOrder.MyOrdersActivity
 import com.fobbu.member.android.activities.orderAndPassbookModule.passbook.MyPassbookActivity
 import com.fobbu.member.android.activities.paymentModule.GetSetGoActivity
+import com.fobbu.member.android.activities.paymentSettings.PaymentSettingActivity
 import com.fobbu.member.android.activities.rsaModule.RSARequestCancelActivity
+import com.fobbu.member.android.activities.securitySetting.SecuritySettingActivity
 import com.fobbu.member.android.activities.vehicleModule.AddEditVehicleActivity
 import com.fobbu.member.android.activities.waitingScreenModule.WaitingScreenBlue
 import com.fobbu.member.android.activities.waitingScreenModule.WaitingScreenWhite
@@ -183,7 +187,38 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
             },500)
         }
 
+        tvPaymentSettings.setOnClickListener {
+            drawer_layout.closeDrawer(GravityCompat.START)
 
+            Handler().postDelayed({
+                startActivity(Intent(this, PaymentSettingActivity::class.java))
+            },500)
+        }
+
+        tvFreebies.setOnClickListener {
+            drawer_layout.closeDrawer(GravityCompat.START)
+
+            Handler().postDelayed({
+                startActivity(Intent(this, FreebiesActivity::class.java))
+            },500)
+        }
+
+  tvHelp.setOnClickListener {
+            drawer_layout.closeDrawer(GravityCompat.START)
+
+            Handler().postDelayed({
+                startActivity(Intent(this, HelpActivity::class.java))
+            },500)
+        }
+
+
+        tvSecuritySettings.setOnClickListener {
+            drawer_layout.closeDrawer(GravityCompat.START)
+
+            Handler().postDelayed({
+                startActivity(Intent(this, SecuritySettingActivity::class.java))
+            },500)
+        }
 
 
         tvLogout.setOnClickListener {

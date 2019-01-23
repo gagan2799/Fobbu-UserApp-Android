@@ -157,8 +157,12 @@ class LoginActivity : AppCompatActivity(),ActivityView {
             if (number == mainPojo.getData().mobile_number)
                 startActivity(Intent(this@LoginActivity, DashboardActivity::class.java))
             else {
+
+
                 CommonClass(this@LoginActivity, this@LoginActivity)
                     .putString("Local_Number", "")
+                CommonClass(this@LoginActivity, this@LoginActivity)
+                    .putString("user_password", etPassword.text.toString())
                 CommonClass(this@LoginActivity, this@LoginActivity)
                     .putString("Local_Pin", "")
                 startActivity(Intent(this@LoginActivity, GeneratePINActivity::class.java))

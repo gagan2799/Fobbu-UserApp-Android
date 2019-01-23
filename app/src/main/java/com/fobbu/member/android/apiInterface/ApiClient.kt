@@ -1,12 +1,16 @@
 package com.fobbu.member.android.apiInterface
 
 import android.app.Activity
+import android.os.Build
+import android.support.annotation.RequiresApi
 import android.widget.Toast
 import com.fobbu.member.android.apiInterface.Handler.ResponseHandler
 import com.fobbu.member.android.modals.MainPojo
 import com.squareup.picasso.RequestHandler
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import org.json.JSONArray
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -370,13 +374,24 @@ class ApiClient(var activity: Activity) {
     }
 
 
-    // POST emergencycontacts API
+    @RequiresApi(Build.VERSION_CODES.KITKAT)
+// POST emergencycontacts API
     fun postEmergencyContacts (contactList:ArrayList<HashMap<String,String>>,token:String,responseHandler: ResponseHandler)
     {
-       val map=HashMap<String,Any>()
-           map["contacts"]=contactList
+       val jsonArray=JSONArray()
 
-        webServiceApi.postEmergencyContacts(contactList, token).enqueue(object :Callback<MainPojo>
+        val obj=JSONObject()
+
+        for (i in contactList.indices)
+        {
+            val jsonObj=JSONObject(contactList[i])
+            jsonArray.put(jsonObj)
+        }
+
+        println("json:::: $obj")
+
+
+        webServiceApi.postEmergencyContacts(jsonArray, token).enqueue(object :Callback<MainPojo>
         {
             override fun onFailure(call: Call<MainPojo>, t: Throwable)
             {
@@ -392,14 +407,58 @@ class ApiClient(var activity: Activity) {
     }
 
 
+    //  get Help API
+    fun getHelp(token:String, responseHandler: ResponseHandler)
+    {
+        webServiceApi.getHelp(token).enqueue(object :Callback<MainPojo>
+        {
+            override fun onFailure(call: Call<MainPojo>, t: Throwable)
+            {
+                responseHandler.onServerError("""Server Error: ${t.message}""")
+            }
+
+            override fun onResponse(call: Call<MainPojo>, response: Response<MainPojo>)
+            {
+                handleSuccess(response,responseHandler)
+            }
+
+        })
+    }
+
+
+    //change password API
+    fun changePassword(password:String,token: String,responseHandler: ResponseHandler)
+    {
+        val map=HashMap<String,Any>()
+
+        map["new_password"]=password
+
+        webServiceApi.changePassword(map,token).enqueue(object :Callback<MainPojo>
+        {
+            override fun onFailure(call: Call<MainPojo>, t: Throwable)
+            {
+                responseHandler.onServerError("""Server Error: ${t.message}""")
+            }
+
+            override fun onResponse(call: Call<MainPojo>, response: Response<MainPojo>)
+            {
+                handleSuccess(response,responseHandler)
+            }
+
+        })
+    }
+
+
+
     // method for handling the response
     fun handleSuccess(response:Response<MainPojo>,responseHandler: ResponseHandler)
     {
-        if (response.isSuccessful)
+
+        if (response.code()== 200)
         {
-            if (response.body()!= null)
+            if (response.isSuccessful)
             {
-                if (response.code()== 200)
+                if (response.body()!= null)
                 {
                     responseHandler.onSuccess(response.body()!!)
                 }

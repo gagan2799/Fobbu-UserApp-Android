@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+>
+
+    <include
+            layout="@layout/toolbar"
+            android:id="@+id/tbSecurity"
+    />
+
+    <TextView
+            android:id="@+id/tvHeaderSetting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/security_settings"
+            android:textSize="@dimen/textsize_normal"
+            android:textColor="@color/color_grey"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/tbSecurity"
+            android:layout_marginTop="5dp"/>
+
+
+    <LinearLayout
+            android:layout_marginTop="30dp"
+            android:layout_below="@id/tvHeaderSetting"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="13dp"
+            android:id="@+id/llChangePassSecurity"
+            android:background="@color/white"
+            android:orientation="horizontal">
+
+        <ImageView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                android:src="@drawable/padlock"/>
+
+        <TextView
+                android:layout_width="0dp"
+                android:layout_weight="7"
+                android:gravity="center_vertical"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/textsize_medium"
+                android:textColor="@color/color_grey"
+                android:text="@string/change_pass"/>
+
+    </LinearLayout>
+    <LinearLayout
+            android:layout_below="@+id/llChangePassSecurity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="13dp"
+            android:layout_marginTop="10dp"
+            android:id="@+id/llPinSecurity"
+            android:background="@color/white"
+            android:orientation="horizontal">
+
+        <ImageView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                android:src="@drawable/password"/>
+
+        <TextView
+                android:layout_width="0dp"
+                android:layout_weight="7"
+                android:gravity="center_vertical"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/textsize_medium"
+                android:textColor="@color/color_grey"
+                android:text="@string/change_pin"/>
+
+    </LinearLayout>
+    <LinearLayout
+            android:layout_below="@+id/llPinSecurity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="13dp"
+            android:layout_marginTop="10dp"
+            android:id="@+id/llFaceIdSecurity"
+            android:background="@color/white"
+            android:orientation="horizontal">
+
+        <ImageView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                android:src="@drawable/face_id"/>
+
+        <TextView
+                android:layout_width="0dp"
+                android:layout_weight="7"
+                android:gravity="center_vertical"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/textsize_medium"
+                android:textColor="@color/color_grey"
+                android:text="@string/face_id_settings"/>
+
+    </LinearLayout>
+    <LinearLayout
+            android:layout_below="@+id/llFaceIdSecurity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="13dp"
+            android:layout_marginTop="10dp"
+            android:id="@+id/llFingerPrintSecurity"
+            android:background="@color/white"
+            android:orientation="horizontal">
+
+        <ImageView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                android:src="@drawable/fingerprints"/>
+
+        <TextView
+                android:layout_width="0dp"
+                android:layout_weight="7"
+                android:gravity="center_vertical"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/textsize_medium"
+                android:textColor="@color/color_grey"
+                android:text="@string/fingerprint_settings"/>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

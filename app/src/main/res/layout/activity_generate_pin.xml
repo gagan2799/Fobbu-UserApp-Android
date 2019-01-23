@@ -48,181 +48,279 @@
             android:id="@+id/etMobile"
             android:padding="10dp"/>
 
-    <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/etMobile"
-            android:layout_marginTop="25dp"
-            android:gravity="center"
-            android:text="@string/new_pin"
-            android:layout_marginRight="@dimen/margin_left"
-            android:layout_marginLeft="@dimen/margin_left"
-            android:textColor="@color/view_grey"
-            android:textSize="@dimen/textsize_normal"
-            android:id="@+id/tvNewPin"
-            />
 
     <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tvNewPin"
-            android:layout_marginStart="50dp"
-            android:id="@+id/llPIN"
-            android:layout_marginEnd="50dp"
-            android:orientation="horizontal">
+            android:layout_below="@+id/etMobile">
 
-
-        <EditText
-                android:id="@+id/edPinOne"
-                android:layout_width="0dp"
+        <TextView
+                android:visibility="gone"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"
-                android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:inputType="numberPassword"
-                android:imeOptions="actionNext"
-                android:maxLength="1"
-                android:singleLine="true"
-                android:background="@drawable/half_recatangle"
-                android:textColor="@color/black"
-                android:textSize="@dimen/login_textsize_medium"/>
+                android:layout_marginTop="25dp"
+                android:gravity="center"
+                android:text="@string/current_pin"
+                android:layout_marginRight="@dimen/margin_left"
+                android:layout_marginLeft="@dimen/margin_left"
+                android:textColor="@color/view_grey"
+                android:textSize="@dimen/textsize_normal"
+                android:id="@+id/tvCurrnetPin"
+        />
 
-        <EditText
-                android:id="@+id/edPinTwo"
-                android:layout_width="0dp"
+        <LinearLayout
+                android:visibility="gone"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:imeOptions="actionNext"
-                android:inputType="numberPassword"
-                android:maxLength="1"
-                android:singleLine="true"
-                android:textColor="@color/black"
-                android:textSize="@dimen/login_textsize_medium"
-                android:background="@drawable/half_recatangle"/>
+                android:layout_marginStart="50dp"
+                android:id="@+id/llCurrentPIN"
+                android:layout_marginEnd="50dp"
+                android:orientation="horizontal">
 
-        <EditText
-                android:id="@+id/edPinThree"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:imeOptions="actionNext"
-                android:inputType="numberPassword"
-                android:maxLength="1"
-                android:singleLine="true"
-                android:textColor="@color/black"
-                android:textSize="@dimen/login_textsize_medium"
-                android:background="@drawable/half_recatangle"/>
 
-        <EditText
-                android:id="@+id/edPinFour"
-                android:layout_width="0dp"
+            <EditText
+                    android:id="@+id/edCurrentPinOne"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:inputType="numberPassword"
+                    android:imeOptions="actionNext"
+                    android:maxLength="1"
+                    android:singleLine="true"
+                    android:background="@drawable/half_recatangle"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/login_textsize_medium"/>
+
+            <EditText
+                    android:id="@+id/edCurrentPinTwo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:imeOptions="actionNext"
+                    android:inputType="numberPassword"
+                    android:maxLength="1"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/login_textsize_medium"
+                    android:background="@drawable/half_recatangle"/>
+
+            <EditText
+                    android:id="@+id/edCurrentPinThree"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:imeOptions="actionNext"
+                    android:inputType="numberPassword"
+                    android:maxLength="1"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/login_textsize_medium"
+                    android:background="@drawable/half_recatangle"/>
+
+            <EditText
+                    android:id="@+id/edCurrentPinFour"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:inputType="numberPassword"
+                    android:maxLength="1"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/login_textsize_medium"
+                    android:background="@drawable/half_recatangle"/>
+
+        </LinearLayout>
+
+
+        <TextView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_weight="1"
-                  android:gravity="center_horizontal"
-                android:inputType="numberPassword"
-                android:maxLength="1"
-                android:singleLine="true"
-                android:textColor="@color/black"
-                android:textSize="@dimen/login_textsize_medium"
-                android:background="@drawable/half_recatangle"/>
+                android:layout_below="@+id/etMobile"
+                android:layout_marginTop="25dp"
+                android:gravity="center"
+                android:text="@string/new_pin"
+                android:layout_marginRight="@dimen/margin_left"
+                android:layout_marginLeft="@dimen/margin_left"
+                android:textColor="@color/view_grey"
+                android:textSize="@dimen/textsize_normal"
+                android:id="@+id/tvNewPin"
+        />
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvNewPin"
+                android:layout_marginStart="50dp"
+                android:id="@+id/llPIN"
+                android:layout_marginEnd="50dp"
+                android:orientation="horizontal">
+
+
+            <EditText
+                    android:id="@+id/edPinOne"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:inputType="numberPassword"
+                    android:imeOptions="actionNext"
+                    android:maxLength="1"
+                    android:singleLine="true"
+                    android:background="@drawable/half_recatangle"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/login_textsize_medium"/>
+
+            <EditText
+                    android:id="@+id/edPinTwo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:imeOptions="actionNext"
+                    android:inputType="numberPassword"
+                    android:maxLength="1"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/login_textsize_medium"
+                    android:background="@drawable/half_recatangle"/>
+
+            <EditText
+                    android:id="@+id/edPinThree"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:imeOptions="actionNext"
+                    android:inputType="numberPassword"
+                    android:maxLength="1"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/login_textsize_medium"
+                    android:background="@drawable/half_recatangle"/>
+
+            <EditText
+                    android:id="@+id/edPinFour"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:inputType="numberPassword"
+                    android:maxLength="1"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/login_textsize_medium"
+                    android:background="@drawable/half_recatangle"/>
+
+        </LinearLayout>
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/llPIN"
+                android:layout_marginTop="25dp"
+                android:gravity="center"
+                android:text="@string/confirm_pin"
+                android:layout_marginRight="@dimen/margin_left"
+                android:layout_marginLeft="@dimen/margin_left"
+                android:textColor="@color/view_grey"
+                android:textSize="@dimen/textsize_normal"
+                android:id="@+id/tvConfirmPin"
+        />
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvConfirmPin"
+                android:layout_marginStart="50dp"
+                android:id="@+id/llPIN1"
+                android:layout_marginEnd="50dp"
+                android:orientation="horizontal">
+
+
+            <EditText
+                    android:id="@+id/edPinFive"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+
+                    android:gravity="center_horizontal"
+                    android:inputType="numberPassword"
+                    android:imeOptions="actionNext"
+                    android:maxLength="1"
+                    android:singleLine="true"
+                    android:background="@drawable/half_recatangle"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/login_textsize_medium"/>
+
+            <EditText
+                    android:id="@+id/edPinSix"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:imeOptions="actionNext"
+                    android:inputType="numberPassword"
+                    android:maxLength="1"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/login_textsize_medium"
+                    android:background="@drawable/half_recatangle"/>
+
+            <EditText
+                    android:id="@+id/edPinSeven"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:imeOptions="actionNext"
+                    android:inputType="numberPassword"
+                    android:maxLength="1"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/login_textsize_medium"
+                    android:background="@drawable/half_recatangle"/>
+
+            <EditText
+                    android:id="@+id/edPinEight"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
+                    android:imeOptions="actionDone"
+                    android:gravity="center_horizontal"
+                    android:inputType="numberPassword"
+                    android:maxLength="1"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/login_textsize_medium"
+                    android:background="@drawable/half_recatangle"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 
-    <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/llPIN"
-            android:layout_marginTop="25dp"
-            android:gravity="center"
-            android:text="@string/confirm_pin"
-            android:layout_marginRight="@dimen/margin_left"
-            android:layout_marginLeft="@dimen/margin_left"
-            android:textColor="@color/view_grey"
-            android:textSize="@dimen/textsize_normal"
-            android:id="@+id/tvConfirmPin"
-    />
-
-    <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tvConfirmPin"
-            android:layout_marginStart="50dp"
-            android:id="@+id/llPIN1"
-            android:layout_marginEnd="50dp"
-            android:orientation="horizontal">
-
-
-        <EditText
-                android:id="@+id/edPinFive"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"
-                android:layout_weight="1"
-
-                android:gravity="center_horizontal"
-                android:inputType="numberPassword"
-                android:imeOptions="actionNext"
-                android:maxLength="1"
-                android:singleLine="true"
-                android:background="@drawable/half_recatangle"
-                android:textColor="@color/black"
-                android:textSize="@dimen/login_textsize_medium"/>
-
-        <EditText
-                android:id="@+id/edPinSix"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:imeOptions="actionNext"
-                android:inputType="numberPassword"
-                android:maxLength="1"
-                android:singleLine="true"
-                android:textColor="@color/black"
-                android:textSize="@dimen/login_textsize_medium"
-                android:background="@drawable/half_recatangle"/>
-
-        <EditText
-                android:id="@+id/edPinSeven"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:imeOptions="actionNext"
-                android:inputType="numberPassword"
-                android:maxLength="1"
-                android:singleLine="true"
-                android:textColor="@color/black"
-                android:textSize="@dimen/login_textsize_medium"
-                android:background="@drawable/half_recatangle"/>
-
-        <EditText
-                android:id="@+id/edPinEight"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_weight="1"
-                android:imeOptions="actionDone"
-                android:gravity="center_horizontal"
-                android:inputType="numberPassword"
-                android:maxLength="1"
-                android:singleLine="true"
-                android:textColor="@color/black"
-                android:textSize="@dimen/login_textsize_medium"
-                android:background="@drawable/half_recatangle"/>
-
-    </LinearLayout>
 
 
 

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:animateLayoutChanges="true"
+        android:layout_height="match_parent"
+        tools:context=".activities.help.HelpActivity">
+
+    <include
+            layout="@layout/toolbar"
+            android:id="@+id/tbHelp"
+    />
+
+    <TextView
+            android:id="@+id/tvHeaderHelp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/need_help"
+            android:textSize="@dimen/textsize_normal"
+            android:textColor="@color/color_grey"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/tbHelp"
+            android:layout_marginTop="5dp"/>
+
+    <TextView
+            android:id="@+id/tvSubHeaderHelp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tell_us_what_you_are_looking_for"
+            android:textSize="@dimen/textsize_medium"
+            android:textColor="@color/color_grey"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/tvHeaderHelp"
+            android:layout_marginTop="5dp"/>
+
+    <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvHelp"
+            android:layout_below="@+id/tvSubHeaderHelp"
+            android:layout_marginTop="40dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+
+
+
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:id="@+id/rlLoader"
+            android:visibility="gone"
+            android:layout_height="match_parent">
+
+        <com.wang.avi.AVLoadingIndicatorView
+                android:id="@+id/avi"
+                style="@style/AVLoadingIndicatorView.Large"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                android:layout_centerInParent="true"
+                app:indicatorColor="@color/colorPrimary"
+                app:indicatorName="BallScaleMultipleIndicator" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

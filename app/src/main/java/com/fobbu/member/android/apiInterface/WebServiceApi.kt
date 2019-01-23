@@ -136,8 +136,22 @@ interface WebServiceApi {
                   @Query("page") pageCount:String,
                   @Header("x-access-token") token:String):Call<MainPojo>
 
+    /*@FormUrlEncoded
     @POST("users/emergencycontacts")
-    fun postEmergencyContacts(@Body mapData: HashMap<String,Any>,
+    fun postEmergencyContacts(@Field("contacts[]") contactList:ArrayList<HashMap<String,String>>,
                               @Header("x-access-token") token: String):Call<MainPojo>
+ */
+
+    @POST("users/emergencycontacts")
+    fun postEmergencyContacts(@Body map:JSONArray,
+                              @Header("x-access-token") token: String):Call<MainPojo>
+
+    @GET("users/get_helps")
+fun  getHelp(@Header("x-access-token") token: String):Call<MainPojo>
+
+    @POST("users/change_password")
+fun changePassword(@Body map:HashMap<String,Any>
+        ,@Header("x-access-token") token: String):Call<MainPojo>
+
 
 }

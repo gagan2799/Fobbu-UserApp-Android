@@ -18,6 +18,7 @@
             android:layout_height="wrap_content"
             android:text="@string/add_emergency_contacts"
             android:textSize="@dimen/textsize_normal"
+            android:textColor="@color/color_grey"
             android:layout_centerHorizontal="true"
             android:layout_below="@+id/tbEmergency"
             android:layout_marginTop="5dp"/>
@@ -43,7 +44,7 @@
                     android:id="@+id/etFullNameEmergency"
                     android:ellipsize="start"
                     android:gravity="center"
-                    android:textColor="@color/view_grey"
+                    android:textColor="@color/color_grey"
                     android:textSize="@dimen/textsize_medium"
                     android:padding="10dp"
                     android:layout_gravity="center_horizontal"
@@ -62,7 +63,7 @@
                     android:gravity="center"
                     android:inputType="number"
                     android:maxLength="10"
-                    android:textColor="@color/view_grey"
+                    android:textColor="@color/color_grey"
                     android:layout_marginTop="10dp"
                     android:textSize="@dimen/textsize_medium"
                     android:layout_marginBottom="10dp"
@@ -111,7 +112,7 @@
                     android:layout_marginTop="20dp"
                     android:id="@+id/et2ndFullNameEmergency"
                     android:ellipsize="start"
-                    android:textColor="@color/view_grey"
+                    android:textColor="@color/color_grey"
                     android:gravity="center"
                     android:textSize="@dimen/textsize_medium"
                     android:padding="10dp"
@@ -129,7 +130,7 @@
                     android:ellipsize="start"
                     android:padding="10dp"
                     android:gravity="center"
-                    android:textColor="@color/view_grey"
+                    android:textColor="@color/color_grey"
                     android:layout_marginTop="10dp"
                     android:textSize="@dimen/textsize_medium"
                     android:layout_marginBottom="10dp"
@@ -181,7 +182,7 @@
     <RelativeLayout
             android:background="@color/white"
             android:id="@+id/rlCustomTabsEmergency"
-            android:padding="10dp"
+            android:padding="8dp"
             android:orientation="horizontal"
             android:layout_marginTop="16dp"
             android:layout_below="@+id/tvHeaderEmergency"
@@ -190,8 +191,8 @@
     >
 
         <LinearLayout
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="16dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="50dp"
                 android:id="@+id/llAddContact"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -240,6 +241,13 @@
 
         </LinearLayout>
 
+        <ImageView
+                android:layout_width="wrap_content"
+                android:src="@drawable/list"
+                android:layout_alignParentRight="true"
+                android:id="@+id/ivList"
+                android:layout_centerVertical="true"
+                android:layout_height="wrap_content"/>
 
 
 

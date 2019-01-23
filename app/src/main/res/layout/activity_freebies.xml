@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+>
+
+    <include
+            layout="@layout/toolbar"
+            android:id="@+id/tbFreebies"
+    />
+
+    <TextView
+            android:id="@+id/tvHeaderFreebies"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/freebies"
+            android:textColor="@color/color_grey"
+            android:textSize="@dimen/textsize_normal"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/tbFreebies"
+            android:layout_marginTop="5dp"/>
+
+
+    <android.support.v4.widget.NestedScrollView
+            android:fillViewport="true"
+            android:layout_marginTop="40dp"
+            android:layout_below="@+id/tvHeaderFreebies"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            <ImageView
+                    android:id="@+id/ivFreebies"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/car_wash"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+            />
+
+            <TextView
+                    android:id="@+id/tvFreeWash"
+                    android:layout_width="wrap_content"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:layout_height="wrap_content"
+                    android:text="@string/free_vehicle_wash"
+                    android:textSize="@dimen/textsize_normal"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/ivFreebies"
+                    android:layout_marginTop="35dp"/>
+
+            <TextView
+                    android:layout_marginLeft="90dp"
+                    android:layout_marginRight="90dp"
+                    android:id="@+id/tvInfoFreebies"
+                    android:layout_width="wrap_content"
+                    android:textColor="@color/color_grey"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/invite_friends_to_fobbu_once_they_sign_up_and_use_any_service_you_get_a_free_vehicle_wash"
+                    android:textSize="@dimen/textsize_medium"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/tvFreeWash"
+                    android:layout_marginTop="10dp"/>
+            <TextView
+                    android:id="@+id/tvLearnMoreFreebies"
+                    android:layout_width="wrap_content"
+                    android:textColor="@color/red"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/learn_more"
+                    android:textSize="@dimen/textsize_medium"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/tvInfoFreebies"
+                    android:layout_marginTop="10dp"/>
+
+
+            <TextView
+                    android:layout_margin="16dp"
+                    android:layout_alignParentBottom="true"
+                    android:text="@string/invite_friends"
+                    android:padding="13dp"
+                    android:id="@+id/tvInviteFriendsFreebies"
+                    android:textColor="@color/white"
+                    android:gravity="center_horizontal"
+                    android:background="@drawable/rounded_blue_background"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+
+
+        </RelativeLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+
+
+
+
+</RelativeLayout>

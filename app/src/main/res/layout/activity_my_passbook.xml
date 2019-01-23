@@ -20,6 +20,7 @@
                 android:visibility="gone"/>
 
         <TextView
+                android:textColor="@color/color_grey"
                 android:id="@+id/tvHeaderPassbook"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

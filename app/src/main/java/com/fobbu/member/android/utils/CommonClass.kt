@@ -17,6 +17,8 @@ import android.support.v4.content.ContextCompat.startActivity
 import android.support.v4.view.MenuItemCompat
 import android.support.v7.widget.Toolbar
 import android.view.*
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.RelativeLayout
 import android.widget.Toast
 import com.fobbu.member.android.R
@@ -345,5 +347,13 @@ class CommonClass(activity1: Activity, context1: Context) {
         }*/
     }
 
+
+    // Method for setting  Animation
+    fun setAnimation(customAnimation: Int, view: View, activity: Activity)
+    {
+        val animation: Animation = AnimationUtils.loadAnimation(activity, customAnimation)
+
+        view.startAnimation(animation)
+    }
 
 }
