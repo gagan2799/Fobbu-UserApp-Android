@@ -378,9 +378,7 @@ class ApiClient(var activity: Activity) {
 // POST emergencycontacts API
     fun postEmergencyContacts (contactList:ArrayList<HashMap<String,String>>,token:String,responseHandler: ResponseHandler)
     {
-       val jsonArray=JSONArray()
-
-        val obj=JSONObject()
+        val jsonArray=JSONArray()
 
         for (i in contactList.indices)
         {
@@ -388,10 +386,10 @@ class ApiClient(var activity: Activity) {
             jsonArray.put(jsonObj)
         }
 
-        println("json:::: $obj")
+        val haspmap = HashMap<String,String>()
+        haspmap["contacts"]=jsonArray.toString()
 
-
-        webServiceApi.postEmergencyContacts(jsonArray, token).enqueue(object :Callback<MainPojo>
+        webServiceApi.postEmergencyContacts(haspmap, token).enqueue(object :Callback<MainPojo>
         {
             override fun onFailure(call: Call<MainPojo>, t: Throwable)
             {
@@ -449,6 +447,68 @@ class ApiClient(var activity: Activity) {
     }
 
 
+    // edit contacts API
+    fun editContacts(dataList:HashMap<String,Any>,token:String,id:String,responseHandler: ResponseHandler)
+    {
+        val map=HashMap<String,Any>()
+
+        val obj =JSONObject(dataList)
+
+        map["contact_id"]=id
+
+        map["contact"]=obj.toString()
+
+        webServiceApi.editContacts(map,token).enqueue(object :Callback<MainPojo>
+        {
+            override fun onFailure(call: Call<MainPojo>, t: Throwable)
+            {
+                responseHandler.onServerError("""Server Error: ${t.message}""")
+            }
+
+            override fun onResponse(call: Call<MainPojo>, response: Response<MainPojo>)
+            {
+                handleSuccess(response,responseHandler)
+            }
+        })
+    }
+
+
+    //getContacts API
+    fun getContact(token:String,responseHandler: ResponseHandler)
+    {
+        webServiceApi.getContacts(token).enqueue(object :Callback<MainPojo>
+        {
+            override fun onFailure(call: Call<MainPojo>, t: Throwable) {
+                responseHandler.onServerError("""Server Error: ${t.message}""")
+            }
+
+            override fun onResponse(call: Call<MainPojo>, response: Response<MainPojo>) {
+                handleSuccess(response,responseHandler)
+            }
+
+        })
+    }
+
+    // delete Contacts
+    fun deleteContact(contactId:String, token:String,responseHandler: ResponseHandler)
+    {
+        val map=HashMap<String,String>()
+
+        map["contact_id"]=contactId
+
+        webServiceApi.deleteContacts(token,map).enqueue(object :Callback<MainPojo>
+        {
+            override fun onFailure(call: Call<MainPojo>, t: Throwable) {
+                responseHandler.onServerError("""Server Error: ${t.message}""")
+            }
+
+            override fun onResponse(call: Call<MainPojo>, response: Response<MainPojo>) {
+                handleSuccess(response,responseHandler)
+            }
+
+        })
+
+    }
 
     // method for handling the response
     fun handleSuccess(response:Response<MainPojo>,responseHandler: ResponseHandler)

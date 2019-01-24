@@ -2,6 +2,7 @@ package com.fobbu.member.android.utils
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.AlertDialog
 import android.app.Dialog
 import android.app.NotificationManager
 import android.content.Context
@@ -317,6 +318,15 @@ class CommonClass(activity1: Activity, context1: Context) {
             e.printStackTrace()
         }
 
+    }
+
+    fun showDailog(activity: Activity)
+    {
+        val builder= AlertDialog.Builder(activity)
+
+        builder.setTitle("Delete")
+
+        builder.setMessage("Do you want to delete this contact from the list?")
     }
 
 

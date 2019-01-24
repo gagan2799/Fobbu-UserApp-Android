@@ -2,7 +2,7 @@
 <android.support.v7.widget.Toolbar android:id="@+id/searchtoolbar"
                                    xmlns:app="http://schemas.android.com/apk/res-auto"
                                    xmlns:android="http://schemas.android.com/apk/res/android"
-                                   app:collapseIcon="@drawable/back_button"
+                                   app:collapseIcon="@drawable/back_button_white"
                                    app:titleTextColor="@color/colorPrimary"
                                    android:layout_alignParentTop="true"
                                    android:layout_width="match_parent"

@@ -102,39 +102,69 @@
 
         <activity
                 android:name=".activities.rsaModule.RSARequestCancelActivity"
+                android:screenOrientation="portrait"
                 android:theme="@style/Transparent">
         </activity>
-        <activity android:name=".activities.rsaModule.CancellationSuccessMessageActivity">
+        <activity
+                android:name=".activities.rsaModule.CancellationSuccessMessageActivity"
+                android:screenOrientation="portrait">
         </activity>
         <activity
                 android:name=".activities.paymentModule.WorkSummaryActivity"
+                android:screenOrientation="portrait"
                 android:windowSoftInputMode="adjustResize">
         </activity>
-        <activity android:name=".activities.paymentModule.PaymentModeActivity">
+        <activity
+                android:name=".activities.paymentModule.PaymentModeActivity"
+                android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".activities.paymentModule.GetSetGoActivity">
+        <activity
+                android:name=".activities.paymentModule.GetSetGoActivity"
+                android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".activities.orderAndPassbookModule.MyOrder.MyOrdersActivity">
+        <activity
+                android:name=".activities.orderAndPassbookModule.MyOrder.MyOrdersActivity"
+                android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".activities.orderAndPassbookModule.passbook.MyPassbookActivity">
+        <activity
+                android:name=".activities.orderAndPassbookModule.passbook.MyPassbookActivity"
+                android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".activities.orderAndPassbookModule.OrderDetail.OrderDetailActivity">
+        <activity
+                android:name=".activities.orderAndPassbookModule.OrderDetail.OrderDetailActivity"
+                android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".activities.orderAndPassbookModule.OrderDetail.adapter.MainActivity">
+        <activity
+                android:name=".activities.orderAndPassbookModule.passbookDetail.PassbookDetailActivity"
+                android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".activities.orderAndPassbookModule.passbookDetail.PassbookDetailActivity">
+        <activity
+                android:name=".activities.emergencyContactsModule.emergencyContacts.EmergencyContactsActivity"
+                android:screenOrientation="portrait"
+                android:windowSoftInputMode="adjustPan">
         </activity>
-        <activity android:name=".activities.emergencyContacts.EmergencyContactsActivity">
+        <activity
+                android:name=".activities.paymentSettings.PaymentSettingActivity"
+                android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".activities.paymentSettings.PaymentSettingActivity">
+        <activity
+                android:name=".activities.freebies.FreebiesActivity"
+                android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".activities.freebies.FreebiesActivity">
+        <activity
+                android:name=".activities.help.HelpActivity"
+                android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".activities.help.HelpActivity">
+        <activity
+                android:name=".activities.securitySetting.SecuritySettingActivity"
+                android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".activities.securitySetting.SecuritySettingActivity">
+        <activity
+                android:name=".activities.changePassword.ChangePasswordActivity"
+                android:screenOrientation="portrait">
         </activity>
-        <activity android:name="com.fobbu.member.android.activities.changePassword.ChangePasswordActivity">
+        <activity android:name=".activities.emergencyContactsModule.contactList.ContactListActicvity"
+                  android:screenOrientation="portrait">
         </activity>
     </application>
 

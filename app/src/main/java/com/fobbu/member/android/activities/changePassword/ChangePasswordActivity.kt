@@ -51,13 +51,15 @@ class ChangePasswordActivity : AppCompatActivity(),ActivityView
         tvReset.setOnClickListener {
             when
             {
+                (etCurrentPasswordChange.text.toString()!=commonClass.getString("user_password"))-> Toast.makeText(this,"Please provide correct current password.", Toast.LENGTH_SHORT).show()
+
                 etPasswordChange.text.isEmpty()->Toast.makeText(this,"Please provide password.", Toast.LENGTH_SHORT).show()
 
                 etConfirmPass.text.isEmpty()->Toast.makeText(this,"Please confirm the password.", Toast.LENGTH_SHORT).show()
 
-                (etPasswordChange.text.toString()!= etConfirmPass.text.toString())->Toast.makeText(this,"Password did not match. Please retry.", Toast.LENGTH_SHORT).show()
+                (etPasswordChange.text.toString()== etCurrentPasswordChange.text.toString())->Toast.makeText(this,"The new password is same as the old one.Please try another password.", Toast.LENGTH_SHORT).show()
 
-                (etCurrentPasswordChange.text.toString()!=commonClass.getString("user_password"))-> Toast.makeText(this,"Please provide correct current password.", Toast.LENGTH_SHORT).show()
+                (etPasswordChange.text.toString()!= etConfirmPass.text.toString())->Toast.makeText(this,"Password did not match. Please retry.", Toast.LENGTH_SHORT).show()
 
                 else->
                     changePassword()

@@ -81,18 +81,20 @@
 
 
             <TextView
-                    android:layout_margin="16dp"
-                    android:layout_alignParentBottom="true"
-                    android:text="@string/invite_friends"
-                    android:padding="13dp"
-                    android:id="@+id/tvInviteFriendsFreebies"
-                    android:textColor="@color/white"
-                    android:gravity="center_horizontal"
-                    android:background="@drawable/rounded_blue_background"
+                    android:id="@+id/tvInviteFriends"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-
-
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/invite_friends"
+                    android:textSize="@dimen/login_textsize_medium"
+                    android:singleLine="true"
+                    android:gravity="center"
+                    android:padding="@dimen/red_rounded_rectangle_padding"
+                    android:layout_margin="20dp"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:layout_alignParentBottom="true"
+                    android:background="@drawable/rounded_blue_background"
+                    android:textColor="#ffffff" />
 
         </RelativeLayout>
 

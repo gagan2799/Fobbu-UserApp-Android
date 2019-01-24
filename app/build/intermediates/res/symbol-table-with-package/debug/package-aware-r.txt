@@ -1302,6 +1302,7 @@ drawable arrow_drawer
 drawable avd_hide_password
 drawable avd_show_password
 drawable back_button
+drawable back_button_white
 drawable bank
 drawable battery_saving
 drawable blue_eadio_unfilled
@@ -1963,6 +1964,8 @@ id et2ndMobileEmergency
 id etBrand
 id etConfirmPass
 id etCurrentPasswordChange
+id etEditMobileEmergency
+id etEditNameEmergency
 id etEmail
 id etFullName
 id etFullNameEmergency
@@ -2044,7 +2047,9 @@ id ivBackButton
 id ivBike
 id ivCar
 id ivCenter
+id ivCheck
 id ivCheckAll
+id ivContactList
 id ivCrossDrawer
 id ivCrossRSA
 id ivDeals
@@ -2127,9 +2132,11 @@ id list_item
 id live_stream_indicator
 id live_stream_seek_bar
 id llAddContact
+id llAddContactComplete
 id llAddMoneyPayment
 id llAddNewVehicle
 id llAllOrder
+id llAnswer
 id llAssistance
 id llBottom
 id llBottomBar
@@ -2137,9 +2144,11 @@ id llCarFuelDieselThree
 id llCarFuelPetrolThree
 id llCarTwo
 id llChangePassSecurity
+id llContainer
 id llCurrentPIN
 id llCustomDatePB
 id llEditContact
+id llEditContactComplete
 id llEmergenyBottomBar
 id llFaceIdSecurity
 id llFindFobbu
@@ -2274,6 +2283,7 @@ id rlBuildingWorkSummary
 id rlCodeValidated
 id rlCustomTabsEmergency
 id rlCustomTabsOthers
+id rlEditRelationShipEmergency
 id rlInformation
 id rlLayout
 id rlLoader
@@ -2293,6 +2303,7 @@ id rlTopDrawer
 id rlTrack
 id rlVehicleAccessed
 id rlWallet
+id rvContacts
 id rvHelp
 id rvOrder
 id rvPassDetail
@@ -2337,6 +2348,7 @@ id snap
 id snapMargins
 id spacer
 id spinner2ndEmergency
+id spinnerEditEmergency
 id spinnerEmergency
 id spinnerSelectGender
 id split_action_bar
@@ -2361,6 +2373,7 @@ id tag_transition_group
 id tag_unhandled_key_event_manager
 id tag_unhandled_key_listeners
 id tbChangePass
+id tbConactsList
 id tbEmergency
 id tbFreebies
 id tbHelp
@@ -2448,6 +2461,7 @@ id tvDefault
 id tvDoItLater
 id tvEdit
 id tvEditContacts
+id tvEditRelationship
 id tvEndDatePB
 id tvFindFobbu
 id tvFlatBedPrice
@@ -2458,6 +2472,7 @@ id tvFreeWash
 id tvFreebies
 id tvGender
 id tvGenerate
+id tvHeaderContactList
 id tvHeaderEmergency
 id tvHeaderFreebies
 id tvHeaderHelp
@@ -2475,7 +2490,7 @@ id tvHelpAnswer
 id tvHelpQuestion
 id tvInCase
 id tvInfoFreebies
-id tvInviteFriendsFreebies
+id tvInviteFriends
 id tvLearnMoreFreebies
 id tvLiftingPrice
 id tvLiftingText
@@ -2487,6 +2502,7 @@ id tvMembership
 id tvMembershipIdHome
 id tvMyOrders
 id tvMyPassbook
+id tvNOdataOrder
 id tvName
 id tvNew
 id tvNewPin
@@ -2660,6 +2676,7 @@ layout activity_add_edit_vehicle
 layout activity_cancel_rsa
 layout activity_cancellation_message
 layout activity_change_password
+layout activity_contact_list
 layout activity_dashboard
 layout activity_emergency_contacts
 layout activity_forgot
@@ -2710,6 +2727,7 @@ layout fragment_builder_confirm
 layout fragment_home
 layout fragment_rsa
 layout fragment_rsa_live
+layout inflate_contactlist
 layout inflate_drawer
 layout inflate_expandable_layout
 layout inflate_message_pop_up
@@ -2820,6 +2838,7 @@ string add_year
 string already_registered
 string always_share_with_my_emergency_contacts
 string amount
+string answer
 string app_name
 string appbar_scrolling_view_behavior
 string are_you_sure
@@ -2918,6 +2937,7 @@ string continue_
 string correct_email_error
 string current_password
 string current_pin
+string currently_no_data_is_available
 string custom_date
 string customized_only_for_u
 string dead_battery_worries
@@ -2929,6 +2949,7 @@ string double_trouble
 string download_statement
 string earn_freebies
 string edit
+string edit_emergency_contacts
 string edit_vehicle
 string email_id
 string empty_tanks_worries
@@ -3089,6 +3110,7 @@ string proceed_to_payment
 string project_id
 string provide_review
 string quantity_of_fuel_d
+string question
 string rate_review
 string recent_v
 string relationship
@@ -3200,6 +3222,7 @@ string working_spare_tyre
 string write_a_review
 string year_of_make
 string yes
+string your_contacts
 string your_membership_id
 string your_review_saved
 string your_review_was_saved_share_it_with_your_friens

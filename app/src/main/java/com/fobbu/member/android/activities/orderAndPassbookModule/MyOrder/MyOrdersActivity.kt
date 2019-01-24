@@ -66,7 +66,7 @@ class MyOrdersActivity : AppCompatActivity(),ActivityView
     }
     
 
-    // funcion for handling all the views of the class
+    // function for handling all the views of the class
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
     private fun initView()
     {
@@ -450,8 +450,21 @@ class MyOrdersActivity : AppCompatActivity(),ActivityView
     if (mainPojo.success=="true")
     {
         dataList=mainPojo.list
+        if (dataList.size>0)
+        {
+            rvOrder.visibility=View.VISIBLE
 
-        setUpRecycler()
+            tvNOdataOrder.visibility=View.GONE
+
+            setUpRecycler()
+        }
+        else
+        {
+            rvOrder.visibility=View.GONE
+
+            tvNOdataOrder.visibility=View.VISIBLE
+        }
+
     }
         else{
         println("message:: ${mainPojo.message}")

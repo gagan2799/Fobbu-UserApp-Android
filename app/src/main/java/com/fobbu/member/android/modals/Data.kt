@@ -2,6 +2,8 @@ package com.fobbu.member.android.modals
 
 class Data
 {
+    var name=""
+    var relationship=""
     var gender: String = ""
     var user_type: String = ""
     var device_type: String = ""

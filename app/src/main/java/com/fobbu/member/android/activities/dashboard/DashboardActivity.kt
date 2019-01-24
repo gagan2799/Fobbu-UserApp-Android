@@ -19,7 +19,7 @@ import android.widget.Toast
 import com.fobbu.member.android.R
 import com.fobbu.member.android.activities.dashboard.presenter.DashboardHandler
 import com.fobbu.member.android.activities.dashboard.presenter.DashboardPresenter
-import com.fobbu.member.android.activities.emergencyContacts.EmergencyContactsActivity
+import com.fobbu.member.android.activities.emergencyContactsModule.emergencyContacts.EmergencyContactsActivity
 import com.fobbu.member.android.activities.freebies.FreebiesActivity
 import com.fobbu.member.android.activities.help.HelpActivity
 import com.fobbu.member.android.activities.orderAndPassbookModule.MyOrder.MyOrdersActivity

@@ -23,162 +23,8 @@
             android:layout_below="@+id/tbEmergency"
             android:layout_marginTop="5dp"/>
 
-    <android.support.v4.widget.NestedScrollView
-            android:layout_above="@+id/llEmergenyBottomBar"
-            android:layout_below="@+id/rlCustomTabsEmergency"
-            android:layout_width="match_parent"
-            android:layout_centerInParent="true"
-            android:layout_height="wrap_content"
-    >
-
-        <LinearLayout
-                android:layout_marginTop="20dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-            // layout for the  1st person
-            <EditText
-                    android:id="@+id/etFullNameEmergency"
-                    android:ellipsize="start"
-                    android:gravity="center"
-                    android:textColor="@color/color_grey"
-                    android:textSize="@dimen/textsize_medium"
-                    android:padding="10dp"
-                    android:layout_gravity="center_horizontal"
-                    android:background="@drawable/et_emergency_drawable"
-                    android:hint="@string/full_name"
-                    android:textColorHint="@color/view_grey"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
 
 
-
-            <EditText
-                    android:id="@+id/etMobileEmergency"
-                    android:ellipsize="start"
-                    android:padding="10dp"
-                    android:gravity="center"
-                    android:inputType="number"
-                    android:maxLength="10"
-                    android:textColor="@color/color_grey"
-                    android:layout_marginTop="10dp"
-                    android:textSize="@dimen/textsize_medium"
-                    android:layout_marginBottom="10dp"
-                    android:layout_gravity="center_horizontal"
-                    android:background="@drawable/et_emergency_drawable"
-                    android:hint="Mobile No 1"
-                    android:textColorHint="@color/view_grey"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-
-
-            <RelativeLayout
-                    android:padding="10dp"
-                    android:gravity="center_vertical"
-                    android:id="@+id/rlRelationShipEmergency"
-                    android:layout_gravity="center_horizontal"
-                    android:background="@drawable/et_emergency_drawable"
-                    android:textColorHint="@color/view_grey"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                <TextView android:layout_width="match_parent"
-                          android:layout_height="wrap_content"
-                          android:id="@+id/tvRelationship"
-                          android:background="@color/white"
-                          android:text="@string/relationship"
-                          android:gravity="center"
-                          android:textColor="@color/view_grey"
-                          android:drawableRight="@drawable/dropdown"
-                          android:textSize="@dimen/textsize_medium"
-                          android:drawableEnd="@drawable/dropdown"/>
-
-
-                <Spinner
-                        android:visibility="invisible"
-                        android:id="@+id/spinnerEmergency"
-                        android:layout_width="match_parent"
-                        android:layout_height="3dp"/>
-
-
-            </RelativeLayout>
-
-            // layour for 2nd person
-            <EditText
-                    android:layout_marginTop="20dp"
-                    android:id="@+id/et2ndFullNameEmergency"
-                    android:ellipsize="start"
-                    android:textColor="@color/color_grey"
-                    android:gravity="center"
-                    android:textSize="@dimen/textsize_medium"
-                    android:padding="10dp"
-                    android:layout_gravity="center_horizontal"
-                    android:background="@drawable/et_emergency_drawable"
-                    android:hint="@string/full_name"
-                    android:textColorHint="@color/view_grey"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-
-
-
-            <EditText
-                    android:id="@+id/et2ndMobileEmergency"
-                    android:ellipsize="start"
-                    android:padding="10dp"
-                    android:gravity="center"
-                    android:textColor="@color/color_grey"
-                    android:layout_marginTop="10dp"
-                    android:textSize="@dimen/textsize_medium"
-                    android:layout_marginBottom="10dp"
-                    android:inputType="number"
-                    android:maxLength="10"
-                    android:layout_gravity="center_horizontal"
-                    android:background="@drawable/et_emergency_drawable"
-                    android:hint="Mobile No 2"
-                    android:textColorHint="@color/view_grey"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-
-
-            <RelativeLayout
-                    android:padding="10dp"
-                    android:gravity="center_vertical"
-                    android:id="@+id/rl2ndRelationShipEmergency"
-                    android:layout_gravity="center_horizontal"
-                    android:background="@drawable/et_emergency_drawable"
-                    android:textColorHint="@color/view_grey"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                <TextView android:layout_width="match_parent"
-                          android:layout_height="wrap_content"
-                          android:id="@+id/tv2ndRelationship"
-                          android:background="@color/white"
-                          android:text="@string/relationship"
-                          android:gravity="center"
-                          android:textColor="@color/view_grey"
-                          android:drawableRight="@drawable/dropdown"
-                          android:textSize="@dimen/textsize_medium"
-                          android:drawableEnd="@drawable/dropdown"/>
-
-
-                <Spinner
-                        android:visibility="invisible"
-                        android:id="@+id/spinner2ndEmergency"
-                        android:layout_width="match_parent"
-                        android:layout_height="3dp"/>
-
-
-            </RelativeLayout>
-
-
-        </LinearLayout>
-    </android.support.v4.widget.NestedScrollView>
     <RelativeLayout
             android:background="@color/white"
             android:id="@+id/rlCustomTabsEmergency"
@@ -242,12 +88,14 @@
         </LinearLayout>
 
         <ImageView
+                android:layout_marginRight="10dp"
                 android:layout_width="wrap_content"
                 android:src="@drawable/list"
                 android:layout_alignParentRight="true"
-                android:id="@+id/ivList"
+                android:id="@+id/ivContactList"
                 android:layout_centerVertical="true"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"/>
 
 
 
@@ -255,38 +103,320 @@
     </RelativeLayout>
 
 
+    <android.support.v4.widget.NestedScrollView
+            android:layout_below="@+id/rlCustomTabsEmergency"
+            android:layout_width="match_parent"
+            android:fillViewport="true"
+            android:layout_centerInParent="true"
+            android:layout_height="match_parent"
+    >
+        <RelativeLayout android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+            // add contact layout
+            <LinearLayout
+                    android:visibility="visible"
+                    android:id="@+id/llAddContactComplete"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="20dp"
+                    android:layout_above="@+id/llEmergenyBottomBar"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                // layout for the  1st person
+                <EditText
+                        android:id="@+id/etFullNameEmergency"
+                        android:gravity="center"
+                        android:textColor="@color/color_grey"
+                        android:textSize="@dimen/textsize_medium"
+                        android:padding="10dp"
+                        android:singleLine="true"
+                        android:imeOptions="actionNext"
+                        android:maxLines="1"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@drawable/et_emergency_drawable"
+                        android:hint="@string/full_name"
+                        android:textColorHint="@color/view_grey"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
 
 
-    <LinearLayout
-            android:id="@+id/llEmergenyBottomBar"
-            android:layout_alignParentBottom="true"
-            android:padding="20dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:orientation="vertical">
-        <TextView
-                android:text="@string/add"
-                android:padding="13dp"
-                android:id="@+id/tvAddEmergencyContacts"
-                android:textColor="@color/white"
-                android:gravity="center_horizontal"
-                android:background="@drawable/red_rect_rounded"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
 
-        <TextView
-                android:layout_marginTop="10dp"
-                android:textSize="@dimen/textsize_small"
-                android:gravity="center"
-                android:drawablePadding="5dp"
-                android:layout_gravity="center"
-                android:drawableLeft="@drawable/checkbox_checked"
-                android:text="@string/always_share_with_my_emergency_contacts"
-                android:layout_width="wrap_content" android:layout_height="wrap_content"
-        />
+                <EditText
+                        android:id="@+id/etMobileEmergency"
+                        android:padding="10dp"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:singleLine="true"
+                        android:maxLength="10"
+                        android:textColor="@color/color_grey"
+                        android:layout_marginTop="10dp"
+                        android:textSize="@dimen/textsize_medium"
+                        android:imeOptions="actionNext"
+                        android:maxLines="1"
+                        android:layout_marginBottom="10dp"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@drawable/et_emergency_drawable"
+                        android:hint="Mobile No 1"
+                        android:textColorHint="@color/view_grey"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
 
-    </LinearLayout>
+
+                <RelativeLayout
+                        android:padding="10dp"
+                        android:gravity="center_vertical"
+                        android:id="@+id/rlRelationShipEmergency"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@drawable/et_emergency_drawable"
+                        android:textColorHint="@color/view_grey"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                    <TextView android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:id="@+id/tvRelationship"
+                              android:background="@color/white"
+                              android:text="@string/relationship"
+                              android:gravity="center"
+                              android:textColor="@color/view_grey"
+                              android:drawableRight="@drawable/dropdown"
+                              android:textSize="@dimen/textsize_medium"
+                              android:drawableEnd="@drawable/dropdown"/>
+
+
+                    <Spinner
+                            android:visibility="invisible"
+                            android:id="@+id/spinnerEmergency"
+                            android:layout_width="match_parent"
+                            android:layout_height="3dp"/>
+
+
+                </RelativeLayout>
+
+                // layour for 2nd person
+                <EditText
+                        android:singleLine="true"
+                        android:layout_marginTop="20dp"
+                        android:id="@+id/et2ndFullNameEmergency"
+                        android:textColor="@color/color_grey"
+                        android:gravity="center"
+                        android:textSize="@dimen/textsize_medium"
+                        android:padding="10dp"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@drawable/et_emergency_drawable"
+                        android:hint="@string/full_name"
+                        android:imeOptions="actionNext"
+                        android:maxLines="1"
+                        android:textColorHint="@color/view_grey"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+
+
+                <EditText
+                        android:id="@+id/et2ndMobileEmergency"
+                        android:padding="10dp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:textColor="@color/color_grey"
+                        android:layout_marginTop="10dp"
+                        android:textSize="@dimen/textsize_medium"
+                        android:layout_marginBottom="10dp"
+                        android:inputType="number"
+                        android:maxLength="10"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@drawable/et_emergency_drawable"
+                        android:hint="Mobile No 2"
+                        android:imeOptions="actionDone"
+                        android:maxLines="1"
+                        android:textColorHint="@color/view_grey"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+
+                <RelativeLayout
+                        android:padding="10dp"
+                        android:gravity="center_vertical"
+                        android:id="@+id/rl2ndRelationShipEmergency"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@drawable/et_emergency_drawable"
+                        android:textColorHint="@color/view_grey"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                    <TextView android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:id="@+id/tv2ndRelationship"
+                              android:background="@color/white"
+                              android:text="@string/relationship"
+                              android:gravity="center"
+                              android:textColor="@color/view_grey"
+                              android:drawableRight="@drawable/dropdown"
+                              android:textSize="@dimen/textsize_medium"
+                              android:drawableEnd="@drawable/dropdown"/>
+
+
+                    <Spinner
+                            android:visibility="invisible"
+                            android:id="@+id/spinner2ndEmergency"
+                            android:layout_width="match_parent"
+                            android:layout_height="3dp"/>
+
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+
+            // edit contact layout
+            <LinearLayout
+                    android:visibility="gone"
+                    android:id="@+id/llEditContactComplete"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="20dp"
+                    android:layout_above="@+id/llEmergenyBottomBar"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                // layout for the  1st person
+                <EditText
+                        android:id="@+id/etEditNameEmergency"
+                        android:gravity="center"
+                        android:textColor="@color/color_grey"
+                        android:textSize="@dimen/textsize_medium"
+                        android:padding="10dp"
+                        android:singleLine="true"
+                        android:imeOptions="actionNext"
+                        android:maxLines="1"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@drawable/et_emergency_drawable"
+                        android:hint="@string/full_name"
+                        android:textColorHint="@color/view_grey"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+
+
+                <EditText
+                        android:id="@+id/etEditMobileEmergency"
+                        android:padding="10dp"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:singleLine="true"
+                        android:maxLength="10"
+                        android:textColor="@color/color_grey"
+                        android:layout_marginTop="10dp"
+                        android:textSize="@dimen/textsize_medium"
+                        android:imeOptions="actionNext"
+                        android:maxLines="1"
+                        android:layout_marginBottom="10dp"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@drawable/et_emergency_drawable"
+                        android:hint="Mobile No 1"
+                        android:textColorHint="@color/view_grey"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+
+                <RelativeLayout
+                        android:padding="10dp"
+                        android:gravity="center_vertical"
+                        android:id="@+id/rlEditRelationShipEmergency"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@drawable/et_emergency_drawable"
+                        android:textColorHint="@color/view_grey"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                    <TextView android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:id="@+id/tvEditRelationship"
+                              android:background="@color/white"
+                              android:text="@string/relationship"
+                              android:gravity="center"
+                              android:textColor="@color/view_grey"
+                              android:drawableRight="@drawable/dropdown"
+                              android:textSize="@dimen/textsize_medium"
+                              android:drawableEnd="@drawable/dropdown"/>
+
+
+                    <Spinner
+                            android:visibility="invisible"
+                            android:id="@+id/spinnerEditEmergency"
+                            android:layout_width="match_parent"
+                            android:layout_height="3dp"/>
+
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                    android:id="@+id/llEmergenyBottomBar"
+                    android:layout_alignParentBottom="true"
+                    android:padding="20dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                <TextView
+                        android:text="@string/add"
+                        android:padding="13dp"
+                        android:id="@+id/tvAddEmergencyContacts"
+                        android:textColor="@color/white"
+                        android:gravity="center_horizontal"
+                        android:background="@drawable/red_rect_rounded"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                <LinearLayout
+                        android:gravity="center_horizontal"
+                        android:layout_marginTop="10dp"
+                        android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                    <ImageView android:layout_width="0dp"
+                               android:layout_weight="1"
+                               android:id="@+id/ivCheck"
+                               android:scaleType="fitEnd"
+                               android:src="@drawable/checkbox_checked"
+                               android:layout_height="wrap_content"/>
+
+                    <TextView
+                            android:paddingLeft="10dp"
+                            android:textSize="@dimen/textsize_small"
+                            android:gravity="start"
+                            android:text="@string/always_share_with_my_emergency_contacts"
+                            android:layout_width="0dp"
+                            android:layout_weight="5"
+                            android:layout_height="wrap_content"
+                    />
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+        </RelativeLayout>
+
+
+    </android.support.v4.widget.NestedScrollView>
 
 
     <RelativeLayout

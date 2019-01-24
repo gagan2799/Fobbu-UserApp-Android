@@ -35,8 +35,8 @@ class VehicleListActivity : AppCompatActivity(),ActivityView,DeleteVehicleClickL
 
     private var imageFrom = ""
     private var vehicleType = "2wheeler"
-    lateinit var vehicleHandler: VehicleListHandler
-    lateinit var addEditHandler: AddEditActivityHandler
+    private lateinit var vehicleHandler: VehicleListHandler
+    private lateinit var addEditHandler: AddEditActivityHandler
 
     private var dataListMain: ArrayList<HashMap<String, Any>> = ArrayList()
     private var dataListTwo: ArrayList<HashMap<String, Any>> = ArrayList()
@@ -62,17 +62,17 @@ class VehicleListActivity : AppCompatActivity(),ActivityView,DeleteVehicleClickL
     }
 
     //// All initialise in this method for this class
-    private fun initialise() {
-
-
+    private fun initialise()
+    {
         vehicleHandler= VehicleListPresenter(this, this)
+
         addEditHandler= AddEditVehiclePresenter(this, this)
 
         webServiceApi = getEnv().getRetrofit()
 
-        if (intent.hasExtra("from_where")) {
+        if (intent.hasExtra("from_where"))
+        {
             fromWhere = "RSA"
-
         }
 
         /// Vehicle Adapter handled here

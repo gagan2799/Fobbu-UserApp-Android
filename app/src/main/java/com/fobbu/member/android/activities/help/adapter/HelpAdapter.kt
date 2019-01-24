@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
 import com.fobbu.member.android.R
 import com.fobbu.member.android.utils.CommonClass
@@ -32,9 +33,9 @@ class HelpAdapter(var activity:Activity, private var dataList:ArrayList<HashMap<
         p0.tvAnswer.text=dataList[p1]["answer"].toString()
 
         if (dataList[p1]["selected"]== "1")
-               p0.tvAnswer.visibility=View.VISIBLE
+               p0.llAnswer.visibility=View.VISIBLE
            else
-               p0.tvAnswer.visibility=View.GONE
+               p0.llAnswer.visibility=View.GONE
 
 
     }
@@ -43,6 +44,8 @@ class HelpAdapter(var activity:Activity, private var dataList:ArrayList<HashMap<
     class HelpViewHolder(view :View) :RecyclerView.ViewHolder(view)
     {
         val tvAnswer: TextView =view.findViewById(R.id.tvHelpAnswer)
+
+        val llAnswer: LinearLayout =view.findViewById(R.id.llAnswer)
 
         val tvQuestion: TextView =view.findViewById(R.id.tvHelpQuestion)
     }

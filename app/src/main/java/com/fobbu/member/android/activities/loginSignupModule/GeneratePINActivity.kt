@@ -34,11 +34,16 @@ class GeneratePINActivity : AppCompatActivity() {
         {
             if (intent.getStringExtra("pin")=="security")
             {
+                if (CommonClass(this,this).getString("Local_Pin").isNotEmpty())
+                {
+                    tvCurrnetPin.visibility=View.VISIBLE
+
+                    llCurrentPIN.visibility=View.VISIBLE
+                }
+
+                tvDoItLater.visibility=View.GONE
+
                 tvLogin.text=getString(R.string.generate_new_pin)
-
-                tvCurrnetPin.visibility=View.VISIBLE
-
-                llCurrentPIN.visibility=View.VISIBLE
 
             }
         }
@@ -49,6 +54,8 @@ class GeneratePINActivity : AppCompatActivity() {
             tvCurrnetPin.visibility=View.GONE
 
             llCurrentPIN.visibility=View.GONE
+
+            tvDoItLater.visibility=View.VISIBLE
         }
 
     }
@@ -122,107 +129,107 @@ class GeneratePINActivity : AppCompatActivity() {
             }
         })
 
-       if (intent.getStringExtra("pin")=="security")
-       {
-           edCurrentPinOne.addTextChangedListener(object : TextWatcher {
+        if (intent.getStringExtra("pin")=="security")
+        {
+            edCurrentPinOne.addTextChangedListener(object : TextWatcher {
 
-               override fun afterTextChanged(s: Editable) {
-                   if (s.isNotEmpty())
-                       edCurrentPinTwo.requestFocus()
-               }
+                override fun afterTextChanged(s: Editable) {
+                    if (s.isNotEmpty())
+                        edCurrentPinTwo.requestFocus()
+                }
 
-               override fun beforeTextChanged(s: CharSequence, start: Int,
-                                              count: Int, after: Int) {
-               }
+                override fun beforeTextChanged(s: CharSequence, start: Int,
+                                               count: Int, after: Int) {
+                }
 
-               override fun onTextChanged(s: CharSequence, start: Int,
-                                          before: Int, count: Int) {}
+                override fun onTextChanged(s: CharSequence, start: Int,
+                                           before: Int, count: Int) {}
 
-           })
-           edCurrentPinTwo.addTextChangedListener(object : TextWatcher {
+            })
+            edCurrentPinTwo.addTextChangedListener(object : TextWatcher {
 
-               override fun afterTextChanged(s: Editable) {
-                   if (s.isNotEmpty()) {
-                       edCurrentPinThree.requestFocus()
-                   }
-               }
+                override fun afterTextChanged(s: Editable) {
+                    if (s.isNotEmpty()) {
+                        edCurrentPinThree.requestFocus()
+                    }
+                }
 
-               override fun beforeTextChanged(s: CharSequence, start: Int,
-                                              count: Int, after: Int) {
-               }
+                override fun beforeTextChanged(s: CharSequence, start: Int,
+                                               count: Int, after: Int) {
+                }
 
-               override fun onTextChanged(s: CharSequence, start: Int,
-                                          before: Int, count: Int) {
+                override fun onTextChanged(s: CharSequence, start: Int,
+                                           before: Int, count: Int) {
 
-               }
-           })
+                }
+            })
 
-           edCurrentPinThree.addTextChangedListener(object : TextWatcher {
+            edCurrentPinThree.addTextChangedListener(object : TextWatcher {
 
-               override fun afterTextChanged(s: Editable) {
-                   if (s.isNotEmpty())
-                       edCurrentPinFour.requestFocus()
-               }
+                override fun afterTextChanged(s: Editable) {
+                    if (s.isNotEmpty())
+                        edCurrentPinFour.requestFocus()
+                }
 
-               override fun beforeTextChanged(s: CharSequence, start: Int,
-                                              count: Int, after: Int) {
-               }
+                override fun beforeTextChanged(s: CharSequence, start: Int,
+                                               count: Int, after: Int) {
+                }
 
-               override fun onTextChanged(s: CharSequence, start: Int,
-                                          before: Int, count: Int) {
+                override fun onTextChanged(s: CharSequence, start: Int,
+                                           before: Int, count: Int) {
 
-               }
-           })
+                }
+            })
 
-           edCurrentPinFour.addTextChangedListener(object : TextWatcher {
+            edCurrentPinFour.addTextChangedListener(object : TextWatcher {
 
-               override fun afterTextChanged(s: Editable) {
-                   if (s.isNotEmpty())
-                       edPinOne.requestFocus()
-               }
+                override fun afterTextChanged(s: Editable) {
+                    if (s.isNotEmpty())
+                        edPinOne.requestFocus()
+                }
 
-               override fun beforeTextChanged(s: CharSequence, start: Int,
-                                              count: Int, after: Int) {
-               }
+                override fun beforeTextChanged(s: CharSequence, start: Int,
+                                               count: Int, after: Int) {
+                }
 
-               override fun onTextChanged(s: CharSequence, start: Int,
-                                          before: Int, count: Int) {
+                override fun onTextChanged(s: CharSequence, start: Int,
+                                           before: Int, count: Int) {
 
-               }
-           })
+                }
+            })
 
-           edCurrentPinThree.setOnKeyListener { v, keyCode, event ->
-               //You can identify which key pressed buy checking keyCode value with KeyEvent.KEYCODE_
-               if (keyCode == KeyEvent.KEYCODE_DEL && edCurrentPinThree.text.toString().trim().isEmpty()) {
-                   edCurrentPinTwo.requestFocus()
-               }
-               false
-           }
-           edCurrentPinTwo.setOnKeyListener { v, keyCode, event ->
-               //You can identify which key pressed buy checking keyCode value with KeyEvent.KEYCODE_
-               if (keyCode == KeyEvent.KEYCODE_DEL) {
-                   edCurrentPinOne.requestFocus()
-               }
-               false
-           }
+            edCurrentPinThree.setOnKeyListener { v, keyCode, event ->
+                //You can identify which key pressed buy checking keyCode value with KeyEvent.KEYCODE_
+                if (keyCode == KeyEvent.KEYCODE_DEL && edCurrentPinThree.text.toString().trim().isEmpty()) {
+                    edCurrentPinTwo.requestFocus()
+                }
+                false
+            }
+            edCurrentPinTwo.setOnKeyListener { v, keyCode, event ->
+                //You can identify which key pressed buy checking keyCode value with KeyEvent.KEYCODE_
+                if (keyCode == KeyEvent.KEYCODE_DEL) {
+                    edCurrentPinOne.requestFocus()
+                }
+                false
+            }
 
-           edCurrentPinFour.setOnKeyListener { v, keyCode, event ->
-               //You can identify which key pressed buy checking keyCode value with KeyEvent.KEYCODE_
-               if (keyCode == KeyEvent.KEYCODE_DEL && edCurrentPinFour.text.toString().trim().isEmpty()) {
-                   edCurrentPinThree.requestFocus()
-               }
-               false
-           }
+            edCurrentPinFour.setOnKeyListener { v, keyCode, event ->
+                //You can identify which key pressed buy checking keyCode value with KeyEvent.KEYCODE_
+                if (keyCode == KeyEvent.KEYCODE_DEL && edCurrentPinFour.text.toString().trim().isEmpty()) {
+                    edCurrentPinThree.requestFocus()
+                }
+                false
+            }
 
-           edPinOne.setOnKeyListener { v, keyCode, event ->
-               //You can identify which key pressed buy checking keyCode value with KeyEvent.KEYCODE_
-               if (keyCode == KeyEvent.KEYCODE_DEL && edPinOne.text.toString().trim().isEmpty()) {
-                   edCurrentPinFour.requestFocus()
-               }
-               false
-           }
+            edPinOne.setOnKeyListener { v, keyCode, event ->
+                //You can identify which key pressed buy checking keyCode value with KeyEvent.KEYCODE_
+                if (keyCode == KeyEvent.KEYCODE_DEL && edPinOne.text.toString().trim().isEmpty()) {
+                    edCurrentPinFour.requestFocus()
+                }
+                false
+            }
 
-       }
+        }
         edPinTwo.setOnKeyListener { v, keyCode, event ->
             //You can identify which key pressed buy checking keyCode value with KeyEvent.KEYCODE_
             if (keyCode == KeyEvent.KEYCODE_DEL) {
@@ -369,13 +376,7 @@ class GeneratePINActivity : AppCompatActivity() {
                     edCurrentPinTwo.text.toString().trim() +
                     edCurrentPinThree.text.toString().trim() +
                     edCurrentPinFour.text.toString().trim()
-            if (intent.getStringExtra("pin")=="security")
-            {
-                if (currentPin!=CommonClass(this,this).getString("Local_Pin"))
-                {
-                    Toast.makeText(this,"provide correct pin", Toast.LENGTH_SHORT).show()
-                }
-            }
+
 
 
             val enterPin= edPinOne.text.toString().trim() +
@@ -388,17 +389,52 @@ class GeneratePINActivity : AppCompatActivity() {
                     edPinSeven.text.toString().trim() +
                     edPinEight.text.toString().trim()
 
-            if(enterPin == confirmPin)
+            if (intent.getStringExtra("pin")=="security")
             {
-                Toast.makeText(this,resources.getString(R.string.succesfully_set_pin),Toast.LENGTH_SHORT).show()
-                val number = CommonClass(this,this).getString("mobile_number")
-                CommonClass(this,this).putString("Local_Number",number)
-                CommonClass(this,this).putString("Local_Pin",confirmPin)
-                startActivity(Intent(this, DashboardActivity::class.java))
-                finish()
+                if (CommonClass(this,this).getString("Local_Pin").isNotEmpty())
+                {
+                    when
+                    {
+                        currentPin!=CommonClass(this,this).getString("Local_Pin") -> Toast.makeText(this,"provide correct pin", Toast.LENGTH_SHORT).show()
+
+                        currentPin== enterPin -> Toast.makeText(this,"Entered Pin is same as the old pin.Try new pin", Toast.LENGTH_SHORT).show()
+
+                        enterPin!=confirmPin -> Toast.makeText(this,resources.getString(R.string.pin_dont_match),Toast.LENGTH_SHORT).show()
+                        else -> {
+                            Toast.makeText(this,resources.getString(R.string.succesfully_set_pin),Toast.LENGTH_SHORT).show()
+
+                            val number = CommonClass(this,this).getString("mobile_number")
+
+                            CommonClass(this,this).putString("Local_Number",number)
+
+                            CommonClass(this,this).putString("Local_Pin",confirmPin)
+
+                            finish()
+                        }
+                    }
+                }
             }
             else
-                Toast.makeText(this,resources.getString(R.string.pin_dont_match),Toast.LENGTH_SHORT).show()
+            {
+                if (enterPin == confirmPin)
+                {
+                    Toast.makeText(this,resources.getString(R.string.succesfully_set_pin),Toast.LENGTH_SHORT).show()
+
+                    val number = CommonClass(this,this).getString("mobile_number")
+
+                    CommonClass(this,this).putString("Local_Number",number)
+
+                    CommonClass(this,this).putString("Local_Pin",confirmPin)
+
+                    startActivity(Intent(this, DashboardActivity::class.java))
+
+                    finish()
+                }
+                else
+                    Toast.makeText(this,resources.getString(R.string.pin_dont_match),Toast.LENGTH_SHORT).show()
+
+
+            }
 
         }
 

@@ -200,14 +200,25 @@
 
         </LinearLayout>
 
+        <TextView
+                android:layout_centerInParent="true"
+                android:textColor="@color/color_grey"
+                android:visibility="gone"
+                android:textSize="@dimen/textsize_medium"
+                android:id="@+id/tvNOdataOrder"
+                android:text="@string/currently_no_data_is_available"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+        />
 
         // recycler for all
         <android.support.v7.widget.RecyclerView
                 android:id="@+id/rvOrder"
                 android:layout_margin="10dp"
+                android:visibility="gone"
                 android:layout_below="@+id/rlCustomTabsOthers"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="match_parent"/>
 
 
 

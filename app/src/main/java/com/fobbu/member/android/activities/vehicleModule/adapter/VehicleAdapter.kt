@@ -20,7 +20,7 @@ import com.fobbu.member.android.utils.CommonClass
 import com.fobbu.member.android.view.ActivityView
 import com.squareup.picasso.Picasso
 
-class VehicleAdapter(internal var activity: Activity, internal  var dataListMain:ArrayList<HashMap<String,Any>>):
+class VehicleAdapter(internal var activity: Activity, private var dataListMain:ArrayList<HashMap<String,Any>>):
 
     RecyclerView.Adapter<VehicleAdapter.MyViewHolder>() {
 

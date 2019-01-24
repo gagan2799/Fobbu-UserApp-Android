@@ -155,10 +155,14 @@ class LoginActivity : AppCompatActivity(),ActivityView {
                 .getString("Local_Number")
 
             if (number == mainPojo.getData().mobile_number)
+            {
+                CommonClass(this@LoginActivity, this@LoginActivity)
+                    .putString("user_password", etPassword.text.toString())
+
                 startActivity(Intent(this@LoginActivity, DashboardActivity::class.java))
-            else {
-
-
+            }
+            else
+            {
                 CommonClass(this@LoginActivity, this@LoginActivity)
                     .putString("Local_Number", "")
                 CommonClass(this@LoginActivity, this@LoginActivity)

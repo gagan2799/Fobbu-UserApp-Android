@@ -143,15 +143,30 @@ interface WebServiceApi {
  */
 
     @POST("users/emergencycontacts")
-    fun postEmergencyContacts(@Body map:JSONArray,
-                              @Header("x-access-token") token: String):Call<MainPojo>
+    fun postEmergencyContacts(
+        @Body data:HashMap<String,String>,
+        @Header("x-access-token") token: String
+    ): Call<MainPojo>
+
+    @PUT("users/emergencycontacts")
+    fun editContacts(@Body map:HashMap<String,Any>,
+                     @Header("x-access-token") token: String):Call<MainPojo>
+
+    @GET("users/emergencycontacts")
+    fun getContacts(@Header("x-access-token") token: String):Call<MainPojo>
+
+    @HTTP(method = "DELETE", path = "users/emergencycontacts", hasBody = true)
+    fun deleteContacts(
+        @Header("x-access-token") token: String,
+        @Body partMap:Map<String, String>
+    ): Call<MainPojo>
 
     @GET("users/get_helps")
-fun  getHelp(@Header("x-access-token") token: String):Call<MainPojo>
+    fun  getHelp(@Header("x-access-token") token: String):Call<MainPojo>
 
     @POST("users/change_password")
-fun changePassword(@Body map:HashMap<String,Any>
-        ,@Header("x-access-token") token: String):Call<MainPojo>
+    fun changePassword(@Body map:HashMap<String,Any>
+                       ,@Header("x-access-token") token: String):Call<MainPojo>
 
 
 }
