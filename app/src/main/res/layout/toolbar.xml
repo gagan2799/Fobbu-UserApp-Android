@@ -59,6 +59,20 @@
                         android:layout_alignParentRight="true"/>
 
 
+                <TextView
+                        android:id="@+id/tvEditToolbar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:padding="16dp"
+                        android:gravity="center_horizontal"
+                        android:visibility="invisible"
+                        android:textSize="@dimen/textsize_medium"
+                        android:textColor="@color/color_grey"
+                        android:text="@string/edit_profile"
+                        android:layout_alignParentRight="true"/>
+
             </RelativeLayout>
 
         </android.support.v7.widget.Toolbar>

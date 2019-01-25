@@ -1,18 +1,12 @@
 package com.fobbu.member.android.fcm.myFirebaseInstanceIDService
 
 import android.annotation.SuppressLint
-import android.app.Activity
-import android.app.PendingIntent.getActivity
 import android.content.Context
 import android.content.SharedPreferences
-import android.widget.Toast
 import com.fobbu.member.android.apiInterface.WebServiceApi
 import com.fobbu.member.android.modals.MainPojo
-import com.fobbu.member.android.utils.CommonClass
-import com.fobbu.member.android.view.ActivityView
 import com.google.firebase.iid.FirebaseInstanceId
 import com.google.firebase.iid.FirebaseInstanceIdService
-import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.logging.HttpLoggingInterceptor

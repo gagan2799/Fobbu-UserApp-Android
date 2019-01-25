@@ -534,6 +534,59 @@ class ApiClient(var activity: Activity) {
         }
     }
 
+
+    // update user API
+    fun updateUser(email:RequestBody,number:RequestBody, first:RequestBody,last:RequestBody,gender:RequestBody,file:ArrayList<MultipartBody.Part>,token:String,responseHandler: ResponseHandler)
+    {
+        val map=HashMap<String,RequestBody>()
+
+        map["email"]=email
+
+        map["mobile_number"]=number
+
+        map["first_name"]=first
+
+        map["last_name"]=last
+
+        map["gender"]=gender
+
+        webServiceMultipart.updateUser(map,file,token).enqueue(object :Callback<MainPojo>
+        {
+            override fun onFailure(call: Call<MainPojo>, t: Throwable)
+            {
+                responseHandler.onServerError("""Server Error: ${t.message}""")
+            }
+
+            override fun onResponse(call: Call<MainPojo>, response: Response<MainPojo>)
+            {
+                handleSuccess(response,responseHandler)
+            }
+
+        })
+    }
+
+    //update KYC API
+    fun updateKyc(map:HashMap<String,Any>,token:String,responseHandler: ResponseHandler)
+    {
+        val hashmap=HashMap<String,Any>()
+
+        val obj=JSONObject(map)
+
+        hashmap["kyc"]=obj
+
+        webServiceApi.updateKyc(hashmap,token).enqueue(object :Callback<MainPojo>
+        {
+            override fun onFailure(call: Call<MainPojo>, t: Throwable) {
+                responseHandler.onServerError("""Server Error: ${t.message}""")
+            }
+
+            override fun onResponse(call: Call<MainPojo>, response: Response<MainPojo>) {
+                handleSuccess(response,responseHandler)
+            }
+        })
+    }
+
+
     private fun getEnv(): MyApplication {
         return activity.application as MyApplication
     }

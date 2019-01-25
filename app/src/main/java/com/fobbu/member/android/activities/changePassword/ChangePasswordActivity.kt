@@ -9,7 +9,6 @@ import com.fobbu.member.android.R
 import com.fobbu.member.android.activities.changePassword.presenter.PasswordHandler
 import com.fobbu.member.android.activities.changePassword.presenter.PasswordPresenter
 import com.fobbu.member.android.modals.MainPojo
-import com.fobbu.member.android.utils.CommonClass
 import com.fobbu.member.android.view.ActivityView
 import kotlinx.android.synthetic.main.activity_change_password.*
 import kotlinx.android.synthetic.main.toolbar.*

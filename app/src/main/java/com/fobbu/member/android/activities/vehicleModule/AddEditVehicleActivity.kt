@@ -34,7 +34,6 @@ import com.fobbu.member.android.apiInterface.MyApplication
 import com.fobbu.member.android.apiInterface.WebServiceApi
 import com.fobbu.member.android.fragments.rsaFragmentModule.RsaConstants
 import com.fobbu.member.android.modals.MainPojo
-import com.fobbu.member.android.utils.CommonClass
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_add_edit_vehicle.*
 import okhttp3.MediaType
@@ -45,7 +44,6 @@ import org.json.JSONObject
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
-import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 

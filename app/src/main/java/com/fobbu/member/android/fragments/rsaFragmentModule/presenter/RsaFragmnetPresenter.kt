@@ -6,7 +6,6 @@ import com.fobbu.member.android.apiInterface.ApiClient
 import com.fobbu.member.android.apiInterface.Handler.ResponseHandler
 import com.fobbu.member.android.fragments.rsaFragmentModule.view.RsaFragmentView
 import com.fobbu.member.android.modals.MainPojo
-import com.fobbu.member.android.utils.CommonClass
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 

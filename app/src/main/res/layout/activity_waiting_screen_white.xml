@@ -343,6 +343,7 @@
                   android:layout_height="wrap_content"
                   android:lineSpacingExtra="1.3dp"
                   android:textSize="@dimen/textsize_small"
+                  android:id="@+id/tvWhiteSubMessage"
                   android:textColor="@color/drawer_text_color"
                   android:text="@string/new_vehicle_added"
                   android:gravity="center"

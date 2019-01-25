@@ -25,7 +25,6 @@ import com.fobbu.member.android.activities.orderAndPassbookModule.MyOrder.presen
 import com.fobbu.member.android.activities.orderAndPassbookModule.MyOrder.presenter.OrderPresenter
 import com.fobbu.member.android.activities.orderAndPassbookModule.OrderDetail.OrderDetailActivity
 import com.fobbu.member.android.modals.MainPojo
-import com.fobbu.member.android.utils.CommonClass
 import com.fobbu.member.android.utils.RecyclerItemClickListener
 import com.fobbu.member.android.view.ActivityView
 import kotlinx.android.synthetic.main.activity_my_orders.*

@@ -8,7 +8,6 @@ import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import com.fobbu.member.android.R
-import com.fobbu.member.android.utils.CommonClass
 import kotlinx.android.synthetic.main.activity_emergency_contacts.*
 import kotlinx.android.synthetic.main.toolbar.*
 import android.widget.AdapterView

@@ -102,7 +102,6 @@
 
         <activity
                 android:name=".activities.rsaModule.RSARequestCancelActivity"
-                android:screenOrientation="portrait"
                 android:theme="@style/Transparent">
         </activity>
         <activity
@@ -164,6 +163,11 @@
                 android:screenOrientation="portrait">
         </activity>
         <activity android:name=".activities.emergencyContactsModule.contactList.ContactListActicvity"
+                  android:screenOrientation="portrait">
+        </activity>
+
+        <activity android:name=".activities.profile.ProfileActivity"
+                  android:windowSoftInputMode="adjustResize"
                   android:screenOrientation="portrait">
         </activity>
     </application>

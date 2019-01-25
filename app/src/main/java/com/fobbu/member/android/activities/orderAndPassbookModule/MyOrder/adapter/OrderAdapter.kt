@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.fobbu.member.android.R
-import com.fobbu.member.android.utils.CommonClass
 
 
 class OrderAdapter(var activity: Activity,var dataList:ArrayList<HashMap<String,Any>>):RecyclerView.Adapter<OrderAdapter.OrderViewHolder>()

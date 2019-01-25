@@ -38,6 +38,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/app_icon_round"
         android:supportsRtl="true"
+        android:testOnly="true"
         android:theme="@style/AppTheme" >
         <activity
             android:name="com.fobbu.member.android.activities.SplashActivity"
@@ -119,7 +120,6 @@
 
         <activity
             android:name="com.fobbu.member.android.activities.rsaModule.RSARequestCancelActivity"
-            android:screenOrientation="portrait"
             android:theme="@style/Transparent" >
         </activity>
         <activity

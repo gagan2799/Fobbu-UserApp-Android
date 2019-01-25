@@ -1,10 +1,7 @@
 package com.fobbu.member.android.utils
 
 import android.annotation.SuppressLint
-import android.app.Activity
-import android.app.AlertDialog
-import android.app.Dialog
-import android.app.NotificationManager
+import android.app.*
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -21,6 +18,7 @@ import android.view.*
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.RelativeLayout
+import android.widget.TextView
 import android.widget.Toast
 import com.fobbu.member.android.R
 import com.fobbu.member.android.activities.loginSignupModule.LoginActivity
@@ -35,6 +33,7 @@ import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.Calendar.*
+import java.util.regex.Pattern
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS", "UNREACHABLE_CODE")
 /**
@@ -44,6 +43,14 @@ class CommonClass(activity1: Activity, context1: Context) {
     private var activity: Activity = activity1
 
     private var context: Context = context1
+
+    private lateinit var datePickerDialog: DatePickerDialog.OnDateSetListener
+
+    private lateinit var myCalendar: Calendar
+
+    private var startDateCustom = ""
+
+    private var endDateCustom = ""
 
 
     var aPI_KEY: String = "Fobbu"
@@ -318,6 +325,55 @@ class CommonClass(activity1: Activity, context1: Context) {
             e.printStackTrace()
         }
 
+    }
+
+    fun isEmailValid(email: String): Boolean {
+        val expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$"
+        val pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE)
+        val matcher = pattern.matcher(email)
+        return matcher.matches()
+    }
+
+
+    fun openDatePicker(activity:Activity,from: String, textview: TextView) {
+
+        myCalendar = Calendar.getInstance()
+
+        datePickerDialog = DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
+            myCalendar.set(Calendar.YEAR, year)
+            myCalendar.set(Calendar.MONTH, monthOfYear)
+            myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+
+            updateLabel(from, textview)
+        }
+
+        val datePicker = DatePickerDialog(activity, R.style.CustomPickerTheme, datePickerDialog, myCalendar
+            .get(YEAR), myCalendar.get(MONTH),
+            myCalendar.get(DAY_OF_MONTH))
+        //datePicker.datePicker.minDate = myCalendar.timeInMillis
+        //datePicker.datePicker.maxDate = myCalendar.timeInMillis + 2592000000
+        datePicker.show()
+
+    }
+
+
+    @SuppressLint("SimpleDateFormat")
+    private fun updateLabel(from: String, etDate: TextView?) {
+        val myFormat = "dd MMM yyyy" //In which you need put here
+        val sdf = SimpleDateFormat(myFormat, Locale.ENGLISH)
+
+        etDate!!.text = sdf.format(myCalendar.time)
+
+        val sdfServer = SimpleDateFormat("yyyy-MM-dd")
+        // sdf.timeZone = TimeZone.getTimeZone("UTC")
+
+        if (from == "Start") {
+            startDateCustom = sdfServer.format(myCalendar.time)
+        } else
+            endDateCustom = sdfServer.format(myCalendar.time)
+
+        /*  rbLastMonth.isChecked = false
+          rbLastWeek.isChecked = false*/
     }
 
     fun showDailog(activity: Activity)

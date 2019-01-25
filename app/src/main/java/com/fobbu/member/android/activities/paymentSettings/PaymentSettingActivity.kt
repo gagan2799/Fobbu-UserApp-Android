@@ -4,7 +4,6 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import com.fobbu.member.android.R
-import com.fobbu.member.android.utils.CommonClass
 import kotlinx.android.synthetic.main.toolbar.*
 
 class PaymentSettingActivity : AppCompatActivity()

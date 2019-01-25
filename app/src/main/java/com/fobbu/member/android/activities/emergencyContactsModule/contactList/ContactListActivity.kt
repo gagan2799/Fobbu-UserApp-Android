@@ -1,7 +1,6 @@
 package com.fobbu.member.android.activities.emergencyContactsModule.contactList
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -13,12 +12,8 @@ import com.fobbu.member.android.activities.emergencyContactsModule.contactList.a
 import com.fobbu.member.android.activities.emergencyContactsModule.contactList.presenter.ListHandler
 import com.fobbu.member.android.activities.emergencyContactsModule.contactList.presenter.ListPresenter
 import com.fobbu.member.android.activities.emergencyContactsModule.contactList.view.ContactListView
-import com.fobbu.member.android.activities.emergencyContactsModule.emergencyContacts.EmergencyContactsActivity
 import com.fobbu.member.android.interfaces.DeleteVehicleClickListener
 import com.fobbu.member.android.modals.MainPojo
-import com.fobbu.member.android.utils.CommonClass
-import com.fobbu.member.android.utils.RecyclerItemClickListener
-import com.fobbu.member.android.view.ActivityView
 import kotlinx.android.synthetic.main.activity_contact_list.*
 import kotlinx.android.synthetic.main.toolbar.*
 

@@ -2,22 +2,15 @@ package com.fobbu.member.android.activities.vehicleModule.adapter
 
 import android.app.Activity
 import android.content.Intent
-import android.graphics.Color
-import android.support.v7.app.AlertDialog
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import com.fobbu.member.android.R
 import com.fobbu.member.android.activities.vehicleModule.AddEditVehicleActivity
-import com.fobbu.member.android.activities.vehicleModule.presenter.VehicleListPresenter
 import com.fobbu.member.android.interfaces.DeleteVehicleClickListener
-import com.fobbu.member.android.modals.MainPojo
-import com.fobbu.member.android.utils.CommonClass
-import com.fobbu.member.android.view.ActivityView
 import com.squareup.picasso.Picasso
 
 class VehicleAdapter(internal var activity: Activity, private var dataListMain:ArrayList<HashMap<String,Any>>):

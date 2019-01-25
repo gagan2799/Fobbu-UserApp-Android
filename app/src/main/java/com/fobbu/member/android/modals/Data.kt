@@ -24,4 +24,6 @@ class Data
 
     var service_name: String = ""
 
+    var profile=""
+
 }

@@ -4,11 +4,9 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import com.fobbu.member.android.R
-import com.fobbu.member.android.utils.CommonClass
 import kotlinx.android.synthetic.main.activity_freebies.*
 import kotlinx.android.synthetic.main.toolbar.*
 import android.content.Intent
-import com.fobbu.member.android.BuildConfig
 
 
 class FreebiesActivity : AppCompatActivity()

@@ -11,12 +11,10 @@ import com.fobbu.member.android.R
 import com.fobbu.member.android.activities.dashboardActivity.DashboardActivity
 import com.fobbu.member.android.activities.loginSignupModule.LoginActivity
 import com.fobbu.member.android.tutorial.TutorialActivity
-import com.fobbu.member.android.utils.CommonClass
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
 import com.google.firebase.iid.FirebaseInstanceId
 import kotlinx.android.synthetic.main.activity_splash.*
-import kotlinx.android.synthetic.main.inflate_vehicle_adapter.*
 import java.lang.Exception
 
 class SplashActivity : AppCompatActivity() {

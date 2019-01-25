@@ -12,11 +12,9 @@ import com.fobbu.member.android.activities.dashboardActivity.DashboardActivity
 import com.fobbu.member.android.activities.paymentModule.presenter.PaymentModeHandler
 import com.fobbu.member.android.activities.paymentModule.presenter.PaymentModePresenter
 import com.fobbu.member.android.activities.rsaModule.RSARequestCancelActivity
-import com.fobbu.member.android.activities.waitingScreenModule.WaitingScreenWhite
 import com.fobbu.member.android.fragments.rsaFragmentModule.RsaClassType
 import com.fobbu.member.android.fragments.rsaFragmentModule.RsaConstants
 import com.fobbu.member.android.modals.MainPojo
-import com.fobbu.member.android.utils.CommonClass
 import com.fobbu.member.android.view.ActivityView
 import kotlinx.android.synthetic.main.activity_payment_mode.*
 import kotlinx.android.synthetic.main.option_menu_layout.*

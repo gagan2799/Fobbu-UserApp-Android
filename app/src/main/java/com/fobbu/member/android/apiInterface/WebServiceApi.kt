@@ -169,4 +169,16 @@ interface WebServiceApi {
                        ,@Header("x-access-token") token: String):Call<MainPojo>
 
 
+    @POST("users/update_user")
+    @Multipart
+    @JvmSuppressWildcards
+    fun updateUser(@PartMap map:Map<String,RequestBody>
+                   ,@Part files:ArrayList<MultipartBody.Part>
+                   ,@Header("x-access-token") token: String):Call<MainPojo>
+
+    @PUT("users/update_kyc")
+    fun updateKyc(@Body map:HashMap<String,Any>
+                  ,@Header("x-access-token") token: String):Call<MainPojo>
+
+
 }

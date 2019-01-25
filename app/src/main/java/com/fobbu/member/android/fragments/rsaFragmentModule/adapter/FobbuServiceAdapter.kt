@@ -9,7 +9,6 @@ import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
 import com.fobbu.member.android.R
-import com.fobbu.member.android.utils.CommonClass
 import com.squareup.picasso.Picasso
 import java.util.ArrayList
 import java.util.HashMap

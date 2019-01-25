@@ -10,7 +10,6 @@ import android.content.Intent
 import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
 import android.support.annotation.RequiresApi
 import android.support.design.widget.BottomSheetDialog
 import android.support.v4.view.MenuItemCompat
@@ -26,10 +25,8 @@ import android.widget.*
 import com.fobbu.member.android.R
 import com.fobbu.member.android.activities.orderAndPassbookModule.passbook.adapter.PassbookAdapter
 import com.fobbu.member.android.activities.orderAndPassbookModule.passbookDetail.PassbookDetailActivity
-import com.fobbu.member.android.utils.CommonClass
 import com.fobbu.member.android.utils.RecyclerItemClickListener
 import kotlinx.android.synthetic.main.activity_my_passbook.*
-import kotlinx.android.synthetic.main.inflate_passbook_bottom_sheet.*
 import kotlinx.android.synthetic.main.toolbar.*
 import java.text.SimpleDateFormat
 import java.util.*

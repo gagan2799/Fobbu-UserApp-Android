@@ -2,12 +2,10 @@ package com.fobbu.member.android.activities.vehicleModule.presenter
 
 import android.app.Activity
 import android.widget.Toast
-import com.fobbu.member.android.activities.vehicleModule.presenter.AddEditActivityHandler
 import com.fobbu.member.android.activities.vehicleModule.view.AddEditVehicleAcivityView
 import com.fobbu.member.android.apiInterface.ApiClient
 import com.fobbu.member.android.apiInterface.Handler.ResponseHandler
 import com.fobbu.member.android.modals.MainPojo
-import com.fobbu.member.android.utils.CommonClass
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 

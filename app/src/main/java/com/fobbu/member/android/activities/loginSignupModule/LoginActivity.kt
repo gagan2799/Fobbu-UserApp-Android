@@ -11,7 +11,6 @@ import com.fobbu.member.android.activities.loginSignupModule.presenter.LoginActi
 import com.fobbu.member.android.apiInterface.MyApplication
 import com.fobbu.member.android.apiInterface.WebServiceApi
 import com.fobbu.member.android.modals.MainPojo
-import com.fobbu.member.android.utils.CommonClass
 import com.fobbu.member.android.view.ActivityView
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
@@ -153,6 +152,12 @@ class LoginActivity : AppCompatActivity(),ActivityView {
 
             val number = CommonClass(this@LoginActivity, this@LoginActivity)
                 .getString("Local_Number")
+
+            CommonClass(this@LoginActivity, this@LoginActivity)
+                .putString("profile", mainPojo.getData().profile)
+
+            CommonClass(this@LoginActivity, this@LoginActivity)
+                .putString("user_url", mainPojo.urls.user)
 
             if (number == mainPojo.getData().mobile_number)
             {

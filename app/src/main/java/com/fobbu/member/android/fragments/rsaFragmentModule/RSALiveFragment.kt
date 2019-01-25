@@ -1,6 +1,5 @@
 package com.fobbu.member.android.fragments
 
-import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.*
@@ -8,7 +7,6 @@ import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Build
 import android.os.Bundle
-import android.os.Handler
 import android.support.annotation.RequiresApi
 import android.support.design.widget.BottomSheetBehavior
 import android.support.design.widget.CoordinatorLayout
@@ -22,13 +20,11 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
-import com.bumptech.glide.Glide
 import com.fobbu.member.android.R
 
 import com.fobbu.member.android.activities.waitingScreenModule.WaitingScreenBlue
 import com.fobbu.member.android.activities.waitingScreenModule.WaitingScreenWhite
 import com.fobbu.member.android.fcm.FcmPushTypes
-import com.fobbu.member.android.fragments.rsaFragmentModule.RsaClassType
 import com.fobbu.member.android.fragments.rsaFragmentModule.RsaConstants
 import com.fobbu.member.android.fragments.rsaFragmentModule.presenter.RsaLiveHandler
 import com.fobbu.member.android.fragments.rsaFragmentModule.presenter.RsaLivePresenter
@@ -37,7 +33,6 @@ import com.fobbu.member.android.fragments.rsaFragmentModule.presenter.RsaLivePre
 import com.fobbu.member.android.interfaces.HeaderIconChanges
 import com.fobbu.member.android.interfaces.TopBarChanges
 import com.fobbu.member.android.modals.MainPojo
-import com.fobbu.member.android.utils.CommonClass
 import com.fobbu.member.android.view.ActivityView
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
@@ -50,8 +45,6 @@ import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.MapsInitializer
 import com.google.android.gms.maps.model.*
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_waiting_screen_blue.*
-import kotlinx.android.synthetic.main.fragment_rsa_live.*
 import java.lang.Double
 
 class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,

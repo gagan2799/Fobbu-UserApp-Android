@@ -9,14 +9,13 @@ import android.os.Handler
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.fobbu.member.android.R
+import com.fobbu.member.android.activities.dashboardActivity.DashboardActivity
 import com.fobbu.member.android.activities.paymentModule.GetSetGoActivity
 import com.fobbu.member.android.activities.paymentModule.WorkSummaryActivity
 import com.fobbu.member.android.fcm.FcmPushTypes
 import com.fobbu.member.android.fragments.rsaFragmentModule.RsaClassType
 import com.fobbu.member.android.fragments.rsaFragmentModule.RsaConstants
-import com.fobbu.member.android.interfaces.ChangeRSAFragments
 import com.fobbu.member.android.utils.CommonClass
-import kotlinx.android.synthetic.main.activity_waiting_screen_blue.*
 import kotlinx.android.synthetic.main.activity_waiting_screen_white.*
 import java.lang.Exception
 
@@ -84,6 +83,20 @@ class WaitingScreenWhite : AppCompatActivity() {
     private fun switchLayouts(strWhich: String?) {
 
         when (strWhich) {
+
+            "profile"->
+            {
+                tvVehicleAdd.text=getString(R.string.thank_you)
+
+                tvWhiteSubMessage.text="you have successfully completed \nyour profile."
+
+                Handler().postDelayed({
+                    startActivity(Intent(this, DashboardActivity::class.java)
+                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK))
+                },2000)
+
+            }
+
             "building_live" -> {
                 rlBuildingLiveTrack.visibility = View.VISIBLE
                 rlCodeValidated.visibility = View.GONE

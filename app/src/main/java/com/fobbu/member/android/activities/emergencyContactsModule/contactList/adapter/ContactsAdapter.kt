@@ -10,10 +10,8 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.fobbu.member.android.R
-import com.fobbu.member.android.R.id.view
 import com.fobbu.member.android.activities.emergencyContactsModule.emergencyContacts.EmergencyContactsActivity
 import com.fobbu.member.android.interfaces.DeleteVehicleClickListener
-import com.fobbu.member.android.utils.CommonClass
 
 class ContactsAdapter(var activity: Activity,var dataList:ArrayList<HashMap<String,Any>>):
     RecyclerView.Adapter<ContactsAdapter.ContactsViewHolder>() {

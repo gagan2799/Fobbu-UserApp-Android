@@ -7,6 +7,8 @@ class MainPojo
 {
     private  var data = Data()
 
+      var urls =Urls()
+
     fun setData(data: Data) {
         this.data = data
     }

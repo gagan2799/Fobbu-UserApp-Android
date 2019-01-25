@@ -10,10 +10,8 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.fobbu.member.android.R
 import com.fobbu.member.android.activities.paymentModule.WorkSummaryActivity
-import com.fobbu.member.android.activities.vehicleModule.AddEditVehicleActivity
 import com.fobbu.member.android.fcm.FcmPushTypes
 import com.fobbu.member.android.fragments.rsaFragmentModule.RsaConstants
-import com.fobbu.member.android.utils.CommonClass
 import kotlinx.android.synthetic.main.activity_waiting_screen_blue.*
 import java.lang.Exception
 

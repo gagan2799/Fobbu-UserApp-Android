@@ -591,10 +591,10 @@ public final class R {
         public static final int Theme_AppInvite_Preview = 0x7f100162;
         public static final int Theme_AppInvite_Preview_Base = 0x7f100163;
         public static final int Theme_IAPTheme = 0x7f10016a;
-        public static final int WalletFragmentDefaultButtonTextAppearance = 0x7f10019a;
-        public static final int WalletFragmentDefaultDetailsHeaderTextAppearance = 0x7f10019b;
-        public static final int WalletFragmentDefaultDetailsTextAppearance = 0x7f10019c;
-        public static final int WalletFragmentDefaultStyle = 0x7f10019d;
+        public static final int WalletFragmentDefaultButtonTextAppearance = 0x7f10019b;
+        public static final int WalletFragmentDefaultDetailsHeaderTextAppearance = 0x7f10019c;
+        public static final int WalletFragmentDefaultDetailsTextAppearance = 0x7f10019d;
+        public static final int WalletFragmentDefaultStyle = 0x7f10019e;
     }
     public static final class styleable {
         private styleable() {}

@@ -1,13 +1,10 @@
 package com.fobbu.member.android.activities.paymentModule.presenter
 
 import android.app.Activity
-import android.media.session.MediaSession
 import android.widget.Toast
-import com.fobbu.member.android.activities.vehicleModule.view.AddEditVehicleAcivityView
 import com.fobbu.member.android.apiInterface.ApiClient
 import com.fobbu.member.android.apiInterface.Handler.ResponseHandler
 import com.fobbu.member.android.modals.MainPojo
-import com.fobbu.member.android.utils.CommonClass
 import com.fobbu.member.android.view.ActivityView
 import okhttp3.RequestBody
 

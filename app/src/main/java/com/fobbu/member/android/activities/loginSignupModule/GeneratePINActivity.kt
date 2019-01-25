@@ -10,7 +10,6 @@ import android.view.View
 import android.widget.Toast
 import com.fobbu.member.android.R
 import com.fobbu.member.android.activities.dashboardActivity.DashboardActivity
-import com.fobbu.member.android.utils.CommonClass
 import kotlinx.android.synthetic.main.activity_generate_pin.*
 
 class GeneratePINActivity : AppCompatActivity() {

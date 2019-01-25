@@ -10,7 +10,6 @@ import android.os.Bundle
 import android.os.Handler
 import android.support.annotation.RequiresApi
 import android.support.v7.widget.GridLayoutManager
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.Window
@@ -24,7 +23,6 @@ import com.fobbu.member.android.activities.rsaModule.presenter.RsaCancelRequestP
 import com.fobbu.member.android.fragments.rsaFragmentModule.RsaClassType
 import com.fobbu.member.android.fragments.rsaFragmentModule.RsaConstants
 import com.fobbu.member.android.modals.MainPojo
-import com.fobbu.member.android.utils.CommonClass
 import com.fobbu.member.android.view.ActivityView
 import kotlinx.android.synthetic.main.activity_cancel_rsa.*
 import kotlinx.android.synthetic.main.fragment_builder_confirm.view.*
@@ -35,7 +33,7 @@ import java.util.HashMap
 class RSARequestCancelActivity : AppCompatActivity(), ActivityView {
 
 
-    val text: String = "Are you sure you want to cancel\n A cancelation fee or Rs$$ will be charged"
+    val text: String = "Are you sure you want to cancel\n A cancellation fee or Rs$$ will be charged"
     var issueList = ArrayList<HashMap<String, Any>>()
     lateinit var rsaHandler: RsaCancelRequestHandler
     lateinit var rsaRecyclerAdapter: RsaRecyclerAdapter
@@ -134,11 +132,11 @@ class RSARequestCancelActivity : AppCompatActivity(), ActivityView {
     }
 
     private fun showPopUp(activity: Activity,string: String) {
-        val inflater = activity!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val inflater = activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
         val cViewFinalPopup = inflater.inflate(R.layout.fragment_builder_confirm, null)
 
-        val builderFinal = Dialog(activity!!)
+        val builderFinal = Dialog(activity)
 
         builderFinal.requestWindowFeature(Window.FEATURE_NO_TITLE)
 
