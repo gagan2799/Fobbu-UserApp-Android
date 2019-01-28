@@ -13,7 +13,6 @@ import com.fobbu.member.android.activities.dashboardActivity.DashboardActivity
 import com.fobbu.member.android.activities.paymentModule.GetSetGoActivity
 import com.fobbu.member.android.activities.paymentModule.WorkSummaryActivity
 import com.fobbu.member.android.fcm.FcmPushTypes
-import com.fobbu.member.android.fragments.rsaFragmentModule.RsaClassType
 import com.fobbu.member.android.fragments.rsaFragmentModule.RsaConstants
 import com.fobbu.member.android.utils.CommonClass
 import kotlinx.android.synthetic.main.activity_waiting_screen_white.*
@@ -72,9 +71,9 @@ class WaitingScreenWhite : AppCompatActivity() {
 
     ///GOING TO RSA LIVE SCREEN
     private fun goToRsaLiveScreen() {
-        CommonClass(this, this).putString(RsaClassType.RsaTypes.onGoingRsaScreen, "YES")
+        CommonClass(this, this).putString(RsaConstants.RsaTypes.onGoingRsaScreen, "YES")
 
-        CommonClass(this, this).putString(RsaClassType.RsaTypes.onGoingRsaScreenType, resources.getString(R.string.rsa_live))
+        CommonClass(this, this).putString(RsaConstants.RsaTypes.onGoingRsaScreenType, resources.getString(R.string.rsa_live))
 
         finish()
     }

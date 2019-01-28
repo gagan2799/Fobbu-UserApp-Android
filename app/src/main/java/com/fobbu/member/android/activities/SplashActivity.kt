@@ -11,6 +11,7 @@ import com.fobbu.member.android.R
 import com.fobbu.member.android.activities.dashboardActivity.DashboardActivity
 import com.fobbu.member.android.activities.loginSignupModule.LoginActivity
 import com.fobbu.member.android.tutorial.TutorialActivity
+import com.fobbu.member.android.utils.CommonClass
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
 import com.google.firebase.iid.FirebaseInstanceId

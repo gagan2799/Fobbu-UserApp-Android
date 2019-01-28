@@ -10,6 +10,7 @@ import com.fobbu.member.android.activities.help.adapter.HelpAdapter
 import com.fobbu.member.android.activities.help.presenter.HelpHandler
 import com.fobbu.member.android.activities.help.presenter.HelpPresenter
 import com.fobbu.member.android.modals.MainPojo
+import com.fobbu.member.android.utils.CommonClass
 import com.fobbu.member.android.utils.RecyclerItemClickListener
 import com.fobbu.member.android.view.ActivityView
 import kotlinx.android.synthetic.main.activity_help.*
@@ -19,7 +20,7 @@ class HelpActivity : AppCompatActivity(),ActivityView
 {
     lateinit var helpAdapter:HelpAdapter
 
-    private lateinit var commonClass:CommonClass
+    private lateinit var commonClass: CommonClass
 
     var dataList= ArrayList<HashMap<String,Any>>()
 

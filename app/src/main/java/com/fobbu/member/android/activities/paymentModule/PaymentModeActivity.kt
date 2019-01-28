@@ -12,9 +12,10 @@ import com.fobbu.member.android.activities.dashboardActivity.DashboardActivity
 import com.fobbu.member.android.activities.paymentModule.presenter.PaymentModeHandler
 import com.fobbu.member.android.activities.paymentModule.presenter.PaymentModePresenter
 import com.fobbu.member.android.activities.rsaModule.RSARequestCancelActivity
-import com.fobbu.member.android.fragments.rsaFragmentModule.RsaClassType
+import com.fobbu.member.android.fcm.FcmPushTypes
 import com.fobbu.member.android.fragments.rsaFragmentModule.RsaConstants
 import com.fobbu.member.android.modals.MainPojo
+import com.fobbu.member.android.utils.CommonClass
 import com.fobbu.member.android.view.ActivityView
 import kotlinx.android.synthetic.main.activity_payment_mode.*
 import kotlinx.android.synthetic.main.option_menu_layout.*
@@ -97,6 +98,8 @@ class PaymentModeActivity : AppCompatActivity() , ActivityView{
     override fun onRequestSuccessReport(mainPojo: MainPojo) {
      if (mainPojo.success=="true")
      {
+         CommonClass(this,this).putString(RsaConstants.RsaTypes.checkStatus,FcmPushTypes.Types.moneyPaid)
+
          if(CommonClass(this,this).getString(RsaConstants.ServiceSaved.serviceNameSelected) ==
              RsaConstants.ServiceName.flatTyre
              ||
@@ -112,14 +115,13 @@ class PaymentModeActivity : AppCompatActivity() , ActivityView{
          }
          else
          {
-
              startActivity(Intent(this,DashboardActivity::class.java)
                  .setFlags
                      (Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK))
 
-             CommonClass(this, this).putString(RsaClassType.RsaTypes.onGoingRsaScreen, "YES")
+             CommonClass(this, this).putString(RsaConstants.RsaTypes.onGoingRsaScreen, "YES")
 
-             CommonClass(this, this).putString(RsaClassType.RsaTypes.onGoingRsaScreenType, resources.getString(R.string.rsa_live))
+             CommonClass(this, this).putString(RsaConstants.RsaTypes.onGoingRsaScreenType, resources.getString(R.string.rsa_live))
 
              finish()
          }

@@ -23,7 +23,6 @@ import android.widget.Toast
 import com.fobbu.member.android.R
 import com.fobbu.member.android.activities.loginSignupModule.LoginActivity
 import com.fobbu.member.android.activities.rsaModule.RSARequestCancelActivity
-import com.fobbu.member.android.fragments.rsaFragmentModule.RsaClassType
 import com.fobbu.member.android.fragments.rsaFragmentModule.RsaConstants
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -134,7 +133,11 @@ class CommonClass(activity1: Activity, context1: Context) {
 
         prefsEditor = myPrefs.edit()
         prefsEditor.remove(RsaConstants.ServiceSaved.fobbuRequestId)
-        prefsEditor.putString(RsaClassType.RsaTypes.onGoingRsaScreen, "")
+        prefsEditor.putString(RsaConstants.RsaTypes.onGoingRsaScreen, "")
+        prefsEditor.putString(RsaConstants.RsaTypes.onGoingRsaScreenType, "")
+        prefsEditor.putString(RsaConstants.RsaTypes.checkIfOnGoingRsaRequest,"")
+        prefsEditor.putString(RsaConstants.RsaTypes.checkStatus,"")
+
         prefsEditor.apply()
     }
 

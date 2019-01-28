@@ -25,6 +25,7 @@ import android.widget.*
 import com.fobbu.member.android.R
 import com.fobbu.member.android.activities.orderAndPassbookModule.passbook.adapter.PassbookAdapter
 import com.fobbu.member.android.activities.orderAndPassbookModule.passbookDetail.PassbookDetailActivity
+import com.fobbu.member.android.utils.CommonClass
 import com.fobbu.member.android.utils.RecyclerItemClickListener
 import kotlinx.android.synthetic.main.activity_my_passbook.*
 import kotlinx.android.synthetic.main.toolbar.*

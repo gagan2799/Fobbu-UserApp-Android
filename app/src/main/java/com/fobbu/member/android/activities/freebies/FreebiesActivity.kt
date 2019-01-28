@@ -7,11 +7,12 @@ import com.fobbu.member.android.R
 import kotlinx.android.synthetic.main.activity_freebies.*
 import kotlinx.android.synthetic.main.toolbar.*
 import android.content.Intent
+import com.fobbu.member.android.utils.CommonClass
 
 
 class FreebiesActivity : AppCompatActivity()
 {
-    lateinit var commonClass:CommonClass
+    lateinit var commonClass: CommonClass
 
     override fun onCreate(savedInstanceState: Bundle?)
     {

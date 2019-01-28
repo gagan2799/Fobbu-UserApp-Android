@@ -33,6 +33,7 @@ import com.fobbu.member.android.fragments.rsaFragmentModule.presenter.RsaLivePre
 import com.fobbu.member.android.interfaces.HeaderIconChanges
 import com.fobbu.member.android.interfaces.TopBarChanges
 import com.fobbu.member.android.modals.MainPojo
+import com.fobbu.member.android.utils.CommonClass
 import com.fobbu.member.android.view.ActivityView
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
@@ -185,6 +186,7 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
             rlTools.visibility = View.GONE
         }
 
+        checkStatusAndNavigate()
     }
 
     @SuppressLint("SetTextI18n", "InflateParams")
@@ -458,27 +460,39 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
             println("ON RECEIVE BROADCAST " + intent.getStringExtra("navigate_to"))
 
-            when {
-                intent.getStringExtra("navigate_to") == FcmPushTypes.Types.inRouteRequest -> {
-                    ivTool.setImageResource(R.drawable.man_riding_bike)
-                    tvText.text = resources.getString(R.string.fobbu_on_way)
-                    strWhere = "share"
+            checkStatusAndNavigate()
+        }
+    }
 
-                    ivLeftDotted.setImageResource(R.drawable.dotted)
-                    ivRightDotted.setImageResource(R.drawable.dotted)
-                    tvTrack.background = resources.getDrawable(R.drawable.solid_color_red)
-                    rlPickingFuel.visibility = View.GONE
-                    tvPickingFuel.visibility = View.GONE
-                    rlTools.visibility = View.VISIBLE
+    private fun checkStatusAndNavigate() {
 
-                }
-                intent.getStringExtra("navigate_to") == FcmPushTypes.Types.newPin -> {
-                    ivTool.setImageResource(R.drawable.mechanic_with_cap)
-                    tvText.text = resources.getString(R.string.share_4_digit_code)
-                    tvCode.text = intent.getStringExtra("otp")
-                    tvCode.visibility = View.VISIBLE
-                }
-                intent.getStringExtra("navigate_to") == FcmPushTypes.Types.otpVerified -> startActivity(
+        val status = CommonClass(activity!!,activity!!).getString(RsaConstants.RsaTypes.checkStatus)
+
+        when (status) {
+            FcmPushTypes.Types.inRouteRequest -> {
+                ivTool.setImageResource(R.drawable.man_riding_bike)
+                tvText.text = resources.getString(R.string.fobbu_on_way)
+                strWhere = "share"
+
+                ivLeftDotted.setImageResource(R.drawable.dotted)
+                ivRightDotted.setImageResource(R.drawable.dotted)
+                tvTrack.background = resources.getDrawable(R.drawable.solid_color_red)
+                rlPickingFuel.visibility = View.GONE
+                tvPickingFuel.visibility = View.GONE
+                rlTools.visibility = View.VISIBLE
+
+            }
+            FcmPushTypes.Types.newPin -> {
+                ivTool.setImageResource(R.drawable.mechanic_with_cap)
+                tvText.text = resources.getString(R.string.share_4_digit_code)
+                tvCode.text = CommonClass(activity!!,activity!!).getString(RsaConstants.ServiceSaved.otpStart)
+                tvCode.visibility = View.VISIBLE
+            }
+            FcmPushTypes.Types.otpVerified ->
+            {
+                println("HERE IN LIVE ")
+
+                startActivity(
                     Intent(
                         activity!!,
                         WaitingScreenWhite::class.java
@@ -486,6 +500,7 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                 )
             }
         }
+
     }
 
 

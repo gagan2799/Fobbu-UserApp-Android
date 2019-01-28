@@ -184,6 +184,11 @@
             android:name="com.fobbu.member.android.activities.emergencyContactsModule.contactList.ContactListActicvity"
             android:screenOrientation="portrait" >
         </activity>
+        <activity
+            android:name="com.fobbu.member.android.activities.profile.ProfileActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" >
+        </activity>
 
         <receiver android:name="com.google.android.gms.cast.framework.media.MediaIntentReceiver" />
 

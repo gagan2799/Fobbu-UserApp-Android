@@ -20,9 +20,9 @@ import com.fobbu.member.android.R
 import com.fobbu.member.android.activities.rsaModule.adapter.RsaRecyclerAdapter
 import com.fobbu.member.android.activities.rsaModule.presenter.RsaCancelRequestHandler
 import com.fobbu.member.android.activities.rsaModule.presenter.RsaCancelRequestPresenter
-import com.fobbu.member.android.fragments.rsaFragmentModule.RsaClassType
 import com.fobbu.member.android.fragments.rsaFragmentModule.RsaConstants
 import com.fobbu.member.android.modals.MainPojo
+import com.fobbu.member.android.utils.CommonClass
 import com.fobbu.member.android.view.ActivityView
 import kotlinx.android.synthetic.main.activity_cancel_rsa.*
 import kotlinx.android.synthetic.main.fragment_builder_confirm.view.*
@@ -195,10 +195,7 @@ class RSARequestCancelActivity : AppCompatActivity(), ActivityView {
 
                 setRecycler()
             } else {
-                CommonClass(this, this).removeString(RsaConstants.ServiceSaved.fobbuRequestId)
-                CommonClass(this, this).putString(RsaClassType.RsaTypes.onGoingRsaScreen, "")
-                CommonClass(this, this).putString(RsaClassType.RsaTypes.onGoingRsaScreenType, "")
-
+                CommonClass(this, this).workDoneReviewSend()
 
                 startActivity(
                     Intent(

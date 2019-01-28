@@ -16,6 +16,7 @@ import com.fobbu.member.android.fragments.rsaFragmentModule.RsaConstants
 import com.fobbu.member.android.fragments.rsaFragmentModule.presenter.RsaLiveHandler
 import com.fobbu.member.android.fragments.rsaFragmentModule.presenter.RsaLivePresenter
 import com.fobbu.member.android.modals.MainPojo
+import com.fobbu.member.android.utils.CommonClass
 import com.fobbu.member.android.view.ActivityView
 import kotlinx.android.synthetic.main.activity_work_summary.*
 import kotlinx.android.synthetic.main.option_menu_layout.*
@@ -38,6 +39,10 @@ class WorkSummaryActivity : AppCompatActivity(),ActivityView {
         clicks()
     }
 
+    override fun onBackPressed() {
+
+    }
+
 
     // method for handling all the initialization of this class
     private fun initView() {
@@ -46,7 +51,8 @@ class WorkSummaryActivity : AppCompatActivity(),ActivityView {
 
         if (CommonClass(this,this).checkInternetConn(this))
         {
-            rsaLiveHandler.getService(CommonClass(this,this).getString("x_access_token"),CommonClass(this, this).getString(
+            rsaLiveHandler.getService(
+                CommonClass(this,this).getString("x_access_token"),CommonClass(this, this).getString(
                 RsaConstants.ServiceSaved.fobbuRequestId))
         }
     }

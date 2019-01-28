@@ -8,6 +8,7 @@ import android.text.TextWatcher
 import android.view.KeyEvent
 import android.widget.Toast
 import com.fobbu.member.android.R
+import com.fobbu.member.android.utils.CommonClass
 import kotlinx.android.synthetic.main.activity_sms_verification.*
 
 class SMSVerificationActivity : AppCompatActivity() {

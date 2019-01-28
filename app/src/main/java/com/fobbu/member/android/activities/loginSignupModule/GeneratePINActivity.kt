@@ -10,11 +10,11 @@ import android.view.View
 import android.widget.Toast
 import com.fobbu.member.android.R
 import com.fobbu.member.android.activities.dashboardActivity.DashboardActivity
+import com.fobbu.member.android.utils.CommonClass
 import kotlinx.android.synthetic.main.activity_generate_pin.*
 
 class GeneratePINActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?)
-    {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_generate_pin)
@@ -27,34 +27,28 @@ class GeneratePINActivity : AppCompatActivity() {
     }
 
     //function for initialisng all variables of the class
-    private fun initView()
-    {
-        if (intent.hasExtra("pin"))
-        {
-            if (intent.getStringExtra("pin")=="security")
-            {
-                if (CommonClass(this,this).getString("Local_Pin").isNotEmpty())
-                {
-                    tvCurrnetPin.visibility=View.VISIBLE
+    private fun initView() {
+        if (intent.hasExtra("pin")) {
+            if (intent.getStringExtra("pin") == "security") {
+                if (CommonClass(this, this).getString("Local_Pin").isNotEmpty()) {
+                    tvCurrnetPin.visibility = View.VISIBLE
 
-                    llCurrentPIN.visibility=View.VISIBLE
+                    llCurrentPIN.visibility = View.VISIBLE
                 }
 
-                tvDoItLater.visibility=View.GONE
+                tvDoItLater.visibility = View.GONE
 
-                tvLogin.text=getString(R.string.generate_new_pin)
+                tvLogin.text = getString(R.string.generate_new_pin)
 
             }
-        }
-        else
-        {
-            tvLogin.text=getString(R.string.generate_pin)
+        } else {
+            tvLogin.text = getString(R.string.generate_pin)
 
-            tvCurrnetPin.visibility=View.GONE
+            tvCurrnetPin.visibility = View.GONE
 
-            llCurrentPIN.visibility=View.GONE
+            llCurrentPIN.visibility = View.GONE
 
-            tvDoItLater.visibility=View.VISIBLE
+            tvDoItLater.visibility = View.VISIBLE
         }
 
     }
@@ -68,12 +62,17 @@ class GeneratePINActivity : AppCompatActivity() {
                     edPinTwo.requestFocus()
             }
 
-            override fun beforeTextChanged(s: CharSequence, start: Int,
-                                           count: Int, after: Int) {
+            override fun beforeTextChanged(
+                s: CharSequence, start: Int,
+                count: Int, after: Int
+            ) {
             }
 
-            override fun onTextChanged(s: CharSequence, start: Int,
-                                       before: Int, count: Int) {}
+            override fun onTextChanged(
+                s: CharSequence, start: Int,
+                before: Int, count: Int
+            ) {
+            }
 
         })
         edPinTwo.addTextChangedListener(object : TextWatcher {
@@ -84,12 +83,16 @@ class GeneratePINActivity : AppCompatActivity() {
                 }
             }
 
-            override fun beforeTextChanged(s: CharSequence, start: Int,
-                                           count: Int, after: Int) {
+            override fun beforeTextChanged(
+                s: CharSequence, start: Int,
+                count: Int, after: Int
+            ) {
             }
 
-            override fun onTextChanged(s: CharSequence, start: Int,
-                                       before: Int, count: Int) {
+            override fun onTextChanged(
+                s: CharSequence, start: Int,
+                before: Int, count: Int
+            ) {
 
             }
         })
@@ -101,12 +104,16 @@ class GeneratePINActivity : AppCompatActivity() {
                     edPinFour.requestFocus()
             }
 
-            override fun beforeTextChanged(s: CharSequence, start: Int,
-                                           count: Int, after: Int) {
+            override fun beforeTextChanged(
+                s: CharSequence, start: Int,
+                count: Int, after: Int
+            ) {
             }
 
-            override fun onTextChanged(s: CharSequence, start: Int,
-                                       before: Int, count: Int) {
+            override fun onTextChanged(
+                s: CharSequence, start: Int,
+                before: Int, count: Int
+            ) {
 
             }
         })
@@ -118,18 +125,21 @@ class GeneratePINActivity : AppCompatActivity() {
                     edPinFive.requestFocus()
             }
 
-            override fun beforeTextChanged(s: CharSequence, start: Int,
-                                           count: Int, after: Int) {
+            override fun beforeTextChanged(
+                s: CharSequence, start: Int,
+                count: Int, after: Int
+            ) {
             }
 
-            override fun onTextChanged(s: CharSequence, start: Int,
-                                       before: Int, count: Int) {
+            override fun onTextChanged(
+                s: CharSequence, start: Int,
+                before: Int, count: Int
+            ) {
 
             }
         })
 
-        if (intent.getStringExtra("pin")=="security")
-        {
+        if (intent.getStringExtra("pin") == "security") {
             edCurrentPinOne.addTextChangedListener(object : TextWatcher {
 
                 override fun afterTextChanged(s: Editable) {
@@ -137,12 +147,17 @@ class GeneratePINActivity : AppCompatActivity() {
                         edCurrentPinTwo.requestFocus()
                 }
 
-                override fun beforeTextChanged(s: CharSequence, start: Int,
-                                               count: Int, after: Int) {
+                override fun beforeTextChanged(
+                    s: CharSequence, start: Int,
+                    count: Int, after: Int
+                ) {
                 }
 
-                override fun onTextChanged(s: CharSequence, start: Int,
-                                           before: Int, count: Int) {}
+                override fun onTextChanged(
+                    s: CharSequence, start: Int,
+                    before: Int, count: Int
+                ) {
+                }
 
             })
             edCurrentPinTwo.addTextChangedListener(object : TextWatcher {
@@ -153,12 +168,16 @@ class GeneratePINActivity : AppCompatActivity() {
                     }
                 }
 
-                override fun beforeTextChanged(s: CharSequence, start: Int,
-                                               count: Int, after: Int) {
+                override fun beforeTextChanged(
+                    s: CharSequence, start: Int,
+                    count: Int, after: Int
+                ) {
                 }
 
-                override fun onTextChanged(s: CharSequence, start: Int,
-                                           before: Int, count: Int) {
+                override fun onTextChanged(
+                    s: CharSequence, start: Int,
+                    before: Int, count: Int
+                ) {
 
                 }
             })
@@ -170,12 +189,16 @@ class GeneratePINActivity : AppCompatActivity() {
                         edCurrentPinFour.requestFocus()
                 }
 
-                override fun beforeTextChanged(s: CharSequence, start: Int,
-                                               count: Int, after: Int) {
+                override fun beforeTextChanged(
+                    s: CharSequence, start: Int,
+                    count: Int, after: Int
+                ) {
                 }
 
-                override fun onTextChanged(s: CharSequence, start: Int,
-                                           before: Int, count: Int) {
+                override fun onTextChanged(
+                    s: CharSequence, start: Int,
+                    before: Int, count: Int
+                ) {
 
                 }
             })
@@ -187,12 +210,16 @@ class GeneratePINActivity : AppCompatActivity() {
                         edPinOne.requestFocus()
                 }
 
-                override fun beforeTextChanged(s: CharSequence, start: Int,
-                                               count: Int, after: Int) {
+                override fun beforeTextChanged(
+                    s: CharSequence, start: Int,
+                    count: Int, after: Int
+                ) {
                 }
 
-                override fun onTextChanged(s: CharSequence, start: Int,
-                                           before: Int, count: Int) {
+                override fun onTextChanged(
+                    s: CharSequence, start: Int,
+                    before: Int, count: Int
+                ) {
 
                 }
             })
@@ -263,12 +290,17 @@ class GeneratePINActivity : AppCompatActivity() {
                     edPinSix.requestFocus()
             }
 
-            override fun beforeTextChanged(s: CharSequence, start: Int,
-                                           count: Int, after: Int) {
+            override fun beforeTextChanged(
+                s: CharSequence, start: Int,
+                count: Int, after: Int
+            ) {
             }
 
-            override fun onTextChanged(s: CharSequence, start: Int,
-                                       before: Int, count: Int) {}
+            override fun onTextChanged(
+                s: CharSequence, start: Int,
+                before: Int, count: Int
+            ) {
+            }
 
         })
         edPinSix.addTextChangedListener(object : TextWatcher {
@@ -279,12 +311,16 @@ class GeneratePINActivity : AppCompatActivity() {
                 }
             }
 
-            override fun beforeTextChanged(s: CharSequence, start: Int,
-                                           count: Int, after: Int) {
+            override fun beforeTextChanged(
+                s: CharSequence, start: Int,
+                count: Int, after: Int
+            ) {
             }
 
-            override fun onTextChanged(s: CharSequence, start: Int,
-                                       before: Int, count: Int) {
+            override fun onTextChanged(
+                s: CharSequence, start: Int,
+                before: Int, count: Int
+            ) {
 
             }
         })
@@ -296,12 +332,16 @@ class GeneratePINActivity : AppCompatActivity() {
                     edPinEight.requestFocus()
             }
 
-            override fun beforeTextChanged(s: CharSequence, start: Int,
-                                           count: Int, after: Int) {
+            override fun beforeTextChanged(
+                s: CharSequence, start: Int,
+                count: Int, after: Int
+            ) {
             }
 
-            override fun onTextChanged(s: CharSequence, start: Int,
-                                       before: Int, count: Int) {
+            override fun onTextChanged(
+                s: CharSequence, start: Int,
+                before: Int, count: Int
+            ) {
 
             }
         })
@@ -310,12 +350,16 @@ class GeneratePINActivity : AppCompatActivity() {
 
             override fun afterTextChanged(s: Editable) {}
 
-            override fun beforeTextChanged(s: CharSequence, start: Int,
-                                           count: Int, after: Int) {
+            override fun beforeTextChanged(
+                s: CharSequence, start: Int,
+                count: Int, after: Int
+            ) {
             }
 
-            override fun onTextChanged(s: CharSequence, start: Int,
-                                       before: Int, count: Int) {
+            override fun onTextChanged(
+                s: CharSequence, start: Int,
+                before: Int, count: Int
+            ) {
 
             }
         })
@@ -371,70 +415,72 @@ class GeneratePINActivity : AppCompatActivity() {
 
         tvGenerate.setOnClickListener {
 
-            val currentPin= edCurrentPinOne.text.toString().trim() +
+            val currentPin = edCurrentPinOne.text.toString().trim() +
                     edCurrentPinTwo.text.toString().trim() +
                     edCurrentPinThree.text.toString().trim() +
                     edCurrentPinFour.text.toString().trim()
 
-
-
-            val enterPin= edPinOne.text.toString().trim() +
+            val enterPin = edPinOne.text.toString().trim() +
                     edPinTwo.text.toString().trim() +
                     edPinThree.text.toString().trim() +
                     edPinFour.text.toString().trim()
 
-            val confirmPin= edPinFive.text.toString().trim() +
+            val confirmPin = edPinFive.text.toString().trim() +
                     edPinSix.text.toString().trim() +
                     edPinSeven.text.toString().trim() +
                     edPinEight.text.toString().trim()
 
-            if (intent.getStringExtra("pin")=="security")
-            {
-                if (CommonClass(this,this).getString("Local_Pin").isNotEmpty())
-                {
-                    when
-                    {
-                        currentPin!=CommonClass(this,this).getString("Local_Pin") -> Toast.makeText(this,"provide correct pin", Toast.LENGTH_SHORT).show()
+            if (intent.getStringExtra("pin") == "security") {
+                if (CommonClass(this, this).getString("Local_Pin").isNotEmpty()) {
+                    when {
+                        currentPin != CommonClass(this, this).getString("Local_Pin") -> Toast.makeText(
+                            this,
+                            "provide correct pin",
+                            Toast.LENGTH_SHORT
+                        ).show()
 
-                        currentPin== enterPin -> Toast.makeText(this,"Entered Pin is same as the old pin.Try new pin", Toast.LENGTH_SHORT).show()
+                        currentPin == enterPin -> Toast.makeText(
+                            this,
+                            "Entered Pin is same as the old pin.Try new pin",
+                            Toast.LENGTH_SHORT
+                        ).show()
 
-                        enterPin!=confirmPin -> Toast.makeText(this,resources.getString(R.string.pin_dont_match),Toast.LENGTH_SHORT).show()
+                        enterPin != confirmPin -> Toast.makeText(
+                            this,
+                            resources.getString(R.string.pin_dont_match),
+                            Toast.LENGTH_SHORT
+                        ).show()
                         else -> {
-                            Toast.makeText(this,resources.getString(R.string.succesfully_set_pin),Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this, resources.getString(R.string.succesfully_set_pin), Toast.LENGTH_SHORT)
+                                .show()
 
-                            val number = CommonClass(this,this).getString("mobile_number")
-
-                            CommonClass(this,this).putString("Local_Number",number)
-
-                            CommonClass(this,this).putString("Local_Pin",confirmPin)
+                            CommonClass(this, this).putString("Local_Pin", confirmPin)
 
                             finish()
                         }
                     }
-                }
+                } else
+                    firstTimePin(enterPin, confirmPin)
+            } else {
+                firstTimePin(enterPin, confirmPin)
             }
-            else
-            {
-                if (enterPin == confirmPin)
-                {
-                    Toast.makeText(this,resources.getString(R.string.succesfully_set_pin),Toast.LENGTH_SHORT).show()
+        }
+    }
 
-                    val number = CommonClass(this,this).getString("mobile_number")
+    private fun firstTimePin(enterPin: String, confirmPin: String) {
+        when {
+            enterPin == "" -> Toast.makeText(this, "Please enter PIN", Toast.LENGTH_SHORT).show()
+            confirmPin == "" -> Toast.makeText(this, "Please enter Confirm PIN", Toast.LENGTH_SHORT).show()
+            enterPin == confirmPin -> {
+                Toast.makeText(this, resources.getString(R.string.succesfully_set_pin), Toast.LENGTH_SHORT).show()
 
-                    CommonClass(this,this).putString("Local_Number",number)
+                CommonClass(this, this).putString("Local_Pin", confirmPin)
 
-                    CommonClass(this,this).putString("Local_Pin",confirmPin)
+                startActivity(Intent(this, DashboardActivity::class.java))
 
-                    startActivity(Intent(this, DashboardActivity::class.java))
-
-                    finish()
-                }
-                else
-                    Toast.makeText(this,resources.getString(R.string.pin_dont_match),Toast.LENGTH_SHORT).show()
-
-
+                finish()
             }
-
+            else -> Toast.makeText(this, resources.getString(R.string.pin_dont_match), Toast.LENGTH_SHORT).show()
         }
 
     }

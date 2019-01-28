@@ -25,6 +25,7 @@ import com.fobbu.member.android.activities.help.HelpActivity
 import com.fobbu.member.android.activities.orderAndPassbookModule.MyOrder.MyOrdersActivity
 import com.fobbu.member.android.activities.orderAndPassbookModule.passbook.MyPassbookActivity
 import com.fobbu.member.android.activities.paymentModule.GetSetGoActivity
+import com.fobbu.member.android.activities.paymentModule.WorkSummaryActivity
 import com.fobbu.member.android.activities.paymentSettings.PaymentSettingActivity
 import com.fobbu.member.android.activities.rsaModule.RSARequestCancelActivity
 import com.fobbu.member.android.activities.securitySetting.SecuritySettingActivity
@@ -37,11 +38,12 @@ import com.fobbu.member.android.fragments.HomeFragment
 
 import com.fobbu.member.android.fragments.RSALiveFragment
 import com.fobbu.member.android.fragments.rsaFragmentModule.RSAFragment
-import com.fobbu.member.android.fragments.rsaFragmentModule.RsaClassType
+import com.fobbu.member.android.fragments.rsaFragmentModule.RsaConstants
 import com.fobbu.member.android.interfaces.ChangeRSAFragments
 import com.fobbu.member.android.interfaces.HeaderIconChanges
 import com.fobbu.member.android.interfaces.TopBarChanges
 import com.fobbu.member.android.modals.MainPojo
+import com.fobbu.member.android.utils.CommonClass
 import com.fobbu.member.android.view.ActivityView
 import kotlinx.android.synthetic.main.activity_dashboard.*
 import kotlinx.android.synthetic.main.app_bar_dashboard.*
@@ -65,7 +67,6 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
         setDataToDrawer()
         drawerClicks()
         tabBarClicks()
-        checkAndNavigateFromPush()
     }
 
     override fun showGoneTopBar(showDrawer: Boolean) {
@@ -241,9 +242,9 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
     ////CHECK IF RSA REQUEST IS ON WITH SCREENS
     private fun checkIfOnGoingRSAScreen() {
 
-        if (CommonClass(this, this).getString(RsaClassType.RsaTypes.onGoingRsaScreen) == "YES") {
+        if (CommonClass(this, this).getString(RsaConstants.RsaTypes.onGoingRsaScreen) == "YES") {
 
-            fragmentTypeForRSA = CommonClass(this, this).getString(RsaClassType.RsaTypes.onGoingRsaScreenType)
+            fragmentTypeForRSA = CommonClass(this, this).getString(RsaConstants.RsaTypes.onGoingRsaScreenType)
             setFragmentsFromStackForRSA(fragmentTypeForRSA)
         }
     }
@@ -361,7 +362,9 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
 
     private fun checkAndNavigateFromPush() {
 
-        if (intent.hasExtra("from_push")) {
+        /// FROM PUSH NOTIFICATIONS
+      /*  if (intent.hasExtra("from_push"))
+        {
             val type: String = intent.getStringExtra("from_push")
             when (type) {
 
@@ -370,56 +373,124 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
                 }
                 FcmPushTypes.Types.inRouteRequest -> {
 
-                    CommonClass(this, this).putString(RsaClassType.RsaTypes.onGoingRsaScreen, "YES")
-                    CommonClass(this, this).putString(RsaClassType.RsaTypes.onGoingRsaScreenType, resources.getString(R.string.rsa_live))
+                    CommonClass(this, this).putString(RsaConstants.RsaTypes.onGoingRsaScreen, "YES")
+                    CommonClass(this, this).putString(RsaConstants.RsaTypes.onGoingRsaScreenType, resources.getString(R.string.rsa_live))
                     checkIfOnGoingRSAScreen()
                 }
                 FcmPushTypes.Types.newPin -> {
 
-                    CommonClass(this, this).putString(RsaClassType.RsaTypes.onGoingRsaScreen, "YES")
-                    CommonClass(this, this).putString(RsaClassType.RsaTypes.onGoingRsaScreenType,
+                    CommonClass(this, this).putString(RsaConstants.RsaTypes.onGoingRsaScreen, "YES")
+                    CommonClass(this, this).putString(RsaConstants.RsaTypes.onGoingRsaScreenType,
                         resources.getString(R.string.rsa_live))
-                    CommonClass(this, this).putString(RsaClassType.RsaTypes.onGoingRsaLiveScreenType,
+                    CommonClass(this, this).putString(RsaConstants.RsaTypes.onGoingRsaLiveScreenType,
                         FcmPushTypes.Types.newPin)
-                    CommonClass(this, this).putString(RsaClassType.RsaTypes.onGoingRsaLivePIN,
+                    CommonClass(this, this).putString(RsaConstants.RsaTypes.onGoingRsaLivePIN,
                         intent.getStringExtra("otp"))
                     checkIfOnGoingRSAScreen()
                 }
                 FcmPushTypes.Types.otpVerified -> {
 
-                    CommonClass(this, this).putString(RsaClassType.RsaTypes.onGoingRsaScreen, "YES")
-                    CommonClass(this, this).putString(RsaClassType.RsaTypes.onGoingRsaScreenType, resources.getString(R.string.rsa_live))
-                    CommonClass(this, this).putString(RsaClassType.RsaTypes.onGoingRsaLiveScreenType,
+                    CommonClass(this, this).putString(RsaConstants.RsaTypes.onGoingRsaScreen, "YES")
+                    CommonClass(this, this).putString(RsaConstants.RsaTypes.onGoingRsaScreenType, resources.getString(R.string.rsa_live))
+                    CommonClass(this, this).putString(RsaConstants.RsaTypes.onGoingRsaLiveScreenType,
                         FcmPushTypes.Types.otpVerified)
                     checkIfOnGoingRSAScreen()
                 }
                 FcmPushTypes.Types.moneyRequested -> {
 
-                    CommonClass(this, this).putString(RsaClassType.RsaTypes.onGoingRsaScreen, "YES")
+                    CommonClass(this, this).putString(RsaConstants.RsaTypes.onGoingRsaScreen, "YES")
                     startActivity(Intent(this, WaitingScreenWhite::class.java).putExtra("from_where", "vehicle_accessed"))
                 }
                 FcmPushTypes.Types.startedWork -> {
 
-                    CommonClass(this, this).putString(RsaClassType.RsaTypes.onGoingRsaScreen, "YES")
+                    CommonClass(this, this).putString(RsaConstants.RsaTypes.onGoingRsaScreen, "YES")
                     startActivity(Intent(this, GetSetGoActivity::class.java).putExtra("navigate_to", "Get"))
                 }
                 FcmPushTypes.Types.workEnded -> {
 
-                    CommonClass(this, this).putString(RsaClassType.RsaTypes.onGoingRsaScreen, "YES")
+                    CommonClass(this, this).putString(RsaConstants.RsaTypes.onGoingRsaScreen, "YES")
                     startActivity(Intent(this, GetSetGoActivity::class.java).putExtra("navigate_to", ""))
                 }
                 else -> {
 
                 }
             }
-        } else
+        }
+
+        else*/ if(CommonClass(this,this).getString(RsaConstants.RsaTypes.checkStatus) !="")
+        {
+            val type: String = CommonClass(this,this).getString(RsaConstants.RsaTypes.checkStatus)
+            when (type) {
+
+                FcmPushTypes.Types.accept -> {
+                    CommonClass(this, this).putString(RsaConstants.RsaTypes.onGoingRsaScreen, "YES")
+                    CommonClass(this, this).putString(RsaConstants.RsaTypes.onGoingRsaScreenType, resources.getString(R.string.rsa_live))
+                    checkIfOnGoingRSAScreen()
+                }
+
+                FcmPushTypes.Types.cancelledByAdmin -> {
+                    CommonClass(this,this).workDoneReviewSend()
+                }
+                FcmPushTypes.Types.inRouteRequest -> {
+
+                    CommonClass(this, this).putString(RsaConstants.RsaTypes.onGoingRsaScreen, "YES")
+                    CommonClass(this, this).putString(RsaConstants.RsaTypes.onGoingRsaScreenType, resources.getString(R.string.rsa_live))
+                    checkIfOnGoingRSAScreen()
+                }
+                FcmPushTypes.Types.newPin -> {
+
+                    CommonClass(this, this).putString(RsaConstants.RsaTypes.onGoingRsaScreen, "YES")
+                    CommonClass(this, this).putString(RsaConstants.RsaTypes.onGoingRsaScreenType,
+                        resources.getString(R.string.rsa_live))
+                    CommonClass(this, this).putString(RsaConstants.RsaTypes.onGoingRsaLiveScreenType,
+                        FcmPushTypes.Types.newPin)
+                    checkIfOnGoingRSAScreen()
+                }
+                FcmPushTypes.Types.otpVerified -> {
+
+                    startActivity(Intent(this, WaitingScreenWhite::class.java)
+                        .putExtra("from_where", "wallet_accessing"))
+                }
+                FcmPushTypes.Types.moneyRequested -> {
+
+                    CommonClass(this, this).putString(RsaConstants.RsaTypes.onGoingRsaScreen, "YES")
+                    startActivity(
+                        Intent(this, WorkSummaryActivity::class.java)
+                            .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+                    )
+                }
+
+                FcmPushTypes.Types.moneyPaid -> {
+
+                    CommonClass(this, this).putString(RsaConstants.RsaTypes.onGoingRsaScreen, "YES")
+                    startActivity(Intent(this, GetSetGoActivity::class.java).putExtra("navigate_to", "Start"))
+                }
+                FcmPushTypes.Types.startedWork -> {
+
+                    CommonClass(this, this).putString(RsaConstants.RsaTypes.onGoingRsaScreen, "YES")
+                    startActivity(Intent(this, GetSetGoActivity::class.java).putExtra("navigate_to", FcmPushTypes.Types.startedWork))
+                }
+                FcmPushTypes.Types.workEnded -> {
+
+                    CommonClass(this, this).putString(RsaConstants.RsaTypes.onGoingRsaScreen, "YES")
+                    startActivity(Intent(this, GetSetGoActivity::class.java).putExtra("navigate_to", FcmPushTypes.Types.workEnded))
+                }
+                else -> {
+
+                }
+            }
+        }
+        else
             changeFragment(HomeFragment(), resources.getString(R.string.home))
     }
 
     override fun onResume() {
         super.onResume()
 
-        checkIfOnGoingRSAScreen()
+       // checkIfOnGoingRSAScreen()
+
+
+        checkAndNavigateFromPush()
 
         /* val filter = IntentFilter(FcmPushTypes.Types.inRouteRequestBroadCast)
          registerReceiver(changeRSALiveScreenReceiver, filter)*/

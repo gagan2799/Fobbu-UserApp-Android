@@ -21,6 +21,7 @@ import com.fobbu.member.android.activities.emergencyContactsModule.emergencyCont
 import com.fobbu.member.android.activities.emergencyContactsModule.emergencyContacts.presenter.EmergencyPresenter
 import com.fobbu.member.android.activities.emergencyContactsModule.emergencyContacts.view.ContactsView
 import com.fobbu.member.android.modals.MainPojo
+import com.fobbu.member.android.utils.CommonClass
 import com.fobbu.member.android.view.ActivityView
 
 
@@ -30,7 +31,7 @@ class EmergencyContactsActivity :ContactListView, AppCompatActivity(),ActivityVi
 
     private var relationShip= arrayOf("Relationship","Father","Mother","Sister","Brother","Uncle","Aunt","Son","Daughter","Wife","Husband","Neighbor")
 
-    lateinit var commonClass:CommonClass
+    lateinit var commonClass: CommonClass
 
     private val contactList=ArrayList<HashMap<String,String>>()
 

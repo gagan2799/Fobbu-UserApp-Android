@@ -10,14 +10,16 @@ import com.fobbu.member.android.activities.loginSignupModule.presenter.LoginActi
 import com.fobbu.member.android.activities.loginSignupModule.presenter.LoginActivityPresenter
 import com.fobbu.member.android.apiInterface.MyApplication
 import com.fobbu.member.android.apiInterface.WebServiceApi
+import com.fobbu.member.android.fragments.rsaFragmentModule.RsaConstants
 import com.fobbu.member.android.modals.MainPojo
+import com.fobbu.member.android.utils.CommonClass
 import com.fobbu.member.android.view.ActivityView
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
 import com.google.firebase.iid.FirebaseInstanceId
 import kotlinx.android.synthetic.main.activity_login.*
 
-class LoginActivity : AppCompatActivity(),ActivityView {
+class LoginActivity : AppCompatActivity(), ActivityView {
 
 
     private lateinit var webServiceApi: WebServiceApi
@@ -26,7 +28,7 @@ class LoginActivity : AppCompatActivity(),ActivityView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-        loginActivityHandler=
+        loginActivityHandler =
                 LoginActivityPresenter(this, this)
         addClicks()
         fetchDeviceToken()
@@ -105,9 +107,9 @@ class LoginActivity : AppCompatActivity(),ActivityView {
 
             val token = CommonClass(this@LoginActivity, this@LoginActivity).getString("device_token")
 
-           // rlLoader.visibility = View.VISIBLE
+            // rlLoader.visibility = View.VISIBLE
 
-            loginActivityHandler.sendLoginData(mobile,password,token)
+            loginActivityHandler.sendLoginData(mobile, password, token)
 
         } else {
 
@@ -118,10 +120,7 @@ class LoginActivity : AppCompatActivity(),ActivityView {
     // Login API Response (API-users/login)
     override fun onRequestSuccessReport(mainPojo: MainPojo) {
 
-        if (mainPojo.success == "true")
-        {
-           // rlLoader.visibility = View.GONE
-            /*Toast.makeText(this,""+mainPojo.message, Toast.LENGTH_SHORT).show()*/
+        if (mainPojo.success == "true") {
 
             CommonClass(this@LoginActivity, this@LoginActivity)
                 .putString("_id", mainPojo!!.getData()._id)
@@ -150,36 +149,35 @@ class LoginActivity : AppCompatActivity(),ActivityView {
             CommonClass(this@LoginActivity, this@LoginActivity)
                 .putString("x_access_token", mainPojo.token)
 
-            val number = CommonClass(this@LoginActivity, this@LoginActivity)
-                .getString("Local_Number")
-
             CommonClass(this@LoginActivity, this@LoginActivity)
                 .putString("profile", mainPojo.getData().profile)
 
             CommonClass(this@LoginActivity, this@LoginActivity)
                 .putString("user_url", mainPojo.urls.user)
 
-            if (number == mainPojo.getData().mobile_number)
-            {
-                CommonClass(this@LoginActivity, this@LoginActivity)
-                    .putString("user_password", etPassword.text.toString())
+            CommonClass(this@LoginActivity, this@LoginActivity)
+                .putString("user_password", etPassword.text.toString())
 
-                startActivity(Intent(this@LoginActivity, DashboardActivity::class.java))
-            }
-            else
+            if(mainPojo.getData().active_requests.size>0)
             {
+                val list = mainPojo.getData().active_requests
+
                 CommonClass(this@LoginActivity, this@LoginActivity)
-                    .putString("Local_Number", "")
+                    .putString(RsaConstants.ServiceSaved.fobbuRequestId, list[0]["_id"].toString())
+
                 CommonClass(this@LoginActivity, this@LoginActivity)
-                    .putString("user_password", etPassword.text.toString())
+                    .putString(RsaConstants.RsaTypes.checkIfOnGoingRsaRequest,"YES")
+
                 CommonClass(this@LoginActivity, this@LoginActivity)
-                    .putString("Local_Pin", "")
-                startActivity(Intent(this@LoginActivity, GeneratePINActivity::class.java))
+                    .putString(RsaConstants.RsaTypes.checkStatus,list[0]["status"].toString())
             }
+
+
+            startActivity(Intent(this@LoginActivity, GeneratePINActivity::class.java))
 
             finish()
-        }else{
-           // rlLoader.visibility = View.GONE
+        } else {
+            // rlLoader.visibility = View.GONE
 /*
             val message = CommonClass(this@LoginActivity, this@LoginActivity)
             .errorMessage(response.errorBody()!!.string())*/
@@ -190,12 +188,13 @@ class LoginActivity : AppCompatActivity(),ActivityView {
         }
 
     }
+
     override fun showLoader() {
-        rlLoader.visibility=View.VISIBLE
+        rlLoader.visibility = View.VISIBLE
     }
 
     override fun hideLoader() {
-        rlLoader.visibility=View.GONE
+        rlLoader.visibility = View.GONE
     }
 
     private fun getEnv(): MyApplication {

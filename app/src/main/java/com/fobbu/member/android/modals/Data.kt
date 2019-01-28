@@ -17,13 +17,10 @@ class Data
     var user=User()
     var partner=Partner()
     var addition_services=ArrayList<HashMap<String,Any>>()
-
+    var active_requests=ArrayList<HashMap<String,Any>>()
     var order_id: String = ""
-
     var total_price: String = ""
-
     var service_name: String = ""
-
     var profile=""
 
 }

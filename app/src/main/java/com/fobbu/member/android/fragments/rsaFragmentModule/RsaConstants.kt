@@ -17,5 +17,16 @@ class RsaConstants
     {
         var fobbuRequestId="fobbu_request_id"
         var serviceNameSelected="service_name_selected"
+        var otpStart="otp_Start"
+    }
+
+    object RsaTypes
+    {
+        var checkStatus="check_Status_On_Which_Screen"
+        var checkIfOnGoingRsaRequest="check_If_On_Going_RSA_Request"
+        var onGoingRsaScreen="OnGoingRSA_Screen"
+        var onGoingRsaScreenType="OnGoingRSA_Screen_Type"
+        var onGoingRsaLiveScreenType="OnGoingRSA_Live_Screen_Type"
+        var onGoingRsaLivePIN="OnGoingRSA_Live_Screen_PIN"
     }
 }

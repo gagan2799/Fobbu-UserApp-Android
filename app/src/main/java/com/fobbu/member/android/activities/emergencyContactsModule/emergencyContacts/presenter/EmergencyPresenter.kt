@@ -8,6 +8,7 @@ import com.fobbu.member.android.activities.emergencyContactsModule.emergencyCont
 import com.fobbu.member.android.apiInterface.ApiClient
 import com.fobbu.member.android.apiInterface.Handler.ResponseHandler
 import com.fobbu.member.android.modals.MainPojo
+import com.fobbu.member.android.utils.CommonClass
 import com.fobbu.member.android.view.ActivityView
 
 class EmergencyPresenter(var activity: Activity,var activityView: ActivityView,var contactsView: ContactsView):EmergencyHandler

@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import com.fobbu.member.android.R
 import com.fobbu.member.android.activities.orderAndPassbookModule.passbookDetail.adapter.PaymentDetailAdapter
+import com.fobbu.member.android.utils.CommonClass
 import kotlinx.android.synthetic.main.activity_passbook_detail.*
 import kotlinx.android.synthetic.main.toolbar.*
 

@@ -1432,6 +1432,7 @@ drawable error
 drawable error_draw
 drawable et_blue_base
 drawable et_emergency_drawable
+drawable et_gray_with_base
 drawable et_white_base
 drawable face_id
 drawable facebook
@@ -1862,6 +1863,7 @@ id audio_list_view
 id auto
 id avi
 id aviPass
+id aviPro
 id avi_assessing
 id avi_summary
 id background_image_view
@@ -1906,6 +1908,7 @@ id chains
 id checkbox
 id chronometer
 id circleIndicator
+id civPicProfile
 id classic
 id clip_horizontal
 id clip_vertical
@@ -1961,16 +1964,22 @@ id enterAlways
 id enterAlwaysCollapsed
 id et2ndFullNameEmergency
 id et2ndMobileEmergency
+id etAdharProfile
 id etBrand
 id etConfirmPass
 id etCurrentPasswordChange
 id etEditMobileEmergency
 id etEditNameEmergency
 id etEmail
+id etEmailProfile
 id etFullName
 id etFullNameEmergency
 id etMobile
 id etMobileEmergency
+id etNameKycProfile
+id etNameProfile
+id etNumberProfile
+id etPANProfile
 id etPassword
 id etPasswordChange
 id etRegNumber
@@ -2138,6 +2147,7 @@ id llAddNewVehicle
 id llAllOrder
 id llAnswer
 id llAssistance
+id llBasicProfile
 id llBottom
 id llBottomBar
 id llCarFuelDieselThree
@@ -2158,6 +2168,7 @@ id llFreeOrder
 id llFreebiesPaymentSetting
 id llHome
 id llHomeServices
+id llKycProfile
 id llLifting
 id llLsdOrder
 id llMarkTyreBurst
@@ -2275,6 +2286,7 @@ id right_side
 id rl
 id rl2ndRelationShipEmergency
 id rlAccessingVehicle
+id rlBasicProfile
 id rlBelow
 id rlBigProfile
 id rlBottomSheet
@@ -2283,11 +2295,15 @@ id rlBuildingWorkSummary
 id rlCodeValidated
 id rlCustomTabsEmergency
 id rlCustomTabsOthers
+id rlCustomTabsProfile
 id rlEditRelationShipEmergency
+id rlGenderProfile
 id rlInformation
+id rlKycProfile
 id rlLayout
 id rlLoader
 id rlLoaderChangePass
+id rlLoaderProfile
 id rlLoaderVehicleList
 id rlNameBar
 id rlNewVehicleAdded
@@ -2350,6 +2366,7 @@ id spacer
 id spinner2ndEmergency
 id spinnerEditEmergency
 id spinnerEmergency
+id spinnerProfile
 id spinnerSelectGender
 id split_action_bar
 id spread
@@ -2367,6 +2384,7 @@ id strict_sandbox
 id submenuarrow
 id submit_area
 id subtitle_view
+id svProfile
 id tabMode
 id tab_host
 id tag_transition_group
@@ -2379,6 +2397,7 @@ id tbFreebies
 id tbHelp
 id tbPassbookDetail
 id tbPaymentSetting
+id tbProfile
 id tbSecurity
 id terrain
 id test
@@ -2443,11 +2462,13 @@ id transition_scene_layoutid_cache
 id transition_transform
 id tv2ndRelationship
 id tvAddContacts
+id tvAddDetailsProfile
 id tvAddEditVehicle
 id tvAddEmergencyContacts
 id tvAddVehicles
 id tvAllOrder
 id tvAlreadyRegistered
+id tvBasicProfile
 id tvCancel
 id tvCancelRequest
 id tvCar
@@ -2459,9 +2480,11 @@ id tvContinue
 id tvCurrnetPin
 id tvDefault
 id tvDoItLater
+id tvDobKycProfile
 id tvEdit
 id tvEditContacts
 id tvEditRelationship
+id tvEditToolbar
 id tvEndDatePB
 id tvFindFobbu
 id tvFlatBedPrice
@@ -2471,6 +2494,7 @@ id tvFreeOrders
 id tvFreeWash
 id tvFreebies
 id tvGender
+id tvGenderProfile
 id tvGenerate
 id tvHeaderContactList
 id tvHeaderEmergency
@@ -2484,6 +2508,7 @@ id tvHeaderSetting
 id tvHeading
 id tvHeadingChange
 id tvHeadingFind
+id tvHeadingProfile
 id tvHeadingUpload
 id tvHelp
 id tvHelpAnswer
@@ -2491,6 +2516,7 @@ id tvHelpQuestion
 id tvInCase
 id tvInfoFreebies
 id tvInviteFriends
+id tvKycProfile
 id tvLearnMoreFreebies
 id tvLiftingPrice
 id tvLiftingText
@@ -2574,6 +2600,7 @@ id tvVehicleReg
 id tvVehicleType
 id tvWalletAmount
 id tvWalletAmountPayment
+id tvWhiteSubMessage
 id tvYear
 id tvYearsOfMake
 id tvYes
@@ -2587,6 +2614,7 @@ id vertical
 id view
 id viewAdd
 id viewAll
+id viewBasic
 id viewBottom
 id viewDeals
 id viewEdit
@@ -2596,6 +2624,7 @@ id viewGetBelow
 id viewGoAbove
 id viewGoBelow
 id viewHome
+id viewKyc
 id viewLSD
 id viewLeftBottom
 id viewLeftTop
@@ -2692,6 +2721,7 @@ layout activity_order_detail
 layout activity_passbook_detail
 layout activity_payment_mode
 layout activity_payment_setting
+layout activity_profile
 layout activity_security_setting
 layout activity_sign_up
 layout activity_sms_verification
@@ -2827,6 +2857,7 @@ string abc_toolbar_collapse_description
 string add
 string add_another_vehicle
 string add_brand
+string add_details
 string add_emergency_contacts
 string add_money
 string add_money_fobbu_wallet
@@ -2847,6 +2878,7 @@ string assured_cashback
 string awesome
 string awesome_exclamatory
 string bank_accounts
+string basic
 string battery_jump
 string bike_scooter
 string bottom_sheet_behavior
@@ -2940,6 +2972,7 @@ string current_pin
 string currently_no_data_is_available
 string custom_date
 string customized_only_for_u
+string date_of_birth
 string dead_battery_worries
 string default_web_client_id
 string deliver_real_quick
@@ -2950,10 +2983,13 @@ string download_statement
 string earn_freebies
 string edit
 string edit_emergency_contacts
+string edit_profile
 string edit_vehicle
 string email_id
 string empty_tanks_worries
 string end_date
+string enter_aadhaar_number
+string enter_pan
 string enter_vehicle_no
 string fab_transformation_scrim_behavior
 string fab_transformation_sheet_behavior
@@ -3012,6 +3048,7 @@ string jump_start
 string keep_driving
 string keep_driving_text
 string killer_saving
+string kyc_details
 string learn_more
 string lifting
 string live_track
@@ -3090,6 +3127,9 @@ string payment_mode
 string payment_screen
 string payment_settings
 string paymnet_successfully_done_for_this_order
+string permission_denied
+string permission_granted
+string permission_message
 string petrol
 string pin_dont_match
 string place_autocomplete_clear_button
@@ -3103,11 +3143,14 @@ string please_enter_vehicle_number
 string please_fobbu_gathering_tools
 string please_generate
 string please_hang_on_fobbu_is_picking_up_the_fuel
+string please_select_from_where_you_want_to_choose
 string please_select_one_issue
 string please_wait
 string proceed_to_pay
 string proceed_to_payment
+string profile
 string project_id
+string provide_name
 string provide_review
 string quantity_of_fuel_d
 string question
@@ -3142,6 +3185,7 @@ string search_menu_title
 string security_settings
 string selectGender
 string select_date_range
+string select_image_first
 string select_service_request
 string select_vehicle_type
 string send_invoice_to_registered_email_id
@@ -3171,6 +3215,7 @@ string tagmanager_preview_dialog_title
 string tell_us_what_you_are_looking_for
 string terms
 string terms_of_service
+string thank_you
 string today
 string total_amount
 string total_amount_paid

@@ -27,9 +27,9 @@ import com.fobbu.member.android.activities.paymentModule.presenter.GetSetGoHandl
 import com.fobbu.member.android.activities.paymentModule.presenter.GetSetGoPresenter
 import com.fobbu.member.android.activities.rsaModule.RSARequestCancelActivity
 import com.fobbu.member.android.fcm.FcmPushTypes
-import com.fobbu.member.android.fragments.rsaFragmentModule.RsaClassType
 import com.fobbu.member.android.fragments.rsaFragmentModule.RsaConstants
 import com.fobbu.member.android.modals.MainPojo
+import com.fobbu.member.android.utils.CommonClass
 import com.fobbu.member.android.view.ActivityView
 import kotlinx.android.synthetic.main.activity_get_set_go.*
 import kotlinx.android.synthetic.main.inflate_review_pop_up.view.*
@@ -126,8 +126,13 @@ class GetSetGoActivity : AppCompatActivity(), ActivityView {
                 linearlayoutReviewGet.visibility = View.GONE
             }
             "Set" -> {
+                viewGetAbove.setBackgroundColor(resources.getColor(R.color.red))
+                viewGetBelow.setBackgroundColor(resources.getColor(R.color.red))
                 viewSetAbove.setBackgroundColor(resources.getColor(R.color.red))
                 viewSetBelow.setBackgroundColor(resources.getColor(R.color.red))
+                textViewGet.setTextColor(resources.getColor(R.color.red))
+                textViewGetDetails.setTextColor(resources.getColor(R.color.red))
+                linearLayoutGetMiddle.background = resources.getDrawable(R.drawable.circular_red)
                 linearLayoutSetMiddle.background = resources.getDrawable(R.drawable.circular_red)
                 textViewSet.setTextColor(resources.getColor(R.color.red))
                 textViewSetDetails.setTextColor(resources.getColor(R.color.red))
@@ -137,9 +142,19 @@ class GetSetGoActivity : AppCompatActivity(), ActivityView {
                 linearlayoutReviewGet.visibility = View.GONE
             }
             else -> {
+                viewGetAbove.setBackgroundColor(resources.getColor(R.color.red))
+                viewGetBelow.setBackgroundColor(resources.getColor(R.color.red))
+                viewSetAbove.setBackgroundColor(resources.getColor(R.color.red))
+                viewSetBelow.setBackgroundColor(resources.getColor(R.color.red))
                 viewGoAbove.setBackgroundColor(resources.getColor(R.color.red))
                 viewGoBelow.setBackgroundColor(resources.getColor(R.color.red))
+                linearLayoutGetMiddle.background = resources.getDrawable(R.drawable.circular_red)
+                linearLayoutSetMiddle.background = resources.getDrawable(R.drawable.circular_red)
                 linearLayoutGoMiddle.background = resources.getDrawable(R.drawable.circular_red)
+                textViewGet.setTextColor(resources.getColor(R.color.red))
+                textViewGetDetails.setTextColor(resources.getColor(R.color.red))
+                textViewSet.setTextColor(resources.getColor(R.color.red))
+                textViewSetDetails.setTextColor(resources.getColor(R.color.red))
                 textViewGo.setTextColor(resources.getColor(R.color.red))
                 textViewGoDetails.setTextColor(resources.getColor(R.color.red))
                 textViewNumberGo.visibility = View.GONE
@@ -174,12 +189,6 @@ class GetSetGoActivity : AppCompatActivity(), ActivityView {
         val dialog: AlertDialog = builder.create()
         view.llWonderFul.setOnClickListener {
 
-            startActivity(
-                Intent(this, DashboardActivity::class.java)
-                    .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
-            )
-
-            CommonClass(this, this).workDoneReviewSend()
             dialog.dismiss()
         }
         view.imageViewrFacebookReview.setOnClickListener {
@@ -254,11 +263,19 @@ class GetSetGoActivity : AppCompatActivity(), ActivityView {
 
         if (mainPojo.success == "true") {
 
-            CommonClass(this, this).removeString(RsaConstants.ServiceSaved.fobbuRequestId)
-            CommonClass(this, this).putString(RsaClassType.RsaTypes.onGoingRsaScreen, "")
-            CommonClass(this, this).putString(RsaClassType.RsaTypes.onGoingRsaScreenType, "")
+            CommonClass(this, this).workDoneReviewSend()
 
             openWonderfulPopUp()
+
+            Handler().postDelayed(
+                {
+                    startActivity(
+                        Intent(this, DashboardActivity::class.java)
+                            .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+                    )
+                },1000
+            )
+
         } else {
             Toast.makeText(this, mainPojo.message, Toast.LENGTH_SHORT).show()
         }

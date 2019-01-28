@@ -14,12 +14,13 @@ import com.fobbu.member.android.activities.emergencyContactsModule.contactList.p
 import com.fobbu.member.android.activities.emergencyContactsModule.contactList.view.ContactListView
 import com.fobbu.member.android.interfaces.DeleteVehicleClickListener
 import com.fobbu.member.android.modals.MainPojo
+import com.fobbu.member.android.utils.CommonClass
 import kotlinx.android.synthetic.main.activity_contact_list.*
 import kotlinx.android.synthetic.main.toolbar.*
 
 class ContactListActicvity : AppCompatActivity(),ContactListView,DeleteVehicleClickListener
 {
-    lateinit var commonClass:CommonClass
+    lateinit var commonClass: CommonClass
 
     var dataList=ArrayList<HashMap<String,Any>>()
 

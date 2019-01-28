@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.*
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.media.RingtoneManager
 import android.os.Build
@@ -12,6 +13,7 @@ import android.support.v4.app.NotificationCompat
 import android.util.Log
 import com.fobbu.member.android.R
 import com.fobbu.member.android.activities.dashboardActivity.DashboardActivity
+import com.fobbu.member.android.fragments.rsaFragmentModule.RsaConstants
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import org.json.JSONObject
@@ -26,11 +28,17 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
     private val TAG = "Firebase Msg"
     val NOTIF_CHANNEL_ID = "com.fobbu.member.android_channel_id_090909"
 
+    lateinit var  myPrefs :SharedPreferences
+    lateinit var prefsEditor :SharedPreferences.Editor
+
 
     override fun onMessageReceived(remoteMessage: RemoteMessage?) {//Displaying data in log
 
         if (remoteMessage == null)
             return
+
+         myPrefs = this.getSharedPreferences("Fobbu_Member_Prefs", Context.MODE_PRIVATE)
+         prefsEditor = myPrefs.edit()
 
         Log.e(TAG, "Notification Body: $remoteMessage")
 
@@ -51,10 +59,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
                     sendNotificationPushO(dataMap)
                 } else
                     ifAppIsNotOpenSendNotification(dataMap)
-
             }
-
-
         } catch (e: Exception) {
             Log.e(TAG, "Exception: " + e.message)
         }
@@ -82,17 +87,26 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
         val json = JSONObject(map["notification"])
 
+        prefsEditor.putString(RsaConstants.RsaTypes.checkStatus,json["type"].toString()).apply()
+
         when {
             json["type"] == FcmPushTypes.Types.accept -> intent.putExtra("from_push", json["type"].toString())
             json["type"] == FcmPushTypes.Types.inRouteRequest -> intent.putExtra("from_push", json["type"].toString())
             json["type"] == FcmPushTypes.Types.newPin -> {
                 intent.putExtra("from_push", FcmPushTypes.Types.newPin)
                 intent.putExtra("otp",json["otp"].toString())
+
+                prefsEditor.putString(RsaConstants.ServiceSaved.otpStart,json["otp"].toString()).apply()
             }
             json["type"] == FcmPushTypes.Types.otpVerified -> intent.putExtra("from_push", FcmPushTypes.Types.otpVerified)
             json["type"] == FcmPushTypes.Types.moneyRequested -> intent.putExtra("from_push", FcmPushTypes.Types.moneyRequested)
             json["type"] == FcmPushTypes.Types.startedWork -> intent.putExtra("from_push", FcmPushTypes.Types.startedWork)
             json["type"] == FcmPushTypes.Types.workEnded -> intent.putExtra("from_push", FcmPushTypes.Types.workEnded)
+            json["type"] == FcmPushTypes.Types.cancelledByAdmin ->
+            {
+                intent.putExtra("from_push", FcmPushTypes.Types.cancelledByAdmin)
+                intent.putExtra("message", map["body"])
+            }
 
         }
 
@@ -126,15 +140,28 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
     }
 
-    private fun ifAppIsOpen(map: Map<String, String>) {
+    private fun ifAppIsOpen(
+        map: Map<String, String>
+    ) {
 
         val json = JSONObject(map["notification"])
+
+        prefsEditor.putString(RsaConstants.RsaTypes.checkStatus,json["type"].toString()).apply()
 
         when {
             json["type"] == FcmPushTypes.Types.accept -> {
                 val intent = Intent()
                 intent.action = FcmPushTypes.Types.acceptRequestBroadCast
                 intent.putExtra("navigate_to", "1")
+                sendBroadcast(intent)
+            }
+
+            json["type"] == FcmPushTypes.Types.cancelledByAdmin -> {
+
+                val intent = Intent()
+                intent.action = FcmPushTypes.Types.acceptRequestBroadCast
+                intent.putExtra("navigate_to", "4")
+                intent.putExtra("message", map["body"])
                 sendBroadcast(intent)
             }
             json["type"] == FcmPushTypes.Types.inRouteRequest -> {
@@ -144,6 +171,9 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
                 sendBroadcast(intent)
             }
             json["type"] == FcmPushTypes.Types.newPin -> {
+
+                prefsEditor.putString(RsaConstants.ServiceSaved.otpStart,json["otp"].toString()).apply()
+
                 val intent = Intent()
                 intent.action = FcmPushTypes.Types.inRouteRequestBroadCast
                 intent.putExtra("navigate_to", FcmPushTypes.Types.newPin)
@@ -187,6 +217,8 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
         val json = JSONObject(map["notification"])
 
+        prefsEditor.putString(RsaConstants.RsaTypes.checkStatus,json["type"].toString()).apply()
+
         // must requires VIBRATE permission
         when {
             json["type"] == FcmPushTypes.Types.accept -> intent.putExtra("from_push", json["type"].toString())
@@ -194,11 +226,18 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             json["type"] == FcmPushTypes.Types.newPin -> {
                 intent.putExtra("from_push", FcmPushTypes.Types.newPin)
                 intent.putExtra("otp",json["otp"].toString())
+
+                prefsEditor.putString(RsaConstants.ServiceSaved.otpStart,json["otp"].toString()).apply()
             }
             json["type"] == FcmPushTypes.Types.otpVerified -> intent.putExtra("from_push", FcmPushTypes.Types.otpVerified)
             json["type"] == FcmPushTypes.Types.moneyRequested -> intent.putExtra("from_push", FcmPushTypes.Types.moneyRequested)
             json["type"] == FcmPushTypes.Types.startedWork -> intent.putExtra("from_push", FcmPushTypes.Types.startedWork)
             json["type"] == FcmPushTypes.Types.workEnded -> intent.putExtra("from_push", FcmPushTypes.Types.workEnded)
+            json["type"] == FcmPushTypes.Types.cancelledByAdmin ->
+            {
+                intent.putExtra("from_push", FcmPushTypes.Types.cancelledByAdmin)
+                intent.putExtra("message", map["body"])
+            }
         }
 
         val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)

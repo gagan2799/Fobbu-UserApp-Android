@@ -32,6 +32,7 @@ import android.view.animation.AnimationUtils
 import android.widget.*
 import com.bumptech.glide.Glide
 import com.fobbu.member.android.R
+import com.fobbu.member.android.activities.dashboardActivity.DashboardActivity
 import com.fobbu.member.android.activities.waitingScreenModule.WaitingScreenBlue
 
 import com.fobbu.member.android.apiInterface.MyApplication
@@ -43,6 +44,7 @@ import com.fobbu.member.android.fragments.rsaFragmentModule.view.RsaFragmentView
 import com.fobbu.member.android.interfaces.HeaderIconChanges
 import com.fobbu.member.android.interfaces.TopBarChanges
 import com.fobbu.member.android.modals.MainPojo
+import com.fobbu.member.android.utils.CommonClass
 import com.fobbu.member.android.utils.RecyclerItemClickListener
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
@@ -209,7 +211,7 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
             when {
                 llSubPoints.visibility == View.VISIBLE -> {
 
-                    topBarChanges!!.showGoneTopBar(true)
+                    ifTopBarChnagesNull(true)
                     llHomeServices.visibility = View.VISIBLE
                     rlTopDrawer.visibility = View.GONE
                     llSubPoints.visibility = View.GONE
@@ -729,7 +731,8 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                             llTwo.visibility = View.VISIBLE
                             setAnimationRight(linearLayoutCarRightTwo, activity!!)
                             setAnimationLeft(linearLayoutScooterLeftTwo, activity!!)
-                            topBarChanges!!.showGoneTopBar(false)
+
+                                ifTopBarChnagesNull(false)
 
                             Handler().postDelayed(
                                 {
@@ -747,7 +750,8 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                             llTwo.visibility = View.VISIBLE
                             setAnimationRight(linearLayoutCarRightTwo, activity!!)
                             setAnimationLeft(linearLayoutScooterLeftTwo, activity!!)
-                            topBarChanges!!.showGoneTopBar(false)
+
+                                ifTopBarChnagesNull(false)
                             rlTopDrawer.visibility = View.VISIBLE
                             tvHeading.text = resources.getString(R.string.dead_battery_worries)
                             tvSubheading.text = resources.getString(R.string.jump_start)
@@ -760,7 +764,8 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                             setAnimationRight(llCarFuelPetrolThree, activity!!)
                             setAnimationLeft(llScooterThree, activity!!)
                             setAnimationFade(llCarFuelDieselThree, activity!!)
-                            topBarChanges!!.showGoneTopBar(false)
+
+                                ifTopBarChnagesNull(false)
                             rlTopDrawer.visibility = View.VISIBLE
                             tvHeading.text = resources.getString(R.string.empty_tanks_worries)
                             tvSubheading.text = resources.getString(R.string.deliver_real_quick)
@@ -772,7 +777,8 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                             llTwo.visibility = View.VISIBLE
                             setAnimationRight(linearLayoutCarRightTwo, activity!!)
                             setAnimationLeft(linearLayoutScooterLeftTwo, activity!!)
-                            topBarChanges!!.showGoneTopBar(false)
+
+                                ifTopBarChnagesNull(false)
                             rlTopDrawer.visibility = View.VISIBLE
                             tvHeading.text = resources.getString(R.string.burst_tyre_worries)
                             tvSubheading.text = resources.getString(R.string.help_you_fix)
@@ -784,7 +790,8 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                             llTwo.visibility = View.VISIBLE
                             setAnimationRight(linearLayoutCarRightTwo, activity!!)
                             setAnimationLeft(linearLayoutScooterLeftTwo, activity!!)
-                            topBarChanges!!.showGoneTopBar(false)
+
+                                ifTopBarChnagesNull(false)
                             rlTopDrawer.visibility = View.VISIBLE
                             tvHeading.text = resources.getString(R.string.double_trouble)
                             tvSubheading.text = resources.getString(R.string.we_will_connect_towing)
@@ -871,12 +878,13 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
         val strVehicleType = RequestBody.create(MediaType.parse("text/plain"), strVehicleType)
 
-        val strVehicleNumber = RequestBody.create(MediaType.parse("text/plain"), etVehicleNumber.text.toString())
+        val strVehicleNumber = RequestBody.create(MediaType.parse("text/plain"),
+            etVehicleNumber.text.toString())
 
 
         rsaFragmentHandler.findFobbuRequest(
             userId, serviceSelected, strLatitude, strLongitude
-            , strVehicleType,strVehicleNumber, fileList, tokenHeader
+            , strVehicleType, strVehicleNumber, fileList, tokenHeader
         )
     }
 
@@ -887,16 +895,32 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
             if (mainPojo.success == "true") {
 
-                fleetRequestApi(mainPojo.getData()._id)
+                if(serviceSelected == RsaConstants.ServiceName.towing)
+                {
+                    Toast.makeText(activity!!,mainPojo.message,Toast.LENGTH_LONG).show()
 
-                CommonClass(activity!!, activity!!).putString(RsaConstants.ServiceSaved.fobbuRequestId, mainPojo.getData()._id)
-                CommonClass(activity!!, activity!!).putString(RsaConstants.ServiceSaved.serviceNameSelected, serviceSelected)
+                    activity!!.startActivity(Intent(activity!!, DashboardActivity::class.java)
+                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK))
 
-                activity!!.startActivity(
-                    Intent(activity!!, WaitingScreenBlue::class.java)
-                        .putExtra("navigate_to", "0")
-                )
+                    CommonClass(activity!!,activity!!).workDoneReviewSend()
 
+                    activity!!.finish()
+                }
+                else
+                {
+                    //fleetRequestApi(mainPojo.getData()._id)
+
+                    CommonClass(activity!!, activity!!).putString(RsaConstants.RsaTypes.checkIfOnGoingRsaRequest,"YES")
+
+                    CommonClass(activity!!, activity!!).putString(RsaConstants.ServiceSaved.fobbuRequestId,
+                        mainPojo.getData()._id)
+
+                    CommonClass(activity!!, activity!!).putString(RsaConstants.ServiceSaved.serviceNameSelected,
+                        serviceSelected)
+
+                    activity!!.startActivity(Intent(activity!!, WaitingScreenBlue::class.java)
+                        .putExtra("navigate_to", "0"))
+                }
             } else {
                 CommonClass(activity!!, activity!!).showToast(mainPojo.message)
             }
@@ -1059,7 +1083,7 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
             result.setResultCallback { p0 ->
                 val status: Status = p0.status
 
-                println("STATUS OF LOCATION "+ status)
+                println("STATUS OF LOCATION $status")
 
                 when (status.statusCode) {
                     LocationSettingsStatusCodes.SUCCESS -> {
@@ -1107,12 +1131,18 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
         googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
     }
 
+    fun ifTopBarChnagesNull(boolean: Boolean)
+    {
+        if (topBarChanges == null)
+            topBarChanges = activity as TopBarChanges
+
+        topBarChanges!!.showGoneTopBar(boolean)
+    }
 
     override fun onResume() {
         super.onResume()
         mMapView.onResume()
 
-        topBarChanges = activity as TopBarChanges
 
         if (llSubPoints.visibility == View.VISIBLE ||
             llUploadPics.visibility == View.VISIBLE ||
@@ -1120,9 +1150,9 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
             llMarkTyreBurst.visibility == View.VISIBLE ||
             llTowRequired.visibility == View.VISIBLE
         )
-            topBarChanges!!.showGoneTopBar(false)
+            ifTopBarChnagesNull(false)
         else
-            topBarChanges!!.showGoneTopBar(true)
+            ifTopBarChnagesNull(true)
 
     }
 

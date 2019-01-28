@@ -7,12 +7,13 @@ import android.view.View
 import com.fobbu.member.android.R
 import com.fobbu.member.android.activities.changePassword.ChangePasswordActivity
 import com.fobbu.member.android.activities.loginSignupModule.GeneratePINActivity
+import com.fobbu.member.android.utils.CommonClass
 import kotlinx.android.synthetic.main.activity_security_setting.*
 import kotlinx.android.synthetic.main.toolbar.*
 
 class SecuritySettingActivity : AppCompatActivity()
 {
-    lateinit var commonClass:CommonClass
+    lateinit var commonClass: CommonClass
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)

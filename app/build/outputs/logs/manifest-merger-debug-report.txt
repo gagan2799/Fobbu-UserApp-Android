@@ -11,10 +11,10 @@ INJECTED from D:\GIT\Fobbu\user-app-android\app\src\main\AndroidManifest.xml:75:
 	android:name
 		ADDED from D:\GIT\Fobbu\user-app-android\app\src\main\AndroidManifest.xml:76:17-71
 manifest
-ADDED from D:\GIT\Fobbu\user-app-android\app\src\main\AndroidManifest.xml:2:1-170:12
-INJECTED from D:\GIT\Fobbu\user-app-android\app\src\main\AndroidManifest.xml:2:1-170:12
-INJECTED from D:\GIT\Fobbu\user-app-android\app\src\main\AndroidManifest.xml:2:1-170:12
-INJECTED from D:\GIT\Fobbu\user-app-android\app\src\main\AndroidManifest.xml:2:1-170:12
+ADDED from D:\GIT\Fobbu\user-app-android\app\src\main\AndroidManifest.xml:2:1-175:12
+INJECTED from D:\GIT\Fobbu\user-app-android\app\src\main\AndroidManifest.xml:2:1-175:12
+INJECTED from D:\GIT\Fobbu\user-app-android\app\src\main\AndroidManifest.xml:2:1-175:12
+INJECTED from D:\GIT\Fobbu\user-app-android\app\src\main\AndroidManifest.xml:2:1-175:12
 MERGED from [com.android.support:multidex:1.0.3] C:\Users\my pc\.gradle\caches\transforms-1\files-1.1\multidex-1.0.3.aar\c8530e9b69545a4064994eaedcd4291d\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:design:28.0.0] C:\Users\my pc\.gradle\caches\transforms-1\files-1.1\design-28.0.0.aar\4363baf4f3b032b7d1de4fcaae5cd5dd\AndroidManifest.xml:17:1-24:12
 MERGED from [com.google.android.gms:play-services:12.0.1] C:\Users\my pc\.gradle\caches\transforms-1\files-1.1\play-services-12.0.1.aar\4f9114ea2315f66d8136ac98f8de78d9\AndroidManifest.xml:2:1-6:12
@@ -161,22 +161,22 @@ MERGED from [com.google.android.gms:play-services-vision-common-license:12.0.1] 
 MERGED from [com.google.android.gms:play-services-vision-license:12.0.1] C:\Users\my pc\.gradle\caches\transforms-1\files-1.1\play-services-vision-license-12.0.1.aar\19e368eaad369d9b1b12fad81474d762\AndroidManifest.xml:17:1-24:12
 MERGED from [com.google.android.gms:play-services-wallet-license:12.0.1] C:\Users\my pc\.gradle\caches\transforms-1\files-1.1\play-services-wallet-license-12.0.1.aar\4b497ceac209878d86e58700febb6d95\AndroidManifest.xml:17:1-24:12
 MERGED from [com.google.android.gms:play-services-wearable-license:12.0.1] C:\Users\my pc\.gradle\caches\transforms-1\files-1.1\play-services-wearable-license-12.0.1.aar\f43012ae3d233f143dde5df17aae2693\AndroidManifest.xml:17:1-24:12
-INJECTED from D:\GIT\Fobbu\user-app-android\app\src\main\AndroidManifest.xml:2:1-170:12
-INJECTED from D:\GIT\Fobbu\user-app-android\app\src\main\AndroidManifest.xml:2:1-170:12
-INJECTED from D:\GIT\Fobbu\user-app-android\app\src\main\AndroidManifest.xml:2:1-170:12
+INJECTED from D:\GIT\Fobbu\user-app-android\app\src\main\AndroidManifest.xml:2:1-175:12
+INJECTED from D:\GIT\Fobbu\user-app-android\app\src\main\AndroidManifest.xml:2:1-175:12
+INJECTED from D:\GIT\Fobbu\user-app-android\app\src\main\AndroidManifest.xml:2:1-175:12
 	package
 		ADDED from D:\GIT\Fobbu\user-app-android\app\src\main\AndroidManifest.xml:4:11-45
 		INJECTED from D:\GIT\Fobbu\user-app-android\app\src\main\AndroidManifest.xml
 		INJECTED from D:\GIT\Fobbu\user-app-android\app\src\main\AndroidManifest.xml
 	android:versionName
 		INJECTED from D:\GIT\Fobbu\user-app-android\app\src\main\AndroidManifest.xml
-		ADDED from D:\GIT\Fobbu\user-app-android\app\src\main\AndroidManifest.xml:2:1-170:12
+		ADDED from D:\GIT\Fobbu\user-app-android\app\src\main\AndroidManifest.xml:2:1-175:12
 		INJECTED from D:\GIT\Fobbu\user-app-android\app\src\main\AndroidManifest.xml
 	xmlns:tools
 		ADDED from D:\GIT\Fobbu\user-app-android\app\src\main\AndroidManifest.xml:3:11-57
 	android:versionCode
 		INJECTED from D:\GIT\Fobbu\user-app-android\app\src\main\AndroidManifest.xml
-		ADDED from D:\GIT\Fobbu\user-app-android\app\src\main\AndroidManifest.xml:2:1-170:12
+		ADDED from D:\GIT\Fobbu\user-app-android\app\src\main\AndroidManifest.xml:2:1-175:12
 		INJECTED from D:\GIT\Fobbu\user-app-android\app\src\main\AndroidManifest.xml
 	xmlns:android
 		ADDED from D:\GIT\Fobbu\user-app-android\app\src\main\AndroidManifest.xml:2:11-69
@@ -255,7 +255,7 @@ ADDED from D:\GIT\Fobbu\user-app-android\app\src\main\AndroidManifest.xml:13:5-6
 	android:name
 		ADDED from D:\GIT\Fobbu\user-app-android\app\src\main\AndroidManifest.xml:13:22-66
 application
-ADDED from D:\GIT\Fobbu\user-app-android\app\src\main\AndroidManifest.xml:15:5-168:19
+ADDED from D:\GIT\Fobbu\user-app-android\app\src\main\AndroidManifest.xml:15:5-173:19
 MERGED from [com.android.support:design:28.0.0] C:\Users\my pc\.gradle\caches\transforms-1\files-1.1\design-28.0.0.aar\4363baf4f3b032b7d1de4fcaae5cd5dd\AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:design:28.0.0] C:\Users\my pc\.gradle\caches\transforms-1\files-1.1\design-28.0.0.aar\4363baf4f3b032b7d1de4fcaae5cd5dd\AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.gms:play-services:12.0.1] C:\Users\my pc\.gradle\caches\transforms-1\files-1.1\play-services-12.0.1.aar\4f9114ea2315f66d8136ac98f8de78d9\AndroidManifest.xml:5:5-20
@@ -709,6 +709,14 @@ ADDED from D:\GIT\Fobbu\user-app-android\app\src\main\AndroidManifest.xml:165:9-
 		ADDED from D:\GIT\Fobbu\user-app-android\app\src\main\AndroidManifest.xml:166:19-55
 	android:name
 		ADDED from D:\GIT\Fobbu\user-app-android\app\src\main\AndroidManifest.xml:165:19-102
+activity#com.fobbu.member.android.activities.profile.ProfileActivity
+ADDED from D:\GIT\Fobbu\user-app-android\app\src\main\AndroidManifest.xml:169:9-172:20
+	android:screenOrientation
+		ADDED from D:\GIT\Fobbu\user-app-android\app\src\main\AndroidManifest.xml:171:19-55
+	android:windowSoftInputMode
+		ADDED from D:\GIT\Fobbu\user-app-android\app\src\main\AndroidManifest.xml:170:19-61
+	android:name
+		ADDED from D:\GIT\Fobbu\user-app-android\app\src\main\AndroidManifest.xml:169:19-69
 uses-sdk
 INJECTED from D:\GIT\Fobbu\user-app-android\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from D:\GIT\Fobbu\user-app-android\app\src\main\AndroidManifest.xml

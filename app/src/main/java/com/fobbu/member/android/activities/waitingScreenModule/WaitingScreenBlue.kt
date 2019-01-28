@@ -8,10 +8,13 @@ import android.os.Bundle
 import android.os.Handler
 import android.support.v7.app.AppCompatActivity
 import android.view.View
+import android.widget.Toast
 import com.fobbu.member.android.R
+import com.fobbu.member.android.activities.dashboardActivity.DashboardActivity
 import com.fobbu.member.android.activities.paymentModule.WorkSummaryActivity
 import com.fobbu.member.android.fcm.FcmPushTypes
 import com.fobbu.member.android.fragments.rsaFragmentModule.RsaConstants
+import com.fobbu.member.android.utils.CommonClass
 import kotlinx.android.synthetic.main.activity_waiting_screen_blue.*
 import java.lang.Exception
 
@@ -79,10 +82,17 @@ class WaitingScreenBlue : AppCompatActivity() {
                     .putExtra("from_where", "building_live"))
                 finish()
             }
+
+            "4" -> {
+
+                startActivity(Intent(this, DashboardActivity::class.java)
+                    .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK))
+
+                CommonClass(this,this).workDoneReviewSend()
+                finish()
+            }
         }
-
     }
-
 
     // Click functionality of this activity's clicks are handled here
     private fun handleclicks() {
@@ -129,6 +139,10 @@ class WaitingScreenBlue : AppCompatActivity() {
         override fun onReceive(context: Context, intent: Intent) {
 
             strWhich = intent.getStringExtra("navigate_to")
+
+            if(strWhich=="4") {
+                Toast.makeText(context, intent.getStringExtra("message"), Toast.LENGTH_SHORT).show()
+            }
             changeLayout()
         }
     }
