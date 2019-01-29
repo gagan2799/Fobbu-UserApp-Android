@@ -3392,6 +3392,10 @@
         "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-hdpi\\helpline.png"
     },
     {
+        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_assessment_scooter_selected.png.flat",
+        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xhdpi\\assessment_scooter_selected.png"
+    },
+    {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_ic_launcher_background.png.flat",
         "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\generated\\res\\pngs\\debug\\drawable-mdpi\\ic_launcher_background.png"
     },
@@ -3790,6 +3794,10 @@
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4_quantum_ic_pause_grey600_48.png.flat",
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-cast-framework-12.0.1.aar\\83b45e13542c3f3250e9e8f36424e7ea\\res\\drawable-mdpi-v4\\quantum_ic_pause_grey600_48.png"
+    },
+    {
+        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_assessment_scooter_selected.png.flat",
+        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-hdpi\\assessment_scooter_selected.png"
     },
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\color-v23_design_tint_password_toggle.xml.flat",
@@ -5936,6 +5944,10 @@
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-plus-12.0.1.aar\\13c52c6747abbf76a221116516aa90c0\\res\\drawable-tvdpi-v4\\ic_plusone_tall_off_client.png"
     },
     {
+        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_assessment_scooter_selected.png.flat",
+        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xxhdpi\\assessment_scooter_selected.png"
+    },
+    {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_wokr_already.png.flat",
         "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-hdpi\\wokr_already.png"
     },
@@ -7594,6 +7606,10 @@
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_quantum_ic_art_track_grey600_48.png.flat",
         "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-cast-framework-12.0.1.aar\\83b45e13542c3f3250e9e8f36424e7ea\\res\\drawable-xhdpi-v4\\quantum_ic_art_track_grey600_48.png"
+    },
+    {
+        "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_assessment_scooter_selected.png.flat",
+        "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\drawable-xxxhdpi\\assessment_scooter_selected.png"
     },
     {
         "merged": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4_notification_bg_low_pressed.9.png.flat",

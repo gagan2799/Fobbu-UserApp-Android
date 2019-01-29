@@ -197,6 +197,9 @@ class SignUpActivity : AppCompatActivity(),ActivityView {
             CommonClass(this@SignUpActivity, this@SignUpActivity)
                 .putString("x_access_token", mainPojo.token)
 
+            CommonClass(this@SignUpActivity, this@SignUpActivity)
+                .putString("member_id", mainPojo.getData().member_id)
+
             startActivity(Intent(this@SignUpActivity,
                 SMSVerificationActivity::class.java))
 

@@ -158,6 +158,9 @@ class LoginActivity : AppCompatActivity(), ActivityView {
             CommonClass(this@LoginActivity, this@LoginActivity)
                 .putString("user_password", etPassword.text.toString())
 
+            CommonClass(this@LoginActivity, this@LoginActivity)
+                .putString("member_id", mainPojo.getData().member_id)
+
             if(mainPojo.getData().active_requests.size>0)
             {
                 val list = mainPojo.getData().active_requests

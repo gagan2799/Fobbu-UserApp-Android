@@ -1,5 +1,6 @@
 package com.fobbu.member.android.fragments
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -7,11 +8,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.TextView
 import com.fobbu.member.android.R
 import com.fobbu.member.android.activities.vehicleModule.AddEditVehicleActivity
 import com.fobbu.member.android.interfaces.ChangeRSAFragments
 import com.fobbu.member.android.interfaces.HeaderIconChanges
 import com.fobbu.member.android.interfaces.TopBarChanges
+import com.fobbu.member.android.utils.CommonClass
 
 class HomeFragment : Fragment() {
 
@@ -23,6 +26,8 @@ class HomeFragment : Fragment() {
     private var topBarChanges:TopBarChanges?=null
 
     private lateinit var llAddNewVehicle:LinearLayout
+
+    private lateinit var tvMembershipIdHome:TextView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -49,6 +54,7 @@ class HomeFragment : Fragment() {
 
     }
 
+    @SuppressLint("SetTextI18n")
     private fun initialise(view: View?) {
 
         headerIconChanges = activity as HeaderIconChanges?
@@ -60,7 +66,11 @@ class HomeFragment : Fragment() {
         changeRSAFragments = activity!! as ChangeRSAFragments
 
         llAddNewVehicle = view!!.findViewById(R.id.llAddNewVehicle)
+        tvMembershipIdHome = view.findViewById(R.id.tvMembershipIdHome)
 
-        llRSA = view!!.findViewById(R.id.llRSA)
+        tvMembershipIdHome.text = resources.getString(R.string.your_membership_id) + " "+
+                CommonClass(activity!!,activity!!).getString("member_id")
+
+        llRSA = view.findViewById(R.id.llRSA)
     }
 }

@@ -174,18 +174,6 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
         ivImageCall = view.findViewById(R.id.ivImageCall)
 
-
-        if (CommonClass(activity!!, activity!!).getString(RsaConstants.ServiceSaved.serviceNameSelected) ==
-            RsaConstants.ServiceName.fuelDelivery
-        ) {
-            ivLeftDotted.setImageResource(R.drawable.dotted_gray)
-            ivRightDotted.setImageResource(R.drawable.dotted_gray)
-            tvTrack.setBackgroundResource(R.drawable.solid_color_grey)
-            rlPickingFuel.visibility = View.VISIBLE
-            tvPickingFuel.visibility = View.VISIBLE
-            rlTools.visibility = View.GONE
-        }
-
         checkStatusAndNavigate()
     }
 
@@ -498,6 +486,16 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                         WaitingScreenWhite::class.java
                     ).putExtra("from_where", "code_valid")
                 )
+            }
+
+            FcmPushTypes.Types.fuelDefaultScreen ->
+            {
+                ivLeftDotted.setImageResource(R.drawable.dotted_gray)
+                ivRightDotted.setImageResource(R.drawable.dotted_gray)
+                tvTrack.setBackgroundResource(R.drawable.solid_color_grey)
+                rlPickingFuel.visibility = View.VISIBLE
+                tvPickingFuel.visibility = View.VISIBLE
+                rlTools.visibility = View.GONE
             }
         }
 

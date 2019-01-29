@@ -63,6 +63,7 @@ import okhttp3.RequestBody
 import java.io.*
 import java.lang.Double
 import java.util.*
+import kotlin.collections.ArrayList
 
 class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     GoogleApiClient.ConnectionCallbacks, LocationListener, RsaFragmentView {
@@ -155,6 +156,7 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     private var strBurstTopRight = ""
     private var strBurstBottomLeft = ""
     private var strBurstBottomRight = ""
+    private var listSelectedBurstTyre = ArrayList<String>()
 
     private lateinit var tvYes: TextView
     private lateinit var tvNo: TextView
@@ -167,6 +169,11 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     private var topBarChanges: TopBarChanges? = null
 
     private lateinit var rsaFragmentHandler: RsaFragmentHandler
+
+    lateinit var rlTwoWheelerBurst: RelativeLayout
+    lateinit var rl4WheelerBurst: RelativeLayout
+    lateinit var viewLeftTwoWheeler: View
+    lateinit var viewRightTwoWheeler: View
 
 
     @SuppressLint("NewApi")
@@ -231,6 +238,17 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                             llFindFobbu.visibility = View.GONE
                             llMarkTyreBurst.visibility = View.VISIBLE
                             llTowRequired.visibility = View.GONE
+
+                            if(strVehicleType == "2wheeler")
+                            {
+                                rl4WheelerBurst.visibility=View.GONE
+                                rlTwoWheelerBurst.visibility=View.VISIBLE
+                            }
+                            else
+                            {
+                                rl4WheelerBurst.visibility=View.VISIBLE
+                                rlTwoWheelerBurst.visibility=View.GONE
+                            }
                         }
                         ifTowRequired -> {
                             llHomeServices.visibility = View.GONE
@@ -274,11 +292,23 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                     llMarkTyreBurst.visibility = View.VISIBLE
                     llTowRequired.visibility = View.GONE
                     ifTowRequired = false
+                    if(strVehicleType == "2wheeler")
+                    {
+                        rl4WheelerBurst.visibility=View.GONE
+                        rlTwoWheelerBurst.visibility=View.VISIBLE
+                    }
+                    else
+                    {
+                        rl4WheelerBurst.visibility=View.VISIBLE
+                        rlTwoWheelerBurst.visibility=View.GONE
+                    }
                 }
             }
         }
 
         llScooterTwo.setOnClickListener {
+
+            strVehicleType = "2wheeler"
 
             if (etVehicleNumber.text.isNullOrBlank()) {
                 Toast.makeText(activity, resources.getString(R.string.please_enter_vehicle_number), Toast.LENGTH_SHORT)
@@ -290,6 +320,16 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                     llUploadPics.visibility = View.GONE
                     llFindFobbu.visibility = View.GONE
                     llMarkTyreBurst.visibility = View.VISIBLE
+                    if(strVehicleType == "2wheeler")
+                    {
+                        rl4WheelerBurst.visibility=View.GONE
+                        rlTwoWheelerBurst.visibility=View.VISIBLE
+                    }
+                    else
+                    {
+                        rl4WheelerBurst.visibility=View.VISIBLE
+                        rlTwoWheelerBurst.visibility=View.GONE
+                    }
                 } else {
                     llHomeServices.visibility = View.GONE
                     llSubPoints.visibility = View.GONE
@@ -298,7 +338,7 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                     llMarkTyreBurst.visibility = View.GONE
                 }
 
-                strVehicleType = "2wheeler"
+
             }
         }
 
@@ -360,16 +400,30 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
             llTowRequired.visibility = View.GONE
 
             serviceSelected = RsaConstants.ServiceName.towing
+
+
+            for (i in dataListServices.indices) {
+                if (RsaConstants.ServiceName.towing == dataListServices[i]["static_name"].toString()) {
+
+                    serviceSelectedID = dataListServices[i]["_id"].toString()
+
+                    println("NAME " + dataListServices[i]["service_name"].toString())
+
+                    break
+                }
+            }
+
             ifTowRequired = true
         }
 
         llCarTwo.setOnClickListener {
 
+            strVehicleType = "4wheeler"
+
             if (etVehicleNumber.text.isNullOrBlank()) {
                 Toast.makeText(activity, resources.getString(R.string.please_enter_vehicle_number), Toast.LENGTH_SHORT)
                     .show()
             } else {
-                strVehicleType = "4wheeler"
 
                 if (serviceSelected == RsaConstants.ServiceName.burstTyre) {
                     llHomeServices.visibility = View.GONE
@@ -377,6 +431,16 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                     llUploadPics.visibility = View.GONE
                     llFindFobbu.visibility = View.GONE
                     llMarkTyreBurst.visibility = View.VISIBLE
+                    if(strVehicleType == "2wheeler")
+                    {
+                        rl4WheelerBurst.visibility=View.GONE
+                        rlTwoWheelerBurst.visibility=View.VISIBLE
+                    }
+                    else
+                    {
+                        rl4WheelerBurst.visibility=View.VISIBLE
+                        rlTwoWheelerBurst.visibility=View.GONE
+                    }
                 } else {
                     llHomeServices.visibility = View.GONE
                     llSubPoints.visibility = View.GONE
@@ -415,14 +479,44 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
             ivLifting.setImageResource(R.drawable.lifting_selected_blue)
         }
 
+        viewLeftTwoWheeler.setOnClickListener {
+
+            if(!listSelectedBurstTyre.contains("LeftTwoWheeler"))
+            {
+                viewLeftTwoWheeler.setBackgroundResource(R.drawable.red_circle)
+                listSelectedBurstTyre.add("LeftTwoWheeler")
+            }
+            else
+            {
+                viewLeftTwoWheeler.setBackgroundResource(R.drawable.border_circle)
+                listSelectedBurstTyre.remove("LeftTwoWheeler")
+            }
+        }
+
+        viewRightTwoWheeler.setOnClickListener {
+
+            if(!listSelectedBurstTyre.contains("RightTwoWheeler"))
+            {
+                viewRightTwoWheeler.setBackgroundResource(R.drawable.red_circle)
+                listSelectedBurstTyre.add("RightTwoWheeler")
+            }
+            else
+            {
+                viewRightTwoWheeler.setBackgroundResource(R.drawable.border_circle)
+                listSelectedBurstTyre.remove("RightTwoWheeler")
+            }
+        }
+
         viewLeftTop.setOnClickListener {
 
             if (strBurstTopLeft == "") {
                 strBurstTopLeft = "1"
                 viewLeftTop.setBackgroundResource(R.drawable.red_circle)
+                listSelectedBurstTyre.add("LeftTop")
             } else {
                 strBurstTopLeft = ""
                 viewLeftTop.setBackgroundResource(R.drawable.border_circle)
+                listSelectedBurstTyre.remove("LeftTop")
             }
         }
 
@@ -431,9 +525,11 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
             if (strBurstBottomLeft == "") {
                 strBurstBottomLeft = "1"
                 viewLeftBottom.setBackgroundResource(R.drawable.red_circle)
+                listSelectedBurstTyre.add("LeftBottom")
             } else {
                 strBurstBottomLeft = ""
                 viewLeftBottom.setBackgroundResource(R.drawable.border_circle)
+                listSelectedBurstTyre.remove("LeftBottom")
             }
         }
 
@@ -442,9 +538,11 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
             if (strBurstTopRight == "") {
                 strBurstTopRight = "1"
                 viewRightTop.setBackgroundResource(R.drawable.red_circle)
+                listSelectedBurstTyre.add("RightTop")
             } else {
                 strBurstTopRight = ""
                 viewRightTop.setBackgroundResource(R.drawable.border_circle)
+                listSelectedBurstTyre.remove("RightTop")
             }
         }
 
@@ -453,26 +551,55 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
             if (strBurstBottomRight == "") {
                 strBurstBottomRight = "1"
                 viewRightBottom.setBackgroundResource(R.drawable.red_circle)
+                listSelectedBurstTyre.add("RightBottom")
             } else {
                 strBurstBottomRight = ""
                 viewRightBottom.setBackgroundResource(R.drawable.border_circle)
+                listSelectedBurstTyre.remove("RightBottom")
             }
         }
 
         tvYes.setOnClickListener {
 
-            strHaveSpareTyre = "yes"
-            tvYes.setBackgroundResource(R.drawable.rounded_blue_background)
-            tvYes.setTextColor(resources.getColor(R.color.white))
-            tvNo.setTextColor(resources.getColor(R.color.drawer_text_color))
-            tvNo.setBackgroundResource(R.drawable.rounded_white_background)
+            println("SELECTED BURST TYRE " + listSelectedBurstTyre)
 
-            llHomeServices.visibility = View.GONE
-            llSubPoints.visibility = View.GONE
-            llUploadPics.visibility = View.VISIBLE
-            llFindFobbu.visibility = View.GONE
-            llMarkTyreBurst.visibility = View.GONE
-            llTowRequired.visibility = View.GONE
+            println("""SELECTED BURST TYRE SIZE ${listSelectedBurstTyre.size}""")
+
+            when {
+                listSelectedBurstTyre.size == 0 -> Toast.makeText(
+                    activity!!,
+                    "Please select atleast one Burst tyre.",
+                    Toast.LENGTH_SHORT
+                ).show()
+                listSelectedBurstTyre.size > 1 -> {
+                    strHaveSpareTyre = "no"
+                    tvYes.setBackgroundResource(R.drawable.rounded_white_background)
+                    tvNo.setBackgroundResource(R.drawable.rounded_blue_background)
+                    tvYes.setTextColor(resources.getColor(R.color.drawer_text_color))
+                    tvNo.setTextColor(resources.getColor(R.color.white))
+
+                    llHomeServices.visibility = View.GONE
+                    llSubPoints.visibility = View.GONE
+                    llUploadPics.visibility = View.GONE
+                    llFindFobbu.visibility = View.GONE
+                    llMarkTyreBurst.visibility = View.GONE
+                    llTowRequired.visibility = View.VISIBLE
+                }
+                else -> {
+                    strHaveSpareTyre = "yes"
+                    tvYes.setBackgroundResource(R.drawable.rounded_blue_background)
+                    tvYes.setTextColor(resources.getColor(R.color.white))
+                    tvNo.setTextColor(resources.getColor(R.color.drawer_text_color))
+                    tvNo.setBackgroundResource(R.drawable.rounded_white_background)
+
+                    llHomeServices.visibility = View.GONE
+                    llSubPoints.visibility = View.GONE
+                    llUploadPics.visibility = View.VISIBLE
+                    llFindFobbu.visibility = View.GONE
+                    llMarkTyreBurst.visibility = View.GONE
+                    llTowRequired.visibility = View.GONE
+                }
+            }
         }
 
         tvNo.setOnClickListener {
@@ -701,6 +828,11 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
         tvContinue = view.findViewById(R.id.tvContinue)
         llTowRequired = view.findViewById(R.id.llTowRequired)
+
+        rlTwoWheelerBurst = view.findViewById(R.id.rlTwoWheelerBurst)
+        rl4WheelerBurst = view.findViewById(R.id.rl4WheelerBurst)
+        viewLeftTwoWheeler = view.findViewById(R.id.viewLeftTwoWheeler)
+        viewRightTwoWheeler = view.findViewById(R.id.viewRightTwoWheeler)
     }
 
 
@@ -732,7 +864,7 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                             setAnimationRight(linearLayoutCarRightTwo, activity!!)
                             setAnimationLeft(linearLayoutScooterLeftTwo, activity!!)
 
-                                ifTopBarChnagesNull(false)
+                            ifTopBarChnagesNull(false)
 
                             Handler().postDelayed(
                                 {
@@ -751,7 +883,7 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                             setAnimationRight(linearLayoutCarRightTwo, activity!!)
                             setAnimationLeft(linearLayoutScooterLeftTwo, activity!!)
 
-                                ifTopBarChnagesNull(false)
+                            ifTopBarChnagesNull(false)
                             rlTopDrawer.visibility = View.VISIBLE
                             tvHeading.text = resources.getString(R.string.dead_battery_worries)
                             tvSubheading.text = resources.getString(R.string.jump_start)
@@ -765,7 +897,7 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                             setAnimationLeft(llScooterThree, activity!!)
                             setAnimationFade(llCarFuelDieselThree, activity!!)
 
-                                ifTopBarChnagesNull(false)
+                            ifTopBarChnagesNull(false)
                             rlTopDrawer.visibility = View.VISIBLE
                             tvHeading.text = resources.getString(R.string.empty_tanks_worries)
                             tvSubheading.text = resources.getString(R.string.deliver_real_quick)
@@ -778,7 +910,7 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                             setAnimationRight(linearLayoutCarRightTwo, activity!!)
                             setAnimationLeft(linearLayoutScooterLeftTwo, activity!!)
 
-                                ifTopBarChnagesNull(false)
+                            ifTopBarChnagesNull(false)
                             rlTopDrawer.visibility = View.VISIBLE
                             tvHeading.text = resources.getString(R.string.burst_tyre_worries)
                             tvSubheading.text = resources.getString(R.string.help_you_fix)
@@ -791,7 +923,7 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                             setAnimationRight(linearLayoutCarRightTwo, activity!!)
                             setAnimationLeft(linearLayoutScooterLeftTwo, activity!!)
 
-                                ifTopBarChnagesNull(false)
+                            ifTopBarChnagesNull(false)
                             rlTopDrawer.visibility = View.VISIBLE
                             tvHeading.text = resources.getString(R.string.double_trouble)
                             tvSubheading.text = resources.getString(R.string.we_will_connect_towing)
@@ -878,8 +1010,10 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
         val strVehicleType = RequestBody.create(MediaType.parse("text/plain"), strVehicleType)
 
-        val strVehicleNumber = RequestBody.create(MediaType.parse("text/plain"),
-            etVehicleNumber.text.toString())
+        val strVehicleNumber = RequestBody.create(
+            MediaType.parse("text/plain"),
+            etVehicleNumber.text.toString()
+        )
 
 
         rsaFragmentHandler.findFobbuRequest(
@@ -895,31 +1029,36 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
             if (mainPojo.success == "true") {
 
-                if(serviceSelected == RsaConstants.ServiceName.towing)
-                {
-                    Toast.makeText(activity!!,mainPojo.message,Toast.LENGTH_LONG).show()
+                if (serviceSelected == RsaConstants.ServiceName.towing) {
+                    Toast.makeText(activity!!, mainPojo.message, Toast.LENGTH_LONG).show()
 
-                    activity!!.startActivity(Intent(activity!!, DashboardActivity::class.java)
-                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK))
+                    activity!!.startActivity(
+                        Intent(activity!!, DashboardActivity::class.java)
+                            .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+                    )
 
-                    CommonClass(activity!!,activity!!).workDoneReviewSend()
+                    CommonClass(activity!!, activity!!).workDoneReviewSend()
 
                     activity!!.finish()
-                }
-                else
-                {
+                } else {
                     //fleetRequestApi(mainPojo.getData()._id)
 
-                    CommonClass(activity!!, activity!!).putString(RsaConstants.RsaTypes.checkIfOnGoingRsaRequest,"YES")
+                    CommonClass(activity!!, activity!!).putString(RsaConstants.RsaTypes.checkIfOnGoingRsaRequest, "YES")
 
-                    CommonClass(activity!!, activity!!).putString(RsaConstants.ServiceSaved.fobbuRequestId,
-                        mainPojo.getData()._id)
+                    CommonClass(activity!!, activity!!).putString(
+                        RsaConstants.ServiceSaved.fobbuRequestId,
+                        mainPojo.getData()._id
+                    )
 
-                    CommonClass(activity!!, activity!!).putString(RsaConstants.ServiceSaved.serviceNameSelected,
-                        serviceSelected)
+                    CommonClass(activity!!, activity!!).putString(
+                        RsaConstants.ServiceSaved.serviceNameSelected,
+                        serviceSelected
+                    )
 
-                    activity!!.startActivity(Intent(activity!!, WaitingScreenBlue::class.java)
-                        .putExtra("navigate_to", "0"))
+                    activity!!.startActivity(
+                        Intent(activity!!, WaitingScreenBlue::class.java)
+                            .putExtra("navigate_to", "0")
+                    )
                 }
             } else {
                 CommonClass(activity!!, activity!!).showToast(mainPojo.message)
@@ -1131,8 +1270,7 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
         googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
     }
 
-    fun ifTopBarChnagesNull(boolean: Boolean)
-    {
+    fun ifTopBarChnagesNull(boolean: Boolean) {
         if (topBarChanges == null)
             topBarChanges = activity as TopBarChanges
 

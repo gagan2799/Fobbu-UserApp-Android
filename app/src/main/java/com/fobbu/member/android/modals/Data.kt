@@ -9,6 +9,7 @@ class Data
     var device_type: String = ""
     var mobile_number: String = ""
     var _id: String = ""
+    var member_id=""
     var first_name: String = ""
     var last_name: String = ""
     var display_name: String = ""

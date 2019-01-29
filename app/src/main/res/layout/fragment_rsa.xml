@@ -932,6 +932,7 @@
                             <RelativeLayout
                                     android:layout_width="match_parent"
                                     android:layout_marginTop="20dp"
+                                    android:id="@+id/rl4WheelerBurst"
                                     android:layout_height="wrap_content">
 
                                 <RelativeLayout
@@ -1006,6 +1007,52 @@
                                         android:layout_marginTop="20dp"
                                         android:layout_centerHorizontal="true"
                                         android:layout_height="wrap_content"/>
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:id="@+id/rlTwoWheelerBurst"
+                                    android:visibility="gone"
+                                    android:layout_marginTop="40dp"
+                                    android:layout_height="wrap_content">
+
+                                <View
+                                        android:background="@drawable/border_circle"
+                                        android:layout_width="40dp"
+                                        android:id="@+id/viewLeftTwoWheeler"
+                                        android:layout_marginLeft="50dp"
+                                        android:layout_above="@+id/viewTwo"
+                                        android:layout_height="40dp"
+                                        android:layout_marginStart="50dp"/>
+
+                                <View
+                                        android:background="@drawable/half_recatangle"
+                                        android:layout_width="match_parent"
+                                        android:layout_marginLeft="70dp"
+                                        android:id="@+id/viewTwo"
+                                        android:layout_marginTop="5dp"
+                                        android:layout_below="@+id/ivTwoWheelerBurst"
+                                        android:layout_marginRight="70dp"
+                                        android:layout_height="5dp"/>
+
+                                <View
+                                        android:background="@drawable/border_circle"
+                                        android:layout_width="40dp"
+                                        android:id="@+id/viewRightTwoWheeler"
+                                        android:layout_marginRight="50dp"
+                                        android:layout_alignParentRight="true"
+                                        android:layout_above="@+id/viewTwo"
+                                        android:layout_height="40dp"
+                                        android:layout_marginEnd="50dp"
+                                        android:layout_alignParentEnd="true"/>
+
+                                <ImageView
+                                        android:id="@+id/ivTwoWheelerBurst"
+                                        android:layout_width="wrap_content"
+                                        android:src="@drawable/mark_car"
+                                        android:layout_centerInParent="true"
+                                        android:layout_height="wrap_content"/>
+
                             </RelativeLayout>
 
 

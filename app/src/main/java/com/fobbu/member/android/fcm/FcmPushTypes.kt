@@ -18,5 +18,6 @@ class FcmPushTypes
         var reviewAdded="review_added"
         var requestCancelled="cancelled_by_partner"
         var cancelledByAdmin="cancelled_by_admin"
+        var fuelDefaultScreen="fuel_default"
     }
 }

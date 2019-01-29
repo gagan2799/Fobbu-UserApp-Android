@@ -70,4 +70,5 @@ dependencies {
     implementation 'com.google.android.gms:play-services:12.0.1'
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'com.google.firebase:firebase-messaging:12.0.1'
+
 }

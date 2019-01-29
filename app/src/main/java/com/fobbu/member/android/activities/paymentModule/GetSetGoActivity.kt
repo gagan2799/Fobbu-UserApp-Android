@@ -63,6 +63,10 @@ class GetSetGoActivity : AppCompatActivity(), ActivityView {
             changeLayout("Get")
     }
 
+    override fun onBackPressed() {
+
+    }
+
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
     private fun clicks() {
 
@@ -85,18 +89,15 @@ class GetSetGoActivity : AppCompatActivity(), ActivityView {
                     )
                 } else {
                     Toast.makeText(this, getString(R.string.provide_review), Toast.LENGTH_SHORT).show()
-
                 }
             } else {
                 Toast.makeText(this, getString(R.string.internet_is_unavailable), Toast.LENGTH_SHORT).show()
             }
-
         }
 
         imageViewOptionMenuGetSetSummary.setOnClickListener {
             shareIt()
         }
-
     }
 
     private fun hideKeyboard() {
@@ -169,8 +170,6 @@ class GetSetGoActivity : AppCompatActivity(), ActivityView {
                 }, 1000)
             }
         }
-
-
     }
 
     private fun shareIt() {

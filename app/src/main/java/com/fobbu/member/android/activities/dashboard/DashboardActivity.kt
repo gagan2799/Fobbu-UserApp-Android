@@ -349,15 +349,24 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
 
     override fun onBackPressed() {
         super.onBackPressed()
-        val f: Fragment = supportFragmentManager.findFragmentById(R.id.content_frame)!!
-        if (f is HomeFragment) {
-            rlTopDrawer.visibility = View.VISIBLE
-            changeTabs(resources.getString(R.string.home))
-        }
-        else if(f is RSALiveFragment)
-        {
 
+        if(supportFragmentManager.findFragmentById(R.id.content_frame)!=null)
+        {
+            val f: Fragment = supportFragmentManager.findFragmentById(R.id.content_frame)!!
+            if (f is HomeFragment) {
+                rlTopDrawer.visibility = View.VISIBLE
+                changeTabs(resources.getString(R.string.home))
+            }
+            else if(f is RSALiveFragment)
+            {
+
+            }
         }
+        else
+        {
+            finish()
+        }
+
     }
 
     private fun checkAndNavigateFromPush() {
@@ -423,14 +432,38 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
             when (type) {
 
                 FcmPushTypes.Types.accept -> {
-                    CommonClass(this, this).putString(RsaConstants.RsaTypes.onGoingRsaScreen, "YES")
-                    CommonClass(this, this).putString(RsaConstants.RsaTypes.onGoingRsaScreenType, resources.getString(R.string.rsa_live))
-                    checkIfOnGoingRSAScreen()
+
+
+                    if (CommonClass(this, this).getString(RsaConstants.ServiceSaved.serviceNameSelected) ==
+                        RsaConstants.ServiceName.flatTyre
+                        ||
+                        CommonClass(this, this).getString(RsaConstants.ServiceSaved.serviceNameSelected) ==
+                        RsaConstants.ServiceName.burstTyre
+                    ) {
+                        CommonClass(this, this).putString(RsaConstants.RsaTypes.onGoingRsaScreen, "YES")
+                        CommonClass(this, this).putString(RsaConstants.RsaTypes.onGoingRsaScreenType, resources.getString(R.string.rsa_live))
+                        checkIfOnGoingRSAScreen()
+                    }
+                    else
+                    {
+                        CommonClass(this, this).putString(RsaConstants.RsaTypes.onGoingRsaScreen, "YES")
+                        startActivity(
+                            Intent(this, WorkSummaryActivity::class.java)
+                                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+                        )
+                    }
                 }
 
                 FcmPushTypes.Types.cancelledByAdmin -> {
                     CommonClass(this,this).workDoneReviewSend()
                 }
+
+                FcmPushTypes.Types.fuelDefaultScreen -> {
+                    CommonClass(this, this).putString(RsaConstants.RsaTypes.onGoingRsaScreen, "YES")
+                    CommonClass(this, this).putString(RsaConstants.RsaTypes.onGoingRsaScreenType, resources.getString(R.string.rsa_live))
+                    checkIfOnGoingRSAScreen()
+                }
+
                 FcmPushTypes.Types.inRouteRequest -> {
 
                     CommonClass(this, this).putString(RsaConstants.RsaTypes.onGoingRsaScreen, "YES")
@@ -440,16 +473,26 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
                 FcmPushTypes.Types.newPin -> {
 
                     CommonClass(this, this).putString(RsaConstants.RsaTypes.onGoingRsaScreen, "YES")
-                    CommonClass(this, this).putString(RsaConstants.RsaTypes.onGoingRsaScreenType,
-                        resources.getString(R.string.rsa_live))
-                    CommonClass(this, this).putString(RsaConstants.RsaTypes.onGoingRsaLiveScreenType,
-                        FcmPushTypes.Types.newPin)
+                    CommonClass(this, this).putString(RsaConstants.RsaTypes.onGoingRsaScreenType,resources.getString(R.string.rsa_live))
+                    CommonClass(this, this).putString(RsaConstants.RsaTypes.onGoingRsaLiveScreenType, FcmPushTypes.Types.newPin)
                     checkIfOnGoingRSAScreen()
                 }
                 FcmPushTypes.Types.otpVerified -> {
 
-                    startActivity(Intent(this, WaitingScreenWhite::class.java)
-                        .putExtra("from_where", "wallet_accessing"))
+                    if (CommonClass(this, this).getString(RsaConstants.ServiceSaved.serviceNameSelected) ==
+                        RsaConstants.ServiceName.flatTyre
+                        ||
+                        CommonClass(this, this).getString(RsaConstants.ServiceSaved.serviceNameSelected) ==
+                        RsaConstants.ServiceName.burstTyre
+                    ) {
+                        startActivity(Intent(this, WaitingScreenWhite::class.java)
+                            .putExtra("from_where", "wallet_accessing"))
+                    }
+                    else
+                    {
+                        CommonClass(this, this).putString(RsaConstants.RsaTypes.onGoingRsaScreen, "YES")
+                        startActivity(Intent(this, GetSetGoActivity::class.java).putExtra("navigate_to", "START"))
+                    }
                 }
                 FcmPushTypes.Types.moneyRequested -> {
 
@@ -462,8 +505,31 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
 
                 FcmPushTypes.Types.moneyPaid -> {
 
-                    CommonClass(this, this).putString(RsaConstants.RsaTypes.onGoingRsaScreen, "YES")
-                    startActivity(Intent(this, GetSetGoActivity::class.java).putExtra("navigate_to", "Start"))
+
+                    if (CommonClass(this, this).getString(RsaConstants.ServiceSaved.serviceNameSelected) ==
+                        RsaConstants.ServiceName.flatTyre
+                        ||
+                        CommonClass(this, this).getString(RsaConstants.ServiceSaved.serviceNameSelected) ==
+                        RsaConstants.ServiceName.burstTyre
+                    ) {
+                        CommonClass(this, this).putString(RsaConstants.RsaTypes.onGoingRsaScreen, "YES")
+                        startActivity(Intent(this, GetSetGoActivity::class.java).putExtra("navigate_to", "Start"))
+                    }
+                    else
+                    {
+                        CommonClass(this, this).putString(RsaConstants.RsaTypes.checkStatus, FcmPushTypes.Types.inRouteRequest)
+                        CommonClass(this, this).putString(RsaConstants.RsaTypes.onGoingRsaScreen, "YES")
+                        CommonClass(this, this).putString(RsaConstants.RsaTypes.onGoingRsaScreenType, resources.getString(R.string.rsa_live))
+
+
+                        if (CommonClass(this, this).getString(RsaConstants.ServiceSaved.serviceNameSelected) ==
+                            RsaConstants.ServiceName.fuelDelivery)
+                        {
+                            CommonClass(this,this).putString(RsaConstants.RsaTypes.checkStatus,FcmPushTypes.Types.fuelDefaultScreen)
+                        }
+
+                        checkIfOnGoingRSAScreen()
+                    }
                 }
                 FcmPushTypes.Types.startedWork -> {
 
@@ -476,7 +542,7 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
                     startActivity(Intent(this, GetSetGoActivity::class.java).putExtra("navigate_to", FcmPushTypes.Types.workEnded))
                 }
                 else -> {
-
+                    changeFragment(HomeFragment(), resources.getString(R.string.home))
                 }
             }
         }

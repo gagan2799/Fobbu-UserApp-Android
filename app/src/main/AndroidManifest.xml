@@ -23,7 +23,7 @@
             tools:ignore="GoogleAppIndexingWarning"
             tools:replace="android:allowBackup">
         <activity
-                android:name=".activities.SplashActivity"
+                android:name="com.fobbu.member.android.activities.SplashActivity"
                 android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -51,7 +51,7 @@
         <activity
                 android:name=".activities.loginSignupModule.GeneratePINActivity"
                 android:screenOrientation="portrait"
-                android:windowSoftInputMode="stateVisible"/>
+                android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
                 android:name=".activities.dashboardActivity.DashboardActivity"
                 android:screenOrientation="portrait"
