@@ -1049,7 +1049,7 @@
                                 <ImageView
                                         android:id="@+id/ivTwoWheelerBurst"
                                         android:layout_width="wrap_content"
-                                        android:src="@drawable/mark_car"
+                                        android:src="@drawable/assessment_scooter_selected"
                                         android:layout_centerInParent="true"
                                         android:layout_height="wrap_content"/>
 

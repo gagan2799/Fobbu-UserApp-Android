@@ -3,12 +3,14 @@ package com.fobbu.member.android.fcm
 class FcmPushTypes
 {
     object Types {
-        var accept = "accept_request"
+        var accept = "accepted"
         var acceptRequestBroadCast = "accept_request_broadcast"
-        var inRouteRequest = "in_route_request"
+        var inRouteRequest = "in_route"
         var inRouteRequestBroadCast = "in_route_request_broadcast"
+        var fromAPIBroadCast = "from_api_request_broadcast"
         var newPin = "new_pin"
         var otpVerified = "otp_verified"
+        var otpGenerated="otp_generated"
         var moneyRequested = "money_requested"
         var moneyPaid = "money_paid"
         var moneyRequestedBroadcast="money_requested_broadcast"

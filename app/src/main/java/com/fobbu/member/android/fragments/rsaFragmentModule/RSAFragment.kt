@@ -37,6 +37,7 @@ import com.fobbu.member.android.activities.waitingScreenModule.WaitingScreenBlue
 
 import com.fobbu.member.android.apiInterface.MyApplication
 import com.fobbu.member.android.apiInterface.WebServiceApi
+import com.fobbu.member.android.backgroundServices.FetchStatusAPI
 import com.fobbu.member.android.fragments.rsaFragmentModule.adapter.FobbuServiceAdapter
 import com.fobbu.member.android.fragments.rsaFragmentModule.presenter.RsaFragmentHandler
 import com.fobbu.member.android.fragments.rsaFragmentModule.presenter.RsaFragmnetPresenter
@@ -1026,6 +1027,9 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     override fun findingFobbuReport(mainPojo: MainPojo) {
         try {
             // val mainPojo = response!!.body()
+
+
+            activity!!.startService(Intent(activity!!, FetchStatusAPI::class.java))
 
             if (mainPojo.success == "true") {
 

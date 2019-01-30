@@ -161,21 +161,33 @@ class LoginActivity : AppCompatActivity(), ActivityView {
             CommonClass(this@LoginActivity, this@LoginActivity)
                 .putString("member_id", mainPojo.getData().member_id)
 
-            if(mainPojo.getData().active_requests.size>0)
-            {
-                val list = mainPojo.getData().active_requests
+            if (mainPojo.active_requests.size > 0) {
+                val list = mainPojo.active_requests
+
+                CommonClass(this, this).putString(
+                    RsaConstants.ServiceSaved.serviceNameSelected,
+                    list[0]["static_name"].toString()
+                )
 
                 CommonClass(this@LoginActivity, this@LoginActivity)
                     .putString(RsaConstants.ServiceSaved.fobbuRequestId, list[0]["_id"].toString())
 
                 CommonClass(this@LoginActivity, this@LoginActivity)
-                    .putString(RsaConstants.RsaTypes.checkIfOnGoingRsaRequest,"YES")
+                    .putString(RsaConstants.RsaTypes.checkIfOnGoingRsaRequest, "YES")
 
                 CommonClass(this@LoginActivity, this@LoginActivity)
-                    .putString(RsaConstants.RsaTypes.checkStatus,list[0]["status"].toString())
+                    .putString(RsaConstants.RsaTypes.checkStatus, list[0]["status"].toString())
+
+                if (list[0].containsKey("otp")) {
+
+                    val  otp = if (list[0]["otp"].toString().contains("\\.".toRegex())) {
+                        list[0]["otp"].toString().split("\\.".toRegex())[0]
+                    } else
+                        list[0]["otp"].toString()
+
+                    CommonClass(this, this).putString(RsaConstants.ServiceSaved.otpStart,otp)
+                }
             }
-
-
             startActivity(Intent(this@LoginActivity, GeneratePINActivity::class.java))
 
             finish()

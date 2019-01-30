@@ -190,6 +190,10 @@
             android:windowSoftInputMode="adjustResize" >
         </activity>
 
+        <service
+            android:name="com.fobbu.member.android.backgroundServices.FetchStatusAPI"
+            android:enabled="true" />
+
         <receiver android:name="com.google.android.gms.cast.framework.media.MediaIntentReceiver" />
 
         <service android:name="com.google.android.gms.cast.framework.media.MediaNotificationService" />

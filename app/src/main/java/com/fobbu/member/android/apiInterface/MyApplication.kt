@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import android.support.multidex.MultiDex
+import com.fobbu.member.android.utils.Url
 import com.google.gson.GsonBuilder
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -25,8 +26,6 @@ class MyApplication : Application() {
     lateinit var webServiceApi: WebServiceApi
 
     lateinit var webServiceApiMultipart: WebServiceApi
-
-    private var URL = "http://13.127.103.243:3000/"
 
     override fun attachBaseContext(context: Context) {
         super.attachBaseContext(context)
@@ -74,7 +73,7 @@ class MyApplication : Application() {
         val gson = GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ").setLenient().create()
 
         retrofit = Retrofit.Builder()
-            .baseUrl(URL)
+            .baseUrl(Url.ApiUrl.URL)
             .client(client)
             .addConverterFactory(GsonConverterFactory.create(gson)).build()
 
@@ -112,7 +111,7 @@ class MyApplication : Application() {
         val gson = GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ").setLenient().create()
 
         retrofit = Retrofit.Builder()
-            .baseUrl(URL)
+            .baseUrl(Url.ApiUrl.URL)
             .client(client)
             .addConverterFactory(GsonConverterFactory.create(gson)).build()
 

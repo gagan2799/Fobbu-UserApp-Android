@@ -1299,6 +1299,7 @@ drawable add_money_saving
 drawable add_vehicle
 drawable add_vehicle_drawer
 drawable arrow_drawer
+drawable assessment_scooter_selected
 drawable avd_hide_password
 drawable avd_show_password
 drawable back_button
@@ -2098,6 +2099,7 @@ id ivTickV
 id ivTodayCheckPb
 id ivTool
 id ivTow
+id ivTwoWheelerBurst
 id ivWallet
 id ivWeekCheckPb
 id ivYesterdayCheckPb
@@ -2285,6 +2287,7 @@ id right_icon
 id right_side
 id rl
 id rl2ndRelationShipEmergency
+id rl4WheelerBurst
 id rlAccessingVehicle
 id rlBasicProfile
 id rlBelow
@@ -2317,6 +2320,7 @@ id rlTools
 id rlTop
 id rlTopDrawer
 id rlTrack
+id rlTwoWheelerBurst
 id rlVehicleAccessed
 id rlWallet
 id rvContacts
@@ -2628,6 +2632,7 @@ id viewKyc
 id viewLSD
 id viewLeftBottom
 id viewLeftTop
+id viewLeftTwoWheeler
 id viewList
 id viewNew
 id viewOds
@@ -2635,8 +2640,10 @@ id viewPager
 id viewRSA
 id viewRightBottom
 id viewRightTop
+id viewRightTwoWheeler
 id viewSetAbove
 id viewSetBelow
+id viewTwo
 id view_car
 id view_consumer_drawer
 id view_offset_helper

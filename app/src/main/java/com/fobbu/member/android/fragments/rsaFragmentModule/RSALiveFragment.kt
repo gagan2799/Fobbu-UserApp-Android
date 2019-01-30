@@ -271,8 +271,6 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
         } catch (e: Exception) {
             e.printStackTrace()
         }
-
-        checkWhenMapIsReady()
     }
 
     override fun onConnected(p0: Bundle?) {
@@ -332,9 +330,11 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                 )
             } else {
                 enableGPSAutoMatically()
+                checkWhenMapIsReady()
             }
         } else {
             enableGPSAutoMatically()
+            checkWhenMapIsReady()
         }
     }
 
@@ -476,6 +476,13 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                 tvCode.text = CommonClass(activity!!,activity!!).getString(RsaConstants.ServiceSaved.otpStart)
                 tvCode.visibility = View.VISIBLE
             }
+
+            FcmPushTypes.Types.otpGenerated -> {
+                ivTool.setImageResource(R.drawable.mechanic_with_cap)
+                tvText.text = resources.getString(R.string.share_4_digit_code)
+                tvCode.text = CommonClass(activity!!,activity!!).getString(RsaConstants.ServiceSaved.otpStart)
+                tvCode.visibility = View.VISIBLE
+            }
             FcmPushTypes.Types.otpVerified ->
             {
                 println("HERE IN LIVE ")
@@ -573,6 +580,16 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                     dialNumber()
                 }
                 return
+            }
+
+            locationPermissionRequestCode -> {
+                if (grantResults.isEmpty() || grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    checkGPSEnable()
+                } else {
+
+                    checkGPSEnable()
+                }
             }
         }
     }

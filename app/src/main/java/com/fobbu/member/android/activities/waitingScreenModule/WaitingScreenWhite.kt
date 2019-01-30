@@ -71,6 +71,10 @@ class WaitingScreenWhite : AppCompatActivity() {
 
     ///GOING TO RSA LIVE SCREEN
     private fun goToRsaLiveScreen() {
+
+        startActivity(Intent(this, DashboardActivity::class.java)
+            .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK))
+
         CommonClass(this, this).putString(RsaConstants.RsaTypes.onGoingRsaScreen, "YES")
 
         CommonClass(this, this).putString(RsaConstants.RsaTypes.onGoingRsaScreenType, resources.getString(R.string.rsa_live))

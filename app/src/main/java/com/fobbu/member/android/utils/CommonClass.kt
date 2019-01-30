@@ -23,6 +23,7 @@ import android.widget.Toast
 import com.fobbu.member.android.R
 import com.fobbu.member.android.activities.loginSignupModule.LoginActivity
 import com.fobbu.member.android.activities.rsaModule.RSARequestCancelActivity
+import com.fobbu.member.android.backgroundServices.FetchStatusAPI
 import com.fobbu.member.android.fragments.rsaFragmentModule.RsaConstants
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -50,7 +51,6 @@ class CommonClass(activity1: Activity, context1: Context) {
     private var startDateCustom = ""
 
     private var endDateCustom = ""
-
 
     var aPI_KEY: String = "Fobbu"
 
@@ -139,6 +139,14 @@ class CommonClass(activity1: Activity, context1: Context) {
         prefsEditor.putString(RsaConstants.RsaTypes.checkStatus,"")
 
         prefsEditor.apply()
+
+        try {
+            activity.stopService(Intent(activity,FetchStatusAPI::class.java))
+        }
+        catch (e:java.lang.Exception)
+        {
+            e.printStackTrace()
+        }
     }
 
     @SuppressLint("ObsoleteSdkInt")

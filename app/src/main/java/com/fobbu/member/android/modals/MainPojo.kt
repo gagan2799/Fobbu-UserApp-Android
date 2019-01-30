@@ -36,4 +36,6 @@ class MainPojo
     var services=ArrayList<HashMap<String,Any>>()
 
     var vehicles=ArrayList<HashMap<String,Any>>()
+
+    var active_requests=ArrayList<HashMap<String,Any>>()
 }

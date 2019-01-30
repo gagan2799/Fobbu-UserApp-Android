@@ -12,6 +12,7 @@ import android.widget.Toast
 import com.fobbu.member.android.R
 import com.fobbu.member.android.activities.dashboardActivity.DashboardActivity
 import com.fobbu.member.android.activities.paymentModule.WorkSummaryActivity
+import com.fobbu.member.android.backgroundServices.FetchStatusAPI
 import com.fobbu.member.android.fcm.FcmPushTypes
 import com.fobbu.member.android.fragments.rsaFragmentModule.RsaConstants
 import com.fobbu.member.android.utils.CommonClass
@@ -51,7 +52,6 @@ class WaitingScreenBlue : AppCompatActivity() {
                 tvTextOne.text=resources.getString(R.string.wonderful)
                 tvTextTwo.text=resources.getString(R.string.fobbu_confirmed_request)
                 tvTextThree.visibility=View.VISIBLE
-
 
                 if(CommonClass(this,this).getString(RsaConstants.ServiceSaved.serviceNameSelected) ==
                     RsaConstants.ServiceName.flatTyre

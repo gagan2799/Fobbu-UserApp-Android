@@ -48,7 +48,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
         type = remoteMessage.data["type"].toString()
 
-        try {
+       /* try {
             // val json = JSONObject(remoteMessage.notification!!.title)
 
             if (!isAppIsInBackground(this)) {
@@ -62,7 +62,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             }
         } catch (e: Exception) {
             Log.e(TAG, "Exception: " + e.message)
-        }
+        }*/
         //handleNotification(remoteMessage!!.notification!!.body)
 
     }
@@ -140,10 +140,8 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
     }
 
-    private fun ifAppIsOpen(
-        map: Map<String, String>
-    ) {
-
+    private fun ifAppIsOpen(map: Map<String, String>)
+    {
         val json = JSONObject(map["notification"])
 
         prefsEditor.putString(RsaConstants.RsaTypes.checkStatus,json["type"].toString()).apply()
