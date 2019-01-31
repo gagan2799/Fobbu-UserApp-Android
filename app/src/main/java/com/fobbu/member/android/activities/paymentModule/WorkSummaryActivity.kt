@@ -13,7 +13,6 @@ import com.fobbu.member.android.R
 import com.fobbu.member.android.activities.paymentModule.adapter.WorkSummaryAdapter
 import com.fobbu.member.android.activities.rsaModule.RSARequestCancelActivity
 import com.fobbu.member.android.fragments.rsaFragmentModule.RsaConstants
-import com.fobbu.member.android.fragments.rsaFragmentModule.presenter.RsaLiveHandler
 import com.fobbu.member.android.fragments.rsaFragmentModule.presenter.RsaLivePresenter
 import com.fobbu.member.android.modals.MainPojo
 import com.fobbu.member.android.utils.CommonClass
@@ -26,7 +25,7 @@ import kotlin.collections.ArrayList
 class WorkSummaryActivity : AppCompatActivity(),ActivityView {
 
 
-    private lateinit var rsaLiveHandler:RsaLiveHandler
+    private lateinit var rsaLiveHandler:RsaLivePresenter
 
     lateinit var workSummaryAdapter:WorkSummaryAdapter
 

@@ -530,7 +530,6 @@ class ApiClient(var activity: Activity) {
 
         else{
             responseHandler.onError("Error: "+response.message())
-            println("main pojo data $response")
         }
     }
 

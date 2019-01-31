@@ -21,5 +21,6 @@ class FcmPushTypes
         var requestCancelled="cancelled_by_partner"
         var cancelledByAdmin="cancelled_by_admin"
         var fuelDefaultScreen="fuel_default"
+        var checkStatusPushOneTime="check_Status_Push_One_Time"
     }
 }

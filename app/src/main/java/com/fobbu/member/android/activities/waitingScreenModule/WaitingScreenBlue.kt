@@ -33,14 +33,21 @@ class WaitingScreenBlue : AppCompatActivity() {
     private fun initView() {
 
         strWhich = intent.getStringExtra("navigate_to")
+
+        if(strWhich=="0")
+            CommonClass(this,this).putString(RsaConstants.ServiceSaved.isBlueScreenON,"1")
+
         changeLayout()
 
     }
+
 
     private fun changeLayout() {
 
         when (strWhich) {
             "1" -> {
+
+                CommonClass(this,this).putString(RsaConstants.ServiceSaved.isBlueScreenON,"")
                 strWhich="2"
                 tvTextOne.text=resources.getString(R.string.awesome)
                 tvTextTwo.text=resources.getString(R.string.fobbu_found)
@@ -48,6 +55,8 @@ class WaitingScreenBlue : AppCompatActivity() {
                 Handler().postDelayed({ changeLayout() },1000)
             }
             "2" -> {
+
+                CommonClass(this,this).putString(RsaConstants.ServiceSaved.isBlueScreenON,"")
                 strWhich="3"
                 tvTextOne.text=resources.getString(R.string.wonderful)
                 tvTextTwo.text=resources.getString(R.string.fobbu_confirmed_request)
@@ -76,6 +85,8 @@ class WaitingScreenBlue : AppCompatActivity() {
 
             }
             "3" -> {
+
+                CommonClass(this,this).putString(RsaConstants.ServiceSaved.isBlueScreenON,"")
                 strWhich="3"
 
                 startActivity(Intent(this, WaitingScreenWhite::class.java)
@@ -85,6 +96,7 @@ class WaitingScreenBlue : AppCompatActivity() {
 
             "4" -> {
 
+                CommonClass(this,this).putString(RsaConstants.ServiceSaved.isBlueScreenON,"")
                 startActivity(Intent(this, DashboardActivity::class.java)
                     .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK))
 
@@ -100,12 +112,16 @@ class WaitingScreenBlue : AppCompatActivity() {
         rlLayout.setOnClickListener {
             when (strWhich) {
                 "0" -> {
+
+                    CommonClass(this,this).putString(RsaConstants.ServiceSaved.isBlueScreenON,"")
                     strWhich="1"
                     tvTextOne.text=resources.getString(R.string.awesome)
                     tvTextTwo.text=resources.getString(R.string.fobbu_found)
                     tvTextThree.visibility=View.GONE
                 }
                 "1" -> {
+
+                    CommonClass(this,this).putString(RsaConstants.ServiceSaved.isBlueScreenON,"")
                     strWhich="2"
                     tvTextOne.text=resources.getString(R.string.wonderful)
                     tvTextTwo.text=resources.getString(R.string.fobbu_confirmed_request)
@@ -113,6 +129,8 @@ class WaitingScreenBlue : AppCompatActivity() {
                     tvTextThree.visibility=View.VISIBLE
                 }
                 "2" -> {
+
+                    CommonClass(this,this).putString(RsaConstants.ServiceSaved.isBlueScreenON,"")
                     strWhich="3"
 
                     startActivity(Intent(this, WaitingScreenWhite::class.java)
@@ -149,6 +167,8 @@ class WaitingScreenBlue : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
+
+        CommonClass(this,this).putString(RsaConstants.ServiceSaved.isBlueScreenON,"")
 
         try {
             unregisterReceiver(changeRSALiveScreenReceiver)

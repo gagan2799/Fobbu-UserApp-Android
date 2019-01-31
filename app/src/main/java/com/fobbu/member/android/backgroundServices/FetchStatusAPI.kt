@@ -10,10 +10,8 @@ import android.os.IBinder
 import com.fobbu.member.android.apiInterface.WebServiceApi
 import com.fobbu.member.android.fcm.FcmPushTypes
 import com.fobbu.member.android.fragments.rsaFragmentModule.RsaConstants
-import com.fobbu.member.android.fragments.rsaFragmentModule.presenter.RsaLiveHandler
-import com.fobbu.member.android.fragments.rsaFragmentModule.presenter.RsaLivePresenter
+import com.fobbu.member.android.fragments.rsaFragmentModule.presenter.FetchStatusHandler
 import com.fobbu.member.android.modals.MainPojo
-import com.fobbu.member.android.utils.CommonClass
 import com.fobbu.member.android.utils.Url
 import com.google.gson.GsonBuilder
 import okhttp3.Interceptor
@@ -24,7 +22,6 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.util.HashMap
 import java.util.concurrent.TimeUnit
 
 
@@ -32,7 +29,7 @@ import java.util.concurrent.TimeUnit
 class FetchStatusAPI : Service() {
     lateinit var mHandler: Handler
 
-    lateinit var rsaLiveHandler: RsaLiveHandler
+    lateinit var rsaLiveHandler: FetchStatusHandler
 
     val defaultSyncInterval = (30 * 1000).toLong()
 

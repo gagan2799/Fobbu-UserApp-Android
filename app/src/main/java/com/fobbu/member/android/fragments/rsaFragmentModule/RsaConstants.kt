@@ -18,6 +18,8 @@ class RsaConstants
         var fobbuRequestId="fobbu_request_id"
         var serviceNameSelected="service_name_selected"
         var otpStart="otp_Start"
+        var cancellationMessage="cancellation_Message"
+        var isBlueScreenON="is_Blue_Screen_ON"
     }
 
     object RsaTypes

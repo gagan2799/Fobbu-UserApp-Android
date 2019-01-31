@@ -16,17 +16,13 @@ import android.support.v4.content.ContextCompat
 import android.support.v7.app.AlertDialog
 import android.util.Log
 import android.view.*
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.RelativeLayout
-import android.widget.TextView
+import android.widget.*
 import com.fobbu.member.android.R
 
 import com.fobbu.member.android.activities.waitingScreenModule.WaitingScreenBlue
 import com.fobbu.member.android.activities.waitingScreenModule.WaitingScreenWhite
 import com.fobbu.member.android.fcm.FcmPushTypes
 import com.fobbu.member.android.fragments.rsaFragmentModule.RsaConstants
-import com.fobbu.member.android.fragments.rsaFragmentModule.presenter.RsaLiveHandler
 import com.fobbu.member.android.fragments.rsaFragmentModule.presenter.RsaLivePresenter
 
 
@@ -63,7 +59,7 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     private var strLatitude = ""
     private var strLongitude = ""
 
-    lateinit var rsaLiveHandler: RsaLiveHandler
+    lateinit var rsaLiveHandler: RsaLivePresenter
 
     private lateinit var rlInformation: RelativeLayout
     private lateinit var ivTool: ImageView
@@ -456,6 +452,8 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
         val status = CommonClass(activity!!,activity!!).getString(RsaConstants.RsaTypes.checkStatus)
 
+        println("HERE IN LIVE FRAGMENT $status")
+
         when (status) {
             FcmPushTypes.Types.inRouteRequest -> {
                 ivTool.setImageResource(R.drawable.man_riding_bike)
@@ -504,6 +502,12 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                 tvPickingFuel.visibility = View.VISIBLE
                 rlTools.visibility = View.GONE
             }
+
+            FcmPushTypes.Types.requestCancelled -> {
+                val intent = Intent()
+                intent.action = FcmPushTypes.Types.fromAPIBroadCast
+                activity!!.sendBroadcast(intent)
+            }
         }
 
     }
@@ -511,7 +515,6 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
     override fun onRequestSuccessReport(mainPojo: MainPojo) {
         if (mainPojo.success == "true") {
-            println("MAIN POJO " + mainPojo.getData().partner.profile)
 
             if (!mainPojo.getData().user.profile.isNullOrBlank()) {
                 Picasso.get().load(mainPojo.getData().partner.profile).error(R.drawable.dummy_pic).into(imgProfile)
