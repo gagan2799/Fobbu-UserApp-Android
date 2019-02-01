@@ -59,7 +59,6 @@ import java.lang.Exception
 class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragments, TopBarChanges, ActivityView,
     ActivityViewDashboard {
 
-
     private var topBarChanges: TopBarChanges? = null
     var fragmentTypeForRSA = ""
     private lateinit var fragmentEarlier: Fragment
@@ -376,8 +375,7 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
                 println("FROM PUSH CHECK AND NAVIGATE")
                 checkStatusAPI()
             }
-            CommonClass(this, this).getString(RsaConstants.RsaTypes.checkStatus) != "" ->
-            {
+            CommonClass(this, this).getString(RsaConstants.RsaTypes.checkStatus) != "" -> {
                 val type: String = CommonClass(this, this).getString(RsaConstants.RsaTypes.checkStatus)
                 when (type) {
 
@@ -405,7 +403,7 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
                     }
 
                     FcmPushTypes.Types.cancelledByAdmin -> {
-                        fragmentTypeForRSA=""
+                        fragmentTypeForRSA = ""
                         CommonClass(this, this).workDoneReviewSend()
                     }
 
@@ -575,10 +573,11 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
 
                     FcmPushTypes.Types.requestCancelled -> {
 
-                        fragmentTypeForRSA=""
+                        fragmentTypeForRSA = ""
                         Toast.makeText(
                             this, CommonClass(this, this)
-                                .getString(RsaConstants.ServiceSaved.cancellationMessage), Toast.LENGTH_SHORT).show()
+                                .getString(RsaConstants.ServiceSaved.cancellationMessage), Toast.LENGTH_SHORT
+                        ).show()
 
                         CommonClass(this, this).workDoneReviewSend()
 
@@ -653,7 +652,6 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
 
             checkStatusAPI()
         }
-
     }
 
     fun checkStatusAPI() {
@@ -665,9 +663,7 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
                 CommonClass(this, this).getString(RsaConstants.ServiceSaved.fobbuRequestId)
             )
         }
-
     }
-
 
     override fun onRequestSuccessReportGetService(mainPojo: MainPojo) {
         try {
@@ -696,28 +692,23 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
                     CommonClass(this, this).putString(RsaConstants.ServiceSaved.otpStart, otp)
 
                     CommonClass(this, this).putString(
-                        RsaConstants.ServiceSaved.cancellationMessage,
-                        mainPojo.getData().reason_of_cancellation
+                        RsaConstants.ServiceSaved.cancellationMessage, mainPojo.getData().reason_of_cancellation
                     )
 
-                   if(intent.hasExtra("from_push") ) {
-                        intent.removeExtra("from_push")
-                       println("APP CLOSED ")
-                       checkAndNavigateFromPush()
-                    }
-                    else
-                   {
-                       ifAppIsOpen()
-                   }
-
-                } else {
-                    if(intent.hasExtra("from_push") ) {
+                    if (intent.hasExtra("from_push")) {
                         intent.removeExtra("from_push")
                         println("APP CLOSED ")
                         checkAndNavigateFromPush()
+                    } else {
+                        ifAppIsOpen()
                     }
-                    else
-                    {
+
+                } else {
+                    if (intent.hasExtra("from_push")) {
+                        intent.removeExtra("from_push")
+                        println("APP CLOSED ")
+                        checkAndNavigateFromPush()
+                    } else {
                         println("NOT SAVED BECAUSE SAME ")
                     }
 
@@ -831,7 +822,7 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
 
                 changeFragment(HomeFragment(), resources.getString(R.string.home))
 
-                fragmentTypeForRSA=""
+                fragmentTypeForRSA = ""
             }
         }
     }

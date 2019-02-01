@@ -1028,23 +1028,22 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
         try {
             // val mainPojo = response!!.body()
 
-
             activity!!.startService(Intent(activity!!, FetchStatusAPI::class.java))
 
             if (mainPojo.success == "true") {
 
-                if (serviceSelected == RsaConstants.ServiceName.towing) {
-                    Toast.makeText(activity!!, mainPojo.message, Toast.LENGTH_LONG).show()
+                /*  if (serviceSelected == RsaConstants.ServiceName.towing) {
+                      Toast.makeText(activity!!, mainPojo.message, Toast.LENGTH_LONG).show()
 
-                    activity!!.startActivity(
-                        Intent(activity!!, DashboardActivity::class.java)
-                            .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
-                    )
+                      activity!!.startActivity(
+                          Intent(activity!!, DashboardActivity::class.java)
+                              .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+                      )
 
-                    CommonClass(activity!!, activity!!).workDoneReviewSend()
+                      CommonClass(activity!!, activity!!).workDoneReviewSend()
 
-                    activity!!.finish()
-                } else {
+                      activity!!.finish()
+                  } else {*/
                     //fleetRequestApi(mainPojo.getData()._id)
 
                     CommonClass(activity!!, activity!!).putString(RsaConstants.RsaTypes.checkIfOnGoingRsaRequest, "YES")
@@ -1063,7 +1062,7 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                         Intent(activity!!, WaitingScreenBlue::class.java)
                             .putExtra("navigate_to", "0")
                     )
-                }
+               // }
             } else {
                 CommonClass(activity!!, activity!!).showToast(mainPojo.message)
             }

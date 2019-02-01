@@ -139,8 +139,6 @@ class WaitingScreenWhite : AppCompatActivity() {
                         finish()
                     }, 1200)
                 }
-
-
             }
             "wallet_accessing" -> {
                 rlAccessingVehicle.visibility = View.VISIBLE
