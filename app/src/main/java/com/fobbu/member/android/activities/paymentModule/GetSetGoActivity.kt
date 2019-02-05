@@ -138,9 +138,12 @@ class GetSetGoActivity : AppCompatActivity(), ActivityView {
                 textViewSet.setTextColor(resources.getColor(R.color.red))
                 textViewSetDetails.setTextColor(resources.getColor(R.color.red))
                 textViewNumberSet.visibility = View.GONE
-                linearLayoutServiceGetSet.visibility = View.VISIBLE
                 imageViewWhiteCheckSet.visibility = View.VISIBLE
+                linearLayoutServiceGetSet.visibility = View.VISIBLE
                 linearlayoutReviewGet.visibility = View.GONE
+
+                textViewNumberGet.visibility = View.GONE
+                imageViewWhiteCheckGet.visibility = View.VISIBLE
             }
             else -> {
                 viewGetAbove.setBackgroundColor(resources.getColor(R.color.red))
@@ -160,6 +163,12 @@ class GetSetGoActivity : AppCompatActivity(), ActivityView {
                 textViewGoDetails.setTextColor(resources.getColor(R.color.red))
                 textViewNumberGo.visibility = View.GONE
                 imageViewWhiteCheckGo.visibility = View.VISIBLE
+
+                textViewNumberSet.visibility = View.GONE
+                imageViewWhiteCheckSet.visibility = View.VISIBLE
+
+                textViewNumberGet.visibility = View.GONE
+                imageViewWhiteCheckGet.visibility = View.VISIBLE
                 Handler().postDelayed({
                     linearLayoutServiceGetSet.visibility = View.GONE
                     linearlayoutReviewGet.visibility = View.VISIBLE

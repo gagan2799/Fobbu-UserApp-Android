@@ -106,7 +106,7 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     @SuppressLint("ResourceAsColor")
     private fun handleClick() {
 
-        rlInformation.setOnClickListener {
+      /*  rlInformation.setOnClickListener {
 
             when (strWhere) {
                 "" -> {
@@ -134,12 +134,11 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                     )
                 )
             }
-        }
+        }*/
 
         ivImageCall.setOnClickListener {
             checkPermissionForCall()
         }
-
     }
 
     @SuppressLint("ResourceAsColor")
@@ -199,7 +198,6 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
         tvCancel.setOnClickListener {
             builderFinal.dismiss()
-
         }
         tvConfirm.setOnClickListener {
             builderFinal.dismiss()

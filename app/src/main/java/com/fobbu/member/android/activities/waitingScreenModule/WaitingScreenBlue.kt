@@ -34,9 +34,11 @@ class WaitingScreenBlue : AppCompatActivity() {
 
         strWhich = intent.getStringExtra("navigate_to")
 
-        if(strWhich=="0")
-            CommonClass(this,this).putString(RsaConstants.ServiceSaved.isBlueScreenON,"1")
+        if(strWhich=="0") {
+            CommonClass(this, this).putString(RsaConstants.ServiceSaved.isBlueScreenON, "1")
 
+            CommonClass(this,this).putString(RsaConstants.ServiceSaved.isNew,"1")
+        }
         changeLayout()
 
     }
@@ -48,6 +50,8 @@ class WaitingScreenBlue : AppCompatActivity() {
             "1" -> {
 
                 CommonClass(this,this).putString(RsaConstants.ServiceSaved.isBlueScreenON,"")
+
+                CommonClass(this,this).putString(RsaConstants.ServiceSaved.isNew,"")
                 strWhich="2"
                 tvTextOne.text=resources.getString(R.string.awesome)
                 tvTextTwo.text=resources.getString(R.string.fobbu_found)
@@ -57,6 +61,7 @@ class WaitingScreenBlue : AppCompatActivity() {
             "2" -> {
 
                 CommonClass(this,this).putString(RsaConstants.ServiceSaved.isBlueScreenON,"")
+                CommonClass(this,this).putString(RsaConstants.ServiceSaved.isNew,"")
                 strWhich="3"
                 tvTextOne.text=resources.getString(R.string.wonderful)
                 tvTextTwo.text=resources.getString(R.string.fobbu_confirmed_request)
@@ -87,6 +92,7 @@ class WaitingScreenBlue : AppCompatActivity() {
             "3" -> {
 
                 CommonClass(this,this).putString(RsaConstants.ServiceSaved.isBlueScreenON,"")
+                CommonClass(this,this).putString(RsaConstants.ServiceSaved.isNew,"")
                 strWhich="3"
 
                 startActivity(Intent(this, WaitingScreenWhite::class.java)
@@ -97,6 +103,7 @@ class WaitingScreenBlue : AppCompatActivity() {
             "4" -> {
 
                 CommonClass(this,this).putString(RsaConstants.ServiceSaved.isBlueScreenON,"")
+                CommonClass(this,this).putString(RsaConstants.ServiceSaved.isNew,"")
                 startActivity(Intent(this, DashboardActivity::class.java)
                     .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK))
 
@@ -114,6 +121,7 @@ class WaitingScreenBlue : AppCompatActivity() {
                 "0" -> {
 
                     CommonClass(this,this).putString(RsaConstants.ServiceSaved.isBlueScreenON,"")
+                    CommonClass(this,this).putString(RsaConstants.ServiceSaved.isNew,"")
                     strWhich="1"
                     tvTextOne.text=resources.getString(R.string.awesome)
                     tvTextTwo.text=resources.getString(R.string.fobbu_found)
@@ -122,6 +130,7 @@ class WaitingScreenBlue : AppCompatActivity() {
                 "1" -> {
 
                     CommonClass(this,this).putString(RsaConstants.ServiceSaved.isBlueScreenON,"")
+                    CommonClass(this,this).putString(RsaConstants.ServiceSaved.isNew,"")
                     strWhich="2"
                     tvTextOne.text=resources.getString(R.string.wonderful)
                     tvTextTwo.text=resources.getString(R.string.fobbu_confirmed_request)

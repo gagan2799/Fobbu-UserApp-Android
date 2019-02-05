@@ -20,6 +20,7 @@ class RsaConstants
         var otpStart="otp_Start"
         var cancellationMessage="cancellation_Message"
         var isBlueScreenON="is_Blue_Screen_ON"
+        var isNew="is_new_request"
     }
 
     object RsaTypes

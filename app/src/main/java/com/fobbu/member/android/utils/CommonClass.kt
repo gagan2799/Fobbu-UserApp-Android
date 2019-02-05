@@ -151,6 +151,7 @@ class CommonClass(activity1: Activity, context1: Context) {
         prefsEditor.putString(RsaConstants.RsaTypes.onGoingRsaScreenType, "")
         prefsEditor.putString(RsaConstants.RsaTypes.checkIfOnGoingRsaRequest,"")
         prefsEditor.putString(RsaConstants.RsaTypes.checkStatus,"")
+        prefsEditor.putString(RsaConstants.ServiceSaved.isNew,"")
 
         prefsEditor.apply()
 

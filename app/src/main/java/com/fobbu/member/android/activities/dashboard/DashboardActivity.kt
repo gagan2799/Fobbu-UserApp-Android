@@ -29,9 +29,11 @@ import com.fobbu.member.android.activities.orderAndPassbookModule.passbook.MyPas
 import com.fobbu.member.android.activities.paymentModule.GetSetGoActivity
 import com.fobbu.member.android.activities.paymentModule.WorkSummaryActivity
 import com.fobbu.member.android.activities.paymentSettings.PaymentSettingActivity
+import com.fobbu.member.android.activities.profile.ProfileActivity
 import com.fobbu.member.android.activities.rsaModule.RSARequestCancelActivity
 import com.fobbu.member.android.activities.securitySetting.SecuritySettingActivity
 import com.fobbu.member.android.activities.vehicleModule.AddEditVehicleActivity
+import com.fobbu.member.android.activities.waitingScreenModule.WaitingScreenBlue
 import com.fobbu.member.android.activities.waitingScreenModule.WaitingScreenWhite
 import com.fobbu.member.android.apiInterface.MyApplication
 import com.fobbu.member.android.fcm.FcmPushTypes
@@ -160,6 +162,14 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
 
     /////DRAWER CLICKS HANDLED HERE
     private fun drawerClicks() {
+
+        rlTop.setOnClickListener {
+            drawer_layout.closeDrawer(GravityCompat.START)
+
+            Handler().postDelayed({
+                startActivity(Intent(this, ProfileActivity::class.java))
+            }, 500)
+        }
 
         ivDrawer.setOnClickListener {
             drawer_layout.openDrawer(GravityCompat.START)
@@ -371,6 +381,14 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
     private fun checkAndNavigateFromPush() {
 
         when {
+
+            (CommonClass(this, this).getString(RsaConstants.ServiceSaved.isNew) == "1") -> {
+                startActivity(
+                    Intent(this, WaitingScreenBlue::class.java)
+                        .putExtra("navigate_to", "0")
+                )
+            }
+
             intent.hasExtra("from_push") -> {
                 println("FROM PUSH CHECK AND NAVIGATE")
                 checkStatusAPI()
@@ -711,8 +729,6 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
                     } else {
                         println("NOT SAVED BECAUSE SAME ")
                     }
-
-
                 }
             }
         } catch (e: Exception) {
@@ -727,7 +743,9 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
         println("HERE IN DASHBOARD IF OPEN $status")
 
         when (status) {
+
             FcmPushTypes.Types.accept -> {
+
                 val intent = Intent()
                 intent.action = FcmPushTypes.Types.acceptRequestBroadCast
                 intent.putExtra("navigate_to", "1")
@@ -823,6 +841,14 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
                 changeFragment(HomeFragment(), resources.getString(R.string.home))
 
                 fragmentTypeForRSA = ""
+            }
+            else -> {
+                if (CommonClass(this, this).getString(RsaConstants.ServiceSaved.isNew) == "1") {
+                    startActivity(
+                        Intent(this, WaitingScreenBlue::class.java)
+                            .putExtra("navigate_to", "0")
+                    )
+                }
             }
         }
     }

@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.fobbu.member.android.R
+import com.fobbu.member.android.activities.profile.ProfileActivity
 import com.fobbu.member.android.activities.vehicleModule.AddEditVehicleActivity
 import com.fobbu.member.android.interfaces.ChangeRSAFragments
 import com.fobbu.member.android.interfaces.HeaderIconChanges
@@ -28,6 +29,7 @@ class HomeFragment : Fragment() {
     private lateinit var llAddNewVehicle:LinearLayout
 
     private lateinit var tvMembershipIdHome:TextView
+    lateinit var llProfile:LinearLayout
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -52,6 +54,10 @@ class HomeFragment : Fragment() {
             activity!!.startActivity(Intent(activity!!, AddEditVehicleActivity::class.java))
         }
 
+        llProfile.setOnClickListener {
+            activity!!.startActivity(Intent(activity!!, ProfileActivity::class.java))
+        }
+
     }
 
     @SuppressLint("SetTextI18n")
@@ -72,5 +78,7 @@ class HomeFragment : Fragment() {
                 CommonClass(activity!!,activity!!).getString("member_id")
 
         llRSA = view.findViewById(R.id.llRSA)
+
+        llProfile = view.findViewById(R.id.llProfile)
     }
 }

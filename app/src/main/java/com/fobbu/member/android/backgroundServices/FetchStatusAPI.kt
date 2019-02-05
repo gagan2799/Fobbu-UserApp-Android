@@ -43,7 +43,6 @@ class FetchStatusAPI : Service() {
     private val runnableService = object : Runnable {
         override fun run() {
             syncData()
-
         }
     }
 
@@ -181,6 +180,8 @@ class FetchStatusAPI : Service() {
                             when {
                                 mainPojo.getData().status=="cancelled_by_admin" ->
                                 {
+                                    emptySharedRequest()
+
                                     val intent = Intent()
                                     intent.action = FcmPushTypes.Types.acceptRequestBroadCast
                                     intent.putExtra("navigate_to","4")
@@ -214,6 +215,15 @@ class FetchStatusAPI : Service() {
             }
         })
 
+    }
+
+    private fun emptySharedRequest() {
+        prefsEditor.putString(RsaConstants.ServiceSaved.isNew,"").apply()
+        prefsEditor.remove(RsaConstants.ServiceSaved.fobbuRequestId).apply()
+        prefsEditor.putString(RsaConstants.RsaTypes.onGoingRsaScreen, "").apply()
+        prefsEditor.putString(RsaConstants.RsaTypes.onGoingRsaScreenType, "").apply()
+        prefsEditor.putString(RsaConstants.RsaTypes.checkIfOnGoingRsaRequest,"").apply()
+        prefsEditor.putString(RsaConstants.RsaTypes.checkStatus,"").apply()
     }
 
 

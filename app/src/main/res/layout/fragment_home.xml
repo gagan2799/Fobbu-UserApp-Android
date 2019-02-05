@@ -266,6 +266,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_marginTop="10dp"
+                android:id="@+id/llProfile"
                 android:gravity="center"
                 android:layout_weight="1">
 
