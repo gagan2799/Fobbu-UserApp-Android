@@ -116,7 +116,7 @@ class WorkSummaryActivity : AppCompatActivity(),ActivityView {
 
                 textViewServiceTypeWork.text=(mainPojo.getData().service_name)
 
-                textViewOrderIdWork.text=(mainPojo.getData().order_id)
+                textViewOrderIdWork.text=("#"+mainPojo.getData().order_id)
             }
             else
             {
@@ -124,7 +124,7 @@ class WorkSummaryActivity : AppCompatActivity(),ActivityView {
 
                 textViewServiceTypeWork.text=(mainPojo.getData().service_name)
 
-                textViewOrderIdWork.text=(mainPojo.getData().order_id)
+                textViewOrderIdWork.text=("#"+mainPojo.getData().order_id)
             }
 
         }else{

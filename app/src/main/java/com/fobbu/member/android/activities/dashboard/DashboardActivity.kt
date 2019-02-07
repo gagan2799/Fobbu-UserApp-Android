@@ -50,6 +50,8 @@ import com.fobbu.member.android.modals.MainPojo
 import com.fobbu.member.android.utils.CommonClass
 import com.fobbu.member.android.view.ActivityView
 import com.fobbu.member.android.view.ActivityViewDashboard
+import com.squareup.picasso.MemoryPolicy
+import com.squareup.picasso.NetworkPolicy
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_dashboard.*
 import kotlinx.android.synthetic.main.app_bar_dashboard.*
@@ -72,7 +74,6 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
         setContentView(R.layout.activity_dashboard)
 
         dashboardHandler = DashboardPresenter(this, this)
-        setDataToDrawer()
         drawerClicks()
         tabBarClicks()
 
@@ -155,8 +156,22 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
     @SuppressLint("SetTextI18n")
     private fun setDataToDrawer() {
         tvName.text = CommonClass(this, this).getString("display_name")
-        tvMembership.text = resources.getString(R.string.membership_id) +
-                CommonClass(this, this).getString("membership_id")
+        tvMembership.text = resources.getString(R.string.membership_id) +" "+
+                CommonClass(this, this).getString("member_id")
+
+        if(CommonClass(this,this).getString("user_image")!="")
+        {
+            val urlProfile = CommonClass(this,this).getString("user_url")+
+                    CommonClass(this,this).getString("user_image")
+
+            println("HERE IN ON RESUME >>>>>> $urlProfile")
+
+            Picasso.get().load(urlProfile)
+                .error(R.drawable.dummy_pic)
+                .networkPolicy(NetworkPolicy.NO_CACHE)
+                .memoryPolicy(MemoryPolicy.NO_CACHE)
+                .into(ivProfileDrawer)
+        }
     }
 
 
@@ -620,6 +635,8 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
 
         val filterStatus = IntentFilter(FcmPushTypes.Types.checkStatusPushOneTime)
         registerReceiver(changeStatusReceiver, filterStatus)
+
+        setDataToDrawer()
     }
 
     private val changeRSALiveScreenReceiver = object : BroadcastReceiver() {

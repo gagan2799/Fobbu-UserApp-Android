@@ -286,7 +286,6 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
             location = true
         } else if (location) {
-
             LocationServices.FusedLocationApi.removeLocationUpdates(googleApiClient, this@RSALiveFragment)
         }
     }
@@ -517,8 +516,8 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
             if (!mainPojo.getData().user.profile.isNullOrBlank()) {
                 Picasso.get().load(mainPojo.getData().partner.profile).error(R.drawable.dummy_pic).into(imgProfile)
             }
-            tvName.text = mainPojo.getData().user.display_name
-            mobileNumber = mainPojo.getData().user.mobile_number
+            tvName.text = mainPojo.getData().partner.display_name
+            mobileNumber = mainPojo.getData().partner.mobile_number
 
         }
     }

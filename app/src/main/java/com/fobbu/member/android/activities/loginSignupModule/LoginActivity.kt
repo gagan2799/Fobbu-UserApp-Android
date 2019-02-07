@@ -150,7 +150,7 @@ class LoginActivity : AppCompatActivity(), ActivityView {
                 .putString("x_access_token", mainPojo.token)
 
             CommonClass(this@LoginActivity, this@LoginActivity)
-                .putString("profile", mainPojo.getData().profile)
+                .putString("user_image", mainPojo.getData().profile)
 
             CommonClass(this@LoginActivity, this@LoginActivity)
                 .putString("user_url", mainPojo.urls.user)

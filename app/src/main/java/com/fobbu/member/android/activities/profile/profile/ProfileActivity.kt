@@ -36,6 +36,7 @@ import com.fobbu.member.android.activities.waitingScreenModule.WaitingScreenWhit
 import com.fobbu.member.android.modals.MainPojo
 import com.fobbu.member.android.utils.CommonClass
 import com.fobbu.member.android.view.ActivityView
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_profile.*
 import kotlinx.android.synthetic.main.toolbar.*
 import okhttp3.MediaType
@@ -54,6 +55,8 @@ class ProfileActivity : AppCompatActivity(),ActivityView,ProfileView
     private var first=""
 
     private var last=""
+
+    private var hasPic=false
 
     ////////////////FOR  IMAGE/////////////////////////
     private var isImageOn1 = false
@@ -128,17 +131,20 @@ class ProfileActivity : AppCompatActivity(),ActivityView,ProfileView
 
         etEmailProfile.setText(commonClass.getString("email"))
 
-        if (commonClass.getString("profile").isEmpty())
+
+        if(CommonClass(this,this).getString("user_image")!="")
         {
-            Glide.with(this)
-                .load(R.drawable.dummy_pic)
+            hasPic=true
+
+            val urlProfile = CommonClass(this,this).getString("user_url")+
+                    CommonClass(this,this).getString("user_image")
+
+            println("HERE IN ON CREATE >>>>>> "+ urlProfile)
+
+            Picasso.get().load(urlProfile)
+                .error(R.drawable.dummy_pic)
                 .into(civPicProfile)
         }
-        else
-            Glide.with(this)
-                .load(commonClass.getString("user_url")+commonClass.getString("profile"))
-                .placeholder(R.drawable.dummy_pic)
-                .into(civPicProfile)
 
         Handler().postDelayed({
             tvGenderProfile.text=commonClass.getString("gender")
@@ -592,6 +598,7 @@ class ProfileActivity : AppCompatActivity(),ActivityView,ProfileView
 
             for (i in 0 until dataList.size)
             {
+                hasPic =true
                 var imgProfile: MultipartBody.Part? = null
 
                 val file = File(dataList[i].toString())
@@ -606,7 +613,7 @@ class ProfileActivity : AppCompatActivity(),ActivityView,ProfileView
             }
 
             when{
-                fileList.size==0 -> commonClass.showToast(getString(R.string.select_image_first))
+                !hasPic -> commonClass.showToast(getString(R.string.select_image_first))
 
                 etNameProfile.text.isEmpty()->commonClass.showToast(getString(R.string.provide_name))
 
@@ -622,11 +629,18 @@ class ProfileActivity : AppCompatActivity(),ActivityView,ProfileView
 
                 else->
                 {
-                    println("image file:::: ${fileList[0]}")
+                    if (etNameProfile.text.toString().contains("\\\\s+"))
+                    {
+                        first=getName(etNameProfile.text.toString())
 
-                    first=getName(etNameProfile.text.toString())
+                        last=getSurname(etNameProfile.text.toString())
+                    }
+                    else
+                    {
+                        first = etNameProfile.text.toString()
+                        last=""
+                    }
 
-                    last=getSurname(etNameProfile.text.toString())
 
                     profileHandler.updateUser(RequestBody.create(MediaType.parse("text/plain"),etEmailProfile.text.toString()),
                         RequestBody.create(MediaType.parse("text/plain"),etNumberProfile.text.toString()),
@@ -672,11 +686,24 @@ class ProfileActivity : AppCompatActivity(),ActivityView,ProfileView
 
             commonClass.putString("last_name",last)
 
+            val displayName = if(last!="") {
+                "$first $last"
+            } else
+                first
+
+            commonClass. putString("display_name",displayName)
+
             commonClass.putString("mobile_number",etNumberProfile.text.toString())
 
             commonClass.putString("gender",tvGenderProfile.text.toString())
 
             commonClass.putString("email",etEmailProfile.text.toString())
+
+            val urlProfile = mainPojo.getData().profile
+
+            println("PROFILE URL >>>>>>>> $urlProfile")
+
+            commonClass.putString("user_image",urlProfile)
 
         }
         commonClass.showToast(mainPojo.message)

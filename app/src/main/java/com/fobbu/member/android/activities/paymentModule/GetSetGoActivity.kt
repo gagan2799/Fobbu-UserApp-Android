@@ -176,7 +176,7 @@ class GetSetGoActivity : AppCompatActivity(), ActivityView {
                     textViewHeadingGet.setTextColor(resources.getColor(R.color.color_grey))
                     val animation: Animation = AnimationUtils.loadAnimation(this, R.anim.fade)
                     linearlayoutReviewGet.startAnimation(animation)
-                }, 1000)
+                }, 500)
             }
         }
     }
