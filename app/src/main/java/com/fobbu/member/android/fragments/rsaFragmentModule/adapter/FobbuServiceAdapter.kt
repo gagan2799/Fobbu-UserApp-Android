@@ -27,7 +27,7 @@ class FobbuServiceAdapter(private var activity: Activity, private var dataListSe
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
 
-        holder.relativeLayout.layoutParams = CommonClass(activity!!, activity!!).giveDynamicHeightRelativeGallery()
+        holder.relativeLayout.layoutParams = CommonClass(activity, activity).giveDynamicHeightRelativeGallery()
 
         holder.tvText.text = dataListServices[position]["service_name"].toString()
 

@@ -49,11 +49,11 @@ class MyPassbookActivity : AppCompatActivity()
 
     private lateinit var myCalendar: Calendar
 
-    var startDateCustom = ""
+    private var startDateCustom = ""
 
-    var endDateCustom = ""
+    private var endDateCustom = ""
 
-    lateinit var datePickerDialog: DatePickerDialog.OnDateSetListener
+    private lateinit var datePickerDialog: DatePickerDialog.OnDateSetListener
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreate(savedInstanceState: Bundle?)

@@ -250,6 +250,7 @@
     <string name="are_you_sure">Are you sure you want to logout ?</string>
     <string name="are_you_sure_you_want_to_delete">Are you sure you want to delete this information from list ?</string>
     <string name="home">Home</string>
+    <string name="Ods">Ods</string>
     <string name="cancel">Cancel</string>
     <string name="cancel_rsa">Cancel RSA</string>
     <string name="cancel_request_screen">Cancel Request Screen</string>
@@ -366,6 +367,31 @@
     <string name="permission_denied">Permission has been denied by user</string>
     <string name="permission_granted">Permission has been granted by user</string>
     <string name="please_select_from_where_you_want_to_choose">Please select from where you want to choose</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="your_doorstep_service_is_just_a_tap_away">Your Doorstep Service is just a tap away!</string>
+    <string name="please_confirm_your_service_address">Please confirm your service Address:</string>
+    <string name="change">Change</string>
+    <string name="gathering_info">Gathering information.Please wait…</string>
+    <string name="your_road_ptrip_vehicle">Your Road trip vehicle is</string>
+    <string name="enter_car_model"><font size="13">enter your car model eg. vento</font></string>
+    <string name="enter_reg_no"><font size="13">enter your Registration No</font></string>
+    <string name="OdsServiceOperation">OdsServiceOperation</string>
+    <string name="please_enter_car_details">Please enter car details</string>
+    <string name="awsome_lets_do_this">Awesome! Lets do this!</string>
+    <string name="to_make_to_trip_hapy_and_safe">to make to trip hapy and safe</string>
+    <string name="rs_1599">Rs 1599/-</string>
+    <string name="select_a_date">Select a date</string>
+    <string name="select_a_time">Select a Time</string>
+    <string name="fobbu_ensures_several_checks_n_and_top_up_on_your_vehicle">Fobbu ensures several checks\nand top up on
+        your vehicle
+    </string>
+    <string name="top_up">Top Up</string>
+    <string name="keep_me_healthy">keep me healthy</string>
+    <string name="keep_running">regular checks keep you running and not stranded</string>
+    <string name="save_water">Lets save water together.</string>
+    <string name="water_save_message">you will save 20l of water with our echo wash therapy</string>
 
 
 </resources>

@@ -30,7 +30,6 @@
                 android:layout_below="@+id/ivImage"
                 android:layout_marginTop="5dp"
                 android:textColor="@color/drawer_text_color"
-                android:text="dxbfsdabsfdabfdsbfdbfdbfdbfdbfd"
                 android:layout_height="wrap_content"/>
 
     </RelativeLayout>

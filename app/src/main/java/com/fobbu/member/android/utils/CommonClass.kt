@@ -402,14 +402,7 @@ class CommonClass(activity1: Activity, context1: Context) {
           rbLastWeek.isChecked = false*/
     }
 
-    fun showDailog(activity: Activity)
-    {
-        val builder= AlertDialog.Builder(activity)
 
-        builder.setTitle("Delete")
-
-        builder.setMessage("Do you want to delete this contact from the list?")
-    }
 
 
     @SuppressLint("SimpleDateFormat")

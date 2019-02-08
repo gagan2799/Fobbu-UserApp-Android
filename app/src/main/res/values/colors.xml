@@ -22,6 +22,7 @@
     <color name="drawer_text_color">#666666</color>
     <color name="drawer_view_color">#DFDDDD</color>
     <color name="green">#098d42</color>
+    <color name="light_blue">#DBECFB</color>
     <color name="home_background">#f9faff</color>
     <color name="color_grey">#666666</color>
     <color name="blue_transparent">#BF094D8D</color>

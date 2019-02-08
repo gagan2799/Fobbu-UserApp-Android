@@ -836,6 +836,7 @@ color grey_header
 color highlighted_text_material_dark
 color highlighted_text_material_light
 color home_background
+color light_blue
 color material_blue_grey_800
 color material_blue_grey_900
 color material_blue_grey_950
@@ -1307,6 +1308,7 @@ drawable back_button_white
 drawable bank
 drawable battery_saving
 drawable blue_eadio_unfilled
+drawable blue_ods_rect
 drawable blue_radio_filled
 drawable border_circle
 drawable border_line_grey
@@ -1318,6 +1320,7 @@ drawable cancel
 drawable cancel_red
 drawable car_blue
 drawable car_click_tabbar
+drawable car_docs_click_tabbar
 drawable car_docs_tabbar
 drawable car_engine_saving
 drawable car_gray
@@ -1452,6 +1455,8 @@ drawable fobbu_wallet
 drawable fourthgif
 drawable freebies_drawer
 drawable fuel_station
+drawable general_service
+drawable general_service_inner_screen
 drawable googleg_disabled_color_18
 drawable googleg_standard_color_18
 drawable gray_cross
@@ -1652,9 +1657,11 @@ drawable intro_background
 drawable lifting
 drawable lifting_selected_blue
 drawable list
+drawable listing_plus
 drawable lock_drawer
 drawable lsd_hover
 drawable man_riding_bike
+drawable man_riding_bike_clrd
 drawable map_mark_blue
 drawable mark_car
 drawable mechanic_with_cap
@@ -1702,8 +1709,10 @@ drawable notification_template_icon_bg
 drawable notification_template_icon_low_bg
 drawable notification_tile_bg
 drawable notify_panel_notification_icon_bg
+drawable ods_dialog_drawable
 drawable ods_hover
 drawable offer_tabbar
+drawable operation_shadow_draw
 drawable option
 drawable option_dialog_border
 drawable padlock
@@ -1763,6 +1772,7 @@ drawable rating_bar_filled
 drawable rating_star_draw
 drawable red_border
 drawable red_circle
+drawable red_ods_rect
 drawable red_rect_rounded
 drawable red_rectangle
 drawable round_check_green
@@ -1777,12 +1787,15 @@ drawable rounded_white_background
 drawable rounded_white_shadow
 drawable rsa_hover
 drawable rsa_red
+drawable schedule
 drawable scooter_blue
 drawable scooter_gray
 drawable scooter_red
 drawable scooter_selected
 drawable search
 drawable secondgif
+drawable select_date
+drawable select_time
 drawable shadow
 drawable shadow_background
 drawable share
@@ -1807,11 +1820,16 @@ drawable towing_selected
 drawable tracker
 drawable trash_bin
 drawable triangle_car
+drawable trip_ready
+drawable trip_ready_inner_screen
 drawable twitter
 drawable unfilled_radio
 drawable upi_payment
+drawable vas
 drawable verified
 drawable wallet
+drawable washing
+drawable washing_inner_screen
 drawable whatsapp
 drawable wheels_saings
 drawable white_radius
@@ -1967,6 +1985,8 @@ id et2ndFullNameEmergency
 id et2ndMobileEmergency
 id etAdharProfile
 id etBrand
+id etCarModelOds
+id etCarRegestrationOds
 id etConfirmPass
 id etCurrentPasswordChange
 id etEditMobileEmergency
@@ -1987,6 +2007,7 @@ id etRegNumber
 id etSize
 id etSubModel
 id etVehicleNumber
+id etVehicleNumberOds
 id etYearsOfMake
 id exitUntilCollapsed
 id expand_activities_button
@@ -2083,6 +2104,7 @@ id ivImageCall
 id ivLeftDotted
 id ivLifting
 id ivList
+id ivOperationAdd
 id ivPassbookCheck
 id ivProfileDrawer
 id ivQrCodePayment
@@ -2090,6 +2112,7 @@ id ivRSA
 id ivRightDotted
 id ivSearch
 id ivSearchToolbar
+id ivServiceImageOperation
 id ivShare
 id ivSuccessCeheckPaymentDetail
 id ivSuccessCheckOrderDetail
@@ -2152,6 +2175,7 @@ id llAssistance
 id llBasicProfile
 id llBottom
 id llBottomBar
+id llCarDetailsOds
 id llCarFuelDieselThree
 id llCarFuelPetrolThree
 id llCarTwo
@@ -2174,7 +2198,9 @@ id llKycProfile
 id llLifting
 id llLsdOrder
 id llMarkTyreBurst
+id llOdsDash
 id llOdsOrder
+id llOdsServices
 id llPIN
 id llPIN1
 id llPhoto1
@@ -2199,6 +2225,7 @@ id llTowRequired
 id llTowing
 id llTwo
 id llUploadPics
+id llVehicleTypeOds
 id llWallet
 id llWonderFul
 id loading_indicator
@@ -2241,6 +2268,7 @@ id mr_volume_slider
 id mtrl_child_content_container
 id mtrl_internal_children_alpha_tag
 id multiply
+id mvOds
 id nav_view
 id navigation_header_container
 id never
@@ -2300,6 +2328,7 @@ id rlCodeValidated
 id rlCustomTabsEmergency
 id rlCustomTabsOthers
 id rlCustomTabsProfile
+id rlDateTime
 id rlEditRelationShipEmergency
 id rlGenderProfile
 id rlInformation
@@ -2320,12 +2349,16 @@ id rlTerms
 id rlTools
 id rlTop
 id rlTopDrawer
+id rlTopDrawerOds
+id rlTopDrawerOperation
 id rlTrack
 id rlTwoWheelerBurst
 id rlVehicleAccessed
 id rlWallet
 id rvContacts
 id rvHelp
+id rvOdsService
+id rvOperations
 id rvOrder
 id rvPassDetail
 id rvPassbook
@@ -2477,11 +2510,15 @@ id tvBasicProfile
 id tvCancel
 id tvCancelRequest
 id tvCar
+id tvCarDetailHeadingOds
+id tvChange
 id tvCode
 id tvCodeValidated
 id tvConfirm
 id tvConfirmPin
 id tvContinue
+id tvContinueOds
+id tvContinueOdsCarDetails
 id tvCurrnetPin
 id tvDefault
 id tvDoItLater
@@ -2502,6 +2539,7 @@ id tvGender
 id tvGenderProfile
 id tvGenerate
 id tvHeaderContactList
+id tvHeaderDialogOds
 id tvHeaderEmergency
 id tvHeaderFreebies
 id tvHeaderHelp
@@ -2539,7 +2577,14 @@ id tvNew
 id tvNewPin
 id tvNo
 id tvNodata
+id tvOdsHeading
 id tvOdsOrders
+id tvOperationBottomSheet
+id tvOperationDate
+id tvOperationLogo
+id tvOperationPrice
+id tvOperationSubLogo
+id tvOperationTime
 id tvOrderDetailBelowTotal
 id tvOrderDetailService
 id tvOrderDetailTime
@@ -2573,6 +2618,7 @@ id tvSOS
 id tvSave
 id tvScooter
 id tvSecuritySettings
+id tvServiceAddress
 id tvServiceRequest
 id tvSkip
 id tvStartDatePB
@@ -2590,6 +2636,7 @@ id tvTextPlease
 id tvTextSummary
 id tvTextThree
 id tvTextTwo
+id tvTopUpOperations
 id tvTotalAll
 id tvTowRequired
 id tvTrack
@@ -2599,6 +2646,7 @@ id tvUploadPics
 id tvVehicleAdd
 id tvVehicleAssessd
 id tvVehicleBrand
+id tvVehicleHeadingOds
 id tvVehicleName
 id tvVehicleNumber
 id tvVehicleReg
@@ -2763,12 +2811,17 @@ layout design_navigation_menu_item
 layout design_text_input_password_icon
 layout fragment_builder_confirm
 layout fragment_home
+layout fragment_ods
+layout fragment_ods_operation
 layout fragment_rsa
 layout fragment_rsa_live
 layout inflate_contactlist
 layout inflate_drawer
 layout inflate_expandable_layout
 layout inflate_message_pop_up
+layout inflate_ods_dialog
+layout inflate_ods_layout
+layout inflate_ods_operation
 layout inflate_order_all
 layout inflate_passbook_bottom_sheet
 layout inflate_passbook_data
@@ -2820,6 +2873,8 @@ mipmap app_icon_round
 mipmap ic_launcher
 mipmap ic_launcher_round
 string Delete
+string Ods
+string OdsServiceOperation
 string _0002534
 string _12_32_pm_05_jan_2019
 string _4
@@ -2885,6 +2940,7 @@ string are_you_sure_you_want_to_delete
 string assured_cashback
 string awesome
 string awesome_exclamatory
+string awsome_lets_do_this
 string bank_accounts
 string basic
 string battery_jump
@@ -2943,6 +2999,7 @@ string cast_tracks_chooser_dialog_none
 string cast_tracks_chooser_dialog_ok
 string cast_tracks_chooser_dialog_subtitles
 string cast_unmute
+string change
 string change_pass
 string change_pin
 string character_counter_content_description
@@ -2997,7 +3054,9 @@ string email_id
 string empty_tanks_worries
 string end_date
 string enter_aadhaar_number
+string enter_car_model
 string enter_pan
+string enter_reg_no
 string enter_vehicle_no
 string fab_transformation_scrim_behavior
 string fab_transformation_sheet_behavior
@@ -3016,6 +3075,7 @@ string flat_tyres
 string flatbed
 string fobbu_accesing_vehicle
 string fobbu_confirmed_request
+string fobbu_ensures_several_checks_n_and_top_up_on_your_vehicle
 string fobbu_found
 string fobbu_gathering_tools
 string fobbu_is_setting_up_your_vehicle
@@ -3031,6 +3091,7 @@ string free
 string free_vehicle_wash
 string freebies
 string full_name
+string gathering_info
 string gcm_defaultSenderId
 string gcm_fallback_notification_channel_label
 string generate
@@ -3044,6 +3105,7 @@ string google_crash_reporting_api_key
 string google_maps_key
 string google_storage_bucket
 string hello
+string hello_blank_fragment
 string help
 string help_you_fix
 string hide_bottom_view_on_scroll_behavior
@@ -3055,6 +3117,8 @@ string invite_friends_to_fobbu_once_they_sign_up_and_use_any_service_you_get_a_f
 string jump_start
 string keep_driving
 string keep_driving_text
+string keep_me_healthy
+string keep_running
 string killer_saving
 string kyc_details
 string learn_more
@@ -3142,6 +3206,8 @@ string petrol
 string pin_dont_match
 string place_autocomplete_clear_button
 string place_autocomplete_search_hint
+string please_confirm_your_service_address
+string please_enter_car_details
 string please_enter_email
 string please_enter_full_name
 string please_enter_gender
@@ -3169,6 +3235,7 @@ string requestID_not_provided
 string resend_code
 string reset
 string rs
+string rs_1599
 string rs_300
 string rsa
 string rsa_fullform
@@ -3188,10 +3255,13 @@ string s5
 string s6
 string s7
 string save_rs_50
+string save_water
 string saved_cards
 string search_menu_title
 string security_settings
 string selectGender
+string select_a_date
+string select_a_time
 string select_date_range
 string select_image_first
 string select_service_request
@@ -3224,7 +3294,9 @@ string tell_us_what_you_are_looking_for
 string terms
 string terms_of_service
 string thank_you
+string to_make_to_trip_hapy_and_safe
 string today
+string top_up
 string total_amount
 string total_amount_paid
 string tow_1
@@ -3257,6 +3329,7 @@ string vehicle_type
 string view_qr_code
 string wallet_buy_button_place_holder
 string wallets
+string water_save_message
 string we_verifying
 string we_will_connect_towing
 string we_will_live_track_it_nonce_the_fobbu_is_on_his_way
@@ -3276,9 +3349,11 @@ string write_a_review
 string year_of_make
 string yes
 string your_contacts
+string your_doorstep_service_is_just_a_tap_away
 string your_membership_id
 string your_review_saved
 string your_review_was_saved_share_it_with_your_friens
+string your_road_ptrip_vehicle
 string your_vehicles
 style AVLoadingIndicatorView
 style AVLoadingIndicatorView_Large

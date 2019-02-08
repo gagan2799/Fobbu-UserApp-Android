@@ -7,7 +7,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.graphics.Color
-import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.support.v4.app.Fragment
@@ -40,6 +39,7 @@ import com.fobbu.member.android.fcm.FcmPushTypes
 import com.fobbu.member.android.fragments.HomeFragment
 
 import com.fobbu.member.android.fragments.RSALiveFragment
+import com.fobbu.member.android.fragments.odsModule.odsFragment.OdsFragment
 import com.fobbu.member.android.fragments.rsaFragmentModule.RSAFragment
 import com.fobbu.member.android.fragments.rsaFragmentModule.RsaConstants
 import com.fobbu.member.android.fragments.rsaFragmentModule.presenter.FetchStatusPresenter
@@ -57,7 +57,6 @@ import kotlinx.android.synthetic.main.activity_dashboard.*
 import kotlinx.android.synthetic.main.app_bar_dashboard.*
 import kotlinx.android.synthetic.main.inflate_drawer.*
 import kotlinx.android.synthetic.main.option_menu_layout.*
-import org.json.JSONObject
 import java.lang.Exception
 
 class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragments, TopBarChanges, ActivityView,
@@ -100,8 +99,11 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
         }
 
         llRSA.setOnClickListener {
-
             setFragmentsFromStackForRSA(fragmentTypeForRSA)
+        }
+
+        llOdsDash.setOnClickListener {
+            changeFragment(OdsFragment(),resources.getString(R.string.ods))
         }
     }
 
@@ -128,28 +130,54 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
     }
 
     ////CHANGE TABS BACKGROUND WITH CLICK
-    private fun changeTabs(string: String) {
-        if (string == resources.getString(R.string.home)) {
-            ivHome.setImageResource(R.drawable.meters_click_tabbar)
-            ivHome.setBackgroundColor(resources.getColor(R.color.white))
+    private fun changeTabs(string: String)
+    {
+        when (string) {
+            resources.getString(R.string.home) -> {
+                ivHome.setImageResource(R.drawable.meters_click_tabbar)
+                ivHome.setBackgroundColor(resources.getColor(R.color.white))
 
-            ivRSA.setImageResource(R.drawable.car_tabbar)
-            ivRSA.setBackgroundColor(resources.getColor(R.color.colorPrimary))
+                ivRSA.setImageResource(R.drawable.car_tabbar)
+                ivRSA.setBackgroundColor(resources.getColor(R.color.colorPrimary))
 
-            viewHome.visibility = View.VISIBLE
-            viewRSA.visibility = View.INVISIBLE
+                ivList.setImageResource(R.drawable.car_docs_tabbar)
+                ivList.setBackgroundColor(resources.getColor(R.color.colorPrimary))
 
-        } else if (string == resources.getString(R.string.rsa_home) || string == resources.getString(R.string.rsa_live)) {
+                viewHome.visibility = View.VISIBLE
+                viewRSA.visibility = View.INVISIBLE
+                viewList.visibility = View.INVISIBLE
+            }
+            resources.getString(R.string.rsa_home), resources.getString(R.string.rsa_live) -> {
+                ivHome.setImageResource(R.drawable.meters_tabbar)
+                ivHome.setBackgroundColor(resources.getColor(R.color.colorPrimary))
 
-            ivHome.setImageResource(R.drawable.meters_tabbar)
-            ivHome.setBackgroundColor(resources.getColor(R.color.colorPrimary))
+                ivRSA.setImageResource(R.drawable.car_click_tabbar)
+                ivRSA.setBackgroundColor(resources.getColor(R.color.white))
 
-            ivRSA.setImageResource(R.drawable.car_click_tabbar)
-            ivRSA.setBackgroundColor(resources.getColor(R.color.white))
-            viewHome.visibility = View.INVISIBLE
-            viewRSA.visibility = View.VISIBLE
+                ivList.setImageResource(R.drawable.car_docs_tabbar)
+                ivList.setBackgroundColor(resources.getColor(R.color.colorPrimary))
+
+                viewHome.visibility = View.INVISIBLE
+                viewRSA.visibility = View.VISIBLE
+                viewList.visibility = View.INVISIBLE
+            }
+
+            /*string==resources.getString(R.string.ods)|| string==resources.getString(R.string.OdsServiceOperation)*/
+            else -> {
+                ivHome.setImageResource(R.drawable.meters_tabbar)
+                ivHome.setBackgroundColor(resources.getColor(R.color.colorPrimary))
+
+                ivRSA.setImageResource(R.drawable.car_tabbar)
+                ivRSA.setBackgroundColor(resources.getColor(R.color.colorPrimary))
+
+                ivList.setImageResource(R.drawable.car_docs_click_tabbar)
+                ivList.setBackgroundColor(resources.getColor(R.color.white))
+
+                viewHome.visibility = View.INVISIBLE
+                viewRSA.visibility = View.INVISIBLE
+                viewList.visibility = View.VISIBLE
+            }
         }
-
     }
 
     /////SET DATA TO DRAWER IF ANY CHANGES REQUIRED
@@ -325,7 +353,7 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
     }
 
     /////CODE TO CHANGE FRAGMENTS IN APP
-    private fun changeFragment(fragment: Fragment, tag: String) {
+    public fun changeFragment(fragment: Fragment, tag: String) {
         val manager = supportFragmentManager
         val transaction = manager.beginTransaction()
 

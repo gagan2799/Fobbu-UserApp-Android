@@ -13,6 +13,11 @@ class RsaConstants
 
     }
 
+
+    object  Ods
+    {
+        var odsService="odsService"
+    }
     object ServiceSaved
     {
         var fobbuRequestId="fobbu_request_id"

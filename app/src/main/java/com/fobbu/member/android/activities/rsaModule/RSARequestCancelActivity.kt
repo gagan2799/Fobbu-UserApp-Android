@@ -35,7 +35,7 @@ class RSARequestCancelActivity : AppCompatActivity(), ActivityView {
 
     val text: String = "Are you sure you want to cancel\n A cancellation fee or Rs$$ will be charged"
     var issueList = ArrayList<HashMap<String, Any>>()
-    lateinit var rsaHandler: RsaCancelRequestHandler
+    private lateinit var rsaHandler: RsaCancelRequestHandler
     lateinit var rsaRecyclerAdapter: RsaRecyclerAdapter
     var row_index: Int = 0
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
@@ -45,13 +45,7 @@ class RSARequestCancelActivity : AppCompatActivity(), ActivityView {
         setContentView(R.layout.activity_cancel_rsa)
         //window.decorView.systemUiVisibility=View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
         window.navigationBarColor=resources.getColor(R.color.white)
-        Handler().postDelayed(object :Runnable
-        {
-            override fun run() {
-                window.navigationBarColor=resources.getColor(R.color.black)
-            }
-
-        },1000)
+        Handler().postDelayed({ window.navigationBarColor=resources.getColor(R.color.black) },1000)
 
 
         rsaHandler = RsaCancelRequestPresenter(this, this)

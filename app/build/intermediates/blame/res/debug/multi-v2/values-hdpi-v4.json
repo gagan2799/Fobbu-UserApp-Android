@@ -1,27 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "D:\\GIT\\Fobbu\\user-app-android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-hdpi-v4\\values-hdpi-v4.xml",
+            "outputFile": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-hdpi-v4/values-hdpi-v4.xml",
             "map": [
                 {
-                    "source": "D:\\GIT\\Fobbu\\user-app-android\\app\\src\\main\\res\\values-hdpi\\dimen.xml",
-                    "from": {
-                        "startLines": "26,17,25,6,19,16,21,24,14,15,11,12,18,23,9,7,8,5,3,4",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "1011,684,973,200,793,640,839,934,538,592,408,458,731,896,353,254,306,153,59,107",
-                        "endColumns": "42,45,36,52,42,42,53,37,52,46,48,47,60,36,51,50,45,45,46,44",
-                        "endOffsets": "1049,725,1005,248,831,678,888,967,586,634,452,501,787,928,400,300,347,194,101,147"
-                    },
-                    "to": {
-                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "55,98,144,181,234,277,320,374,412,465,512,561,609,670,707,759,810,856,902,949",
-                        "endColumns": "42,45,36,52,42,42,53,37,52,46,48,47,60,36,51,50,45,45,46,44",
-                        "endOffsets": "93,139,176,229,272,315,369,407,460,507,556,604,665,702,754,805,851,897,944,989"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\8535e9c43b1934f846f2a7844fab5ef5\\res\\values-hdpi-v4\\values-hdpi-v4.xml",
+                    "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/8b2647e4d6f90733320c66bc0dae852b/res/values-hdpi-v4/values-hdpi-v4.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -37,6 +20,23 @@
                         "endLines": "26",
                         "endColumns": "13",
                         "endOffsets": "1266"
+                    }
+                },
+                {
+                    "source": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/res/values-hdpi/dimen.xml",
+                    "from": {
+                        "startLines": "26,17,25,6,19,16,21,24,14,15,11,12,18,23,9,7,8,5,3,4",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "985,667,948,194,774,624,818,910,524,577,397,446,713,873,344,247,298,148,56,103",
+                        "endColumns": "42,45,36,52,42,42,53,37,52,46,48,47,60,36,51,50,45,45,46,44",
+                        "endOffsets": "1023,708,980,242,812,662,867,943,572,619,441,489,769,905,391,293,339,189,98,143"
+                    },
+                    "to": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,98,144,181,234,277,320,374,412,465,512,561,609,670,707,759,810,856,902,949",
+                        "endColumns": "42,45,36,52,42,42,53,37,52,46,48,47,60,36,51,50,45,45,46,44",
+                        "endOffsets": "93,139,176,229,272,315,369,407,460,507,556,604,665,702,754,805,851,897,944,989"
                     }
                 }
             ]
