@@ -10,13 +10,26 @@ class RsaConstants
         var burstTyre="burst_tyre"
         var towing="towing"
         var iDunno="i_donno"
-
     }
 
+    object OdsServiceStaticName
+    {
+        var trip_ready="trip_ready"
+        var general_service="general_service"
+        var washing="washing"
+        var vas="vas"
+    }
 
     object  Ods
     {
-        var odsService="odsService"
+        var service_image="service_image"
+        var singleServiceList="singleServiceList"
+        var service_name="service_name"
+        var static_name="static_name"
+        var service_price="service_price"
+        var address="address"
+        var time="time"
+        var date="date"
     }
     object ServiceSaved
     {

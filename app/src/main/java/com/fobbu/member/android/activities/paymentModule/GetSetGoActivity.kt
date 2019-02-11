@@ -196,7 +196,6 @@ class GetSetGoActivity : AppCompatActivity(), ActivityView {
         builder.setView(view)
         val dialog: AlertDialog = builder.create()
         view.llWonderFul.setOnClickListener {
-
             dialog.dismiss()
         }
         view.imageViewrFacebookReview.setOnClickListener {

@@ -201,15 +201,17 @@
                                             android:layout_width="wrap_content"
                                             android:orientation="vertical"
                                             android:gravity="center"
-                                            android:id="@+id/llScooterTwo"
+                                            android:id="@+id/llScooterOds"
                                             android:layout_height="wrap_content">
 
                                         <ImageView
+                                                android:id="@+id/ivScooterOds"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
                                                 android:src="@drawable/scooter_selected"/>
 
                                         <TextView
+                                                android:id="@+id/tvScooterOds"
                                                 android:layout_width="wrap_content"
                                                 android:text="@string/bike_scooter"
                                                 android:padding="5dp"
@@ -221,11 +223,6 @@
                                 </LinearLayout>
 
 
-                                <View android:layout_width="1dp"
-                                      android:layout_height="match_parent"
-                                      android:background="@color/view_grey"
-                                      android:layout_margin="10dp"/>
-
 
                                 <LinearLayout android:layout_width="0dp"
                                               android:layout_weight="1"
@@ -236,15 +233,17 @@
                                             android:layout_width="wrap_content"
                                             android:orientation="vertical"
                                             android:gravity="center"
-                                            android:id="@+id/llCarTwo"
+                                            android:id="@+id/llCarOds"
                                             android:layout_height="wrap_content">
 
                                         <ImageView
+                                                android:id="@+id/ivCarOds"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
                                                 android:src="@drawable/car_selected"/>
 
                                         <TextView
+                                                android:id="@+id/tvCarOds"
                                                 android:layout_width="wrap_content"
                                                 android:text="@string/car_suv"
                                                 android:paddingBottom="5dp"
@@ -266,7 +265,7 @@
                             <EditText
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:id="@+id/etVehicleNumberOds"
+                                    android:id="@+id/etVehicleModelOds"
                                     android:singleLine="true"
                                     android:textSize="@dimen/textsize_normal"
                                     android:background="@drawable/border_line_grey"
@@ -435,306 +434,7 @@
                         </LinearLayout>
 
 
-                        <!--// find fobbu layout-->
-                        <LinearLayout
-                                android:layout_width="match_parent"
-                                android:id="@+id/llFindFobbu"
-                                android:visibility="gone"
-                                android:layout_height="match_parent"
-                                android:orientation="vertical">
-
-                            <LinearLayout
-                                    android:orientation="vertical"
-                                    android:id="@+id/llTextAll"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content">
-
-                                <RelativeLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_marginTop="10dp"
-                                        android:layout_height="wrap_content">
-
-                                    <View android:layout_width="50dp"
-                                          android:layout_height="1dp"
-                                          android:layout_toLeftOf="@+id/tvHeadingFind"
-                                          android:layout_centerVertical="true"
-                                          android:background="@color/colorPrimary"
-                                          android:layout_toStartOf="@+id/tvHeadingFind"/>
-
-                                    <TextView android:layout_width="wrap_content"
-                                              android:layout_height="wrap_content"
-                                              android:textColor="@color/colorPrimary"
-                                              android:gravity="center"
-                                              android:padding="10dp"
-                                              android:layout_centerInParent="true"
-                                              android:text="Rs 250/-"
-                                              android:id="@+id/tvHeadingFind"
-                                              android:textSize="@dimen/textsize_normal"/>
-
-                                    <View android:layout_width="50dp"
-                                          android:layout_height="1dp"
-                                          android:layout_toRightOf="@+id/tvHeadingFind"
-                                          android:layout_centerVertical="true"
-                                          android:background="@color/colorPrimary"/>
-
-                                </RelativeLayout>
-
-                                <TextView
-                                        android:textSize="@dimen/textsize_small"
-                                        android:text="@string/tyre_1"
-                                        android:layout_width="match_parent"
-                                        android:padding="2dp"
-                                        android:id="@+id/text1"
-                                        android:layout_marginLeft="20dp"
-                                        android:layout_marginRight="10dp"
-                                        android:layout_height="wrap_content"/>
-
-                                <ImageView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="3dp"
-                                        android:src="@drawable/dotted_gray"
-                                        android:layout_marginLeft="20dp"
-                                        android:layout_marginRight="10dp"
-                                        android:layerType="software"/>
-
-
-                                <TextView
-                                        android:textSize="@dimen/textsize_small"
-                                        android:text="@string/tyre_2"
-                                        android:layout_width="match_parent"
-                                        android:padding="2dp"
-                                        android:id="@+id/text2"
-                                        android:layout_marginLeft="20dp"
-                                        android:layout_marginRight="10dp"
-                                        android:layout_height="wrap_content"/>
-
-                                <ImageView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="3dp"
-                                        android:src="@drawable/dotted_gray"
-                                        android:layout_marginLeft="20dp"
-                                        android:layout_marginRight="10dp"
-                                        android:layerType="software"/>
-
-                                <TextView
-                                        android:textSize="@dimen/textsize_small"
-                                        android:text="@string/tyre_3"
-                                        android:layout_width="match_parent"
-                                        android:id="@+id/text3"
-                                        android:padding="2dp"
-                                        android:layout_marginLeft="20dp"
-                                        android:layout_marginRight="10dp"
-                                        android:layout_height="wrap_content"/>
-
-                                <ImageView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="3dp"
-                                        android:src="@drawable/dotted_gray"
-                                        android:layout_marginLeft="20dp"
-                                        android:layout_marginRight="10dp"
-                                        android:layerType="software"/>
-
-                                <TextView
-                                        android:textSize="@dimen/textsize_small"
-                                        android:text="@string/tyre_4"
-                                        android:layout_width="match_parent"
-                                        android:padding="2dp"
-                                        android:id="@+id/text4"
-                                        android:layout_marginLeft="20dp"
-                                        android:layout_marginRight="10dp"
-                                        android:layout_height="wrap_content"/>
-
-                                <ImageView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="3dp"
-                                        android:src="@drawable/dotted_gray"
-                                        android:layout_marginLeft="20dp"
-                                        android:layout_marginRight="10dp"
-                                        android:layerType="software"/>
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                    android:orientation="vertical"
-                                    android:layout_width="match_parent"
-                                    android:id="@+id/llTowing"
-                                    android:visibility="gone"
-                                    android:layout_height="wrap_content">
-
-
-                                <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_marginTop="20dp"
-                                        android:orientation="horizontal"
-                                        android:gravity="center_vertical|center"
-                                        android:layout_height="wrap_content">
-
-                                    <LinearLayout
-                                            android:layout_width="wrap_content"
-                                            android:orientation="vertical"
-                                            android:gravity="center"
-                                            android:layout_marginRight="15dp"
-                                            android:id="@+id/llLifting"
-                                            android:layout_height="wrap_content">
-
-                                        <ImageView
-                                                android:layout_width="wrap_content"
-                                                android:layout_height="wrap_content"
-                                                android:id="@+id/ivLifting"
-                                                android:src="@drawable/lifting"/>
-
-                                        <TextView
-                                                android:layout_width="wrap_content"
-                                                android:text="Rs 1500/-"
-                                                android:padding="5dp"
-                                                android:id="@+id/tvLiftingPrice"
-                                                android:textSize="@dimen/textsize_medium"
-                                                android:textColor="@color/drawer_text_color"
-                                                android:layout_height="wrap_content"/>
-
-                                        <TextView
-                                                android:layout_width="wrap_content"
-                                                android:text="@string/lifting"
-                                                android:id="@+id/tvLiftingText"
-                                                android:textSize="@dimen/textsize_medium"
-                                                android:textColor="@color/drawer_text_color"
-                                                android:layout_height="wrap_content"/>
-
-                                    </LinearLayout>
-
-
-                                    <View android:layout_width="1dp"
-                                          android:layout_height="match_parent"
-                                          android:background="@color/view_grey"
-                                          android:layout_margin="10dp"/>
-
-                                    <LinearLayout
-                                            android:layout_width="wrap_content"
-                                            android:orientation="vertical"
-                                            android:gravity="center"
-                                            android:layout_marginLeft="15dp"
-                                            android:id="@+id/llFlatbed"
-                                            android:layout_height="wrap_content">
-
-                                        <ImageView
-                                                android:layout_width="wrap_content"
-                                                android:layout_height="wrap_content"
-                                                android:id="@+id/ivFlatBed"
-                                                android:src="@drawable/flatbed_selected"/>
-
-                                        <TextView
-                                                android:layout_width="wrap_content"
-                                                android:text="Rs 2500/-"
-                                                android:paddingBottom="5dp"
-                                                android:paddingTop="5dp"
-                                                android:paddingRight="10dp"
-                                                android:paddingLeft="10dp"
-                                                android:id="@+id/tvFlatBedPrice"
-                                                android:textSize="@dimen/textsize_medium"
-                                                android:textColor="@color/drawer_text_color"
-                                                android:layout_height="wrap_content"/>
-
-                                        <TextView
-                                                android:layout_width="wrap_content"
-                                                android:text="@string/flatbed"
-                                                android:id="@+id/tvFlatBedText"
-                                                android:textSize="@dimen/textsize_medium"
-                                                android:textColor="@color/drawer_text_color"
-                                                android:layout_height="wrap_content"/>
-
-                                    </LinearLayout>
-
-
-                                </LinearLayout>
-
-                                <TextView
-                                        android:textSize="@dimen/textsize_small"
-                                        android:text="@string/tow_1"
-                                        android:layout_width="match_parent"
-                                        android:padding="2dp"
-                                        android:layout_marginTop="10dp"
-                                        android:layout_marginLeft="20dp"
-                                        android:layout_marginRight="10dp"
-                                        android:layout_height="wrap_content"/>
-
-                                <ImageView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="3dp"
-                                        android:src="@drawable/dotted_gray"
-                                        android:layout_marginLeft="20dp"
-                                        android:layout_marginRight="10dp"
-                                        android:layerType="software"/>
-
-
-                                <TextView
-                                        android:textSize="@dimen/textsize_small"
-                                        android:text="@string/tyre_4"
-                                        android:layout_width="match_parent"
-                                        android:padding="2dp"
-                                        android:layout_marginLeft="20dp"
-                                        android:layout_marginRight="10dp"
-                                        android:layout_height="wrap_content"/>
-
-                                <ImageView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="3dp"
-                                        android:src="@drawable/dotted_gray"
-                                        android:layout_marginLeft="20dp"
-                                        android:layout_marginRight="10dp"
-                                        android:layerType="software"/>
-
-                            </LinearLayout>
-
-                            <TextView
-                                    android:id="@+id/tvFindFobbu"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/find_fobbu"
-                                    android:layout_alignParentBottom="true"
-                                    android:layout_gravity="center_horizontal"
-                                    android:layout_centerHorizontal="true"
-                                    android:textSize="@dimen/login_textsize_medium"
-                                    android:gravity="center"
-                                    android:padding="@dimen/red_rounded_rectangle_padding"
-                                    android:layout_marginRight="20dp"
-                                    android:layout_marginLeft="20dp"
-                                    android:layout_marginTop="15dp"
-                                    android:foreground="?attr/selectableItemBackground"
-                                    android:paddingBottom="25dp"
-                                    android:layout_marginBottom="10dp"
-                                    android:background="@drawable/red_rect_rounded"
-                                    android:textColor="@color/white"/>
-
-                            <LinearLayout android:layout_width="match_parent"
-                                          android:layout_height="wrap_content"
-                                          android:id="@+id/llTerms"
-                                          android:gravity="center"
-                                          android:orientation="horizontal">
-
-                                <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="@string/terms"
-                                        android:textSize="@dimen/textsize_small"
-                                        android:layout_gravity="center_horizontal"
-                                        android:foreground="?attr/selectableItemBackground"
-                                        android:textColor="@color/drawer_text_color"/>
-                                <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="@string/conditions"
-                                        android:textSize="@dimen/textsize_small"
-                                        android:layout_marginLeft="5dp"
-                                        android:layout_gravity="center_horizontal"
-                                        android:foreground="?attr/selectableItemBackground"
-                                        android:textColor="@color/blue"/>
-                            </LinearLayout>
-
-
-                        </LinearLayout>
-
-
-                        <!--//vehicle layout-->
+                        <!--//vehicle  Details layout-->
                         <LinearLayout
                                 android:layout_width="match_parent"
                                 android:id="@+id/llCarDetailsOds"

@@ -9,12 +9,7 @@ import android.graphics.Color
 import android.net.ConnectivityManager
 import android.net.Uri
 import android.os.Build
-import android.support.annotation.RequiresApi
 import android.support.v4.app.ActivityCompat
-import android.support.v4.content.ContextCompat.startActivity
-import android.support.v4.view.MenuItemCompat
-import android.support.v7.widget.Toolbar
-import android.util.Log
 import android.view.*
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
@@ -23,30 +18,14 @@ import android.widget.TextView
 import android.widget.Toast
 import com.fobbu.member.android.R
 import com.fobbu.member.android.activities.loginSignupModule.LoginActivity
-import com.fobbu.member.android.activities.rsaModule.RSARequestCancelActivity
-import com.fobbu.member.android.apiInterface.WebServiceApi
 import com.fobbu.member.android.backgroundServices.FetchStatusAPI
 import com.fobbu.member.android.fragments.rsaFragmentModule.RsaConstants
-import com.fobbu.member.android.modals.MainPojo
-import com.google.firebase.messaging.RemoteMessage
 import com.google.gson.Gson
-import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
-import kotlinx.android.synthetic.main.option_menu_layout.*
-import okhttp3.Interceptor
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import org.json.JSONObject
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.Calendar.*
-import java.util.concurrent.TimeUnit
 import java.util.regex.Pattern
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS", "UNREACHABLE_CODE")
@@ -104,21 +83,17 @@ class CommonClass(activity1: Activity, context1: Context) {
 
     }
 
-    fun getStringList(preference: String): ArrayList<HashMap<String, Any>> {
+    fun getStringList(key: String): ArrayList<HashMap<String, Any>> {
 
         val myPrefs = context.getSharedPreferences("Fobbu_Member_Prefs", Context.MODE_PRIVATE)
 
         val gson = Gson()
 
-        val json: String = myPrefs.getString(preference, "")
+        val json = myPrefs.getString(key, "")
 
-        val type = object : TypeToken<ArrayList<HashMap<String, Any>>>() {}.type
+        val type= object : TypeToken<java.util.ArrayList<java.util.HashMap<String, Any>>>(){}.type
 
-        val list: ArrayList<HashMap<String, Any>> = gson.fromJson(json, type)
-
-        println("LIst $list")
-
-        return list
+        return gson.fromJson(json,type)
     }
 
 

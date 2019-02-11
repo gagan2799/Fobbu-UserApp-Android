@@ -142,7 +142,6 @@
                             android:layout_height="wrap_content"
                             android:textSize="@dimen/textsize_normal"
                             android:textColor="@color/color_grey"
-                            android:text="@string/flat_tyres"
                             android:id="@+id/textViewServiceTypeWork"
                             android:layout_marginTop="5dp"
                     />
@@ -164,6 +163,111 @@
                            android:src="@drawable/check_form"/>
             </LinearLayout>
 
+
+            <!--// for ods services-->
+            <LinearLayout
+                    android:visibility="gone"
+                    android:id="@+id/llOdsService"
+                    android:layout_marginTop="6dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/address"
+                        android:textColor="@color/color_grey"
+                        android:textSize="@dimen/textsize_medium"
+                />
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/textsize_normal"
+                        android:textColor="@color/color_grey"
+                        android:id="@+id/tvAddressWorkSummary"
+                        android:layout_marginTop="5dp"
+                />
+
+                <View android:layerType="software"
+                      android:layout_width="match_parent"
+                      android:layout_height="10dp"
+                      android:background="@drawable/dashed_line"/>
+
+                <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                android:layout_marginTop="6dp">
+
+                    <!--//date-->
+                    <LinearLayout
+                            android:layout_alignParentLeft="true"
+                            android:layout_width="wrap_content"
+                                  android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/date"
+                                android:textColor="@color/color_grey"
+                                android:textSize="@dimen/textsize_medium"
+                        />
+
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="12-2-2019"
+                                android:textSize="@dimen/textsize_normal"
+                                android:textColor="@color/color_grey"
+                                android:id="@+id/tvDateWorkSummary"
+                                android:layout_marginTop="5dp"
+                        />
+
+                    </LinearLayout>
+
+                    <!--//time-->
+                    <LinearLayout
+                            android:id="@+id/llTimeSlot"
+                            android:layout_alignParentRight="true"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/time_slot"
+                                android:textColor="@color/color_grey"
+                                android:textSize="@dimen/textsize_medium"
+                        />
+
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="12-2-2019"
+                                android:textSize="@dimen/textsize_normal"
+                                android:textColor="@color/color_grey"
+                                android:id="@+id/tvTimeWorkSummary"
+                                android:layout_marginTop="5dp"
+                        />
+
+                    </LinearLayout>
+
+                    <View
+                            android:layout_below="@+id/llTimeSlot"
+                            android:layerType="software"
+                          android:layout_width="match_parent"
+                          android:layout_height="10dp"
+                            android:layout_marginTop="15dp"
+                          android:background="@drawable/dashed_line"/>
+
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
 
             <LinearLayout
                     android:layout_width="match_parent"

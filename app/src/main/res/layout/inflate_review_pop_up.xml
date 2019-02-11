@@ -29,6 +29,8 @@
             android:layout_height="wrap_content"
             android:text="@string/your_review_was_saved_share_it_with_your_friens"
             android:textSize="@dimen/textsize_medium"
+            android:gravity="center"
+            android:id="@+id/tvReviewMessage"
             android:textColor="@color/color_grey"
             android:layout_marginTop="5dp"
             android:layout_gravity="center"

@@ -297,7 +297,7 @@
     </string>
     <string name="please_hang_on_fobbu_is_picking_up_the_fuel">Please Hang on…\nFobbu is picking up the fuel…</string>
     <string name="free">Free</string>
-    <string name="rs">Rs " "</string>
+
     <string name="order_detail">Order Detail</string>
     <string name="order_id_detail">Order ID:</string>
     <string name="rs_300">Rs 300</string>
@@ -375,13 +375,17 @@
     <string name="change">Change</string>
     <string name="gathering_info">Gathering information.Please wait…</string>
     <string name="your_road_ptrip_vehicle">Your Road trip vehicle is</string>
-    <string name="enter_car_model"><font size="13">enter your car model eg. vento</font></string>
-    <string name="enter_reg_no"><font size="13">enter your Registration No</font></string>
+    <string name="enter_car_model">
+        <font size="13">enter your car model eg. vento</font>
+    </string>
+    <string name="enter_reg_no">
+        <font size="13">enter your Registration No</font>
+    </string>
     <string name="OdsServiceOperation">OdsServiceOperation</string>
     <string name="please_enter_car_details">Please enter car details</string>
     <string name="awsome_lets_do_this">Awesome! Lets do this!</string>
     <string name="to_make_to_trip_hapy_and_safe">to make to trip hapy and safe</string>
-    <string name="rs_1599">Rs 1599/-</string>
+    <string name="rs">Rs</string>
     <string name="select_a_date">Select a date</string>
     <string name="select_a_time">Select a Time</string>
     <string name="fobbu_ensures_several_checks_n_and_top_up_on_your_vehicle">Fobbu ensures several checks\nand top up on
@@ -392,6 +396,17 @@
     <string name="keep_running">regular checks keep you running and not stranded</string>
     <string name="save_water">Lets save water together.</string>
     <string name="water_save_message">you will save 20l of water with our echo wash therapy</string>
+    <string name="provide_date_message">Please provide a date.</string>
+    <string name="address">Address:</string>
+    <string name="time_slot">Time Slot:</string>
+    <string name="date">Date:</string>
+    <string name="service_booked_message">You have successfully booked your service\nwe will notify you once the
+        Fobbu\'s
+        on the way...
+    </string>
+    <string name="car_model_message">Please provide details about the cars\' model</string>
+    <string name="registeration_no_message">Please provide registration number of the car</string>
+    <string name="provide_vehicle_msg">Please provide a vehicle type</string>
 
 
 </resources>

@@ -39,6 +39,7 @@ import com.fobbu.member.android.fcm.FcmPushTypes
 import com.fobbu.member.android.fragments.HomeFragment
 
 import com.fobbu.member.android.fragments.RSALiveFragment
+import com.fobbu.member.android.fragments.odsModule.OdsTrackingFragment.OdsTrackingFragment
 import com.fobbu.member.android.fragments.odsModule.odsFragment.OdsFragment
 import com.fobbu.member.android.fragments.rsaFragmentModule.RSAFragment
 import com.fobbu.member.android.fragments.rsaFragmentModule.RsaConstants
@@ -60,23 +61,51 @@ import kotlinx.android.synthetic.main.option_menu_layout.*
 import java.lang.Exception
 
 class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragments, TopBarChanges, ActivityView,
-    ActivityViewDashboard {
-
+    ActivityViewDashboard
+{
     private var topBarChanges: TopBarChanges? = null
-    var fragmentTypeForRSA = ""
+
+    private var fragmentTypeForRSA = ""
+
     private lateinit var fragmentEarlier: Fragment
-    var fragmentEarlierBool = false
+
+    private var fragmentEarlierBool = false
+
     private lateinit var dashboardHandler: DashboardHandler
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    var odsServiceStaticName=""
+
+    override fun onCreate(savedInstanceState: Bundle?)
+    {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_dashboard)
 
+        initView()
+    }
+
+    // function for initialising all the variables and view of the class
+    private fun initView()
+    {
         dashboardHandler = DashboardPresenter(this, this)
+
         drawerClicks()
+
         tabBarClicks()
 
-        checkAndNavigateFromPush()
+        if (intent.hasExtra(RsaConstants.Ods.static_name))
+        {
+            odsServiceStaticName=intent.getStringExtra(RsaConstants.Ods.static_name)
+
+            if (odsServiceStaticName==RsaConstants.OdsServiceStaticName.trip_ready)
+                CommonClass(this,this)
+                    .removeString(RsaConstants.Ods.singleServiceList)
+
+            else
+                changeFragment(OdsTrackingFragment(),resources.getString(R.string.ods))
+        }
+        else
+            checkAndNavigateFromPush()
     }
 
     override fun showGoneTopBar(showDrawer: Boolean) {
@@ -103,7 +132,15 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
         }
 
         llOdsDash.setOnClickListener {
-            changeFragment(OdsFragment(),resources.getString(R.string.ods))
+            if (intent.hasExtra(RsaConstants.Ods.static_name))
+            {
+                odsServiceStaticName=intent.getStringExtra(RsaConstants.Ods.static_name)
+
+                if (odsServiceStaticName!=RsaConstants.OdsServiceStaticName.trip_ready)
+                    changeFragment(OdsTrackingFragment(),resources.getString(R.string.ods))
+            }
+            else
+                changeFragment(OdsFragment(),resources.getString(R.string.ods))
         }
     }
 
@@ -421,8 +458,8 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
 
     }
 
-    private fun checkAndNavigateFromPush() {
-
+    private fun checkAndNavigateFromPush()
+    {
         when {
 
             (CommonClass(this, this).getString(RsaConstants.ServiceSaved.isNew) == "1") -> {

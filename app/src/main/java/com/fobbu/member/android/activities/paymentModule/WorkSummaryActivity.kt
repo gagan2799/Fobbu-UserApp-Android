@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.Gravity
+import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
 import com.fobbu.member.android.R
@@ -22,15 +23,22 @@ import kotlinx.android.synthetic.main.option_menu_layout.*
 import kotlin.collections.ArrayList
 
 @Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-class WorkSummaryActivity : AppCompatActivity(),ActivityView {
-
+class WorkSummaryActivity : AppCompatActivity(),ActivityView
+{
+    lateinit var commonClass:CommonClass
 
     private lateinit var rsaLiveHandler:RsaLivePresenter
 
     lateinit var workSummaryAdapter:WorkSummaryAdapter
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    var odsServiceTime=""
+
+    lateinit var dataList:ArrayList<HashMap<String,Any>>
+
+    override fun onCreate(savedInstanceState: Bundle?)
+    {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_work_summary)
 
         initView()
@@ -39,20 +47,51 @@ class WorkSummaryActivity : AppCompatActivity(),ActivityView {
     }
 
     override fun onBackPressed() {
-
     }
 
 
     // method for handling all the initialization of this class
-    private fun initView() {
+    private fun initView()
+    {
+        commonClass= CommonClass(this,this)
 
-        rsaLiveHandler=RsaLivePresenter(this,this)
-
-        if (CommonClass(this,this).checkInternetConn(this))
+        if (intent.hasExtra(RsaConstants.Ods.time))
         {
-            rsaLiveHandler.getService(
-                CommonClass(this,this).getString("x_access_token"),CommonClass(this, this).getString(
-                RsaConstants.ServiceSaved.fobbuRequestId))
+            dataList= ArrayList()
+
+            if (commonClass.getStringList(RsaConstants.Ods.singleServiceList).isNotEmpty())
+                dataList=commonClass.getStringList(RsaConstants.Ods.singleServiceList)
+
+            textViewServiceTypeWork.text=dataList[0][RsaConstants.Ods.service_name].toString()
+
+            textViewTotalAmount.text=dataList[0][RsaConstants.Ods.service_price].toString()
+
+            odsServiceTime=intent.getStringExtra(RsaConstants.Ods.time)
+
+            llOdsService.visibility= View.VISIBLE
+
+            recyclerViewWorkSummary.visibility=View.INVISIBLE
+
+            tvAddressWorkSummary.text=commonClass.getString(RsaConstants.Ods.address)
+
+            tvTimeWorkSummary.text=intent.getStringExtra(RsaConstants.Ods.time)
+
+            tvDateWorkSummary.text=intent.getStringExtra(RsaConstants.Ods.date)
+        }
+        else
+        {
+            llOdsService.visibility= View.GONE
+
+            recyclerViewWorkSummary.visibility=View.VISIBLE
+
+            rsaLiveHandler=RsaLivePresenter(this,this)
+
+            if (CommonClass(this,this).checkInternetConn(this))
+            {
+                rsaLiveHandler.getService(
+                    CommonClass(this,this).getString("x_access_token"),CommonClass(this, this).getString(
+                        RsaConstants.ServiceSaved.fobbuRequestId))
+            }
         }
     }
 
@@ -68,7 +107,8 @@ class WorkSummaryActivity : AppCompatActivity(),ActivityView {
         textViewConfirmAndPay.setOnClickListener {
             startActivity(Intent(this,PaymentModeActivity::class.java)
                 .setFlags
-            (Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK))
+            (Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+                .putExtra(RsaConstants.Ods.service_name,odsServiceTime))
         }
     }
 

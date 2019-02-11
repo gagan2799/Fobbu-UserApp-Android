@@ -87,7 +87,7 @@
             android:layout_below="@id/tvOperationSubLogo"
             android:textColor="@color/drawer_text_color"
             android:textSize="@dimen/textsize_normal"
-            android:text="@string/rs_1599"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 

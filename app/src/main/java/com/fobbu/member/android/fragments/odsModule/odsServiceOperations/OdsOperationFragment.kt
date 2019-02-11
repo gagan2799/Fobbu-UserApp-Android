@@ -3,24 +3,30 @@ package com.fobbu.member.android.fragments.odsModule.odsServiceOperations
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentTransaction
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
 import com.fobbu.member.android.R
+import com.fobbu.member.android.activities.paymentModule.WorkSummaryActivity
 import com.fobbu.member.android.fragments.odsModule.odsFragment.OdsFragment
 import com.fobbu.member.android.fragments.odsModule.odsServiceOperations.adapter.OdsOperationAdapter
+import com.fobbu.member.android.fragments.rsaFragmentModule.RSAFragment
 import com.fobbu.member.android.fragments.rsaFragmentModule.RsaConstants
 import com.fobbu.member.android.interfaces.TopBarChanges
 import com.fobbu.member.android.utils.CommonClass
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.fragment_ods_operation.*
 import kotlinx.android.synthetic.main.fragment_ods_operation.view.*
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 
 class OdsOperationFragment : Fragment()
@@ -29,9 +35,13 @@ class OdsOperationFragment : Fragment()
 
     private var startdateCustom = ""
 
-    lateinit var odsOperationAdapter:OdsOperationAdapter
+    private lateinit var odsOperationAdapter:OdsOperationAdapter
     
     private var dateCustom = ""
+
+    private var time=""
+
+    lateinit var dataList:ArrayList<HashMap<String,Any>>
 
     private lateinit var datePickerDialog: DatePickerDialog.OnDateSetListener
 
@@ -61,38 +71,53 @@ class OdsOperationFragment : Fragment()
     {
         commonClass= CommonClass(activity!!,activity!!)
 
-        manageLayout(view)
+        dataList= ArrayList()
+
+        if (commonClass.getStringList(RsaConstants.Ods.singleServiceList).isNotEmpty())
+        {
+            dataList=commonClass.getStringList(RsaConstants.Ods.singleServiceList)
+        }
+
+        setDataInView(view)
 
         setRecycler(view)
     }
 
 
     // managing the layout according to the service selecetd
-    private fun manageLayout(view:View)
+    @SuppressLint("SetTextI18n")
+    private fun setDataInView(view:View)
     {
-        when(commonClass.getString(RsaConstants.Ods.odsService))
-        {
-            "Trip Ready"->
-            {
-                view.ivServiceImageOperation.setImageResource(R.drawable.trip_ready_inner_screen)
+        if (dataList[0][RsaConstants.Ods.service_image].toString()!="")
+            Picasso.get().load(dataList[0][RsaConstants.Ods.service_image].toString())
+                .placeholder(R.drawable.dummy_services)
+                .error(R.drawable.dummy_services)
+                .into(view.ivServiceImageOperation)
 
+        else
+            view.ivServiceImageOperation.setImageResource(R.drawable.dummy_services)
+
+        if (dataList[0][RsaConstants.Ods.service_price].toString()!="")
+            view.tvOperationPrice.text=
+                    """${activity!!.getString(R.string.rs)} ${dataList[0][RsaConstants.Ods.service_price].toString()}"""
+
+        when(dataList[0][RsaConstants.Ods.static_name])
+        {
+            RsaConstants.OdsServiceStaticName.trip_ready->
+            {
                 view.tvOperationLogo.text=activity!!.resources.getString(R.string.awsome_lets_do_this)
 
                 view.tvOperationSubLogo.text=activity!!.resources.getString(R.string.to_make_to_trip_hapy_and_safe)
             }
 
-            "General Service"->
+            RsaConstants.OdsServiceStaticName.general_service->
             {
-                view.ivServiceImageOperation.setImageResource(R.drawable.general_service_inner_screen)
-
                 view.tvOperationLogo.text=getString(R.string.keep_me_healthy)
 
                 view.tvOperationSubLogo.text=getString(R.string.keep_running)
             }
-            "Washing"->
+            RsaConstants.OdsServiceStaticName.washing->
             {
-                view.ivServiceImageOperation.setImageResource(R.drawable.washing_inner_screen)
-
                 view.tvOperationLogo.text=getString(R.string.save_water)
 
                 view.tvOperationSubLogo.text=getString(R.string.water_save_message)
@@ -116,11 +141,11 @@ class OdsOperationFragment : Fragment()
     private fun clicks(view: View)
     {
         view.tvOperationDate.setOnClickListener {
-           selectDateFromCalender()
+           selectDateFromCalender(view)
         }
 
         view.tvOperationTime.setOnClickListener {
-            selectTime()
+            selectTime(view)
         }
 
         view.ivBack.setOnClickListener {
@@ -149,7 +174,7 @@ class OdsOperationFragment : Fragment()
         topBarChanges!!.showGoneTopBar(boolean)
     }
 
-    private fun selectDateFromCalender()
+    private fun selectDateFromCalender(view: View)
     {
         myCalendar = Calendar.getInstance()
 
@@ -162,7 +187,13 @@ class OdsOperationFragment : Fragment()
 
             dateCustom=updateLabel()
 
-            println("date:::$dateCustom")
+            view.tvOperationDate.text=dateCustom
+
+            if (time!="")
+                startActivity(Intent(activity!!,WorkSummaryActivity::class.java)
+                    .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                    .putExtra(RsaConstants.Ods.time,time)
+                    .putExtra(RsaConstants.Ods.date,dateCustom))
         }
 
 
@@ -193,7 +224,7 @@ class OdsOperationFragment : Fragment()
     }
 
 
-  private fun   selectTime()
+  private fun   selectTime(view: View)
   {
       val mcurrentTime = Calendar.getInstance()
 
@@ -203,12 +234,31 @@ class OdsOperationFragment : Fragment()
     val mTimePicker: TimePickerDialog
 
       mTimePicker =  TimePickerDialog(activity!!,
-          TimePickerDialog.OnTimeSetListener { _, p1, p2 -> println("time::: $p1:$p2") }, hour, minute, true);//Yes 24 hour time
+          TimePickerDialog.OnTimeSetListener { _, p1, p2 ->
+
+              val AM_PM = if(p1 < 12) {
+                  "AM"
+              } else {
+                  "PM"
+              }
+
+              time= ("$p1:$p2 $AM_PM")
+
+              view.tvOperationTime.text=time
+
+              if (dateCustom!="")
+                  startActivity(Intent(activity!!,WorkSummaryActivity::class.java)
+                      .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                      .putExtra(RsaConstants.Ods.time,time)
+                      .putExtra(RsaConstants.Ods.date,dateCustom))
+
+          }, hour, minute, false)//Yes 24 hour time
 
       mTimePicker.setTitle("Select Time")
 
       mTimePicker.show()
   }
+
 
   }
 

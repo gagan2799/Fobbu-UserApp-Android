@@ -5,6 +5,7 @@ import android.app.Dialog
 import android.content.Context
 import android.content.IntentSender
 import android.content.pm.PackageManager
+import android.graphics.Typeface
 import android.location.Address
 import android.location.Geocoder
 import android.location.Location
@@ -18,12 +19,17 @@ import android.support.v7.widget.GridLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RelativeLayout
 
 import com.fobbu.member.android.R
 import com.fobbu.member.android.fragments.odsModule.odsFragment.adapter.OdsFragmentAdapter
 import com.fobbu.member.android.fragments.odsModule.odsServiceOperations.OdsOperationFragment
 import com.fobbu.member.android.fragments.rsaFragmentModule.RsaConstants
+import com.fobbu.member.android.fragments.rsaFragmentModule.presenter.RsaFragmentHandler
+import com.fobbu.member.android.fragments.rsaFragmentModule.presenter.RsaFragmnetPresenter
+import com.fobbu.member.android.fragments.rsaFragmentModule.view.RsaFragmentView
 import com.fobbu.member.android.interfaces.TopBarChanges
+import com.fobbu.member.android.modals.MainPojo
 import com.fobbu.member.android.utils.CommonClass
 import com.fobbu.member.android.utils.RecyclerItemClickListener
 import com.google.android.gms.common.ConnectionResult
@@ -42,16 +48,25 @@ import kotlinx.android.synthetic.main.fragment_ods.view.*
 import kotlinx.android.synthetic.main.inflate_ods_dialog.*
 import java.lang.Double
 import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 
+@Suppress("DEPRECATION")
 class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
-    GoogleApiClient.ConnectionCallbacks,LocationListener
+    GoogleApiClient.ConnectionCallbacks,LocationListener,RsaFragmentView
 {
+    lateinit var rlLoader:RelativeLayout
+
+    private lateinit var serviceHandler:RsaFragmentHandler
+
     private lateinit var mMapView: MapView
 
     private var topBarChanges: TopBarChanges? = null
 
     private lateinit var googleMap: GoogleMap
+
+    lateinit var dataList:ArrayList<HashMap<String,Any>>
 
     private lateinit var odsAdapter:OdsFragmentAdapter
 
@@ -59,10 +74,12 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
     private lateinit var geocoder:Geocoder
 
-    var odsService= arrayOf("Trip Ready","General Service","Washing","VAS")
+    private var odsService= arrayOf("Trip Ready","General Service","Washing","VAS")
 
 
     lateinit var commonClass:CommonClass
+
+    var wheels=""
 
     var currentAddress=""
 
@@ -86,14 +103,21 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     // function for initialising all the variables of the class
     private fun initView(view: View, savedInstanceState: Bundle?)
     {
+        rlLoader=view.findViewById(R.id.rlLoader)
+
         commonClass= CommonClass(activity!!,activity!!)
+
+        dataList=ArrayList()
 
         mapInitialise(view, savedInstanceState)
 
         setUpGoogleClient()
 
+        fetchService()
+
         setRecycler(view)
     }
+
 
     // function for handling the clicks of the class
     private fun clicks(view: View)
@@ -113,18 +137,86 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
         }))
 
+        view.llScooterOds.setOnClickListener {
+
+            view.tvCarOds.setTextColor(activity!!.resources.getColor(R.color.drawer_text_color))
+
+            view.tvCarOds.setTypeface(view.tvScooterOds.typeface, Typeface.NORMAL)
+
+            if (view.tvScooterOds.currentTextColor==activity!!.resources.getColor(R.color.drawer_text_color))
+            {
+                wheels="2"
+
+                view.tvScooterOds.setTextColor(activity!!.resources.getColor(R.color.colorPrimary))
+
+                view.tvScooterOds.typeface= Typeface.DEFAULT_BOLD
+            }
+            else
+            {
+                wheels=""
+
+                view.tvScooterOds.setTextColor(activity!!.resources.getColor(R.color.drawer_text_color))
+
+                view.tvScooterOds.setTypeface(view.tvScooterOds.typeface, Typeface.NORMAL)
+            }
+        }
+
+        view.llCarOds.setOnClickListener {
+
+            view.tvScooterOds.setTextColor(activity!!.resources.getColor(R.color.drawer_text_color))
+
+            view.tvScooterOds.setTypeface(view.tvScooterOds.typeface, Typeface.NORMAL)
+
+            if (view.tvCarOds.currentTextColor==activity!!.resources.getColor(R.color.drawer_text_color))
+            {
+                wheels="4"
+
+                view.tvCarOds.setTextColor(activity!!.resources.getColor(R.color.colorPrimary))
+
+                view.tvCarOds.typeface= Typeface.DEFAULT_BOLD
+            }
+            else
+            {
+                wheels=""
+
+                view.tvCarOds.setTextColor(activity!!.resources.getColor(R.color.drawer_text_color))
+
+                view.tvCarOds.setTypeface(view.tvScooterOds.typeface, Typeface.NORMAL)
+            }
+        }
+
 
         view.tvContinueOds.setOnClickListener {
-            commonClass.putString(RsaConstants.Ods.odsService,odsService[selectedPosition])
+            commonClass.putString(RsaConstants.Ods.service_name,odsService[selectedPosition])
 
-            changeFragment(OdsOperationFragment())
+            when{
+
+                wheels==""->
+                commonClass.showToast(getString(R.string.provide_vehicle_msg))
+
+                etVehicleModelOds.text.isNullOrEmpty()->
+                    commonClass.showToast(getString(R.string.car_model_message))
+
+                else->
+                    changeFragment(OdsOperationFragment())
+            }
 
         }
 
         view.tvContinueOdsCarDetails.setOnClickListener {
-            commonClass.putString(RsaConstants.Ods.odsService,odsService[selectedPosition])
+            commonClass.putString(RsaConstants.Ods.service_name,odsService[selectedPosition])
 
-            changeFragment(OdsOperationFragment())
+            when{
+                etCarModelOds.text.isNullOrEmpty()->
+                    commonClass.showToast(getString(R.string.car_model_message))
+
+
+                etCarRegestrationOds.text.isNullOrEmpty()->
+                    commonClass.showToast(getString(R.string.registeration_no_message))
+
+                else->
+                    changeFragment(OdsOperationFragment())
+            }
         }
 
         view.ivBack.setOnClickListener {
@@ -143,18 +235,18 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
     private fun changeFragment(fragment:Fragment)
     {
-   val ft: FragmentTransaction  = activity!!.supportFragmentManager.beginTransaction()
+        val ft: FragmentTransaction  = activity!!.supportFragmentManager.beginTransaction()
 
-    ft.replace(R.id.content_frame, fragment)
+        ft.replace(R.id.content_frame, fragment)
 
         ft.commit()
-}
+    }
 
 
     private fun setRecycler(view: View) {
-        odsAdapter= OdsFragmentAdapter(activity!!,odsService)
+        odsAdapter= OdsFragmentAdapter(activity!!,dataList)
 
-        view.rvOdsService.layoutManager=GridLayoutManager(activity!!,2)
+        view.rvOdsService.layoutManager= GridLayoutManager(activity!!,2)
 
         view.rvOdsService.adapter=odsAdapter
     }
@@ -174,6 +266,22 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
         dialog.tvConfirm.setOnClickListener {
             dialog.dismiss()
+
+            commonClass.putString(RsaConstants.Ods.address,currentAddress)
+
+            val singleService=ArrayList<HashMap<String,Any>>()
+
+            for( i in dataList.indices)
+            {
+                if (dataList[position][RsaConstants.Ods.service_name]==dataList[i][RsaConstants.Ods.service_name])
+                {
+                    val map=dataList[i]
+
+                    singleService.add(map)
+                }
+            }
+
+            commonClass.putStringList(RsaConstants.Ods.singleServiceList,singleService)
 
             manageServiceLayout(position)
         }
@@ -197,7 +305,7 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
                 tvVehicleHeadingOds.text=resources.getString(R.string.your_road_ptrip_vehicle)
 
-                etVehicleNumberOds.hint=getString(R.string.enter_car_model)
+                etVehicleModelOds.hint=getString(R.string.enter_car_model)
 
                 ifTopBarChnagesNull(false)
 
@@ -217,7 +325,7 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
                 tvVehicleHeadingOds.text=resources.getString(R.string.your_road_ptrip_vehicle)
 
-                etVehicleNumberOds.hint=getString(R.string.enter_car_model)
+                etVehicleModelOds.hint=getString(R.string.enter_car_model)
 
                 ifTopBarChnagesNull(false)
 
@@ -313,7 +421,7 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     {
         geocoder= Geocoder(activity!!, Locale.ENGLISH)
         try {
-            var address:  List<Address> = geocoder.getFromLocation(lat,long,1)
+            val address:  List<Address> = geocoder.getFromLocation(lat,long,1)
             if (address.isNotEmpty())
             {
                 println("current address::${address[0].getAddressLine(0)}")
@@ -383,8 +491,8 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
 
     // Method for setting up  marker on Map
-    private fun throwMarkerOnMap(latitude: String, longitude: String) {
-
+    private fun throwMarkerOnMap(latitude: String, longitude: String)
+    {
         // create marker
         val marker = MarkerOptions().position(
             LatLng(Double.valueOf(latitude), Double.valueOf(longitude))
@@ -394,6 +502,8 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
         marker.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_mark_blue))
 
         // adding marker
+        googleMap.clear()
+
         googleMap.addMarker(marker)
 
         val cameraPosition = CameraPosition.Builder()
@@ -421,11 +531,16 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
 
     // setting up google client for map in this method
-    private fun setUpGoogleClient() {
+    private fun setUpGoogleClient()
+    {
         googleApiClient = GoogleApiClient.Builder(context!!)
+
             .addApi(LocationServices.API)
+
             .addConnectionCallbacks(this)
+
             .addOnConnectionFailedListener(this).build()
+
         googleApiClient!!.connect()
     }
 
@@ -435,8 +550,7 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
         println("LOCATION >>>>>>>>>>>>>>>>>>>> " + p0!!.latitude)
 
         if (!location)
-        {/*  strLatitude = p0.latitude.toString()
-            strLongitude = p0.longitude.toString()*/
+        {
             throwMarkerOnMap(p0.latitude.toString(), p0.longitude.toString())
 
             mapClicks()
@@ -446,16 +560,17 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
             location = true
         }
         else if (location)
-        {
             LocationServices.FusedLocationApi.removeLocationUpdates(googleApiClient, this@OdsFragment)
-        }
+
     }
 
     // for handling clicks on the map
     private fun mapClicks()
     {
         googleMap.setOnMapClickListener {
-            print("google lat::::${it.latitude}")
+            throwMarkerOnMap(it.latitude.toString(),it.longitude.toString())
+
+            getAddressFromLocation(it.latitude,it.longitude)
         }
     }
 
@@ -478,18 +593,65 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
             locationPermissionRequestCode ->
             {
                 if (grantResults.isEmpty() || grantResults[0] == PackageManager.PERMISSION_GRANTED)
-                {
                     checkGPSEnable()
-                }
+
                 else
-                {
                     checkGPSEnable()
-                }
+
             }
         }
     }
 
 
+    //***************************** services API ******************************//
+
+    //implementing services API
+    private fun fetchService()
+    {
+        serviceHandler=RsaFragmnetPresenter(activity!!,this)
+
+        if (commonClass.checkInternetConn(activity!!))
+            serviceHandler.fetchService(commonClass.getString("x_access_token"))
+
+        else
+            commonClass.showToast(activity!!.resources.getString(R.string.internet_is_unavailable))
+    }
+
+    // handling the response of the service API
+    override fun fetchingServiceReport(mainPojo: MainPojo)
+    {
+        for (i in mainPojo.services.indices)
+        {
+            if (mainPojo.services[i]["service_type"]=="ODS")
+            {
+                val map = mainPojo.services[i]
+
+                map["selected"] = "0"
+
+                dataList.add(map)
+            }
+        }
+
+        odsAdapter.notifyDataSetChanged()
+    }
+
+    override fun findingFobbuReport(mainPojo: MainPojo) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun fleetSuccessReport(mainPojo: MainPojo) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun showLoader()
+    {
+        rlLoader.visibility = View.VISIBLE
+    }
+
+    override fun hideLoader()
+    {
+        rlLoader.visibility = View.GONE
+    }
 
 
 }

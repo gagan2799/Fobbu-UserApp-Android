@@ -956,23 +956,31 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     }
 
     // handling fetch service api response (API-partners/services)
-    override fun fetchingServiceReport(mainPojo: MainPojo) {
+    override fun fetchingServiceReport(mainPojo: MainPojo)
+    {
         //val mainPojo = response!!.body()
-        val serviceList = mainPojo!!.services
+        val serviceList = mainPojo.services
+
         dataListServices.clear()
+
         for (i in serviceList.indices) {
             if (serviceList[i]["service_type"].toString() == "RSA")
                 dataListServices.add(serviceList[i])
         }
+
         println("service list $dataListServices")
 
-        for (i in dataListServices.indices) {
-            if (i == 0) {
+        for (i in dataListServices.indices)
+        {
+            if (i == 0)
+            {
                 dataListServices[i]["select"] = "1"
 
                 serviceSelectedID = dataListServices[i]["_id"].toString()
+
                 serviceSelectedAmount = dataListServices[i]["service_price"].toString()
-            } else
+            }
+            else
                 dataListServices[i]["select"] = "0"
         }
 

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+              android:orientation="vertical"
+             tools:context=".fragments.odsModule.OdsTrackingFragment.OdsTrackingFragment">
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="0dp"
+                  android:layout_weight="1">
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            <com.google.android.gms.maps.MapView
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/mvOdsTracking"
+                    android:background="@color/black"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+
+            <!--//custom tool bar-->
+          <!--  <RelativeLayout
+                    android:id="@+id/rlTopDrawerOds"
+                    android:layout_width="match_parent"
+                    android:background="@drawable/rounded_white_shadow"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:visibility="gone"
+                    android:layout_height="wrap_content">
+
+                <ImageView
+                        android:id="@+id/ivBack"
+                        android:layout_width="wrap_content"
+                        android:padding="12dp"
+                        android:src="@drawable/back_button"
+                        android:layout_height="wrap_content"/>
+
+                <TextView
+                        android:id="@+id/tvSOS"
+                        android:textColor="@color/drawer_text_color"
+                        android:layout_alignParentLeft="true"
+                        android:padding="10dp"
+                        android:gravity="center"
+                        android:textSize="@dimen/textsize_small"
+                        android:drawableTop="@drawable/sos"
+                        android:text="@string/sos"
+                        android:visibility="gone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                <ImageView
+                        android:id="@+id/ivCrossRSA"
+                        android:src="@drawable/cross_gray"
+                        android:layout_width="wrap_content"
+                        android:padding="10dp"
+                        android:visibility="gone"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_height="wrap_content"/>
+
+                <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/fobbu_logo_blue"
+                        android:layout_centerInParent="true"/>
+
+
+            </RelativeLayout>-->
+
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <LinearLayout android:layout_width="match_parent" android:layout_height="0dp"
+                  android:layout_weight="1"
+    ></LinearLayout>
+
+
+</LinearLayout>

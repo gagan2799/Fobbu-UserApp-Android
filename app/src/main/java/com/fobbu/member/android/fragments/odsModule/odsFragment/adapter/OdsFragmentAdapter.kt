@@ -8,9 +8,13 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.fobbu.member.android.R
+import com.fobbu.member.android.utils.CommonClass
+import com.squareup.picasso.Picasso
 
-class OdsFragmentAdapter(var activity :Activity,var dataList: Array<String>/*,var dataList:ArrayList<HashMap<String, Any>>*/):RecyclerView.Adapter<OdsFragmentAdapter.OdsViewHolder>()
+class OdsFragmentAdapter(var activity :Activity,var dataList: ArrayList<HashMap<String,Any>>/*,var dataList:ArrayList<HashMap<String, Any>>*/):RecyclerView.Adapter<OdsFragmentAdapter.OdsViewHolder>()
 {
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): OdsViewHolder
     {
@@ -26,23 +30,38 @@ class OdsFragmentAdapter(var activity :Activity,var dataList: Array<String>/*,va
     {
         if (isODD(position))
             holder.view.visibility=View.INVISIBLE
+
         else
             holder.view.visibility=View.VISIBLE
 
-        if (position==2 || position== 3)
-        {
+        if (position== dataList.size-2 || position== dataList.size-1)
             holder.viewBottom.visibility=View.INVISIBLE
-        }
 
-        holder.tvText.text=dataList[position]
+
+        holder.tvText.text=dataList[position]["service_name"].toString()
+
+        if (dataList[position]["service_image"].toString()!="")
+        Picasso.get().load(dataList[position]["service_image"].toString())
+
+            .placeholder(R.drawable.dummy_services)
+
+            .error(R.drawable.dummy_services)
+
+            .into(holder.ivImage)
+        else
+            holder.ivImage.setImageResource(R.drawable.dummy_services)
     }
 
     class OdsViewHolder(view: View):RecyclerView.ViewHolder(view)
     {
         var ivImage = view.findViewById(R.id.ivImage) as ImageView
+
         var relativeLayout = view.findViewById(R.id.relativeLayout) as RelativeLayout
+
         var tvText = view.findViewById(R.id.tvText) as TextView
+
         var view:View = view.findViewById(R.id.view)
+
         var viewBottom:View = view.findViewById(R.id.viewBottom)
     }
 
