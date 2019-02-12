@@ -71,7 +71,7 @@ class ProfileActivity : AppCompatActivity(),ActivityView,ProfileView
 
     private var mFileTemp: File? = null
 
-    var gender= arrayOf("Select Gender","Male","Female")
+    var gender= arrayOf("Select Gender","Male","Female","Others")
 
     private val imageCameraRequest = 100
 

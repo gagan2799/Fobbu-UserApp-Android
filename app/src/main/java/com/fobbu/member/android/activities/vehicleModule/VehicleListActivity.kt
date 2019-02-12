@@ -1,14 +1,26 @@
 package com.fobbu.member.android.activities.vehicleModule
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
 import android.annotation.SuppressLint
+import android.annotation.TargetApi
 import android.content.Intent
 import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
+import android.support.annotation.RequiresApi
+import android.support.v4.view.MenuItemCompat
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.SearchView
+import android.support.v7.widget.Toolbar
+import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
+import android.view.ViewAnimationUtils
+import android.widget.*
 import com.fobbu.member.android.R
 import com.fobbu.member.android.activities.vehicleModule.adapter.VehicleAdapter
 import com.fobbu.member.android.activities.vehicleModule.presenter.AddEditActivityHandler
@@ -24,38 +36,53 @@ import com.fobbu.member.android.modals.MainPojo
 import com.fobbu.member.android.utils.CommonClass
 import com.fobbu.member.android.view.ActivityView
 import kotlinx.android.synthetic.main.activity_vehicle_list.*
+import kotlinx.android.synthetic.main.toolbar.*
 import java.util.*
 import kotlin.collections.HashMap
 
-class VehicleListActivity : AppCompatActivity(),ActivityView,DeleteVehicleClickListener,AddEditVehicleAcivityView{
-
-
-
+class VehicleListActivity : AppCompatActivity(),ActivityView,DeleteVehicleClickListener,AddEditVehicleAcivityView
+{
     private lateinit var webServiceApi: WebServiceApi
 
     private var imageFrom = ""
+
     private var vehicleType = "2wheeler"
+
     private lateinit var vehicleHandler: VehicleListHandler
+
     private lateinit var addEditHandler: AddEditActivityHandler
 
     private var dataListMain: ArrayList<HashMap<String, Any>> = ArrayList()
+
     private var dataListTwo: ArrayList<HashMap<String, Any>> = ArrayList()
+
     private var dataListFour: ArrayList<HashMap<String, Any>> = ArrayList()
 
     var fromWhere = ""
 
     var vehicleID=""
 
+    lateinit var searchtoolbar: Toolbar
+
+    private lateinit var search_menu: Menu
+
+    private lateinit var item_search: MenuItem
+
     private lateinit var vehicleAdapter: VehicleAdapter
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?)
+    {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_vehicle_list)
+
         initialise()
+
         addClicks()
     }
 
-    override fun onResume() {
+    override fun onResume()
+    {
         super.onResume()
 
         vehicleListApi()
@@ -64,6 +91,12 @@ class VehicleListActivity : AppCompatActivity(),ActivityView,DeleteVehicleClickL
     //// All initialise in this method for this class
     private fun initialise()
     {
+        ivBackButton.setImageResource(R.drawable.cross_gray)
+
+        setSupportActionBar(toolbar)
+
+        setsearchtoolbar()
+
         vehicleHandler= VehicleListPresenter(this, this)
 
         addEditHandler= AddEditVehiclePresenter(this, this)
@@ -74,12 +107,175 @@ class VehicleListActivity : AppCompatActivity(),ActivityView,DeleteVehicleClickL
         {
             fromWhere = "RSA"
         }
+    }
 
+    // function for setting up recycler
+    private fun setupRecycler()
+    {
         /// Vehicle Adapter handled here
         recyclerViewVehicles.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+
         vehicleAdapter = VehicleAdapter(this, dataListMain)
+
         recyclerViewVehicles.adapter = vehicleAdapter
+
         vehicleAdapter.notifyDataSetChanged()
+    }
+
+    @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
+    fun setsearchtoolbar()
+    {
+        searchtoolbar = findViewById(R.id.searchtoolbar)
+
+        searchtoolbar.inflateMenu(R.menu.menu_search)
+
+        search_menu = searchtoolbar.menu
+
+        searchtoolbar.setNavigationOnClickListener {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+            //searchtoolbar!!.visibility = View.VISIBLE
+                circleReveal(R.id.searchtoolbar, 1, true, false)
+            else
+                searchtoolbar!!.visibility = View.GONE
+        }
+
+        item_search = search_menu.findItem(R.id.action_filter_search)
+
+        MenuItemCompat.setOnActionExpandListener(item_search, object : MenuItemCompat.OnActionExpandListener {
+            override fun onMenuItemActionCollapse(item: MenuItem): Boolean {
+                // Do something when collapsed
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    circleReveal(R.id.searchtoolbar, 1, true, false)
+                } else
+                    searchtoolbar.visibility = View.GONE
+                return true
+            }
+
+            override fun onMenuItemActionExpand(item: MenuItem): Boolean {
+                // Do something when expanded
+                return true
+            }
+        })
+
+        initSearchView()
+
+
+    }
+
+
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+    @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
+    private fun initSearchView()
+    {
+        val searchView = search_menu.findItem(R.id.action_filter_search).actionView as SearchView
+
+        // Enable/Disable Submit button in the keyboard
+
+        searchView.isSubmitButtonEnabled = false
+
+        searchView.setBackgroundResource(R.drawable.et_blue_base)
+
+        val searchplate = searchView.findViewById(android.support.v7.appcompat.R.id.search_plate) as View
+
+        searchplate.setBackgroundResource(R.drawable.et_white_base)
+
+        // Change search close button image
+
+        val closeButton = searchView.findViewById(R.id.search_close_btn) as ImageView
+
+        closeButton.setImageResource(R.drawable.cross_white)
+
+        // set hint and the text colors
+
+        val txtSearch = searchView.findViewById<View>(android.support.v7.appcompat.R.id.search_src_text) as EditText
+
+        txtSearch.hint = "Search.."
+
+        txtSearch.setTextColor(resources.getColor(R.color.white))
+
+        txtSearch.setHintTextColor(resources.getColor(R.color.white))
+
+        // set the cursor
+
+        val searchTextView = searchView.findViewById<View>(android.support.v7.appcompat.R.id.search_src_text) as AutoCompleteTextView
+        try
+        {
+            val mCursorDrawableRes = TextView::class.java.getDeclaredField("mCursorDrawableRes")
+
+            mCursorDrawableRes.isAccessible = true
+
+            // mCursorDrawableRes.set(searchTextView, R.drawable.search) //This sets the cursor resource ID to 0 or @null which will make it visible on white background
+        }
+        catch (e: Exception)
+        {
+            e.printStackTrace()
+        }
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            @SuppressLint("RestrictedApi")
+            override fun onQueryTextSubmit(query: String): Boolean {
+                callSearch(query)
+                searchView.clearFocus()
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                callSearch(newText)
+                return true
+            }
+
+            fun callSearch(query: String) {
+                //Do searching
+                Log.i("query", "" + query)
+
+            }
+
+        })
+
+    }
+
+
+    @SuppressLint("PrivateResource")
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    fun circleReveal(viewID: Int, posFromRight: Int, containsOverflow: Boolean, isShow: Boolean) {
+        val myView = findViewById<View>(viewID)
+
+        var width = myView.width
+
+        if (posFromRight > 0)
+            width -= posFromRight * resources.getDimensionPixelSize(R.dimen.abc_action_button_min_width_material) - resources.getDimensionPixelSize(
+                R.dimen.abc_action_button_min_width_material
+            )
+        if (containsOverflow)
+            width -= resources.getDimensionPixelSize(R.dimen.abc_action_button_min_width_overflow_material)
+
+        val cx = width + 9
+        val cy = myView.height / 2
+
+        val anim: Animator
+        anim = if (isShow)
+            ViewAnimationUtils.createCircularReveal(myView, cx, cy, 0f, width.toFloat())
+        else
+            ViewAnimationUtils.createCircularReveal(myView, cx, cy, width.toFloat(), 0f)
+
+        anim.duration = 220.toLong()
+
+        // make the view invisible when the animation is done
+        anim.addListener(object : AnimatorListenerAdapter() {
+            override fun onAnimationEnd(animation: Animator) {
+                if (!isShow) {
+                    super.onAnimationEnd(animation)
+                    myView.visibility = View.INVISIBLE
+                }
+            }
+        })
+
+        // make the view visible and start the animation
+        if (isShow)
+            myView.visibility = View.VISIBLE
+
+        // start the animation
+        anim.start()
     }
 
 
@@ -92,9 +288,21 @@ class VehicleListActivity : AppCompatActivity(),ActivityView,DeleteVehicleClickL
 
     /// All click on buttons handled here
     @SuppressLint("SetTextI18n")
-    private fun addClicks() {
+    private fun addClicks()
+    {
+        // search
+        ivSearchToolbar.setOnClickListener {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+            {
+                circleReveal(R.id.searchtoolbar, 1, true, true)
+            }
+            else
+                searchtoolbar.visibility = View.VISIBLE
 
-        ivBack.setOnClickListener {
+            item_search.expandActionView()
+        }
+
+        ivBackButton.setOnClickListener {
             finish()
         }
 
@@ -177,23 +385,25 @@ class VehicleListActivity : AppCompatActivity(),ActivityView,DeleteVehicleClickL
             val userId = CommonClass(this, this).getString("_id")
 
             vehicleHandler.sendVehicleData(tokenHeader,userId)
-
         }
     }
 
 
     /// Vehicle List Response (API -users/vehicles )
     @SuppressLint("SetTextI18n")
-    override fun onRequestSuccessReport(mainPojo: MainPojo) {
+    override fun onRequestSuccessReport(mainPojo: MainPojo)
+    {
        // rlLoaderVehicleList.visibility = View.GONE
         if (mainPojo.success == "true")
         {
             dataListMain.clear()
+
             dataListFour.clear()
+
             dataListTwo.clear()
 
-
-            for (i in mainPojo.vehicles.indices) {
+            for (i in mainPojo.vehicles.indices)
+            {
                 if (mainPojo.vehicles[i]["vehicle_type"] == "4wheeler")
                     dataListFour.add(mainPojo.vehicles[i])
                 else
@@ -203,78 +413,95 @@ class VehicleListActivity : AppCompatActivity(),ActivityView,DeleteVehicleClickL
             if (vehicleType=="4wheeler")
             {
                 tvScooter.setImageResource(R.drawable.scooter_gray)
+
                 view_scooter.visibility = View.GONE
 
                 tvCar.setImageResource(R.drawable.car_red)
+
                 view_car.visibility = View.VISIBLE
 
                 dataListMain.addAll(dataListFour)
-                vehicleAdapter.notifyDataSetChanged()
+
+                //vehicleAdapter.notifyDataSetChanged()
 
                 if(dataListMain.size>0)
                 {
                     tvNodata.visibility=View.GONE
+
                     recyclerViewVehicles.visibility=View.VISIBLE
                 }
                 else
                 {
                     tvNodata.visibility=View.VISIBLE
+
                     tvNodata.text="No 2 Wheeler Added"
+
                     recyclerViewVehicles.visibility=View.GONE
                 }
-
-
-
             }
             else
             {
                 tvScooter.setImageResource(R.drawable.scooter_red)
+
                 view_scooter.visibility = View.VISIBLE
 
                 tvCar.setImageResource(R.drawable.car_gray)
+
                 view_car.visibility = View.GONE
 
                 dataListMain.addAll(dataListTwo)
-                vehicleAdapter.notifyDataSetChanged()
+
+                //vehicleAdapter.notifyDataSetChanged()
 
                 if(dataListMain.size>0)
                 {
                     tvNodata.visibility=View.GONE
+
                     recyclerViewVehicles.visibility=View.VISIBLE
                 }
                 else
                 {
                     tvNodata.visibility=View.VISIBLE
+
                     tvNodata.text="No 2 Wheeler Added"
+
                     recyclerViewVehicles.visibility=View.GONE
                 }
             }
-        }else{
 
+            setupRecycler()
         }
     }
 
-    override fun showLoader() {
+    override fun showLoader()
+    {
         rlLoaderVehicleList.visibility=View.VISIBLE
     }
 
-    override fun hideLoader() {
+    override fun hideLoader()
+    {
         rlLoaderVehicleList.visibility=View.GONE
     }
 
-    private fun getEnv(): MyApplication {
+    private fun getEnv(): MyApplication
+    {
         return application as MyApplication
     }
 
     ///DELETE VEHICLE  POPUP
-    private fun deleteVehicle(vehicleID: String) {
-
+    private fun deleteVehicle(vehicleID: String)
+    {
         this.vehicleID =vehicleID
+
         val alertDialog = AlertDialog.Builder(this).create()
+
         alertDialog.setTitle(resources.getString(R.string.Delete))
+
         alertDialog.setMessage(resources.getString(R.string.are_you_sure_you_want_to_delete))
+
         alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "OK") { _, _ ->
             alertDialog.dismiss()
+
             if (CommonClass(this,this).checkInternetConn(this))
             {
                 val tokenHeader = CommonClass(this, this).getString("x_access_token")
@@ -282,16 +509,16 @@ class VehicleListActivity : AppCompatActivity(),ActivityView,DeleteVehicleClickL
                 val userId = CommonClass(this, this).getString("_id")
 
                 addEditHandler.deleteVehicle(tokenHeader,vehicleID,userId)
-
-
             }
-
         }
+
         alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "CANCEL") { _, _ ->
             alertDialog.dismiss()
         }
+
         alertDialog.setOnShowListener {
             alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.BLACK)
+
             alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.BLACK)
         }
 
@@ -307,8 +534,8 @@ class VehicleListActivity : AppCompatActivity(),ActivityView,DeleteVehicleClickL
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun onDeleteVehicleSuccessUpdateVehicle(mainPojo: MainPojo) {
-
+    override fun onDeleteVehicleSuccessUpdateVehicle(mainPojo: MainPojo)
+    {
         if (mainPojo.success=="true")
         {
             for (i in dataListMain.size-1 downTo 0)
@@ -316,6 +543,7 @@ class VehicleListActivity : AppCompatActivity(),ActivityView,DeleteVehicleClickL
                 if (vehicleID==dataListMain[i]["_id"])
                 {
                     dataListMain.removeAt(i)
+
                     break
                 }
             }
@@ -325,8 +553,8 @@ class VehicleListActivity : AppCompatActivity(),ActivityView,DeleteVehicleClickL
                 if (vehicleID==dataListTwo[i]["_id"])
                 {
                     dataListTwo.removeAt(i)
-                    break
 
+                    break
                 }
             }
 
@@ -335,15 +563,16 @@ class VehicleListActivity : AppCompatActivity(),ActivityView,DeleteVehicleClickL
                 if (vehicleID==dataListFour[i]["_id"])
                 {
                     dataListFour.removeAt(i)
+
                     break
                 }
             }
+
             vehicleAdapter.notifyDataSetChanged()
-            println("data list$dataListMain")
-        }else
+        }
+        else
         {
             Toast.makeText(this,mainPojo.message, Toast.LENGTH_SHORT).show()
         }
     }
-
 }

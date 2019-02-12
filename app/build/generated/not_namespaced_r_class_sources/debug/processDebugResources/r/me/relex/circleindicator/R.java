@@ -30,7 +30,7 @@ public final class R {
     public static final class drawable {
         private drawable() {}
 
-        public static final int white_radius = 0x7f080275;
+        public static final int white_radius = 0x7f080277;
     }
     public static final class id {
         private id() {}
@@ -50,7 +50,7 @@ public final class R {
         public static final int right = 0x7f0901e2;
         public static final int start = 0x7f090248;
         public static final int top = 0x7f090295;
-        public static final int vertical = 0x7f090348;
+        public static final int vertical = 0x7f09034b;
     }
     public static final class styleable {
         private styleable() {}

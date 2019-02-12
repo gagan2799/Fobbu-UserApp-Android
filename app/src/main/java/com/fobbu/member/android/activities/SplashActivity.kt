@@ -10,6 +10,7 @@ import android.view.animation.AnimationUtils
 import com.fobbu.member.android.R
 import com.fobbu.member.android.activities.dashboardActivity.DashboardActivity
 import com.fobbu.member.android.activities.loginSignupModule.LoginActivity
+import com.fobbu.member.android.activities.loginSignupModule.SMSVerificationActivity
 import com.fobbu.member.android.tutorial.TutorialActivity
 import com.fobbu.member.android.utils.CommonClass
 import com.google.android.gms.common.ConnectionResult
@@ -38,16 +39,35 @@ class SplashActivity : AppCompatActivity() {
     private fun navigateToScreen() {
 
         when {
-            CommonClass(this, this).getString("CoachMark_first_time") == "" -> {
+            CommonClass(this, this).getString("CoachMark_first_time") == "" ->
+            {
                 startActivity(Intent(this, TutorialActivity::class.java))
+
                 finish()
             }
-            CommonClass(this, this).getString("mobile_number") != "" -> {
-                startActivity(Intent(this, DashboardActivity::class.java))
+
+
+            CommonClass(this, this).getString("isSmsVerified") == "false" ->
+            {
+                startActivity(Intent(this, SMSVerificationActivity::class.java))
+
                 finish()
             }
-            else -> {
+
+            CommonClass(this, this).getString("isSmsVerified") == "true" ->
+            {
+                if (CommonClass(this, this).getString("mobile_number") != "")
+                {
+                    startActivity(Intent(this, DashboardActivity::class.java))
+
+                    finish()
+                }
+            }
+
+            else ->
+            {
                 startActivity(Intent(this, LoginActivity::class.java))
+
                 finish()
             }
         }

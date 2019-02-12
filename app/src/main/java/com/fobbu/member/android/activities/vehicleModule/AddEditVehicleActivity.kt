@@ -2,6 +2,7 @@ package com.fobbu.member.android.activities.vehicleModule
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.DatePickerDialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -10,9 +11,11 @@ import android.graphics.Color
 import android.graphics.Matrix
 import android.media.ExifInterface
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
+import android.support.annotation.RequiresApi
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.support.v4.content.FileProvider
@@ -21,6 +24,7 @@ import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.Gravity
 import android.view.View
+import android.widget.DatePicker
 import android.widget.TextView
 import android.widget.Toast
 import com.bumptech.glide.Glide
@@ -35,6 +39,7 @@ import com.fobbu.member.android.apiInterface.WebServiceApi
 import com.fobbu.member.android.fragments.rsaFragmentModule.RsaConstants
 import com.fobbu.member.android.modals.MainPojo
 import com.fobbu.member.android.utils.CommonClass
+import com.fobbu.member.android.utils.CustomDatePicker
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_add_edit_vehicle.*
 import okhttp3.MediaType
@@ -45,126 +50,182 @@ import org.json.JSONObject
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
+import java.lang.reflect.Field
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
 class AddEditVehicleActivity : AppCompatActivity(),
-    AddEditVehicleAcivityView {
-
+    AddEditVehicleAcivityView,DatePickerDialog.OnDateSetListener
+{
     private lateinit var webServiceApi: WebServiceApi
+
     lateinit var addEditActivityHandler: AddEditActivityHandler
 
     private var imageFrom = ""
+
     private var vehicleType = ""
 
     private var isImageOn1 = false
+
     private var isImageOn2 = false
+
     private var isImageOn3 = false
+
     private var isImageOn4 = false
 
     private var file1: File? = null
+
     private var file2: File? = null
+
     private var file3: File? = null
+
     private var file4: File? = null
 
     private var dataList: ArrayList<Any> = ArrayList()
 
+    var year=0
+
+    var month=0
+
+    var day=0
+
     private var hashMapEdit = HashMap<String, Any>()
 
     private var fromWhere = ""
+
     private var listImagesEdit = ArrayList<String>()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?)
+    {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_add_edit_vehicle)
 
-        addEditActivityHandler = AddEditVehiclePresenter(this, this)
         initialise()
+
         addClicks()
     }
 
     // all the initialization of the class is done here
-    private fun initialise() {
+    private fun initialise()
+    {
+        addEditActivityHandler = AddEditVehiclePresenter(this, this)
 
         webServiceApi = getEnv().getRetrofitMulti()
 
-        if (intent.hasExtra("from_where")) {
+        if (intent.hasExtra("from_where"))
+        {
             fromWhere = "RSA"
+
             ivBack.visibility = View.GONE
+
             tvEdit.visibility = View.GONE
+
             ivList.visibility = View.GONE
+
             tvEdit.visibility = View.GONE
+
             tvSkip.visibility = View.VISIBLE
         }
 
-        if (intent.hasExtra("vehicle_edit")) {
+        if (intent.hasExtra("vehicle_edit"))
+        {
             hashMapEdit = intent.getSerializableExtra("vehicle_edit") as HashMap<String, Any>
+
             etBrand.setText(hashMapEdit["vehicle_brand"].toString())
+
             etRegNumber.setText(hashMapEdit["vehicle_registration_number"].toString())
+
             etSubModel.setText(hashMapEdit["vehicle_sub_model"].toString())
+
             etYearsOfMake.setText(hashMapEdit["make_of_year"].toString())
 
             vehicleType = hashMapEdit["vehicle_type"].toString()
 
-            if (vehicleType == "2wheeler") {
+            if (vehicleType == "2wheeler")
+            {
                 ivBike.setImageResource(R.drawable.scooter_blue)
+
                 ivCar.setImageResource(R.drawable.car_gray)
-            } else {
+            }
+            else
+            {
                 ivBike.setImageResource(R.drawable.scooter_gray)
+
                 ivCar.setImageResource(R.drawable.car_blue)
             }
 
             tvNew.setTextColor(resources.getColor(R.color.color_grey))
+
             tvEdit.setTextColor(resources.getColor(R.color.red))
 
             viewEdit.visibility = View.VISIBLE
+
             viewNew.visibility = View.GONE
+
             tvAddEditVehicle.text = resources.getString(R.string.edit_vehicle)
+
             tvHeading.text = resources.getString(R.string.edit_vehicle)
 
             listImagesEdit = hashMapEdit["images"] as ArrayList<String>
 
-            for (i in listImagesEdit.indices) {
-                when (i) {
-                    0 -> {
+            for (i in listImagesEdit.indices)
+            {
+                when (i)
+                {
+                    0 ->
+                    {
                         if (listImagesEdit[i] != "")
                             Picasso.get().load(listImagesEdit[i])
-                                .error(R.drawable.photo_camera)
-                                .into(ivImage1)
-                        isImageOn1 = true
 
+                                .error(R.drawable.photo_camera)
+
+                                .into(ivImage1)
+
+                        isImageOn1 = true
                     }
-                    1 -> {
+
+                    1 ->
+                    {
                         if (listImagesEdit[i] != "")
                             Picasso.get().load(listImagesEdit[i])
+
                                 .error(R.drawable.photo_camera)
+
                                 .into(ivImage2)
 
                         isImageOn2 = true
                     }
-                    2 -> {
+
+                    2 ->
+                    {
                         if (listImagesEdit[i] != "")
                             Picasso.get().load(listImagesEdit[i])
+
                                 .error(R.drawable.photo_camera)
+
                                 .into(ivImage3)
 
                         isImageOn3 = true
                     }
-                    else -> {
+
+                    else ->
+                    {
                         Picasso.get().load(listImagesEdit[i])
+
                             .error(R.drawable.photo_camera)
+
                             .into(ivImage4)
+
                         isImageOn4 = true
                     }
                 }
-
             }
-
-
         }
     }
 
-    override fun onBackPressed() {
+    override fun onBackPressed()
+    {
         if (fromWhere == "RSA")
             startActivity(Intent(this, WaitingScreenWhite::class.java).putExtra("from_where", "building_live"))
 
@@ -172,49 +233,58 @@ class AddEditVehicleActivity : AppCompatActivity(),
     }
 
     // all the clicks  are handled in this method
-    private fun addClicks() {
-
+    private fun addClicks()
+    {
         ivList.setOnClickListener {
             startActivity(Intent(this, VehicleListActivity::class.java))
 
+            finish()
         }
 
         tvSkip.setOnClickListener {
-            if (fromWhere == "RSA") {
+            if (fromWhere == "RSA")
+            {
                 startActivity(Intent(this, WaitingScreenWhite::class.java).putExtra("from_where", "building_live"))
+
                 finish()
             }
         }
 
         imgClose.setOnClickListener {
-
             rlBigProfile.visibility = View.GONE
         }
 
         ivBack.setOnClickListener {
             if (rlBigProfile.visibility == View.VISIBLE)
                 rlBigProfile.visibility = View.GONE
+
             else
                 finish()
         }
 
         llPhoto1.setOnClickListener {
-
-            if (isImageOn1) {
+            if (isImageOn1)
+            {
                 showPopupViewDelete("1")
-            } else {
+            }
+            else
+            {
                 imageFrom = "1"
+
                 uploadImagesPopup()
             }
 
         }
 
         llPhoto2.setOnClickListener {
-
-            if (isImageOn2) {
+            if (isImageOn2)
+            {
                 showPopupViewDelete("2")
-            } else {
+            }
+            else
+            {
                 imageFrom = "2"
+
                 uploadImagesPopup()
             }
         }
@@ -250,24 +320,33 @@ class AddEditVehicleActivity : AppCompatActivity(),
         }
 
         tvAddEditVehicle.setOnClickListener {
+            val brand= checkAndRemoveSpace(etBrand.text.toString())
 
+            val regNo=  checkAndRemoveSpace(etRegNumber.text.toString())
+
+            val subModel=checkAndRemoveSpace(etSubModel.text.toString())
+
+            val year=checkAndRemoveSpace(etYearsOfMake.text.toString())
             when {
-                etBrand.text.toString() == "" -> Toast.makeText(
-                    this,
-                    resources.getString(R.string.add_brand),
-                    Toast.LENGTH_SHORT
-                ).show()
-                etRegNumber.text.toString() == "" -> Toast.makeText(
+                brand == "" ->
+                {
+                    Toast.makeText(
+                        this,
+                        resources.getString(R.string.add_brand),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+                regNo == "" -> Toast.makeText(
                     this,
                     resources.getString(R.string.add_reg_no),
                     Toast.LENGTH_SHORT
                 ).show()
-                etSubModel.text.toString() == "" -> Toast.makeText(
+                subModel == "" -> Toast.makeText(
                     this,
                     resources.getString(R.string.add_sub_model),
                     Toast.LENGTH_SHORT
                 ).show()
-                etYearsOfMake.text.toString() == "" -> Toast.makeText(
+                year == "" -> Toast.makeText(
                     this,
                     resources.getString(R.string.add_year),
                     Toast.LENGTH_SHORT
@@ -373,9 +452,10 @@ class AddEditVehicleActivity : AppCompatActivity(),
                     if (tvHeading.text != resources.getString(R.string.edit_vehicle)) {
                         file1 = null
                     } else {
+                        if (listImagesEdit.size>=1)
                         listImagesEdit.removeAt(0)
-                    }
 
+                    }
                     isImageOn1 = false
                     ivImage1.setImageResource(R.drawable.photo_camera)
                 }
@@ -383,7 +463,10 @@ class AddEditVehicleActivity : AppCompatActivity(),
                     if (tvHeading.text != resources.getString(R.string.edit_vehicle)) {
                         file2 = null
                     } else {
+                        if (listImagesEdit.size==2)
                         listImagesEdit.removeAt(1)
+                        else
+                            listImagesEdit.removeAt(0)
                     }
                     isImageOn2 = false
                     ivImage2.setImageResource(R.drawable.photo_camera)
@@ -392,7 +475,10 @@ class AddEditVehicleActivity : AppCompatActivity(),
                     if (tvHeading.text != resources.getString(R.string.edit_vehicle)) {
                         file3 = null
                     } else {
-                        listImagesEdit.removeAt(2)
+                        if (listImagesEdit.size==3)
+                            listImagesEdit.removeAt(2)
+                        else
+                            listImagesEdit.removeAt(0)
                     }
                     isImageOn3 = false
                     ivImage3.setImageResource(R.drawable.photo_camera)
@@ -401,7 +487,10 @@ class AddEditVehicleActivity : AppCompatActivity(),
                     if (tvHeading.text != resources.getString(R.string.edit_vehicle)) {
                         file4 = null
                     } else {
-                        listImagesEdit.removeAt(3)
+                        if (listImagesEdit.size==4)
+                            listImagesEdit.removeAt(3)
+                        else
+                            listImagesEdit.removeAt(0)
                     }
                     isImageOn4 = false
                     ivImage4.setImageResource(R.drawable.photo_camera)
@@ -417,15 +506,19 @@ class AddEditVehicleActivity : AppCompatActivity(),
     }
 
     //Method for uploading car images
-    private fun uploadImagesPopup() {
-
+    private fun uploadImagesPopup()
+    {
         val alertDialog = AlertDialog.Builder(this).create()
+
         alertDialog.setTitle("Upload Car Images")
+
         alertDialog.setMessage("Please select from where you want to choose")
+
         alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Gallery") { dialogInterface, i ->
             val apiLevel = android.os.Build.VERSION.SDK_INT
 
-            if (apiLevel >= 23) {
+            if (apiLevel >= 23)
+            {
                 //phone state
                 val permission1 =
                     ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE)
@@ -435,19 +528,20 @@ class AddEditVehicleActivity : AppCompatActivity(),
 
                 if (permission1 != PackageManager.PERMISSION_GRANTED || permission2 != PackageManager.PERMISSION_GRANTED) {
                     makeRequest2()
-                } else {
-                    openGallery()
                 }
-            } else {
-                openGallery()
+                else
+                    openGallery()
             }
+            else
+                openGallery()
         }
+
         alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Camera") { _, _ ->
             val apiLevel = android.os.Build.VERSION.SDK_INT
 
-            if (apiLevel >= 23) {
+            if (apiLevel >= 23)
+            {
                 //phone state
-
                 val permission1 =
                     ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE)
 
@@ -458,33 +552,37 @@ class AddEditVehicleActivity : AppCompatActivity(),
 
                 if (permission1 != PackageManager.PERMISSION_GRANTED || permission2 != PackageManager.PERMISSION_GRANTED
                     || permission3 != PackageManager.PERMISSION_GRANTED
-                ) {
+                )
                     makeRequest1()
-                } else {
+                 else
                     takePicture()
-                }
-            } else {
-                takePicture()
+
             }
+            else
+                takePicture()
         }
+
         alertDialog.setOnShowListener {
             alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.BLACK)
+
             alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.BLACK)
         }
 
         alertDialog.show()
     }
 
-    private fun makeRequest1() {
+    private fun makeRequest1()
+    {
         ActivityCompat.requestPermissions(
             this@AddEditVehicleActivity,
             arrayOf(
                 "android.permission.WRITE_EXTERNAL_STORAGE",
+
                 "android.permission.READ_EXTERNAL_STORAGE",
+
                 "android.permission.CAMERA"
             ),
-            1
-        )
+            1)
     }
 
     private fun makeRequest2() {
@@ -502,8 +600,6 @@ class AddEditVehicleActivity : AppCompatActivity(),
     private val imageCameraRequest = 100
 
     private val imageCameraCaptureRequest = 200
-    private val placeAutoCompleteResult = 300
-    private val REQUEST_PICK_CONTACT = 400
 
     private var mFileTemp: File? = null
 
@@ -782,64 +878,75 @@ class AddEditVehicleActivity : AppCompatActivity(),
     //////////////////ADD EDIT VEHICLE API  /////////////////////////
 
     //Add vehicle API (API-users/vehicles)
-    private fun addVehicleApi() {
-
+    private fun addVehicleApi()
+    {
         val fileList = ArrayList<MultipartBody.Part>()
 
-        for (i in 0 until dataList.size) {
+        for (i in 0 until dataList.size)
+        {
             var imgProfile: MultipartBody.Part? = null
+
             val file = File(dataList[i].toString())
+
             // create RequestBody instance from file
             val requestFile = RequestBody.create(MediaType.parse("image/jpeg"), file)
+
             // MultipartBody.Part is used to send also the actual file name
             imgProfile = MultipartBody.Part.createFormData("photos", file.name, requestFile)
+
             fileList.add(imgProfile!!)
         }
-
-
-
-        //  rlLoader.visibility = View.VISIBLE
 
         val jsonDoc = JSONObject()
 
         jsonDoc.put("user_id", CommonClass(this, this).getString("_id"))
+
         jsonDoc.put("vehicle_brand", etBrand.text.toString().trim())
+
         jsonDoc.put("vehicle_registration_number", etRegNumber.text.toString().trim())
+
         jsonDoc.put("vehicle_sub_model", etSubModel.text.toString().trim())
+
         jsonDoc.put("make_of_year", etYearsOfMake.text.toString().trim())
+
         jsonDoc.put("vehicle_type", vehicleType)
 
         val partnerJsonBody = RequestBody.create(MediaType.parse("text/plain"), jsonDoc.toString())
 
         val map = HashMap<String, RequestBody>()
+
         map["vehicle"] = partnerJsonBody
 
         val tokenHeader = CommonClass(this, this).getString("x_access_token")
 
         addEditActivityHandler.sendAddEditData(map, fileList, tokenHeader)
-
     }
 
     // Add Vehicle Api Response (API-users/vehicles)
-    override fun onRequestSuccessReport(mainPojo: MainPojo) {
-        //rlLoader.visibility = View.GONE
-
-        if (mainPojo.success == "true") {
-
-            if (fromWhere == "RSA") {
+    override fun onRequestSuccessReport(mainPojo: MainPojo)
+    {
+        if (mainPojo.success == "true")
+        {
+            if (fromWhere == "RSA")
+            {
                 callUpdateVehicle(mainPojo.getData()._id)
-            } else {
-
+            }
+            else
+            {
                 println("Success")
                 CommonClass(
                     this@AddEditVehicleActivity,
+
                     this@AddEditVehicleActivity
                 ).showToast(mainPojo.message)
 
+                startActivity(Intent(this,VehicleListActivity::class.java))
+
                 finish()
             }
-        } else {
-
+        }
+        else
+        {
             CommonClass(
                 this@AddEditVehicleActivity,
                 this@AddEditVehicleActivity
@@ -921,6 +1028,8 @@ class AddEditVehicleActivity : AppCompatActivity(),
                     this@AddEditVehicleActivity
                 ).showToast(mainPojo.message)
 
+            startActivity(Intent(this,VehicleListActivity::class.java))
+
                 finish()
 
         } else {
@@ -994,5 +1103,58 @@ class AddEditVehicleActivity : AppCompatActivity(),
 
     override fun onDeleteVehicleSuccessUpdateVehicle(mainPojo: MainPojo) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+/*
+    @RequiresApi(Build.VERSION_CODES.N)
+    fun yearCalender()
+    {
+        val dp = CustomDatePicker(
+            this,
+            android.R.style.Theme_Holo_Light_Dialog,
+            this,
+            year,
+            month,
+            day
+        )
+
+        val obj = dp.getPicker()
+        try {
+            val datePickerDialogFields = obj.javaClass.getDeclaredFields()
+            for (datePickerDialogField in datePickerDialogFields) {
+                if (datePickerDialogField.name == "mDatePicker") {
+                    datePickerDialogField.isAccessible = true
+                    val datePicker = datePickerDialogField.get(obj) as DatePicker
+                    val datePickerFields = datePickerDialogField.type.declaredFields
+                    for (datePickerField in datePickerFields) {
+                        if ("mDayPicker" == datePickerField.name || "mDaySpinner" == datePickerField
+                                .name
+                        ) {
+                            datePickerField.isAccessible = true
+                            var dayPicker = Any()
+                            dayPicker = datePickerField.get(datePicker)
+                            (dayPicker as View).visibility = View.GONE
+                        }
+                    }
+                }
+
+            }
+        } catch (ex: Exception) {
+        }
+
+        obj?.show()
+    }*/
+
+    override fun onDateSet(p0: DatePicker?, p1: Int, p2: Int, p3: Int) {
+        year=p1
+        month=p2
+        day=p3
+    }
+
+    private fun checkAndRemoveSpace(text:String):String
+    {
+        if (text.startsWith(""))
+           return text.trim()
+
+        return text
     }
 }

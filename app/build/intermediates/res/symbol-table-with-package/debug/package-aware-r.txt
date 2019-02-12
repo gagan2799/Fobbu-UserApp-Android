@@ -1415,6 +1415,7 @@ drawable credit_card
 drawable cross_gray
 drawable cross_white
 drawable dashed_line
+drawable dashed_line_red
 drawable design_bottom_navigation_item_background
 drawable design_fab_background
 drawable design_ic_visibility
@@ -1775,6 +1776,7 @@ drawable red_circle
 drawable red_ods_rect
 drawable red_rect_rounded
 drawable red_rectangle
+drawable red_rectangle_ods
 drawable round_check_green
 drawable rounded_blue
 drawable rounded_blue_background
@@ -2073,6 +2075,7 @@ id italic
 id item_touch_helper_previous_elevation
 id iv
 id iv1
+id iv3
 id ivBack
 id ivBackButton
 id ivBike
@@ -2112,7 +2115,6 @@ id ivQrCodePayment
 id ivRSA
 id ivRightDotted
 id ivScooterOds
-id ivSearch
 id ivSearchToolbar
 id ivServiceImageOperation
 id ivShare
@@ -2573,10 +2575,12 @@ id tvKycProfile
 id tvLearnMoreFreebies
 id tvLiftingPrice
 id tvLiftingText
+id tvLiveTrackOds
 id tvLogin
 id tvLogout
 id tvLsdOrders
 id tvMarkBurst
+id tvMarkerTitle
 id tvMembership
 id tvMembershipIdHome
 id tvMyOrders
@@ -2637,6 +2641,7 @@ id tvStartDatePB
 id tvStartFobbu
 id tvSubHeaderHelp
 id tvSubModel
+id tvSubModelAdapter
 id tvSubheading
 id tvTerms
 id tvText
@@ -2832,6 +2837,7 @@ layout fragment_rsa_live
 layout inflate_contactlist
 layout inflate_drawer
 layout inflate_expandable_layout
+layout inflate_marker_title
 layout inflate_message_pop_up
 layout inflate_ods_dialog
 layout inflate_ods_layout
@@ -3048,6 +3054,7 @@ string confirm_pay
 string confirm_pin
 string continue_
 string correct_email_error
+string correct_mobile_number_msg
 string current_password
 string current_pin
 string currently_no_data_is_available
@@ -3282,6 +3289,7 @@ string selectGender
 string select_a_date
 string select_a_time
 string select_date_range
+string select_gender
 string select_image_first
 string select_service_request
 string select_vehicle_type

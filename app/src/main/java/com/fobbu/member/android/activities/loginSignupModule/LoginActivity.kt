@@ -83,6 +83,10 @@ class LoginActivity : AppCompatActivity(), ActivityView {
                 etMobile.text.isEmpty() -> {
                     CommonClass(this, this).showToast(resources.getString(R.string.please_enter_mobile))
                 }
+                etMobile.text.length<10->
+                {
+                    CommonClass(this, this).showToast(resources.getString(R.string.correct_mobile_number_msg))
+                }
                 etPassword.text.isEmpty() -> {
                     CommonClass(this, this).showToast(resources.getString(R.string.please_enter_password))
                 }

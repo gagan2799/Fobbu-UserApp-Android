@@ -64,8 +64,8 @@ class SignUpActivity : AppCompatActivity(),ActivityView {
     // Method for initializing all the variables that are used in the class
     private fun initialise() {
         webServiceApi = getEnv().getRetrofit()
-        val itemSelectGender = arrayOf(this.resources.getString(R.string.other),this.resources.getString(R.string.male),
-                this.resources.getString(R.string.female))
+        val itemSelectGender = arrayOf(this.resources.getString(R.string.selectGender),this.resources.getString(R.string.male),
+                this.resources.getString(R.string.female),this.resources.getString(R.string.other))
         dataAdaperSelectService = ArrayAdapter(this, R.layout.spinnertype, itemSelectGender)
         spinnerSelectGender.adapter = dataAdaperSelectService as SpinnerAdapter?
         spinnerSelectGender.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -78,8 +78,8 @@ class SignUpActivity : AppCompatActivity(),ActivityView {
     }
 
     // Functionality of  all clicks present in the activity are handled here
-    private fun addClicks() {
-
+    private fun addClicks()
+    {
         tvGender.setOnClickListener {
             spinnerSelectGender.performClick()
         }
@@ -102,6 +102,13 @@ class SignUpActivity : AppCompatActivity(),ActivityView {
                     etMobile.requestFocus()
                 }
 
+                etMobile.text.toString().length<10->
+                {
+                    CommonClass(this,this).showToast(resources.getString(R.string.correct_mobile_number_msg))
+
+                    etFullName.requestFocus()
+                }
+
                 etEmail.text.toString() =="" -> {
                     CommonClass(this, this).showToast(resources.getString(R.string.please_enter_email))
                     etEmail.requestFocus()
@@ -116,7 +123,7 @@ class SignUpActivity : AppCompatActivity(),ActivityView {
                     CommonClass(this, this).showToast(resources.getString(R.string.please_enter_password))
                     etPassword.requestFocus()
                 }
-                tvGender.text.toString() ==resources.getString(R.string.other) -> {
+                tvGender.text.toString() ==resources.getString(R.string.selectGender) -> {
                     CommonClass(this, this).showToast(resources.getString(R.string.please_enter_gender))
                     etPassword.requestFocus()
                 }
@@ -146,18 +153,25 @@ class SignUpActivity : AppCompatActivity(),ActivityView {
 
             val firstName :String
             var lastName=""
+            var name=""
 
-            if(display_name.contains("\\s+".toRegex()))
+            name= if (display_name.startsWith(""))
+                display_name.trim()
+            else
+                display_name
+
+            if(name.contains("\\s+".toRegex()))
             {
-                firstName = display_name.split("\\s+".toRegex())[0]
-                lastName = display_name.split("\\s+".toRegex())[1]
+                firstName = name.split("\\s+".toRegex())[0]
+                lastName = name.split("\\s+".toRegex())[1]
             }
             else
-                firstName = display_name
+                firstName = name
 
+            println("firstname::::$firstName")
            // rlLoader.visibility = View.VISIBLE
             signUpactivityHandler.sendSignUpData(user_type,firstName,
-                lastName,display_name,email,password,mobile_number,gender,token)
+                lastName,name,email,password,mobile_number,gender,token)
         } else {
 
             CommonClass(this, this).internetIssue(this)

@@ -26,11 +26,17 @@ class GeneratePINActivity : AppCompatActivity() {
         checkPinValidations()
     }
 
-    //function for initialisng all variables of the class
-    private fun initView() {
-        if (intent.hasExtra("pin")) {
-            if (intent.getStringExtra("pin") == "security") {
-                if (CommonClass(this, this).getString("Local_Pin").isNotEmpty()) {
+    //function for initialising all variables of the class
+    private fun initView()
+    {
+        CommonClass(this,this).putString("isSmsVerified","true")
+
+        if (intent.hasExtra("pin"))
+        {
+            if (intent.getStringExtra("pin") == "security")
+            {
+                if (CommonClass(this, this).getString("Local_Pin").isNotEmpty())
+                {
                     tvCurrnetPin.visibility = View.VISIBLE
 
                     llCurrentPIN.visibility = View.VISIBLE
@@ -39,9 +45,10 @@ class GeneratePINActivity : AppCompatActivity() {
                 tvDoItLater.visibility = View.GONE
 
                 tvLogin.text = getString(R.string.generate_new_pin)
-
             }
-        } else {
+        }
+        else
+        {
             tvLogin.text = getString(R.string.generate_pin)
 
             tvCurrnetPin.visibility = View.GONE
@@ -50,14 +57,15 @@ class GeneratePINActivity : AppCompatActivity() {
 
             tvDoItLater.visibility = View.VISIBLE
         }
-
     }
 
     /// FOR 4 DIGIT PIN
-    private fun checkPinValidations() {
-        edPinOne.addTextChangedListener(object : TextWatcher {
-
-            override fun afterTextChanged(s: Editable) {
+    private fun checkPinValidations()
+    {
+        edPinOne.addTextChangedListener(object : TextWatcher
+        {
+            override fun afterTextChanged(s: Editable)
+            {
                 if (s.isNotEmpty())
                     edPinTwo.requestFocus()
             }
@@ -65,20 +73,20 @@ class GeneratePINActivity : AppCompatActivity() {
             override fun beforeTextChanged(
                 s: CharSequence, start: Int,
                 count: Int, after: Int
-            ) {
-            }
+            ) {}
 
             override fun onTextChanged(
                 s: CharSequence, start: Int,
                 before: Int, count: Int
-            ) {
-            }
-
+            ) {}
         })
-        edPinTwo.addTextChangedListener(object : TextWatcher {
 
-            override fun afterTextChanged(s: Editable) {
-                if (s.isNotEmpty()) {
+        edPinTwo.addTextChangedListener(object : TextWatcher
+        {
+            override fun afterTextChanged(s: Editable)
+            {
+                if (s.isNotEmpty())
+                {
                     edPinThree.requestFocus()
                 }
             }
@@ -86,15 +94,12 @@ class GeneratePINActivity : AppCompatActivity() {
             override fun beforeTextChanged(
                 s: CharSequence, start: Int,
                 count: Int, after: Int
-            ) {
-            }
+            ) {}
 
             override fun onTextChanged(
                 s: CharSequence, start: Int,
                 before: Int, count: Int
-            ) {
-
-            }
+            ) {}
         })
 
         edPinThree.addTextChangedListener(object : TextWatcher {
@@ -450,6 +455,10 @@ class GeneratePINActivity : AppCompatActivity() {
                             resources.getString(R.string.pin_dont_match),
                             Toast.LENGTH_SHORT
                         ).show()
+
+                        enterPin.length<4 || confirmPin.length<4->
+                            Toast.makeText(this,"Please provide correct pin", Toast.LENGTH_SHORT).show()
+
                         else -> {
                             Toast.makeText(this, resources.getString(R.string.succesfully_set_pin), Toast.LENGTH_SHORT)
                                 .show()
@@ -471,6 +480,9 @@ class GeneratePINActivity : AppCompatActivity() {
         when {
             enterPin == "" -> Toast.makeText(this, "Please enter PIN", Toast.LENGTH_SHORT).show()
             confirmPin == "" -> Toast.makeText(this, "Please enter Confirm PIN", Toast.LENGTH_SHORT).show()
+            enterPin.length<4 || confirmPin.length<4->
+                Toast.makeText(this,"Please provide correct pin", Toast.LENGTH_SHORT).show()
+
             enterPin == confirmPin -> {
                 Toast.makeText(this, resources.getString(R.string.succesfully_set_pin), Toast.LENGTH_SHORT).show()
 

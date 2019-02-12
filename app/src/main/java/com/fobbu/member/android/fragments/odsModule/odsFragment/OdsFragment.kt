@@ -45,6 +45,7 @@ import com.google.android.gms.maps.model.*
 import kotlinx.android.synthetic.main.fragment_ods.*
 
 import kotlinx.android.synthetic.main.fragment_ods.view.*
+import kotlinx.android.synthetic.main.inflate_marker_title.view.*
 import kotlinx.android.synthetic.main.inflate_ods_dialog.*
 import java.lang.Double
 import java.util.*
@@ -494,17 +495,49 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     private fun throwMarkerOnMap(latitude: String, longitude: String)
     {
         // create marker
-        val marker = MarkerOptions().position(
+        val markerOption = MarkerOptions().position(
             LatLng(Double.valueOf(latitude), Double.valueOf(longitude))
         )//.title(data["id"].toString())
 
         // Changing marker icon
-        marker.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_mark_blue))
+        markerOption.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_mark_blue))
 
         // adding marker
         googleMap.clear()
 
-        googleMap.addMarker(marker)
+        if (currentAddress!="")
+        {
+            val marker =googleMap.addMarker(markerOption)
+
+            marker.title=currentAddress
+
+        googleMap.setInfoWindowAdapter(object :GoogleMap.InfoWindowAdapter
+        {
+            override fun getInfoContents(p0: Marker?): View
+            {
+                return LayoutInflater.from(activity!!).inflate(R.layout.inflate_marker_title,null)
+            }
+
+            override fun getInfoWindow(p0: Marker?): View? {
+                if (p0 != null
+                    && p0.isInfoWindowShown
+                ) {
+                    p0.hideInfoWindow()
+                    p0.showInfoWindow()
+                }
+                val view=LayoutInflater.from(activity!!).inflate(R.layout.inflate_marker_title,null)
+
+
+                view.tvMarkerTitle.text=currentAddress
+
+                return view
+            }
+        })
+
+
+        }
+
+
 
         val cameraPosition = CameraPosition.Builder()
             .target(LatLng(Double.valueOf(latitude), Double.valueOf(longitude))).zoom(14f).build()
@@ -551,11 +584,11 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
         if (!location)
         {
+            getAddressFromLocation(p0.latitude,p0.longitude)
+
             throwMarkerOnMap(p0.latitude.toString(), p0.longitude.toString())
 
             mapClicks()
-
-            getAddressFromLocation(p0.latitude,p0.longitude)
 
             location = true
         }
@@ -568,9 +601,9 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     private fun mapClicks()
     {
         googleMap.setOnMapClickListener {
-            throwMarkerOnMap(it.latitude.toString(),it.longitude.toString())
-
             getAddressFromLocation(it.latitude,it.longitude)
+
+            throwMarkerOnMap(it.latitude.toString(),it.longitude.toString())
         }
     }
 

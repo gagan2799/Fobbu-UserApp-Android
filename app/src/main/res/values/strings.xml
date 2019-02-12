@@ -39,7 +39,7 @@
     <string name="already_registered">
         <u>Already Registered?</u>
     </string>
-    <string name="by_signing_up">By Signing up, agree to our</string>
+    <string name="by_signing_up">By Signing up, you agree to our</string>
     <string name="terms_of_service">Terms of Service</string>
     <string name="please_enter_full_name">Please enter Full Name.</string>
     <string name="please_enter_email">Please enter Email ID.</string>
@@ -47,7 +47,8 @@
     <string name="selectGender">Select Gender</string>
     <string name="male">Male</string>
     <string name="female">Female</string>
-    <string name="other">Select Gender</string>
+    <string name="select_gender">Select Gender</string>
+    <string name="other">Others</string>
     <string name="please_enter_gender">Please select Gender.</string>
 
     ///FORGOT PASSWORD
@@ -196,7 +197,6 @@
         <u>Skip this step</u>
     </string>
     <string name="new_vehicle_added">A new vehicle has been added…</string>
-    <string name="live_track">LIVE TRACK</string>
     <string name="unlock_your_lsd">Unlock Your LSD\'s - I Bet you wont regret !</string>
     <string name="assured_cashback">Assured cashback offers</string>
     <string name="sos">SOS</string>
@@ -407,6 +407,8 @@
     <string name="car_model_message">Please provide details about the cars\' model</string>
     <string name="registeration_no_message">Please provide registration number of the car</string>
     <string name="provide_vehicle_msg">Please provide a vehicle type</string>
+    <string name="live_track">LIVE TRACK</string>
+    <string name="correct_mobile_number_msg">Please provide correct mobile number</string>
 
 
 </resources>

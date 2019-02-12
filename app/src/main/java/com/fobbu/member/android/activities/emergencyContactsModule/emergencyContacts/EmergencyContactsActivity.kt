@@ -25,6 +25,7 @@ import com.fobbu.member.android.utils.CommonClass
 import com.fobbu.member.android.view.ActivityView
 
 
+@Suppress("DEPRECATION")
 class EmergencyContactsActivity :ContactListView, AppCompatActivity(),ActivityView,ContactsView
 {
     var dataList=ArrayList<HashMap<String,Any>>()
@@ -136,6 +137,7 @@ class EmergencyContactsActivity :ContactListView, AppCompatActivity(),ActivityVi
     {
         if (commonClass.checkInternetConn(this))
             listHandler.getContacts(commonClass.getString("x_access_token"))
+
         else
             commonClass.showToast(resources.getString(R.string.internet_is_unavailable))
     }
@@ -228,42 +230,78 @@ class EmergencyContactsActivity :ContactListView, AppCompatActivity(),ActivityVi
 
 
         tvAddEmergencyContacts.setOnClickListener {
+            val name=checkAndRemoveSpace(etEditNameEmergency.text.toString())
+
+            val mobile=checkAndRemoveSpace(etEditMobileEmergency.text.toString())
+
             if (tvAddEmergencyContacts.text==resources.getString(R.string.add))
             {
-                saveToLocalList(etFullNameEmergency.text.toString(),
-                    etMobileEmergency.text.toString(),tvRelationship.text.toString())
+                when {
+                    etFullNameEmergency.text.toString().trim().isEmpty() -> CommonClass(this,this).showToast("Please provide a name")
 
-                saveToLocalList(et2ndFullNameEmergency.text.toString(),
-                    et2ndMobileEmergency.text.toString(),tv2ndRelationship.text.toString())
+                    etMobileEmergency.text.toString().trim().isEmpty() -> CommonClass(this,this).showToast("Please provide a number")
 
-                if (contactList.size<1)
-                    Toast.makeText(this,"Please provide atleast one emergency contact", Toast.LENGTH_SHORT).show()
-                else
-                {
-                    if (dataList.size>=5)
-                        Toast.makeText(this,"You have reached the maximum limit of contacts that can be added. Please remove few to add more.", Toast.LENGTH_SHORT).show()
+                    tvRelationship.text.toString()=="Relationship" -> CommonClass(this,this).showToast("Please provide a relationship status")
 
-                    else
-                        postEmergencyContacts()
+                    else -> {
+                        saveToLocalList(etFullNameEmergency.text.toString().trim(),
+                            etMobileEmergency.text.toString(),tvRelationship.text.toString())
+
+                        saveToLocalList(et2ndFullNameEmergency.text.toString().trim(), et2ndMobileEmergency.text.toString().trim(),tv2ndRelationship.text.toString())
+
+                        if (contactList.size<1)
+                            Toast.makeText(this,"Please provide atleast one emergency contact", Toast.LENGTH_SHORT).show()
+                        else
+                        {
+                            if (dataList.size>1) {
+                                val map = contactList[1]
+
+                                when {
+                                    map.size > 0 -> when {
+                                        map["name"].toString().trim().isEmpty() -> CommonClass(
+                                            this,
+                                            this
+                                        ).showToast("Please provide 2nd contacts name")
+                                        map["mobile_number"].toString().trim().isEmpty() -> CommonClass(
+                                            this,
+                                            this
+                                        ).showToast("Please provide 2nd contacts number")
+                                        map["relationship"] == "Relationship" -> CommonClass(
+                                            this,
+                                            this
+                                        ).showToast("Please provide 2nd contacts relationship status")
+                                    }
+                                    dataList.size >= 5 -> Toast.makeText(
+                                        this,
+                                        "You have reached the maximum limit of contacts that can be added. Please remove few to add more.",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                    else -> postEmergencyContacts()
+                                }
+                            }
+                            else if (dataList.size==1)
+                                postEmergencyContacts()
+                        }
+                    }
                 }
             }
             else
             {
                 when
                 {
-                    etEditNameEmergency.text.isEmpty()->   Toast.makeText(this,"Please provide name.", Toast.LENGTH_SHORT).show()
+                    etEditNameEmergency.text.toString().trim().isEmpty()->   Toast.makeText(this,"Please provide name.", Toast.LENGTH_SHORT).show()
 
-                    etEditMobileEmergency.text.isEmpty()->   Toast.makeText(this,"Please provide number.", Toast.LENGTH_SHORT).show()
+                    etEditMobileEmergency.text.toString().trim().isEmpty()->   Toast.makeText(this,"Please provide number.", Toast.LENGTH_SHORT).show()
 
                     tvEditRelationship.text== getString(R.string.relationship)->   Toast.makeText(this,"Please provide relationship.", Toast.LENGTH_SHORT).show()
 
                     else->
                     {
-                        editedList["name"]=etEditNameEmergency.text.toString()
+                        editedList["name"]=etEditNameEmergency.text.toString().trim()
 
-                        editedList["mobile_number"]=etEditMobileEmergency.text.toString()
+                        editedList["mobile_number"]=etEditMobileEmergency.text.toString().trim()
 
-                        editedList["relationship"]=tvEditRelationship.text.toString()
+                        editedList["relationship"]=tvEditRelationship.text.toString().trim()
 
                         editContacts()
                     }
@@ -280,8 +318,7 @@ class EmergencyContactsActivity :ContactListView, AppCompatActivity(),ActivityVi
         var position=0
 
         var isPresent=false
-
-        if (name.isNotEmpty() && mobileNumber.isNotEmpty() && relatonship.isNotEmpty())
+        if (name.isNotEmpty() && mobileNumber.isNotEmpty() && relatonship!="Relationship")
         {
             for (i in contactList.indices)
             {
@@ -322,7 +359,7 @@ class EmergencyContactsActivity :ContactListView, AppCompatActivity(),ActivityVi
 
     //##################POST emergency contacts API####################//
 
-  // function for posting emergency contacts
+    // function for posting emergency contacts
     private fun postEmergencyContacts()
     {
         if (commonClass.checkInternetConn(this))
@@ -405,5 +442,12 @@ class EmergencyContactsActivity :ContactListView, AppCompatActivity(),ActivityVi
     }
 
 
+    private fun checkAndRemoveSpace(text:String):String
+    {
+        if (text.startsWith(""))
+            return text.trim()
+
+        return text
+    }
 
 }

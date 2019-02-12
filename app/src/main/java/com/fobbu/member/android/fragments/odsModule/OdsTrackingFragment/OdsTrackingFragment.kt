@@ -49,6 +49,8 @@ class OdsTrackingFragment : Fragment(),GoogleApiClient.OnConnectionFailedListene
     private fun initView(view: View, savedInstanceState: Bundle?)
     {
         mapInitialise(view, savedInstanceState)
+
+        setUpGoogleClient()
     }
 
     //########################### MAP#################################//

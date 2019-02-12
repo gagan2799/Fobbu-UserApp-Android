@@ -6,38 +6,20 @@
                 android:background="@color/grey_header">
 
 
-    <RelativeLayout
+    <include
+            layout="@layout/toolbar"
+            android:layout_alignParentTop="true"
             android:id="@+id/rlTop"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"/>
 
-        <ImageView
-                android:id="@+id/ivBack"
-                android:layout_width="wrap_content"
-                android:padding="16dp"
-                android:src="@drawable/cross_gray"
-                android:layout_height="wrap_content"/>
 
-        <ImageView
-                android:id="@+id/ivSearch"
-                android:layout_width="wrap_content"
-                android:padding="16dp"
-                android:layout_alignParentRight="true"
-                android:src="@drawable/search"
-                android:layout_height="wrap_content"/>
-
-        <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:padding="8dp"
-                android:id="@+id/ivHead"
-                android:layout_centerVertical="true"
-                android:src="@drawable/fobbu_logo_blue"/>
-
-    </RelativeLayout>
+    <include
+            layout="@layout/search_toolbar"
+            android:visibility="gone"/>
 
     <TextView
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/your_vehicles"

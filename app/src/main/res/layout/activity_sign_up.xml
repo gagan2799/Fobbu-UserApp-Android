@@ -69,6 +69,7 @@
         android:singleLine="true"
         android:textColor="@color/black"
         android:textSize="@dimen/login_textsize_medium"
+        android:maxLength="10"
         android:id="@+id/etMobile"
         android:padding="10dp"/>
 
@@ -120,6 +121,7 @@
         android:text="@string/selectGender"
         android:drawableRight="@drawable/dropdown"
         android:gravity="center"
+        android:overlapAnchor="false"
         android:layout_marginRight="@dimen/margin_left"
         android:layout_marginLeft="@dimen/margin_left"
         android:id="@+id/tvGender"/>
@@ -128,6 +130,7 @@
         android:id="@+id/spinnerSelectGender"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:overlapAnchor="false"
         android:layout_alignBottom="@+id/tvGender"
         android:layout_alignLeft="@+id/tvGender"
         android:layout_alignStart="@+id/tvGender"

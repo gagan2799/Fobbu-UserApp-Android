@@ -93,18 +93,10 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
 
         tabBarClicks()
 
-        if (intent.hasExtra(RsaConstants.Ods.static_name))
-        {
-            odsServiceStaticName=intent.getStringExtra(RsaConstants.Ods.static_name)
+      /*  if (intent.getStringExtra(RsaConstants.Ods.static_name)!=RsaConstants.OdsServiceStaticName.trip_ready)
+            changeFragment(OdsTrackingFragment(),resources.getString(R.string.ods))
 
-            if (odsServiceStaticName==RsaConstants.OdsServiceStaticName.trip_ready)
-                CommonClass(this,this)
-                    .removeString(RsaConstants.Ods.singleServiceList)
-
-            else
-                changeFragment(OdsTrackingFragment(),resources.getString(R.string.ods))
-        }
-        else
+        else*/
             checkAndNavigateFromPush()
     }
 
@@ -132,14 +124,10 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
         }
 
         llOdsDash.setOnClickListener {
-            if (intent.hasExtra(RsaConstants.Ods.static_name))
-            {
-                odsServiceStaticName=intent.getStringExtra(RsaConstants.Ods.static_name)
+          /*  if (intent.getStringExtra(RsaConstants.Ods.static_name)!=RsaConstants.OdsServiceStaticName.trip_ready)
+                changeFragment(OdsTrackingFragment(),resources.getString(R.string.ods))
 
-                if (odsServiceStaticName!=RsaConstants.OdsServiceStaticName.trip_ready)
-                    changeFragment(OdsTrackingFragment(),resources.getString(R.string.ods))
-            }
-            else
+            else*/
                 changeFragment(OdsFragment(),resources.getString(R.string.ods))
         }
     }

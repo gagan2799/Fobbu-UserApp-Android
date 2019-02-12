@@ -11,18 +11,27 @@ import com.fobbu.member.android.R
 import com.fobbu.member.android.utils.CommonClass
 import kotlinx.android.synthetic.main.activity_sms_verification.*
 
-class SMSVerificationActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
+class SMSVerificationActivity : AppCompatActivity()
+{
+    override fun onCreate(savedInstanceState: Bundle?)
+    {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_sms_verification)
+
         initialise()
+
         addClicks()
+
         checkPinValidations()
     }
 
     // Method for initializing all the variables that are used in the class
-    private fun initialise() {
+    private fun initialise()
+    {
         val pin = CommonClass(this,this).getString("pin")
+
+        CommonClass(this,this).putString("isSmsVerified","false")
 
         for (i in pin.indices)
         {
@@ -134,20 +143,31 @@ class SMSVerificationActivity : AppCompatActivity() {
     }
 
     // Functionality of  all clicks present in the activity are handled here
-    private fun addClicks() {
+    private fun addClicks()
+    {
+        ivBack.setOnClickListener {
+            finish()
+        }
+
         tvSave.setOnClickListener {
             val enterPin= edPinOne.text.toString().trim() +
                     edPinTwo.text.toString().trim() +
+
                     edPinThree.text.toString().trim() +
+
                     edPinFour.text.toString().trim()
 
             val pin = CommonClass(this,this).getString("pin")
 
             if(enterPin == pin)
             {
+                CommonClass(this,this).putString("isSmsVerified","true")
+
                 Toast.makeText(this,resources.getString(R.string.sms_success), Toast.LENGTH_SHORT).show()
+
                    startActivity(Intent(this,
                        GeneratePINActivity::class.java))
+
                 finish()
             }
             else
