@@ -128,7 +128,7 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
                 changeFragment(OdsTrackingFragment(),resources.getString(R.string.ods))
 
             else*/
-                changeFragment(OdsFragment(),resources.getString(R.string.ods))
+                changeFragment(OdsTrackingFragment(),resources.getString(R.string.ods))
         }
     }
 

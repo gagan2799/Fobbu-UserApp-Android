@@ -1,17 +1,33 @@
 package com.fobbu.member.android.fragments.odsModule.OdsTrackingFragment
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.content.IntentSender
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
+import android.support.design.widget.BottomSheetBehavior
+import android.support.design.widget.CoordinatorLayout
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
+import android.support.v7.app.AlertDialog
+import android.util.Log
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
+import android.widget.RelativeLayout
+import android.widget.TextView
 
 import com.fobbu.member.android.R
+import com.fobbu.member.android.activities.waitingScreenModule.WaitingScreenWhite
+import com.fobbu.member.android.fragments.rsaFragmentModule.RsaConstants
+import com.fobbu.member.android.fragments.rsaFragmentModule.presenter.RsaLiveHandler
+import com.fobbu.member.android.fragments.rsaFragmentModule.presenter.RsaLivePresenter
+import com.fobbu.member.android.modals.MainPojo
+import com.fobbu.member.android.utils.CommonClass
+import com.fobbu.member.android.view.ActivityView
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.common.api.PendingResult
@@ -22,15 +38,25 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.MapsInitializer
 import com.google.android.gms.maps.model.*
+import kotlinx.android.synthetic.main.fragment_ods_tracking.*
+import kotlinx.android.synthetic.main.fragment_ods_tracking.view.*
 import java.lang.Double
 
 @Suppress("DEPRECATION")
 class OdsTrackingFragment : Fragment(),GoogleApiClient.OnConnectionFailedListener,
-    GoogleApiClient.ConnectionCallbacks,LocationListener
+    GoogleApiClient.ConnectionCallbacks,LocationListener,ActivityView
 {
     private lateinit var mMapView: MapView
 
     private lateinit var googleMap: GoogleMap
+
+    lateinit var livetTrackingHandler:RsaLiveHandler
+
+    private var mobileNumber = "123"
+
+    private lateinit var coordinatorLayout: CoordinatorLayout
+
+    lateinit var  commonClass: CommonClass
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,16 +67,93 @@ class OdsTrackingFragment : Fragment(),GoogleApiClient.OnConnectionFailedListene
 
         initView(view,savedInstanceState)
 
+        clicks(view)
+
         return view
     }
-
 
     // function for initialising all the variables if the class
     private fun initView(view: View, savedInstanceState: Bundle?)
     {
+        commonClass= CommonClass(activity!!,activity!!)
+
+        coordinatorLayout = view.findViewById(R.id.coordinator) as CoordinatorLayout
+
+        livetTrackingHandler=RsaLivePresenter(activity!!,this)
+
+        initPersistentBottomsheet()
+
+        if ( commonClass.getString(
+                RsaConstants.ServiceSaved.fobbuRequestId           // checking if request ID is present or not
+            ).isNotEmpty())
+            getService()
+
         mapInitialise(view, savedInstanceState)
 
         setUpGoogleClient()
+    }
+
+    // function for handling clicks of the class
+    @SuppressLint("SetTextI18n")
+    private fun clicks(view: View)
+    {
+        view.ivCallOdsTrack.setOnClickListener {
+            checkPermissionForCall()
+        }
+
+        view.tvLiveTrackOds.setOnClickListener {
+            if (view.tvStatusOdsTrack.visibility==View.VISIBLE)
+            {
+                view.tvStatusOdsTrack.visibility=View.INVISIBLE
+
+                view.rlOdsTrackOtp.visibility=View.VISIBLE
+            }
+
+
+            else if (view.rlOdsTrackOtp.visibility==View.VISIBLE)
+            {
+                startActivity(Intent(activity!!,WaitingScreenWhite::class.java)
+                    .putExtra("from_where","code_valid_ods"))
+
+                activity!!.finish()
+            }
+        }
+    }
+
+
+
+    private fun checkPermissionForCall() {
+        val apiLevel = android.os.Build.VERSION.SDK_INT
+
+        if (apiLevel >= 23) {
+            //phone state
+
+            val permission1 =
+                ContextCompat.checkSelfPermission(activity!!, android.Manifest.permission.CALL_PHONE)
+
+            if (permission1 != PackageManager.PERMISSION_GRANTED) {
+                makeRequest()
+            } else {
+                dialNumber()
+            }
+        } else {
+            dialNumber()
+        }
+    }
+
+    private fun dialNumber() {
+
+        if (mobileNumber != "")
+            CommonClass(activity!!, activity!!).callOnPhone(mobileNumber)
+    }
+
+    private fun makeRequest() {
+        requestPermissions(
+            arrayOf(
+                "android.permission.CALL_PHONE"
+            ),
+            1
+        )
     }
 
     //########################### MAP#################################//
@@ -59,7 +162,7 @@ class OdsTrackingFragment : Fragment(),GoogleApiClient.OnConnectionFailedListene
 
     private var locationRequest = LocationRequest.create()!!
 
-    var location = false
+    private var location = false
 
     private val locationPermissionRequestCode = 12313
 
@@ -275,7 +378,116 @@ class OdsTrackingFragment : Fragment(),GoogleApiClient.OnConnectionFailedListene
                     checkGPSEnable()
 
             }
+            1 -> {
+                if (grantResults.isEmpty() || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                    Log.i("", "Permission has been denied by user")
+                    showMessageDialog(
+                        "You need to allow the permissions from\n" +
+                                "Phone Settings -> Apps --> Fobbu Member --> Permissions\n" +
+                                "to allow the permissions"
+                    )
+
+                } else {
+                    Log.i("", "Permission has been granted by user")
+
+                    dialNumber()
+                }
+                return
+            }
+
         }
     }
 
+    // Method for opening dialog containing message
+    private fun showMessageDialog(message: String) {
+        val alertDialog = AlertDialog.Builder(
+            activity!!
+            , R.style.MyDialogTheme
+        ).create()
+        alertDialog.setMessage(message)
+        alertDialog.setButton(
+            AlertDialog.BUTTON_POSITIVE, "Ok"
+        ) { dialog
+            , _ ->
+            dialog.dismiss()
+        }
+
+        alertDialog.show()
+
+        val messageText: TextView = alertDialog!!.findViewById(android.R.id.message)!!
+
+        messageText.gravity = Gravity.LEFT
+
+    }
+
+    //insert bottom sheet
+    private fun initPersistentBottomsheet()
+    {
+        val persistentbottomSheet = coordinatorLayout.findViewById<LinearLayout>(R.id.bottomsheet)
+
+        val rlBottomSheet = persistentbottomSheet.findViewById(R.id.rlBottomSheet) as RelativeLayout
+
+        val behavior = BottomSheetBehavior.from<View>(persistentbottomSheet)
+
+        rlBottomSheet.setOnClickListener {
+            if (behavior!!.state == BottomSheetBehavior.STATE_COLLAPSED)
+                behavior.setState(BottomSheetBehavior.STATE_EXPANDED)
+
+            else
+                behavior.setState(BottomSheetBehavior.STATE_COLLAPSED)
+        }
+
+        behavior?.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback()
+        {
+            override fun onStateChanged(bottomSheet: View, newState: Int)
+            {
+                //showing the different states
+                when (newState)
+                {
+                    BottomSheetBehavior.STATE_HIDDEN -> { }
+
+                    BottomSheetBehavior.STATE_EXPANDED -> { }
+
+                    BottomSheetBehavior.STATE_COLLAPSED -> { }
+
+                    BottomSheetBehavior.STATE_DRAGGING -> { }
+
+                    BottomSheetBehavior.STATE_SETTLING -> { }
+                }
+            }
+
+            override fun onSlide(bottomSheet: View, slideOffset: Float)
+            {
+                // React to dragging events
+            }
+        })
+    }
+
+    //****************************** requests API *********************//
+
+    private fun getService()
+    {
+        if (commonClass.checkInternetConn(activity!!))
+            livetTrackingHandler.getService(
+                commonClass.getString("x_access_token"),
+                commonClass.getString(
+                    RsaConstants.ServiceSaved.fobbuRequestId
+                )
+            )
+
+        else
+            commonClass.showToast(activity!!.resources.getString(R.string.internet_is_unavailable))
+    }
+
+    override fun onRequestSuccessReport(mainPojo: MainPojo) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun showLoader() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun hideLoader() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 }

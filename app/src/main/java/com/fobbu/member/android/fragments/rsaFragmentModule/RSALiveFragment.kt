@@ -529,7 +529,7 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
     }
 
-    fun checkPermissionForCall() {
+    private fun checkPermissionForCall() {
         val apiLevel = android.os.Build.VERSION.SDK_INT
 
         if (apiLevel >= 23) {

@@ -140,6 +140,26 @@ class WaitingScreenWhite : AppCompatActivity() {
                     }, 1200)
                 }
             }
+
+            "code_valid_ods" -> {
+                rlBuildingLiveTrack.visibility = View.GONE
+                rlCodeValidated.visibility = View.VISIBLE
+                rlAccessingVehicle.visibility = View.GONE
+                rlBuildingWorkSummary.visibility = View.GONE
+                rlNewVehicleAdded.visibility = View.GONE
+                rlVehicleAccessed.visibility = View.GONE
+                tvCodeValidatedSubMessage.visibility = View.GONE
+
+                Handler().postDelayed({
+                        startActivity(Intent(this, GetSetGoActivity::class.java)
+                            .setFlags
+                                (Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK).putExtra(RsaConstants.Ods.static_name,"washing"))
+
+                        finish()
+                    }, 1200)
+
+            }
+
             "wallet_accessing" -> {
                 rlAccessingVehicle.visibility = View.VISIBLE
                 rlBuildingLiveTrack.visibility = View.GONE

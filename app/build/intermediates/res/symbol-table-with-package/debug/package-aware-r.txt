@@ -1657,6 +1657,7 @@ drawable ic_vol_type_tv_light
 drawable intro_background
 drawable lifting
 drawable lifting_selected_blue
+drawable light_blue_rectangle
 drawable list
 drawable listing_plus
 drawable lock_drawer
@@ -1883,6 +1884,7 @@ id async
 id audio_list_view
 id auto
 id avi
+id aviOdsGet
 id aviPass
 id aviPro
 id avi_assessing
@@ -1929,6 +1931,7 @@ id chains
 id checkbox
 id chronometer
 id circleIndicator
+id civOdsTrack
 id civPicProfile
 id classic
 id clip_horizontal
@@ -2079,6 +2082,7 @@ id iv3
 id ivBack
 id ivBackButton
 id ivBike
+id ivCallOdsTrack
 id ivCar
 id ivCarOds
 id ivCenter
@@ -2206,6 +2210,7 @@ id llMarkTyreBurst
 id llOdsDash
 id llOdsOrder
 id llOdsService
+id llOdsServiceLoading
 id llOdsServices
 id llPIN
 id llPIN1
@@ -2349,6 +2354,7 @@ id rlLoaderProfile
 id rlLoaderVehicleList
 id rlNameBar
 id rlNewVehicleAdded
+id rlOdsTrackOtp
 id rlPic
 id rlPickingFuel
 id rlProfilePic
@@ -2525,6 +2531,7 @@ id tvCarOds
 id tvChange
 id tvCode
 id tvCodeValidated
+id tvCodeValidatedSubMessage
 id tvConfirm
 id tvConfirmPin
 id tvContinue
@@ -2587,11 +2594,13 @@ id tvMyOrders
 id tvMyPassbook
 id tvNOdataOrder
 id tvName
+id tvNameOdsTrack
 id tvNew
 id tvNewPin
 id tvNo
 id tvNodata
 id tvOdsHeading
+id tvOdsLoadingMessage
 id tvOdsOrders
 id tvOperationBottomSheet
 id tvOperationDate
@@ -2607,6 +2616,9 @@ id tvOrderIdAll
 id tvOrderSuccessReport
 id tvOrderTimeAll
 id tvOrderTypeAll
+id tvOtpOdsTrack
+id tvOtpTrack4Digits
+id tvOtpTrackMessage
 id tvPassDetailOrderId
 id tvPassDetailTime
 id tvPassbookCommission
@@ -2639,6 +2651,7 @@ id tvServiceRequest
 id tvSkip
 id tvStartDatePB
 id tvStartFobbu
+id tvStatusOdsTrack
 id tvSubHeaderHelp
 id tvSubModel
 id tvSubModelAdapter
@@ -2898,6 +2911,7 @@ string OdsServiceOperation
 string _0002534
 string _12_32_pm_05_jan_2019
 string _4
+string _4digits_otp_code_ods
 string abc_action_bar_home_description
 string abc_action_bar_up_description
 string abc_action_menu_overflow_description
@@ -3102,6 +3116,7 @@ string fobbu_confirmed_request
 string fobbu_ensures_several_checks_n_and_top_up_on_your_vehicle
 string fobbu_found
 string fobbu_gathering_tools
+string fobbu_has_started_his_journey
 string fobbu_is_setting_up_your_vehicle
 string fobbu_on_way
 string fobbu_pay
@@ -3155,6 +3170,7 @@ string lsd
 string lsd_fullform
 string lsd_text
 string lsd_tutorial_text
+string luis_philip
 string male
 string mark_tyre_burst
 string membership_id
@@ -3199,6 +3215,7 @@ string no_of_valve
 string not_now
 string ods
 string ods_fullform
+string ods_otp_track_message
 string ods_text
 string ods_tutorial_text
 string ongoing_rsa
@@ -3295,6 +3312,7 @@ string select_service_request
 string select_vehicle_type
 string send_invoice_to_registered_email_id
 string service_booked_message
+string service_photos_will_appear_here
 string service_type
 string set
 string setting

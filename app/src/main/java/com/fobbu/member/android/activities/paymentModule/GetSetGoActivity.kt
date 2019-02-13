@@ -38,29 +38,56 @@ import okhttp3.MediaType
 import okhttp3.RequestBody
 import java.lang.Exception
 
-class GetSetGoActivity : AppCompatActivity(), ActivityView {
-
-
+class GetSetGoActivity : AppCompatActivity(), ActivityView
+{
     lateinit var getSetGoHandler: GetSetGoHandler
 
-
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?)
+    {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_get_set_go)
 
-        getSetGoHandler = GetSetGoPresenter(this, this)
-        clicks()
-        manageService(CommonClass(this, this).getString(RsaConstants.ServiceSaved.serviceNameSelected))
+        initView()
 
-        if (intent.hasExtra("navigate_to")) {
-            when {
-                intent.getStringExtra("navigate_to") == FcmPushTypes.Types.startedWork -> changeLayout("Set")
-                intent.getStringExtra("navigate_to") == FcmPushTypes.Types.workEnded -> changeLayout("")
-                else -> changeLayout("Get")
+        clicks()
+    }
+
+    // function for initialising all the variables of the class
+    private fun initView()
+    {
+        if (intent
+                .hasExtra(RsaConstants.Ods.static_name))
+        {
+            linearLayoutHolderGet.background=resources.getDrawable(R.drawable.light_blue_rectangle)
+
+            llOdsServiceLoading.visibility=View.VISIBLE
+        }
+      else
+        {
+            linearLayoutHolderGet.background=resources.getDrawable(R.drawable.work_summary_drawable)
+
+            llOdsServiceLoading.visibility=View. GONE
+
+            getSetGoHandler = GetSetGoPresenter(this, this)
+
+            manageService(CommonClass(this, this).getString(RsaConstants.ServiceSaved.serviceNameSelected))
+
+            if (intent.hasExtra("navigate_to"))
+            {
+                when
+                {
+                    intent.getStringExtra("navigate_to") == FcmPushTypes.Types.startedWork -> changeLayout("Set")
+
+                    intent.getStringExtra("navigate_to") == FcmPushTypes.Types.workEnded -> changeLayout("")
+
+                    else -> changeLayout("Get")
+                }
             }
-        } else
-            changeLayout("Get")
+            else
+                changeLayout("Get")
+        }
     }
 
     override fun onBackPressed() {
@@ -68,13 +95,13 @@ class GetSetGoActivity : AppCompatActivity(), ActivityView {
     }
 
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
-    private fun clicks() {
-
+    private fun clicks()
+    {
         buttonSubmitGet.setOnClickListener {
-
-            if (CommonClass(this, this).checkInternetConn(this)) {
-                if (!editTextReviewGet.text.isEmpty()) {
-
+            if (CommonClass(this, this).checkInternetConn(this))
+            {
+                if (!editTextReviewGet.text.isEmpty())
+                {
                     hideKeyboard()
 
                     //println("requestID"+CommonClass(this,this).getString(RsaConstants.ServiceSaved.fobbuRequestId))
@@ -83,16 +110,19 @@ class GetSetGoActivity : AppCompatActivity(), ActivityView {
                             MediaType.parse("text/plain"),
                             CommonClass(this, this).getString(RsaConstants.ServiceSaved.fobbuRequestId)
                         ),
+
                         RequestBody.create(MediaType.parse("text/plain"), ratinBarGetSet.rating.toString()),
+
                         RequestBody.create(MediaType.parse("text/plain"), editTextReviewGet.text.toString()),
+
                         CommonClass(this, this).getString("x_access_token")
                     )
-                } else {
-                    Toast.makeText(this, getString(R.string.provide_review), Toast.LENGTH_SHORT).show()
                 }
-            } else {
-                Toast.makeText(this, getString(R.string.internet_is_unavailable), Toast.LENGTH_SHORT).show()
+                else
+                    Toast.makeText(this, getString(R.string.provide_review), Toast.LENGTH_SHORT).show()
             }
+            else
+                Toast.makeText(this, getString(R.string.internet_is_unavailable), Toast.LENGTH_SHORT).show()
         }
 
         imageViewOptionMenuGetSetSummary.setOnClickListener {
@@ -100,176 +130,278 @@ class GetSetGoActivity : AppCompatActivity(), ActivityView {
         }
     }
 
-    private fun hideKeyboard() {
+    private fun hideKeyboard()
+    {
         val imm: InputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+
         //Find the currently focused view, so we can grab the correct window token from it.
         var view = currentFocus
+
         //If no view currently has focus, create a new one, just so we can grab a window token from it
-        if (view == null) {
+        if (view == null)
             view = View(this)
-        }
+
         imm.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
     @SuppressLint("NewApi")
-    private fun changeLayout(s: String) {
-
-        when (s) {
-            "Get" -> {
+    private fun changeLayout(s: String)
+    {
+        when (s)
+        {
+            "Get" ->
+            {
                 viewGetAbove.setBackgroundColor(resources.getColor(R.color.red))
+
                 viewGetBelow.setBackgroundColor(resources.getColor(R.color.red))
+
                 linearLayoutGetMiddle.background = resources.getDrawable(R.drawable.circular_red)
+
                 textViewGet.setTextColor(resources.getColor(R.color.red))
+
                 textViewGetDetails.setTextColor(resources.getColor(R.color.red))
+
                 textViewNumberGet.visibility = View.GONE
+
                 imageViewWhiteCheckGet.visibility = View.VISIBLE
+
                 linearLayoutServiceGetSet.visibility = View.VISIBLE
+
                 linearlayoutReviewGet.visibility = View.GONE
             }
-            "Set" -> {
+
+            "Set" ->
+            {
                 viewGetAbove.setBackgroundColor(resources.getColor(R.color.red))
+
                 viewGetBelow.setBackgroundColor(resources.getColor(R.color.red))
+
                 viewSetAbove.setBackgroundColor(resources.getColor(R.color.red))
+
                 viewSetBelow.setBackgroundColor(resources.getColor(R.color.red))
+
                 textViewGet.setTextColor(resources.getColor(R.color.red))
+
                 textViewGetDetails.setTextColor(resources.getColor(R.color.red))
+
                 linearLayoutGetMiddle.background = resources.getDrawable(R.drawable.circular_red)
+
                 linearLayoutSetMiddle.background = resources.getDrawable(R.drawable.circular_red)
+
                 textViewSet.setTextColor(resources.getColor(R.color.red))
+
                 textViewSetDetails.setTextColor(resources.getColor(R.color.red))
+
                 textViewNumberSet.visibility = View.GONE
+
                 imageViewWhiteCheckSet.visibility = View.VISIBLE
+
                 linearLayoutServiceGetSet.visibility = View.VISIBLE
+
                 linearlayoutReviewGet.visibility = View.GONE
 
                 textViewNumberGet.visibility = View.GONE
+
                 imageViewWhiteCheckGet.visibility = View.VISIBLE
             }
-            else -> {
+
+            else ->
+            {
                 viewGetAbove.setBackgroundColor(resources.getColor(R.color.red))
+
                 viewGetBelow.setBackgroundColor(resources.getColor(R.color.red))
+
                 viewSetAbove.setBackgroundColor(resources.getColor(R.color.red))
+
                 viewSetBelow.setBackgroundColor(resources.getColor(R.color.red))
+
                 viewGoAbove.setBackgroundColor(resources.getColor(R.color.red))
+
                 viewGoBelow.setBackgroundColor(resources.getColor(R.color.red))
+
                 linearLayoutGetMiddle.background = resources.getDrawable(R.drawable.circular_red)
+
                 linearLayoutSetMiddle.background = resources.getDrawable(R.drawable.circular_red)
+
                 linearLayoutGoMiddle.background = resources.getDrawable(R.drawable.circular_red)
+
                 textViewGet.setTextColor(resources.getColor(R.color.red))
+
                 textViewGetDetails.setTextColor(resources.getColor(R.color.red))
+
                 textViewSet.setTextColor(resources.getColor(R.color.red))
+
                 textViewSetDetails.setTextColor(resources.getColor(R.color.red))
+
                 textViewGo.setTextColor(resources.getColor(R.color.red))
+
                 textViewGoDetails.setTextColor(resources.getColor(R.color.red))
+
                 textViewNumberGo.visibility = View.GONE
+
                 imageViewWhiteCheckGo.visibility = View.VISIBLE
 
                 textViewNumberSet.visibility = View.GONE
+
                 imageViewWhiteCheckSet.visibility = View.VISIBLE
 
                 textViewNumberGet.visibility = View.GONE
+
                 imageViewWhiteCheckGet.visibility = View.VISIBLE
+
                 Handler().postDelayed({
                     linearLayoutServiceGetSet.visibility = View.GONE
+
                     linearlayoutReviewGet.visibility = View.VISIBLE
+
                     textViewHeadingGet.text = "Share Your Experience"
+
                     textViewHeadingGet.setTextColor(resources.getColor(R.color.color_grey))
+
                     val animation: Animation = AnimationUtils.loadAnimation(this, R.anim.fade)
+
                     linearlayoutReviewGet.startAnimation(animation)
                 }, 500)
             }
         }
     }
 
-    private fun shareIt() {
+    private fun shareIt()
+    {
         val intent: Intent = Intent(android.content.Intent.ACTION_SEND)
+
         intent.type = "text/plain"
+
         val shareBody: String = "Here is the share content body"
+
         intent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Subject Here")
+
         intent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody)
+
         startActivity(Intent.createChooser(intent, "Share via"))
     }
 
-    private fun openWonderfulPopUp() {
+    private fun openWonderfulPopUp()
+    {
         val builder: AlertDialog.Builder = AlertDialog.Builder(this)
+
         val view: View = LayoutInflater.from(this).inflate(R.layout.inflate_review_pop_up, null)
+
         builder.setView(view)
+
         val dialog: AlertDialog = builder.create()
+
         view.llWonderFul.setOnClickListener {
             dialog.dismiss()
         }
+
         view.imageViewrFacebookReview.setOnClickListener {
             dialog.dismiss()
         }
+
         view.imageViewrTwitterReview.setOnClickListener {
             dialog.dismiss()
         }
+
         dialog.show()
     }
 
 
-    private fun showOptionPopUp() {
+    private fun showOptionPopUp()
+    {
         val dialog: Dialog = Dialog(this)
+
         dialog.setContentView(R.layout.option_menu_layout)
+
         var layoutParams = WindowManager.LayoutParams()
+
         layoutParams = dialog.window.attributes
+
         layoutParams.gravity = Gravity.TOP or Gravity.RIGHT
+
         layoutParams.x = -100
+
         layoutParams.y = -100
+
         layoutParams.windowAnimations = R.style.DialogTheme
 
         dialog.textViewCancelRSA.setOnClickListener {
             dialog.dismiss()
+
             startActivity(
                 Intent(this, RSARequestCancelActivity::class.java)
                     .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
             )
+
             overridePendingTransition(R.anim.slide_down, R.anim.fade)
-
         }
+
         dialog.show()
-
-
     }
 
-    private fun manageService(string: String) {
-        when (string) {
-            RsaConstants.ServiceName.flatTyre -> {
+    private fun manageService(string: String)
+    {
+        when (string)
+        {
+            RsaConstants.ServiceName.flatTyre ->
+            {
                 imageViewRequestType.setImageResource(R.drawable.mechanic_with_cap_blue)
+
                 textViewServiceDetailsGet.text = getString(R.string.fobbu_will_set_your_vehicle)
+
                 textViewGetDetails.text = resources.getString(R.string.work_order_payment)
             }
-            RsaConstants.ServiceName.jumpStart -> {
+
+            RsaConstants.ServiceName.jumpStart ->
+            {
                 imageViewRequestType.setImageResource(R.drawable.mechanic_with_cap_blue)
+
                 textViewServiceDetailsGet.text = getString(R.string.fobbu_will_set_your_vehicle)
+
                 textViewGetDetails.text = getString(R.string.otp_and_payment_recevied)
             }
-            RsaConstants.ServiceName.fuelDelivery -> {
+
+            RsaConstants.ServiceName.fuelDelivery ->
+            {
                 imageViewRequestType.setImageResource(R.drawable.fuel_station)
+
                 textViewServiceDetailsGet.text = getString(R.string.while_fobbu_fills_fuel)
+
                 textViewGetDetails.text = getString(R.string.otp_validate_and_upload_dl)
             }
-            RsaConstants.ServiceName.burstTyre -> {
+
+            RsaConstants.ServiceName.burstTyre ->
+            {
                 imageViewRequestType.setImageResource(R.drawable.mechanic_with_cap_blue)
+
                 textViewServiceDetailsGet.text = getString(R.string.fobbu_will_set_your_vehicle)
+
                 textViewGetDetails.text = resources.getString(R.string.otp_and_payment_recevied)
             }
-            RsaConstants.ServiceName.towing -> {
+
+            RsaConstants.ServiceName.towing ->
+            {
                 linearLayoutServiceGetSet.visibility = View.GONE
+
                 linearlayoutReviewGet.visibility = View.VISIBLE
+
                 textViewHeadingGet.text = getString(R.string.share_your_experience)
+
                 textViewHeadingGet.setTextColor(resources.getColor(R.color.color_grey))
+
                 linearLayoutGo.visibility = View.GONE
+
                 linearLayoutGet.visibility = View.GONE
+
                 linearLayoutSet.visibility = View.GONE
             }
         }
     }
 
-    override fun onRequestSuccessReport(mainPojo: MainPojo) {
-
-        if (mainPojo.success == "true") {
-
+    override fun onRequestSuccessReport(mainPojo: MainPojo)
+    {
+        if (mainPojo.success == "true")
+        {
             CommonClass(this, this).workDoneReviewSend()
 
             openWonderfulPopUp()
@@ -282,10 +414,9 @@ class GetSetGoActivity : AppCompatActivity(), ActivityView {
                     )
                 },1000
             )
-
-        } else {
-            Toast.makeText(this, mainPojo.message, Toast.LENGTH_SHORT).show()
         }
+        else
+            Toast.makeText(this, mainPojo.message, Toast.LENGTH_SHORT).show()
     }
 
     override fun showLoader() {
@@ -297,36 +428,36 @@ class GetSetGoActivity : AppCompatActivity(), ActivityView {
     }
 
 
-    override fun onResume() {
+    override fun onResume()
+    {
         super.onResume()
 
         val filter = IntentFilter(FcmPushTypes.Types.startedWorkBroadcast)
+
         registerReceiver(changeRSALiveScreenReceiver, filter)
     }
 
-    private val changeRSALiveScreenReceiver = object : BroadcastReceiver() {
+    private val changeRSALiveScreenReceiver = object : BroadcastReceiver()
+    {
         override fun onReceive(context: Context, intent: Intent) {
 
             println("HERE" + intent.getStringExtra("navigate_to"))
 
-            if (intent.getStringExtra("navigate_to") == FcmPushTypes.Types.startedWork) {
+            if (intent.getStringExtra("navigate_to") == FcmPushTypes.Types.startedWork)
                 changeLayout("Set")
-            } else if (intent.getStringExtra("navigate_to") == FcmPushTypes.Types.workEnded) {
-                changeLayout("")
-            }
 
+            else if (intent.getStringExtra("navigate_to") == FcmPushTypes.Types.workEnded)
+                changeLayout("")
         }
     }
 
-    override fun onDestroy() {
+    override fun onDestroy()
+    {
         super.onDestroy()
 
         try {
             unregisterReceiver(changeRSALiveScreenReceiver)
-        } catch (e: Exception) {
-
         }
+        catch (e: Exception) { }
     }
-
-
 }

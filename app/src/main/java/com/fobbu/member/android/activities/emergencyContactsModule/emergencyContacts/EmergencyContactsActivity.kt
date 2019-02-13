@@ -26,28 +26,41 @@ import com.fobbu.member.android.view.ActivityView
 
 
 @Suppress("DEPRECATION")
-class EmergencyContactsActivity :ContactListView, AppCompatActivity(),ActivityView,ContactsView
-{
-    var dataList=ArrayList<HashMap<String,Any>>()
+class EmergencyContactsActivity : ContactListView, AppCompatActivity(), ActivityView, ContactsView {
+    var dataList = ArrayList<HashMap<String, Any>>()
 
-    private var relationShip= arrayOf("Relationship","Father","Mother","Sister","Brother","Uncle","Aunt","Son","Daughter","Wife","Husband","Neighbor")
+    private var relationShip = arrayOf(
+        "Relationship",
+        "Father",
+        "Mother",
+        "Sister",
+        "Brother",
+        "Uncle",
+        "Aunt",
+        "Son",
+        "Daughter",
+        "Wife",
+        "Husband",
+        "Neighbor"
+    )
 
     lateinit var commonClass: CommonClass
 
-    private val contactList=ArrayList<HashMap<String,String>>()
+     var  selectedContactId=""
 
-    private var sortedList=ArrayList<HashMap<String,String>>()
+    private val contactList = ArrayList<HashMap<String, String>>()
 
-    private var editedList=HashMap<String,Any>()
+    private var sortedList = ArrayList<HashMap<String, String>>()
 
-    lateinit var listHandler:ListHandler
+    private var editedList = HashMap<String, Any>()
 
-    private lateinit var emergencyHandler:EmergencyHandler
+    private lateinit var listHandler: ListHandler
 
-    private lateinit var spinnerAdapter:ArrayAdapter<String>
+    private lateinit var emergencyHandler: EmergencyHandler
 
-    override fun onCreate(savedInstanceState: Bundle?)
-    {
+    private lateinit var spinnerAdapter: ArrayAdapter<String>
+
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_emergency_contacts)
@@ -59,73 +72,71 @@ class EmergencyContactsActivity :ContactListView, AppCompatActivity(),ActivityVi
 
 
     //function for initialising all  the views of the class
-    private fun initView()
-    {
-        commonClass= CommonClass(this,this)
+    private fun initView() {
+        commonClass = CommonClass(this, this)
 
-        ivSearchToolbar.visibility= View.INVISIBLE
+        ivSearchToolbar.visibility = View.INVISIBLE
 
-        spinnerAdapter=ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,relationShip)
+        spinnerAdapter = ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, relationShip)
 
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
-        spinnerEmergency.adapter=spinnerAdapter
+        spinnerEmergency.adapter = spinnerAdapter
 
-        spinner2ndEmergency.adapter= spinnerAdapter
+        spinner2ndEmergency.adapter = spinnerAdapter
 
-        spinnerEditEmergency.adapter=spinnerAdapter
+        spinnerEditEmergency.adapter = spinnerAdapter
 
-        listHandler=ListPresenter(this,this)
+        listHandler = ListPresenter(this, this)
 
-        if (intent.hasExtra("sorted_list"))
-        {
-            tvHeaderEmergency.text=resources.getString(R.string.edit_emergency_contacts)
+        if (intent.hasExtra("sorted_list")) {
+            tvHeaderEmergency.text = resources.getString(R.string.edit_emergency_contacts)
 
-            sortedList= intent.getSerializableExtra("sorted_list") as ArrayList<HashMap<String, String>>
+            sortedList = intent.getSerializableExtra("sorted_list") as ArrayList<HashMap<String, String>>
 
-            etEditNameEmergency.setText(sortedList[0]["name"],TextView.BufferType.EDITABLE)
+            etEditNameEmergency.setText(sortedList[0]["name"], TextView.BufferType.EDITABLE)
 
-            etEditMobileEmergency.setText(sortedList[0]["mobile_number"],TextView.BufferType.EDITABLE)
+            etEditMobileEmergency.setText(sortedList[0]["mobile_number"], TextView.BufferType.EDITABLE)
+
+            selectedContactId=sortedList[0]["_id"].toString()
 
             Handler().postDelayed({
                 tvEditRelationship.setTextColor(resources.getColor(R.color.color_grey))
 
-                tvEditRelationship.text=sortedList[0]["relationship"].toString()
-            },1000)
+                tvEditRelationship.text = sortedList[0]["relationship"].toString()
+            }, 1000)
 
-            llAddContactComplete.visibility=View.GONE
+            llAddContactComplete.visibility = View.GONE
 
-            llEditContactComplete.visibility=View.VISIBLE
+            llEditContactComplete.visibility = View.VISIBLE
 
             tvAddContacts.setTextColor(resources.getColor(R.color.color_grey))
 
-            viewAdd.visibility=View.INVISIBLE
+            viewAdd.visibility = View.INVISIBLE
 
             tvEditContacts.setTextColor(resources.getColor(R.color.red))
 
-            viewEdit.visibility=View.VISIBLE
+            viewEdit.visibility = View.VISIBLE
 
-            tvAddEmergencyContacts.text= getString(R.string.edit)
-        }
-        else
-        {
-            tvHeaderEmergency.text=resources.getString(R.string.add_emergency_contacts)
+            tvAddEmergencyContacts.text = getString(R.string.edit)
+        } else {
+            tvHeaderEmergency.text = resources.getString(R.string.add_emergency_contacts)
 
             tvAddContacts.setTextColor(resources.getColor(R.color.red))
 
-            viewAdd.visibility=View.VISIBLE
+            viewAdd.visibility = View.VISIBLE
 
             tvEditContacts.setTextColor(resources.getColor(R.color.color_grey))
 
-            viewEdit.visibility=View.INVISIBLE
+            viewEdit.visibility = View.INVISIBLE
 
-            llAddContactComplete.visibility=View.VISIBLE
+            llAddContactComplete.visibility = View.VISIBLE
 
-            llEditContactComplete.visibility=View.GONE
+            llEditContactComplete.visibility = View.GONE
 
-            tvAddEmergencyContacts.text= getString(R.string.add)
+            tvAddEmergencyContacts.text = getString(R.string.add)
         }
-        emergencyHandler=EmergencyPresenter(this,this,this)
+        emergencyHandler = EmergencyPresenter(this, this, this)
     }
 
     override fun onResume() {
@@ -133,23 +144,19 @@ class EmergencyContactsActivity :ContactListView, AppCompatActivity(),ActivityVi
         getContact()
     }
 
-    private fun getContact()
-    {
+    private fun getContact() {
         if (commonClass.checkInternetConn(this))
             listHandler.getContacts(commonClass.getString("x_access_token"))
-
         else
             commonClass.showToast(resources.getString(R.string.internet_is_unavailable))
     }
 
     // function for handling clicks of the class
-    private fun clicks()
-    {
+    private fun clicks() {
         ivCheck.setOnClickListener {
-            if (ivCheck.drawable.constantState==resources.getDrawable(R.drawable.checkbox_checked).constantState)
-            {
+            if (ivCheck.drawable.constantState == resources.getDrawable(R.drawable.checkbox_checked).constantState) {
                 ivCheck.setImageResource(R.drawable.checkbox_uncheck)
-            }else{
+            } else {
                 ivCheck.setImageResource(R.drawable.checkbox_checked)
             }
         }
@@ -167,7 +174,7 @@ class EmergencyContactsActivity :ContactListView, AppCompatActivity(),ActivityVi
         }
 
         ivContactList.setOnClickListener {
-            startActivity(Intent(this,ContactListActicvity::class.java))
+            startActivity(Intent(this, ContactListActicvity::class.java))
         }
 
         rlEditRelationShipEmergency.setOnClickListener {
@@ -175,33 +182,28 @@ class EmergencyContactsActivity :ContactListView, AppCompatActivity(),ActivityVi
             spinnerEditEmergency.performClick()
         }
 
-        spinnerEmergency.onItemSelectedListener = object : OnItemSelectedListener
-        {
-            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long)
-            {
-                tvRelationship.text=spinnerEmergency.selectedItem.toString()
+        spinnerEmergency.onItemSelectedListener = object : OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+                tvRelationship.text = spinnerEmergency.selectedItem.toString()
 
-                if (tvRelationship.text.toString()=="Relationship")
+                if (tvRelationship.text.toString() == "Relationship")
                     tvRelationship.setTextColor(resources.getColor(R.color.view_grey))
-
                 else
                     tvRelationship.setTextColor(resources.getColor(R.color.color_grey))
 
             } // to close the onItemSelected
+
             override fun onNothingSelected(parent: AdapterView<*>) {
 
             }
         }
 
-        spinnerEditEmergency.onItemSelectedListener = object : OnItemSelectedListener
-        {
-            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long)
-            {
-                tvEditRelationship.text=spinnerEditEmergency.selectedItem.toString()
+        spinnerEditEmergency.onItemSelectedListener = object : OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+                tvEditRelationship.text = spinnerEditEmergency.selectedItem.toString()
 
-                if (tvEditRelationship.text.toString()=="Relationship")
+                if (tvEditRelationship.text.toString() == "Relationship")
                     tvEditRelationship.setTextColor(resources.getColor(R.color.view_grey))
-
                 else
                     tvEditRelationship.setTextColor(resources.getColor(R.color.color_grey))
             } // to close the onItemSelected
@@ -210,15 +212,12 @@ class EmergencyContactsActivity :ContactListView, AppCompatActivity(),ActivityVi
         }
 
 
-        spinner2ndEmergency.onItemSelectedListener = object : OnItemSelectedListener
-        {
-            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long)
-            {
-                tv2ndRelationship.text=spinner2ndEmergency.selectedItem.toString()
+        spinner2ndEmergency.onItemSelectedListener = object : OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+                tv2ndRelationship.text = spinner2ndEmergency.selectedItem.toString()
 
-                if (tv2ndRelationship.text.toString()=="Relationship")
+                if (tv2ndRelationship.text.toString() == "Relationship")
                     tv2ndRelationship.setTextColor(resources.getColor(R.color.view_grey))
-
                 else
                     tv2ndRelationship.setTextColor(resources.getColor(R.color.color_grey))
             } // to close the onItemSelected
@@ -230,159 +229,244 @@ class EmergencyContactsActivity :ContactListView, AppCompatActivity(),ActivityVi
 
 
         tvAddEmergencyContacts.setOnClickListener {
-            val name=checkAndRemoveSpace(etEditNameEmergency.text.toString())
+            if (tvAddEmergencyContacts.text == resources.getString(R.string.add)) {
+                if (dataList.size >= 5) {
+                    Toast.makeText(
+                        this,
+                        "You have reached the maximum limit of contacts that can be added. Please remove few to add more.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+                else if (etFullNameEmergency.text.toString().trim().isEmpty() && et2ndFullNameEmergency.text.toString().trim().isEmpty()) {
+                    CommonClass(this, this).showToast("Please provide atleast one contacts information")
+                }
+                else if (etMobileEmergency.text.trim().toString() == et2ndMobileEmergency.text.trim().toString()) {
+                    commonClass.showToast("Please provide different contact number")
+                }
+                else if (ifEmpty(
+                        etFullNameEmergency.text.toString().trim(),
+                        etMobileEmergency.text.toString().trim(),
+                        tvRelationship.text.toString()
+                    )
+                ) {
+                    when {
+                        etFullNameEmergency.text.toString().trim().isEmpty() -> CommonClass(
+                            this,
+                            this
+                        ).showToast("Please provide a name")
 
-            val mobile=checkAndRemoveSpace(etEditMobileEmergency.text.toString())
+                        etMobileEmergency.text.toString().isEmpty() -> CommonClass(
+                            this,
+                            this
+                        ).showToast("Please provide a number")
 
-            if (tvAddEmergencyContacts.text==resources.getString(R.string.add))
-            {
+                        etMobileEmergency.text.toString().trim().length < 10 -> CommonClass(
+                            this,
+                            this
+                        ).showToast("Please provide correct number of 1st contact")
+
+
+                        tvRelationship.text.toString() == "Relationship" -> CommonClass(
+                            this,
+                            this
+                        ).showToast("Please provide a relationship status with 2nd contact")
+
+
+                        else -> {
+                            saveToLocalList(
+                                etFullNameEmergency.text.toString().trim(),
+                                etMobileEmergency.text.toString(), tvRelationship.text.toString(),"1")
+                        }
+                    }
+                } else if (ifEmpty(
+                        et2ndFullNameEmergency.text.toString().trim(),
+                        et2ndMobileEmergency.text.toString().trim(),
+                        tv2ndRelationship.text.toString()))
+                {
+                    check2ndBlock()
+                }
+
+            } else {
                 when {
-                    etFullNameEmergency.text.toString().trim().isEmpty() -> CommonClass(this,this).showToast("Please provide a name")
+                    etEditNameEmergency.text.toString().trim().isEmpty() -> Toast.makeText(
+                        this,
+                        "Please provide name.",
+                        Toast.LENGTH_SHORT
+                    ).show()
 
-                    etMobileEmergency.text.toString().trim().isEmpty() -> CommonClass(this,this).showToast("Please provide a number")
+                    etEditMobileEmergency.text.toString().trim().isEmpty() -> Toast.makeText(
+                        this,
+                        "Please provide number.",
+                        Toast.LENGTH_SHORT
+                    ).show()
 
-                    tvRelationship.text.toString()=="Relationship" -> CommonClass(this,this).showToast("Please provide a relationship status")
+                    tvEditRelationship.text == getString(R.string.relationship) -> Toast.makeText(
+                        this,
+                        "Please provide relationship.",
+                        Toast.LENGTH_SHORT
+                    ).show()
 
-                    else -> {
-                        saveToLocalList(etFullNameEmergency.text.toString().trim(),
-                            etMobileEmergency.text.toString(),tvRelationship.text.toString())
+                    else ->
+                    {
+                        var isPresent=false
+                        
+                        var selectedId=false
 
-                        saveToLocalList(et2ndFullNameEmergency.text.toString().trim(), et2ndMobileEmergency.text.toString().trim(),tv2ndRelationship.text.toString())
+                        for (i in dataList.indices)
+                        {
+                            if(dataList[i]["mobile_number"]==etEditMobileEmergency.text.trim().toString())
+                            {
+                               isPresent=true
+                                
+                                if (dataList[i]["_id"]==selectedContactId)
+                                {
+                                    editedList=dataList[i]
+                                
+                                  selectedId=true
 
-                        if (contactList.size<1)
-                            Toast.makeText(this,"Please provide atleast one emergency contact", Toast.LENGTH_SHORT).show()
+                                }else
+                                    selectedId=false
+
+                                break
+                            }
+
+                        }
+
+                        if (isPresent)
+                        {
+                            if (selectedId)
+                            {
+                                editedList["name"] = etEditNameEmergency.text.toString().trim()
+
+                                editedList["relationship"] = tvEditRelationship.text.toString().trim()
+
+                                editContacts()
+                            }
+                            else
+                            commonClass.showToast("This number already exists. Please try with another one")
+                        }
                         else
                         {
-                            if (dataList.size>1) {
-                                val map = contactList[1]
+                            editedList["name"] = etEditNameEmergency.text.toString().trim()
 
-                                when {
-                                    map.size > 0 -> when {
-                                        map["name"].toString().trim().isEmpty() -> CommonClass(
-                                            this,
-                                            this
-                                        ).showToast("Please provide 2nd contacts name")
-                                        map["mobile_number"].toString().trim().isEmpty() -> CommonClass(
-                                            this,
-                                            this
-                                        ).showToast("Please provide 2nd contacts number")
-                                        map["relationship"] == "Relationship" -> CommonClass(
-                                            this,
-                                            this
-                                        ).showToast("Please provide 2nd contacts relationship status")
-                                    }
-                                    dataList.size >= 5 -> Toast.makeText(
-                                        this,
-                                        "You have reached the maximum limit of contacts that can be added. Please remove few to add more.",
-                                        Toast.LENGTH_SHORT
-                                    ).show()
-                                    else -> postEmergencyContacts()
-                                }
-                            }
-                            else if (dataList.size==1)
-                                postEmergencyContacts()
+                            editedList["mobile_number"] = etEditMobileEmergency.text.toString().trim()
+
+                            editedList["relationship"] = tvEditRelationship.text.toString().trim()
+
+                            editContacts()
                         }
                     }
                 }
             }
-            else
-            {
-                when
-                {
-                    etEditNameEmergency.text.toString().trim().isEmpty()->   Toast.makeText(this,"Please provide name.", Toast.LENGTH_SHORT).show()
+        }
+    }
 
-                    etEditMobileEmergency.text.toString().trim().isEmpty()->   Toast.makeText(this,"Please provide number.", Toast.LENGTH_SHORT).show()
+    private fun check2ndBlock() {
+        when {
+            et2ndFullNameEmergency.text.toString().trim().isEmpty() -> CommonClass(
+                this,
+                this
+            ).showToast("Please provide  2nd contacts name")
 
-                    tvEditRelationship.text== getString(R.string.relationship)->   Toast.makeText(this,"Please provide relationship.", Toast.LENGTH_SHORT).show()
 
-                    else->
-                    {
-                        editedList["name"]=etEditNameEmergency.text.toString().trim()
+            et2ndMobileEmergency.text.toString().isEmpty() -> CommonClass(
+                this,
+                this
+            ).showToast("Please provide  2nd contacts number")
 
-                        editedList["mobile_number"]=etEditMobileEmergency.text.toString().trim()
 
-                        editedList["relationship"]=tvEditRelationship.text.toString().trim()
+            et2ndMobileEmergency.text.toString().trim().length < 10 -> CommonClass(
+                this,
+                this
+            ).showToast("Please provide correct number of 2nd contact")
 
-                        editContacts()
-                    }
-                }
+            tv2ndRelationship.text.toString() == "Relationship" -> CommonClass(
+                this,
+                this
+            ).showToast("Please provide a relationship status with 2nd contact")
+
+            else -> {
+                saveToLocalList(
+                    et2ndFullNameEmergency.text.toString().trim(),
+                    et2ndMobileEmergency.text.toString().trim(),
+                    tv2ndRelationship.text.toString()
+                ,"2")
+
+
             }
         }
     }
 
     // method for saving prices and total number of services in hashmap
-    private fun saveToLocalList(name:String,mobileNumber:String,relatonship:String)
-    {
-        val hashMap =HashMap<String,String>()
+    private fun saveToLocalList(name: String, mobileNumber: String, relationship: String,from:String) {
+        var isPresent = false
 
-        var position=0
-
-        var isPresent=false
-        if (name.isNotEmpty() && mobileNumber.isNotEmpty() && relatonship!="Relationship")
-        {
-            for (i in contactList.indices)
-            {
-                if(mobileNumber==contactList[i]["mobile_number"] )
-                {
-                    isPresent=true
-
-                    position=i
-
-                    break
-                }
+        for (i in dataList.indices) {
+            if (dataList[i]["mobile_number"] == mobileNumber) {
+                isPresent = true
+                break
             }
 
-            when{
-                isPresent->
-                {
-                    contactList[position]["name"]=name
-
-                    contactList[position]["mobile_number"]=mobileNumber
-
-                    contactList[position]["relationship"]=relatonship
-                }
-                else->
-                {
-                    hashMap["name"]=name
-
-                    hashMap["mobile_number"]=mobileNumber
-
-                    hashMap["relationship"]=relatonship
-
-                    contactList.add(hashMap)
-
-                }
-            }
-            println("SAVED LIST $contactList")
         }
+
+        if (isPresent) {
+            commonClass.showToast("User already exists. Please try with another number.")
+        } else {
+            val hashMap = HashMap<String, String>()
+
+            hashMap["name"] = name
+
+            hashMap["mobile_number"] = mobileNumber
+
+            hashMap["relationship"] = relationship
+
+            contactList.add(hashMap)
+
+            if(from=="1")
+            {
+                if (ifEmpty(et2ndFullNameEmergency.text.toString().trim(),
+                        et2ndMobileEmergency.text.toString().trim(),
+                        tv2ndRelationship.text.toString()))
+                    check2ndBlock()
+                else
+                    postEmergencyContacts()
+            }
+            else
+            {
+                postEmergencyContacts()
+            }
+        }
+
+        println("SAVED LIST $contactList")
+
     }
 
     //##################POST emergency contacts API####################//
 
     // function for posting emergency contacts
-    private fun postEmergencyContacts()
-    {
-        if (commonClass.checkInternetConn(this))
-            emergencyHandler.postEmergencyContracts(contactList,
-                commonClass.getString("x_access_token"))
+    private fun postEmergencyContacts() {
+        if (commonClass.checkInternetConn(this)) {
+            if (contactList.size > 0) {
+                emergencyHandler.postEmergencyContracts(
+                    contactList,
+                    commonClass.getString("x_access_token")
+                )
 
-        else
-            Toast.makeText(this,resources.getString(R.string.internet_is_unavailable), Toast.LENGTH_SHORT).show()
+                contactList.clear()
+            }
+        } else
+            Toast.makeText(this, resources.getString(R.string.internet_is_unavailable), Toast.LENGTH_SHORT).show()
     }
 
 
     // function for handling the response of the POST emergency contacts API
-    override fun onRequestSuccessReport(mainPojo: MainPojo)
-    {
-        if (mainPojo.success=="true")
-        {
-            startActivity(Intent(this,ContactListActicvity::class.java))
+    override fun onRequestSuccessReport(mainPojo: MainPojo) {
+        if (mainPojo.success == "true") {
+            startActivity(Intent(this, ContactListActicvity::class.java))
 
             finish()
-        }
-        else
-        {
-            Toast.makeText(this,mainPojo.message, Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(this, mainPojo.message, Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -390,50 +474,46 @@ class EmergencyContactsActivity :ContactListView, AppCompatActivity(),ActivityVi
     // ######################## EDIT CONTACTS API####################################//
 
     // function for hitting edit contacts API
-    private fun editContacts()
-    {
+    private fun editContacts() {
         if (commonClass.checkInternetConn(this))
-            emergencyHandler.editContacts(editedList,sortedList[0]["_id"].toString(),commonClass.getString("x_access_token"))
+            emergencyHandler.editContacts(
+                editedList,
+                sortedList[0]["_id"].toString(),
+                commonClass.getString("x_access_token")
+            )
         else
-            Toast.makeText(this,resources.getString(R.string.internet_is_unavailable), Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, resources.getString(R.string.internet_is_unavailable), Toast.LENGTH_SHORT).show()
     }
 
     // function to handle the response of the edit contacts API
-    override fun editContactsSuccessReport(mainPojo: MainPojo)
-    {
-        if (mainPojo.success=="true")
-        {
-            startActivity(Intent(this,ContactListActicvity::class.java)
-                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK))
+    override fun editContactsSuccessReport(mainPojo: MainPojo) {
+        if (mainPojo.success == "true") {
+            startActivity(
+                Intent(this, ContactListActicvity::class.java)
+                    .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+            )
 
             finish()
-        }
-
-
-
-        else
+        } else
             commonClass.showToast(mainPojo.message)
     }
 
 
-    override fun showLoader()
-    {
-        rlLoader.visibility=View.GONE
+    override fun showLoader() {
+        rlLoader.visibility = View.GONE
 
         avi.show()
     }
 
-    override fun hideLoader()
-    {
-        rlLoader.visibility=View.GONE
+    override fun hideLoader() {
+        rlLoader.visibility = View.GONE
 
         avi.hide()
     }
 
     override fun SuccessReport(mainPojo: MainPojo) {
-        if (mainPojo.success=="true")
-        {
-            dataList= mainPojo.list
+        if (mainPojo.success == "true") {
+            dataList = mainPojo.list
         }
     }
 
@@ -442,12 +522,20 @@ class EmergencyContactsActivity :ContactListView, AppCompatActivity(),ActivityVi
     }
 
 
-    private fun checkAndRemoveSpace(text:String):String
-    {
-        if (text.startsWith(""))
-            return text.trim()
+    private fun ifEmpty(name: String, number: String, relationshipString: String): Boolean {
+        var isProvided = false
 
-        return text
+        if (name.isNotEmpty())
+            isProvided = true
+
+        if (number.isNotEmpty())
+            isProvided = true
+
+        if (relationshipString != ("Relationship"))
+            isProvided = true
+
+        return isProvided
     }
+
 
 }
