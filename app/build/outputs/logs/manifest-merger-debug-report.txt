@@ -11,12 +11,13 @@ INJECTED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/mai
 	android:name
 		ADDED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:77:17-71
 manifest
-ADDED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:2:1-180:12
-INJECTED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:2:1-180:12
-INJECTED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:2:1-180:12
-INJECTED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:2:1-180:12
+ADDED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:2:1-188:12
+INJECTED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:2:1-188:12
+INJECTED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:2:1-188:12
+INJECTED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:2:1-188:12
 MERGED from [com.android.support:multidex:1.0.3] /home/robin/.gradle/caches/transforms-1/files-1.1/multidex-1.0.3.aar/86c7f20d6ef3280f9204a6f40054ce9e/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:design:28.0.0] /home/robin/.gradle/caches/transforms-1/files-1.1/design-28.0.0.aar/15f5a17aa151a673c001a76a04cadfd4/AndroidManifest.xml:17:1-24:12
+MERGED from [com.yarolegovich:discrete-scrollview:1.4.9] /home/robin/.gradle/caches/transforms-1/files-1.1/discrete-scrollview-1.4.9.aar/8b3e7384a6d35119de3c4503754cb80e/AndroidManifest.xml:2:1-12:12
 MERGED from [com.google.android.gms:play-services:12.0.1] /home/robin/.gradle/caches/transforms-1/files-1.1/play-services-12.0.1.aar/099434bedf5083fa71bd1fdb326a32db/AndroidManifest.xml:2:1-6:12
 MERGED from [com.google.android.gms:play-services-cast-framework:12.0.1] /home/robin/.gradle/caches/transforms-1/files-1.1/play-services-cast-framework-12.0.1.aar/8750718b48cced1522846415165619aa/AndroidManifest.xml:2:1-14:12
 MERGED from [com.google.android.gms:play-services-cast:12.0.1] /home/robin/.gradle/caches/transforms-1/files-1.1/play-services-cast-12.0.1.aar/b3173311d8b72e77bbfd6634094daf8e/AndroidManifest.xml:17:1-24:12
@@ -81,10 +82,9 @@ MERGED from [com.github.chrisbanes:PhotoView:2.0.0] /home/robin/.gradle/caches/t
 MERGED from [de.hdodenhof:circleimageview:2.2.0] /home/robin/.gradle/caches/transforms-1/files-1.1/circleimageview-2.2.0.aar/6e2782cffca7eb050359d16506de2df4/AndroidManifest.xml:2:1-11:12
 MERGED from [com.squareup.picasso:picasso:2.71828] /home/robin/.gradle/caches/transforms-1/files-1.1/picasso-2.71828.aar/339d4f96c53f69faa845aa893d79ba0c/AndroidManifest.xml:2:1-14:12
 MERGED from [com.android.support:support-fragment:28.0.0] /home/robin/.gradle/caches/transforms-1/files-1.1/support-fragment-28.0.0.aar/2b91c61a73911d4fb8e1be8fe6d81160/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:recyclerview-v7:28.0.0] /home/robin/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-28.0.0.aar/870b3651a86907fc85e337c3d387b6b8/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:animated-vector-drawable:28.0.0] /home/robin/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-28.0.0.aar/5d1d3b1fee3205840eff10865b03507f/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:recyclerview-v7:28.0.0] /home/robin/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-28.0.0.aar/870b3651a86907fc85e337c3d387b6b8/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:support-core-ui:28.0.0] /home/robin/.gradle/caches/transforms-1/files-1.1/support-core-ui-28.0.0.aar/c20677174566346b99aa16ab8586012c/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:cursoradapter:28.0.0] /home/robin/.gradle/caches/transforms-1/files-1.1/cursoradapter-28.0.0.aar/4a4c8882ac53ab02860aff045cbc0b10/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:transition:28.0.0] /home/robin/.gradle/caches/transforms-1/files-1.1/transition-28.0.0.aar/b3d338965e4be6e7e823ebde86af1bb2/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:cardview-v7:28.0.0] /home/robin/.gradle/caches/transforms-1/files-1.1/cardview-v7-28.0.0.aar/ea7d852ca5338c28cb446c302da1722f/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:exifinterface:27.1.0] /home/robin/.gradle/caches/transforms-1/files-1.1/exifinterface-27.1.0.aar/328b960849034ec940ccf28733dbb673/AndroidManifest.xml:17:1-22:12
@@ -100,17 +100,18 @@ MERGED from [com.android.support:customview:28.0.0] /home/robin/.gradle/caches/t
 MERGED from [com.android.support:swiperefreshlayout:28.0.0] /home/robin/.gradle/caches/transforms-1/files-1.1/swiperefreshlayout-28.0.0.aar/8d8d404039dc748005389c239197e127/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:interpolator:28.0.0] /home/robin/.gradle/caches/transforms-1/files-1.1/interpolator-28.0.0.aar/8eda4878265e3c69e6c39af846883bd6/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:asynclayoutinflater:28.0.0] /home/robin/.gradle/caches/transforms-1/files-1.1/asynclayoutinflater-28.0.0.aar/3d7cfc8e44082fe273dc82f30fe6f3b6/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:cursoradapter:28.0.0] /home/robin/.gradle/caches/transforms-1/files-1.1/cursoradapter-28.0.0.aar/4a4c8882ac53ab02860aff045cbc0b10/AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.lifecycle:livedata:1.1.1] /home/robin/.gradle/caches/transforms-1/files-1.1/livedata-1.1.1.aar/a7c7d25134fdb0ef27c2b5c58c03b644/AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /home/robin/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.1.aar/8ab76af1e611ff678c487c49fcd9ef64/AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.core:runtime:1.1.1] /home/robin/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/8e0666d6f37b248ec832b3fd2b644d5d/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-media-compat:28.0.0] /home/robin/.gradle/caches/transforms-1/files-1.1/support-media-compat-28.0.0.aar/fd96fe3868b8a6bbae55cc62810f745f/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:support-vector-drawable:28.0.0] /home/robin/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-28.0.0.aar/3f53d2712fcb561f92562e91dc89cb41/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-media-compat:28.0.0] /home/robin/.gradle/caches/transforms-1/files-1.1/support-media-compat-28.0.0.aar/fd96fe3868b8a6bbae55cc62810f745f/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:support-compat:28.0.0] /home/robin/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/039c28797e5175886ed63fb98e346303/AndroidManifest.xml:17:1-24:12
 MERGED from [android.arch.lifecycle:runtime:1.1.1] /home/robin/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/1b0a463f524e0544a27ca37e19d795f0/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:versionedparcelable:28.0.0] /home/robin/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/2aa11cffa6f1b7e3a4d841b65d3f901c/AndroidManifest.xml:17:1-25:12
 MERGED from [com.android.support:documentfile:28.0.0] /home/robin/.gradle/caches/transforms-1/files-1.1/documentfile-28.0.0.aar/5014493caf4f9a0023384dc19b527814/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:localbroadcastmanager:28.0.0] /home/robin/.gradle/caches/transforms-1/files-1.1/localbroadcastmanager-28.0.0.aar/6e79053818ad15ad96610893a81bb6c5/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:print:28.0.0] /home/robin/.gradle/caches/transforms-1/files-1.1/print-28.0.0.aar/e0182fd837ff740c5f64a81058640aa6/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:versionedparcelable:28.0.0] /home/robin/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/2aa11cffa6f1b7e3a4d841b65d3f901c/AndroidManifest.xml:17:1-25:12
 MERGED from [com.google.android.gms:play-services-maps-license:12.0.1] /home/robin/.gradle/caches/transforms-1/files-1.1/play-services-maps-license-12.0.1.aar/8b55f5581a1863d47ab106ff07a767f8/AndroidManifest.xml:17:1-24:12
 MERGED from [com.google.firebase:firebase-messaging-license:12.0.1] /home/robin/.gradle/caches/transforms-1/files-1.1/firebase-messaging-license-12.0.1.aar/4c5482b8d9b72bc058d4ab2d33aec211/AndroidManifest.xml:17:1-24:12
 MERGED from [com.google.android.gms:play-services-base-license:12.0.1] /home/robin/.gradle/caches/transforms-1/files-1.1/play-services-base-license-12.0.1.aar/ed1c3ecd92b763815b83d3cb6e2b0314/AndroidManifest.xml:17:1-24:12
@@ -161,22 +162,22 @@ MERGED from [com.google.android.gms:play-services-vision-common-license:12.0.1] 
 MERGED from [com.google.android.gms:play-services-vision-license:12.0.1] /home/robin/.gradle/caches/transforms-1/files-1.1/play-services-vision-license-12.0.1.aar/1a0c51a7971487427938923897ec6762/AndroidManifest.xml:17:1-24:12
 MERGED from [com.google.android.gms:play-services-wallet-license:12.0.1] /home/robin/.gradle/caches/transforms-1/files-1.1/play-services-wallet-license-12.0.1.aar/662be9fde14b17bca87b75170eb90ebe/AndroidManifest.xml:17:1-24:12
 MERGED from [com.google.android.gms:play-services-wearable-license:12.0.1] /home/robin/.gradle/caches/transforms-1/files-1.1/play-services-wearable-license-12.0.1.aar/c88a7228e1951b6305ee987322500992/AndroidManifest.xml:17:1-24:12
-INJECTED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:2:1-180:12
-INJECTED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:2:1-180:12
-INJECTED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:2:1-180:12
+INJECTED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:2:1-188:12
+INJECTED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:2:1-188:12
+INJECTED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:2:1-188:12
 	package
 		ADDED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:4:11-45
 		INJECTED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml
 		INJECTED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml
 	android:versionName
 		INJECTED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml
-		ADDED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:2:1-180:12
+		ADDED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:2:1-188:12
 		INJECTED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml
 	xmlns:tools
 		ADDED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:3:11-57
 	android:versionCode
 		INJECTED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml
-		ADDED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:2:1-180:12
+		ADDED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:2:1-188:12
 		INJECTED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml
 	xmlns:android
 		ADDED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:2:11-69
@@ -255,7 +256,7 @@ ADDED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/A
 	android:name
 		ADDED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:13:22-66
 application
-ADDED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:15:5-178:19
+ADDED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:15:5-186:19
 MERGED from [com.android.support:design:28.0.0] /home/robin/.gradle/caches/transforms-1/files-1.1/design-28.0.0.aar/15f5a17aa151a673c001a76a04cadfd4/AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:design:28.0.0] /home/robin/.gradle/caches/transforms-1/files-1.1/design-28.0.0.aar/15f5a17aa151a673c001a76a04cadfd4/AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.gms:play-services:12.0.1] /home/robin/.gradle/caches/transforms-1/files-1.1/play-services-12.0.1.aar/099434bedf5083fa71bd1fdb326a32db/AndroidManifest.xml:5:5-20
@@ -486,7 +487,7 @@ ADDED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/A
 	android:screenOrientation
 		ADDED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:28:17-53
 	android:name
-		ADDED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:27:17-82
+		ADDED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:27:17-58
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
 ADDED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:29:13-33:29
 action#android.intent.action.MAIN
@@ -706,31 +707,35 @@ ADDED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/A
 	android:name
 		ADDED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:163:17-81
 activity#com.fobbu.member.android.activities.emergencyContactsModule.contactList.ContactListActicvity
-ADDED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:166:9-168:20
+ADDED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:166:9-169:20
 	android:screenOrientation
-		ADDED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:167:19-55
+		ADDED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:168:17-53
 	android:name
-		ADDED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:166:19-102
+		ADDED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:167:17-100
 activity#com.fobbu.member.android.activities.profile.ProfileActivity
-ADDED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:170:9-173:20
+ADDED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:170:9-174:20
 	android:screenOrientation
-		ADDED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:172:19-55
+		ADDED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:172:17-53
 	android:windowSoftInputMode
-		ADDED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:171:19-61
+		ADDED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:173:17-59
 	android:name
-		ADDED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:170:19-69
+		ADDED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:171:17-67
 service#com.fobbu.member.android.backgroundServices.FetchStatusAPI
-ADDED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:175:9-92
+ADDED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:176:9-178:41
 	android:enabled
-		ADDED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:175:18-40
+		ADDED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:178:17-39
 	android:name
-		ADDED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:175:41-90
+		ADDED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:177:17-66
 uses-library#org.apache.http.legacy
-ADDED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:176:9-88
+ADDED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:180:9-182:43
 	android:required
-		ADDED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:176:61-85
+		ADDED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:182:17-41
 	android:name
-		ADDED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:176:23-60
+		ADDED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:181:17-54
+activity#com.fobbu.member.android.activities.paymentModule.OdsGetSetGoActivity
+ADDED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:184:9-185:20
+	android:name
+		ADDED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:184:19-79
 uses-sdk
 INJECTED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml
@@ -739,6 +744,8 @@ MERGED from [com.android.support:multidex:1.0.3] /home/robin/.gradle/caches/tran
 MERGED from [com.android.support:multidex:1.0.3] /home/robin/.gradle/caches/transforms-1/files-1.1/multidex-1.0.3.aar/86c7f20d6ef3280f9204a6f40054ce9e/AndroidManifest.xml:20:5-43
 MERGED from [com.android.support:design:28.0.0] /home/robin/.gradle/caches/transforms-1/files-1.1/design-28.0.0.aar/15f5a17aa151a673c001a76a04cadfd4/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:design:28.0.0] /home/robin/.gradle/caches/transforms-1/files-1.1/design-28.0.0.aar/15f5a17aa151a673c001a76a04cadfd4/AndroidManifest.xml:20:5-44
+MERGED from [com.yarolegovich:discrete-scrollview:1.4.9] /home/robin/.gradle/caches/transforms-1/files-1.1/discrete-scrollview-1.4.9.aar/8b3e7384a6d35119de3c4503754cb80e/AndroidManifest.xml:8:5-10:41
+MERGED from [com.yarolegovich:discrete-scrollview:1.4.9] /home/robin/.gradle/caches/transforms-1/files-1.1/discrete-scrollview-1.4.9.aar/8b3e7384a6d35119de3c4503754cb80e/AndroidManifest.xml:8:5-10:41
 MERGED from [com.google.android.gms:play-services:12.0.1] /home/robin/.gradle/caches/transforms-1/files-1.1/play-services-12.0.1.aar/099434bedf5083fa71bd1fdb326a32db/AndroidManifest.xml:4:5-43
 MERGED from [com.google.android.gms:play-services:12.0.1] /home/robin/.gradle/caches/transforms-1/files-1.1/play-services-12.0.1.aar/099434bedf5083fa71bd1fdb326a32db/AndroidManifest.xml:4:5-43
 MERGED from [com.google.android.gms:play-services-cast-framework:12.0.1] /home/robin/.gradle/caches/transforms-1/files-1.1/play-services-cast-framework-12.0.1.aar/8750718b48cced1522846415165619aa/AndroidManifest.xml:5:5-44
@@ -867,14 +874,12 @@ MERGED from [com.squareup.picasso:picasso:2.71828] /home/robin/.gradle/caches/tr
 MERGED from [com.squareup.picasso:picasso:2.71828] /home/robin/.gradle/caches/transforms-1/files-1.1/picasso-2.71828.aar/339d4f96c53f69faa845aa893d79ba0c/AndroidManifest.xml:5:5-44
 MERGED from [com.android.support:support-fragment:28.0.0] /home/robin/.gradle/caches/transforms-1/files-1.1/support-fragment-28.0.0.aar/2b91c61a73911d4fb8e1be8fe6d81160/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:support-fragment:28.0.0] /home/robin/.gradle/caches/transforms-1/files-1.1/support-fragment-28.0.0.aar/2b91c61a73911d4fb8e1be8fe6d81160/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:recyclerview-v7:28.0.0] /home/robin/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-28.0.0.aar/870b3651a86907fc85e337c3d387b6b8/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:recyclerview-v7:28.0.0] /home/robin/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-28.0.0.aar/870b3651a86907fc85e337c3d387b6b8/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:animated-vector-drawable:28.0.0] /home/robin/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-28.0.0.aar/5d1d3b1fee3205840eff10865b03507f/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:animated-vector-drawable:28.0.0] /home/robin/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-28.0.0.aar/5d1d3b1fee3205840eff10865b03507f/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:recyclerview-v7:28.0.0] /home/robin/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-28.0.0.aar/870b3651a86907fc85e337c3d387b6b8/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:recyclerview-v7:28.0.0] /home/robin/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-28.0.0.aar/870b3651a86907fc85e337c3d387b6b8/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:support-core-ui:28.0.0] /home/robin/.gradle/caches/transforms-1/files-1.1/support-core-ui-28.0.0.aar/c20677174566346b99aa16ab8586012c/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:support-core-ui:28.0.0] /home/robin/.gradle/caches/transforms-1/files-1.1/support-core-ui-28.0.0.aar/c20677174566346b99aa16ab8586012c/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:cursoradapter:28.0.0] /home/robin/.gradle/caches/transforms-1/files-1.1/cursoradapter-28.0.0.aar/4a4c8882ac53ab02860aff045cbc0b10/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:cursoradapter:28.0.0] /home/robin/.gradle/caches/transforms-1/files-1.1/cursoradapter-28.0.0.aar/4a4c8882ac53ab02860aff045cbc0b10/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:transition:28.0.0] /home/robin/.gradle/caches/transforms-1/files-1.1/transition-28.0.0.aar/b3d338965e4be6e7e823ebde86af1bb2/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:transition:28.0.0] /home/robin/.gradle/caches/transforms-1/files-1.1/transition-28.0.0.aar/b3d338965e4be6e7e823ebde86af1bb2/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:cardview-v7:28.0.0] /home/robin/.gradle/caches/transforms-1/files-1.1/cardview-v7-28.0.0.aar/ea7d852ca5338c28cb446c302da1722f/AndroidManifest.xml:20:5-44
@@ -905,28 +910,30 @@ MERGED from [com.android.support:interpolator:28.0.0] /home/robin/.gradle/caches
 MERGED from [com.android.support:interpolator:28.0.0] /home/robin/.gradle/caches/transforms-1/files-1.1/interpolator-28.0.0.aar/8eda4878265e3c69e6c39af846883bd6/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:asynclayoutinflater:28.0.0] /home/robin/.gradle/caches/transforms-1/files-1.1/asynclayoutinflater-28.0.0.aar/3d7cfc8e44082fe273dc82f30fe6f3b6/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:asynclayoutinflater:28.0.0] /home/robin/.gradle/caches/transforms-1/files-1.1/asynclayoutinflater-28.0.0.aar/3d7cfc8e44082fe273dc82f30fe6f3b6/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cursoradapter:28.0.0] /home/robin/.gradle/caches/transforms-1/files-1.1/cursoradapter-28.0.0.aar/4a4c8882ac53ab02860aff045cbc0b10/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cursoradapter:28.0.0] /home/robin/.gradle/caches/transforms-1/files-1.1/cursoradapter-28.0.0.aar/4a4c8882ac53ab02860aff045cbc0b10/AndroidManifest.xml:20:5-44
 MERGED from [android.arch.lifecycle:livedata:1.1.1] /home/robin/.gradle/caches/transforms-1/files-1.1/livedata-1.1.1.aar/a7c7d25134fdb0ef27c2b5c58c03b644/AndroidManifest.xml:20:5-44
 MERGED from [android.arch.lifecycle:livedata:1.1.1] /home/robin/.gradle/caches/transforms-1/files-1.1/livedata-1.1.1.aar/a7c7d25134fdb0ef27c2b5c58c03b644/AndroidManifest.xml:20:5-44
 MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /home/robin/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.1.aar/8ab76af1e611ff678c487c49fcd9ef64/AndroidManifest.xml:20:5-44
 MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /home/robin/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.1.aar/8ab76af1e611ff678c487c49fcd9ef64/AndroidManifest.xml:20:5-44
 MERGED from [android.arch.core:runtime:1.1.1] /home/robin/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/8e0666d6f37b248ec832b3fd2b644d5d/AndroidManifest.xml:20:5-44
 MERGED from [android.arch.core:runtime:1.1.1] /home/robin/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/8e0666d6f37b248ec832b3fd2b644d5d/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-media-compat:28.0.0] /home/robin/.gradle/caches/transforms-1/files-1.1/support-media-compat-28.0.0.aar/fd96fe3868b8a6bbae55cc62810f745f/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-media-compat:28.0.0] /home/robin/.gradle/caches/transforms-1/files-1.1/support-media-compat-28.0.0.aar/fd96fe3868b8a6bbae55cc62810f745f/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:support-vector-drawable:28.0.0] /home/robin/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-28.0.0.aar/3f53d2712fcb561f92562e91dc89cb41/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:support-vector-drawable:28.0.0] /home/robin/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-28.0.0.aar/3f53d2712fcb561f92562e91dc89cb41/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-media-compat:28.0.0] /home/robin/.gradle/caches/transforms-1/files-1.1/support-media-compat-28.0.0.aar/fd96fe3868b8a6bbae55cc62810f745f/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-media-compat:28.0.0] /home/robin/.gradle/caches/transforms-1/files-1.1/support-media-compat-28.0.0.aar/fd96fe3868b8a6bbae55cc62810f745f/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:support-compat:28.0.0] /home/robin/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/039c28797e5175886ed63fb98e346303/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:support-compat:28.0.0] /home/robin/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/039c28797e5175886ed63fb98e346303/AndroidManifest.xml:20:5-44
 MERGED from [android.arch.lifecycle:runtime:1.1.1] /home/robin/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/1b0a463f524e0544a27ca37e19d795f0/AndroidManifest.xml:20:5-44
 MERGED from [android.arch.lifecycle:runtime:1.1.1] /home/robin/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/1b0a463f524e0544a27ca37e19d795f0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:versionedparcelable:28.0.0] /home/robin/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/2aa11cffa6f1b7e3a4d841b65d3f901c/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:versionedparcelable:28.0.0] /home/robin/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/2aa11cffa6f1b7e3a4d841b65d3f901c/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:documentfile:28.0.0] /home/robin/.gradle/caches/transforms-1/files-1.1/documentfile-28.0.0.aar/5014493caf4f9a0023384dc19b527814/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:documentfile:28.0.0] /home/robin/.gradle/caches/transforms-1/files-1.1/documentfile-28.0.0.aar/5014493caf4f9a0023384dc19b527814/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:localbroadcastmanager:28.0.0] /home/robin/.gradle/caches/transforms-1/files-1.1/localbroadcastmanager-28.0.0.aar/6e79053818ad15ad96610893a81bb6c5/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:localbroadcastmanager:28.0.0] /home/robin/.gradle/caches/transforms-1/files-1.1/localbroadcastmanager-28.0.0.aar/6e79053818ad15ad96610893a81bb6c5/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:print:28.0.0] /home/robin/.gradle/caches/transforms-1/files-1.1/print-28.0.0.aar/e0182fd837ff740c5f64a81058640aa6/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:print:28.0.0] /home/robin/.gradle/caches/transforms-1/files-1.1/print-28.0.0.aar/e0182fd837ff740c5f64a81058640aa6/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:versionedparcelable:28.0.0] /home/robin/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/2aa11cffa6f1b7e3a4d841b65d3f901c/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:versionedparcelable:28.0.0] /home/robin/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/2aa11cffa6f1b7e3a4d841b65d3f901c/AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.gms:play-services-maps-license:12.0.1] /home/robin/.gradle/caches/transforms-1/files-1.1/play-services-maps-license-12.0.1.aar/8b55f5581a1863d47ab106ff07a767f8/AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.gms:play-services-maps-license:12.0.1] /home/robin/.gradle/caches/transforms-1/files-1.1/play-services-maps-license-12.0.1.aar/8b55f5581a1863d47ab106ff07a767f8/AndroidManifest.xml:20:5-44
 MERGED from [com.google.firebase:firebase-messaging-license:12.0.1] /home/robin/.gradle/caches/transforms-1/files-1.1/firebase-messaging-license-12.0.1.aar/4c5482b8d9b72bc058d4ab2d33aec211/AndroidManifest.xml:20:5-44

@@ -2,17 +2,14 @@
 <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:focusable="false"
         android:animateLayoutChanges="true"
-        android:focusableInTouchMode="true"
-        android:background="@color/grey_header"
-        tools:context=".activities.paymentModule.GetSetGoActivity">
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        tools:context=".activities.paymentModule.OdsGetSetGoActivity">
 
     <RelativeLayout
-            android:id="@+id/relativeLayoutGetSetToolBar"
+            android:id="@+id/rlOdsGet"
             android:layout_width="match_parent"
             android:background="@drawable/rounded_white_shadow"
             android:layout_marginLeft="12dp"
@@ -27,29 +24,7 @@
                 android:src="@drawable/drawer"
                 android:layout_height="wrap_content"/>
 
-        <TextView
-                android:id="@+id/tvSOS"
-                android:textColor="@color/orange"
-                android:layout_alignParentLeft="true"
-                android:padding="10dp"
-                android:gravity="center"
-                android:textSize="@dimen/textsize_small"
-                android:drawableTop="@drawable/sos_orange"
-                android:text="@string/sos"
-                android:visibility="visible"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
 
-        <ImageView
-                android:id="@+id/ivCrossRSA"
-                android:src="@drawable/cross_gray"
-                android:layout_width="wrap_content"
-                android:padding="10dp"
-                android:visibility="gone"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"/>
 
         <ImageView
                 android:layout_width="wrap_content"
@@ -63,180 +38,162 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:id="@+id/imageViewOptionMenuGetSetSummary"
+                android:id="@+id/ivShareOdsGet"
                 android:src="@drawable/option"
                 android:layout_alignParentEnd="true"/>
     </RelativeLayout>
+
     <TextView
             android:layout_width="wrap_content"
-            android:layout_centerInParent="true"
             android:layout_height="wrap_content"
-            android:id="@+id/textViewHeadingGet"
-            android:layout_below="@+id/relativeLayoutGetSetToolBar"
+            android:id="@+id/tvHeadingGet"
             android:textSize="@dimen/textsize_normal"
-            android:text="@string/ongoing_rsa_request"
+            android:text="@string/photo_updates"
             android:layout_gravity="center"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
-            android:textColor="@color/orange"/>
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/rlOdsGet"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/colorPrimary"/>
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvSubHeadingGet"
+            android:textSize="@dimen/textsize_medium"
+            android:text="@string/sit_back_amp_relax"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="6dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/tvHeadingGet"
+            android:textColor="@color/drawer_text_color"/>
+
+    <RelativeLayout
+            android:id="@+id/rlContainerOdsGet"
+            android:layout_below="@+id/tvSubHeadingGet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <com.fobbu.member.android.utils.WrapContentViewPager
+                android:clipToPadding="false"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/picker"/>
+
+        <!--layout of  feedback provided by the user-->
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone"
+                android:layout_centerInParent="true"
+                android:padding="10dp"
+                android:background="@drawable/work_summary_drawable"
+                android:id="@+id/llReviewGetOds">
+            <RatingBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/ratinBarGetSet"
+                    style="@style/RatingBarSmall"
+                    android:numStars="5"
+                    android:layout_gravity="center"
+            />
+
+            <LinearLayout
+                    android:layout_width="match_parent" android:layout_height="90dp"
+                    android:background="@drawable/work_summary_drawable"
+                    android:layout_marginTop="10dp"
+                    android:padding="10dp"
+            >
+                <EditText
+                        style="@style/TextLabel"
+                        android:textColor="@color/color_grey"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/editTextReviewGet"
+                        android:layout_gravity="top"
+                        android:gravity="top"
+                        android:background="@android:color/transparent"
+                        android:hint="@string/write_a_review"
+                />
+
+            </LinearLayout>
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="20dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:layout_height="wrap_content">
+                    <Button android:layout_width="wrap_content"
+                            android:layout_height="40dp"
+                            android:id="@+id/buttonSubmitGet"
+                            android:text="@string/submit"
+                            android:paddingLeft="40dp"
+                            android:paddingRight="40dp"
+                            android:textAllCaps="false"
+                            android:textSize="@dimen/textsize_medium"
+                            android:textColor="@color/white"
+                            android:background="@drawable/red_rect_rounded"/>
+
+                </LinearLayout>
+                <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="20dp"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+                    <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
+                                  android:id="@+id/linearlayoutNotNowGet"
+                                  android:orientation="vertical">
+
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                                  android:text="@string/not_now"
+                                  android:textSize="@dimen/textsize_medium"
+                                  android:textColor="@color/colorPrimary"
+                        />
+                        <View android:layout_width="match_parent" android:layout_height="1dp"
+                              android:background="@color/colorPrimary"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+
 
     <ScrollView
-            android:layout_below="@+id/textViewHeadingGet"
+            android:layout_marginTop="25dp"
+            android:fillViewport="true"
+            android:layout_below="@+id/rlContainerOdsGet"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
     >
         <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-            <!--Layout of the above box containing the service and feedback layout-->
-            <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_margin="10dp"
-                    android:padding="15dp"
-                    android:id="@+id/linearLayoutHolderGet"
-                    android:background="@drawable/work_summary_drawable"
-            >
 
-                <!--layout of  feedback provided by the user-->
-
-                <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:visibility="gone"
-                        android:animateLayoutChanges="true"
-                        android:id="@+id/linearlayoutReviewGet">
-                    <RatingBar
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/ratinBarGetSet"
-                            style="@style/RatingBarSmall"
-                            android:numStars="5"
-                            android:layout_gravity="center"
-                    />
-
-                    <LinearLayout
-                            android:layout_width="match_parent" android:layout_height="90dp"
-                            android:background="@drawable/work_summary_drawable"
-                            android:layout_marginTop="10dp"
-                            android:padding="10dp"
-                    >
-                        <EditText
-                                style="@style/TextLabel"
-                                android:textColor="@color/color_grey"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:id="@+id/editTextReviewGet"
-                                android:layout_gravity="top"
-                                android:gravity="top"
-                                android:background="@android:color/transparent"
-                                android:hint="@string/write_a_review"
-                        />
-
-                    </LinearLayout>
-                    <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_marginTop="20dp"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                        <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_weight="1"
-                                android:gravity="end"
-                                android:layout_height="wrap_content">
-                            <Button android:layout_width="wrap_content"
-                                    android:layout_height="40dp"
-                                    android:id="@+id/buttonSubmitGet"
-                                    android:text="@string/submit"
-                                    android:paddingLeft="40dp"
-                                    android:paddingRight="40dp"
-                                    android:textAllCaps="false"
-                                    android:textSize="@dimen/textsize_medium"
-                                    android:textColor="@color/white"
-                                    android:background="@drawable/red_rect_rounded"/>
-
-                        </LinearLayout>
-                        <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_weight="1"
-                                android:gravity="center_vertical"
-                                android:paddingLeft="20dp"
-                                android:layout_height="match_parent"
-                                android:orientation="vertical">
-                            <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
-                                          android:id="@+id/linearlayoutNotNowGet"
-                                          android:orientation="vertical">
-
-                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                                          android:text="@string/not_now"
-                                          android:textSize="@dimen/textsize_medium"
-                                          android:textColor="@color/colorPrimary"
-                                />
-                                <View android:layout_width="match_parent" android:layout_height="1dp"
-                                      android:background="@color/colorPrimary"/>
-
-                            </LinearLayout>
-
-                        </LinearLayout>
-
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-
-
-
-
-
-
-                <!--layout of services offered-->
-                <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:visibility="gone"
-                        android:id="@+id/linearLayoutServiceGetSet">
-
-                    <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:id="@+id/imageViewRequestType"
-                            android:src="@drawable/fuel_station"
-                    />
-                    <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:textSize="@dimen/textsize_normal"
-                            android:gravity="center"
-                            android:layout_marginTop="15dp"
-                            android:textColor="@color/color_grey"
-                            android:text="@string/sit_back_relax"/>
-                    <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:textSize="@dimen/textsize_normal"
-                            android:id="@+id/textViewServiceDetailsGet"
-                            android:gravity="center"
-                            android:textColor="@color/color_grey"
-                            android:text="@string/while_fobbu_fills_fuel"/>
-                </LinearLayout>
-
-            </LinearLayout>
 
             <LinearLayout
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingLeft="60dp"
                     android:paddingRight="60dp"
                     android:id="@+id/linearLayoutGet"
-                    android:layout_below="@+id/linearLayoutHolderGet"
                     android:orientation="vertical">
                 <LinearLayout
                         android:layout_width="match_parent"
@@ -508,6 +465,5 @@
             </LinearLayout>
         </RelativeLayout>
     </ScrollView>
-
 
 </RelativeLayout>

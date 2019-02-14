@@ -199,6 +199,9 @@
             android:name="org.apache.http.legacy"
             android:required="false" />
 
+        <activity android:name="com.fobbu.member.android.activities.paymentModule.OdsGetSetGoActivity" >
+        </activity>
+
         <receiver android:name="com.google.android.gms.cast.framework.media.MediaIntentReceiver" />
 
         <service android:name="com.google.android.gms.cast.framework.media.MediaNotificationService" />

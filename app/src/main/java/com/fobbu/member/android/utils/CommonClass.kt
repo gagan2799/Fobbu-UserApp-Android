@@ -47,6 +47,21 @@ class CommonClass(activity1: Activity, context1: Context) {
 
     var aPI_KEY: String = "Fobbu"
 
+     fun shareIt(context:Context)
+    {
+        val intent: Intent = Intent(android.content.Intent.ACTION_SEND)
+
+        intent.type = "text/plain"
+
+        val shareBody: String = "Here is the share content body"
+
+        intent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Subject Here")
+
+        intent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody)
+
+        context.startActivity(Intent.createChooser(intent, "Share via"))
+    }
+
     fun putString(preference: String, value: String) {
         val myPrefs = context.getSharedPreferences("Fobbu_Member_Prefs", Context.MODE_PRIVATE)
 

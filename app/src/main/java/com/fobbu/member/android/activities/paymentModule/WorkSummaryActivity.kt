@@ -29,9 +29,9 @@ class WorkSummaryActivity : AppCompatActivity(),ActivityView
 
     private lateinit var rsaLiveHandler:RsaLivePresenter
 
-    lateinit var workSummaryAdapter:WorkSummaryAdapter
+    private lateinit var workSummaryAdapter:WorkSummaryAdapter
 
-    var odsServiceTime=""
+    private var odsServiceTime=""
 
     lateinit var dataList:ArrayList<HashMap<String,Any>>
 

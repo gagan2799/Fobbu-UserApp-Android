@@ -414,6 +414,8 @@
     <string name="ods_otp_track_message">Fobbu has reached please share</string>
     <string name="_4digits_otp_code_ods">4 digit code:" "</string>
     <string name="service_photos_will_appear_here">Service photos\nwill appear here</string>
+    <string name="photo_updates">Photo Updates</string>
+    <string name="sit_back_amp_relax"><![CDATA[Sit Back & Relax]]></string>
 
 
 </resources>

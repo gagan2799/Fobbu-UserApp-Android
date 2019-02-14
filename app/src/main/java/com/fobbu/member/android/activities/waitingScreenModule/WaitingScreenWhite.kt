@@ -11,6 +11,7 @@ import android.view.View
 import com.fobbu.member.android.R
 import com.fobbu.member.android.activities.dashboardActivity.DashboardActivity
 import com.fobbu.member.android.activities.paymentModule.GetSetGoActivity
+import com.fobbu.member.android.activities.paymentModule.OdsGetSetGoActivity
 import com.fobbu.member.android.activities.paymentModule.WorkSummaryActivity
 import com.fobbu.member.android.fcm.FcmPushTypes
 import com.fobbu.member.android.fragments.rsaFragmentModule.RsaConstants
@@ -151,7 +152,7 @@ class WaitingScreenWhite : AppCompatActivity() {
                 tvCodeValidatedSubMessage.visibility = View.GONE
 
                 Handler().postDelayed({
-                        startActivity(Intent(this, GetSetGoActivity::class.java)
+                        startActivity(Intent(this, OdsGetSetGoActivity::class.java)
                             .setFlags
                                 (Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK).putExtra(RsaConstants.Ods.static_name,"washing"))
 

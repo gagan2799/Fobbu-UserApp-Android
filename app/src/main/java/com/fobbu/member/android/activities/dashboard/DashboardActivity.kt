@@ -60,6 +60,7 @@ import kotlinx.android.synthetic.main.inflate_drawer.*
 import kotlinx.android.synthetic.main.option_menu_layout.*
 import java.lang.Exception
 
+@Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragments, TopBarChanges, ActivityView,
     ActivityViewDashboard
 {
@@ -124,11 +125,11 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
         }
 
         llOdsDash.setOnClickListener {
-          /*  if (intent.getStringExtra(RsaConstants.Ods.static_name)!=RsaConstants.OdsServiceStaticName.trip_ready)
+            if (intent.hasExtra(RsaConstants.Ods.static_name)/*!=RsaConstants.OdsServiceStaticName.trip_ready*/)
                 changeFragment(OdsTrackingFragment(),resources.getString(R.string.ods))
 
-            else*/
-                changeFragment(OdsTrackingFragment(),resources.getString(R.string.ods))
+            else
+                changeFragment(OdsFragment(),resources.getString(R.string.ods))
         }
     }
 

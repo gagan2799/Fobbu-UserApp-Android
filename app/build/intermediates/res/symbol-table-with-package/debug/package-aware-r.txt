@@ -301,6 +301,7 @@ attr drawableSize
 attr drawerArrowStyle
 attr dropDownListViewStyle
 attr dropdownListPreferredItemHeight
+attr dsv_orientation
 attr editTextBackground
 attr editTextColor
 attr editTextStyle
@@ -1468,6 +1469,7 @@ drawable help_drawer
 drawable helpline
 drawable helpline_draw
 drawable helpline_white
+drawable hill
 drawable ic_audiotrack_dark
 drawable ic_audiotrack_light
 drawable ic_dialog_close_dark
@@ -1884,7 +1886,6 @@ id async
 id audio_list_view
 id auto
 id avi
-id aviOdsGet
 id aviPass
 id aviPro
 id avi_assessing
@@ -2122,6 +2123,8 @@ id ivScooterOds
 id ivSearchToolbar
 id ivServiceImageOperation
 id ivShare
+id ivShareOdsGet
+id ivSlidingImage
 id ivSuccessCeheckPaymentDetail
 id ivSuccessCheckOrderDetail
 id ivTick
@@ -2210,7 +2213,6 @@ id llMarkTyreBurst
 id llOdsDash
 id llOdsOrder
 id llOdsService
-id llOdsServiceLoading
 id llOdsServices
 id llPIN
 id llPIN1
@@ -2222,6 +2224,7 @@ id llPinSecurity
 id llProfile
 id llRSA
 id llRecent
+id llReviewGetOds
 id llRsaOrder
 id llScooterOds
 id llScooterThree
@@ -2241,6 +2244,7 @@ id llUploadPics
 id llVehicleTypeOds
 id llWallet
 id llWonderFul
+id loaderOds
 id loading_indicator
 id logo_only
 id mapView
@@ -2300,6 +2304,7 @@ id parent
 id parentPanel
 id parent_matrix
 id percent
+id picker
 id pin
 id place_autocomplete_clear_button
 id place_autocomplete_powered_by_google
@@ -2339,6 +2344,7 @@ id rlBottomSheet
 id rlBuildingLiveTrack
 id rlBuildingWorkSummary
 id rlCodeValidated
+id rlContainerOdsGet
 id rlCustomTabsEmergency
 id rlCustomTabsOthers
 id rlCustomTabsProfile
@@ -2354,6 +2360,7 @@ id rlLoaderProfile
 id rlLoaderVehicleList
 id rlNameBar
 id rlNewVehicleAdded
+id rlOdsGet
 id rlOdsTrackOtp
 id rlPic
 id rlPickingFuel
@@ -2570,6 +2577,7 @@ id tvHeaderSetting
 id tvHeading
 id tvHeadingChange
 id tvHeadingFind
+id tvHeadingGet
 id tvHeadingProfile
 id tvHeadingUpload
 id tvHelp
@@ -2600,7 +2608,6 @@ id tvNewPin
 id tvNo
 id tvNodata
 id tvOdsHeading
-id tvOdsLoadingMessage
 id tvOdsOrders
 id tvOperationBottomSheet
 id tvOperationDate
@@ -2653,6 +2660,7 @@ id tvStartDatePB
 id tvStartFobbu
 id tvStatusOdsTrack
 id tvSubHeaderHelp
+id tvSubHeadingGet
 id tvSubModel
 id tvSubModelAdapter
 id tvSubheading
@@ -2804,6 +2812,7 @@ layout activity_login
 layout activity_main
 layout activity_my_orders
 layout activity_my_passbook
+layout activity_ods_get_set_go
 layout activity_order_detail
 layout activity_passbook_detail
 layout activity_payment_mode
@@ -2896,6 +2905,7 @@ layout search_toolbar
 layout select_dialog_item_material
 layout select_dialog_multichoice_material
 layout select_dialog_singlechoice_material
+layout sliding_cards
 layout spinnertype
 layout support_simple_spinner_dropdown_item
 layout toolbar
@@ -3083,6 +3093,8 @@ string diesel
 string do_it_later
 string double_trouble
 string download_statement
+string dsv_ex_msg_adapter_wrong_recycler
+string dsv_ex_msg_dont_set_lm
 string earn_freebies
 string edit
 string edit_emergency_contacts
@@ -3244,6 +3256,7 @@ string permission_denied
 string permission_granted
 string permission_message
 string petrol
+string photo_updates
 string pin_dont_match
 string place_autocomplete_clear_button
 string place_autocomplete_search_hint
@@ -3320,6 +3333,7 @@ string share_4_digit_code
 string share_your_experience
 string share_your_rsa
 string signup
+string sit_back_amp_relax
 string sit_back_relax
 string sit_back_relax_n_while_fobbu_fills_fuel
 string skip_this_step
@@ -3989,6 +4003,7 @@ styleable Corpus contentProviderUri corpusId corpusVersion documentMaxAgeSecs pe
 styleable CustomCastTheme castExpandedControllerStyle castIntroOverlayStyle castMiniControllerStyle
 styleable CustomWalletTheme customThemeStyle toolbarTextColorStyle windowTransitionStyle
 styleable DesignTheme bottomSheetDialogTheme bottomSheetStyle
+styleable DiscreteScrollView dsv_orientation
 styleable DrawerArrowToggle arrowHeadLength arrowShaftLength barLength color drawableSize gapBetweenBars spinBars thickness
 styleable FeatureParam paramName paramValue
 styleable FloatingActionButton backgroundTint backgroundTintMode borderWidth elevation fabCustomSize fabSize hideMotionSpec hoveredFocusedTranslationZ maxImageSize pressedTranslationZ rippleColor showMotionSpec useCompatPadding

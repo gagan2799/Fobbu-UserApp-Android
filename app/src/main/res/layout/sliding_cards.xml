@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                                    app:cardCornerRadius="10dp"
+                                    android.enableAapt2="false"
+                                    android:layout_gravity="center">
+
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:background="@drawable/light_blue_rectangle"
+                  android:gravity="center_horizontal"
+                  android:paddingTop="40dp"
+                  android:paddingBottom="40dp"
+                  android:paddingLeft="100dp"
+                  android:paddingRight="100dp"
+                  android:id="@+id/loaderOds"
+    android:orientation="vertical">
+
+        <com.wang.avi.AVLoadingIndicatorView
+                android:id="@+id/avi_assessing"
+                style="@style/AVLoadingIndicatorView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+
+
+                app:indicatorColor="@color/colorPrimary"
+                app:indicatorName="BallSpinFadeLoaderIndicator"/>
+
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:textSize="@dimen/textsize_normal"
+                  android:textColor="@color/colorPrimary"
+                  android:text="@string/service_photos_will_appear_here"
+
+                  android:gravity="center"
+                  android:padding="10dp"
+                  android:layout_marginTop="15dp"
+                  android:id="@+id/tvTextPlease"/>
+
+    </LinearLayout>
+
+
+
+    <ImageView
+            android:id="@+id/ivSlidingImage"
+            android:scaleType="centerCrop"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+</android.support.v7.widget.CardView>

@@ -57,18 +57,9 @@ class GetSetGoActivity : AppCompatActivity(), ActivityView
     // function for initialising all the variables of the class
     private fun initView()
     {
-        if (intent
-                .hasExtra(RsaConstants.Ods.static_name))
-        {
-            linearLayoutHolderGet.background=resources.getDrawable(R.drawable.light_blue_rectangle)
+        linearLayoutHolderGet.background=resources.getDrawable(R.drawable.work_summary_drawable)
 
-            llOdsServiceLoading.visibility=View.VISIBLE
-        }
-      else
-        {
-            linearLayoutHolderGet.background=resources.getDrawable(R.drawable.work_summary_drawable)
-
-            llOdsServiceLoading.visibility=View. GONE
+            //llOdsServiceLoading.visibility=View. GONE
 
             getSetGoHandler = GetSetGoPresenter(this, this)
 
@@ -87,7 +78,7 @@ class GetSetGoActivity : AppCompatActivity(), ActivityView
             }
             else
                 changeLayout("Get")
-        }
+
     }
 
     override fun onBackPressed() {

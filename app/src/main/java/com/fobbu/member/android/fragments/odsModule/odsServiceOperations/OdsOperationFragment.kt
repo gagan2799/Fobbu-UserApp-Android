@@ -41,6 +41,8 @@ class OdsOperationFragment : Fragment()
 
     private var time=""
 
+    private var timeSlot=""
+
     lateinit var dataList:ArrayList<HashMap<String,Any>>
 
     private lateinit var datePickerDialog: DatePickerDialog.OnDateSetListener
@@ -192,7 +194,7 @@ class OdsOperationFragment : Fragment()
             if (time!="")
                 startActivity(Intent(activity!!,WorkSummaryActivity::class.java)
                     .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
-                    .putExtra(RsaConstants.Ods.time,time)
+                    .putExtra(RsaConstants.Ods.time,timeSlot)
                     .putExtra(RsaConstants.Ods.date,dateCustom))
         }
 
@@ -244,12 +246,19 @@ class OdsOperationFragment : Fragment()
 
               time= ("$p1:$p2 $AM_PM")
 
+              timeSlot = if (p1==12)
+                  ("$p1:$p2-${"1:$p2"} $AM_PM")
+
+              else
+                  ("$p1:$p2-${""+(p1+1)+":"+p2} $AM_PM")
+
+
               view.tvOperationTime.text=time
 
               if (dateCustom!="")
                   startActivity(Intent(activity!!,WorkSummaryActivity::class.java)
                       .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
-                      .putExtra(RsaConstants.Ods.time,time)
+                      .putExtra(RsaConstants.Ods.time,timeSlot)
                       .putExtra(RsaConstants.Ods.date,dateCustom))
 
           }, hour, minute, false)//Yes 24 hour time
