@@ -1,162 +1,185 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context=".fragments.odsModule.odsServiceOperations.OdsOperationFragment">
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
+        tools:context=".fragments.odsModule.odsServiceOperations.OdsOperationFragment">
 
-
-    <RelativeLayout
-            android:id="@+id/rlTopDrawerOperation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-        <ImageView
-                android:id="@+id/ivBack"
-                android:layout_width="wrap_content"
-                android:padding="12dp"
-                android:src="@drawable/back_button"
-                android:layout_height="wrap_content"/>
-
-        <TextView
-                android:id="@+id/tvSOS"
-                android:textColor="@color/drawer_text_color"
-                android:layout_alignParentLeft="true"
-                android:padding="10dp"
-                android:gravity="center"
-                android:textSize="@dimen/textsize_small"
-                android:drawableTop="@drawable/sos"
-                android:text="@string/sos"
-                android:visibility="gone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-        <ImageView
-                android:id="@+id/ivCrossRSA"
-                android:src="@drawable/cross_gray"
-                android:layout_width="wrap_content"
-                android:padding="10dp"
-                android:visibility="gone"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_height="wrap_content"/>
-
-        <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/fobbu_logo_blue"
-                android:layout_centerInParent="true"/>
-
-    </RelativeLayout>
-
-    <ImageView
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
-            android:layout_below="@+id/rlTopDrawerOperation"
-            android:id="@+id/ivServiceImageOperation"
-            android:layout_width="wrap_content"
-               android:layout_height="wrap_content"/>
-
-    <TextView
-            android:id="@+id/tvOperationLogo"
-            android:layout_marginTop="15dp"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@id/ivServiceImageOperation"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="@dimen/textsize_medium"
-            android:layout_width="wrap_content"
-              android:layout_height="wrap_content"/>
-
-    <TextView
-            android:id="@+id/tvOperationSubLogo"
-            android:layout_marginTop="5dp"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@id/tvOperationLogo"
-            android:textColor="@color/drawer_text_color"
-            android:textSize="@dimen/textsize_small"
-
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-
-    <TextView
-            android:id="@+id/tvOperationPrice"
-            android:layout_marginTop="25dp"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@id/tvOperationSubLogo"
-            android:textColor="@color/drawer_text_color"
-            android:textSize="@dimen/textsize_normal"
-
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-
-    <RelativeLayout
-            android:id="@+id/rlDateTime"
-            android:layout_below="@+id/tvOperationPrice"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:layout_height="wrap_content">
-        <TextView
-                android:id="@+id/tvOperationDate"
-                android:drawablePadding="15dp"
-                android:gravity="center"
-                android:layout_marginLeft="10dp"
-                android:drawableLeft="@drawable/select_date"
-                android:layout_alignParentLeft="true"
-                android:textColor="@color/drawer_text_color"
-                android:textSize="@dimen/textsize_medium"
-                android:text="@string/select_a_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-
-        <TextView
-                android:id="@+id/tvOperationTime"
-                android:drawablePadding="15dp"
-                android:gravity="center"
-                android:layout_marginRight="10dp"
-                android:drawableLeft="@drawable/select_time"
-                android:layout_alignParentRight="true"
-                android:textColor="@color/drawer_text_color"
-                android:textSize="@dimen/textsize_medium"
-                android:text="@string/select_a_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-
-        <LinearLayout
-                android:layout_marginTop="30dp"
-                android:layout_below="@+id/tvOperationTime"
-                android:layout_alignParentBottom="true"
+    <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content">
+        <RelativeLayout
+                android:id="@+id/rlTopDrawerOperation"
                 android:layout_width="match_parent"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:padding="20dp"
-                android:background="@drawable/operation_shadow_draw"
                 android:layout_height="wrap_content">
 
+            <ImageView
+                    android:id="@+id/ivBack"
+                    android:layout_width="wrap_content"
+                    android:padding="12dp"
+                    android:src="@drawable/back_button"
+                    android:layout_height="wrap_content"/>
+
             <TextView
-                    android:id="@+id/tvOperationBottomSheet"
-                    android:layout_marginTop="10dp"
-                    android:gravity="center"
+                    android:id="@+id/tvSOS"
                     android:textColor="@color/drawer_text_color"
-                    android:textSize="@dimen/textsize_medium"
-                    android:text="@string/fobbu_ensures_several_checks_n_and_top_up_on_your_vehicle"
+                    android:layout_alignParentLeft="true"
+                    android:padding="10dp"
+                    android:gravity="center"
+                    android:textSize="@dimen/textsize_small"
+                    android:drawableTop="@drawable/sos"
+                    android:text="@string/sos"
+                    android:visibility="gone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
 
-            <android.support.v7.widget.RecyclerView
-                    android:layout_marginTop="10dp"
-                    android:id="@+id/rvOperations"
-                    android:layout_width="match_parent"
+            <ImageView
+                    android:id="@+id/ivCrossRSA"
+                    android:src="@drawable/cross_gray"
+                    android:layout_width="wrap_content"
+                    android:padding="10dp"
+                    android:visibility="gone"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
                     android:layout_height="wrap_content"/>
 
-        </LinearLayout>
+            <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/fobbu_logo_blue"
+                    android:layout_centerInParent="true"/>
+
+        </RelativeLayout>
+
+        <ImageView
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:layout_below="@+id/rlTopDrawerOperation"
+                android:id="@+id/ivServiceImageOperation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        <TextView
+                android:id="@+id/tvOperationLogo"
+                android:layout_marginTop="15dp"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/ivServiceImageOperation"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/textsize_medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        <TextView
+                android:id="@+id/tvOperationSubLogo"
+                android:layout_marginTop="5dp"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/tvOperationLogo"
+                android:textColor="@color/drawer_text_color"
+                android:textSize="@dimen/textsize_small"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+
+        <TextView
+                android:id="@+id/tvOperationPrice"
+                android:layout_marginTop="25dp"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/tvOperationSubLogo"
+                android:textColor="@color/drawer_text_color"
+                android:textSize="@dimen/textsize_normal"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+
+        <RelativeLayout
+                android:id="@+id/rlDateTime"
+                android:layout_below="@+id/tvOperationPrice"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
+            <TextView
+                    android:id="@+id/tvOperationDate"
+                    android:drawablePadding="15dp"
+                    android:gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:drawableLeft="@drawable/select_date"
+                    android:layout_alignParentLeft="true"
+                    android:textColor="@color/drawer_text_color"
+                    android:textSize="@dimen/textsize_medium"
+                    android:text="@string/select_a_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+
+            <TextView
+                    android:id="@+id/tvOperationTime"
+                    android:drawablePadding="15dp"
+                    android:gravity="center"
+                    android:layout_marginRight="10dp"
+                    android:drawableLeft="@drawable/select_time"
+                    android:layout_alignParentRight="true"
+                    android:textColor="@color/drawer_text_color"
+                    android:textSize="@dimen/textsize_medium"
+                    android:text="@string/select_a_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+
+            <LinearLayout
+                    android:layout_marginTop="30dp"
+                    android:layout_below="@+id/tvOperationTime"
+                    android:layout_alignParentBottom="true"
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:padding="20dp"
+                    android:background="@drawable/operation_shadow_draw"
+                    android:layout_height="wrap_content">
+
+                <TextView
+                        android:id="@+id/tvOperationBottomSheet"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center"
+                        android:textColor="@color/drawer_text_color"
+                        android:textSize="@dimen/textsize_medium"
+                        android:text="@string/fobbu_ensures_several_checks_n_and_top_up_on_your_vehicle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                <android.support.v7.widget.RecyclerView
+                        android:layout_marginTop="10dp"
+                        android:id="@+id/rvOperations"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:id="@+id/rlLoader"
+            android:visibility="gone"
+            android:layout_height="match_parent">
+
+        <com.wang.avi.AVLoadingIndicatorView
+                android:id="@+id/avi"
+                style="@style/AVLoadingIndicatorView.Large"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                android:layout_centerInParent="true"
+                app:indicatorColor="@color/colorPrimary"
+                app:indicatorName="BallScaleMultipleIndicator"/>
+
     </RelativeLayout>
 
 </RelativeLayout>

@@ -27,7 +27,7 @@ class WaitingScreenBlue : AppCompatActivity() {
 
         setContentView(R.layout.activity_waiting_screen_blue)
         initView()
-        handleclicks()
+        //handleclicks()
     }
 
     private fun initView() {
@@ -164,7 +164,7 @@ class WaitingScreenBlue : AppCompatActivity() {
 
     private val changeRSALiveScreenReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
-
+            println("Broadcast received")
             strWhich = intent.getStringExtra("navigate_to")
 
             if(strWhich=="4") {

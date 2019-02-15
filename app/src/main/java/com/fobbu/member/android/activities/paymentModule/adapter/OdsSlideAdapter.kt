@@ -10,21 +10,35 @@ import android.widget.ImageView
 import com.fobbu.member.android.R
 import kotlinx.android.synthetic.main.sliding_cards.view.*
 
-class OdsSlideAdapter(var context: Context/*, var list:ArrayList<Int>*/): PagerAdapter(){
+class OdsSlideAdapter(var context: Context, var list:ArrayList<Int>): PagerAdapter(){
     override fun isViewFromObject(p0: View, p1: Any): Boolean {
         return p0 == p1
     }
 
     override fun getCount(): Int {
-
-        return 6
+        return if (list.size==0)
+            1
+        else
+            6
     }
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any
     {
         val view=LayoutInflater.from(context).inflate(R.layout.sliding_cards,container,false)
 
-        view.ivSlidingImage.setImageResource(R.drawable.hill)
+        if (list.size==0)
+        {
+        view.loaderOds.visibility=View.VISIBLE
+
+            view.ivSlidingImage.visibility=View.GONE
+        }else
+        {
+            view.loaderOds.visibility=View.GONE
+
+            view.ivSlidingImage.visibility=View.VISIBLE
+
+            view.ivSlidingImage.setImageResource(R.drawable.hill)
+        }
 
         container.addView(view)
 

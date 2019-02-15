@@ -19,6 +19,8 @@ class OdsGetSetGoActivity : AppCompatActivity()
 
     lateinit var adapter: OdsSlideAdapter
 
+    var list=ArrayList<Int>()
+
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
@@ -36,16 +38,19 @@ class OdsGetSetGoActivity : AppCompatActivity()
        commonClass= CommonClass(this,this)
 
         setUpSlider()
-
-        /*Handler().postDelayed({
-            picker.visibility= View.GONE
-
-            llReviewGetOds.visibility=View.VISIBLE
-        },1000)*/
-
-
     }
 
+
+    override fun onResume() {
+        super.onResume()
+
+        Handler().postDelayed({
+            list.add(R.drawable.hill)
+
+            setUpSlider()
+        },5000)
+
+    }
 
     //function for handling clicks of the class
     private fun clicks()
@@ -59,7 +64,7 @@ class OdsGetSetGoActivity : AppCompatActivity()
     // functiom for setting up slider
     private fun  setUpSlider()
     {
-        adapter=OdsSlideAdapter(this)
+        adapter=OdsSlideAdapter(this,list)
 
         picker.adapter=adapter
 

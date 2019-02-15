@@ -183,6 +183,8 @@
 
         <activity android:name=".activities.paymentModule.OdsGetSetGoActivity">
         </activity>
+        <activity android:name=".activities.GooglePlacesActivity.GooglePlacesActivity">
+        </activity>
     </application>
 
 </manifest>

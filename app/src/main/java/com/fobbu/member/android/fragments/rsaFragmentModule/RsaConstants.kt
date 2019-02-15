@@ -29,7 +29,12 @@ class RsaConstants
         var service_price="service_price"
         var address="address"
         var time="time"
+        var vehicleType="vehicleType"
+        var vehicleNumber="vehicleNumber"
+        var regNo="regNo"
         var date="date"
+        var lat="placesLat"
+        var long="placesLat"
     }
     object ServiceSaved
     {

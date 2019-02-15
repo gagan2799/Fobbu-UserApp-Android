@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Intent
+import android.location.Address
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentTransaction
@@ -11,16 +12,22 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RelativeLayout
 
 import com.fobbu.member.android.R
 import com.fobbu.member.android.activities.paymentModule.WorkSummaryActivity
 import com.fobbu.member.android.fragments.odsModule.odsFragment.OdsFragment
 import com.fobbu.member.android.fragments.odsModule.odsServiceOperations.adapter.OdsOperationAdapter
+import com.fobbu.member.android.fragments.odsModule.odsServiceOperations.presenter.OdsRequestHandler
+import com.fobbu.member.android.fragments.odsModule.odsServiceOperations.presenter.OdsRequestPresenter
 import com.fobbu.member.android.fragments.rsaFragmentModule.RSAFragment
 import com.fobbu.member.android.fragments.rsaFragmentModule.RsaConstants
 import com.fobbu.member.android.interfaces.TopBarChanges
+import com.fobbu.member.android.modals.MainPojo
 import com.fobbu.member.android.utils.CommonClass
+import com.fobbu.member.android.view.ActivityView
 import com.squareup.picasso.Picasso
+import com.squareup.picasso.RequestHandler
 import kotlinx.android.synthetic.main.fragment_ods_operation.*
 import kotlinx.android.synthetic.main.fragment_ods_operation.view.*
 import java.text.SimpleDateFormat
@@ -29,25 +36,35 @@ import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
 
-class OdsOperationFragment : Fragment()
+class OdsOperationFragment : Fragment(),ActivityView
 {
     private lateinit var myCalendar: Calendar
 
     private var startdateCustom = ""
 
     private lateinit var odsOperationAdapter:OdsOperationAdapter
-    
+
     private var dateCustom = ""
 
     private var time=""
 
     private var timeSlot=""
 
+    lateinit var addressList:List<Address>
+
+    private var startDate=""
+
+    private var endDate=""
+
     lateinit var dataList:ArrayList<HashMap<String,Any>>
 
     private lateinit var datePickerDialog: DatePickerDialog.OnDateSetListener
 
     lateinit var commonClass:CommonClass
+
+    private lateinit var odsRequestHandler: OdsRequestHandler
+
+    lateinit var rlLoader:RelativeLayout
 
     private var topBarChanges: TopBarChanges? = null
 
@@ -56,7 +73,7 @@ class OdsOperationFragment : Fragment()
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-     val   view= inflater.inflate(R.layout.fragment_ods_operation, container, false)
+        val   view= inflater.inflate(R.layout.fragment_ods_operation, container, false)
         if (view!= null)
         {
             initView(view)
@@ -80,6 +97,10 @@ class OdsOperationFragment : Fragment()
             dataList=commonClass.getStringList(RsaConstants.Ods.singleServiceList)
         }
 
+        rlLoader=view.findViewById(R.id.rlLoader)
+
+        odsRequestHandler=OdsRequestPresenter(activity!!,this)
+
         setDataInView(view)
 
         setRecycler(view)
@@ -101,7 +122,7 @@ class OdsOperationFragment : Fragment()
 
         if (dataList[0][RsaConstants.Ods.service_price].toString()!="")
             view.tvOperationPrice.text=
-                    """${activity!!.getString(R.string.rs)} ${dataList[0][RsaConstants.Ods.service_price].toString()}"""
+                    """${activity!!.getString(R.string.rs)} ${(dataList[0][RsaConstants.Ods.service_price]as Double).toLong()} /-"""
 
         when(dataList[0][RsaConstants.Ods.static_name])
         {
@@ -143,7 +164,7 @@ class OdsOperationFragment : Fragment()
     private fun clicks(view: View)
     {
         view.tvOperationDate.setOnClickListener {
-           selectDateFromCalender(view)
+            selectDateFromCalender(view)
         }
 
         view.tvOperationTime.setOnClickListener {
@@ -192,10 +213,15 @@ class OdsOperationFragment : Fragment()
             view.tvOperationDate.text=dateCustom
 
             if (time!="")
-                startActivity(Intent(activity!!,WorkSummaryActivity::class.java)
-                    .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
-                    .putExtra(RsaConstants.Ods.time,timeSlot)
-                    .putExtra(RsaConstants.Ods.date,dateCustom))
+            {
+                if (dataList[0][RsaConstants.Ods.service_name].toString()=="Washing")
+                    makeOdsRequest()
+                else
+                    startActivity(Intent(activity!!,WorkSummaryActivity::class.java)
+                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                        .putExtra(RsaConstants.Ods.time,timeSlot)
+                        .putExtra(RsaConstants.Ods.date,dateCustom))
+            }
         }
 
 
@@ -220,56 +246,120 @@ class OdsOperationFragment : Fragment()
         val sdfServer = SimpleDateFormat("dd-MM-yyyy")
         // sdf.timeZone = TimeZone.getTimeZone("UTC")
 
-            startdateCustom = sdfServer.format(myCalendar.time)
+        startdateCustom = sdfServer.format(myCalendar.time)
 
-     return startdateCustom
+        val sdfServerPOST = SimpleDateFormat("YYYY-MM-dd HH:mm:ss")
+
+        startDate=sdfServerPOST.format(myCalendar.time)
+
+        myCalendar.add(Calendar.HOUR, 1)
+
+        endDate=sdfServerPOST.format(myCalendar.time)
+
+        return startdateCustom
     }
 
 
-  private fun   selectTime(view: View)
-  {
-      val mcurrentTime = Calendar.getInstance()
+    private fun   selectTime(view: View)
+    {
+        val mcurrentTime = Calendar.getInstance()
 
-      val hour = mcurrentTime.get(Calendar.HOUR_OF_DAY)
+        val hour = mcurrentTime.get(Calendar.HOUR_OF_DAY)
 
-      val minute = mcurrentTime.get(Calendar.MINUTE)
-    val mTimePicker: TimePickerDialog
+        val minute = mcurrentTime.get(Calendar.MINUTE)
+        val mTimePicker: TimePickerDialog
 
-      mTimePicker =  TimePickerDialog(activity!!,
-          TimePickerDialog.OnTimeSetListener { _, p1, p2 ->
+        mTimePicker =  TimePickerDialog(activity!!,
+            TimePickerDialog.OnTimeSetListener { _, p1, p2 ->
 
-              val AM_PM = if(p1 < 12) {
-                  "AM"
-              } else {
-                  "PM"
-              }
+                val AM_PM = if(p1 < 12) {
+                    "AM"
+                } else {
+                    "PM"
+                }
 
-              time= ("$p1:$p2 $AM_PM")
+                time= ("$p1:$p2 $AM_PM")
 
-              timeSlot = if (p1==12)
-                  ("$p1:$p2-${"1:$p2"} $AM_PM")
+                timeSlot = if (p1==12)
+                    ("$p1:$p2-${"1:$p2"} $AM_PM")
 
-              else
-                  ("$p1:$p2-${""+(p1+1)+":"+p2} $AM_PM")
-
-
-              view.tvOperationTime.text=time
-
-              if (dateCustom!="")
-                  startActivity(Intent(activity!!,WorkSummaryActivity::class.java)
-                      .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
-                      .putExtra(RsaConstants.Ods.time,timeSlot)
-                      .putExtra(RsaConstants.Ods.date,dateCustom))
-
-          }, hour, minute, false)//Yes 24 hour time
-
-      mTimePicker.setTitle("Select Time")
-
-      mTimePicker.show()
-  }
+                else
+                    ("$p1:$p2-${""+(p1+1)+":"+p2} $AM_PM")
 
 
-  }
+                view.tvOperationTime.text=time
+
+                if (dateCustom!="")
+                {
+                    if (dataList[0][RsaConstants.Ods.service_name].toString()=="Washing")
+                        makeOdsRequest()
+                    else
+                    startActivity(Intent(activity!!,WorkSummaryActivity::class.java)
+                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                        .putExtra(RsaConstants.Ods.time,timeSlot)
+                        .putExtra(RsaConstants.Ods.date,dateCustom))
+                }
+
+            }, hour, minute, false)//Yes 24 hour time
+
+        mTimePicker.setTitle("Select Time")
+
+        mTimePicker.show()
+    }
+
+    //********************** ods_request API ***********************//
+
+    //implementing ods_request API
+    private fun makeOdsRequest()
+    {
+        if (commonClass.checkInternetConn(activity!!))
+        {
+            val map=HashMap<String,Any>()
+
+            map["user_id"]=commonClass.getString("_id")
+
+            map["service"]=dataList[0]["_id"].toString()
+
+            map["latitude"]=commonClass.getString(RsaConstants.Ods.lat)
+
+            map["longitude"]=commonClass.getString(RsaConstants.Ods.long)
+
+            map["vehicle_number"]=commonClass.getString(RsaConstants.Ods.vehicleNumber)
+
+            map["vehicle_type"]=commonClass.getString(RsaConstants.Ods.vehicleType)
+
+            map["registration_number"]=commonClass.getString(RsaConstants.Ods.regNo)
+
+            map["start_date"]= startDate
+
+            map["end_date"]=endDate
+
+            map["address"]=commonClass.getString(RsaConstants.Ods.address)
+
+            println("dataMap::::$map")
+
+            odsRequestHandler.makeOdsRequest(map,commonClass.getString("x_access_token"))
+        }
+        else
+            commonClass.showToast(activity!!.resources.getString(R.string.internet_is_unavailable))
+    }
+    //handling the response of    ods_request API
+    override fun onRequestSuccessReport(mainPojo: MainPojo)
+    {
+      commonClass.showToast(mainPojo.message)
+    }
+
+    override fun showLoader()
+    {
+        rlLoader.visibility=View.VISIBLE
+    }
+
+    override fun hideLoader()
+    {
+        rlLoader.visibility=View.GONE
+    }
+
+}
 
 
 

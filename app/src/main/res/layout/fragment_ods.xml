@@ -98,7 +98,6 @@
                         android:layout_height="match_parent">
 
 
-
                     <RelativeLayout
                             android:layout_width="match_parent"
                             android:orientation="vertical"
@@ -115,7 +114,6 @@
                                 android:orientation="vertical">
 
 
-
                                 <TextView android:layout_width="match_parent"
                                           android:layout_height="wrap_content"
                                           android:textColor="@color/colorPrimary"
@@ -130,7 +128,7 @@
 
 
                             <android.support.v7.widget.RecyclerView
-                                    android:layout_margin="20dp"
+
                                     android:layout_width="match_parent"
                                     android:id="@+id/rvOdsService"
                                     android:layout_marginBottom="10dp"
@@ -151,12 +149,6 @@
                                     android:layout_marginTop="10dp"
                                     android:layout_height="wrap_content">
 
-                                <View android:layout_width="50dp"
-                                      android:layout_height="1dp"
-                                      android:layout_toLeftOf="@+id/tvVehicleHeadingOds"
-                                      android:layout_centerVertical="true"
-                                      android:background="@color/view_grey"
-                                      android:layout_toStartOf="@+id/tvVehicleHeadingOds"/>
 
                                 <TextView android:layout_width="wrap_content"
                                           android:layout_height="wrap_content"
@@ -165,13 +157,8 @@
                                           android:padding="10dp"
                                           android:layout_centerInParent="true"
                                           android:id="@+id/tvVehicleHeadingOds"
-                                          android:textSize="@dimen/textsize_normal"/>
+                                          android:textSize="@dimen/textsize_medium"/>
 
-                                <View android:layout_width="50dp"
-                                      android:layout_height="1dp"
-                                      android:layout_toRightOf="@+id/tvVehicleHeadingOds"
-                                      android:layout_centerVertical="true"
-                                      android:background="@color/view_grey"/>
 
                             </RelativeLayout>
 
@@ -447,12 +434,6 @@
                                     android:layout_marginTop="10dp"
                                     android:layout_height="wrap_content">
 
-                                <View android:layout_width="50dp"
-                                      android:layout_height="1dp"
-                                      android:layout_toLeftOf="@+id/tvCarDetailHeadingOds"
-                                      android:layout_centerVertical="true"
-                                      android:background="@color/view_grey"
-                                      android:layout_toStartOf="@+id/tvCarDetailHeadingOds"/>
 
                                 <TextView android:layout_width="wrap_content"
                                           android:layout_height="wrap_content"
@@ -462,13 +443,8 @@
                                           android:text="@string/please_enter_car_details"
                                           android:layout_centerInParent="true"
                                           android:id="@+id/tvCarDetailHeadingOds"
-                                          android:textSize="@dimen/textsize_normal"/>
+                                          android:textSize="@dimen/textsize_medium"/>
 
-                                <View android:layout_width="50dp"
-                                      android:layout_height="1dp"
-                                      android:layout_toRightOf="@+id/tvCarDetailHeadingOds"
-                                      android:layout_centerVertical="true"
-                                      android:background="@color/view_grey"/>
 
                             </RelativeLayout>
 
@@ -543,29 +519,9 @@
     </LinearLayout>
 
 
-    <RelativeLayout
-            android:id="@+id/rlBigProfile"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/black"
-            android:clickable="true"
-            android:visibility="gone">
 
-        <com.github.chrisbanes.photoview.PhotoView
-                android:id="@+id/imgBig"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
 
-        <ImageView
-                android:id="@+id/imgClose"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:padding="10dp"
-                android:src="@drawable/cross_white"/>
 
-    </RelativeLayout>
 
     <RelativeLayout
             android:layout_width="match_parent"

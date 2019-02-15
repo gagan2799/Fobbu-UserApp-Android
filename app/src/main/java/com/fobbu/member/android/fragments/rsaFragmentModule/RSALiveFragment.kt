@@ -445,6 +445,7 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun checkStatusAndNavigate() {
 
         val status = CommonClass(activity!!,activity!!).getString(RsaConstants.RsaTypes.checkStatus)
@@ -468,6 +469,10 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
             FcmPushTypes.Types.newPin -> {
                 ivTool.setImageResource(R.drawable.mechanic_with_cap)
                 tvText.text = resources.getString(R.string.share_4_digit_code)
+                if (CommonClass(activity!!,activity!!).getString(RsaConstants.ServiceSaved.otpStart).length==3)
+                    tvCode.text = "0"+CommonClass(activity!!,activity!!).getString(RsaConstants.ServiceSaved.otpStart)
+
+                else
                 tvCode.text = CommonClass(activity!!,activity!!).getString(RsaConstants.ServiceSaved.otpStart)
                 tvCode.visibility = View.VISIBLE
             }
@@ -475,6 +480,10 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
             FcmPushTypes.Types.otpGenerated -> {
                 ivTool.setImageResource(R.drawable.mechanic_with_cap)
                 tvText.text = resources.getString(R.string.share_4_digit_code)
+                if (CommonClass(activity!!,activity!!).getString(RsaConstants.ServiceSaved.otpStart).length==3)
+                    tvCode.text = "0"+CommonClass(activity!!,activity!!).getString(RsaConstants.ServiceSaved.otpStart)
+
+                else
                 tvCode.text = CommonClass(activity!!,activity!!).getString(RsaConstants.ServiceSaved.otpStart)
                 tvCode.visibility = View.VISIBLE
             }

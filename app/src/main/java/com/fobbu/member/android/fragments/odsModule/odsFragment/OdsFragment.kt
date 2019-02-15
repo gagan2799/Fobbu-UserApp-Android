@@ -1,8 +1,10 @@
 package com.fobbu.member.android.fragments.odsModule.odsFragment
 
 import android.annotation.SuppressLint
+import android.app.Activity.RESULT_OK
 import android.app.Dialog
 import android.content.Context
+import android.content.Intent
 import android.content.IntentSender
 import android.content.pm.PackageManager
 import android.graphics.Typeface
@@ -22,6 +24,7 @@ import android.view.ViewGroup
 import android.widget.RelativeLayout
 
 import com.fobbu.member.android.R
+import com.fobbu.member.android.activities.dashboardActivity.DashboardActivity
 import com.fobbu.member.android.fragments.odsModule.odsFragment.adapter.OdsFragmentAdapter
 import com.fobbu.member.android.fragments.odsModule.odsServiceOperations.OdsOperationFragment
 import com.fobbu.member.android.fragments.rsaFragmentModule.RsaConstants
@@ -33,10 +36,18 @@ import com.fobbu.member.android.modals.MainPojo
 import com.fobbu.member.android.utils.CommonClass
 import com.fobbu.member.android.utils.RecyclerItemClickListener
 import com.google.android.gms.common.ConnectionResult
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException
+import com.google.android.gms.common.GooglePlayServicesRepairableException
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.common.api.PendingResult
 import com.google.android.gms.common.api.Status
 import com.google.android.gms.location.*
+import com.google.android.gms.location.places.AutocompleteFilter
+import com.google.android.gms.location.places.Place
+import com.google.android.gms.location.places.ui.PlaceAutocomplete
+import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment
+import com.google.android.gms.location.places.ui.PlaceSelectionListener
+import com.google.android.gms.location.places.ui.SupportPlaceAutocompleteFragment
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
@@ -96,6 +107,7 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
             initView(view,savedInstanceState)
 
             clicks(view)
+
         }
         // Inflate the layout for this fragment
         return view
@@ -105,6 +117,8 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     private fun initView(view: View, savedInstanceState: Bundle?)
     {
         rlLoader=view.findViewById(R.id.rlLoader)
+
+       /* rlSearchOds=view.findViewById(R.id.rlSearchOds)*/
 
         commonClass= CommonClass(activity!!,activity!!)
 
@@ -199,7 +213,9 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                     commonClass.showToast(getString(R.string.car_model_message))
 
                 else->
+                {
                     changeFragment(OdsOperationFragment())
+                }
             }
 
         }
@@ -216,7 +232,15 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                     commonClass.showToast(getString(R.string.registeration_no_message))
 
                 else->
+                {
+                    commonClass.putString(RsaConstants.Ods.vehicleType,wheels)
+
+                    commonClass.putString(RsaConstants.Ods.vehicleNumber,etCarModelOds.text.toString())
+
+                    commonClass.putString(RsaConstants.Ods.regNo,etCarRegestrationOds.text.toString())
+
                     changeFragment(OdsOperationFragment())
+                }
             }
         }
 
@@ -420,12 +444,18 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
     private fun getAddressFromLocation(lat:kotlin.Double, long:kotlin.Double)
     {
+        commonClass.putString(RsaConstants.Ods.lat,lat.toString())
+
+        commonClass.putString(RsaConstants.Ods.long,long.toString())
+
         geocoder= Geocoder(activity!!, Locale.ENGLISH)
         try {
             val address:  List<Address> = geocoder.getFromLocation(lat,long,1)
             if (address.isNotEmpty())
             {
                 println("current address::${address[0].getAddressLine(0)}")
+
+                commonClass.putString(RsaConstants.Ods.address,address[0].getAddressLine(0))
 
                 currentAddress=address[0].getAddressLine(0)
             }
@@ -511,7 +541,9 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
             marker.title=currentAddress
 
-        googleMap.setInfoWindowAdapter(object :GoogleMap.InfoWindowAdapter
+
+
+     /*   googleMap.setInfoWindowAdapter(object :GoogleMap.InfoWindowAdapter
         {
             override fun getInfoContents(p0: Marker?): View
             {
@@ -532,12 +564,8 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
                 return view
             }
-        })
-
-
+        })*/
         }
-
-
 
         val cameraPosition = CameraPosition.Builder()
             .target(LatLng(Double.valueOf(latitude), Double.valueOf(longitude))).zoom(14f).build()
@@ -601,12 +629,32 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     private fun mapClicks()
     {
         googleMap.setOnMapClickListener {
+           /* if (rlSearchOds.visibility==View.VISIBLE)
+            {
+                ifTopBarChnagesNull(true)
+
+                rlSearchOds.visibility=View.GONE
+            }*/
             getAddressFromLocation(it.latitude,it.longitude)
 
             throwMarkerOnMap(it.latitude.toString(),it.longitude.toString())
         }
-    }
 
+        googleMap.setOnInfoWindowClickListener{
+
+            try {
+    val intent =  PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_FULLSCREEN).build(activity!!)
+    startActivityForResult(intent, 123)
+
+} catch (e: GooglePlayServicesRepairableException) {
+    // TODO: Handle the error.
+} catch (e: GooglePlayServicesNotAvailableException ) {
+    // TODO: Handle the error.
+}
+
+
+        }
+    }
 
     override fun onConnectionFailed(p0: ConnectionResult) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
@@ -686,5 +734,30 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
         rlLoader.visibility = View.GONE
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        when (requestCode) {
+            123
+            -> {
+                if (resultCode == RESULT_OK) {
+                    val place: Place = PlaceAutocomplete.getPlace(activity!!, data)
 
+                    val lat=place.latLng.latitude
+
+                    val long=place.latLng.longitude
+
+                    getAddressFromLocation(lat,long)
+
+                    throwMarkerOnMap(lat.toString(),long.toString())
+
+                    //Log.i(TAG, "Place: " + place.getName());
+                } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
+                    val status: Status = PlaceAutocomplete.getStatus(activity!!, data)
+                    // TODO: Handle the error.
+                    //Log.i(TAG, status.getStatusMessage());
+
+                }
+            }
+        }
+    }
 }

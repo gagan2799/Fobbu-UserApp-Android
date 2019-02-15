@@ -180,5 +180,9 @@ interface WebServiceApi {
     fun updateKyc(@Body map:HashMap<String,Any>
                   ,@Header("x-access-token") token: String):Call<MainPojo>
 
+    @POST("users/ods_requests")
+    fun makeOdsRequest(@Body map:HashMap<String,Any>
+                       ,@Header("x-access-token") token: String):Call<MainPojo>
+
 
 }

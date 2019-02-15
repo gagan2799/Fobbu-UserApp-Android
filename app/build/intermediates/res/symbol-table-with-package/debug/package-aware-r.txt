@@ -1838,6 +1838,7 @@ drawable washing_inner_screen
 drawable whatsapp
 drawable wheels_saings
 drawable white_radius
+drawable white_rounded_rect_with_border
 drawable wokr_already
 drawable wonderful
 drawable work_summary_drawable
@@ -2048,6 +2049,7 @@ id icon_group
 id icon_only
 id icon_uri
 id icon_view
+id idCardView
 id ifRoom
 id image
 id imageViewLeftSplash
@@ -2307,6 +2309,7 @@ id percent
 id picker
 id pin
 id place_autocomplete_clear_button
+id place_autocomplete_fragment
 id place_autocomplete_powered_by_google
 id place_autocomplete_prediction_primary_text
 id place_autocomplete_prediction_secondary_text
@@ -2807,6 +2810,7 @@ layout activity_forgot
 layout activity_freebies
 layout activity_generate_pin
 layout activity_get_set_go
+layout activity_google_places
 layout activity_help
 layout activity_login
 layout activity_main

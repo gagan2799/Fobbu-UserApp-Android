@@ -135,7 +135,7 @@
 
                     <RelativeLayout
                             android:gravity="center_horizontal"
-                            android:layout_marginTop="25dp"
+                            android:layout_marginTop="15dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
 
@@ -229,7 +229,6 @@
                                     android:layout_below="@+id/tvOtpTrackMessage"
                                     android:gravity="center_vertical"
                                     android:drawablePadding="13dp"
-                                    android:layout_marginLeft="5dp"
                                     android:textStyle="bold"
                                     android:text="1234"
                                     android:textSize="@dimen/textsize_medium"

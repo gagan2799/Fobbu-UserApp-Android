@@ -585,6 +585,21 @@ class ApiClient(var activity: Activity) {
         })
     }
 
+    // ods_request
+    fun makeOdsRequest(map:HashMap<String,Any>,token:String,responseHandler: ResponseHandler)
+    {
+        webServiceApi.makeOdsRequest(map,token).enqueue(object :Callback<MainPojo>{
+            override fun onFailure(call: Call<MainPojo>, t: Throwable) {
+                responseHandler.onServerError("""Server Error: ${t.message}""")
+            }
+
+            override fun onResponse(call: Call<MainPojo>, response: Response<MainPojo>) {
+                handleSuccess(response,responseHandler)
+            }
+
+        })
+    }
+
 
     private fun getEnv(): MyApplication {
         return activity.application as MyApplication

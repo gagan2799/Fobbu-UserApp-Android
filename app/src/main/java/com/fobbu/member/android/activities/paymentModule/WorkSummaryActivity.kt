@@ -59,12 +59,16 @@ class WorkSummaryActivity : AppCompatActivity(),ActivityView
         {
             dataList= ArrayList()
 
+            imageViewOptionMenuWorkSummary.visibility=View.INVISIBLE
+
+            ivBack.visibility=View.VISIBLE
+
             if (commonClass.getStringList(RsaConstants.Ods.singleServiceList).isNotEmpty())
                 dataList=commonClass.getStringList(RsaConstants.Ods.singleServiceList)
 
             textViewServiceTypeWork.text=dataList[0][RsaConstants.Ods.service_name].toString()
 
-            textViewTotalAmount.text=dataList[0][RsaConstants.Ods.service_price].toString()
+            textViewTotalAmount.text=(dataList[0][RsaConstants.Ods.service_price] as Double).toLong().toString()
 
             odsServiceTime=intent.getStringExtra(RsaConstants.Ods.time)
 
@@ -98,7 +102,8 @@ class WorkSummaryActivity : AppCompatActivity(),ActivityView
 
 
     // Method for handling click  functionality of the Class
-    private fun clicks() {
+    private fun clicks()
+    {
 
         imageViewOptionMenuWorkSummary.setOnClickListener {
             showOptionLayout()

@@ -201,6 +201,8 @@
 
         <activity android:name="com.fobbu.member.android.activities.paymentModule.OdsGetSetGoActivity" >
         </activity>
+        <activity android:name="com.fobbu.member.android.activities.GooglePlacesActivity.GooglePlacesActivity" >
+        </activity>
 
         <receiver android:name="com.google.android.gms.cast.framework.media.MediaIntentReceiver" />
 
