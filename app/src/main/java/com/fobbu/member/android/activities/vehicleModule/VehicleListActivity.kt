@@ -103,6 +103,7 @@ class VehicleListActivity : AppCompatActivity(),ActivityView,DeleteVehicleClickL
 
         webServiceApi = getEnv().getRetrofit()
 
+
         if (intent.hasExtra("from_where"))
         {
             fromWhere = "RSA"
@@ -306,7 +307,11 @@ class VehicleListActivity : AppCompatActivity(),ActivityView,DeleteVehicleClickL
             finish()
         }
 
-        tvAddEditVehicle.setOnClickListener { finish() }
+        tvAddEditVehicle.setOnClickListener {
+            startActivity(Intent(this,AddEditVehicleActivity::class.java))
+
+            finish()
+        }
 
         tvScooter.setOnClickListener {
 
@@ -314,7 +319,8 @@ class VehicleListActivity : AppCompatActivity(),ActivityView,DeleteVehicleClickL
             {
                 vehicleType ="2wheeler"
 
-                tvScooter.setImageResource(R.drawable.scooter_red)
+                manageLayout(vehicleType)
+               /* tvScooter.setImageResource(R.drawable.scooter_red)
                 view_scooter.visibility = View.VISIBLE
 
                 tvCar.setImageResource(R.drawable.car_gray)
@@ -334,7 +340,7 @@ class VehicleListActivity : AppCompatActivity(),ActivityView,DeleteVehicleClickL
                     tvNodata.visibility=View.VISIBLE
                     tvNodata.text="No 2 Wheeler Added"
                     recyclerViewVehicles.visibility=View.GONE
-                }
+                }*/
             }
         }
 
@@ -342,6 +348,39 @@ class VehicleListActivity : AppCompatActivity(),ActivityView,DeleteVehicleClickL
             if(vehicleType!="4wheeler") {
 
                 vehicleType ="4wheeler"
+                manageLayout(vehicleType)
+                /*tvScooter.setImageResource(R.drawable.scooter_gray)
+                view_scooter.visibility = View.GONE
+
+                tvCar.setImageResource(R.drawable.car_red)
+                view_car.visibility = View.VISIBLE
+
+                dataListMain.clear()
+                dataListMain.addAll(dataListFour)
+                vehicleAdapter.notifyDataSetChanged()
+
+                if(dataListMain.size>0)
+                {
+                    tvNodata.visibility=View.GONE
+                    recyclerViewVehicles.visibility=View.VISIBLE
+                }
+                else
+                {
+                    tvNodata.visibility=View.VISIBLE
+                    tvNodata.text="No 4 Wheeler Added"
+                    recyclerViewVehicles.visibility=View.GONE
+                }*/
+            }
+        }
+    }
+
+
+    private fun manageLayout(vehcicleTypeIntent:String)
+    {
+        when (vehcicleTypeIntent)
+        {
+            "4wheeler" ->
+            {
                 tvScooter.setImageResource(R.drawable.scooter_gray)
                 view_scooter.visibility = View.GONE
 
@@ -364,8 +403,32 @@ class VehicleListActivity : AppCompatActivity(),ActivityView,DeleteVehicleClickL
                     recyclerViewVehicles.visibility=View.GONE
                 }
             }
-        }
 
+            "2wheeler"->
+
+            {tvScooter.setImageResource(R.drawable.scooter_red)
+                    view_scooter.visibility = View.VISIBLE
+
+                    tvCar.setImageResource(R.drawable.car_gray)
+                    view_car.visibility = View.GONE
+
+                    dataListMain.clear()
+                    dataListMain.addAll(dataListTwo)
+                    vehicleAdapter.notifyDataSetChanged()
+
+                if(dataListMain.size>0)
+            {
+                tvNodata.visibility=View.GONE
+                recyclerViewVehicles.visibility=View.VISIBLE
+            }
+            else
+            {
+                tvNodata.visibility=View.VISIBLE
+                tvNodata.text="No 2 Wheeler Added"
+                recyclerViewVehicles.visibility=View.GONE
+            }
+            }
+        }
     }
 
     override fun onViewClick(vehicleID: String) {
@@ -470,6 +533,11 @@ class VehicleListActivity : AppCompatActivity(),ActivityView,DeleteVehicleClickL
             }
 
             setupRecycler()
+
+            if (intent.hasExtra("vehicle_type"))
+            {
+                manageLayout(intent.getStringExtra("vehicle_type"))
+            }
         }
     }
 

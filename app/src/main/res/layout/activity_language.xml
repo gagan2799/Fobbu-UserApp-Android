@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/order_screen_background"
+        tools:context=".activities.profileModule.langauage.LanguageActivity">
+
+    <include
+            android:id="@+id/tbLanguage"
+            layout="@layout/toolbar"/>
+
+    <include
+            layout="@layout/search_toolbar"
+            android:visibility="gone"/>
+
+
+    <TextView
+            android:id="@+id/tvHeadingLanguage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/select_languagae"
+            android:textSize="@dimen/textsize_normal"
+            android:textColor="@color/color_grey"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/tbLanguage"
+            android:layout_marginTop="10dp"/>
+
+
+    <android.support.v7.widget.RecyclerView
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/tvHeadingLanguage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/rvLanguageCheck"
+    />
+
+</RelativeLayout>

@@ -41,14 +41,15 @@
     </string>
     <string name="by_signing_up">By Signing up, you agree to our</string>
     <string name="terms_of_service">Terms of Service</string>
-    <string name="please_enter_full_name">Please enter Full Name.</string>
+    <string name="please_enter_full_name">Please enter full Name.</string>
     <string name="please_enter_email">Please enter Email ID.</string>
     <string name="correct_email_error">Please enter valid Email</string>
     <string name="selectGender">Select Gender</string>
     <string name="male">Male</string>
     <string name="female">Female</string>
     <string name="select_gender">Select Gender</string>
-    <string name="other">Others</string>
+    <string name="not_specified">Not specified</string>
+    <string name="other">other</string>
     <string name="please_enter_gender">Please select Gender.</string>
 
     ///FORGOT PASSWORD
@@ -76,7 +77,7 @@
         <u>Do it Later</u>
     </string>
     <string name="succesfully_set_pin">PIN Set Successfully.</string>
-    <string name="pin_dont_match">PIN don\'t match.</string>
+    <string name="pin_dont_match">PIN didn\'t match. Please try again</string>
     <string name="new_pin">New PIN</string>
     <string name="confirm_pin">Confirm PIN</string>
 
@@ -113,6 +114,7 @@
     <string name="upload_pics">Upload Pics</string>
     <string name="vehicle_type">Vehicle Type</string>
     <string name="edit_vehicle">Edit Vehicle</string>
+    <string name="save_changes">Save Changes</string>
     <string name="your_vehicles">Your Vehicles</string>
     <string name="add_brand">Please add vehicle brand</string>
     <string name="add_reg_no">Please add vehicle reg.no</string>
@@ -353,7 +355,7 @@
     <string name="edit_profile">Edit Profile</string>
     <string name="profile">Profile</string>
     <string name="basic">Basic</string>
-    <string name="kyc_details">Kyc Details</string>
+    <string name="kyc_details">KYC Details</string>
     <string name="add_details">Add Details</string>
     <string name="select_image_first">Please provide a profile pic.</string>
     <string name="provide_name">Please provide name.</string>
@@ -416,6 +418,64 @@
     <string name="service_photos_will_appear_here">Service photos\nwill appear here</string>
     <string name="photo_updates">Photo Updates</string>
     <string name="sit_back_amp_relax"><![CDATA[Sit Back & Relax]]></string>
+    <string name="language">Language</string>
+    <string name="select_languagae">Select Language(only 3)</string>
+    <string name="select_languages">Select languages:</string>
+
+
+    <!--///LANGUAGE ARRAY-->
+    <string-array name="fobbu_langauage_array">
+        <item>English</item>
+        <item>Hindi</item>
+        <item>Bhojpuri</item>
+        <item>Bengali</item>
+        <item>Tamil</item>
+        <item>Marathi</item>
+        <item>Telugu</item>
+        <item>Kannada</item>
+        <item>Gujarati</item>
+        <item>Punjabi</item>
+        <item>Odia</item>
+        <item>Malayalam</item>
+        <item>Sadri</item>
+        <item>Haryanvi</item>
+        <item>Santali</item>
+        <item>Sanskrit</item>
+        <item>Urdu</item>
+        <item>Assamese</item>
+        <item>Nepali</item>
+        <item>Chhattisgarhi</item>
+        <item>Maithili</item>
+        <item>Kokborok</item>
+        <item>Karbi</item>
+        <item>Tangam</item>
+        <item>Konkani</item>
+        <item>Garhwali</item>
+        <item>Tulu</item>
+        <item>Gondi</item>
+        <item>Bundeli</item>
+        <item>Rajasthani</item>
+        <item>Marwari</item>
+        <item>Kumaoni</item>
+        <item>Malvi</item>
+        <item>Kurukh</item>
+        <item>Surjapuri</item>
+        <item>Dogri</item>
+        <item>Kashmiri</item>
+        <item>Khandeshi</item>
+        <item>Meitei</item>
+        <item>Saurashtra</item>
+        <item>Nimadi</item>
+        <item>Mundari</item>
+        <item>Bodo</item>
+        <item>Sindhi</item>
+        <item>Banjari</item>
+        <item>Bagri</item>
+        <item>Awadhi</item>
+        <item>Mizo</item>
+        <item>Bagheli</item>
+        <item>Khasi</item>
+    </string-array>
 
 
 </resources>

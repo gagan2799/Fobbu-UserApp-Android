@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Intent
-import android.location.Address
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentTransaction
@@ -20,15 +19,12 @@ import com.fobbu.member.android.fragments.odsModule.odsFragment.OdsFragment
 import com.fobbu.member.android.fragments.odsModule.odsServiceOperations.adapter.OdsOperationAdapter
 import com.fobbu.member.android.fragments.odsModule.odsServiceOperations.presenter.OdsRequestHandler
 import com.fobbu.member.android.fragments.odsModule.odsServiceOperations.presenter.OdsRequestPresenter
-import com.fobbu.member.android.fragments.rsaFragmentModule.RSAFragment
 import com.fobbu.member.android.fragments.rsaFragmentModule.RsaConstants
 import com.fobbu.member.android.interfaces.TopBarChanges
 import com.fobbu.member.android.modals.MainPojo
 import com.fobbu.member.android.utils.CommonClass
 import com.fobbu.member.android.view.ActivityView
 import com.squareup.picasso.Picasso
-import com.squareup.picasso.RequestHandler
-import kotlinx.android.synthetic.main.fragment_ods_operation.*
 import kotlinx.android.synthetic.main.fragment_ods_operation.view.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -50,8 +46,6 @@ class OdsOperationFragment : Fragment(),ActivityView
 
     private var timeSlot=""
 
-    lateinit var addressList:List<Address>
-
     private var startDate=""
 
     private var endDate=""
@@ -67,6 +61,8 @@ class OdsOperationFragment : Fragment(),ActivityView
     lateinit var rlLoader:RelativeLayout
 
     private var topBarChanges: TopBarChanges? = null
+
+    private lateinit var subServiceList:ArrayList<Map<String,Any>>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -90,11 +86,32 @@ class OdsOperationFragment : Fragment(),ActivityView
     {
         commonClass= CommonClass(activity!!,activity!!)
 
+        subServiceList= ArrayList()
+
         dataList= ArrayList()
 
         if (commonClass.getStringList(RsaConstants.Ods.singleServiceList).isNotEmpty())
         {
             dataList=commonClass.getStringList(RsaConstants.Ods.singleServiceList)
+
+            val map=dataList[0]
+
+            map.getValue("sub_services")
+
+            subServiceList=(map.getValue("sub_services") as ArrayList<Map<String,Any>>)
+
+            println("array list:::::$subServiceList")
+
+      /*   val jsonObject=JSONObject(map)
+
+            val jsonArray=jsonObject.getJSONArray("sub_services")
+
+                for (j in 0 until jsonArray.length())
+                {
+                    subServiceList.add(jsonArray[j])
+                }
+
+            println("sub service list::: $subServiceList")*/
         }
 
         rlLoader=view.findViewById(R.id.rlLoader)
@@ -152,7 +169,7 @@ class OdsOperationFragment : Fragment(),ActivityView
     // function for setting up recycler
     private fun setRecycler(view: View)
     {
-        odsOperationAdapter= OdsOperationAdapter(activity!!)
+        odsOperationAdapter= OdsOperationAdapter(activity!!,subServiceList)
 
         view.rvOperations.layoutManager=LinearLayoutManager(activity!!)
 

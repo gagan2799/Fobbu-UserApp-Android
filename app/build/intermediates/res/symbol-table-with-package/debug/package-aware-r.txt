@@ -41,6 +41,7 @@ animator mtrl_fab_transformation_sheet_expand_spec
 animator scale_with_alpha
 array cast_expanded_controller_default_control_buttons
 array cast_mini_controller_default_control_buttons
+array fobbu_langauage_array
 attr actionBarDivider
 attr actionBarItemBackground
 attr actionBarPopupTheme
@@ -1801,6 +1802,7 @@ drawable search
 drawable secondgif
 drawable select_date
 drawable select_time
+drawable selected_language_drawable
 drawable shadow
 drawable shadow_background
 drawable share
@@ -1926,6 +1928,7 @@ id cast_featurehighlight_help_text_body_view
 id cast_featurehighlight_help_text_header_view
 id cast_featurehighlight_view
 id cast_notification_id
+id cblanguageRecycler
 id center
 id center_horizontal
 id center_vertical
@@ -2364,6 +2367,7 @@ id rlLoaderVehicleList
 id rlNameBar
 id rlNewVehicleAdded
 id rlOdsGet
+id rlOdsSubService
 id rlOdsTrackOtp
 id rlPic
 id rlPickingFuel
@@ -2382,11 +2386,14 @@ id rlVehicleAccessed
 id rlWallet
 id rvContacts
 id rvHelp
+id rvLanguageCheck
 id rvOdsService
+id rvOdsSubService
 id rvOperations
 id rvOrder
 id rvPassDetail
 id rvPassbook
+id rvSelectedLangauges
 id rvorderDetail
 id sandbox
 id satellite
@@ -2458,6 +2465,7 @@ id tbConactsList
 id tbEmergency
 id tbFreebies
 id tbHelp
+id tbLanguage
 id tbPassbookDetail
 id tbPaymentSetting
 id tbProfile
@@ -2581,6 +2589,7 @@ id tvHeading
 id tvHeadingChange
 id tvHeadingFind
 id tvHeadingGet
+id tvHeadingLanguage
 id tvHeadingProfile
 id tvHeadingUpload
 id tvHelp
@@ -2590,6 +2599,8 @@ id tvInCase
 id tvInfoFreebies
 id tvInviteFriends
 id tvKycProfile
+id tvLanguageProfile
+id tvLanguageRecycler
 id tvLearnMoreFreebies
 id tvLiftingPrice
 id tvLiftingText
@@ -2656,6 +2667,7 @@ id tvSave
 id tvScooter
 id tvScooterOds
 id tvSecuritySettings
+id tvSelectedLanguageProfile
 id tvServiceAddress
 id tvServiceRequest
 id tvSkip
@@ -2812,6 +2824,7 @@ layout activity_generate_pin
 layout activity_get_set_go
 layout activity_google_places
 layout activity_help
+layout activity_language
 layout activity_login
 layout activity_main
 layout activity_my_orders
@@ -2863,6 +2876,7 @@ layout fragment_rsa_live
 layout inflate_contactlist
 layout inflate_drawer
 layout inflate_expandable_layout
+layout inflate_language_layout
 layout inflate_marker_title
 layout inflate_message_pop_up
 layout inflate_ods_dialog
@@ -2873,6 +2887,7 @@ layout inflate_passbook_bottom_sheet
 layout inflate_passbook_data
 layout inflate_review_pop_up
 layout inflate_rsa_recycler_layout
+layout inflate_selected_language
 layout inflate_tutorials
 layout inflate_vehicle_adapter
 layout inflate_work_summary
@@ -3176,6 +3191,7 @@ string keep_me_healthy
 string keep_running
 string killer_saving
 string kyc_details
+string language
 string learn_more
 string lifting
 string live_track
@@ -3229,6 +3245,7 @@ string no_of_puncture
 string no_of_tubes
 string no_of_valve
 string not_now
+string not_specified
 string ods
 string ods_fullform
 string ods_otp_track_message
@@ -3314,6 +3331,7 @@ string s4
 string s5
 string s6
 string s7
+string save_changes
 string save_rs_50
 string save_water
 string saved_cards
@@ -3325,6 +3343,8 @@ string select_a_time
 string select_date_range
 string select_gender
 string select_image_first
+string select_languagae
+string select_languages
 string select_service_request
 string select_vehicle_type
 string send_invoice_to_registered_email_id

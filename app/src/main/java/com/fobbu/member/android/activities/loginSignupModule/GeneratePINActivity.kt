@@ -13,8 +13,10 @@ import com.fobbu.member.android.activities.dashboardActivity.DashboardActivity
 import com.fobbu.member.android.utils.CommonClass
 import kotlinx.android.synthetic.main.activity_generate_pin.*
 
-class GeneratePINActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
+class GeneratePINActivity : AppCompatActivity()
+{
+    override fun onCreate(savedInstanceState: Bundle?)
+    {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_generate_pin)

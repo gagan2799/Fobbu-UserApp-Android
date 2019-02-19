@@ -20,6 +20,11 @@ class RsaConstants
         var vas="vas"
     }
 
+    object  Constants
+    {
+     var selectedLanguageList="selectedLanguageList"
+    }
+
     object  Ods
     {
         var service_image="service_image"

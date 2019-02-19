@@ -111,6 +111,8 @@ class AddEditVehicleActivity : AppCompatActivity(),
     {
         addEditActivityHandler = AddEditVehiclePresenter(this, this)
 
+        tvEdit.visibility=View.GONE
+
         webServiceApi = getEnv().getRetrofitMulti()
 
         if (intent.hasExtra("from_where"))
@@ -155,7 +157,9 @@ class AddEditVehicleActivity : AppCompatActivity(),
                 ivCar.setImageResource(R.drawable.car_blue)
             }
 
-            tvNew.setTextColor(resources.getColor(R.color.color_grey))
+            //tvNew.setTextColor(resources.getColor(R.color.color_grey))
+
+            tvEdit.visibility=View.VISIBLE
 
             tvEdit.setTextColor(resources.getColor(R.color.red))
 
@@ -163,7 +167,9 @@ class AddEditVehicleActivity : AppCompatActivity(),
 
             viewNew.visibility = View.GONE
 
-            tvAddEditVehicle.text = resources.getString(R.string.edit_vehicle)
+            tvNew.visibility = View.GONE
+
+            tvAddEditVehicle.text = resources.getString(R.string.save_changes)
 
             tvHeading.text = resources.getString(R.string.edit_vehicle)
 
@@ -940,7 +946,8 @@ class AddEditVehicleActivity : AppCompatActivity(),
                     this@AddEditVehicleActivity
                 ).showToast(mainPojo.message)
 
-                startActivity(Intent(this,VehicleListActivity::class.java))
+                startActivity(Intent(this,VehicleListActivity::class.java)
+                    .putExtra("vehicle_type",vehicleType))
 
                 finish()
             }
@@ -956,62 +963,72 @@ class AddEditVehicleActivity : AppCompatActivity(),
 
 
     //EDIT vehicle API (API-users/vehicles)
-    private fun editVehicleApi() {
-
+    private fun editVehicleApi()
+    {
         val fileList = ArrayList<MultipartBody.Part>()
 
-        for (i in 0 until dataList.size) {
+        for (i in 0 until dataList.size)
+        {
             var imgProfile: MultipartBody.Part? = null
+
             val file = File(dataList[i].toString())
+
             // create RequestBody instance from file
             val requestFile = RequestBody.create(MediaType.parse("image/jpeg"), file)
+
             // MultipartBody.Part is used to send also the actual file name
             imgProfile = MultipartBody.Part.createFormData("photos", file.name, requestFile)
+
             fileList.add(imgProfile!!)
         }
 
-
-
         val list=JSONArray()
-       // val list=ArrayList<String>()
 
         for (i in listImagesEdit.indices)
         {
             if(listImagesEdit[i].contains("vehicles/"))
             {
                 val separated = listImagesEdit[i].split("vehicles/".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
+
                 val jsonObject = separated[1]
+
                 list.put(jsonObject)
-                //list.add(separated[1])
             }
         }
 
-
-        println("ALREADY LIST GOING VALUE IS $list")
-
-
         val bodyUserId = RequestBody.create(MediaType.parse("text/plain"), CommonClass(this, this).getString("_id"))
+
         val bodyVehicleBrand = RequestBody.create(MediaType.parse("text/plain"), etBrand.text.toString().trim())
+
         val bodyVehicleRegistrationNumber = RequestBody.create(MediaType.parse("text/plain"), etRegNumber.text.toString().trim())
+
         val bodyVehicleSubModel = RequestBody.create(MediaType.parse("text/plain"), etSubModel.text.toString().trim())
+
         val bodyMakeOfYear = RequestBody.create(MediaType.parse("text/plain"), etYearsOfMake.text.toString().trim())
+
         val bodyVehicleType = RequestBody.create(MediaType.parse("text/plain"), vehicleType)
+
         val bodyVehicleId = RequestBody.create(MediaType.parse("text/plain"), hashMapEdit["_id"].toString())
+
         val bodyVehicleImages = RequestBody.create(MediaType.parse("text/plain"), list.toString())
 
-
         val map = HashMap<String, RequestBody>()
+
         map["user_id"] = bodyUserId
+
         map["vehicle_brand"] = bodyVehicleBrand
+
         map["vehicle_registration_number"] = bodyVehicleRegistrationNumber
+
         map["vehicle_sub_model"] = bodyVehicleSubModel
+
         map["make_of_year"] = bodyMakeOfYear
+
         map["vehicle_type"] = bodyVehicleType
+
         map["vehicle_id"] = bodyVehicleId
+
         map["images"] = bodyVehicleImages
-
-
-
 
         val tokenHeader = CommonClass(this, this).getString("x_access_token")
 
@@ -1019,18 +1036,17 @@ class AddEditVehicleActivity : AppCompatActivity(),
 
     }
 
-    override fun onRequestSuccessReportEdit(mainPojo: MainPojo) {
-        if (mainPojo.success == "true") {
-
-                println("Success")
+    override fun onRequestSuccessReportEdit(mainPojo: MainPojo)
+    {
+        if (mainPojo.success == "true")
+        {
                 CommonClass(
                     this@AddEditVehicleActivity,
                     this@AddEditVehicleActivity
                 ).showToast(mainPojo.message)
 
-            startActivity(Intent(this,VehicleListActivity::class.java))
-
-                finish()
+            startActivity(Intent(this,VehicleListActivity::class.java)
+                .putExtra("vehicle_type",vehicleType))
 
         } else {
 
@@ -1077,6 +1093,7 @@ class AddEditVehicleActivity : AppCompatActivity(),
                     this@AddEditVehicleActivity
                     , WaitingScreenWhite::class.java
                 ).putExtra("from_where", "new_vehicle_added")
+                    .putExtra("vehicle_type",vehicleType)
             )
             finish()
 
@@ -1096,7 +1113,6 @@ class AddEditVehicleActivity : AppCompatActivity(),
         rlLoader.visibility = View.GONE
     }
 
-
     private fun getEnv(): MyApplication {
         return application as MyApplication
     }
@@ -1104,45 +1120,6 @@ class AddEditVehicleActivity : AppCompatActivity(),
     override fun onDeleteVehicleSuccessUpdateVehicle(mainPojo: MainPojo) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
-/*
-    @RequiresApi(Build.VERSION_CODES.N)
-    fun yearCalender()
-    {
-        val dp = CustomDatePicker(
-            this,
-            android.R.style.Theme_Holo_Light_Dialog,
-            this,
-            year,
-            month,
-            day
-        )
-
-        val obj = dp.getPicker()
-        try {
-            val datePickerDialogFields = obj.javaClass.getDeclaredFields()
-            for (datePickerDialogField in datePickerDialogFields) {
-                if (datePickerDialogField.name == "mDatePicker") {
-                    datePickerDialogField.isAccessible = true
-                    val datePicker = datePickerDialogField.get(obj) as DatePicker
-                    val datePickerFields = datePickerDialogField.type.declaredFields
-                    for (datePickerField in datePickerFields) {
-                        if ("mDayPicker" == datePickerField.name || "mDaySpinner" == datePickerField
-                                .name
-                        ) {
-                            datePickerField.isAccessible = true
-                            var dayPicker = Any()
-                            dayPicker = datePickerField.get(datePicker)
-                            (dayPicker as View).visibility = View.GONE
-                        }
-                    }
-                }
-
-            }
-        } catch (ex: Exception) {
-        }
-
-        obj?.show()
-    }*/
 
     override fun onDateSet(p0: DatePicker?, p1: Int, p2: Int, p3: Int) {
         year=p1

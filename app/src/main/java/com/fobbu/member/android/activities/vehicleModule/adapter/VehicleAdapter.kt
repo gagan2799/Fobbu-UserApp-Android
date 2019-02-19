@@ -16,7 +16,7 @@ import com.squareup.picasso.Picasso
 class VehicleAdapter(internal var activity: Activity, private var dataListMain:ArrayList<HashMap<String,Any>>):
     RecyclerView.Adapter<VehicleAdapter.MyViewHolder>()
 {
-    var clickListener:DeleteVehicleClickListener=activity!! as DeleteVehicleClickListener
+    var clickListener:DeleteVehicleClickListener=activity as DeleteVehicleClickListener
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): MyViewHolder
     {

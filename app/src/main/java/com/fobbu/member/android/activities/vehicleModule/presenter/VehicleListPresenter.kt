@@ -16,13 +16,9 @@ class VehicleListPresenter(internal  var activity: Activity,internal var activit
 
     val apiClient= ApiClient(activity)
 
-
-
     override fun sendVehicleData(token: String, userid: String) {
 
         activityView.showLoader()
-
-
 
         apiClient.getVichleListData(token,userid,object :ResponseHandler
         {

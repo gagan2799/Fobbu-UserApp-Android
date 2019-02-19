@@ -27,6 +27,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 import java.util.Calendar.*
 import java.util.regex.Pattern
+import kotlin.collections.ArrayList
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS", "UNREACHABLE_CODE")
 /**
@@ -97,9 +98,10 @@ class CommonClass(activity1: Activity, context1: Context) {
         prefsEditor.apply()
 
     }
+    private val emptyList= ArrayList<HashMap<String, Any>>()
 
-    fun getStringList(key: String): ArrayList<HashMap<String, Any>> {
-
+    fun getStringList(key: String): ArrayList<HashMap<String, Any>>
+    {
         val myPrefs = context.getSharedPreferences("Fobbu_Member_Prefs", Context.MODE_PRIVATE)
 
         val gson = Gson()
@@ -108,7 +110,11 @@ class CommonClass(activity1: Activity, context1: Context) {
 
         val type= object : TypeToken<java.util.ArrayList<java.util.HashMap<String, Any>>>(){}.type
 
-        return gson.fromJson(json,type)
+
+        return if (json!="") {
+            gson.fromJson(json,type)
+        } else
+            emptyList
     }
 
 

@@ -21,6 +21,9 @@ import android.support.annotation.RequiresApi
 import android.support.v4.content.ContextCompat
 import android.support.v4.content.FileProvider
 import android.support.v7.app.AlertDialog
+import android.support.v7.widget.GridLayoutManager
+import android.text.InputFilter
+import android.text.Spanned
 import android.util.Log
 import android.view.Gravity
 import android.view.View
@@ -29,10 +32,14 @@ import android.widget.ArrayAdapter
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.fobbu.member.android.R
+import com.fobbu.member.android.R.drawable.filter
 import com.fobbu.member.android.activities.profile.presenter.ProfileHandler
 import com.fobbu.member.android.activities.profile.presenter.ProfilePresenter
+import com.fobbu.member.android.activities.profileModule.langauage.LanguageActivity
 import com.fobbu.member.android.activities.profile.view.ProfileView
+import com.fobbu.member.android.activities.profileModule.profile.adapter.ProfileLangaugeAdapter
 import com.fobbu.member.android.activities.waitingScreenModule.WaitingScreenWhite
+import com.fobbu.member.android.fragments.rsaFragmentModule.RsaConstants
 import com.fobbu.member.android.modals.MainPojo
 import com.fobbu.member.android.utils.CommonClass
 import com.fobbu.member.android.view.ActivityView
@@ -47,7 +54,7 @@ import java.io.File
 import java.io.FileOutputStream
 import java.util.ArrayList
 
-@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
+@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS", "DEPRECATION")
 class ProfileActivity : AppCompatActivity(),ActivityView,ProfileView
 {
     private val fileList = ArrayList<MultipartBody.Part>()
@@ -69,9 +76,11 @@ class ProfileActivity : AppCompatActivity(),ActivityView,ProfileView
 
     private var checKBasic=true
 
+    lateinit var  selectedLanguageList:ArrayList<HashMap<String,Any>>
+
     private var mFileTemp: File? = null
 
-    var gender= arrayOf("Select Gender","Male","Female","Others")
+    lateinit var gender:Array<String>
 
     private val imageCameraRequest = 100
 
@@ -81,7 +90,14 @@ class ProfileActivity : AppCompatActivity(),ActivityView,ProfileView
 
     lateinit var commonClass:CommonClass
 
+
+    private val blockCharacterSet = "~#^|$%&*!"
+
+    lateinit var inputFilter:InputFilter
+
     private lateinit var profileHandler:ProfileHandler
+
+    private lateinit var profileAdapter: ProfileLangaugeAdapter
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
@@ -96,9 +112,34 @@ class ProfileActivity : AppCompatActivity(),ActivityView,ProfileView
         chooseImagesClick()
     }
 
+
+    override fun onResume()
+    {
+        super.onResume()
+
+        if (commonClass.getStringList(RsaConstants.Constants.selectedLanguageList).isNotEmpty())
+        {
+            selectedLanguageList=commonClass.getStringList(RsaConstants.Constants.selectedLanguageList)
+
+            setSelectedLanguageRecycler()
+        }
+    }
+
     private fun initView()
     {
+        inputFilter= InputFilter { p0, p1, p2, p3, p4, p5 ->
+            if (p0 != null && blockCharacterSet.contains(("" + p0))) {
+                return@InputFilter ""
+            }
+            ""
+        }
+
         commonClass= CommonClass(this,this)
+
+        selectedLanguageList= ArrayList()
+
+        gender=arrayOf(this.resources.getString(R.string.selectGender),this.resources.getString(R.string.male),
+            this.resources.getString(R.string.female),this.resources.getString(R.string.not_specified))
 
         civPicProfile.isEnabled=false
 
@@ -117,6 +158,17 @@ class ProfileActivity : AppCompatActivity(),ActivityView,ProfileView
         spinnerProfile.adapter=spinnerAdapter
     }
 
+    private fun setSelectedLanguageRecycler()
+    {
+        rvSelectedLangauges.visibility=View.VISIBLE
+
+     profileAdapter= ProfileLangaugeAdapter(this,selectedLanguageList)
+
+        rvSelectedLangauges.layoutManager=GridLayoutManager(this,2)
+
+        rvSelectedLangauges.adapter=profileAdapter
+    }
+
 
     // function for setting data form preference into view
     private fun setDataInView()
@@ -131,7 +183,6 @@ class ProfileActivity : AppCompatActivity(),ActivityView,ProfileView
 
         etEmailProfile.setText(commonClass.getString("email"))
 
-
         if(CommonClass(this,this).getString("user_image")!="")
         {
             hasPic=true
@@ -139,14 +190,16 @@ class ProfileActivity : AppCompatActivity(),ActivityView,ProfileView
             val urlProfile = CommonClass(this,this).getString("user_url")+
                     CommonClass(this,this).getString("user_image")
 
-            println("HERE IN ON CREATE >>>>>> "+ urlProfile)
-
             Picasso.get().load(urlProfile)
                 .error(R.drawable.dummy_pic)
                 .into(civPicProfile)
         }
 
         Handler().postDelayed({
+            if (commonClass.getString("gender")==resources.getString(R.string.other))
+            tvGenderProfile.text=resources.getString(R.string.not_specified)
+
+            else
             tvGenderProfile.text=commonClass.getString("gender")
         },1000)
     }
@@ -168,9 +221,15 @@ class ProfileActivity : AppCompatActivity(),ActivityView,ProfileView
 
             etPANProfile.isEnabled=true
 
+           // etPANProfile.filters = object: InputFilter[] { filter }
+
             etAdharProfile.isEnabled=true
 
             civPicProfile.isEnabled=true
+
+            tvLanguageProfile.isEnabled=true
+
+            tvAddDetailsProfile.visibility=View.VISIBLE
         }
 
         ivBackButton.setOnClickListener {
@@ -179,6 +238,10 @@ class ProfileActivity : AppCompatActivity(),ActivityView,ProfileView
 
         rlGenderProfile.setOnClickListener {
             spinnerProfile.performClick()
+        }
+
+        tvLanguageProfile.setOnClickListener {
+           startActivity(Intent(this,LanguageActivity::class.java))
         }
 
         spinnerProfile.onItemSelectedListener = object : AdapterView.OnItemSelectedListener
@@ -641,12 +704,16 @@ class ProfileActivity : AppCompatActivity(),ActivityView,ProfileView
                         last=""
                     }
 
+                    val gender= if (tvGenderProfile.text.toString()==resources.getString(R.string.not_specified))
+                        resources.getString(R.string.other)
+                    else
+                        tvGenderProfile.text.toString()
 
                     profileHandler.updateUser(RequestBody.create(MediaType.parse("text/plain"),etEmailProfile.text.toString()),
                         RequestBody.create(MediaType.parse("text/plain"),etNumberProfile.text.toString()),
                         RequestBody.create(MediaType.parse("text/plain"),first),
                         RequestBody.create(MediaType.parse("text/plain"),last),
-                        RequestBody.create(MediaType.parse("text/plain"),tvGenderProfile.text.toString()),
+                        RequestBody.create(MediaType.parse("text/plain"),gender),
                         fileList,
                         commonClass.getString("x_access_token"))
                 }

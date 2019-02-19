@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:layout_marginBottom="15dp"
+        android:padding="10dp"
+        android:layout_height="wrap_content">
+
+    <TextView
+            android:layout_alignParentLeft="true"
+            android:id="@+id/tvLanguageRecycler"
+            android:layout_centerVertical="true"
+            android:textSize="@dimen/textsize_medium"
+            android:textColor="@color/drawer_text_color"
+            android:layout_width="wrap_content"
+              android:layout_height="wrap_content"/>
+
+    <ImageView
+            android:src="@drawable/checkbox_uncheck"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:id="@+id/cblanguageRecycler"
+            android:layout_centerVertical="true"
+              android:layout_height="wrap_content"/>
+
+</RelativeLayout>
