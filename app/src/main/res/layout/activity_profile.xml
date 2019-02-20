@@ -305,10 +305,12 @@
 
                 <EditText
                         android:enabled="false"
+                        android:digits="qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM0123456789"
                         android:layout_below="@+id/tvDobKycProfile"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/enter_pan"
+                        android:maxLength="10"
                         android:imeOptions="actionDone"
                         android:layout_marginTop="30dp"
                         android:background="@drawable/et_gray_with_base"
@@ -341,6 +343,7 @@
                         android:textSize="@dimen/login_textsize_medium"
                         android:id="@+id/etAdharProfile"
                         android:padding="10dp"
+                        android:maxLength="15"
                         android:importantForAutofill="no"/>
 
             </RelativeLayout>

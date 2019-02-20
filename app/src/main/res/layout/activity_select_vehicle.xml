@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
+        tools:context=".activities.selectVehicleActivity.SelectVehicleActivity">
+
+    <include
+            android:id="@+id/tbVehicle"
+            layout="@layout/toolbar"/>
+
+    <include
+            layout="@layout/search_toolbar"
+            android:visibility="gone"/>
+
+
+    <android.support.design.widget.TabLayout
+            android:layout_below="@+id/tbVehicle"
+            android:id="@+id/tlVehicle"
+            app:tabIndicatorColor="@color/colorAccent"
+            app:tabIndicatorHeight="2dp"
+            app:tabTextColor="@color/drawer_text_color"
+            app:tabSelectedTextColor="@color/colorPrimaryDark"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    <android.support.v7.widget.RecyclerView
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_below="@+id/tlVehicle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/rvWheelerVehicle"/>
+
+    <TextView
+            android:id="@+id/tvNodataVehcile"
+            android:text=""
+            android:textSize="@dimen/textsize_medium"
+            android:gravity="center"
+            android:textColor="@color/drawer_text_color"
+            android:layout_centerInParent="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+
+
+
+</RelativeLayout>

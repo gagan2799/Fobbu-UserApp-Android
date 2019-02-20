@@ -4,11 +4,14 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.annotation.TargetApi
 import android.app.Activity
+import android.content.Context
+import android.content.Context.LOCATION_SERVICE
 import android.content.Intent
 import android.content.IntentSender
 import android.content.pm.PackageManager
 import android.graphics.*
 import android.location.Location
+import android.location.LocationManager
 import android.media.ExifInterface
 import android.net.Uri
 import android.os.Build
@@ -19,6 +22,7 @@ import android.provider.MediaStore
 import android.support.annotation.RequiresApi
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
+import android.support.v4.content.ContextCompat.getSystemService
 import android.support.v4.content.FileProvider
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
@@ -33,6 +37,7 @@ import android.widget.*
 import com.bumptech.glide.Glide
 import com.fobbu.member.android.R
 import com.fobbu.member.android.activities.dashboardActivity.DashboardActivity
+import com.fobbu.member.android.activities.selectVehicleActivity.SelectVehicleActivity
 import com.fobbu.member.android.activities.waitingScreenModule.WaitingScreenBlue
 
 import com.fobbu.member.android.apiInterface.MyApplication
@@ -146,6 +151,7 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     private lateinit var tvLiftingText: TextView
     private lateinit var tvLiftingPrice: TextView
     private lateinit var ivLifting: ImageView
+    private lateinit var ivVehicleTypeRsa: ImageView
     private lateinit var ivFlatBed: ImageView
 
     private lateinit var viewLeftTop: View
@@ -208,6 +214,11 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     private fun handleClick() {
 
         chooseImagesClick()
+
+        ivVehicleTypeRsa.setOnClickListener {
+            startActivity(Intent(activity!!,SelectVehicleActivity::class.java))
+        }
+
 
         tvFindFobbu.setOnClickListener {
             findFobbuApi()
@@ -737,7 +748,8 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     }
 
     // initializing all the variables of the class in this method
-    private fun initialise(view: View?) {
+    private fun initialise(view: View?)
+    {
 
         webServiceApi = getEnv().getRetrofitMulti()
 
@@ -815,6 +827,7 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
         tvLiftingText = view.findViewById(R.id.tvLiftingText)
 
         ivLifting = view.findViewById(R.id.ivLifting)
+        ivVehicleTypeRsa = view.findViewById(R.id.ivVehcileTypeRsa)
         ivFlatBed = view.findViewById(R.id.ivFlatBed)
 
         viewLeftTop = view.findViewById(R.id.viewLeftTop)
@@ -840,12 +853,35 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     ///RECYCLER VIEW CLICKS HANDLED
     private fun recyclerViewClicks() {
 
+        val locationManager : LocationManager? = activity?.getSystemService(Context.LOCATION_SERVICE) as LocationManager?
+
         recyclerViewServices.addOnItemTouchListener(
             RecyclerItemClickListener(activity!!, object : RecyclerItemClickListener.OnItemClickListener {
                 @SuppressLint("SetTextI18n")
                 override fun onItemClick(view: View, position: Int) {
 
-                    serviceSelected = dataListServices[position]["static_name"].toString()
+                    val permission =
+                        ContextCompat.checkSelfPermission(context!!, android.Manifest.permission.ACCESS_FINE_LOCATION)
+
+                    if (permission != PackageManager.PERMISSION_GRANTED) {
+                        showMessageDialog(
+                            "You need to allow the permissions from\n" +
+                                    "Phone Settings -> Apps --> Fobbu Member --> Permissions\n" +
+                                    "to allow the permissions"
+                        )
+                    }
+
+
+                    else if ( !locationManager?.isProviderEnabled( LocationManager.GPS_PROVIDER )!!) {
+                        enableGPSAutoMatically()
+                    }
+
+                 /*   else if (strLatitude.isEmpty()|| strLongitude.isEmpty())
+                    {
+                        CommonClass(activity!!,activity!!).showToast("Unable to fetch the loaction. Please wait few seconds")
+                    }*/
+                    else
+                    {  serviceSelected = dataListServices[position]["static_name"].toString()
                     serviceSelectedID = dataListServices[position]["_id"].toString()
                     serviceSelectedAmount = dataListServices[position]["service_price"].toString()
 
@@ -939,6 +975,7 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                         }
                     }
                 }
+                }
             })
         )
     }
@@ -1024,6 +1061,7 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
             etVehicleNumber.text.toString()
         )
 
+        CommonClass(activity!!,activity!!).removeString(RsaConstants.Ods.vehicleNumberSelect)
 
         rsaFragmentHandler.findFobbuRequest(
             userId, serviceSelected, strLatitude, strLongitude
@@ -1291,7 +1329,12 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     override fun onResume() {
         super.onResume()
         mMapView.onResume()
+        if (CommonClass(activity!!,activity!!).getString(RsaConstants.Ods.vehicleTypeSelect).isNotEmpty())
+        {
+            etVehicleNumber.setText(CommonClass(activity!!,activity!!).getString(RsaConstants.Ods.vehicleNumberSelect))
 
+            etVehicleNumber.setSelection(etVehicleNumber.text.length)
+        }
 
         if (llSubPoints.visibility == View.VISIBLE ||
             llUploadPics.visibility == View.VISIBLE ||
@@ -1601,8 +1644,12 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
                     checkGPSEnable()
                 } else {
-
-                    checkGPSEnable()
+                    showMessageDialog(
+                        "You need to allow the permissions from\n" +
+                                "Phone Settings -> Apps --> Fobbu Vendor --> Permissions\n" +
+                                "to allow the permissions"
+                    )
+                   // checkGPSEnable()
                 }
             }
         }
@@ -1610,6 +1657,7 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
     @SuppressLint("Recycle")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+
         if (resultCode != AppCompatActivity.RESULT_OK) {
             return
         }
@@ -1760,6 +1808,8 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
         fos.close()
         return f
     }
+
+
 
     // Method for rotating images
     private fun imageRotation(bitmap: Bitmap, path: String): Bitmap {

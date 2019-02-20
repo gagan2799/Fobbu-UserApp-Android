@@ -90,6 +90,8 @@ class WaitingScreenWhite : AppCompatActivity() {
 
             "profile"->
             {
+                rlNewVehicleAdded.visibility=View.VISIBLE
+
                 tvVehicleAdd.text=getString(R.string.thank_you)
 
                 tvWhiteSubMessage.text="you have successfully completed \nyour profile."

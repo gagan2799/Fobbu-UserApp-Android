@@ -571,7 +571,9 @@ class ApiClient(var activity: Activity) {
 
         val obj=JSONObject(map)
 
-        hashmap["kyc"]=obj
+        hashmap["kyc"]=obj.toString()
+
+        println("kyc::::$hashmap")
 
         webServiceApi.updateKyc(hashmap,token).enqueue(object :Callback<MainPojo>
         {

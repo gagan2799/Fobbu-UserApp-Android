@@ -124,13 +124,13 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
             setFragmentsFromStackForRSA(fragmentTypeForRSA)
         }
 
-       /* llOdsDash.setOnClickListener {
-            if (intent.hasExtra(RsaConstants.Ods.static_name)*//*!=RsaConstants.OdsServiceStaticName.trip_ready*//*)
+        llOdsDash.setOnClickListener {
+            if (intent.hasExtra(RsaConstants.Ods.static_name)/*!=RsaConstants.OdsServiceStaticName.trip_ready*/)
                 changeFragment(OdsTrackingFragment(),resources.getString(R.string.ods))
 
             else
                 changeFragment(OdsFragment(),resources.getString(R.string.ods))
-        }*/
+        }
     }
 
     //// This is for Cancel and Call Helpline

@@ -90,11 +90,6 @@ class ProfileActivity : AppCompatActivity(),ActivityView,ProfileView
 
     lateinit var commonClass:CommonClass
 
-
-    private val blockCharacterSet = "~#^|$%&*!"
-
-    lateinit var inputFilter:InputFilter
-
     private lateinit var profileHandler:ProfileHandler
 
     private lateinit var profileAdapter: ProfileLangaugeAdapter
@@ -127,13 +122,6 @@ class ProfileActivity : AppCompatActivity(),ActivityView,ProfileView
 
     private fun initView()
     {
-        inputFilter= InputFilter { p0, p1, p2, p3, p4, p5 ->
-            if (p0 != null && blockCharacterSet.contains(("" + p0))) {
-                return@InputFilter ""
-            }
-            ""
-        }
-
         commonClass= CommonClass(this,this)
 
         selectedLanguageList= ArrayList()
@@ -183,6 +171,23 @@ class ProfileActivity : AppCompatActivity(),ActivityView,ProfileView
 
         etEmailProfile.setText(commonClass.getString("email"))
 
+        if (commonClass.getString("date_of_birth").isNotEmpty())
+        {
+            tvDobKycProfile.text=commonClass.getString("date_of_birth")
+        }
+        if (commonClass.getString("pan_card").isNotEmpty())
+        {
+            etPANProfile.setText(commonClass.getString("pan_card"))
+
+            etPANProfile.setSelection(etPANProfile.text.length)
+        }
+        if (commonClass.getString("aadhar_number").isNotEmpty())
+        {
+            etAdharProfile.setText(commonClass.getString("aadhar_number"))
+
+            etAdharProfile.setSelection(etAdharProfile.text.length)
+        }
+
         if(CommonClass(this,this).getString("user_image")!="")
         {
             hasPic=true
@@ -220,8 +225,6 @@ class ProfileActivity : AppCompatActivity(),ActivityView,ProfileView
             tvDobKycProfile.isEnabled=true
 
             etPANProfile.isEnabled=true
-
-           // etPANProfile.filters = object: InputFilter[] { filter }
 
             etAdharProfile.isEnabled=true
 
@@ -807,19 +810,21 @@ class ProfileActivity : AppCompatActivity(),ActivityView,ProfileView
         {
             val map=HashMap<String,Any>()
             when{
-                tvDobKycProfile.text.toString()==getString(R.string.date_of_birth)->commonClass.showToast("Please provide date of birth")
+                tvDobKycProfile.text.toString()==getString(R.string.date_of_birth)->commonClass.showToast(getString(R.string.provide_date_msg))
 
-                etPANProfile.text.isEmpty()->commonClass.showToast("Please provide PAN number.")
+               /* etPANProfile.text.isEmpty()->commonClass.showToast(getString(R.string.provide_pan_msg))
 
-                etAdharProfile.text.isEmpty()->commonClass.showToast("Please provide Aadhaar number.")
+                etPANProfile.text.length<10->commonClass.showToast(getString(R.string.correct_pan_msg))
+*/
+                etAdharProfile.text.trim().isEmpty() && etPANProfile.text.trim().isEmpty() ->commonClass.showToast(getString(R.string.provide_any_msg))
 
                 else->
                 {
-                    map["date_of_birth"]=tvDobKycProfile.text.toString()
+                    map["date_of_birth"]=tvDobKycProfile.text.trim().toString()
 
-                    map["pan_card"]=etPANProfile.text.toString()
+                    map["pan_card"]=etPANProfile.text.trim().toString()
 
-                    map["aadhar_number"]=etAdharProfile.text.toString()
+                    map["aadhar_number"]=etAdharProfile.text.trim().toString()
 
                     profileHandler.updateKyc(map,
                         commonClass.getString("x_access_token"))
@@ -835,11 +840,11 @@ class ProfileActivity : AppCompatActivity(),ActivityView,ProfileView
     {
         if (mainPojo.success=="true")
         {
-            commonClass.putString("date_of_birth",tvDobKycProfile.text.toString())
+            commonClass.putString("date_of_birth",mainPojo.getData().date_of_birth)
 
-            commonClass.putString("pan_card",etPANProfile.text.toString())
+            commonClass.putString("pan_card",mainPojo.getData().pan_card)
 
-            commonClass.putString("aadhar_number",etAdharProfile.text.toString())
+            commonClass.putString("aadhar_number",mainPojo.getData().aadhar_number)
 
             startActivity(Intent(this,WaitingScreenWhite::class.java)
                 .putExtra("from_where","profile"))

@@ -45,13 +45,17 @@ class VehicleAdapter(internal var activity: Activity, private var dataListMain:A
             val listImages = dataListMain[position]["images"] as ArrayList<String>
 
             if (listImages.size > 0)
+            {
                 Picasso.get().load(listImages[0])
 
                     .placeholder(R.drawable.car_gray)
 
+                    .fit().centerInside()
+
                     .error(R.drawable.car_gray)
 
                     .into(holder.ivImage)
+            }
             else
                 holder.ivImage.setImageResource(R.drawable.dummy_services)
         }

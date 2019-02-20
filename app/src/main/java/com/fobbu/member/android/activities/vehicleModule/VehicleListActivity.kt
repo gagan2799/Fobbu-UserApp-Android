@@ -283,7 +283,11 @@ class VehicleListActivity : AppCompatActivity(),ActivityView,DeleteVehicleClickL
     override fun onBackPressed() {
         if (fromWhere == "RSA")
             startActivity(Intent(this, WaitingScreenWhite::class.java).putExtra("from_where", "building_live"))
-
+        else
+        {
+            startActivity(Intent(this,AddEditVehicleActivity::class.java)
+                .setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
+        }
         finish()
     }
 
@@ -304,6 +308,9 @@ class VehicleListActivity : AppCompatActivity(),ActivityView,DeleteVehicleClickL
         }
 
         ivBackButton.setOnClickListener {
+            startActivity(Intent(this,AddEditVehicleActivity::class.java)
+                .setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
+
             finish()
         }
 

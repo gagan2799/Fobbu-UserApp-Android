@@ -185,7 +185,9 @@
         </activity>
         <activity android:name=".activities.GooglePlacesActivity.GooglePlacesActivity">
         </activity>
-        <activity android:name="com.fobbu.member.android.activities.profileModule.langauage.LanguageActivity">
+        <activity android:name=".activities.profileModule.langauage.LanguageActivity">
+        </activity>
+        <activity android:name=".activities.selectVehicleActivity.SelectVehicleActivity">
         </activity>
     </application>
 

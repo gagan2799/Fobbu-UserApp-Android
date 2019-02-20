@@ -2139,6 +2139,7 @@ id ivTodayCheckPb
 id ivTool
 id ivTow
 id ivTwoWheelerBurst
+id ivVehcileTypeRsa
 id ivWallet
 id ivWeekCheckPb
 id ivYesterdayCheckPb
@@ -2394,6 +2395,7 @@ id rvOrder
 id rvPassDetail
 id rvPassbook
 id rvSelectedLangauges
+id rvWheelerVehicle
 id rvorderDetail
 id sandbox
 id satellite
@@ -2470,6 +2472,7 @@ id tbPassbookDetail
 id tbPaymentSetting
 id tbProfile
 id tbSecurity
+id tbVehicle
 id terrain
 id test
 id text
@@ -2520,7 +2523,9 @@ id title
 id titleDividerNoCustom
 id title_template
 id title_view
+id tlVehicle
 id toolbar
+id toolbarHeading
 id toolbarOrder
 id toolbarPassbook
 id top
@@ -2621,6 +2626,7 @@ id tvNew
 id tvNewPin
 id tvNo
 id tvNodata
+id tvNodataVehcile
 id tvOdsHeading
 id tvOdsOrders
 id tvOperationBottomSheet
@@ -2836,6 +2842,7 @@ layout activity_payment_mode
 layout activity_payment_setting
 layout activity_profile
 layout activity_security_setting
+layout activity_select_vehicle
 layout activity_sign_up
 layout activity_sms_verification
 layout activity_splash
@@ -3098,6 +3105,7 @@ string confirm_pin
 string continue_
 string correct_email_error
 string correct_mobile_number_msg
+string correct_pan_msg
 string current_password
 string current_pin
 string currently_no_data_is_available
@@ -3240,6 +3248,7 @@ string new_text
 string new_vehicle_added
 string no
 string noInternet
+string no_data_msg
 string no_of
 string no_of_puncture
 string no_of_tubes
@@ -3299,8 +3308,12 @@ string proceed_to_pay
 string proceed_to_payment
 string profile
 string project_id
+string provide_aadhar_msg
+string provide_any_msg
 string provide_date_message
+string provide_date_msg
 string provide_name
+string provide_pan_msg
 string provide_review
 string provide_vehicle_msg
 string quantity_of_fuel_d
@@ -3346,6 +3359,7 @@ string select_image_first
 string select_languagae
 string select_languages
 string select_service_request
+string select_vehicle
 string select_vehicle_type
 string send_invoice_to_registered_email_id
 string service_booked_message

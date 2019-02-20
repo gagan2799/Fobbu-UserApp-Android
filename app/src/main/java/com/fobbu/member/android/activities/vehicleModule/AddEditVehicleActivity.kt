@@ -184,6 +184,8 @@ class AddEditVehicleActivity : AppCompatActivity(),
                         if (listImagesEdit[i] != "")
                             Picasso.get().load(listImagesEdit[i])
 
+                                .fit().centerInside()
+
                                 .error(R.drawable.photo_camera)
 
                                 .into(ivImage1)
@@ -195,6 +197,8 @@ class AddEditVehicleActivity : AppCompatActivity(),
                     {
                         if (listImagesEdit[i] != "")
                             Picasso.get().load(listImagesEdit[i])
+
+                                .fit().centerInside()
 
                                 .error(R.drawable.photo_camera)
 
@@ -208,6 +212,8 @@ class AddEditVehicleActivity : AppCompatActivity(),
                         if (listImagesEdit[i] != "")
                             Picasso.get().load(listImagesEdit[i])
 
+                                .fit().centerInside()
+
                                 .error(R.drawable.photo_camera)
 
                                 .into(ivImage3)
@@ -218,6 +224,8 @@ class AddEditVehicleActivity : AppCompatActivity(),
                     else ->
                     {
                         Picasso.get().load(listImagesEdit[i])
+
+                            .fit().centerInside()
 
                             .error(R.drawable.photo_camera)
 
@@ -234,6 +242,13 @@ class AddEditVehicleActivity : AppCompatActivity(),
     {
         if (fromWhere == "RSA")
             startActivity(Intent(this, WaitingScreenWhite::class.java).putExtra("from_where", "building_live"))
+
+        if (intent.hasExtra("vehicle_edit"))
+        {
+            startActivity(Intent(this,VehicleListActivity::class.java)
+                .setFlags
+                    (Intent.FLAG_ACTIVITY_NO_ANIMATION))
+        }
 
         finish()
     }
@@ -265,7 +280,15 @@ class AddEditVehicleActivity : AppCompatActivity(),
                 rlBigProfile.visibility = View.GONE
 
             else
+            {
+                if (intent.hasExtra("vehicle_edit"))
+                {
+                    startActivity(Intent(this,VehicleListActivity::class.java)
+                        .setFlags
+                    (Intent.FLAG_ACTIVITY_NO_ANIMATION))
+                }
                 finish()
+            }
         }
 
         llPhoto1.setOnClickListener {
@@ -376,10 +399,9 @@ class AddEditVehicleActivity : AppCompatActivity(),
                     if (file4 != null && file4!!.exists())
                         dataList.add(file4!!)
 
-                    if (tvAddEditVehicle.text == resources.getString(R.string.edit_vehicle)) {
+                    if (tvAddEditVehicle.text == resources.getString(R.string.save_changes)) {
                         editVehicleApi()
                     } else {
-
                         addVehicleApi()
                     }
 
@@ -1047,7 +1069,7 @@ class AddEditVehicleActivity : AppCompatActivity(),
 
             startActivity(Intent(this,VehicleListActivity::class.java)
                 .putExtra("vehicle_type",vehicleType))
-
+            finish()
         } else {
 
             CommonClass(
