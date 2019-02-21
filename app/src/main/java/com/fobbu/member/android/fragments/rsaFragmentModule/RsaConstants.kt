@@ -39,6 +39,7 @@ class RsaConstants
         var vehicleNumber="vehicleNumber"
         var vehicleNumberSelect="vehicleNumberSelect"
         var regNo="regNo"
+        var model="model"
         var date="date"
         var lat="placesLat"
         var long="placesLat"

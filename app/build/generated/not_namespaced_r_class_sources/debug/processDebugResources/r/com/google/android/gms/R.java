@@ -474,9 +474,9 @@ public final class R {
         public static final int thing_proto = 0x7f0902a1;
         public static final int title_view = 0x7f0902a6;
         public static final int toolbar = 0x7f0902a8;
-        public static final int url = 0x7f09036d;
-        public static final int wide = 0x7f090393;
-        public static final int wrap_content = 0x7f090396;
+        public static final int url = 0x7f09036e;
+        public static final int wide = 0x7f090395;
+        public static final int wrap_content = 0x7f090398;
     }
     public static final class integer {
         private integer() {}
@@ -493,11 +493,11 @@ public final class R {
         public static final int cast_mini_controller = 0x7f0c0043;
         public static final int cast_tracks_chooser_dialog_layout = 0x7f0c0044;
         public static final int cast_tracks_chooser_dialog_row_layout = 0x7f0c0045;
-        public static final int place_autocomplete_fragment = 0x7f0c0085;
-        public static final int place_autocomplete_item_powered_by_google = 0x7f0c0086;
-        public static final int place_autocomplete_item_prediction = 0x7f0c0087;
-        public static final int place_autocomplete_progress = 0x7f0c0088;
-        public static final int wallet_test_layout = 0x7f0c0092;
+        public static final int place_autocomplete_fragment = 0x7f0c0087;
+        public static final int place_autocomplete_item_powered_by_google = 0x7f0c0088;
+        public static final int place_autocomplete_item_prediction = 0x7f0c0089;
+        public static final int place_autocomplete_progress = 0x7f0c008a;
+        public static final int wallet_test_layout = 0x7f0c0094;
     }
     public static final class string {
         private string() {}

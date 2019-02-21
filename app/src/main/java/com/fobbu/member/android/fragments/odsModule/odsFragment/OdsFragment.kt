@@ -239,6 +239,8 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
                     commonClass.putString(RsaConstants.Ods.regNo,etCarRegestrationOds.text.toString())
 
+                    commonClass.putString(RsaConstants.Ods.model,etCarModelOds.text.toString())
+
                     changeFragment(OdsOperationFragment())
                 }
             }

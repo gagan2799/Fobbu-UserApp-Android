@@ -333,7 +333,7 @@ class OdsOperationFragment : Fragment(),ActivityView
         {
             val map=HashMap<String,Any>()
 
-            map["user_id"]=commonClass.getString("_id")
+            //map["user_id"]=commonClass.getString("_id")
 
             map["service"]=dataList[0]["_id"].toString()
 
@@ -341,11 +341,11 @@ class OdsOperationFragment : Fragment(),ActivityView
 
             map["longitude"]=commonClass.getString(RsaConstants.Ods.long)
 
-            map["vehicle_number"]=commonClass.getString(RsaConstants.Ods.vehicleNumber)
+            map["vehicle_number"]=commonClass.getString(RsaConstants.Ods.regNo)
 
             map["vehicle_type"]=commonClass.getString(RsaConstants.Ods.vehicleType)
 
-            map["registration_number"]=commonClass.getString(RsaConstants.Ods.regNo)
+            map["model"]=commonClass.getString(RsaConstants.Ods.model)
 
             map["start_date"]= startDate
 

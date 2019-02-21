@@ -6220,6 +6220,10 @@
         "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/8b2647e4d6f90733320c66bc0dae852b/res/drawable-xxhdpi-v4/abc_list_selector_disabled_holo_dark.9.png"
     },
     {
+        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/layout_inflate_ods_sub_service.xml.flat",
+        "source": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/res/layout/inflate_ods_sub_service.xml"
+    },
+    {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-hdpi_gray_cross.png.flat",
         "source": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/res/drawable-hdpi/gray_cross.png"
     },
@@ -7650,6 +7654,10 @@
     {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable_common_google_signin_btn_icon_dark_focused.xml.flat",
         "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/play-services-base-12.0.1.aar/57d7f6855b26a14510f48549d3968840/res/drawable/common_google_signin_btn_icon_dark_focused.xml"
+    },
+    {
+        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/layout_inflate_big_profile.xml.flat",
+        "source": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/res/layout/inflate_big_profile.xml"
     },
     {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable_red_rect_rounded.xml.flat",

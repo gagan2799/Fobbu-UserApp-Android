@@ -50,7 +50,7 @@ public final class R {
         public static final int right = 0x7f0901ed;
         public static final int start = 0x7f09025b;
         public static final int top = 0x7f0902ac;
-        public static final int vertical = 0x7f09036f;
+        public static final int vertical = 0x7f090370;
     }
     public static final class styleable {
         private styleable() {}

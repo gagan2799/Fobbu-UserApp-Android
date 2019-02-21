@@ -11,11 +11,9 @@ import android.graphics.Color
 import android.graphics.Matrix
 import android.media.ExifInterface
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
-import android.support.annotation.RequiresApi
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.support.v4.content.FileProvider
@@ -29,6 +27,7 @@ import android.widget.TextView
 import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.fobbu.member.android.R
+import com.fobbu.member.android.activities.vehicleModule.adapter.BigProfileViewAdapter
 import com.fobbu.member.android.activities.vehicleModule.presenter.AddEditActivityHandler
 import com.fobbu.member.android.activities.vehicleModule.presenter.AddEditVehiclePresenter
 import com.fobbu.member.android.activities.vehicleModule.view.AddEditVehicleAcivityView
@@ -38,8 +37,8 @@ import com.fobbu.member.android.apiInterface.MyApplication
 import com.fobbu.member.android.apiInterface.WebServiceApi
 import com.fobbu.member.android.fragments.rsaFragmentModule.RsaConstants
 import com.fobbu.member.android.modals.MainPojo
+import com.fobbu.member.android.utils.CardsPagerTransformerBasic
 import com.fobbu.member.android.utils.CommonClass
-import com.fobbu.member.android.utils.CustomDatePicker
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_add_edit_vehicle.*
 import okhttp3.MediaType
@@ -50,7 +49,6 @@ import org.json.JSONObject
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
-import java.lang.reflect.Field
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
@@ -69,7 +67,11 @@ class AddEditVehicleActivity : AppCompatActivity(),
 
     private var isImageOn2 = false
 
+    lateinit var viewAdapter:BigProfileViewAdapter
+
     private var isImageOn3 = false
+
+    var bigProfileList=ArrayList<Any>()
 
     private var isImageOn4 = false
 
@@ -175,6 +177,12 @@ class AddEditVehicleActivity : AppCompatActivity(),
 
             listImagesEdit = hashMapEdit["images"] as ArrayList<String>
 
+            if (listImagesEdit.size>0)
+            {
+                for (i in listImagesEdit.indices)
+                    bigProfileList.add(listImagesEdit[i])
+            }
+
             for (i in listImagesEdit.indices)
             {
                 when (i)
@@ -240,17 +248,27 @@ class AddEditVehicleActivity : AppCompatActivity(),
 
     override fun onBackPressed()
     {
-        if (fromWhere == "RSA")
-            startActivity(Intent(this, WaitingScreenWhite::class.java).putExtra("from_where", "building_live"))
 
-        if (intent.hasExtra("vehicle_edit"))
+        if (rlBigProfile.visibility==View.VISIBLE)
         {
-            startActivity(Intent(this,VehicleListActivity::class.java)
-                .setFlags
-                    (Intent.FLAG_ACTIVITY_NO_ANIMATION))
+            rlBigProfile.visibility=View.GONE
+
+            bigProfileList.clear()
+        }
+        else{
+            if (fromWhere == "RSA")
+                startActivity(Intent(this, WaitingScreenWhite::class.java).putExtra("from_where", "building_live"))
+
+            if (intent.hasExtra("vehicle_edit"))
+            {
+                startActivity(Intent(this,VehicleListActivity::class.java)
+                    .setFlags
+                        (Intent.FLAG_ACTIVITY_NO_ANIMATION))
+            }
+
+            finish()
         }
 
-        finish()
     }
 
     // all the clicks  are handled in this method
@@ -273,22 +291,20 @@ class AddEditVehicleActivity : AppCompatActivity(),
 
         imgClose.setOnClickListener {
             rlBigProfile.visibility = View.GONE
+
+            bigProfileList.clear()
         }
 
         ivBack.setOnClickListener {
-            if (rlBigProfile.visibility == View.VISIBLE)
-                rlBigProfile.visibility = View.GONE
 
-            else
-            {
                 if (intent.hasExtra("vehicle_edit"))
                 {
                     startActivity(Intent(this,VehicleListActivity::class.java)
                         .setFlags
-                    (Intent.FLAG_ACTIVITY_NO_ANIMATION))
+                            (Intent.FLAG_ACTIVITY_NO_ANIMATION))
                 }
                 finish()
-            }
+
         }
 
         llPhoto1.setOnClickListener {
@@ -418,57 +434,72 @@ class AddEditVehicleActivity : AppCompatActivity(),
         val alertDialog = AlertDialog.Builder(this).create()
         alertDialog.setTitle("Car Images")
         alertDialog.setMessage(null)
-        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "View") { _, _ ->
 
+        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "View") { _, _ ->
+            println("list image edit::::::$listImagesEdit")
+            println("list image edit size::::::${listImagesEdit.size}")
             when (s) {
                 "1" -> {
 
                     if (tvHeading.text == resources.getString(R.string.edit_vehicle)) {
-                        Glide.with(this@AddEditVehicleActivity)
-                            .load(listImagesEdit[0])
-                            .into(imgBig)
+                        if (listImagesEdit.size<1)
+                        {
+                            addFileToList()
+                        }
+
                     } else {
-                        Glide.with(this@AddEditVehicleActivity)
-                            .load(file1)
-                            .into(imgBig)
+                        addFileToList()
                     }
+
+                    setUpSlider(0)
+                    println("big profile added 1:::: $bigProfileList")
                     rlBigProfile.visibility = View.VISIBLE
 
                 }
                 "2" -> {
                     if (tvHeading.text == resources.getString(R.string.edit_vehicle)) {
-                        Glide.with(this@AddEditVehicleActivity)
-                            .load(listImagesEdit[1])
-                            .into(imgBig)
-                    } else {
-                        Glide.with(this@AddEditVehicleActivity)
-                            .load(file2)
-                            .into(imgBig)
+                        if (listImagesEdit.size<2)
+                        {
+                            addFileToList()
+                        }
                     }
+                    else
+                    {
+                        addFileToList()
+                    }
+                    setUpSlider(1)
+
+                    println("big profile added 2:::: $bigProfileList")
                     rlBigProfile.visibility = View.VISIBLE
                 }
                 "3" -> {
                     if (tvHeading.text == resources.getString(R.string.edit_vehicle)) {
-                        Glide.with(this@AddEditVehicleActivity)
-                            .load(listImagesEdit[2])
-                            .into(imgBig)
-                    } else {
-                        Glide.with(this@AddEditVehicleActivity)
-                            .load(file3)
-                            .into(imgBig)
+                        if (listImagesEdit.size<3)
+                        {
+                            addFileToList()
+                        }
                     }
+                    else
+                    {
+                        addFileToList()
+                    }
+                    setUpSlider(2)
+
+                    println("big profile added 3:::: $bigProfileList")
                     rlBigProfile.visibility = View.VISIBLE
                 }
                 "4" -> {
                     if (tvHeading.text == resources.getString(R.string.edit_vehicle)) {
-                        Glide.with(this@AddEditVehicleActivity)
-                            .load(listImagesEdit[3])
-                            .into(imgBig)
+                        if (listImagesEdit.size<4)
+                        {
+                            addFileToList()
+                        }
                     } else {
-                        Glide.with(this@AddEditVehicleActivity)
-                            .load(file4)
-                            .into(imgBig)
+                        addFileToList()
                     }
+                    setUpSlider(3)
+
+                    println("big profile added 4:::: $bigProfileList")
                     rlBigProfile.visibility = View.VISIBLE
                 }
             }
@@ -480,8 +511,13 @@ class AddEditVehicleActivity : AppCompatActivity(),
                     if (tvHeading.text != resources.getString(R.string.edit_vehicle)) {
                         file1 = null
                     } else {
-                        if (listImagesEdit.size>=1)
-                        listImagesEdit.removeAt(0)
+                        if (listImagesEdit.size<1)
+                            file1=null
+                        else
+                        {
+                            if (listImagesEdit.size>=1)
+                                listImagesEdit.removeAt(0)
+                        }
 
                     }
                     isImageOn1 = false
@@ -491,10 +527,15 @@ class AddEditVehicleActivity : AppCompatActivity(),
                     if (tvHeading.text != resources.getString(R.string.edit_vehicle)) {
                         file2 = null
                     } else {
-                        if (listImagesEdit.size==2)
-                        listImagesEdit.removeAt(1)
+                        if (listImagesEdit.size<2)
+                            file2=null
                         else
-                            listImagesEdit.removeAt(0)
+                        {
+                            if (listImagesEdit.size==2)
+                                listImagesEdit.removeAt(1)
+                            else
+                                listImagesEdit.removeAt(0)
+                        }
                     }
                     isImageOn2 = false
                     ivImage2.setImageResource(R.drawable.photo_camera)
@@ -503,10 +544,15 @@ class AddEditVehicleActivity : AppCompatActivity(),
                     if (tvHeading.text != resources.getString(R.string.edit_vehicle)) {
                         file3 = null
                     } else {
-                        if (listImagesEdit.size==3)
-                            listImagesEdit.removeAt(2)
+                        if (listImagesEdit.size<3)
+                            file3=null
                         else
-                            listImagesEdit.removeAt(0)
+                        {
+                            if (listImagesEdit.size==3)
+                                listImagesEdit.removeAt(2)
+                            else
+                                listImagesEdit.removeAt(0)
+                        }
                     }
                     isImageOn3 = false
                     ivImage3.setImageResource(R.drawable.photo_camera)
@@ -515,13 +561,26 @@ class AddEditVehicleActivity : AppCompatActivity(),
                     if (tvHeading.text != resources.getString(R.string.edit_vehicle)) {
                         file4 = null
                     } else {
-                        if (listImagesEdit.size==4)
-                            listImagesEdit.removeAt(3)
+                        if (listImagesEdit.size<4)
+                            file1=null
                         else
-                            listImagesEdit.removeAt(0)
+                        {
+                            if (listImagesEdit.size==4)
+                                listImagesEdit.removeAt(3)
+                            else
+                                listImagesEdit.removeAt(0)
+                        }
                     }
                     isImageOn4 = false
                     ivImage4.setImageResource(R.drawable.photo_camera)
+                }
+            }
+            bigProfileList.clear()
+            if (listImagesEdit.isNotEmpty())
+            {
+                for (i in listImagesEdit.indices)
+                {
+                    bigProfileList.add(listImagesEdit[i])
                 }
             }
         }
@@ -582,7 +641,7 @@ class AddEditVehicleActivity : AppCompatActivity(),
                     || permission3 != PackageManager.PERMISSION_GRANTED
                 )
                     makeRequest1()
-                 else
+                else
                     takePicture()
 
             }
@@ -687,7 +746,7 @@ class AddEditVehicleActivity : AppCompatActivity(),
                     Log.i("", "Permission has been denied by user")
                     showMessageDialog(
                         "You need to allow the permissions from\n" +
-                                "Phone Settings -> Apps --> Fobbu Vendor --> Permissions\n" +
+                                "Phone Settings -> Apps --> Fobbu  --> Permissions\n" +
                                 "to allow the permissions"
                     )
 
@@ -1058,14 +1117,15 @@ class AddEditVehicleActivity : AppCompatActivity(),
 
     }
 
+
     override fun onRequestSuccessReportEdit(mainPojo: MainPojo)
     {
         if (mainPojo.success == "true")
         {
-                CommonClass(
-                    this@AddEditVehicleActivity,
-                    this@AddEditVehicleActivity
-                ).showToast(mainPojo.message)
+            CommonClass(
+                this@AddEditVehicleActivity,
+                this@AddEditVehicleActivity
+            ).showToast(mainPojo.message)
 
             startActivity(Intent(this,VehicleListActivity::class.java)
                 .putExtra("vehicle_type",vehicleType))
@@ -1152,8 +1212,64 @@ class AddEditVehicleActivity : AppCompatActivity(),
     private fun checkAndRemoveSpace(text:String):String
     {
         if (text.startsWith(""))
-           return text.trim()
+            return text.trim()
 
         return text
+    }
+
+    private fun addFileToList()
+    {
+
+            if (file1!=null)
+            {
+                bigProfileList.add(file1.toString())
+            }
+
+
+            if (file2!=null)
+            {
+                bigProfileList.add(file2.toString())
+            }
+
+
+            if (file3!=null)
+            {
+                bigProfileList.add(file3.toString())
+            }
+
+
+            if (file4!=null)
+            {
+                bigProfileList.add(file4.toString())
+            }
+    }
+
+
+    // functiom for setting up slider
+    private fun  setUpSlider(pos:Int)
+    {
+        viewAdapter= BigProfileViewAdapter(this,bigProfileList)
+
+        vpBigProfile.adapter=viewAdapter
+
+        val density = resources.displayMetrics.density
+        val partialWidth = (16 * density).toInt() // 16dp
+        val pageMargin = (8 * density).toInt() // 8dp
+
+        val viewPagerPadding = partialWidth + pageMargin
+
+        vpBigProfile.pageMargin = pageMargin
+
+        vpBigProfile.setPadding(viewPagerPadding, 0, viewPagerPadding, 0)
+
+        vpBigProfile.setPageTransformer(true, CardsPagerTransformerBasic(2,5, 0.7F))
+
+        circleIndicator.setViewPager(vpBigProfile)
+        if (pos>=bigProfileList.size)
+        {
+            vpBigProfile.currentItem = bigProfileList.size-1
+        }
+        else
+            vpBigProfile.currentItem = pos
     }
 }

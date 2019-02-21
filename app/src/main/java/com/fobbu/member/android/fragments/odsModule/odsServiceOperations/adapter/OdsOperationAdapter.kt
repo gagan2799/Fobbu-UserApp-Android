@@ -1,6 +1,7 @@
 package com.fobbu.member.android.fragments.odsModule.odsServiceOperations.adapter
 
 import android.content.Context
+import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -9,15 +10,23 @@ import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
 import com.fobbu.member.android.R
+import kotlinx.android.synthetic.main.inflate_ods_operation.view.*
 
 class OdsOperationAdapter(var context:Context, var dataList: ArrayList<Map<String, Any>>):RecyclerView.Adapter<OdsOperationAdapter.OperationViewHolder>()
 {
     var optionList=ArrayList<String>()
 
+    lateinit var odsSubServiceAdapter:OdsSubServiceAdapter
+
+    private var viewpool:RecyclerView.RecycledViewPool = RecyclerView.RecycledViewPool()
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): OperationViewHolder
     {
-    return OperationViewHolder(LayoutInflater.from(context).inflate(R.layout.inflate_ods_operation,p0,false))
+        val view=LayoutInflater.from(context).inflate(R.layout.inflate_ods_operation,p0,false)
+
+        viewpool=   view.rvOdsSubService.recycledViewPool
+
+    return OperationViewHolder(view)
     }
 
     override fun getItemCount(): Int {
@@ -34,6 +43,17 @@ class OdsOperationAdapter(var context:Context, var dataList: ArrayList<Map<Strin
 
         println("option list:::::$optionList")
 
+        odsSubServiceAdapter=OdsSubServiceAdapter(context,optionList)
+
+        p0.rvOdsSubSrevice.layoutManager=LinearLayoutManager(context)
+
+        p0.rvOdsSubSrevice.adapter=odsSubServiceAdapter
+
+        p0.rvOdsSubSrevice.setRecycledViewPool(viewpool)
+
+        p0.rvOdsSubSrevice.setHasFixedSize(true)
+
+        p0.rvOdsSubSrevice.isNestedScrollingEnabled=false
 
         p0.ivPlusListing.setOnClickListener {
             if (p0.rlOdsSubService.visibility==View.GONE)
