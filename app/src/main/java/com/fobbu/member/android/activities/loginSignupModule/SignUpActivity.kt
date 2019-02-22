@@ -123,6 +123,10 @@ class SignUpActivity : AppCompatActivity(),ActivityView {
                     CommonClass(this, this).showToast(resources.getString(R.string.please_enter_password))
                     etPassword.requestFocus()
                 }
+                etPassword.text.length < 6 -> {
+                    CommonClass(this, this).showToast(resources.getString(R.string.please_enter_password))
+                    etPassword.requestFocus()
+                }
                 tvGender.text.toString() ==resources.getString(R.string.selectGender) -> {
                     CommonClass(this, this).showToast(resources.getString(R.string.please_enter_gender))
                     etPassword.requestFocus()

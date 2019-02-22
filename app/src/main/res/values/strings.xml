@@ -32,6 +32,8 @@
     </string>
     <string name="please_enter_mobile">Please enter Mobile no.</string>
     <string name="please_enter_password">Please enter Password.</string>
+    <string name="please_enter_valid_password">Minimum 6 character should be there in password field.</string>
+
 
     ///SIGNUP SCREEN
     <string name="signup">Sign Up</string>

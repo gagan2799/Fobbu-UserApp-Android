@@ -3301,6 +3301,7 @@ string please_enter_full_name
 string please_enter_gender
 string please_enter_mobile
 string please_enter_password
+string please_enter_valid_password
 string please_enter_vehicle_number
 string please_fobbu_gathering_tools
 string please_generate

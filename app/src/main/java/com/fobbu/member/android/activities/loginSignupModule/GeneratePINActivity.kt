@@ -440,11 +440,22 @@ class GeneratePINActivity : AppCompatActivity()
             if (intent.getStringExtra("pin") == "security") {
                 if (CommonClass(this, this).getString("Local_Pin").isNotEmpty()) {
                     when {
+
+                        currentPin.length!=4 ->
+                            Toast.makeText(this, "Please enter Current PIN.", Toast.LENGTH_SHORT).show()
+
                         currentPin != CommonClass(this, this).getString("Local_Pin") -> Toast.makeText(
                             this,
-                            "provide correct pin",
+                            "Current PIN is incorrect.",
                             Toast.LENGTH_SHORT
                         ).show()
+
+                        enterPin.length!=4 ->
+                            Toast.makeText(this, "Please enter New PIN.", Toast.LENGTH_SHORT).show()
+
+                        confirmPin.length!=4 ->
+                            Toast.makeText(this, "Please enter Confirm PIN.", Toast.LENGTH_SHORT).show()
+
 
                         currentPin == enterPin -> Toast.makeText(
                             this,
@@ -480,10 +491,12 @@ class GeneratePINActivity : AppCompatActivity()
 
     private fun firstTimePin(enterPin: String, confirmPin: String) {
         when {
-            enterPin == "" -> Toast.makeText(this, "Please enter PIN", Toast.LENGTH_SHORT).show()
-            confirmPin == "" -> Toast.makeText(this, "Please enter Confirm PIN", Toast.LENGTH_SHORT).show()
-            enterPin.length<4 || confirmPin.length<4->
-                Toast.makeText(this,"Please provide correct pin", Toast.LENGTH_SHORT).show()
+
+            enterPin.length!=4 ->
+                Toast.makeText(this, "Please enter New PIN.", Toast.LENGTH_SHORT).show()
+
+            confirmPin.length!=4 ->
+                Toast.makeText(this, "Please enter Confirm PIN.", Toast.LENGTH_SHORT).show()
 
             enterPin == confirmPin -> {
                 Toast.makeText(this, resources.getString(R.string.succesfully_set_pin), Toast.LENGTH_SHORT).show()

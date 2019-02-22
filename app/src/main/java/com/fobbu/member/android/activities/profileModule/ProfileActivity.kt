@@ -197,6 +197,7 @@ class ProfileActivity : AppCompatActivity(),ActivityView,ProfileView
 
             Picasso.get().load(urlProfile)
                 .error(R.drawable.dummy_pic)
+                .placeholder(R.drawable.dummy_pic)
                 .into(civPicProfile)
         }
 
@@ -266,7 +267,7 @@ class ProfileActivity : AppCompatActivity(),ActivityView,ProfileView
         }
 
         tvDobKycProfile.setOnClickListener {
-            commonClass.openDatePicker(this,"Start", tvDobKycProfile)
+            commonClass.openDatePickerDOB(this,"Start", tvDobKycProfile)
 
             tvDobKycProfile.setTextColor(resources.getColor(R.color.black))
         }

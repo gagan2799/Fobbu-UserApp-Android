@@ -66,7 +66,7 @@ class SplashActivity : AppCompatActivity() {
 
             else ->
             {
-                startActivity(Intent(this, LoginActivity::class.java))
+                startActivity(Intent(this, TutorialActivity::class.java))
 
                 finish()
             }
@@ -135,7 +135,7 @@ class SplashActivity : AppCompatActivity() {
                             //HANDLE WHERE SHOULD APP LAND IN
                             navigateToScreen()
 
-                        }, 3000)
+                        }, 2000)
                     }
 
                     override fun onAnimationStart(p0: Animation?) {

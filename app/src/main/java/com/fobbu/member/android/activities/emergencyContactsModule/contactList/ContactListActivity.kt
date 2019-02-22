@@ -1,10 +1,10 @@
 package com.fobbu.member.android.activities.emergencyContactsModule.contactList
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.app.AlertDialog
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import com.fobbu.member.android.R

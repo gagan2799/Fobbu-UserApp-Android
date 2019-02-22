@@ -149,13 +149,11 @@ class LanguageActivity : AppCompatActivity(),Filterable
 
                             selectedLanguageList.add(map)
                         }
-
-
                         else
                         {
                             filteredLanguageList[position]["selected"]="0"
 
-                            commonClass.showToast("You have the reached the limit of the languages that can be selected. Please unlect one add a new one.")
+                            commonClass.showToast("You have reached the limit of the languages that can be selected. Please Unselect one add a new one.")
                         }
 
                         println("language list ADDED:::$filteredLanguageList")

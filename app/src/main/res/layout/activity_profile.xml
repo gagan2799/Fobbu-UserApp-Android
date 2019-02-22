@@ -91,9 +91,6 @@
         </LinearLayout>
 
 
-
-
-
     </RelativeLayout>
 
     <de.hdodenhof.circleimageview.CircleImageView
@@ -110,7 +107,7 @@
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="20dp"/>
 
-    <ScrollView
+    <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scrollIndicators="none"
@@ -118,12 +115,11 @@
             android:layout_below="@+id/civPicProfile"
             android:id="@+id/svProfile"
             android:fillViewport="true"
-            android:fitsSystemWindows="true"
-    >
+            android:fitsSystemWindows="true">
 
-        <RelativeLayout android:layout_width="match_parent" android:layout_height="match_parent"
-        >
-            //basic layout
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
             <RelativeLayout
                     android:id="@+id/rlBasicProfile"
                     android:layout_width="match_parent"
@@ -188,7 +184,6 @@
                         android:id="@+id/etEmailProfile"
                         android:padding="10dp"
                         android:importantForAutofill="no"/>
-
 
 
                 <RelativeLayout
@@ -259,7 +254,6 @@
 
             </RelativeLayout>
 
-            //KYC layout
             <RelativeLayout
                     android:visibility="gone"
                     android:id="@+id/rlKycProfile"
@@ -311,7 +305,7 @@
                         android:layout_height="wrap_content"
                         android:hint="@string/enter_pan"
                         android:maxLength="10"
-                        android:imeOptions="actionDone"
+                        android:imeOptions="actionNext"
                         android:layout_marginTop="30dp"
                         android:background="@drawable/et_gray_with_base"
                         android:singleLine="true"
@@ -369,9 +363,7 @@
             </RelativeLayout>
         </RelativeLayout>
 
-    </ScrollView>
-
-
+    </android.support.v4.widget.NestedScrollView>
 
 
     <RelativeLayout
@@ -388,11 +380,9 @@
                 android:visibility="visible"
                 android:layout_centerInParent="true"
                 app:indicatorColor="@color/colorPrimary"
-                app:indicatorName="BallScaleMultipleIndicator" />
+                app:indicatorName="BallScaleMultipleIndicator"/>
 
     </RelativeLayout>
-
-
 
 
 </RelativeLayout>

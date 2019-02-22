@@ -40,6 +40,11 @@ class VehicleAdapter(internal var activity: Activity, private var dataListMain:A
 
         holder.tvSubModel?.text=dataListMain[position]["vehicle_sub_model"].toString()
 
+        val placeHolder = if(dataListMain[position]["vehicle_type"]=="4wheeler")
+            R.drawable.car_gray
+        else
+            R.drawable.scooter_gray
+
         if(dataListMain[position].containsKey("images"))
         {
             val listImages = dataListMain[position]["images"] as ArrayList<String>
@@ -48,20 +53,20 @@ class VehicleAdapter(internal var activity: Activity, private var dataListMain:A
             {
                 Picasso.get().load(listImages[0])
 
-                    .placeholder(R.drawable.car_gray)
+                    .placeholder(placeHolder)
 
                     .fit().centerInside()
 
-                    .error(R.drawable.car_gray)
+                    .error(placeHolder)
 
                     .into(holder.ivImage)
             }
             else
-                holder.ivImage.setImageResource(R.drawable.dummy_services)
+                holder.ivImage.setImageResource(placeHolder)
         }
 
         else
-            holder.ivImage.setImageResource(R.drawable.dummy_services)
+            holder.ivImage.setImageResource(placeHolder)
 
         holder.itemView.setOnClickListener {
             activity.startActivity(Intent(activity,AddEditVehicleActivity::class.java).putExtra("vehicle_edit",

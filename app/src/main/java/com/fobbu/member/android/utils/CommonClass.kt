@@ -372,8 +372,29 @@ class CommonClass(activity1: Activity, context1: Context) {
         val datePicker = DatePickerDialog(activity, R.style.CustomPickerTheme, datePickerDialog, myCalendar
             .get(YEAR), myCalendar.get(MONTH),
             myCalendar.get(DAY_OF_MONTH))
-        //datePicker.datePicker.minDate = myCalendar.timeInMillis
-        //datePicker.datePicker.maxDate = myCalendar.timeInMillis + 2592000000
+       // datePicker.datePicker.minDate = myCalendar.timeInMillis
+        //datePicker.datePicker.maxDate = myCalendar.timeInMillis
+        datePicker.show()
+
+    }
+
+    fun openDatePickerDOB(activity:Activity,from: String, textview: TextView) {
+
+        myCalendar = Calendar.getInstance()
+
+        datePickerDialog = DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
+            myCalendar.set(Calendar.YEAR, year)
+            myCalendar.set(Calendar.MONTH, monthOfYear)
+            myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+
+            updateLabel(from, textview)
+        }
+
+        val datePicker = DatePickerDialog(activity, R.style.CustomPickerTheme, datePickerDialog, myCalendar
+            .get(YEAR), myCalendar.get(MONTH),
+            myCalendar.get(DAY_OF_MONTH))
+        // datePicker.datePicker.minDate = myCalendar.timeInMillis
+        datePicker.datePicker.maxDate = myCalendar.timeInMillis /*+ 2592000000*/
         datePicker.show()
 
     }

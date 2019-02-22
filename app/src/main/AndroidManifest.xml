@@ -140,8 +140,7 @@
         </activity>
         <activity
                 android:name=".activities.emergencyContactsModule.emergencyContacts.EmergencyContactsActivity"
-                android:screenOrientation="portrait"
-                android:windowSoftInputMode="adjustPan">
+                android:screenOrientation="portrait" >
         </activity>
         <activity
                 android:name=".activities.paymentSettings.PaymentSettingActivity"
@@ -169,8 +168,7 @@
         </activity>
         <activity
                 android:name=".activities.profile.ProfileActivity"
-                android:screenOrientation="portrait"
-                android:windowSoftInputMode="adjustResize">
+                android:screenOrientation="portrait">
         </activity>
 
         <service
@@ -182,8 +180,6 @@
                 android:required="false"/>
 
         <activity android:name=".activities.paymentModule.OdsGetSetGoActivity">
-        </activity>
-        <activity android:name=".activities.GooglePlacesActivity.GooglePlacesActivity">
         </activity>
         <activity android:name=".activities.profileModule.langauage.LanguageActivity">
         </activity>

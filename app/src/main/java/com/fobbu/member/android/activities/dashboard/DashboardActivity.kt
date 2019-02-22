@@ -460,7 +460,18 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
 
             intent.hasExtra("from_push") -> {
                 println("FROM PUSH CHECK AND NAVIGATE")
-                checkStatusAPI()
+
+                if(intent.getStringExtra("from_push")==FcmPushTypes.Types.cancelledByAdmin)
+                {
+                    println("FROM PUSH CHECK AND NAVIGATE TO HOME BECAUSE CANCELLED BY ADMIN")
+                    fragmentTypeForRSA = ""
+                    CommonClass(this, this).workDoneReviewSend()
+                    changeFragment(HomeFragment(), resources.getString(R.string.home))
+                }
+                else
+                {
+                    checkStatusAPI()
+                }
             }
             CommonClass(this, this).getString(RsaConstants.RsaTypes.checkStatus) != "" -> {
                 val type: String = CommonClass(this, this).getString(RsaConstants.RsaTypes.checkStatus)
@@ -492,6 +503,7 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
                     FcmPushTypes.Types.cancelledByAdmin -> {
                         fragmentTypeForRSA = ""
                         CommonClass(this, this).workDoneReviewSend()
+
                     }
 
                     FcmPushTypes.Types.fuelDefaultScreen -> {
@@ -752,6 +764,15 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
                 CommonClass(this, this).getString(RsaConstants.ServiceSaved.fobbuRequestId)
             )
         }
+        else
+        {
+            println("ELSE CASE HERE  ")
+
+
+            fragmentTypeForRSA = ""
+            CommonClass(this, this).workDoneReviewSend()
+            changeFragment(HomeFragment(), resources.getString(R.string.home))
+        }
     }
 
     override fun onRequestSuccessReportGetService(mainPojo: MainPojo) {
@@ -760,7 +781,7 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
                 if (CommonClass(this, this).getString(RsaConstants.RsaTypes.checkStatus) !=
                     mainPojo.getData().status
                 ) {
-                    println("SAVED AND MOVED YEAHH")
+                    println("SAVED AND MOVED YEAHH IN CHECK STATUS API")
 
                     CommonClass(this, this).putString(
                         RsaConstants.ServiceSaved.serviceNameSelected,
