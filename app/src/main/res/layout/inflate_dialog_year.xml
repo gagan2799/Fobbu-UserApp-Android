@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:gravity="center_horizontal"
+                android:padding="10dp"
+                android:layout_height="wrap_content" >
+
+    <TextView
+            android:id="@+id/tvNumHead"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:textStyle="bold"
+            android:textSize="@dimen/textsize_normal"
+            android:textColor="@color/black"
+            android:text="Select Year" />
+
+    <NumberPicker
+            android:layout_below="@+id/tvNumHead"
+            android:id="@+id/numberPicker1"
+
+            android:layout_centerHorizontal="true"
+            android:background="@android:color/transparent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+             />
+
+
+
+    <TextView
+            android:id="@+id/button1"
+            android:layout_below="@id/numberPicker1"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textSize="@dimen/textsize_medium"
+            android:textColor="@color/black"
+            android:text="DONE" />
+
+</RelativeLayout>

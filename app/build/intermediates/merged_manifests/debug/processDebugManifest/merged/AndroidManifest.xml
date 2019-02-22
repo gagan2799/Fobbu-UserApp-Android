@@ -89,7 +89,8 @@
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name="com.fobbu.member.android.activities.vehicleModule.VehicleListActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"

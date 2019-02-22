@@ -520,14 +520,19 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
 
     override fun onRequestSuccessReport(mainPojo: MainPojo) {
-        if (mainPojo.success == "true") {
+        if (mainPojo.success == "true")
+        {
 
-            if (!mainPojo.getData().user.profile.isNullOrBlank()) {
-                Picasso.get().load(mainPojo.getData().partner.profile).error(R.drawable.dummy_pic).into(imgProfile)
-            }
-            tvName.text = mainPojo.getData().partner.display_name
-            mobileNumber = mainPojo.getData().partner.mobile_number
+                if (!mainPojo.getData().user.profile.isNullOrBlank())
+                {
+                    if (mainPojo.getData().partner.profile.isNotEmpty())
+                    Picasso.get().load(mainPojo.getData().partner.profile).error(R.drawable.dummy_pic).into(imgProfile)
 
+                    else
+                        imgProfile.setImageResource(R.drawable.dummy_pic)
+                }
+                tvName.text = mainPojo.getData().partner.display_name
+                mobileNumber = mainPojo.getData().partner.mobile_number
         }
     }
 

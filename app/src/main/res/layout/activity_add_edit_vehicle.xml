@@ -203,7 +203,7 @@
                         android:singleLine="true"
                         android:textSize="@dimen/textsize_small"
                         android:padding="10dp"
-                        android:imeOptions="actionNext"
+                        android:imeOptions="actionDone"
                         android:layout_centerVertical="true"
                         android:layout_height="wrap_content"/>
 

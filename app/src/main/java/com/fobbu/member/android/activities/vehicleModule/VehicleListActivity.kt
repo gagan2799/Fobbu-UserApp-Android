@@ -40,11 +40,13 @@ import kotlinx.android.synthetic.main.toolbar.*
 import java.util.*
 import kotlin.collections.HashMap
 
-class VehicleListActivity : AppCompatActivity(),ActivityView,DeleteVehicleClickListener,AddEditVehicleAcivityView
+class VehicleListActivity : AppCompatActivity(),ActivityView,DeleteVehicleClickListener,AddEditVehicleAcivityView,Filterable
 {
     private lateinit var webServiceApi: WebServiceApi
 
     private var imageFrom = ""
+
+    var filteredList=ArrayList<HashMap<String,Any>>()
 
     private var vehicleType = "2wheeler"
 
@@ -116,7 +118,7 @@ class VehicleListActivity : AppCompatActivity(),ActivityView,DeleteVehicleClickL
         /// Vehicle Adapter handled here
         recyclerViewVehicles.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
-        vehicleAdapter = VehicleAdapter(this, dataListMain)
+        vehicleAdapter = VehicleAdapter(this, filteredList)
 
         recyclerViewVehicles.adapter = vehicleAdapter
 
@@ -227,6 +229,7 @@ class VehicleListActivity : AppCompatActivity(),ActivityView,DeleteVehicleClickL
 
             fun callSearch(query: String) {
                 //Do searching
+                filter.filter(query)
                 Log.i("query", "" + query)
 
             }
@@ -539,7 +542,8 @@ class VehicleListActivity : AppCompatActivity(),ActivityView,DeleteVehicleClickL
                 }
             }
 
-            setupRecycler()
+            // setting up recycler
+            filter.filter("")
 
             if (intent.hasExtra("vehicle_type"))
             {
@@ -648,6 +652,48 @@ class VehicleListActivity : AppCompatActivity(),ActivityView,DeleteVehicleClickL
         else
         {
             Toast.makeText(this,mainPojo.message, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+
+    override fun getFilter(): Filter {
+
+        return object : Filter()
+        {
+            override fun performFiltering(charSequence: CharSequence): Filter.FilterResults
+            {
+                val charString = charSequence.toString()
+
+                if (charString.isEmpty())
+                {
+                    filteredList=dataListMain
+                }
+                else
+                {
+                    val filteredCustomList = ArrayList<HashMap<String,Any>>()
+                    for (row in dataListMain)
+                    {
+                        // name match condition. this might differ depending on your requirement
+                        // here we are looking for name or phone number match
+                        if (row["vehicle_brand"].toString().toLowerCase().contains(charString.toLowerCase()) )
+                        {
+                            filteredCustomList.add(row)
+                        }
+                    }
+                    filteredList = filteredCustomList
+                }
+
+                val filterResults = Filter.FilterResults()
+                filterResults.values = filteredList
+                return filterResults
+            }
+
+            override fun publishResults(charSequence: CharSequence, filterResults: Filter.FilterResults)
+            {
+                filteredList = filterResults.values as ArrayList<HashMap<String,Any>>
+
+                setupRecycler()
+            }
         }
     }
 }

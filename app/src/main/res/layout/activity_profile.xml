@@ -216,6 +216,7 @@
 
                     <Spinner
                             android:visibility="invisible"
+                            android:enabled="false"
                             android:id="@+id/spinnerProfile"
                             android:layout_width="match_parent"
                             android:layout_height="3dp"/>
@@ -237,7 +238,6 @@
                         android:textColor="@color/drawer_text_color"
                         android:textSize="@dimen/login_textsize_medium"
                         android:id="@+id/tvLanguageProfile"
-                        android:padding="10dp"
                         android:importantForAutofill="no"/>
 
                 <android.support.v7.widget.RecyclerView

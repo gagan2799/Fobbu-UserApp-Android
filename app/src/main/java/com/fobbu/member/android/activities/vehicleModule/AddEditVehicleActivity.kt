@@ -3,6 +3,7 @@ package com.fobbu.member.android.activities.vehicleModule
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
+import android.app.Dialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -23,6 +24,7 @@ import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.widget.DatePicker
+import android.widget.NumberPicker
 import android.widget.TextView
 import android.widget.Toast
 import com.bumptech.glide.Glide
@@ -53,7 +55,7 @@ import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
 class AddEditVehicleActivity : AppCompatActivity(),
-    AddEditVehicleAcivityView,DatePickerDialog.OnDateSetListener
+    AddEditVehicleAcivityView,DatePickerDialog.OnDateSetListener, NumberPicker.OnValueChangeListener
 {
     private lateinit var webServiceApi: WebServiceApi
 
@@ -297,15 +299,20 @@ class AddEditVehicleActivity : AppCompatActivity(),
 
         ivBack.setOnClickListener {
 
-                if (intent.hasExtra("vehicle_edit"))
-                {
-                    startActivity(Intent(this,VehicleListActivity::class.java)
-                        .setFlags
-                            (Intent.FLAG_ACTIVITY_NO_ANIMATION))
-                }
-                finish()
+            if (intent.hasExtra("vehicle_edit"))
+            {
+                startActivity(Intent(this,VehicleListActivity::class.java)
+                    .setFlags
+                        (Intent.FLAG_ACTIVITY_NO_ANIMATION))
+            }
+            finish()
 
         }
+
+        etYearsOfMake.setOnClickListener{
+            dialogYearShow()
+        }
+
 
         llPhoto1.setOnClickListener {
             if (isImageOn1)
@@ -1220,28 +1227,28 @@ class AddEditVehicleActivity : AppCompatActivity(),
     private fun addFileToList()
     {
 
-            if (file1!=null)
-            {
-                bigProfileList.add(file1.toString())
-            }
+        if (file1!=null)
+        {
+            bigProfileList.add(file1.toString())
+        }
 
 
-            if (file2!=null)
-            {
-                bigProfileList.add(file2.toString())
-            }
+        if (file2!=null)
+        {
+            bigProfileList.add(file2.toString())
+        }
 
 
-            if (file3!=null)
-            {
-                bigProfileList.add(file3.toString())
-            }
+        if (file3!=null)
+        {
+            bigProfileList.add(file3.toString())
+        }
 
 
-            if (file4!=null)
-            {
-                bigProfileList.add(file4.toString())
-            }
+        if (file4!=null)
+        {
+            bigProfileList.add(file4.toString())
+        }
     }
 
 
@@ -1272,4 +1279,29 @@ class AddEditVehicleActivity : AppCompatActivity(),
         else
             vpBigProfile.currentItem = pos
     }
+
+    @SuppressLint("SetTextI18n")
+    fun dialogYearShow()
+    {
+        val d: Dialog =  Dialog(this)
+        d.setTitle("NumberPicker")
+        d.setContentView(R.layout.inflate_dialog_year)
+        val b1:TextView  =  d.findViewById(R.id.button1);
+        val np: NumberPicker  =  d.findViewById(R.id.numberPicker1)
+        np.maxValue = 2019
+        np.minValue = 1970
+        np.wrapSelectorWheel = false
+        np.setOnValueChangedListener(this)
+        b1.setOnClickListener {
+            etYearsOfMake.setText(""+(np.value))
+            d.dismiss()
+        }
+        d.show()
+    }
+
+
+    override fun onValueChange(p0: NumberPicker?, p1: Int, p2: Int) {
+        Log.i("value is",""+p2)
+    }
+
 }

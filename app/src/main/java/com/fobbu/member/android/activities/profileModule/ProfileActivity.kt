@@ -221,6 +221,8 @@ class ProfileActivity : AppCompatActivity(),ActivityView,ProfileView
 
             rlGenderProfile.isEnabled=true
 
+            spinnerProfile.isEnabled=true
+
             etNameKycProfile.isEnabled=true
 
             tvDobKycProfile.isEnabled=true
@@ -241,6 +243,7 @@ class ProfileActivity : AppCompatActivity(),ActivityView,ProfileView
         }
 
         rlGenderProfile.setOnClickListener {
+            if (tvEditToolbar.visibility==View.GONE)
             spinnerProfile.performClick()
         }
 
