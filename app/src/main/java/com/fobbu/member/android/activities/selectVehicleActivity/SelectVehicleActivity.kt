@@ -49,6 +49,8 @@ class SelectVehicleActivity : AppCompatActivity(),ActivityView,Filterable
 
     var vehicleType="2wheeler"
 
+    lateinit var searchView:SearchView
+
     lateinit var searchtoolbar: Toolbar
 
     lateinit var vehicle2WheelerAdapter:Vehicle2WheelerAdapter
@@ -150,7 +152,20 @@ class SelectVehicleActivity : AppCompatActivity(),ActivityView,Filterable
 
             }
 
-            override fun onTabSelected(p0: TabLayout.Tab?) {
+            override fun onTabSelected(p0: TabLayout.Tab?)
+            {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+                //searchtoolbar!!.visibility = View.VISIBLE
+                    circleReveal(R.id.searchtoolbar, 1, true, false)
+                else
+                    searchtoolbar!!.visibility = View.VISIBLE
+
+
+                if (searchView!=null && searchView!=null) {
+                    searchView.clearFocus()
+                    item_search.collapseActionView()
+                }
+
                when(p0?.position)
                {
                    0->
@@ -216,7 +231,7 @@ class SelectVehicleActivity : AppCompatActivity(),ActivityView,Filterable
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
     private fun initSearchView()
     {
-        val searchView = search_menu.findItem(R.id.action_filter_search).actionView as SearchView
+         searchView = search_menu.findItem(R.id.action_filter_search).actionView as SearchView
 
         // Enable/Disable Submit button in the keyboard
 

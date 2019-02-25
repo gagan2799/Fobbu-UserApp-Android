@@ -46,6 +46,8 @@ class VehicleListActivity : AppCompatActivity(),ActivityView,DeleteVehicleClickL
 
     private var imageFrom = ""
 
+    lateinit var searchView:SearchView
+
     var filteredList=ArrayList<HashMap<String,Any>>()
 
     private var vehicleType = "2wheeler"
@@ -170,7 +172,7 @@ class VehicleListActivity : AppCompatActivity(),ActivityView,DeleteVehicleClickL
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
     private fun initSearchView()
     {
-        val searchView = search_menu.findItem(R.id.action_filter_search).actionView as SearchView
+         searchView = search_menu.findItem(R.id.action_filter_search).actionView as SearchView
 
         // Enable/Disable Submit button in the keyboard
 
@@ -325,11 +327,25 @@ class VehicleListActivity : AppCompatActivity(),ActivityView,DeleteVehicleClickL
 
         tvScooter.setOnClickListener {
 
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+            //searchtoolbar!!.visibility = View.VISIBLE
+                circleReveal(R.id.searchtoolbar, 1, true, false)
+            else
+                searchtoolbar!!.visibility = View.VISIBLE
+
+            if (searchView!=null && searchView!=null) {
+                searchView.clearFocus()
+                item_search.collapseActionView()
+            }
+
             if(vehicleType!="2wheeler")
             {
                 vehicleType ="2wheeler"
 
                 manageLayout(vehicleType)
+
+                filter.filter("")
+
                /* tvScooter.setImageResource(R.drawable.scooter_red)
                 view_scooter.visibility = View.VISIBLE
 
@@ -355,10 +371,26 @@ class VehicleListActivity : AppCompatActivity(),ActivityView,DeleteVehicleClickL
         }
 
         tvCar.setOnClickListener {
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+            //searchtoolbar!!.visibility = View.VISIBLE
+                circleReveal(R.id.searchtoolbar, 1, true, false)
+            else
+                searchtoolbar!!.visibility = View.VISIBLE
+
+            if (searchView!=null && searchView!=null) {
+                searchView.clearFocus()
+                item_search.collapseActionView()
+            }
+
+
             if(vehicleType!="4wheeler") {
 
                 vehicleType ="4wheeler"
+
                 manageLayout(vehicleType)
+
+                filter.filter("")
                 /*tvScooter.setImageResource(R.drawable.scooter_gray)
                 view_scooter.visibility = View.GONE
 

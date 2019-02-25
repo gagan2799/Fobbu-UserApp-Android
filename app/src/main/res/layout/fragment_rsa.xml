@@ -205,7 +205,9 @@
                                     android:layout_height="wrap_content"/>
 
 
-                            <RelativeLayout   android:layout_marginLeft="50dp"
+                            <LinearLayout
+                                    android:orientation="horizontal"
+                                    android:layout_marginLeft="50dp"
                                               android:layout_marginTop="10dp"
                                               android:layout_marginRight="50dp"
                                               android:layout_width="match_parent"
@@ -213,7 +215,8 @@
                                               android:background="@drawable/border_line_grey"
                             >
                                 <EditText
-                                        android:layout_width="match_parent"
+                                        android:layout_width="0dp"
+                                        android:layout_weight="5"
                                         android:layout_height="wrap_content"
                                         android:id="@+id/etVehicleNumber"
                                         android:singleLine="true"
@@ -229,13 +232,12 @@
                                 <ImageView
                                         android:id="@+id/ivVehcileTypeRsa"
                                         android:src="@drawable/dropdown"
-                                        android:layout_centerVertical="true"
-                                        android:layout_alignParentRight="true"
                                         android:padding="10dp"
-                                        android:layout_width="wrap_content"
-                                           android:layout_height="wrap_content"/>
 
-                            </RelativeLayout>
+                                        android:layout_width="wrap_content"
+                                           android:layout_height="match_parent"/>
+
+                            </LinearLayout>
 
 
 
