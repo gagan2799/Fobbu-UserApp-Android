@@ -1193,6 +1193,8 @@ dimen profile_screen
 dimen rating_min_height
 dimen rating_min_width
 dimen red_rounded_rectangle_padding
+dimen rsa_service_height
+dimen rsa_service_width
 dimen small
 dimen subtitle_corner_radius
 dimen subtitle_outline_width
@@ -2131,6 +2133,7 @@ id ivServiceImageOperation
 id ivShare
 id ivShareOdsGet
 id ivSlidingImage
+id ivSubServiceChecked
 id ivSuccessCeheckPaymentDetail
 id ivSuccessCheckOrderDetail
 id ivTick
@@ -3321,6 +3324,7 @@ string provide_aadhar_msg
 string provide_any_msg
 string provide_date_message
 string provide_date_msg
+string provide_image_rsa_msg
 string provide_name
 string provide_pan_msg
 string provide_review

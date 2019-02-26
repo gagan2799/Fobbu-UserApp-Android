@@ -44,6 +44,7 @@ class RsaConstants
         var lat="placesLat"
         var long="placesLat"
     }
+
     object ServiceSaved
     {
         var fobbuRequestId="fobbu_request_id"

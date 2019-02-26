@@ -62,13 +62,20 @@ class OdsTrackingFragment : Fragment(),GoogleApiClient.OnConnectionFailedListene
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        val view=inflater.inflate(R.layout.fragment_ods_tracking, container, false)
+        if (isAdded)
+        {
+            // Inflate the layout for this fragment
 
-        initView(view,savedInstanceState)
+            val view = inflater.inflate(R.layout.fragment_ods_tracking, container, false)
 
-        clicks(view)
+            if (view != null)
+            {
+                initView(view, savedInstanceState)
 
+                clicks(view)
+            }
+
+        }
         return view
     }
 

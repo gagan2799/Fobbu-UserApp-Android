@@ -1,5 +1,6 @@
 package com.fobbu.member.android.fragments.odsModule.odsServiceOperations.adapter
 
+import android.app.Activity
 import android.content.Context
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -10,15 +11,24 @@ import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
 import com.fobbu.member.android.R
+import com.fobbu.member.android.fragments.odsModule.odsServiceOperations.view.SelectedSubServiceView
+import com.fobbu.member.android.utils.RecyclerItemClickListener
 import kotlinx.android.synthetic.main.inflate_ods_operation.view.*
+import java.lang.Exception
 
-class OdsOperationAdapter(var context:Context, var dataList: ArrayList<Map<String, Any>>):RecyclerView.Adapter<OdsOperationAdapter.OperationViewHolder>()
+class OdsOperationAdapter(var context:Activity, var dataList: ArrayList<Map<String, Any>>):RecyclerView.Adapter<OdsOperationAdapter.OperationViewHolder>(),SelectedSubServiceView
 {
-    var optionList=ArrayList<String>()
+    var optionList=ArrayList<HashMap<String,Any>>()
 
-    lateinit var odsSubServiceAdapter:OdsSubServiceAdapter
+    var newSelectedList=ArrayList<HashMap<String,Any>>()
+
+    private lateinit var odsSubServiceAdapter:OdsSubServiceAdapter
 
     private var viewpool:RecyclerView.RecycledViewPool = RecyclerView.RecycledViewPool()
+
+    init {
+
+    }
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): OperationViewHolder
     {
@@ -26,7 +36,7 @@ class OdsOperationAdapter(var context:Context, var dataList: ArrayList<Map<Strin
 
         viewpool=   view.rvOdsSubService.recycledViewPool
 
-    return OperationViewHolder(view)
+        return OperationViewHolder(view)
     }
 
     override fun getItemCount(): Int {
@@ -37,27 +47,90 @@ class OdsOperationAdapter(var context:Context, var dataList: ArrayList<Map<Strin
     {
         p0.tvTopUp.text=dataList[p1]["service_name"].toString()
 
-        val map=dataList[p1]
-
-        optionList=map.getValue("option") as ArrayList<String>
-
-        println("option list:::::$optionList")
-
-        odsSubServiceAdapter=OdsSubServiceAdapter(context,optionList)
-
-        p0.rvOdsSubSrevice.layoutManager=LinearLayoutManager(context)
-
-        p0.rvOdsSubSrevice.adapter=odsSubServiceAdapter
-
-        p0.rvOdsSubSrevice.setRecycledViewPool(viewpool)
-
-        p0.rvOdsSubSrevice.setHasFixedSize(true)
-
-        p0.rvOdsSubSrevice.isNestedScrollingEnabled=false
-
         p0.ivPlusListing.setOnClickListener {
             if (p0.rlOdsSubService.visibility==View.GONE)
+            {
+                var list= ArrayList<Any>()
+
+                try
+                {
+                    list.clear()
+
+                    optionList.clear()
+
+
+
+                    list= dataList[p1]["option"] as ArrayList<Any>
+
+                    loop@
+                    for (i in list.indices)
+                    {
+                        val subServicemap = HashMap<String, Any>()
+
+                        subServicemap["option"] = list[i].toString()
+
+                        if (newSelectedList.isNotEmpty())
+                            {
+                                innerloop@
+                                for (j in newSelectedList.indices)
+                                {
+                                    if (newSelectedList[j]["service_name"]==dataList[p1]["service_name"])
+                                    {
+                                        if (newSelectedList[j]["option"]==list[i])
+                                        {
+                                            if (subServicemap["selected"]!="1")
+                                            subServicemap["selected"]=newSelectedList[j]["selected"].toString()
+                                        }
+                                        else
+                                        {
+                                            if (subServicemap["selected"]!="1")
+                                            subServicemap["selected"]="0"
+                                        }
+
+                                    }
+                                    else
+                                    {
+                                        if (subServicemap["selected"]!="1")
+                                        subServicemap["selected"]="0"
+                                    }
+
+                                }
+                            }
+                        else{
+                            subServicemap["selected"] = "0"
+                        }
+
+
+                            subServicemap["service_name"] = dataList[p1]["service_name"].toString()
+
+
+                            optionList.add(subServicemap)
+                        }
+
+
+
+                }
+                catch (e:Exception)
+                {
+                    print("error:::${e.message}")
+                }
+
+
+                odsSubServiceAdapter=OdsSubServiceAdapter(context,optionList,this)
+
+                p0.rvOdsSubSrevice.layoutManager=LinearLayoutManager(context)
+
+                p0.rvOdsSubSrevice.adapter=odsSubServiceAdapter
+
+                p0.rvOdsSubSrevice.setRecycledViewPool(viewpool)
+
+                p0.rvOdsSubSrevice.setHasFixedSize(true)
+
+                p0.rvOdsSubSrevice.isNestedScrollingEnabled=false
+
                 p0.rlOdsSubService.visibility=View.VISIBLE
+            }
+
             else
                 p0.rlOdsSubService.visibility=View.GONE
         }
@@ -74,4 +147,11 @@ class OdsOperationAdapter(var context:Context, var dataList: ArrayList<Map<Strin
 
         var rvOdsSubSrevice:RecyclerView=view.findViewById(R.id.rvOdsSubService)
     }
+
+    override fun onSuccessReport(selectedSubSercice: ArrayList<HashMap<String,Any>>)
+    {
+     newSelectedList=selectedSubSercice
+        println("success list::::: ${newSelectedList}")
+    }
+
 }

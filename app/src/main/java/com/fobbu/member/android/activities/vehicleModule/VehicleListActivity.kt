@@ -163,8 +163,6 @@ class VehicleListActivity : AppCompatActivity(),ActivityView,DeleteVehicleClickL
         })
 
         initSearchView()
-
-
     }
 
 
@@ -429,9 +427,12 @@ class VehicleListActivity : AppCompatActivity(),ActivityView,DeleteVehicleClickL
                 tvCar.setImageResource(R.drawable.car_red)
                 view_car.visibility = View.VISIBLE
 
+                tvCar.requestFocus()
+
                 dataListMain.clear()
                 dataListMain.addAll(dataListFour)
-                vehicleAdapter.notifyDataSetChanged()
+                filter.filter("")
+
 
                 if(dataListMain.size>0)
                 {
@@ -456,7 +457,7 @@ class VehicleListActivity : AppCompatActivity(),ActivityView,DeleteVehicleClickL
 
                     dataListMain.clear()
                     dataListMain.addAll(dataListTwo)
-                    vehicleAdapter.notifyDataSetChanged()
+                 filter.filter("")
 
                 if(dataListMain.size>0)
             {
@@ -527,7 +528,7 @@ class VehicleListActivity : AppCompatActivity(),ActivityView,DeleteVehicleClickL
 
                 dataListMain.addAll(dataListFour)
 
-                //vehicleAdapter.notifyDataSetChanged()
+                filter.filter("")
 
                 if(dataListMain.size>0)
                 {
@@ -556,7 +557,7 @@ class VehicleListActivity : AppCompatActivity(),ActivityView,DeleteVehicleClickL
 
                 dataListMain.addAll(dataListTwo)
 
-                //vehicleAdapter.notifyDataSetChanged()
+                filter.filter("")
 
                 if(dataListMain.size>0)
                 {
@@ -579,6 +580,8 @@ class VehicleListActivity : AppCompatActivity(),ActivityView,DeleteVehicleClickL
 
             if (intent.hasExtra("vehicle_type"))
             {
+                vehicleType=intent.getStringExtra("vehicle_type")
+
                 manageLayout(intent.getStringExtra("vehicle_type"))
             }
         }

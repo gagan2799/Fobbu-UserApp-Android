@@ -10,6 +10,8 @@ import android.content.Intent
 import android.content.IntentSender
 import android.content.pm.PackageManager
 import android.graphics.*
+import android.location.Address
+import android.location.Geocoder
 import android.location.Location
 import android.location.LocationManager
 import android.media.ExifInterface
@@ -53,16 +55,21 @@ import com.fobbu.member.android.modals.MainPojo
 import com.fobbu.member.android.utils.CommonClass
 import com.fobbu.member.android.utils.RecyclerItemClickListener
 import com.google.android.gms.common.ConnectionResult
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException
+import com.google.android.gms.common.GooglePlayServicesRepairableException
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.common.api.PendingResult
 import com.google.android.gms.common.api.Status
 import com.google.android.gms.location.*
+import com.google.android.gms.location.places.Place
+import com.google.android.gms.location.places.ui.PlaceAutocomplete
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.MapsInitializer
 import com.google.android.gms.maps.model.*
 import kotlinx.android.synthetic.main.fragment_rsa.*
+import kotlinx.android.synthetic.main.fragment_rsa.view.*
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -80,6 +87,10 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
     private var headerIconChanges: HeaderIconChanges? = null
     private var webServiceApi: WebServiceApi? = null
+
+    var currentAddress= ""
+
+    private lateinit var geocoder:Geocoder
 
     private lateinit var llPhoto1: LinearLayout
     private lateinit var llPhoto2: LinearLayout
@@ -190,20 +201,25 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_rsa, container, false)
 
-        if (view != null) {
+        if (isAdded)
+        {
+            if (view != null)
+            {
 
-            mapInitialise(view, savedInstanceState)
+                mapInitialise(view, savedInstanceState)
 
-            initialise(view)
+                initialise(view)
 
-            setUpGoogleClient()
+                setUpGoogleClient()
 
-            handleClick()
+                handleClick()
 
-            rsaFragmentHandler = RsaFragmnetPresenter(activity!!, this)
+                rsaFragmentHandler = RsaFragmnetPresenter(activity!!, this)
 
-            serviceListApi()
+                serviceListApi()
+            }
         }
+
         return view
     }
 
@@ -464,7 +480,9 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
         }
 
         tvUploadPics.setOnClickListener {
-            showMainFindFobbuView()
+            if (file1!=null || file2!= null || file3 != null || file4!=null)
+                showMainFindFobbuView()
+            else CommonClass(activity!!,activity!!).showToast(activity!!.resources.getString(R.string.provide_image_rsa_msg))
         }
 
         tvSkip.setOnClickListener {
@@ -847,6 +865,11 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
         rl4WheelerBurst = view.findViewById(R.id.rl4WheelerBurst)
         viewLeftTwoWheeler = view.findViewById(R.id.viewLeftTwoWheeler)
         viewRightTwoWheeler = view.findViewById(R.id.viewRightTwoWheeler)
+
+        view.tvName.text= """${activity!!.resources.getString(R.string.hello)} ${CommonClass(
+            activity!!,
+            activity!!
+        ).getString("display_name")}"""
     }
 
 
@@ -855,129 +878,132 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
         val locationManager : LocationManager? = activity?.getSystemService(Context.LOCATION_SERVICE) as LocationManager?
 
-        recyclerViewServices.addOnItemTouchListener(
-            RecyclerItemClickListener(activity!!, object : RecyclerItemClickListener.OnItemClickListener {
-                @SuppressLint("SetTextI18n")
-                override fun onItemClick(view: View, position: Int) {
+        if (isAdded)
+        {
+            recyclerViewServices.addOnItemTouchListener(
+                RecyclerItemClickListener(activity!!, object : RecyclerItemClickListener.OnItemClickListener {
+                    @SuppressLint("SetTextI18n")
+                    override fun onItemClick(view: View, position: Int) {
 
-                    val permission =
-                        ContextCompat.checkSelfPermission(context!!, android.Manifest.permission.ACCESS_FINE_LOCATION)
+                        val permission =
+                            ContextCompat.checkSelfPermission(context!!, android.Manifest.permission.ACCESS_FINE_LOCATION)
 
-                    if (permission != PackageManager.PERMISSION_GRANTED) {
-                        showMessageDialog(
-                            "You need to allow the permissions from\n" +
-                                    "Phone Settings -> Apps --> Fobbu Member --> Permissions\n" +
-                                    "to allow the permissions"
-                        )
-                    }
-
-
-                    else if ( !locationManager?.isProviderEnabled( LocationManager.GPS_PROVIDER )!!) {
-                        enableGPSAutoMatically()
-                    }
-
-                 /*   else if (strLatitude.isEmpty()|| strLongitude.isEmpty())
-                    {
-                        CommonClass(activity!!,activity!!).showToast("Unable to fetch the loaction. Please wait few seconds")
-                    }*/
-                    else
-                    {  serviceSelected = dataListServices[position]["static_name"].toString()
-                    serviceSelectedID = dataListServices[position]["_id"].toString()
-                    serviceSelectedAmount = dataListServices[position]["service_price"].toString()
-
-                    if (serviceSelectedAmount.contains("\\.".toRegex())) {
-                        tvHeadingFind.text = "Rs ${serviceSelectedAmount.split("\\.".toRegex())[0]}/-"
-                    } else
-                        tvHeadingFind.text = "Rs $serviceSelectedAmount/-"
-
-
-
-                    when (serviceSelected) {
-                        RsaConstants.ServiceName.flatTyre -> {
-                            llHomeServices.visibility = View.GONE
-                            llSubPoints.visibility = View.VISIBLE
-                            llThree.visibility = View.GONE
-                            llTwo.visibility = View.VISIBLE
-                            setAnimationRight(linearLayoutCarRightTwo, activity!!)
-                            setAnimationLeft(linearLayoutScooterLeftTwo, activity!!)
-
-                            ifTopBarChnagesNull(false)
-
-                            Handler().postDelayed(
-                                {
-                                    rlTopDrawer.visibility = View.VISIBLE
-                                }, 200
+                        if (permission != PackageManager.PERMISSION_GRANTED) {
+                            showMessageDialog(
+                                "You need to allow the permissions from\n" +
+                                        "Phone Settings -> Apps --> Fobbu Member --> Permissions\n" +
+                                        "to allow the permissions"
                             )
-
-                            tvHeading.text = resources.getString(R.string.flat_tyre_worries)
-                            tvSubheading.text = resources.getString(R.string.fix_on_the_spot)
                         }
-                        RsaConstants.ServiceName.jumpStart -> {
-                            llHomeServices.visibility = View.GONE
-                            llSubPoints.visibility = View.VISIBLE
-                            llThree.visibility = View.GONE
-                            llTwo.visibility = View.VISIBLE
-                            setAnimationRight(linearLayoutCarRightTwo, activity!!)
-                            setAnimationLeft(linearLayoutScooterLeftTwo, activity!!)
 
-                            ifTopBarChnagesNull(false)
-                            rlTopDrawer.visibility = View.VISIBLE
-                            tvHeading.text = resources.getString(R.string.dead_battery_worries)
-                            tvSubheading.text = resources.getString(R.string.jump_start)
-                        }
-                        RsaConstants.ServiceName.fuelDelivery -> {
-                            llHomeServices.visibility = View.GONE
-                            llSubPoints.visibility = View.VISIBLE
-                            llThree.visibility = View.VISIBLE
-                            llTwo.visibility = View.GONE
-                            setAnimationRight(llCarFuelPetrolThree, activity!!)
-                            setAnimationLeft(llScooterThree, activity!!)
-                            setAnimationFade(llCarFuelDieselThree, activity!!)
 
-                            ifTopBarChnagesNull(false)
-                            rlTopDrawer.visibility = View.VISIBLE
-                            tvHeading.text = resources.getString(R.string.empty_tanks_worries)
-                            tvSubheading.text = resources.getString(R.string.deliver_real_quick)
+                        else if ( !locationManager?.isProviderEnabled( LocationManager.GPS_PROVIDER )!!) {
+                            enableGPSAutoMatically()
                         }
-                        RsaConstants.ServiceName.burstTyre -> {
-                            llHomeServices.visibility = View.GONE
-                            llSubPoints.visibility = View.VISIBLE
-                            llThree.visibility = View.GONE
-                            llTwo.visibility = View.VISIBLE
-                            setAnimationRight(linearLayoutCarRightTwo, activity!!)
-                            setAnimationLeft(linearLayoutScooterLeftTwo, activity!!)
 
-                            ifTopBarChnagesNull(false)
-                            rlTopDrawer.visibility = View.VISIBLE
-                            tvHeading.text = resources.getString(R.string.burst_tyre_worries)
-                            tvSubheading.text = resources.getString(R.string.help_you_fix)
-                        }
-                        RsaConstants.ServiceName.towing -> {
-                            llHomeServices.visibility = View.GONE
-                            llSubPoints.visibility = View.VISIBLE
-                            llThree.visibility = View.GONE
-                            llTwo.visibility = View.VISIBLE
-                            setAnimationRight(linearLayoutCarRightTwo, activity!!)
-                            setAnimationLeft(linearLayoutScooterLeftTwo, activity!!)
+                        /*   else if (strLatitude.isEmpty()|| strLongitude.isEmpty())
+                           {
+                               CommonClass(activity!!,activity!!).showToast("Unable to fetch the loaction. Please wait few seconds")
+                           }*/
+                        else
+                        {  serviceSelected = dataListServices[position]["static_name"].toString()
+                            serviceSelectedID = dataListServices[position]["_id"].toString()
+                            serviceSelectedAmount = dataListServices[position]["service_price"].toString()
 
-                            ifTopBarChnagesNull(false)
-                            rlTopDrawer.visibility = View.VISIBLE
-                            tvHeading.text = resources.getString(R.string.double_trouble)
-                            tvSubheading.text = resources.getString(R.string.we_will_connect_towing)
-                        }
-                        RsaConstants.ServiceName.iDunno -> {
+                            if (serviceSelectedAmount.contains("\\.".toRegex())) {
+                                tvHeadingFind.text = "Rs ${serviceSelectedAmount.split("\\.".toRegex())[0]}/-"
+                            } else
+                                tvHeadingFind.text = "Rs $serviceSelectedAmount/-"
 
-                        }
-                        else -> {
-                            llHomeServices.visibility = View.VISIBLE
-                            llSubPoints.visibility = View.GONE
-                            rlTopDrawer.visibility = View.GONE
+
+
+                            when (serviceSelected) {
+                                RsaConstants.ServiceName.flatTyre -> {
+                                    llHomeServices.visibility = View.GONE
+                                    llSubPoints.visibility = View.VISIBLE
+                                    llThree.visibility = View.GONE
+                                    llTwo.visibility = View.VISIBLE
+                                    setAnimationRight(linearLayoutCarRightTwo, activity!!)
+                                    setAnimationLeft(linearLayoutScooterLeftTwo, activity!!)
+
+                                    ifTopBarChnagesNull(false)
+
+                                    Handler().postDelayed(
+                                        {
+                                            rlTopDrawer.visibility = View.VISIBLE
+                                        }, 200
+                                    )
+
+                                    tvHeading.text = resources.getString(R.string.flat_tyre_worries)
+                                    tvSubheading.text = resources.getString(R.string.fix_on_the_spot)
+                                }
+                                RsaConstants.ServiceName.jumpStart -> {
+                                    llHomeServices.visibility = View.GONE
+                                    llSubPoints.visibility = View.VISIBLE
+                                    llThree.visibility = View.GONE
+                                    llTwo.visibility = View.VISIBLE
+                                    setAnimationRight(linearLayoutCarRightTwo, activity!!)
+                                    setAnimationLeft(linearLayoutScooterLeftTwo, activity!!)
+
+                                    ifTopBarChnagesNull(false)
+                                    rlTopDrawer.visibility = View.VISIBLE
+                                    tvHeading.text = resources.getString(R.string.dead_battery_worries)
+                                    tvSubheading.text = resources.getString(R.string.jump_start)
+                                }
+                                RsaConstants.ServiceName.fuelDelivery -> {
+                                    llHomeServices.visibility = View.GONE
+                                    llSubPoints.visibility = View.VISIBLE
+                                    llThree.visibility = View.VISIBLE
+                                    llTwo.visibility = View.GONE
+                                    setAnimationRight(llCarFuelPetrolThree, activity!!)
+                                    setAnimationLeft(llScooterThree, activity!!)
+                                    setAnimationFade(llCarFuelDieselThree, activity!!)
+
+                                    ifTopBarChnagesNull(false)
+                                    rlTopDrawer.visibility = View.VISIBLE
+                                    tvHeading.text = resources.getString(R.string.empty_tanks_worries)
+                                    tvSubheading.text = resources.getString(R.string.deliver_real_quick)
+                                }
+                                RsaConstants.ServiceName.burstTyre -> {
+                                    llHomeServices.visibility = View.GONE
+                                    llSubPoints.visibility = View.VISIBLE
+                                    llThree.visibility = View.GONE
+                                    llTwo.visibility = View.VISIBLE
+                                    setAnimationRight(linearLayoutCarRightTwo, activity!!)
+                                    setAnimationLeft(linearLayoutScooterLeftTwo, activity!!)
+
+                                    ifTopBarChnagesNull(false)
+                                    rlTopDrawer.visibility = View.VISIBLE
+                                    tvHeading.text = resources.getString(R.string.burst_tyre_worries)
+                                    tvSubheading.text = resources.getString(R.string.help_you_fix)
+                                }
+                                RsaConstants.ServiceName.towing -> {
+                                    llHomeServices.visibility = View.GONE
+                                    llSubPoints.visibility = View.VISIBLE
+                                    llThree.visibility = View.GONE
+                                    llTwo.visibility = View.VISIBLE
+                                    setAnimationRight(linearLayoutCarRightTwo, activity!!)
+                                    setAnimationLeft(linearLayoutScooterLeftTwo, activity!!)
+
+                                    ifTopBarChnagesNull(false)
+                                    rlTopDrawer.visibility = View.VISIBLE
+                                    tvHeading.text = resources.getString(R.string.double_trouble)
+                                    tvSubheading.text = resources.getString(R.string.we_will_connect_towing)
+                                }
+                                RsaConstants.ServiceName.iDunno -> {
+
+                                }
+                                else -> {
+                                    llHomeServices.visibility = View.VISIBLE
+                                    llSubPoints.visibility = View.GONE
+                                    rlTopDrawer.visibility = View.GONE
+                                }
+                            }
                         }
                     }
-                }
-                }
-            })
-        )
+                })
+            )
+        }
     }
 
 
@@ -1090,25 +1116,25 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
                       activity!!.finish()
                   } else {*/
-                    //fleetRequestApi(mainPojo.getData()._id)
+                //fleetRequestApi(mainPojo.getData()._id)
 
-                    CommonClass(activity!!, activity!!).putString(RsaConstants.RsaTypes.checkIfOnGoingRsaRequest, "YES")
+                CommonClass(activity!!, activity!!).putString(RsaConstants.RsaTypes.checkIfOnGoingRsaRequest, "YES")
 
-                    CommonClass(activity!!, activity!!).putString(
-                        RsaConstants.ServiceSaved.fobbuRequestId,
-                        mainPojo.getData()._id
-                    )
+                CommonClass(activity!!, activity!!).putString(
+                    RsaConstants.ServiceSaved.fobbuRequestId,
+                    mainPojo.getData()._id
+                )
 
-                    CommonClass(activity!!, activity!!).putString(
-                        RsaConstants.ServiceSaved.serviceNameSelected,
-                        serviceSelected
-                    )
+                CommonClass(activity!!, activity!!).putString(
+                    RsaConstants.ServiceSaved.serviceNameSelected,
+                    serviceSelected
+                )
 
-                    activity!!.startActivity(
-                        Intent(activity!!, WaitingScreenBlue::class.java)
-                            .putExtra("navigate_to", "0")
-                    )
-               // }
+                activity!!.startActivity(
+                    Intent(activity!!, WaitingScreenBlue::class.java)
+                        .putExtra("navigate_to", "0")
+                )
+                // }
             } else {
                 CommonClass(activity!!, activity!!).showToast(mainPojo.message)
             }
@@ -1164,6 +1190,38 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     }
 
 
+    private fun getAddressFromLocation(lat:kotlin.Double, long:kotlin.Double)
+    {
+        if (CommonClass(activity!!,activity!!).getString(RsaConstants.Ods.lat).isNotEmpty())
+        {
+            CommonClass(activity!!,activity!!).removeString(RsaConstants.Ods.lat)
+
+            CommonClass(activity!!,activity!!).removeString(RsaConstants.Ods.long)
+
+            CommonClass(activity!!,activity!!).removeString(RsaConstants.Ods.address)
+        }
+        CommonClass(activity!!,activity!!).putString(RsaConstants.Ods.lat,lat.toString())
+
+        CommonClass(activity!!,activity!!).putString(RsaConstants.Ods.long,long.toString())
+
+        geocoder= Geocoder(activity!!, Locale.ENGLISH)
+        try {
+            val address:  List<Address> = geocoder.getFromLocation(lat,long,1)
+            if (address.isNotEmpty())
+            {
+                println("current address::${address[0].getAddressLine(0)}")
+
+                CommonClass(activity!!,activity!!).putString(RsaConstants.Ods.address,address[0].getAddressLine(0))
+
+                currentAddress=address[0].getAddressLine(0)
+            }
+        }
+        catch (e:Exception)
+        {
+
+        }
+    }
+
     override fun onConnected(p0: Bundle?) {
         checkGPSEnable()
     }
@@ -1182,7 +1240,10 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
             throwMarkerOnMap(p0.latitude.toString(), p0.longitude.toString())
 
+            mapClicks()
+
             location = true
+
         } else if (location) {
 
             LocationServices.FusedLocationApi.removeLocationUpdates(googleApiClient, this@RSAFragment)
@@ -1215,22 +1276,28 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     private fun checkGPSEnable() {
         val apiLevel = android.os.Build.VERSION.SDK_INT
 
-        if (apiLevel >= 23) {
+        if (isAdded)
+        {
+            if (apiLevel >= 23)
+            {
 
-            val permission =
-                ContextCompat.checkSelfPermission(context!!, android.Manifest.permission.ACCESS_FINE_LOCATION)
+                val permission =
+                    ContextCompat.checkSelfPermission(context!!, android.Manifest.permission.ACCESS_FINE_LOCATION)
 
-            if (permission != PackageManager.PERMISSION_GRANTED) {
+                if (permission != PackageManager.PERMISSION_GRANTED) {
 
-                requestPermissions(
-                    arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
-                    locationPermissionRequestCode
-                )
-            } else {
+                    requestPermissions(
+                        arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+                        locationPermissionRequestCode
+                    )
+                } else {
+                    enableGPSAutoMatically()
+                }
+            }
+            else
+            {
                 enableGPSAutoMatically()
             }
-        } else {
-            enableGPSAutoMatically()
         }
     }
 
@@ -1303,20 +1370,57 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     private fun throwMarkerOnMap(latitude: String, longitude: String) {
 
         // create marker
-        val marker = MarkerOptions().position(
+        val markerOption = MarkerOptions().position(
             LatLng(Double.valueOf(latitude), Double.valueOf(longitude))
         )//.title(data["id"].toString())
 
         // Changing marker icon
-        marker.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_mark_blue))
+        markerOption.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_mark_blue))
+
 
         // adding marker
-        googleMap.addMarker(marker)
+        googleMap.clear()
+
+        getAddressFromLocation(Double.valueOf(latitude),Double.valueOf(longitude))
+
+        if (currentAddress!="")
+        {
+            // adding marker
+            val marker = googleMap.addMarker(markerOption)
+
+            marker.title = currentAddress
+        }
 
         val cameraPosition = CameraPosition.Builder()
             .target(LatLng(Double.valueOf(latitude), Double.valueOf(longitude))).zoom(14f).build()
 
         googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
+    }
+
+    // for handling clicks on the map
+    private fun mapClicks()
+    {
+        googleMap.setOnMapClickListener {
+
+            getAddressFromLocation(it.latitude,it.longitude)
+
+            throwMarkerOnMap(it.latitude.toString(),it.longitude.toString())
+        }
+
+        googleMap.setOnInfoWindowClickListener{
+
+            try {
+                val intent =  PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_FULLSCREEN).build(activity!!)
+                startActivityForResult(intent, 123)
+
+            } catch (e: GooglePlayServicesRepairableException) {
+                // TODO: Handle the error.
+            } catch (e: GooglePlayServicesNotAvailableException) {
+                // TODO: Handle the error.
+            }
+
+
+        }
     }
 
     fun ifTopBarChnagesNull(boolean: Boolean) {
@@ -1474,21 +1578,24 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
         alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Gallery") { dialogInterface, i ->
             val apiLevel = android.os.Build.VERSION.SDK_INT
 
-            if (apiLevel >= 23) {
-                //phone state
-                val permission1 =
-                    ContextCompat.checkSelfPermission(activity!!, android.Manifest.permission.READ_EXTERNAL_STORAGE)
+            if (isAdded)
+            {
+                if (apiLevel >= 23) {
+                    //phone state
+                    val permission1 =
+                        ContextCompat.checkSelfPermission(activity!!, android.Manifest.permission.READ_EXTERNAL_STORAGE)
 
-                val permission2 =
-                    ContextCompat.checkSelfPermission(activity!!, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    val permission2 =
+                        ContextCompat.checkSelfPermission(activity!!, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
 
-                if (permission1 != PackageManager.PERMISSION_GRANTED || permission2 != PackageManager.PERMISSION_GRANTED) {
-                    makeRequest2()
+                    if (permission1 != PackageManager.PERMISSION_GRANTED || permission2 != PackageManager.PERMISSION_GRANTED) {
+                        makeRequest2()
+                    } else {
+                        openGallery()
+                    }
                 } else {
                     openGallery()
                 }
-            } else {
-                openGallery()
             }
         }
         alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Camera") { _, _ ->
@@ -1649,7 +1756,7 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                                 "Phone Settings -> Apps --> Fobbu Vendor --> Permissions\n" +
                                 "to allow the permissions"
                     )
-                   // checkGPSEnable()
+                    // checkGPSEnable()
                 }
             }
         }
@@ -1663,6 +1770,27 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
         }
 
         when (requestCode) {
+
+            123
+            -> {
+                if (resultCode == Activity.RESULT_OK) {
+                    val place: Place = PlaceAutocomplete.getPlace(activity!!, data)
+
+                    val lat=place.latLng.latitude
+
+                    val long=place.latLng.longitude
+
+                    throwMarkerOnMap(lat.toString(),long.toString())
+
+                    //Log.i(TAG, "Place: " + place.getName());
+                } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
+                    val status: Status = PlaceAutocomplete.getStatus(activity!!, data)
+                    // TODO: Handle the error.
+                    //Log.i(TAG, status.getStatusMessage());
+
+                }
+            }
+
 
             imageCameraRequest ->
 

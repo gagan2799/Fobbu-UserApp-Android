@@ -70,11 +70,15 @@ class OdsOperationFragment : Fragment(),ActivityView
     ): View? {
         // Inflate the layout for this fragment
         val   view= inflater.inflate(R.layout.fragment_ods_operation, container, false)
-        if (view!= null)
-        {
-            initView(view)
 
-            clicks(view)
+        if (isAdded)
+        {
+            if (view!= null)
+            {
+                initView(view)
+
+                clicks(view)
+            }
         }
         return  view
     }
@@ -86,6 +90,8 @@ class OdsOperationFragment : Fragment(),ActivityView
     {
         commonClass= CommonClass(activity!!,activity!!)
 
+        commonClass.removeString("subServiceList")
+
         subServiceList= ArrayList()
 
         dataList= ArrayList()
@@ -96,22 +102,20 @@ class OdsOperationFragment : Fragment(),ActivityView
 
             val map=dataList[0]
 
-            map.getValue("sub_services")
-
             subServiceList=(map.getValue("sub_services") as ArrayList<Map<String,Any>>)
 
             println("array list:::::$subServiceList")
 
-      /*   val jsonObject=JSONObject(map)
+            /*   val jsonObject=JSONObject(map)
 
-            val jsonArray=jsonObject.getJSONArray("sub_services")
+                  val jsonArray=jsonObject.getJSONArray("sub_services")
 
-                for (j in 0 until jsonArray.length())
-                {
-                    subServiceList.add(jsonArray[j])
-                }
+                      for (j in 0 until jsonArray.length())
+                      {
+                          subServiceList.add(jsonArray[j])
+                      }
 
-            println("sub service list::: $subServiceList")*/
+                  println("sub service list::: $subServiceList")*/
         }
 
         rlLoader=view.findViewById(R.id.rlLoader)
@@ -311,10 +315,10 @@ class OdsOperationFragment : Fragment(),ActivityView
                     if (dataList[0][RsaConstants.Ods.service_name].toString()=="Washing")
                         makeOdsRequest()
                     else
-                    startActivity(Intent(activity!!,WorkSummaryActivity::class.java)
-                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
-                        .putExtra(RsaConstants.Ods.time,timeSlot)
-                        .putExtra(RsaConstants.Ods.date,dateCustom))
+                        startActivity(Intent(activity!!,WorkSummaryActivity::class.java)
+                            .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                            .putExtra(RsaConstants.Ods.time,timeSlot)
+                            .putExtra(RsaConstants.Ods.date,dateCustom))
                 }
 
             }, hour, minute, false)//Yes 24 hour time
@@ -363,7 +367,7 @@ class OdsOperationFragment : Fragment(),ActivityView
     //handling the response of    ods_request API
     override fun onRequestSuccessReport(mainPojo: MainPojo)
     {
-      commonClass.showToast(mainPojo.message)
+        commonClass.showToast(mainPojo.message)
     }
 
     override fun showLoader()

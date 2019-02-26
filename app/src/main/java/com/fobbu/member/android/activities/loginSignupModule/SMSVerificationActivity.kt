@@ -48,6 +48,17 @@ class SMSVerificationActivity : AppCompatActivity()
         }
     }
 
+    override fun onBackPressed()
+    {
+        CommonClass(this,this).removeString("isSmsVerified")
+
+        startActivity(Intent(this,SignUpActivity::class.java)
+            .setFlags
+                (Intent.FLAG_ACTIVITY_NO_ANIMATION))
+
+        finish()
+    }
+
     /// FOR 4 DIGIT PIN
     private fun checkPinValidations() {
         edPinOne.addTextChangedListener(object : TextWatcher {
@@ -145,7 +156,13 @@ class SMSVerificationActivity : AppCompatActivity()
     // Functionality of  all clicks present in the activity are handled here
     private fun addClicks()
     {
+        CommonClass(this,this).removeString("isSmsVerified")
+
         ivBack.setOnClickListener {
+            startActivity(Intent(this,SignUpActivity::class.java)
+                .setFlags
+            (Intent.FLAG_ACTIVITY_NO_ANIMATION))
+
             finish()
         }
 

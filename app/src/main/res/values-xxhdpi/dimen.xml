@@ -26,4 +26,9 @@
     <dimen name="large">26px</dimen>
     <dimen name="extra_large">30px</dimen>
 
+
+    <!--// RSA service-->
+    <dimen name="rsa_service_width">40dp</dimen>
+    <dimen name="rsa_service_height">40dp</dimen>
+
 </resources>

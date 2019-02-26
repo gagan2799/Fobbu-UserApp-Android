@@ -102,12 +102,15 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     {
         val view = inflater.inflate(R.layout.fragment_ods, container, false)
 
-        if (view != null)
+        if (isAdded)
         {
-            initView(view,savedInstanceState)
+            if (view != null)
+            {
+                initView(view, savedInstanceState)
 
-            clicks(view)
+                clicks(view)
 
+            }
         }
         // Inflate the layout for this fragment
         return view
@@ -118,7 +121,7 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     {
         rlLoader=view.findViewById(R.id.rlLoader)
 
-       /* rlSearchOds=view.findViewById(R.id.rlSearchOds)*/
+        /* rlSearchOds=view.findViewById(R.id.rlSearchOds)*/
 
         commonClass= CommonClass(activity!!,activity!!)
 
@@ -207,7 +210,7 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
             when{
 
                 wheels==""->
-                commonClass.showToast(getString(R.string.provide_vehicle_msg))
+                    commonClass.showToast(getString(R.string.provide_vehicle_msg))
 
                 etVehicleModelOds.text.isNullOrEmpty()->
                     commonClass.showToast(getString(R.string.car_model_message))
@@ -404,6 +407,7 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
     @SuppressLint("MissingPermission")
     private fun checkWhenMapIsReady() {
+
         mMapView.getMapAsync { mMap ->
             googleMap = mMap
 
@@ -417,6 +421,7 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
             googleMap.setInfoWindowAdapter(InfoWindow())
 
+
         }
     }
 
@@ -424,48 +429,59 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     // method for checking whether GPS is enabled or not
     private fun checkGPSEnable() {
         val apiLevel = android.os.Build.VERSION.SDK_INT
+        if (isAdded)
+        {
+            if (apiLevel >= 23)
+            {
+                val permission =
+                    ContextCompat.checkSelfPermission(context!!, android.Manifest.permission.ACCESS_FINE_LOCATION)
 
-        if (apiLevel >= 23) {
+                if (permission != PackageManager.PERMISSION_GRANTED) {
 
-            val permission =
-                ContextCompat.checkSelfPermission(context!!, android.Manifest.permission.ACCESS_FINE_LOCATION)
-
-            if (permission != PackageManager.PERMISSION_GRANTED) {
-
-                requestPermissions(
-                    arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
-                    locationPermissionRequestCode
-                )
+                    requestPermissions(
+                        arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+                        locationPermissionRequestCode
+                    )
+                } else {
+                    enableGPSAutoMatically()
+                }
             } else {
                 enableGPSAutoMatically()
             }
-        } else {
-            enableGPSAutoMatically()
         }
+
     }
 
     private fun getAddressFromLocation(lat:kotlin.Double, long:kotlin.Double)
     {
-        commonClass.putString(RsaConstants.Ods.lat,lat.toString())
 
-        commonClass.putString(RsaConstants.Ods.long,long.toString())
+        if (CommonClass(activity!!, activity!!).getString(RsaConstants.Ods.lat).isNotEmpty())
+        {
+            CommonClass(activity!!, activity!!).removeString(RsaConstants.Ods.lat)
 
-        geocoder= Geocoder(activity!!, Locale.ENGLISH)
+            CommonClass(activity!!, activity!!).removeString(RsaConstants.Ods.long)
+
+            CommonClass(activity!!, activity!!).removeString(RsaConstants.Ods.address)
+        }
+
+        commonClass.putString(RsaConstants.Ods.lat, lat.toString())
+
+        commonClass.putString(RsaConstants.Ods.long, long.toString())
+
+        geocoder = Geocoder(activity!!, Locale.ENGLISH)
         try {
-            val address:  List<Address> = geocoder.getFromLocation(lat,long,1)
-            if (address.isNotEmpty())
-            {
+            val address: List<Address> = geocoder.getFromLocation(lat, long, 1)
+            if (address.isNotEmpty()) {
                 println("current address::${address[0].getAddressLine(0)}")
 
-                commonClass.putString(RsaConstants.Ods.address,address[0].getAddressLine(0))
+                commonClass.putString(RsaConstants.Ods.address, address[0].getAddressLine(0))
 
-                currentAddress=address[0].getAddressLine(0)
+                currentAddress = address[0].getAddressLine(0)
             }
-        }
-        catch (e:Exception)
-        {
+        } catch (e: Exception) {
 
         }
+
     }
 
     // Method  for enabling Device GPS
@@ -545,28 +561,28 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
 
 
-     /*   googleMap.setInfoWindowAdapter(object :GoogleMap.InfoWindowAdapter
-        {
-            override fun getInfoContents(p0: Marker?): View
-            {
-                return LayoutInflater.from(activity!!).inflate(R.layout.inflate_marker_title,null)
-            }
+            /*   googleMap.setInfoWindowAdapter(object :GoogleMap.InfoWindowAdapter
+               {
+                   override fun getInfoContents(p0: Marker?): View
+                   {
+                       return LayoutInflater.from(activity!!).inflate(R.layout.inflate_marker_title,null)
+                   }
 
-            override fun getInfoWindow(p0: Marker?): View? {
-                if (p0 != null
-                    && p0.isInfoWindowShown
-                ) {
-                    p0.hideInfoWindow()
-                    p0.showInfoWindow()
-                }
-                val view=LayoutInflater.from(activity!!).inflate(R.layout.inflate_marker_title,null)
+                   override fun getInfoWindow(p0: Marker?): View? {
+                       if (p0 != null
+                           && p0.isInfoWindowShown
+                       ) {
+                           p0.hideInfoWindow()
+                           p0.showInfoWindow()
+                       }
+                       val view=LayoutInflater.from(activity!!).inflate(R.layout.inflate_marker_title,null)
 
 
-                view.tvMarkerTitle.text=currentAddress
+                       view.tvMarkerTitle.text=currentAddress
 
-                return view
-            }
-        })*/
+                       return view
+                   }
+               })*/
         }
 
         val cameraPosition = CameraPosition.Builder()
@@ -631,12 +647,7 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     private fun mapClicks()
     {
         googleMap.setOnMapClickListener {
-           /* if (rlSearchOds.visibility==View.VISIBLE)
-            {
-                ifTopBarChnagesNull(true)
 
-                rlSearchOds.visibility=View.GONE
-            }*/
             getAddressFromLocation(it.latitude,it.longitude)
 
             throwMarkerOnMap(it.latitude.toString(),it.longitude.toString())
@@ -645,14 +656,14 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
         googleMap.setOnInfoWindowClickListener{
 
             try {
-    val intent =  PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_FULLSCREEN).build(activity!!)
-    startActivityForResult(intent, 123)
+                val intent =  PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_FULLSCREEN).build(activity!!)
+                startActivityForResult(intent, 123)
 
-} catch (e: GooglePlayServicesRepairableException) {
-    // TODO: Handle the error.
-} catch (e: GooglePlayServicesNotAvailableException ) {
-    // TODO: Handle the error.
-}
+            } catch (e: GooglePlayServicesRepairableException) {
+                // TODO: Handle the error.
+            } catch (e: GooglePlayServicesNotAvailableException ) {
+                // TODO: Handle the error.
+            }
 
 
         }
@@ -663,6 +674,7 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     }
 
     override fun onConnected(p0: Bundle?) {
+        if (isAdded)
         checkGPSEnable()
     }
 

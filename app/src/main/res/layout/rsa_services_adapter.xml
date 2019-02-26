@@ -14,12 +14,12 @@
             android:orientation="vertical"  >
 
         <ImageView
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/rsa_service_width"
                 android:src="@drawable/dummy_services"
                 android:layout_marginTop="10dp"
                 android:id="@+id/ivImage"
                 android:layout_centerHorizontal="true"
-                android:layout_height="wrap_content"/>
+                android:layout_height="@dimen/rsa_service_height"/>
 
         <TextView
                 android:textSize="@dimen/medium"

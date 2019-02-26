@@ -82,22 +82,27 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_rsa_live, container, false)
-        if (view != null) {
-            mapInitialise(view, savedInstanceState)
 
-            checkGPSEnable()
+        if (isAdded)
+        {
+            if (view != null)
+            {
+                mapInitialise(view, savedInstanceState)
 
-            initialise(view)
+                checkGPSEnable()
 
-            handleClick()
+                initialise(view)
 
-            rsaLiveHandler = RsaLivePresenter(this.activity!!, this)
-            rsaLiveHandler.getService(
-                CommonClass(activity!!, activity!!).getString("x_access_token"),
-                CommonClass(this.activity!!, this.activity!!).getString(
-                    RsaConstants.ServiceSaved.fobbuRequestId
+                handleClick()
+
+                rsaLiveHandler = RsaLivePresenter(this.activity!!, this)
+                rsaLiveHandler.getService(
+                    CommonClass(activity!!, activity!!).getString("x_access_token"),
+                    CommonClass(this.activity!!, this.activity!!).getString(
+                        RsaConstants.ServiceSaved.fobbuRequestId
+                    )
                 )
-            )
+            }
         }
 
         return view
@@ -309,25 +314,28 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     private fun checkGPSEnable() {
         val apiLevel = android.os.Build.VERSION.SDK_INT
 
-        if (apiLevel >= 23) {
+        if (isAdded)
+        {
+            if (apiLevel >= 23)
+            {
+                val permission =
+                    ContextCompat.checkSelfPermission(context!!, android.Manifest.permission.ACCESS_FINE_LOCATION)
 
-            val permission =
-                ContextCompat.checkSelfPermission(context!!, android.Manifest.permission.ACCESS_FINE_LOCATION)
+                if (permission != PackageManager.PERMISSION_GRANTED) {
 
-            if (permission != PackageManager.PERMISSION_GRANTED) {
-
-                ActivityCompat.requestPermissions(
-                    activity!!,
-                    arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
-                    locationPermissionRequestCode
-                )
+                    ActivityCompat.requestPermissions(
+                        activity!!,
+                        arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+                        locationPermissionRequestCode
+                    )
+                } else {
+                    enableGPSAutoMatically()
+                    checkWhenMapIsReady()
+                }
             } else {
                 enableGPSAutoMatically()
                 checkWhenMapIsReady()
             }
-        } else {
-            enableGPSAutoMatically()
-            checkWhenMapIsReady()
         }
     }
 
@@ -522,8 +530,7 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     override fun onRequestSuccessReport(mainPojo: MainPojo) {
         if (mainPojo.success == "true")
         {
-
-                if (!mainPojo.getData().user.profile.isNullOrBlank())
+            if (!mainPojo.getData().user.profile.isNullOrBlank())
                 {
                     if (mainPojo.getData().partner.profile.isNotEmpty())
                     Picasso.get().load(mainPojo.getData().partner.profile).error(R.drawable.dummy_pic).into(imgProfile)
@@ -546,19 +553,22 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     private fun checkPermissionForCall() {
         val apiLevel = android.os.Build.VERSION.SDK_INT
 
-        if (apiLevel >= 23) {
-            //phone state
+        if (isAdded)
+        {
+            if (apiLevel >= 23) {
+                //phone state
 
-            val permission1 =
-                ContextCompat.checkSelfPermission(activity!!, android.Manifest.permission.CALL_PHONE)
+                val permission1 =
+                    ContextCompat.checkSelfPermission(activity!!, android.Manifest.permission.CALL_PHONE)
 
-            if (permission1 != PackageManager.PERMISSION_GRANTED) {
-                makeRequest()
+                if (permission1 != PackageManager.PERMISSION_GRANTED) {
+                    makeRequest()
+                } else {
+                    dialNumber()
+                }
             } else {
                 dialNumber()
             }
-        } else {
-            dialNumber()
         }
     }
 
