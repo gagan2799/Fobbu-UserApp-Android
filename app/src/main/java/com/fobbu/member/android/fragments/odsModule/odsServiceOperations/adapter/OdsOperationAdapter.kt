@@ -16,9 +16,15 @@ import com.fobbu.member.android.utils.RecyclerItemClickListener
 import kotlinx.android.synthetic.main.inflate_ods_operation.view.*
 import java.lang.Exception
 
-class OdsOperationAdapter(var context:Activity, var dataList: ArrayList<Map<String, Any>>):RecyclerView.Adapter<OdsOperationAdapter.OperationViewHolder>(),SelectedSubServiceView
+class OdsOperationAdapter(var context:Activity, var dataList: ArrayList<HashMap<String, Any>>):RecyclerView.Adapter<OdsOperationAdapter.OperationViewHolder>(),SelectedSubServiceView
 {
     var optionList=ArrayList<HashMap<String,Any>>()
+
+    var mainList=ArrayList<HashMap<String,Any>>()
+
+    var list=ArrayList<String>()
+
+    val tempList=ArrayList<HashMap<String,Any>>()
 
     var newSelectedList=ArrayList<HashMap<String,Any>>()
 
@@ -26,9 +32,7 @@ class OdsOperationAdapter(var context:Activity, var dataList: ArrayList<Map<Stri
 
     private var viewpool:RecyclerView.RecycledViewPool = RecyclerView.RecycledViewPool()
 
-    init {
 
-    }
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): OperationViewHolder
     {
@@ -47,7 +51,62 @@ class OdsOperationAdapter(var context:Activity, var dataList: ArrayList<Map<Stri
     {
         p0.tvTopUp.text=dataList[p1]["service_name"].toString()
 
-        p0.ivPlusListing.setOnClickListener {
+        p0.itemView.setOnClickListener {
+            if (p0.rlOdsSubService.visibility==View.GONE)
+            {
+                optionList= dataList[p1]["option"] as ArrayList<HashMap<String, Any>>
+
+                setUpInnerRecycler(p0)
+            }
+
+            else{
+                p0.rlOdsSubService.visibility=View.GONE
+            }
+        }
+
+        p0.rvOdsSubSrevice.addOnItemTouchListener(RecyclerItemClickListener(context,object :RecyclerItemClickListener.OnItemClickListener
+        {
+            override fun onItemClick(view: View, position: Int)
+            {
+              /*  if (optionList[position]["selected"]=="0")
+                {
+                    optionList[position]["selected"]="1"
+                }
+
+                else
+                {
+                    optionList[position]["selected"]="0"
+                }*/
+
+                for (i in dataList.indices)
+                {
+                    if (dataList[i]["service_name"]==optionList[position]["inner_service_name"])
+                    {
+                        val list=dataList[i]["option"] as ArrayList<HashMap<String,Any>>
+
+                        for ( k in list.indices)
+                        {
+                            if (list[k]["name"]==optionList[position]["name"])
+                            {
+                                if (list[k]["selected"]=="0")
+                                list[k]["selected"]="1"
+
+                                else
+                                    list[k]["selected"]="0"
+                            }
+
+                        }
+                    }
+                }
+
+                println("new main list:::: $dataList")
+
+                setUpInnerRecycler(p0)
+            }
+
+        }))
+
+        /*p0.ivPlusListing.setOnClickListener {
             if (p0.rlOdsSubService.visibility==View.GONE)
             {
                 var list= ArrayList<Any>()
@@ -133,7 +192,7 @@ class OdsOperationAdapter(var context:Activity, var dataList: ArrayList<Map<Stri
 
             else
                 p0.rlOdsSubService.visibility=View.GONE
-        }
+        }*/
     }
 
 
@@ -150,8 +209,27 @@ class OdsOperationAdapter(var context:Activity, var dataList: ArrayList<Map<Stri
 
     override fun onSuccessReport(selectedSubSercice: ArrayList<HashMap<String,Any>>)
     {
-     newSelectedList=selectedSubSercice
+        newSelectedList=selectedSubSercice
         println("success list::::: ${newSelectedList}")
+    }
+
+    private fun setUpInnerRecycler(p0: OperationViewHolder)
+    {
+        p0.rlOdsSubService.visibility=View.VISIBLE
+
+        odsSubServiceAdapter=OdsSubServiceAdapter(context,optionList,this)
+
+        p0.rvOdsSubSrevice.layoutManager=LinearLayoutManager(context)
+
+        p0.rvOdsSubSrevice.adapter=odsSubServiceAdapter
+
+        p0.rvOdsSubSrevice.setRecycledViewPool(viewpool)
+
+        p0.rvOdsSubSrevice.setHasFixedSize(true)
+
+        p0.rvOdsSubSrevice.isNestedScrollingEnabled=false
+
+        p0.rlOdsSubService.visibility=View.VISIBLE
     }
 
 }

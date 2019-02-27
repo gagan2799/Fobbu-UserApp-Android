@@ -486,6 +486,9 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
         }
 
         tvSkip.setOnClickListener {
+            if (dataList.isNotEmpty())
+                dataList.clear()
+
             showMainFindFobbuView()
         }
 
@@ -1192,18 +1195,6 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
     private fun getAddressFromLocation(lat:kotlin.Double, long:kotlin.Double)
     {
-        if (CommonClass(activity!!,activity!!).getString(RsaConstants.Ods.lat).isNotEmpty())
-        {
-            CommonClass(activity!!,activity!!).removeString(RsaConstants.Ods.lat)
-
-            CommonClass(activity!!,activity!!).removeString(RsaConstants.Ods.long)
-
-            CommonClass(activity!!,activity!!).removeString(RsaConstants.Ods.address)
-        }
-        CommonClass(activity!!,activity!!).putString(RsaConstants.Ods.lat,lat.toString())
-
-        CommonClass(activity!!,activity!!).putString(RsaConstants.Ods.long,long.toString())
-
         geocoder= Geocoder(activity!!, Locale.ENGLISH)
         try {
             val address:  List<Address> = geocoder.getFromLocation(lat,long,1)

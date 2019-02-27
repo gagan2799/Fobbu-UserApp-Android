@@ -10,50 +10,55 @@
             android:layout_width="match_parent"
             android:id="@+id/rlBuildingLiveTrack"
             android:visibility="gone"
+
             android:layout_height="match_parent">
 
-        <com.wang.avi.AVLoadingIndicatorView
-                android:id="@+id/avi"
-                style="@style/AVLoadingIndicatorView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="visible"
-                android:layout_centerHorizontal="true"
-                android:layout_centerInParent="true"
-                app:indicatorColor="@color/colorPrimary"
-                app:indicatorName="BallSpinFadeLoaderIndicator"/>
+        <LinearLayout
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
 
-        <TextView android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:textSize="@dimen/textsize_normal"
-                  android:textColor="@color/colorPrimary"
-                  android:text="@string/please_wait"
-                  android:layout_below="@+id/avi"
-                  android:gravity="center"
-                  android:padding="10dp"
-                  android:layout_marginTop="15dp"
-                  android:id="@+id/tvTextOne"/>
+        android:layout_centerInParent="true">
+            <com.wang.avi.AVLoadingIndicatorView
+                    android:id="@+id/avi"
+                    style="@style/AVLoadingIndicatorView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible"
+                    app:indicatorColor="@color/colorPrimary"
+                    app:indicatorName="BallSpinFadeLoaderIndicator"/>
 
-        <TextView android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:textSize="@dimen/textsize_small"
-                  android:textColor="@color/drawer_text_color"
-                  android:text="@string/building_live_track"
-                  android:gravity="center"
-                  android:layout_below="@+id/tvTextOne"
-                  android:id="@+id/tvTextTwo"/>
+            <TextView android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:textSize="@dimen/textsize_normal"
+                      android:textColor="@color/colorPrimary"
+                      android:text="@string/please_wait"
+                      android:gravity="center"
+                      android:padding="10dp"
+                      android:layout_marginTop="15dp"
+                      android:id="@+id/tvTextOne"/>
 
-        <TextView android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:textSize="@dimen/textsize_small"
-                  android:textColor="@color/white"
-                  android:text="@string/finding_fobbu_for_u"
-                  android:gravity="center"
-                  android:lineSpacingExtra="1.3dp"
-                  android:layout_below="@+id/tvTextTwo"
-                  android:visibility="gone"
-                  android:padding="10dp"
-                  android:id="@+id/tvTextThree"/>
+            <TextView android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:textSize="@dimen/textsize_small"
+                      android:textColor="@color/drawer_text_color"
+                      android:text="@string/building_live_track"
+                      android:gravity="center"
+                      android:id="@+id/tvTextTwo"/>
+
+            <TextView android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:textSize="@dimen/textsize_small"
+                      android:textColor="@color/white"
+                      android:text="@string/finding_fobbu_for_u"
+                      android:gravity="center"
+                      android:lineSpacingExtra="1.3dp"
+                      android:visibility="gone"
+                      android:padding="10dp"
+                      android:id="@+id/tvTextThree"/>
+        </LinearLayout>
+
+
     </RelativeLayout>
 
     <RelativeLayout

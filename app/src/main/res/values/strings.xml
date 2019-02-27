@@ -165,8 +165,11 @@
     </string>
     <string name="building_live_track">building live track elements…</string>
     <string name="ongoing_rsa">Ongoing RSA Request</string>
-    <string name="please_fobbu_gathering_tools">Please wait Fobbu is Gathering Tools</string>
-    <string name="fobbu_on_way">Fobbu is on his way please stay at your stranded location.</string>
+    <string name="please_wait_fobbu_msg">Please wait Fobbu,</string>
+    <string name="gathering_tools__msg">is Gathering Tools</string>
+
+
+    <string name="fobbu_on_way">is on his way please stay at your stranded location.</string>
     <string name="share_4_digit_code">Please share 4 digit code</string>
     <string name="code_validated">Code Validated!</string>
     <string name="fobbu_will_access_your_vehicle">Fobbu will now asses your\nvehicle issue.</string>

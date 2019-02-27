@@ -43,44 +43,21 @@ class OdsSubServiceAdapter (var activity: Activity, var dataList:ArrayList<HashM
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(p0: OdsSubServiceViewHolder, p1: Int) {
-        p0.tvSubService.text = """${p1 + 1}: ${dataList[p1]["option"]}"""
-
-        p0.itemView.setOnClickListener {
-            if (dataList[p1]["selected"] == "0")
-            {
-                dataList[p1]["selected"] = "1"
+        p0.tvSubService.text = """${p1 + 1}: ${dataList[p1]["name"]}"""
 
 
-                        val map =dataList[p1]
-                        saveToList(map)
-
-
-
-            }
-            else
-            {
-                dataList[p1]["selected"] = "0"
-
-
-                        val map =dataList[p1]
-                        saveToList(map)
-
-
-            }
-
-            notifyDataSetChanged()
-
-
-        }
         when (dataList[p1]["selected"]) {
             "0" -> {
                 p0.ivSubServiceChecked.setImageResource(R.drawable.checkbox_uncheck)
-
+               /* val map =dataList[p1]
+                saveToList(map)*/
             }
 
             else ->
             {
                 p0.ivSubServiceChecked.setImageResource(R.drawable.checkbox_checked)
+               /* val map =dataList[p1]
+                saveToList(map)*/
             }
         }
     }
@@ -90,7 +67,7 @@ class OdsSubServiceAdapter (var activity: Activity, var dataList:ArrayList<HashM
         val tvSubService:TextView=view.findViewById(R.id.tvSubServiceOds)
         val ivSubServiceChecked:ImageView=view.findViewById(R.id.ivSubServiceChecked)
     }
-
+/*
     private fun saveToList(map:HashMap<String,Any>)
     {
 
@@ -98,26 +75,6 @@ class OdsSubServiceAdapter (var activity: Activity, var dataList:ArrayList<HashM
         {
                 selectedSubServiceList.add(map)
 
-          /*  else
-            {
-                outerloop@
-                for (i in selectedSubServiceList.indices)
-                {
-                    if (selectedSubServiceList[i]["parent_pos"]==map["parent_pos"])
-                    {
-                        if (selectedSubServiceList[i]["option"]!=map["option"])
-                        {
-                            selectedSubServiceList.add(map)
-                            break@outerloop
-                        }
-                    }
-                    else{
-                        selectedSubServiceList.add(map)
-                        break@outerloop
-                    }
-
-                }
-            }*/
         }
         else{
             if (selectedSubServiceList.isNotEmpty())
@@ -125,9 +82,9 @@ class OdsSubServiceAdapter (var activity: Activity, var dataList:ArrayList<HashM
                 outerloop@
             for ( i in selectedSubServiceList.size-1 downTo   0)
             {
-                if (selectedSubServiceList[i]["service_name"]==map["service_name"])
+                if (selectedSubServiceList[i]["inner_service_name"]==map["inner_service_name"])
                 {
-                    if (selectedSubServiceList[i]["option"]==map["option"])
+                    if (selectedSubServiceList[i]["name"]==map["name"])
                     {
                         selectedSubServiceList.removeAt(i)
                     }
@@ -135,58 +92,11 @@ class OdsSubServiceAdapter (var activity: Activity, var dataList:ArrayList<HashM
             }
         }
 
-/*
-
-       if (CommonClass(activity,activity).getStringList("subServiceList").isEmpty())
-        {
-            newSelectedList=selectedSubServiceList
-        }
-        else{
-            newSelectedList=CommonClass(activity,activity).getStringList("subServiceList")
-
-            outerLoop@
-            for (i in newSelectedList.indices)
-            {
-                innerLoop@
-                for (j in selectedSubServiceList.indices)
-                {
-                    if (selectedSubServiceList[j]["service_name"]==newSelectedList[i]["service_name"])
-                    {
-                        if (selectedSubServiceList[j]["option"]==newSelectedList[i]["option"])
-                        {
-                            newSelectedList.removeAt(i)
-
-                            val selectedMap=selectedSubServiceList[j]
-
-                            newSelectedList.add(selectedMap)
-
-                            break@outerLoop
-                        }else{
-                            val selectedMap=selectedSubServiceList[j]
-
-                            newSelectedList.add(selectedMap)
-
-                            break@outerLoop
-                        }
-                    }
-                    else
-                    {
-                        val selectedMap=selectedSubServiceList[j]
-
-                        newSelectedList.add(selectedMap)
-
-                        break@outerLoop
-                    }
-                }
-            }
-        }
-*/
-
 
         println("subServiceList::::$selectedSubServiceList")
 
         CommonClass(activity,activity).putStringList("subServiceList",selectedSubServiceList)
 
-        selectedSubServiceView.onSuccessReport(selectedSubServiceList)
-    }
+
+    }*/
 }

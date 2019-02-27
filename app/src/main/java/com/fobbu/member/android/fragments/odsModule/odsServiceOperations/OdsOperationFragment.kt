@@ -46,11 +46,13 @@ class OdsOperationFragment : Fragment(),ActivityView
 
     private var timeSlot=""
 
+    val mainList= ArrayList<HashMap<String,Any>>()
+
     private var startDate=""
 
     private var endDate=""
 
-    lateinit var dataList:ArrayList<HashMap<String,Any>>
+    var dataList:ArrayList<HashMap<String,Any>> = ArrayList()
 
     private lateinit var datePickerDialog: DatePickerDialog.OnDateSetListener
 
@@ -105,6 +107,33 @@ class OdsOperationFragment : Fragment(),ActivityView
             subServiceList=(map.getValue("sub_services") as ArrayList<Map<String,Any>>)
 
             println("array list:::::$subServiceList")
+
+
+
+            for (i in subServiceList.indices)
+            {
+                val listOption= ArrayList<HashMap<String,Any>>()
+
+                val hashMain = HashMap<String,Any>()
+
+                val firstOptionList = subServiceList[i]["option"] as ArrayList<String>
+
+                for (j in firstOptionList.indices)
+                {
+                    val hashMapInner = HashMap<String,Any>()
+                    hashMapInner["name"]= firstOptionList[j]
+                    hashMapInner["selected"]= "0"
+                    hashMapInner["inner_service_name"]= subServiceList[i]["service_name"].toString()
+                    listOption.add(hashMapInner)
+                }
+
+                hashMain["option"]=listOption
+                hashMain["service_name"]=subServiceList[i]["service_name"].toString()
+                mainList.add(hashMain)
+
+            }
+
+            println("MAIN  list:::::    $mainList")
 
             /*   val jsonObject=JSONObject(map)
 
@@ -173,7 +202,7 @@ class OdsOperationFragment : Fragment(),ActivityView
     // function for setting up recycler
     private fun setRecycler(view: View)
     {
-        odsOperationAdapter= OdsOperationAdapter(activity!!,subServiceList)
+        odsOperationAdapter= OdsOperationAdapter(activity!!,mainList)
 
         view.rvOperations.layoutManager=LinearLayoutManager(activity!!)
 
@@ -189,7 +218,12 @@ class OdsOperationFragment : Fragment(),ActivityView
         }
 
         view.tvOperationTime.setOnClickListener {
-            selectTime(view)
+            /*selectTime(view)*/
+
+            if (commonClass.getStringList("subServiceList").isNotEmpty())
+            {
+                println("SELECTED SERVICE LIST::::::   ${commonClass.getStringList("subServiceList")}")
+            }
         }
 
         view.ivBack.setOnClickListener {

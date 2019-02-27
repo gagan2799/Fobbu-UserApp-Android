@@ -59,6 +59,8 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     private var strLatitude = ""
     private var strLongitude = ""
 
+    var displayName=""
+
     lateinit var rsaLiveHandler: RsaLivePresenter
 
     private lateinit var rlInformation: RelativeLayout
@@ -173,7 +175,6 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
         rlTools = view.findViewById(R.id.rlTools)
 
         ivImageCall = view.findViewById(R.id.ivImageCall)
-
         checkStatusAndNavigate()
     }
 
@@ -463,7 +464,7 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
         when (status) {
             FcmPushTypes.Types.inRouteRequest -> {
                 ivTool.setImageResource(R.drawable.man_riding_bike)
-                tvText.text = resources.getString(R.string.fobbu_on_way)
+                tvText.text = displayName+" "+resources.getString(R.string.fobbu_on_way)
                 strWhere = "share"
 
                 ivLeftDotted.setImageResource(R.drawable.dotted)
@@ -527,6 +528,7 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     }
 
 
+    @SuppressLint("SetTextI18n")
     override fun onRequestSuccessReport(mainPojo: MainPojo) {
         if (mainPojo.success == "true")
         {
@@ -538,7 +540,14 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                     else
                         imgProfile.setImageResource(R.drawable.dummy_pic)
                 }
-                tvName.text = mainPojo.getData().partner.display_name
+
+            displayName=mainPojo.getData().partner.display_name
+                tvName.text = displayName
+            tvText.text=
+                    """${activity!!.resources.getString(R.string.please_wait_fobbu_msg)}$displayName ${activity!!.resources.getString(
+                        R.string.gathering_tools__msg
+                    )}"""
+
                 mobileNumber = mainPojo.getData().partner.mobile_number
         }
     }

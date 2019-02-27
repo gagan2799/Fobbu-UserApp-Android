@@ -455,15 +455,6 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     private fun getAddressFromLocation(lat:kotlin.Double, long:kotlin.Double)
     {
 
-        if (CommonClass(activity!!, activity!!).getString(RsaConstants.Ods.lat).isNotEmpty())
-        {
-            CommonClass(activity!!, activity!!).removeString(RsaConstants.Ods.lat)
-
-            CommonClass(activity!!, activity!!).removeString(RsaConstants.Ods.long)
-
-            CommonClass(activity!!, activity!!).removeString(RsaConstants.Ods.address)
-        }
-
         commonClass.putString(RsaConstants.Ods.lat, lat.toString())
 
         commonClass.putString(RsaConstants.Ods.long, long.toString())

@@ -3181,6 +3181,7 @@ string free_vehicle_wash
 string freebies
 string full_name
 string gathering_info
+string gathering_tools__msg
 string gcm_defaultSenderId
 string gcm_fallback_notification_channel_label
 string generate
@@ -3310,12 +3311,12 @@ string please_enter_mobile
 string please_enter_password
 string please_enter_valid_password
 string please_enter_vehicle_number
-string please_fobbu_gathering_tools
 string please_generate
 string please_hang_on_fobbu_is_picking_up_the_fuel
 string please_select_from_where_you_want_to_choose
 string please_select_one_issue
 string please_wait
+string please_wait_fobbu_msg
 string proceed_to_pay
 string proceed_to_payment
 string profile

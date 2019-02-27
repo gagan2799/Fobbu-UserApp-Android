@@ -181,7 +181,6 @@
                             android:id="@+id/tvText"
                             android:layout_centerVertical="true"
                             android:padding="10dp"
-                            android:text="@string/please_fobbu_gathering_tools"
                             android:gravity="center"/>
 
                     <TextView
