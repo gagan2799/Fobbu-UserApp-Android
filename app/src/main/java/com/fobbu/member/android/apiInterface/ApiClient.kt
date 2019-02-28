@@ -6,6 +6,7 @@ import android.support.annotation.RequiresApi
 import android.widget.Toast
 import com.fobbu.member.android.apiInterface.Handler.ResponseHandler
 import com.fobbu.member.android.modals.MainPojo
+import com.google.android.gms.maps.model.LatLng
 import com.squareup.picasso.RequestHandler
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -26,7 +27,24 @@ class ApiClient(var activity: Activity) {
 
      private  var webServiceMultipart:WebServiceApi=getEnv().getRetrofitMulti()
 
+    private  var mapWebService:WebServiceApi=getEnv().getMapService()
 
+
+    //geocoding
+    fun getAddress(latlng:LatLng,sensor:String,key:String,responseHandler: ResponseHandler)
+    {
+        mapWebService.getAddress(""+latlng.latitude+","+latlng.longitude,sensor,key).enqueue(object :Callback<MainPojo>
+        {
+            override fun onFailure(call: Call<MainPojo>, t: Throwable) {
+                responseHandler.onServerError(""+t.message)
+            }
+
+            override fun onResponse(call: Call<MainPojo>, response: Response<MainPojo>) {
+                handleSuccess(response,responseHandler)
+            }
+
+        })
+    }
 
    //login api
     fun getLoginData(mobile:String, password:String, token:String, responseHandler: ResponseHandler)

@@ -1,6 +1,7 @@
 package com.fobbu.member.android.apiInterface
 
 import com.fobbu.member.android.modals.MainPojo
+import com.google.android.gms.maps.model.LatLng
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import org.json.JSONArray
@@ -184,5 +185,9 @@ interface WebServiceApi {
     fun makeOdsRequest(@Body map:HashMap<String,Any>
                        ,@Header("x-access-token") token: String):Call<MainPojo>
 
+    @GET("geocode/json")
+    fun getAddress(@Query("latlng") latlng:String,
+                   @Query("sensor") sensor:String,
+                   @Query("key") key:String):Call<MainPojo>
 
 }

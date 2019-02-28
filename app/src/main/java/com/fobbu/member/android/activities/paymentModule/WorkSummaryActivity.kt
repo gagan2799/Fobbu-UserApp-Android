@@ -18,6 +18,7 @@ import com.fobbu.member.android.fragments.rsaFragmentModule.presenter.RsaLivePre
 import com.fobbu.member.android.modals.MainPojo
 import com.fobbu.member.android.utils.CommonClass
 import com.fobbu.member.android.view.ActivityView
+import kotlinx.android.synthetic.main.activity_ods_work_summary.*
 import kotlinx.android.synthetic.main.activity_work_summary.*
 import kotlinx.android.synthetic.main.option_menu_layout.*
 import kotlin.collections.ArrayList
@@ -55,47 +56,16 @@ class WorkSummaryActivity : AppCompatActivity(),ActivityView
     {
         commonClass= CommonClass(this,this)
 
-        if (intent.hasExtra(RsaConstants.Ods.time))
+
+        recyclerViewWorkSummary.visibility=View.VISIBLE
+
+        rsaLiveHandler=RsaLivePresenter(this,this)
+
+        if (CommonClass(this,this).checkInternetConn(this))
         {
-            dataList= ArrayList()
-
-            imageViewOptionMenuWorkSummary.visibility=View.INVISIBLE
-
-            ivBack.visibility=View.VISIBLE
-
-            if (commonClass.getStringList(RsaConstants.Ods.singleServiceList).isNotEmpty())
-                dataList=commonClass.getStringList(RsaConstants.Ods.singleServiceList)
-
-            textViewServiceTypeWork.text=dataList[0][RsaConstants.Ods.service_name].toString()
-
-            textViewTotalAmount.text=(dataList[0][RsaConstants.Ods.service_price] as Double).toLong().toString()
-
-            odsServiceTime=intent.getStringExtra(RsaConstants.Ods.time)
-
-            llOdsService.visibility= View.VISIBLE
-
-            recyclerViewWorkSummary.visibility=View.INVISIBLE
-
-            tvAddressWorkSummary.text=commonClass.getString(RsaConstants.Ods.address)
-
-            tvTimeWorkSummary.text=intent.getStringExtra(RsaConstants.Ods.time)
-
-            tvDateWorkSummary.text=intent.getStringExtra(RsaConstants.Ods.date)
-        }
-        else
-        {
-            llOdsService.visibility= View.GONE
-
-            recyclerViewWorkSummary.visibility=View.VISIBLE
-
-            rsaLiveHandler=RsaLivePresenter(this,this)
-
-            if (CommonClass(this,this).checkInternetConn(this))
-            {
-                rsaLiveHandler.getService(
-                    CommonClass(this,this).getString("x_access_token"),CommonClass(this, this).getString(
-                        RsaConstants.ServiceSaved.fobbuRequestId))
-            }
+            rsaLiveHandler.getService(
+                CommonClass(this,this).getString("x_access_token"),CommonClass(this, this).getString(
+                    RsaConstants.ServiceSaved.fobbuRequestId))
         }
     }
 
@@ -104,7 +74,6 @@ class WorkSummaryActivity : AppCompatActivity(),ActivityView
     // Method for handling click  functionality of the Class
     private fun clicks()
     {
-
         imageViewOptionMenuWorkSummary.setOnClickListener {
             showOptionLayout()
         }
@@ -112,8 +81,7 @@ class WorkSummaryActivity : AppCompatActivity(),ActivityView
         textViewConfirmAndPay.setOnClickListener {
             startActivity(Intent(this,PaymentModeActivity::class.java)
                 .setFlags
-            (Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
-                .putExtra(RsaConstants.Ods.service_name,odsServiceTime))
+                    (Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK))
         }
     }
 
@@ -142,7 +110,6 @@ class WorkSummaryActivity : AppCompatActivity(),ActivityView
     override fun onRequestSuccessReport(mainPojo: MainPojo) {
         if (mainPojo.success=="true")
         {
-
             if(mainPojo.getData().addition_services.size>0)
             {
                 setUpRecycler(mainPojo.getData().addition_services)

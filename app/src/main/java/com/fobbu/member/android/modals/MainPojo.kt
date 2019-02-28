@@ -17,7 +17,11 @@ class MainPojo
         return data
     }
 
+    var results=ArrayList<HashMap<String,Any>>()
+
     var message: String = ""
+
+    var error_message=""
 
     var pin: String = ""
 

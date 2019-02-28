@@ -27,6 +27,8 @@ class MyApplication : Application() {
 
     lateinit var webServiceApiMultipart: WebServiceApi
 
+    lateinit var mapWebService: WebServiceApi
+
     override fun attachBaseContext(context: Context) {
         super.attachBaseContext(context)
         MultiDex.install(this)
@@ -40,6 +42,46 @@ class MyApplication : Application() {
         forSimpleAPI()
 
         forMultiPartAPI()
+
+        forMapApi()
+    }
+
+    private fun forMapApi() {
+
+        val loggingInterceptor = HttpLoggingInterceptor()
+
+        loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
+
+        val httpClient = OkHttpClient.Builder()
+        httpClient.networkInterceptors().add(Interceptor { chain ->
+            val original = chain.request()
+
+            val request = original.newBuilder()
+                .build()
+
+            chain.proceed(request)
+        })
+        httpClient.addInterceptor(loggingInterceptor)
+        httpClient.readTimeout((2 * 60).toLong(), TimeUnit.SECONDS)
+        httpClient.writeTimeout((2 * 60).toLong(), TimeUnit.SECONDS)
+
+        val client = httpClient.build()
+
+
+        val okHttpClient = OkHttpClient.Builder().addInterceptor(loggingInterceptor)
+            .readTimeout(60, TimeUnit.SECONDS)
+            .connectTimeout(60, TimeUnit.SECONDS)
+            .build()
+
+        val gson = GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ").setLenient().create()
+
+        retrofit = Retrofit.Builder()
+            .baseUrl(Url.ApiUrl.MAP_BASEURL)
+            .client(client)
+            .addConverterFactory(GsonConverterFactory.create(gson)).build()
+
+        mapWebService = retrofit.create<WebServiceApi>(WebServiceApi::class.java!!)
+
     }
 
     private fun forMultiPartAPI() {
@@ -126,4 +168,8 @@ class MyApplication : Application() {
         return webServiceApiMultipart
     }
 
+
+    fun getMapService():WebServiceApi{
+        return  mapWebService
+    }
 }

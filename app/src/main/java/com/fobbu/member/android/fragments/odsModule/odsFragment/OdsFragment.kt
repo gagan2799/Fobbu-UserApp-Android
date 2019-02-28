@@ -26,6 +26,9 @@ import android.widget.RelativeLayout
 import com.fobbu.member.android.R
 import com.fobbu.member.android.activities.dashboardActivity.DashboardActivity
 import com.fobbu.member.android.fragments.odsModule.odsFragment.adapter.OdsFragmentAdapter
+import com.fobbu.member.android.fragments.odsModule.odsFragment.presenter.MapServiceHandler
+import com.fobbu.member.android.fragments.odsModule.odsFragment.presenter.MapServicePresenter
+import com.fobbu.member.android.fragments.odsModule.odsFragment.view.MapServiceView
 import com.fobbu.member.android.fragments.odsModule.odsServiceOperations.OdsOperationFragment
 import com.fobbu.member.android.fragments.rsaFragmentModule.RsaConstants
 import com.fobbu.member.android.fragments.rsaFragmentModule.presenter.RsaFragmentHandler
@@ -66,8 +69,10 @@ import kotlin.collections.HashMap
 
 @Suppress("DEPRECATION")
 class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
-    GoogleApiClient.ConnectionCallbacks,LocationListener,RsaFragmentView
+    GoogleApiClient.ConnectionCallbacks,LocationListener,RsaFragmentView,MapServiceView
 {
+    var addressList=ArrayList<HashMap<String,Any>>()
+
     lateinit var rlLoader:RelativeLayout
 
     private lateinit var serviceHandler:RsaFragmentHandler
@@ -86,8 +91,9 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
     private lateinit var geocoder:Geocoder
 
-    private var odsService= arrayOf("Trip Ready","General Service","Washing","VAS")
+    private lateinit var mapServiceHandler:MapServiceHandler
 
+    private var odsService= arrayOf("Trip Ready","General Service","Washing","VAS")
 
     lateinit var commonClass:CommonClass
 
@@ -109,7 +115,6 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                 initView(view, savedInstanceState)
 
                 clicks(view)
-
             }
         }
         // Inflate the layout for this fragment
@@ -120,8 +125,6 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     private fun initView(view: View, savedInstanceState: Bundle?)
     {
         rlLoader=view.findViewById(R.id.rlLoader)
-
-        /* rlSearchOds=view.findViewById(R.id.rlSearchOds)*/
 
         commonClass= CommonClass(activity!!,activity!!)
 
@@ -134,6 +137,8 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
         fetchService()
 
         setRecycler(view)
+
+        mapServiceHandler=MapServicePresenter(activity!!,this)
     }
 
 
@@ -152,14 +157,12 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                 else
                     showDialog(activity!!,position)
             }
-
         }))
 
         view.llScooterOds.setOnClickListener {
-
             view.tvCarOds.setTextColor(activity!!.resources.getColor(R.color.drawer_text_color))
 
-            view.tvCarOds.setTypeface(view.tvScooterOds.typeface, Typeface.NORMAL)
+            view.tvCarOds.setTypeface(null, Typeface.NORMAL)
 
             if (view.tvScooterOds.currentTextColor==activity!!.resources.getColor(R.color.drawer_text_color))
             {
@@ -175,15 +178,14 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
                 view.tvScooterOds.setTextColor(activity!!.resources.getColor(R.color.drawer_text_color))
 
-                view.tvScooterOds.setTypeface(view.tvScooterOds.typeface, Typeface.NORMAL)
+                view.tvScooterOds.setTypeface(null, Typeface.NORMAL)
             }
         }
 
         view.llCarOds.setOnClickListener {
-
             view.tvScooterOds.setTextColor(activity!!.resources.getColor(R.color.drawer_text_color))
 
-            view.tvScooterOds.setTypeface(view.tvScooterOds.typeface, Typeface.NORMAL)
+            view.tvScooterOds.setTypeface(null, Typeface.NORMAL)
 
             if (view.tvCarOds.currentTextColor==activity!!.resources.getColor(R.color.drawer_text_color))
             {
@@ -199,7 +201,7 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
                 view.tvCarOds.setTextColor(activity!!.resources.getColor(R.color.drawer_text_color))
 
-                view.tvCarOds.setTypeface(view.tvScooterOds.typeface, Typeface.NORMAL)
+                view.tvCarOds.setTypeface(null, Typeface.NORMAL)
             }
         }
 
@@ -207,8 +209,8 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
         view.tvContinueOds.setOnClickListener {
             commonClass.putString(RsaConstants.Ods.service_name,odsService[selectedPosition])
 
-            when{
-
+            when
+            {
                 wheels==""->
                     commonClass.showToast(getString(R.string.provide_vehicle_msg))
 
@@ -216,11 +218,8 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                     commonClass.showToast(getString(R.string.car_model_message))
 
                 else->
-                {
                     changeFragment(OdsOperationFragment())
-                }
             }
-
         }
 
         view.tvContinueOdsCarDetails.setOnClickListener {
@@ -251,6 +250,16 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
         view.ivBack.setOnClickListener {
             ifTopBarChnagesNull(true)
+
+            wheels=""
+
+            view.tvCarOds.setTextColor(activity!!.resources.getColor(R.color.drawer_text_color))
+
+            view.tvCarOds.setTypeface(null, Typeface.NORMAL)
+
+            view.tvScooterOds.setTextColor(activity!!.resources.getColor(R.color.drawer_text_color))
+
+            view.tvScooterOds.setTypeface(null, Typeface.NORMAL)
 
             view.llOdsServices.visibility = View.VISIBLE
 
@@ -295,8 +304,6 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
         }
 
         dialog.tvConfirm.setOnClickListener {
-            dialog.dismiss()
-
             commonClass.putString(RsaConstants.Ods.address,currentAddress)
 
             val singleService=ArrayList<HashMap<String,Any>>()
@@ -312,6 +319,8 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
             }
 
             commonClass.putStringList(RsaConstants.Ods.singleServiceList,singleService)
+
+            dialog.dismiss()
 
             manageServiceLayout(position)
         }
@@ -333,9 +342,9 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
                 llCarDetailsOds.visibility=View.VISIBLE
 
-                tvVehicleHeadingOds.text=resources.getString(R.string.your_road_ptrip_vehicle)
+                tvVehicleHeadingOds.text=activity!!.resources.getString(R.string.your_road_ptrip_vehicle)
 
-                etVehicleModelOds.hint=getString(R.string.enter_car_model)
+                //etVehicleModelOds.hint=activity!!.resources.getString(R.string.enter_car_model)
 
                 ifTopBarChnagesNull(false)
 
@@ -353,22 +362,21 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
                 llCarDetailsOds.visibility=View.INVISIBLE
 
-                tvVehicleHeadingOds.text=resources.getString(R.string.your_road_ptrip_vehicle)
+                tvVehicleHeadingOds.text=activity!!.resources.getString(R.string.your_road_ptrip_vehicle)
 
-                etVehicleModelOds.hint=getString(R.string.enter_car_model)
+                //etVehicleModelOds.hint=activity!!.resources.getString(R.string.enter_car_model)
 
                 ifTopBarChnagesNull(false)
 
                 Handler().postDelayed({
                     rlTopDrawerOds.visibility=View.VISIBLE
                 },200)
-
-                //ifTopBarChnagesNull(true)
             }
         }
     }
 
-    private fun ifTopBarChnagesNull(boolean: Boolean) {
+    private fun ifTopBarChnagesNull(boolean: Boolean)
+    {
         if (topBarChanges == null)
             topBarChanges = activity as TopBarChanges
 
@@ -395,9 +403,12 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
         mMapView.onResume()// needed to get the map to display immediately
 
-        try {
+        try
+        {
             MapsInitializer.initialize(activity!!.applicationContext)
-        } catch (e: Exception) {
+        }
+        catch (e: Exception)
+        {
             e.printStackTrace()
         }
 
@@ -406,28 +417,26 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
 
     @SuppressLint("MissingPermission")
-    private fun checkWhenMapIsReady() {
-
+    private fun checkWhenMapIsReady()
+    {
         mMapView.getMapAsync { mMap ->
             googleMap = mMap
 
             val permission =
                 ContextCompat.checkSelfPermission(context!!, android.Manifest.permission.ACCESS_FINE_LOCATION)
 
-            if (permission == PackageManager.PERMISSION_GRANTED) {
+            if (permission == PackageManager.PERMISSION_GRANTED)
+            {
                 googleMap.isMyLocationEnabled = true
             }
 
-
             googleMap.setInfoWindowAdapter(InfoWindow())
-
-
         }
     }
 
-
     // method for checking whether GPS is enabled or not
-    private fun checkGPSEnable() {
+    private fun checkGPSEnable()
+    {
         val apiLevel = android.os.Build.VERSION.SDK_INT
         if (isAdded)
         {
@@ -442,47 +451,48 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                         arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
                         locationPermissionRequestCode
                     )
-                } else {
-                    enableGPSAutoMatically()
                 }
-            } else {
-                enableGPSAutoMatically()
+                else
+                    enableGPSAutoMatically()
             }
+            else
+                enableGPSAutoMatically()
         }
-
     }
 
     private fun getAddressFromLocation(lat:kotlin.Double, long:kotlin.Double)
     {
-
         commonClass.putString(RsaConstants.Ods.lat, lat.toString())
 
         commonClass.putString(RsaConstants.Ods.long, long.toString())
 
         geocoder = Geocoder(activity!!, Locale.ENGLISH)
-        try {
-            val address: List<Address> = geocoder.getFromLocation(lat, long, 1)
-            if (address.isNotEmpty()) {
-                println("current address::${address[0].getAddressLine(0)}")
 
+        try
+        {
+            val address: List<Address> = geocoder.getFromLocation(lat, long, 1)
+
+            if (address.isNotEmpty())
+            {
                 commonClass.putString(RsaConstants.Ods.address, address[0].getAddressLine(0))
 
                 currentAddress = address[0].getAddressLine(0)
             }
-        } catch (e: Exception) {
-
         }
 
+        catch (e: Exception) { }
     }
 
     // Method  for enabling Device GPS
     @SuppressLint("MissingPermission")
-    fun enableGPSAutoMatically() {
-
-        if (googleApiClient!!.isConnected) {
-
+    fun enableGPSAutoMatically()
+    {
+        if (googleApiClient!!.isConnected)
+        {
             locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+
             locationRequest.interval = (1000 * 3).toLong()
+
             locationRequest.fastestInterval = (1000 * 3).toLong()
 
             val builder = LocationSettingsRequest.Builder().addLocationRequest(locationRequest)
@@ -504,24 +514,28 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
                 println("STATUS OF LOCATION $status")
 
-                when (status.statusCode) {
-                    LocationSettingsStatusCodes.SUCCESS -> {
-                        try {
+                when (status.statusCode)
+                {
+                    LocationSettingsStatusCodes.SUCCESS ->
+                    {
+                        try
+                        {
                             LocationServices.FusedLocationApi.requestLocationUpdates(
                                 googleApiClient, locationRequest,
                                 this@OdsFragment
                             )
-                        } catch (e: IntentSender.SendIntentException) {
                         }
+                        catch (e: IntentSender.SendIntentException) { }
                     }
-                    LocationSettingsStatusCodes.RESOLUTION_REQUIRED -> {
+                    LocationSettingsStatusCodes.RESOLUTION_REQUIRED ->
+                    {
                         status.startResolutionForResult(activity!!, 1000)
                     }
-                    LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE -> {
 
-                    }
+                    LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE -> { }
 
-                    LocationSettingsStatusCodes.CANCELED -> {
+                    LocationSettingsStatusCodes.CANCELED ->
+                    {
                         checkGPSEnable()
                     }
                 }
@@ -529,10 +543,11 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
         }
     }
 
-
     // Method for setting up  marker on Map
     private fun throwMarkerOnMap(latitude: String, longitude: String)
     {
+        getAddressFromLocation(Double.valueOf(latitude),Double.valueOf(longitude))
+
         // create marker
         val markerOption = MarkerOptions().position(
             LatLng(Double.valueOf(latitude), Double.valueOf(longitude))
@@ -549,31 +564,6 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
             val marker =googleMap.addMarker(markerOption)
 
             marker.title=currentAddress
-
-
-
-            /*   googleMap.setInfoWindowAdapter(object :GoogleMap.InfoWindowAdapter
-               {
-                   override fun getInfoContents(p0: Marker?): View
-                   {
-                       return LayoutInflater.from(activity!!).inflate(R.layout.inflate_marker_title,null)
-                   }
-
-                   override fun getInfoWindow(p0: Marker?): View? {
-                       if (p0 != null
-                           && p0.isInfoWindowShown
-                       ) {
-                           p0.hideInfoWindow()
-                           p0.showInfoWindow()
-                       }
-                       val view=LayoutInflater.from(activity!!).inflate(R.layout.inflate_marker_title,null)
-
-
-                       view.tvMarkerTitle.text=currentAddress
-
-                       return view
-                   }
-               })*/
         }
 
         val cameraPosition = CameraPosition.Builder()
@@ -583,22 +573,19 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     }
 
 
-    private inner class InfoWindow : GoogleMap.InfoWindowAdapter {
-
-        override fun getInfoContents(p0: Marker?): View? {
-
+    private inner class InfoWindow : GoogleMap.InfoWindowAdapter
+    {
+        override fun getInfoContents(p0: Marker?): View?
+        {
             return null
         }
 
         @SuppressLint("SetTextI18n", "InflateParams")
-        override fun getInfoWindow(p0: Marker?): View? {
-
-
+        override fun getInfoWindow(p0: Marker?): View?
+        {
             return null
         }
     }
-
-
 
     // setting up google client for map in this method
     private fun setUpGoogleClient()
@@ -614,14 +601,15 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
         googleApiClient!!.connect()
     }
 
-
     override fun onLocationChanged(p0: Location?)
     {
         println("LOCATION >>>>>>>>>>>>>>>>>>>> " + p0!!.latitude)
 
         if (!location)
         {
-            getAddressFromLocation(p0.latitude,p0.longitude)
+           // val latlng=LatLng(p0.latitude,p0.longitude)
+
+            //getAddress(latlng)
 
             throwMarkerOnMap(p0.latitude.toString(), p0.longitude.toString())
 
@@ -638,8 +626,9 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     private fun mapClicks()
     {
         googleMap.setOnMapClickListener {
+            //val latlng=LatLng(it.latitude,it.longitude)
 
-            getAddressFromLocation(it.latitude,it.longitude)
+            //getAddress(latlng)
 
             throwMarkerOnMap(it.latitude.toString(),it.longitude.toString())
         }
@@ -660,18 +649,14 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
         }
     }
 
-    override fun onConnectionFailed(p0: ConnectionResult) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun onConnectionFailed(p0: ConnectionResult) {}
 
     override fun onConnected(p0: Bundle?) {
         if (isAdded)
-        checkGPSEnable()
+            checkGPSEnable()
     }
 
-    override fun onConnectionSuspended(p0: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun onConnectionSuspended(p0: Int) {}
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         when (requestCode)
@@ -717,17 +702,12 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                 dataList.add(map)
             }
         }
-
         odsAdapter.notifyDataSetChanged()
     }
 
-    override fun findingFobbuReport(mainPojo: MainPojo) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun findingFobbuReport(mainPojo: MainPojo) {}
 
-    override fun fleetSuccessReport(mainPojo: MainPojo) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun fleetSuccessReport(mainPojo: MainPojo) {}
 
     override fun showLoader()
     {
@@ -744,25 +724,54 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
         when (requestCode) {
             123
             -> {
-                if (resultCode == RESULT_OK) {
+                if (resultCode == RESULT_OK)
+                {
                     val place: Place = PlaceAutocomplete.getPlace(activity!!, data)
 
                     val lat=place.latLng.latitude
 
                     val long=place.latLng.longitude
 
-                    getAddressFromLocation(lat,long)
+                   // val latlng=LatLng(lat,long)
+
+                    //getAddress(latlng)
 
                     throwMarkerOnMap(lat.toString(),long.toString())
+                }
 
-                    //Log.i(TAG, "Place: " + place.getName());
-                } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
+                else if (resultCode == PlaceAutocomplete.RESULT_ERROR)
+                {
                     val status: Status = PlaceAutocomplete.getStatus(activity!!, data)
-                    // TODO: Handle the error.
-                    //Log.i(TAG, status.getStatusMessage());
-
                 }
             }
         }
     }
+
+    // ******************************* MAP API (geocoding) ***********************//
+
+    // implementing geocoding API
+    fun getAddress(latlng:LatLng)
+    {
+        println("latLng:::: ${latlng}")
+
+        if (commonClass.checkInternetConn(activity!!))
+            mapServiceHandler.getAddress(latlng,"false",activity!!.resources.getString(R.string.google_maps_key))
+
+        else
+            commonClass.showToast(activity!!.resources.getString(R.string.internet_is_unavailable))
+    }
+
+
+    override fun onAddressSuccessReport(mainPojo: MainPojo) {
+        if (mainPojo.results.isNotEmpty())
+        {
+            addressList=mainPojo.results
+
+            print("address list:::: $addressList")
+        }
+
+        commonClass.showToast(mainPojo.error_message)
+
+    }
+
 }

@@ -202,6 +202,7 @@
                                                 android:layout_width="wrap_content"
                                                 android:text="@string/bike_scooter"
                                                 android:padding="5dp"
+                                                android:textStyle="normal"
                                                 android:textSize="@dimen/textsize_medium"
                                                 android:textColor="@color/drawer_text_color"
                                                 android:layout_height="wrap_content"/>
@@ -237,6 +238,7 @@
                                                 android:paddingTop="5dp"
                                                 android:paddingRight="10dp"
                                                 android:paddingLeft="10dp"
+                                                android:textStyle="normal"
                                                 android:textSize="@dimen/textsize_medium"
                                                 android:textColor="@color/drawer_text_color"
                                                 android:layout_height="wrap_content"/>
@@ -257,6 +259,7 @@
                                     android:textSize="@dimen/textsize_normal"
                                     android:background="@drawable/border_line_grey"
                                     android:padding="10dp"
+                                    android:hint="@string/enter_car_model"
                                     android:gravity="center"
                                     android:inputType="textCapCharacters"
                                     android:textAllCaps="true"

@@ -29,6 +29,7 @@ class RsaConstants
     {
         var service_image="service_image"
         var singleServiceList="singleServiceList"
+        var selectedServiceList="selectedServiceList"
         var service_name="service_name"
         var static_name="static_name"
         var service_price="service_price"

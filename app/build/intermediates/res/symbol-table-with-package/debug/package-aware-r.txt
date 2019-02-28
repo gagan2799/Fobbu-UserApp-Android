@@ -2100,6 +2100,7 @@ id ivCheckAll
 id ivContactList
 id ivCrossDrawer
 id ivCrossRSA
+id ivCrossRSAOds
 id ivDeals
 id ivDelete
 id ivDownloadStatement
@@ -2122,6 +2123,7 @@ id ivLeftDotted
 id ivLifting
 id ivList
 id ivOperationAdd
+id ivOptionMenuWorkSummary
 id ivPassbookCheck
 id ivProfileDrawer
 id ivQrCodePayment
@@ -2395,6 +2397,7 @@ id rvHelp
 id rvLanguageCheck
 id rvOdsService
 id rvOdsSubService
+id rvOdsWorkSummary
 id rvOperations
 id rvOrder
 id rvPassDetail
@@ -2561,6 +2564,7 @@ id tvCode
 id tvCodeValidated
 id tvCodeValidatedSubMessage
 id tvConfirm
+id tvConfirmAndPay
 id tvConfirmPin
 id tvContinue
 id tvContinueOds
@@ -2646,6 +2650,7 @@ id tvOrderDetailService
 id tvOrderDetailTime
 id tvOrderIDDetail
 id tvOrderIdAll
+id tvOrderIdWork
 id tvOrderSuccessReport
 id tvOrderTimeAll
 id tvOrderTypeAll
@@ -2682,6 +2687,7 @@ id tvSecuritySettings
 id tvSelectedLanguageProfile
 id tvServiceAddress
 id tvServiceRequest
+id tvServiceTypeWork
 id tvSkip
 id tvStartDatePB
 id tvStartFobbu
@@ -2705,6 +2711,7 @@ id tvTextTwo
 id tvTimeWorkSummary
 id tvTopUpOperations
 id tvTotalAll
+id tvTotalAmount
 id tvTowRequired
 id tvTrack
 id tvTryFobbu
@@ -2844,6 +2851,7 @@ layout activity_main
 layout activity_my_orders
 layout activity_my_passbook
 layout activity_ods_get_set_go
+layout activity_ods_work_summary
 layout activity_order_detail
 layout activity_passbook_detail
 layout activity_payment_mode

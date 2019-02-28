@@ -14,11 +14,12 @@ import android.view.ViewGroup
 import android.widget.RelativeLayout
 
 import com.fobbu.member.android.R
-import com.fobbu.member.android.activities.paymentModule.WorkSummaryActivity
+import com.fobbu.member.android.activities.paymentModule.OdsWorkSummaryActivity
 import com.fobbu.member.android.fragments.odsModule.odsFragment.OdsFragment
 import com.fobbu.member.android.fragments.odsModule.odsServiceOperations.adapter.OdsOperationAdapter
 import com.fobbu.member.android.fragments.odsModule.odsServiceOperations.presenter.OdsRequestHandler
 import com.fobbu.member.android.fragments.odsModule.odsServiceOperations.presenter.OdsRequestPresenter
+import com.fobbu.member.android.fragments.odsModule.odsServiceOperations.view.SelectedSubServiceView
 import com.fobbu.member.android.fragments.rsaFragmentModule.RsaConstants
 import com.fobbu.member.android.interfaces.TopBarChanges
 import com.fobbu.member.android.modals.MainPojo
@@ -32,7 +33,7 @@ import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
 
-class OdsOperationFragment : Fragment(),ActivityView
+class OdsOperationFragment : Fragment(),ActivityView,SelectedSubServiceView
 {
     private lateinit var myCalendar: Calendar
 
@@ -44,9 +45,11 @@ class OdsOperationFragment : Fragment(),ActivityView
 
     private var time=""
 
+    private val selectedServiceList=ArrayList<HashMap<String,Any>>()
+
     private var timeSlot=""
 
-    val mainList= ArrayList<HashMap<String,Any>>()
+    private val mainList= ArrayList<HashMap<String,Any>>()
 
     private var startDate=""
 
@@ -69,7 +72,8 @@ class OdsOperationFragment : Fragment(),ActivityView
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View?
+    {
         // Inflate the layout for this fragment
         val   view= inflater.inflate(R.layout.fragment_ods_operation, container, false)
 
@@ -85,14 +89,10 @@ class OdsOperationFragment : Fragment(),ActivityView
         return  view
     }
 
-
-
     // function for initialising all the variables of the class
     private fun initView(view: View)
     {
         commonClass= CommonClass(activity!!,activity!!)
-
-        commonClass.removeString("subServiceList")
 
         subServiceList= ArrayList()
 
@@ -106,10 +106,6 @@ class OdsOperationFragment : Fragment(),ActivityView
 
             subServiceList=(map.getValue("sub_services") as ArrayList<Map<String,Any>>)
 
-            println("array list:::::$subServiceList")
-
-
-
             for (i in subServiceList.indices)
             {
                 val listOption= ArrayList<HashMap<String,Any>>()
@@ -121,32 +117,22 @@ class OdsOperationFragment : Fragment(),ActivityView
                 for (j in firstOptionList.indices)
                 {
                     val hashMapInner = HashMap<String,Any>()
+
                     hashMapInner["name"]= firstOptionList[j]
+
                     hashMapInner["selected"]= "0"
+
                     hashMapInner["inner_service_name"]= subServiceList[i]["service_name"].toString()
+
                     listOption.add(hashMapInner)
                 }
-
                 hashMain["option"]=listOption
+
                 hashMain["service_name"]=subServiceList[i]["service_name"].toString()
+
                 mainList.add(hashMain)
-
             }
-
-            println("MAIN  list:::::    $mainList")
-
-            /*   val jsonObject=JSONObject(map)
-
-                  val jsonArray=jsonObject.getJSONArray("sub_services")
-
-                      for (j in 0 until jsonArray.length())
-                      {
-                          subServiceList.add(jsonArray[j])
-                      }
-
-                  println("sub service list::: $subServiceList")*/
         }
-
         rlLoader=view.findViewById(R.id.rlLoader)
 
         odsRequestHandler=OdsRequestPresenter(activity!!,this)
@@ -202,7 +188,7 @@ class OdsOperationFragment : Fragment(),ActivityView
     // function for setting up recycler
     private fun setRecycler(view: View)
     {
-        odsOperationAdapter= OdsOperationAdapter(activity!!,mainList)
+        odsOperationAdapter= OdsOperationAdapter(activity!!,mainList,this)
 
         view.rvOperations.layoutManager=LinearLayoutManager(activity!!)
 
@@ -218,12 +204,7 @@ class OdsOperationFragment : Fragment(),ActivityView
         }
 
         view.tvOperationTime.setOnClickListener {
-            /*selectTime(view)*/
-
-            if (commonClass.getStringList("subServiceList").isNotEmpty())
-            {
-                println("SELECTED SERVICE LIST::::::   ${commonClass.getStringList("subServiceList")}")
-            }
+            selectTime(view)
         }
 
         view.ivBack.setOnClickListener {
@@ -272,10 +253,11 @@ class OdsOperationFragment : Fragment(),ActivityView
                 if (dataList[0][RsaConstants.Ods.service_name].toString()=="Washing")
                     makeOdsRequest()
                 else
-                    startActivity(Intent(activity!!,WorkSummaryActivity::class.java)
+                    startActivity(Intent(activity!!,OdsWorkSummaryActivity::class.java)
                         .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                         .putExtra(RsaConstants.Ods.time,timeSlot)
-                        .putExtra(RsaConstants.Ods.date,dateCustom))
+                        .putExtra(RsaConstants.Ods.date,dateCustom)
+                        .putExtra(RsaConstants.Ods.selectedServiceList,selectedServiceList))
             }
         }
 
@@ -349,10 +331,11 @@ class OdsOperationFragment : Fragment(),ActivityView
                     if (dataList[0][RsaConstants.Ods.service_name].toString()=="Washing")
                         makeOdsRequest()
                     else
-                        startActivity(Intent(activity!!,WorkSummaryActivity::class.java)
+                        startActivity(Intent(activity!!,OdsWorkSummaryActivity::class.java)
                             .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                             .putExtra(RsaConstants.Ods.time,timeSlot)
-                            .putExtra(RsaConstants.Ods.date,dateCustom))
+                            .putExtra(RsaConstants.Ods.date,dateCustom)
+                            .putExtra(RsaConstants.Ods.selectedServiceList,selectedServiceList))
                 }
 
             }, hour, minute, false)//Yes 24 hour time
@@ -401,7 +384,17 @@ class OdsOperationFragment : Fragment(),ActivityView
     //handling the response of    ods_request API
     override fun onRequestSuccessReport(mainPojo: MainPojo)
     {
-        commonClass.showToast(mainPojo.message)
+        if (mainPojo.success=="true")
+        {
+            startActivity(Intent(activity!!,OdsWorkSummaryActivity::class.java)
+                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                .putExtra(RsaConstants.Ods.time,timeSlot)
+                .putExtra(RsaConstants.Ods.date,dateCustom)
+                .putExtra(RsaConstants.Ods.selectedServiceList,selectedServiceList))
+
+        }
+        else
+            commonClass.showToast(mainPojo.message)
     }
 
     override fun showLoader()
@@ -414,6 +407,26 @@ class OdsOperationFragment : Fragment(),ActivityView
         rlLoader.visibility=View.GONE
     }
 
+    override fun onSuccessReport(selectedSubSercice: ArrayList<HashMap<String, Any>>)
+    {
+        selectedServiceList.clear()
+
+        for ( i in selectedSubSercice.indices)
+        {
+            val optionList=selectedSubSercice[i]["option"] as ArrayList<HashMap<String,Any>>
+
+            for (j in optionList.indices)
+            {
+                if (optionList[j]["selected"]=="1")
+                {
+                    val map=optionList[j]
+                    selectedServiceList.add(map)
+                }
+            }
+        }
+
+        println("selected list updated::::  $selectedServiceList")
+    }
 }
 
 

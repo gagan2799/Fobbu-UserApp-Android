@@ -50,7 +50,7 @@ class OdsTrackingFragment : Fragment(),GoogleApiClient.OnConnectionFailedListene
 
     private lateinit var googleMap: GoogleMap
 
-    lateinit var livetTrackingHandler:RsaLiveHandler
+    private lateinit var livetTrackingHandler:RsaLiveHandler
 
     private var mobileNumber = "123"
 
@@ -62,19 +62,15 @@ class OdsTrackingFragment : Fragment(),GoogleApiClient.OnConnectionFailedListene
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        if (isAdded)
-        {
-            // Inflate the layout for this fragment
 
-            val view = inflater.inflate(R.layout.fragment_ods_tracking, container, false)
+        // Inflate the layout for this fragment
 
-            if (view != null)
-            {
-                initView(view, savedInstanceState)
+        val view = inflater.inflate(R.layout.fragment_ods_tracking, container, false)
 
-                clicks(view)
-            }
+        if (view != null) {
+            initView(view, savedInstanceState)
 
+            clicks(view)
         }
         return view
     }
@@ -90,10 +86,10 @@ class OdsTrackingFragment : Fragment(),GoogleApiClient.OnConnectionFailedListene
 
         initPersistentBottomsheet()
 
-        if ( commonClass.getString(
+        /*if ( commonClass.getString(
                 RsaConstants.ServiceSaved.fobbuRequestId           // checking if request ID is present or not
             ).isNotEmpty())
-            getService()
+            getService()*/
 
         mapInitialise(view, savedInstanceState)
 
@@ -472,7 +468,7 @@ class OdsTrackingFragment : Fragment(),GoogleApiClient.OnConnectionFailedListene
 
     //****************************** requests API *********************//
 
-    private fun getService()
+    /*private fun getService()
     {
         if (commonClass.checkInternetConn(activity!!))
             livetTrackingHandler.getService(
@@ -484,17 +480,17 @@ class OdsTrackingFragment : Fragment(),GoogleApiClient.OnConnectionFailedListene
 
         else
             commonClass.showToast(activity!!.resources.getString(R.string.internet_is_unavailable))
-    }
+    }*/
 
     override fun onRequestSuccessReport(mainPojo: MainPojo) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
     }
 
     override fun showLoader() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
     }
 
     override fun hideLoader() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
     }
 }

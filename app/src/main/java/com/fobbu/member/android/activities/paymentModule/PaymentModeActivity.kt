@@ -64,7 +64,7 @@ class PaymentModeActivity : AppCompatActivity(), ActivityView
 
         linearLayoutBankPayment.setOnClickListener {
 
-            if (intent.getStringExtra(RsaConstants.Ods.service_name)!="")
+            if (intent.hasExtra(RsaConstants.Ods.service_name))
             {
                 successDialog()
 
