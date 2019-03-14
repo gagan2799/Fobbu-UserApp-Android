@@ -2,6 +2,7 @@ package com.fobbu.member.android.fragments
 
 import android.annotation.SuppressLint
 import android.app.Dialog
+import android.app.PendingIntent
 import android.content.*
 import android.content.pm.PackageManager
 import android.location.Location
@@ -454,6 +455,9 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
         }
     }
 
+
+
+
     @SuppressLint("SetTextI18n")
     private fun checkStatusAndNavigate() {
 
@@ -462,7 +466,8 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
         println("HERE IN LIVE FRAGMENT $status")
 
         when (status) {
-            FcmPushTypes.Types.inRouteRequest -> {
+            FcmPushTypes.Types.inRouteRequest ->
+            {
                 ivTool.setImageResource(R.drawable.man_riding_bike)
                 tvText.text = displayName+" "+resources.getString(R.string.fobbu_on_way)
                 strWhere = "share"
@@ -628,7 +633,8 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     }
 
     // Method for opening dialog containing message
-    private fun showMessageDialog(message: String) {
+    private fun showMessageDialog(message: String)
+    {
         val alertDialog = AlertDialog.Builder(
             activity!!
             , R.style.MyDialogTheme
@@ -646,7 +652,6 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
         val messageText: TextView = alertDialog!!.findViewById(android.R.id.message)!!
 
         messageText.gravity = Gravity.LEFT
-
     }
 
 }

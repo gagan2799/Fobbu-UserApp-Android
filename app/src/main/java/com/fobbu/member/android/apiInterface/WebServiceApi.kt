@@ -190,4 +190,9 @@ interface WebServiceApi {
                    @Query("sensor") sensor:String,
                    @Query("key") key:String):Call<MainPojo>
 
+
+    @GET("partners/update_location_request")
+    fun updateLocationLive(token: String,requestID: String):Call<MainPojo>
+
+
 }
