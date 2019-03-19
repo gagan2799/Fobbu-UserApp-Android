@@ -31,4 +31,7 @@
     <dimen name="rsa_service_width">172px</dimen>
     <dimen name="rsa_service_height">160px</dimen>
 
+    // polyline
+    <dimen name="polyline_width">2dp</dimen>
+
 </resources>

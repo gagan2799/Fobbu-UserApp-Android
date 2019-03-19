@@ -26,6 +26,7 @@ class Data
     var service_name: String = ""
     var profile=""
     var static_name=""
+    var lat_long: String = ""
     var status=""
     var otp=""
     var reason_of_cancellation=""

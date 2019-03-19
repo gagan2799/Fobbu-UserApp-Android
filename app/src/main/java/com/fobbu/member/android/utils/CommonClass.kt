@@ -374,6 +374,7 @@ class CommonClass(activity1: Activity, context1: Context) {
             myCalendar.get(DAY_OF_MONTH))
        // datePicker.datePicker.minDate = myCalendar.timeInMillis
         //datePicker.datePicker.maxDate = myCalendar.timeInMillis
+
         datePicker.show()
 
     }

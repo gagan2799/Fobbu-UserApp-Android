@@ -27,7 +27,7 @@ class MainPojo
 
     var token: String = ""
 
-    var lat_long: String = ""
+
 
     var success: String = ""
 

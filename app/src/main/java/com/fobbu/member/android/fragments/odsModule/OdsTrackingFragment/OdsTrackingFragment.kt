@@ -25,6 +25,7 @@ import com.fobbu.member.android.activities.waitingScreenModule.WaitingScreenWhit
 import com.fobbu.member.android.fragments.rsaFragmentModule.RsaConstants
 import com.fobbu.member.android.fragments.rsaFragmentModule.presenter.RsaLiveHandler
 import com.fobbu.member.android.fragments.rsaFragmentModule.presenter.RsaLivePresenter
+import com.fobbu.member.android.fragments.rsaFragmentModule.view.RsaLiveView
 import com.fobbu.member.android.modals.MainPojo
 import com.fobbu.member.android.utils.CommonClass
 import com.fobbu.member.android.view.ActivityView
@@ -44,8 +45,10 @@ import java.lang.Double
 
 @Suppress("DEPRECATION")
 class OdsTrackingFragment : Fragment(),GoogleApiClient.OnConnectionFailedListener,
-    GoogleApiClient.ConnectionCallbacks,LocationListener,ActivityView
+    GoogleApiClient.ConnectionCallbacks,LocationListener,ActivityView,RsaLiveView
 {
+
+
     private lateinit var mMapView: MapView
 
     private lateinit var googleMap: GoogleMap
@@ -82,7 +85,7 @@ class OdsTrackingFragment : Fragment(),GoogleApiClient.OnConnectionFailedListene
 
         coordinatorLayout = view.findViewById(R.id.coordinator) as CoordinatorLayout
 
-        livetTrackingHandler=RsaLivePresenter(activity!!,this)
+        livetTrackingHandler=RsaLivePresenter(activity!!,this,this)
 
         initPersistentBottomsheet()
 
@@ -493,4 +496,10 @@ class OdsTrackingFragment : Fragment(),GoogleApiClient.OnConnectionFailedListene
     override fun hideLoader() {
 
     }
+
+    override fun successReportLocationUpdate(mainPojo: MainPojo) {
+
+    }
+
 }
+

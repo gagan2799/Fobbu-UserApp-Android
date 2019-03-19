@@ -5,9 +5,12 @@ import android.app.Dialog
 import android.app.PendingIntent
 import android.content.*
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.location.Location
+import android.os.AsyncTask
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.support.annotation.RequiresApi
 import android.support.design.widget.BottomSheetBehavior
 import android.support.design.widget.CoordinatorLayout
@@ -19,12 +22,14 @@ import android.util.Log
 import android.view.*
 import android.widget.*
 import com.fobbu.member.android.R
+import com.fobbu.member.android.R.id.url
 
 import com.fobbu.member.android.activities.waitingScreenModule.WaitingScreenBlue
 import com.fobbu.member.android.activities.waitingScreenModule.WaitingScreenWhite
 import com.fobbu.member.android.fcm.FcmPushTypes
 import com.fobbu.member.android.fragments.rsaFragmentModule.RsaConstants
 import com.fobbu.member.android.fragments.rsaFragmentModule.presenter.RsaLivePresenter
+import com.fobbu.member.android.fragments.rsaFragmentModule.view.RsaLiveView
 
 
 import com.fobbu.member.android.interfaces.HeaderIconChanges
@@ -43,13 +48,23 @@ import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.MapsInitializer
 import com.google.android.gms.maps.model.*
 import com.squareup.picasso.Picasso
+import org.json.JSONArray
+import org.json.JSONObject
+import java.io.BufferedReader
+import java.io.InputStream
+import java.io.InputStreamReader
 import java.lang.Double
+import java.net.HttpURLConnection
+import java.net.URL
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
-    GoogleApiClient.ConnectionCallbacks, LocationListener, ActivityView {
-
+    GoogleApiClient.ConnectionCallbacks, LocationListener, ActivityView,RsaLiveView {
 
     private var headerIconChanges: HeaderIconChanges? = null
+
 
     private lateinit var coordinatorLayout: CoordinatorLayout
 
@@ -60,7 +75,7 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     private var strLatitude = ""
     private var strLongitude = ""
 
-    var displayName=""
+    var displayName = ""
 
     lateinit var rsaLiveHandler: RsaLivePresenter
 
@@ -73,7 +88,7 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     private var strWhere = ""
     private var topBarChanges: TopBarChanges? = null
     private var mobileNumber = ""
-    private lateinit var ivImageCall:ImageView
+    private lateinit var ivImageCall: ImageView
 
     private lateinit var ivLeftDotted: ImageView
     private lateinit var ivRightDotted: ImageView
@@ -86,10 +101,8 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_rsa_live, container, false)
 
-        if (isAdded)
-        {
-            if (view != null)
-            {
+        if (isAdded) {
+            if (view != null) {
                 mapInitialise(view, savedInstanceState)
 
                 checkGPSEnable()
@@ -98,7 +111,7 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
                 handleClick()
 
-                rsaLiveHandler = RsaLivePresenter(this.activity!!, this)
+                rsaLiveHandler = RsaLivePresenter(this.activity!!, this, this)
                 rsaLiveHandler.getService(
                     CommonClass(activity!!, activity!!).getString("x_access_token"),
                     CommonClass(this.activity!!, this.activity!!).getString(
@@ -114,35 +127,35 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     @SuppressLint("ResourceAsColor")
     private fun handleClick() {
 
-      /*  rlInformation.setOnClickListener {
+        /*  rlInformation.setOnClickListener {
 
-            when (strWhere) {
-                "" -> {
-                    ivTool.setImageResource(R.drawable.man_riding_bike)
-                    tvText.text = resources.getString(R.string.fobbu_on_way)
-                    strWhere = "share"
+              when (strWhere) {
+                  "" -> {
+                      ivTool.setImageResource(R.drawable.man_riding_bike)
+                      tvText.text = resources.getString(R.string.fobbu_on_way)
+                      strWhere = "share"
 
-                    ivLeftDotted.setImageResource(R.drawable.dotted)
-                    ivRightDotted.setImageResource(R.drawable.dotted)
-                    tvTrack.setBackgroundResource(R.drawable.solid_color_grey)
-                    rlPickingFuel.visibility = View.GONE
-                    tvPickingFuel.visibility = View.GONE
-                    rlTools.visibility = View.VISIBLE
-                }
-                "share" -> {
-                    strWhere = "next"
-                    ivTool.setImageResource(R.drawable.mechanic_with_cap)
-                    tvText.text = resources.getString(R.string.share_4_digit_code)
-                    tvCode.visibility = View.VISIBLE
-                }
-                else -> startActivity(
-                    Intent(activity!!, WaitingScreenWhite::class.java).putExtra(
-                        "from_where",
-                        "code_valid"
-                    )
-                )
-            }
-        }*/
+                      ivLeftDotted.setImageResource(R.drawable.dotted)
+                      ivRightDotted.setImageResource(R.drawable.dotted)
+                      tvTrack.setBackgroundResource(R.drawable.solid_color_grey)
+                      rlPickingFuel.visibility = View.GONE
+                      tvPickingFuel.visibility = View.GONE
+                      rlTools.visibility = View.VISIBLE
+                  }
+                  "share" -> {
+                      strWhere = "next"
+                      ivTool.setImageResource(R.drawable.mechanic_with_cap)
+                      tvText.text = resources.getString(R.string.share_4_digit_code)
+                      tvCode.visibility = View.VISIBLE
+                  }
+                  else -> startActivity(
+                      Intent(activity!!, WaitingScreenWhite::class.java).putExtra(
+                          "from_where",
+                          "code_valid"
+                      )
+                  )
+              }
+          }*/
 
         ivImageCall.setOnClickListener {
             checkPermissionForCall()
@@ -316,10 +329,8 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     private fun checkGPSEnable() {
         val apiLevel = android.os.Build.VERSION.SDK_INT
 
-        if (isAdded)
-        {
-            if (apiLevel >= 23)
-            {
+        if (isAdded) {
+            if (apiLevel >= 23) {
                 val permission =
                     ContextCompat.checkSelfPermission(context!!, android.Manifest.permission.ACCESS_FINE_LOCATION)
 
@@ -409,11 +420,17 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     override fun onPause() {
         super.onPause()
         mMapView.onPause()
+
     }
 
     override fun onDestroy() {
         super.onDestroy()
         mMapView.onDestroy()
+        try {
+            activity!!.unregisterReceiver(changeRSALiveScreenReceiver)
+        } catch (e: java.lang.Exception) {
+
+        }
     }
 
     override fun onLowMemory() {
@@ -456,22 +473,19 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     }
 
 
-
-
     @SuppressLint("SetTextI18n")
     private fun checkStatusAndNavigate() {
 
-        val status = CommonClass(activity!!,activity!!).getString(RsaConstants.RsaTypes.checkStatus)
+        val status = CommonClass(activity!!, activity!!).getString(RsaConstants.RsaTypes.checkStatus)
 
         println("HERE IN LIVE FRAGMENT $status")
 
         when (status) {
-            FcmPushTypes.Types.inRouteRequest ->
-            {
+            FcmPushTypes.Types.inRouteRequest -> {
                 ivTool.setImageResource(R.drawable.man_riding_bike)
-                tvText.text = displayName+" "+resources.getString(R.string.fobbu_on_way)
+                tvText.text = displayName + " " + resources.getString(R.string.fobbu_on_way)
                 strWhere = "share"
-
+                updateLiveLocation()
                 ivLeftDotted.setImageResource(R.drawable.dotted)
                 ivRightDotted.setImageResource(R.drawable.dotted)
                 tvTrack.background = resources.getDrawable(R.drawable.solid_color_red)
@@ -483,26 +497,25 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
             FcmPushTypes.Types.newPin -> {
                 ivTool.setImageResource(R.drawable.mechanic_with_cap)
                 tvText.text = resources.getString(R.string.share_4_digit_code)
-                if (CommonClass(activity!!,activity!!).getString(RsaConstants.ServiceSaved.otpStart).length==3)
-                    tvCode.text = "0"+CommonClass(activity!!,activity!!).getString(RsaConstants.ServiceSaved.otpStart)
-
+                if (CommonClass(activity!!, activity!!).getString(RsaConstants.ServiceSaved.otpStart).length == 3)
+                    tvCode.text = "0" +
+                            CommonClass(activity!!, activity!!).getString(RsaConstants.ServiceSaved.otpStart)
                 else
-                tvCode.text = CommonClass(activity!!,activity!!).getString(RsaConstants.ServiceSaved.otpStart)
+                    tvCode.text = CommonClass(activity!!, activity!!).getString(RsaConstants.ServiceSaved.otpStart)
                 tvCode.visibility = View.VISIBLE
             }
 
             FcmPushTypes.Types.otpGenerated -> {
                 ivTool.setImageResource(R.drawable.mechanic_with_cap)
                 tvText.text = resources.getString(R.string.share_4_digit_code)
-                if (CommonClass(activity!!,activity!!).getString(RsaConstants.ServiceSaved.otpStart).length==3)
-                    tvCode.text = "0"+CommonClass(activity!!,activity!!).getString(RsaConstants.ServiceSaved.otpStart)
-
+                if (CommonClass(activity!!, activity!!).getString(RsaConstants.ServiceSaved.otpStart).length == 3)
+                    tvCode.text = "0" +
+                            CommonClass(activity!!, activity!!).getString(RsaConstants.ServiceSaved.otpStart)
                 else
-                tvCode.text = CommonClass(activity!!,activity!!).getString(RsaConstants.ServiceSaved.otpStart)
+                    tvCode.text = CommonClass(activity!!, activity!!).getString(RsaConstants.ServiceSaved.otpStart)
                 tvCode.visibility = View.VISIBLE
             }
-            FcmPushTypes.Types.otpVerified ->
-            {
+            FcmPushTypes.Types.otpVerified -> {
                 println("HERE IN LIVE ")
 
                 startActivity(
@@ -513,8 +526,7 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                 )
             }
 
-            FcmPushTypes.Types.fuelDefaultScreen ->
-            {
+            FcmPushTypes.Types.fuelDefaultScreen -> {
                 ivLeftDotted.setImageResource(R.drawable.dotted_gray)
                 ivRightDotted.setImageResource(R.drawable.dotted_gray)
                 tvTrack.setBackgroundResource(R.drawable.solid_color_grey)
@@ -535,25 +547,64 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
     @SuppressLint("SetTextI18n")
     override fun onRequestSuccessReport(mainPojo: MainPojo) {
-        if (mainPojo.success == "true")
-        {
-            if (!mainPojo.getData().user.profile.isNullOrBlank())
-                {
-                    if (mainPojo.getData().partner.profile.isNotEmpty())
-                    Picasso.get().load(mainPojo.getData().partner.profile).error(R.drawable.dummy_pic).into(imgProfile)
+        if (mainPojo.success == "true") {
+            val latLongList = ArrayList<HashMap<String, Any>>()
 
-                    else
-                        imgProfile.setImageResource(R.drawable.dummy_pic)
+            if (!(mainPojo.getData().lat_long.isNullOrEmpty())) {
+                val jsonArray = JSONArray(mainPojo.getData().lat_long)
+
+                if (jsonArray.length() > 1) {
+                    for (i in 0 until jsonArray.length() - 1) {
+                        val jsonObject = jsonArray.getJSONObject(i)
+
+                        val map = HashMap<String, Any>()
+
+                        val lat = jsonObject.getString("lat")
+
+                        val long = jsonObject.getString("long")
+
+                        map["lat"] = lat
+
+                        map["long"] = long
+
+                        latLongList.add(map)
+                    }
+                } else {
+                    val jsonObject = jsonArray.getJSONObject(0)
+
+                    val map = HashMap<String, Any>()
+
+                    val lat = jsonObject.getString("lat")
+
+                    val long = jsonObject.getString("long")
+
+                    map["lat"] = lat
+
+                    map["long"] = long
+
+                    latLongList.add(map)
                 }
+                println("lat long list:::::::: ${latLongList}")
 
-            displayName=mainPojo.getData().partner.display_name
-                tvName.text = displayName
-            tvText.text=
+
+            }
+
+
+            if (!mainPojo.getData().user.profile.isNullOrBlank()) {
+                if (mainPojo.getData().partner.profile.isNotEmpty())
+                    Picasso.get().load(mainPojo.getData().partner.profile).error(R.drawable.dummy_pic).into(imgProfile)
+                else
+                    imgProfile.setImageResource(R.drawable.dummy_pic)
+            }
+
+            displayName = mainPojo.getData().partner.display_name
+            tvName.text = displayName
+            tvText.text =
                     """${activity!!.resources.getString(R.string.please_wait_fobbu_msg)}$displayName ${activity!!.resources.getString(
                         R.string.gathering_tools__msg
                     )}"""
 
-                mobileNumber = mainPojo.getData().partner.mobile_number
+            mobileNumber = mainPojo.getData().partner.mobile_number
         }
     }
 
@@ -567,8 +618,7 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     private fun checkPermissionForCall() {
         val apiLevel = android.os.Build.VERSION.SDK_INT
 
-        if (isAdded)
-        {
+        if (isAdded) {
             if (apiLevel >= 23) {
                 //phone state
 
@@ -633,8 +683,7 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     }
 
     // Method for opening dialog containing message
-    private fun showMessageDialog(message: String)
-    {
+    private fun showMessageDialog(message: String) {
         val alertDialog = AlertDialog.Builder(
             activity!!
             , R.style.MyDialogTheme
@@ -653,5 +702,47 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
         messageText.gravity = Gravity.LEFT
     }
+
+    // *************************** update_location_request API **************************//
+
+    // implementing update_location_request API
+    private fun updateLiveLocation() {
+        if (CommonClass(activity!!, activity!!).checkInternetConn(activity!!)) {
+            val timer = Timer()
+            Handler().postDelayed({
+                val hourlyTask = object : TimerTask() {
+
+                    override fun run() {
+                        println("HIT LIVE LOCATION API >>>>>>>>>>>")
+                        try {
+                            rsaLiveHandler.getService(
+                                CommonClass(activity!!, activity!!).getString("x_access_token"),
+                                CommonClass(activity!!, activity!!).getString(RsaConstants.ServiceSaved.fobbuRequestId)
+                            )
+                        } catch (e: java.lang.Exception) {
+                            println("API LIVE LOCATION CRASHED:::::::${e.message}")
+                        }
+                    }
+                }
+
+                timer.schedule(hourlyTask, 1L, 1000 * 60)
+            }, 1000)
+
+// schedule the task to run starting now and then every minute...
+            //  timer.schedule (hourlyTask, 1L, 1000*60)
+        } else {
+            CommonClass(
+                activity!!,
+                activity!!
+            ).showToast(activity!!.resources.getString(R.string.internet_is_unavailable))
+        }
+    }
+
+
+    // handling response of the update_location_request API
+    override fun successReportLocationUpdate(mainPojo: MainPojo) {
+
+    }
+
 
 }

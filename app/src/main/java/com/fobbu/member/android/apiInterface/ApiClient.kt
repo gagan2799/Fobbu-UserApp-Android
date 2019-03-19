@@ -285,11 +285,13 @@ class ApiClient(var activity: Activity) {
     {
         webServiceApi.getServices(token,requestId).enqueue(object :Callback<MainPojo>
         {
-            override fun onFailure(call: Call<MainPojo>, t: Throwable) {
+            override fun onFailure(call: Call<MainPojo>, t: Throwable)
+            {
                 responseHandler.onServerError("""Server Error: ${t.message}""")
             }
 
-            override fun onResponse(call: Call<MainPojo>, response: Response<MainPojo>) {
+            override fun onResponse(call: Call<MainPojo>, response: Response<MainPojo>)
+            {
                 handleSuccess(response,responseHandler)
             }
 
@@ -620,6 +622,22 @@ class ApiClient(var activity: Activity) {
         })
     }
 
+
+    // update_location_request
+    fun updateLiveLocation(token: String,requestId: String,responseHandler: ResponseHandler)
+    {
+        webServiceApi.updateLocationLive(token,requestId).enqueue(object :Callback<MainPojo>
+        {
+            override fun onFailure(call: Call<MainPojo>, t: Throwable) {
+                responseHandler.onServerError("""Server Error: ${t.message}""")
+            }
+
+            override fun onResponse(call: Call<MainPojo>, response: Response<MainPojo>) {
+                handleSuccess(response,responseHandler)
+            }
+
+        })
+    }
 
     private fun getEnv(): MyApplication {
         return activity.application as MyApplication

@@ -61,10 +61,10 @@ public final class R {
         public static final int notification_subtext_size = 0x7f0700f8;
         public static final int notification_top_pad = 0x7f0700f9;
         public static final int notification_top_pad_large_text = 0x7f0700fa;
-        public static final int subtitle_corner_radius = 0x7f07010d;
-        public static final int subtitle_outline_width = 0x7f07010e;
-        public static final int subtitle_shadow_offset = 0x7f07010f;
-        public static final int subtitle_shadow_radius = 0x7f070110;
+        public static final int subtitle_corner_radius = 0x7f07010e;
+        public static final int subtitle_outline_width = 0x7f07010f;
+        public static final int subtitle_shadow_offset = 0x7f070110;
+        public static final int subtitle_shadow_radius = 0x7f070111;
     }
     public static final class drawable {
         private drawable() {}

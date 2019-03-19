@@ -192,7 +192,8 @@ interface WebServiceApi {
 
 
     @GET("partners/update_location_request")
-    fun updateLocationLive(token: String,requestID: String):Call<MainPojo>
+    fun updateLocationLive(@Query("x-access-token")token: String,
+                           @Query("request_id")requestID: String):Call<MainPojo>
 
 
 }

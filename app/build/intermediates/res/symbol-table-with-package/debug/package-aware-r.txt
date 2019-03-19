@@ -1188,6 +1188,7 @@ dimen place_autocomplete_prediction_secondary_text
 dimen place_autocomplete_progress_horizontal_margin
 dimen place_autocomplete_progress_size
 dimen place_autocomplete_separator_start
+dimen polyline_width
 dimen profile_drawer_image
 dimen profile_screen
 dimen rating_min_height
