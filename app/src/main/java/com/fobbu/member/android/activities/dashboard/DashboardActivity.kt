@@ -450,7 +450,6 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
     private fun checkAndNavigateFromPush()
     {
         when {
-
             (CommonClass(this, this).getString(RsaConstants.ServiceSaved.isNew) == "1") -> {
                 startActivity(
                     Intent(this, WaitingScreenBlue::class.java)

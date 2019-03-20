@@ -3377,6 +3377,7 @@ string selectGender
 string select_a_date
 string select_a_time
 string select_date_range
+string select_from_gallery_or_camera_msg
 string select_gender
 string select_image_first
 string select_languagae
@@ -3442,6 +3443,7 @@ string unlock_your_lsd
 string upi_payments
 string upload_pics
 string upload_vehicle
+string upload_vehicle_images
 string vehicle_assessed
 string vehicle_brand
 string vehicle_emergency

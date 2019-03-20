@@ -1564,8 +1564,8 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     private fun showDocPopup() {
 
         val alertDialog = AlertDialog.Builder(activity!!).create()
-        alertDialog.setTitle("Upload Car Images")
-        alertDialog.setMessage("Please select from where you want to choose")
+        alertDialog.setTitle(getString(R.string.upload_vehicle_images))
+        alertDialog.setMessage(getString(R.string.select_from_gallery_or_camera_msg))
         alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Gallery") { dialogInterface, i ->
             val apiLevel = android.os.Build.VERSION.SDK_INT
 

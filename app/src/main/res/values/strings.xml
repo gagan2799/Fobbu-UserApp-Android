@@ -434,6 +434,8 @@
     <string name="select_vehicle">Select Vehicle</string>
     <string name="no_data_msg">No data found</string>
     <string name="provide_image_rsa_msg">Please provide atleast one image for assistance.</string>
+    <string name="upload_vehicle_images">Upload Vehicle Images</string>
+    <string name="select_from_gallery_or_camera_msg">Please select from where you want to choose</string>
 
 
     <!--///LANGUAGE ARRAY-->

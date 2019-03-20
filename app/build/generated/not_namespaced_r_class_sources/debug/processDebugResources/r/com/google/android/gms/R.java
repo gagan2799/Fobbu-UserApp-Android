@@ -572,10 +572,10 @@ public final class R {
         public static final int s5 = 0x7f0f0193;
         public static final int s6 = 0x7f0f0194;
         public static final int s7 = 0x7f0f0195;
-        public static final int tagmanager_preview_dialog_button = 0x7f0f01bf;
-        public static final int tagmanager_preview_dialog_message = 0x7f0f01c0;
-        public static final int tagmanager_preview_dialog_title = 0x7f0f01c1;
-        public static final int wallet_buy_button_place_holder = 0x7f0f01e8;
+        public static final int tagmanager_preview_dialog_button = 0x7f0f01c0;
+        public static final int tagmanager_preview_dialog_message = 0x7f0f01c1;
+        public static final int tagmanager_preview_dialog_title = 0x7f0f01c2;
+        public static final int wallet_buy_button_place_holder = 0x7f0f01ea;
     }
     public static final class style {
         private style() {}
