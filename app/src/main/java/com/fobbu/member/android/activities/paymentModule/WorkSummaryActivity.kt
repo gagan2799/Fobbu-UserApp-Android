@@ -68,6 +68,9 @@ class WorkSummaryActivity : AppCompatActivity(),ActivityView,RsaLiveView
                 CommonClass(this,this).getString("x_access_token"),CommonClass(this, this).getString(
                     RsaConstants.ServiceSaved.fobbuRequestId))
         }
+
+        else
+            CommonClass(this,this).showToast(resources.getString(R.string.internet_is_unavailable))
     }
 
 

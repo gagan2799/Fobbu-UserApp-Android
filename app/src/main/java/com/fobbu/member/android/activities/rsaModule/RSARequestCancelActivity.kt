@@ -1,5 +1,6 @@
 package com.fobbu.member.android.activities.rsaModule
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
 import android.content.Context
@@ -30,29 +31,36 @@ import com.fobbu.member.android.utils.RecyclerItemClickListener
 import java.util.HashMap
 
 
-class RSARequestCancelActivity : AppCompatActivity(), ActivityView {
-
-
-    val text: String = "Are you sure you want to cancel\n A cancellation fee or Rs$$ will be charged"
+class RSARequestCancelActivity : AppCompatActivity(), ActivityView
+{
     var issueList = ArrayList<HashMap<String, Any>>()
-    private lateinit var rsaHandler: RsaCancelRequestHandler
-    lateinit var rsaRecyclerAdapter: RsaRecyclerAdapter
-    var row_index: Int = 0
-    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-    override fun onCreate(savedInstanceState: Bundle?) {
 
+    private lateinit var rsaHandler: RsaCancelRequestHandler
+
+    lateinit var rsaRecyclerAdapter: RsaRecyclerAdapter
+
+    var row_index: Int = 0
+
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+    override fun onCreate(savedInstanceState: Bundle?)
+    {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_cancel_rsa)
+
         //window.decorView.systemUiVisibility=View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
         window.navigationBarColor=resources.getColor(R.color.white)
+
         Handler().postDelayed({ window.navigationBarColor=resources.getColor(R.color.black) },1000)
 
 
         rsaHandler = RsaCancelRequestPresenter(this, this)
-        rsaHandler.cancelReasons(CommonClass(this, this).getString("x_access_token"))
-        clicks()
 
+        cancelReasons()
+
+        clicks()
     }
+
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     private fun clicks() {
@@ -78,7 +86,7 @@ class RSARequestCancelActivity : AppCompatActivity(), ActivityView {
 
             if(isSelected)
             {
-               showPopUp(this,reason)
+                showPopUp(this,reason)
             }
             else
             {
@@ -125,7 +133,8 @@ class RSARequestCancelActivity : AppCompatActivity(), ActivityView {
         rsaRecyclerAdapter.notifyDataSetChanged()
     }
 
-    private fun showPopUp(activity: Activity,string: String) {
+    @SuppressLint("InflateParams")
+    private fun showPopUp(activity: Activity, string: String) {
         val inflater = activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
         val cViewFinalPopup = inflater.inflate(R.layout.fragment_builder_confirm, null)
@@ -143,9 +152,9 @@ class RSARequestCancelActivity : AppCompatActivity(), ActivityView {
         val tvCancel = cViewFinalPopup.findViewById(R.id.tvCancel) as TextView
 
         val tvText = cViewFinalPopup.findViewById(R.id.tvText) as TextView
-        tvText.text = text
-        cViewFinalPopup.tvCancel.text = "NO"
-        cViewFinalPopup.tvConfirm.text = "YES"
+        tvText.text = resources.getString(R.string.cancellation_msg)
+        cViewFinalPopup.tvCancel.text = resources.getString(R.string.no).toUpperCase()
+        cViewFinalPopup.tvConfirm.text = resources.getString(R.string.yes).toUpperCase()
 
         val tvConfirm = cViewFinalPopup.findViewById(R.id.tvConfirm) as TextView
 
@@ -156,12 +165,16 @@ class RSARequestCancelActivity : AppCompatActivity(), ActivityView {
         tvConfirm.setOnClickListener {
             builderFinal.dismiss()
 
-            rsaHandler.cancelRequest(
-                string,
-                CommonClass(this, this).getString(RsaConstants.ServiceSaved.fobbuRequestId),
-                CommonClass(this, this).getString("x_access_token")
-            )
-            //
+            if (CommonClass(this,this).checkInternetConn(this))
+            {
+                rsaHandler.cancelRequest(
+                    string,
+                    CommonClass(this, this).getString(RsaConstants.ServiceSaved.fobbuRequestId),
+                    CommonClass(this, this).getString("x_access_token"))
+            }
+            else
+                CommonClass(this,this).showToast(resources.getString(R.string.noInternet))
+
         }
 
         builderFinal.window!!.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
@@ -177,6 +190,20 @@ class RSARequestCancelActivity : AppCompatActivity(), ActivityView {
         overridePendingTransition(R.anim.fade, R.anim.slide_up)
     }
 
+    // *************************** reasons API ********************//
+
+
+    // implementing reasons API
+    private fun cancelReasons()
+    {
+        if (CommonClass(this,this).checkInternetConn(this))
+            rsaHandler.cancelReasons(CommonClass(this, this).getString("x_access_token"))
+
+        else
+            CommonClass(this,this).showToast(resources.getString(R.string.internet_is_unavailable))
+    }
+
+    // handling the response of the reasons API
     override fun onRequestSuccessReport(mainPojo: MainPojo) {
         if (mainPojo.success == "true") {
             if (mainPojo.message == "Service List") {

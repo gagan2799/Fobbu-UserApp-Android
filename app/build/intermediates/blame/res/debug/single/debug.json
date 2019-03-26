@@ -6020,6 +6020,10 @@
         "source": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/res/drawable-xhdpi/share.png"
     },
     {
+        "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable_rectangle_blue_bottom_shadow.xml.flat",
+        "source": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/res/drawable/rectangle_blue_bottom_shadow.xml"
+    },
+    {
         "merged": "/home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_ic_mr_button_connecting_22_dark.png.flat",
         "source": "/home/robin/.gradle/caches/transforms-1/files-1.1/mediarouter-v7-26.1.0.aar/82a35fc31339186c48f70adf6693290f/res/drawable-xhdpi-v4/ic_mr_button_connecting_22_dark.png"
     },

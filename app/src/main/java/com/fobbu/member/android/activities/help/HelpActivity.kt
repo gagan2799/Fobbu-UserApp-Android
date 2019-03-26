@@ -93,7 +93,7 @@ class HelpActivity : AppCompatActivity(),ActivityView
     //####################GET HELP API###################//
 
     //function for hitting getHelp API
-    fun getHelp()
+    private fun getHelp()
     {
         if (commonClass.checkInternetConn(this))
             helpHandler.getHelp(commonClass.getString(commonClass.getString("x_access_token")))

@@ -237,7 +237,11 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
 
         tvFindFobbu.setOnClickListener {
+            if (CommonClass(activity!!,activity!!).checkInternetConn(activity!!))
             findFobbuApi()
+
+            else
+                CommonClass(activity!!,activity!!).showToast(activity!!.resources.getString(R.string.internet_is_unavailable))
             //("Puncture cost is Rs $serviceSelectedAmount\n(extra puncture will cost Rs $serviceSelectedAmount per puncture)")
         }
 
@@ -1014,11 +1018,14 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
     // fetch service Api (API-partners/services)
     private fun serviceListApi() {
-        if (CommonClass(activity!!, activity!!).checkInternetConn(activity!!)) {
-
+        if (CommonClass(activity!!, activity!!).checkInternetConn(activity!!))
+        {
             val tokenHeader = CommonClass(activity!!, activity!!).getString("x_access_token")
+
             rsaFragmentHandler.fetchService(tokenHeader)
         }
+        else
+            CommonClass(activity!!,activity!!).showToast(activity!!.resources.getString(R.string.internet_is_unavailable))
     }
 
     // handling fetch service api response (API-partners/services)
@@ -1158,6 +1165,8 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
             rsaFragmentHandler.findFleetOrUser(tokenHeader, id)
         }
+        else
+            CommonClass(activity!!,activity!!).showToast(activity!!.resources.getString(R.string.internet_is_unavailable))
     }
 
     // Handler Fleet request Api response (Api-users/request/{requestId})

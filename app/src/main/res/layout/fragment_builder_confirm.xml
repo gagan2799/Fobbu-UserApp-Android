@@ -21,12 +21,12 @@
                 android:layout_margin="10dp"/>
 
         <TextView
-                android:background="@drawable/rounded_blue"
+                android:background="@drawable/rectangle_blue_bottom_shadow"
                 android:layout_width="wrap_content"
                 android:text="@string/cancel"
                 android:paddingRight="35dp"
-                android:paddingBottom="20dp"
-                android:paddingTop="16dp"
+                android:paddingBottom="15dp"
+                android:paddingTop="10dp"
                 android:id="@+id/tvCancel"
                 android:layout_marginLeft="20dp"
                 android:layout_marginBottom="20dp"
@@ -41,8 +41,8 @@
                 android:layout_width="wrap_content"
                 android:text="@string/confirm"
                 android:paddingRight="35dp"
-                android:paddingBottom="20dp"
-                android:paddingTop="16dp"
+                android:paddingBottom="15dp"
+                android:paddingTop="10dp"
                 android:layout_alignParentRight="true"
                 android:layout_marginBottom="20dp"
                 android:layout_marginRight="20dp"

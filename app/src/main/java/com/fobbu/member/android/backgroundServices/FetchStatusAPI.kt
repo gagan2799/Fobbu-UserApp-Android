@@ -51,6 +51,7 @@ class FetchStatusAPI : Service() {
 
         if(myPrefs.getString(RsaConstants.ServiceSaved.fobbuRequestId, "")!="")
         {
+            if (checkInternetConn(this))
             fetchStatus()
 
             // Repeat this runnable code block again every ... min
@@ -202,6 +203,11 @@ class FetchStatusAPI : Service() {
                                     val intent = Intent()
                                     intent.action = FcmPushTypes.Types.fromAPIBroadCast
                                     sendBroadcast(intent)
+
+                                    val intent1 = Intent()
+                                    intent1.action = FcmPushTypes.Types.acceptRequestBroadCast
+                                    intent1.putExtra("navigate_to","1")
+                                    sendBroadcast(intent1)
                                 }
                             }
                         }

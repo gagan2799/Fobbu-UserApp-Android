@@ -995,8 +995,8 @@ public final class R {
         public static final int notification_template_icon_low_bg = 0x7f0801fa;
         public static final int notification_tile_bg = 0x7f0801fb;
         public static final int notify_panel_notification_icon_bg = 0x7f0801fc;
-        public static final int tooltip_frame_dark = 0x7f080268;
-        public static final int tooltip_frame_light = 0x7f080269;
+        public static final int tooltip_frame_dark = 0x7f080269;
+        public static final int tooltip_frame_light = 0x7f08026a;
     }
     public static final class id {
         private id() {}
@@ -1283,19 +1283,19 @@ public final class R {
         public static final int abc_toolbar_collapse_description = 0x7f0f002d;
         public static final int appbar_scrolling_view_behavior = 0x7f0f0040;
         public static final int bottom_sheet_behavior = 0x7f0f004b;
-        public static final int character_counter_content_description = 0x7f0f0085;
-        public static final int character_counter_pattern = 0x7f0f0086;
-        public static final int fab_transformation_scrim_behavior = 0x7f0f00c2;
-        public static final int fab_transformation_sheet_behavior = 0x7f0f00c3;
-        public static final int hide_bottom_view_on_scroll_behavior = 0x7f0f00f6;
-        public static final int mtrl_chip_close_icon_content_description = 0x7f0f012a;
-        public static final int password_toggle_content_description = 0x7f0f014b;
-        public static final int path_password_eye = 0x7f0f014c;
-        public static final int path_password_eye_mask_strike_through = 0x7f0f014d;
-        public static final int path_password_eye_mask_visible = 0x7f0f014e;
-        public static final int path_password_strike_through = 0x7f0f014f;
-        public static final int search_menu_title = 0x7f0f019a;
-        public static final int status_bar_notification_info_overflow = 0x7f0f01bd;
+        public static final int character_counter_content_description = 0x7f0f0086;
+        public static final int character_counter_pattern = 0x7f0f0087;
+        public static final int fab_transformation_scrim_behavior = 0x7f0f00c3;
+        public static final int fab_transformation_sheet_behavior = 0x7f0f00c4;
+        public static final int hide_bottom_view_on_scroll_behavior = 0x7f0f00f7;
+        public static final int mtrl_chip_close_icon_content_description = 0x7f0f012b;
+        public static final int password_toggle_content_description = 0x7f0f014c;
+        public static final int path_password_eye = 0x7f0f014d;
+        public static final int path_password_eye_mask_strike_through = 0x7f0f014e;
+        public static final int path_password_eye_mask_visible = 0x7f0f014f;
+        public static final int path_password_strike_through = 0x7f0f0150;
+        public static final int search_menu_title = 0x7f0f019b;
+        public static final int status_bar_notification_info_overflow = 0x7f0f01be;
     }
     public static final class style {
         private style() {}

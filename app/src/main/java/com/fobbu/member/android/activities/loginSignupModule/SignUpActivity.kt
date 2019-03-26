@@ -149,39 +149,38 @@ class SignUpActivity : AppCompatActivity(),ActivityView {
 
     // Signup API (API-users/signup)
     private fun callSignUpAPIUser(user_type: String,display_name:String,
-                                  email:String,password:String,mobile_number:String,gender:String ) {
-
-
-        if (CommonClass(this, this).checkInternetConn(this)) {
-
+                                  email:String,password:String,mobile_number:String,gender:String )
+    {
+        if (CommonClass(this, this).checkInternetConn(this))
+        {
             val token = CommonClass(this@SignUpActivity, this@SignUpActivity).getString("device_token")
 
-
             val firstName :String
+
             var lastName=""
+
             var name=""
 
             name= if (display_name.startsWith(""))
                 display_name.trim()
+
             else
                 display_name
 
             if(name.contains("\\s+".toRegex()))
             {
                 firstName = name.split("\\s+".toRegex())[0]
+
                 lastName = name.split("\\s+".toRegex())[1]
             }
             else
                 firstName = name
 
-            println("firstname::::$firstName")
            // rlLoader.visibility = View.VISIBLE
-            signUpactivityHandler.sendSignUpData(user_type,firstName,
-                lastName,name,email,password,mobile_number,gender,token)
-        } else {
-
-            CommonClass(this, this).internetIssue(this)
+            signUpactivityHandler.sendSignUpData(user_type,firstName, lastName,name,email,password,mobile_number,gender,token)
         }
+        else
+            CommonClass(this, this).internetIssue(this)
     }
 
     // Signup API Response (API-users/signup)

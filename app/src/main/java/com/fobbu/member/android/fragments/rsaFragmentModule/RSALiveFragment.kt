@@ -112,16 +112,23 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                 handleClick()
 
                 rsaLiveHandler = RsaLivePresenter(this.activity!!, this, this)
-                rsaLiveHandler.getService(
-                    CommonClass(activity!!, activity!!).getString("x_access_token"),
-                    CommonClass(this.activity!!, this.activity!!).getString(
-                        RsaConstants.ServiceSaved.fobbuRequestId
-                    )
-                )
+
+                getServices()
             }
         }
 
         return view
+    }
+
+    private fun getServices() {
+        if (CommonClass(activity!!,activity!!).checkInternetConn(activity!!))
+        rsaLiveHandler.getService(
+            CommonClass(activity!!, activity!!).getString("x_access_token"),
+            CommonClass(this.activity!!, this.activity!!).getString(
+                RsaConstants.ServiceSaved.fobbuRequestId))
+
+        else
+            CommonClass(activity!!,activity!!).showToast(activity!!.resources.getString(R.string.internet_is_unavailable))
     }
 
     @SuppressLint("ResourceAsColor")
@@ -715,10 +722,7 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                     override fun run() {
                         println("HIT LIVE LOCATION API >>>>>>>>>>>")
                         try {
-                            rsaLiveHandler.getService(
-                                CommonClass(activity!!, activity!!).getString("x_access_token"),
-                                CommonClass(activity!!, activity!!).getString(RsaConstants.ServiceSaved.fobbuRequestId)
-                            )
+                           getServices()
                         } catch (e: java.lang.Exception) {
                             println("API LIVE LOCATION CRASHED:::::::${e.message}")
                         }

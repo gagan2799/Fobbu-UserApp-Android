@@ -1778,6 +1778,7 @@ drawable quantum_ic_volume_up_white_36
 drawable rating_bar_empty
 drawable rating_bar_filled
 drawable rating_star_draw
+drawable rectangle_blue_bottom_shadow
 drawable red_border
 drawable red_circle
 drawable red_ods_rect
@@ -3046,6 +3047,7 @@ string cancel
 string cancel_request
 string cancel_request_screen
 string cancel_rsa
+string cancellation_msg
 string cancelled
 string car_model_message
 string car_suv

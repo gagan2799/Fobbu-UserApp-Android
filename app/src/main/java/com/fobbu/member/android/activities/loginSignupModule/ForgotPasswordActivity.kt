@@ -59,9 +59,9 @@ class ForgotPasswordActivity : AppCompatActivity(),ActivityView
     // Forgot Password API (API-users/forgot-password)
     private fun callForgotAPIUser(email: String) {
 
-        if (CommonClass(this, this).checkInternetConn(this)) {
-
-          //  rlLoader.visibility = View.VISIBLE
+        if (CommonClass(this, this).checkInternetConn(this))
+        {
+            //  rlLoader.visibility = View.VISIBLE
             forgotPasswordHandler.getPassword(email)
         } else {
 

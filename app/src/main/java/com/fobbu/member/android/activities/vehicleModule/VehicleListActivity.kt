@@ -492,6 +492,8 @@ class VehicleListActivity : AppCompatActivity(),ActivityView,DeleteVehicleClickL
 
             vehicleHandler.sendVehicleData(tokenHeader,userId)
         }
+        else
+            CommonClass(this,this).showToast(resources.getString(R.string.internet_is_unavailable))
     }
 
 
@@ -624,6 +626,8 @@ class VehicleListActivity : AppCompatActivity(),ActivityView,DeleteVehicleClickL
 
                 addEditHandler.deleteVehicle(tokenHeader,vehicleID,userId)
             }
+            else
+                CommonClass(this,this).showToast(resources.getString(R.string.internet_is_unavailable))
         }
 
         alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "CANCEL") { _, _ ->

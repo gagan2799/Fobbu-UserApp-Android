@@ -3,8 +3,10 @@ package com.fobbu.member.android.fcm.myFirebaseInstanceIDService
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
+import android.net.ConnectivityManager
 import com.fobbu.member.android.apiInterface.WebServiceApi
 import com.fobbu.member.android.modals.MainPojo
+import com.fobbu.member.android.utils.CommonClass
 import com.google.firebase.iid.FirebaseInstanceId
 import com.google.firebase.iid.FirebaseInstanceIdService
 import okhttp3.OkHttpClient
@@ -47,10 +49,31 @@ class MyFirebaseInstanceIDService : FirebaseInstanceIdService() {
         prefsEditor.putString("device_token", refreshedToken).commit()
         prefsEditor.putString("device_ID", refreshedId).commit()
 
-        if (myPrefs.getString("_id", "") != "")
-            sendRegistrationToServer(refreshedToken,
-                myPrefs.getString("x_access_token", ""), myPrefs.getString("_id", ""))
+        if (checkInternetConn(this))
+        {
+            if (myPrefs.getString("_id", "") != "")
+                sendRegistrationToServer(refreshedToken,
+                    myPrefs.getString("x_access_token", ""), myPrefs.getString("_id", ""))
+        }
     }
+
+
+    fun checkInternetConn(con: Context): Boolean {
+        try {
+            val connMgr = con.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+
+            val wifi = connMgr.getNetworkInfo(ConnectivityManager.TYPE_WIFI)
+
+            val mobile = connMgr.getNetworkInfo(ConnectivityManager.TYPE_MOBILE)
+
+            return mobile.isConnected || wifi.isConnected
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+        return false
+    }
+
 
     private fun sendRegistrationToServer(refreshedToken: String, accessToken: String, refreshedId: String) {
 

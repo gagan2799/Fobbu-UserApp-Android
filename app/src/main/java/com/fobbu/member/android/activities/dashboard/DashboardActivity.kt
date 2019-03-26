@@ -412,6 +412,8 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
 
                 dashboardHandler.logout(userId, tokenHeader)
             }
+            else
+                CommonClass(this,this).showToast(resources.getString(R.string.internet_is_unavailable))
 
             //logoutApi()
         }
@@ -757,19 +759,25 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
     fun checkStatusAPI() {
         val rsaLiveHandler = FetchStatusPresenter(this, this)
 
-        if (CommonClass(this, this).getString(RsaConstants.ServiceSaved.fobbuRequestId) != "") {
+        if (CommonClass(this, this).getString(RsaConstants.ServiceSaved.fobbuRequestId) != "")
+        {
+            if (CommonClass(this,this).checkInternetConn(this))
             rsaLiveHandler.getServiceOneTime(
                 CommonClass(this, this).getString("x_access_token"),
                 CommonClass(this, this).getString(RsaConstants.ServiceSaved.fobbuRequestId)
             )
+
+            else
+                CommonClass(this,this).showToast(resources.getString(R.string.internet_is_unavailable))
         }
         else
         {
             println("ELSE CASE HERE  ")
 
-
             fragmentTypeForRSA = ""
+
             CommonClass(this, this).workDoneReviewSend()
+
             changeFragment(HomeFragment(), resources.getString(R.string.home))
         }
     }

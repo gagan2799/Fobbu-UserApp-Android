@@ -11,8 +11,10 @@ import com.fobbu.member.android.view.ActivityView
 class ForgotPasswordPresenter (internal var activity:Activity,internal var activityView:ActivityView):
     ForgotPasswordHandler {
 
-    override fun getPassword(email: String) {
-        var apiClient= ApiClient(activity)
+    override fun getPassword(email: String)
+    {
+        val apiClient= ApiClient(activity)
+
         activityView.showLoader()
 
         apiClient.forgotPassword(email,object :ResponseHandler

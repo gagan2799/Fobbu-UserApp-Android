@@ -805,8 +805,8 @@ public final class R {
         public static final int notification_template_icon_low_bg = 0x7f0801fa;
         public static final int notification_tile_bg = 0x7f0801fb;
         public static final int notify_panel_notification_icon_bg = 0x7f0801fc;
-        public static final int tooltip_frame_dark = 0x7f080268;
-        public static final int tooltip_frame_light = 0x7f080269;
+        public static final int tooltip_frame_dark = 0x7f080269;
+        public static final int tooltip_frame_light = 0x7f08026a;
     }
     public static final class id {
         private id() {}
@@ -1042,29 +1042,29 @@ public final class R {
         public static final int abc_shareactionprovider_share_with = 0x7f0f002b;
         public static final int abc_shareactionprovider_share_with_application = 0x7f0f002c;
         public static final int abc_toolbar_collapse_description = 0x7f0f002d;
-        public static final int mr_button_content_description = 0x7f0f0115;
-        public static final int mr_cast_button_connected = 0x7f0f0116;
-        public static final int mr_cast_button_connecting = 0x7f0f0117;
-        public static final int mr_cast_button_disconnected = 0x7f0f0118;
-        public static final int mr_chooser_searching = 0x7f0f0119;
-        public static final int mr_chooser_title = 0x7f0f011a;
-        public static final int mr_controller_album_art = 0x7f0f011b;
-        public static final int mr_controller_casting_screen = 0x7f0f011c;
-        public static final int mr_controller_close_description = 0x7f0f011d;
-        public static final int mr_controller_collapse_group = 0x7f0f011e;
-        public static final int mr_controller_disconnect = 0x7f0f011f;
-        public static final int mr_controller_expand_group = 0x7f0f0120;
-        public static final int mr_controller_no_info_available = 0x7f0f0121;
-        public static final int mr_controller_no_media_selected = 0x7f0f0122;
-        public static final int mr_controller_pause = 0x7f0f0123;
-        public static final int mr_controller_play = 0x7f0f0124;
-        public static final int mr_controller_stop = 0x7f0f0125;
-        public static final int mr_controller_stop_casting = 0x7f0f0126;
-        public static final int mr_controller_volume_slider = 0x7f0f0127;
-        public static final int mr_system_route_name = 0x7f0f0128;
-        public static final int mr_user_route_category_name = 0x7f0f0129;
-        public static final int search_menu_title = 0x7f0f019a;
-        public static final int status_bar_notification_info_overflow = 0x7f0f01bd;
+        public static final int mr_button_content_description = 0x7f0f0116;
+        public static final int mr_cast_button_connected = 0x7f0f0117;
+        public static final int mr_cast_button_connecting = 0x7f0f0118;
+        public static final int mr_cast_button_disconnected = 0x7f0f0119;
+        public static final int mr_chooser_searching = 0x7f0f011a;
+        public static final int mr_chooser_title = 0x7f0f011b;
+        public static final int mr_controller_album_art = 0x7f0f011c;
+        public static final int mr_controller_casting_screen = 0x7f0f011d;
+        public static final int mr_controller_close_description = 0x7f0f011e;
+        public static final int mr_controller_collapse_group = 0x7f0f011f;
+        public static final int mr_controller_disconnect = 0x7f0f0120;
+        public static final int mr_controller_expand_group = 0x7f0f0121;
+        public static final int mr_controller_no_info_available = 0x7f0f0122;
+        public static final int mr_controller_no_media_selected = 0x7f0f0123;
+        public static final int mr_controller_pause = 0x7f0f0124;
+        public static final int mr_controller_play = 0x7f0f0125;
+        public static final int mr_controller_stop = 0x7f0f0126;
+        public static final int mr_controller_stop_casting = 0x7f0f0127;
+        public static final int mr_controller_volume_slider = 0x7f0f0128;
+        public static final int mr_system_route_name = 0x7f0f0129;
+        public static final int mr_user_route_category_name = 0x7f0f012a;
+        public static final int search_menu_title = 0x7f0f019b;
+        public static final int status_bar_notification_info_overflow = 0x7f0f01be;
     }
     public static final class style {
         private style() {}

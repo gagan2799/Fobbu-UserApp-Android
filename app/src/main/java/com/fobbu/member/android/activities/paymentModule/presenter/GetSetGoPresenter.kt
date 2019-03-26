@@ -9,10 +9,12 @@ import com.fobbu.member.android.utils.CommonClass
 import com.fobbu.member.android.view.ActivityView
 import okhttp3.RequestBody
 
-class GetSetGoPresenter(var activity: Activity,var acivityView: ActivityView):GetSetGoHandler {
-
+class GetSetGoPresenter(var activity: Activity,var acivityView: ActivityView):GetSetGoHandler
+{
     override fun postReviews(requestId: RequestBody, ratings: RequestBody, reviews: RequestBody,token: String) {
-    val apiClient=ApiClient(activity)
+
+        val apiClient=ApiClient(activity)
+
         apiClient.postReviews(requestId,ratings,reviews,token,object :ResponseHandler
         {
             override fun onSuccess(mainPojo: MainPojo) {

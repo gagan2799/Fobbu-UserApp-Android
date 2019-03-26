@@ -17,8 +17,8 @@ import retrofit2.http.Multipart
 /**
  * Created by abc on 29/1/18.
  */
-interface WebServiceApi {
-
+interface WebServiceApi
+{
     @POST("users/signup")
     fun postSignUp(
         @Body map:HashMap<String,String>

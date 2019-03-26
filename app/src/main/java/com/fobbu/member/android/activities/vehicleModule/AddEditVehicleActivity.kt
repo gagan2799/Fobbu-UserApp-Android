@@ -422,12 +422,17 @@ class AddEditVehicleActivity : AppCompatActivity(),
                     if (file4 != null && file4!!.exists())
                         dataList.add(file4!!)
 
-                    if (tvAddEditVehicle.text == resources.getString(R.string.save_changes)) {
-                        editVehicleApi()
-                    } else {
-                        addVehicleApi()
-                    }
 
+                    if (CommonClass(this,this).checkInternetConn(this))
+                    {
+                        if (tvAddEditVehicle.text == resources.getString(R.string.save_changes))
+                            editVehicleApi()
+
+                        else
+                            addVehicleApi()
+                    }
+                    else
+                        CommonClass(this,this).showToast(resources.getString(R.string.internet_is_unavailable))
                 }
             }
 

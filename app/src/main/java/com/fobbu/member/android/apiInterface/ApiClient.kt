@@ -70,7 +70,7 @@ class ApiClient(var activity: Activity) {
 
 
 
-    // signup api
+    // signUp api
      fun getSignupData(user_type: String,firstName:String,lastName:String,displayName:String,email:String,password:String,
     mobile:String,gender:String,token:String,responseHandler: ResponseHandler)
     {
@@ -101,7 +101,7 @@ class ApiClient(var activity: Activity) {
     }
 
 
-    //add_edit_vechile_api
+    //add_edit_vehicle_api
     fun getAddEditVehicleData(map:Map<String,RequestBody>,list:ArrayList<MultipartBody.Part>,tokenHeader:String,responseHandler: ResponseHandler)
     {
         webServiceMultipart.addVehicle(map,list,tokenHeader).enqueue(object :Callback<MainPojo>
