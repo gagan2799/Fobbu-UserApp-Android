@@ -3339,6 +3339,7 @@ string provide_date_msg
 string provide_image_rsa_msg
 string provide_name
 string provide_pan_msg
+string provide_pan_msg_error
 string provide_review
 string provide_vehicle_msg
 string quantity_of_fuel_d

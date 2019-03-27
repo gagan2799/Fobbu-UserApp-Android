@@ -1,2 +1,2 @@
-# Referenced at /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:32
+# Referenced at D:\GIT\FobbuGit\user-app-android\app\build\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:32
 -keep class com.fobbu.member.android.apiInterface.MyApplication { <init>(...); }

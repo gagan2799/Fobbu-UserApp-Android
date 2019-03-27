@@ -15,17 +15,15 @@ import com.fobbu.member.android.activities.paymentModule.adapter.WorkSummaryAdap
 import com.fobbu.member.android.activities.rsaModule.RSARequestCancelActivity
 import com.fobbu.member.android.fragments.rsaFragmentModule.RsaConstants
 import com.fobbu.member.android.fragments.rsaFragmentModule.presenter.RsaLivePresenter
-import com.fobbu.member.android.fragments.rsaFragmentModule.view.RsaLiveView
 import com.fobbu.member.android.modals.MainPojo
 import com.fobbu.member.android.utils.CommonClass
 import com.fobbu.member.android.view.ActivityView
-import kotlinx.android.synthetic.main.activity_ods_work_summary.*
 import kotlinx.android.synthetic.main.activity_work_summary.*
 import kotlinx.android.synthetic.main.option_menu_layout.*
 import kotlin.collections.ArrayList
 
 @Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-class WorkSummaryActivity : AppCompatActivity(),ActivityView,RsaLiveView
+class WorkSummaryActivity : AppCompatActivity(),ActivityView
 {
     lateinit var commonClass:CommonClass
 
@@ -60,7 +58,7 @@ class WorkSummaryActivity : AppCompatActivity(),ActivityView,RsaLiveView
 
         recyclerViewWorkSummary.visibility=View.VISIBLE
 
-        rsaLiveHandler=RsaLivePresenter(this,this,this)
+        rsaLiveHandler=RsaLivePresenter(this,this)
 
         if (CommonClass(this,this).checkInternetConn(this))
         {
@@ -160,10 +158,6 @@ class WorkSummaryActivity : AppCompatActivity(),ActivityView,RsaLiveView
 
     override fun hideLoader() {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun successReportLocationUpdate(mainPojo: MainPojo) {
-
     }
 
 }

@@ -1,13 +1,12 @@
 package com.fobbu.member.android.fragments
 
+
+import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.app.Dialog
-import android.app.PendingIntent
 import android.content.*
 import android.content.pm.PackageManager
-import android.graphics.Color
 import android.location.Location
-import android.os.AsyncTask
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
@@ -20,18 +19,17 @@ import android.support.v4.content.ContextCompat
 import android.support.v7.app.AlertDialog
 import android.util.Log
 import android.view.*
-import android.widget.*
+import android.view.animation.LinearInterpolator
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.RelativeLayout
+import android.widget.TextView
 import com.fobbu.member.android.R
-import com.fobbu.member.android.R.id.url
-
 import com.fobbu.member.android.activities.waitingScreenModule.WaitingScreenBlue
 import com.fobbu.member.android.activities.waitingScreenModule.WaitingScreenWhite
 import com.fobbu.member.android.fcm.FcmPushTypes
 import com.fobbu.member.android.fragments.rsaFragmentModule.RsaConstants
 import com.fobbu.member.android.fragments.rsaFragmentModule.presenter.RsaLivePresenter
-import com.fobbu.member.android.fragments.rsaFragmentModule.view.RsaLiveView
-
-
 import com.fobbu.member.android.interfaces.HeaderIconChanges
 import com.fobbu.member.android.interfaces.TopBarChanges
 import com.fobbu.member.android.modals.MainPojo
@@ -49,19 +47,10 @@ import com.google.android.gms.maps.MapsInitializer
 import com.google.android.gms.maps.model.*
 import com.squareup.picasso.Picasso
 import org.json.JSONArray
-import org.json.JSONObject
-import java.io.BufferedReader
-import java.io.InputStream
-import java.io.InputStreamReader
 import java.lang.Double
-import java.net.HttpURLConnection
-import java.net.URL
-import java.util.*
-import kotlin.collections.ArrayList
-import kotlin.collections.HashMap
 
 class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
-    GoogleApiClient.ConnectionCallbacks, LocationListener, ActivityView,RsaLiveView {
+    GoogleApiClient.ConnectionCallbacks, LocationListener, ActivityView {
 
     private var headerIconChanges: HeaderIconChanges? = null
 
@@ -97,6 +86,8 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     private lateinit var tvPickingFuel: TextView
     private lateinit var rlTools: RelativeLayout
 
+    private var checkFirstTime = true
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_rsa_live, container, false)
@@ -111,8 +102,15 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
                 handleClick()
 
-                rsaLiveHandler = RsaLivePresenter(this.activity!!, this, this)
+                rsaLiveHandler = RsaLivePresenter(this.activity!!, this)
 
+                /* val status = CommonClass(activity!!, activity!!).getString(RsaConstants.RsaTypes.checkStatus)
+
+                 if(status == FcmPushTypes.Types.inRouteRequest)
+                 {
+                     updateLiveLocation()
+                 }
+                 else*/
                 getServices()
             }
         }
@@ -121,12 +119,14 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     }
 
     private fun getServices() {
-        if (CommonClass(activity!!,activity!!).checkInternetConn(activity!!))
-        rsaLiveHandler.getService(
-            CommonClass(activity!!, activity!!).getString("x_access_token"),
-            CommonClass(this.activity!!, this.activity!!).getString(
-                RsaConstants.ServiceSaved.fobbuRequestId))
-
+        if (CommonClass(activity!!, activity!!).checkInternetConn(activity!!)) {
+            rsaLiveHandler.getService(
+                CommonClass(activity!!, activity!!).getString("x_access_token"),
+                CommonClass(this.activity!!, this.activity!!).getString(
+                    RsaConstants.ServiceSaved.fobbuRequestId
+                )
+            )
+        }
         else
             CommonClass(activity!!,activity!!).showToast(activity!!.resources.getString(R.string.internet_is_unavailable))
     }
@@ -421,7 +421,7 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
         val cameraPosition = CameraPosition.Builder()
             .target(LatLng(Double.valueOf(latitude), Double.valueOf(longitude))).zoom(14f).build()
 
-        googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
+        //googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
     }
 
     override fun onPause() {
@@ -432,11 +432,15 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
     override fun onDestroy() {
         super.onDestroy()
-        mMapView.onDestroy()
+
         try {
+            mMapView.onDestroy()
+
+            handlerrLiveApi.removeCallbacksAndMessages(null)
+            handlerr.removeCallbacksAndMessages(null)
             activity!!.unregisterReceiver(changeRSALiveScreenReceiver)
         } catch (e: java.lang.Exception) {
-
+            e.printStackTrace()
         }
     }
 
@@ -552,68 +556,6 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     }
 
 
-    @SuppressLint("SetTextI18n")
-    override fun onRequestSuccessReport(mainPojo: MainPojo) {
-        if (mainPojo.success == "true") {
-            val latLongList = ArrayList<HashMap<String, Any>>()
-
-            if (!(mainPojo.getData().lat_long.isNullOrEmpty())) {
-                val jsonArray = JSONArray(mainPojo.getData().lat_long)
-
-                if (jsonArray.length() > 1) {
-                    for (i in 0 until jsonArray.length() - 1) {
-                        val jsonObject = jsonArray.getJSONObject(i)
-
-                        val map = HashMap<String, Any>()
-
-                        val lat = jsonObject.getString("lat")
-
-                        val long = jsonObject.getString("long")
-
-                        map["lat"] = lat
-
-                        map["long"] = long
-
-                        latLongList.add(map)
-                    }
-                } else {
-                    val jsonObject = jsonArray.getJSONObject(0)
-
-                    val map = HashMap<String, Any>()
-
-                    val lat = jsonObject.getString("lat")
-
-                    val long = jsonObject.getString("long")
-
-                    map["lat"] = lat
-
-                    map["long"] = long
-
-                    latLongList.add(map)
-                }
-                println("lat long list:::::::: ${latLongList}")
-
-
-            }
-
-
-            if (!mainPojo.getData().user.profile.isNullOrBlank()) {
-                if (mainPojo.getData().partner.profile.isNotEmpty())
-                    Picasso.get().load(mainPojo.getData().partner.profile).error(R.drawable.dummy_pic).into(imgProfile)
-                else
-                    imgProfile.setImageResource(R.drawable.dummy_pic)
-            }
-
-            displayName = mainPojo.getData().partner.display_name
-            tvName.text = displayName
-            tvText.text =
-                    """${activity!!.resources.getString(R.string.please_wait_fobbu_msg)}$displayName ${activity!!.resources.getString(
-                        R.string.gathering_tools__msg
-                    )}"""
-
-            mobileNumber = mainPojo.getData().partner.mobile_number
-        }
-    }
 
     override fun showLoader() {
     }
@@ -715,24 +657,23 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     // implementing update_location_request API
     private fun updateLiveLocation() {
         if (CommonClass(activity!!, activity!!).checkInternetConn(activity!!)) {
-            val timer = Timer()
-            Handler().postDelayed({
-                val hourlyTask = object : TimerTask() {
 
-                    override fun run() {
-                        println("HIT LIVE LOCATION API >>>>>>>>>>>")
-                        try {
-                           getServices()
-                        } catch (e: java.lang.Exception) {
-                            println("API LIVE LOCATION CRASHED:::::::${e.message}")
-                        }
-                    }
+            handlerrLiveApi = Handler()
+
+            handlerrLiveApi.postDelayed(object : Runnable {
+                override fun run() {
+                    //do something
+                    println("HIT LIVE LOCATION API>>>>>>>")
+                    getServices()
+
+                    handlerrLiveApi.postDelayed(this, 1000 * 60)
+
+
                 }
-
-                timer.schedule(hourlyTask, 1L, 1000 * 60)
             }, 1000)
 
-// schedule the task to run starting now and then every minute...
+
+            // schedule the task to run starting now and then every minute...
             //  timer.schedule (hourlyTask, 1L, 1000*60)
         } else {
             CommonClass(
@@ -743,10 +684,194 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     }
 
 
-    // handling response of the update_location_request API
-    override fun successReportLocationUpdate(mainPojo: MainPojo) {
+    @SuppressLint("SetTextI18n")
+    override fun onRequestSuccessReport(mainPojo: MainPojo) {
+        if (mainPojo.success == "true") {
+
+
+            if (checkFirstTime) {
+                checkFirstTime = false
+
+                if (!mainPojo.getData().user.profile.isBlank()) {
+                    if (mainPojo.getData().partner.profile.isNotEmpty())
+                        Picasso.get().load(mainPojo.getData().partner.profile).error(R.drawable.dummy_pic).into(
+                            imgProfile
+                        )
+                    else
+                        imgProfile.setImageResource(R.drawable.dummy_pic)
+                }
+
+                displayName = mainPojo.getData().partner.display_name
+                tvName.text = displayName
+                tvText.text =
+                        """${activity!!.resources.getString(R.string.please_wait_fobbu_msg)}$displayName ${activity!!.resources.getString(
+                            R.string.gathering_tools__msg
+                        )}"""
+
+                mobileNumber = mainPojo.getData().partner.mobile_number
+            }
+
+
+            if (!(mainPojo.getData().lat_long.isNullOrEmpty())) {
+                val jsonArray = JSONArray(mainPojo.getData().lat_long)
+
+                val polyLineList: ArrayList<LatLng> = ArrayList()
+
+                for (i in 0..(jsonArray.length() - 1)) {
+                    val item = jsonArray.getJSONObject(i)
+
+                    val hmap = HashMap<String, String>()
+
+                    hmap["lat"] = item.getString("lat")
+                    hmap["long"] = item.getString("long")
+                    hmap["set"] = "0"
+
+                    val latLng = LatLng(
+                        item.getString("lat").toDouble(),
+                        item.getString("long").toDouble()
+                    )
+
+                    if (!listCheck.contains(item.getString("lat"))) {
+                        listCheck.add(item.getString("lat"))
+                        polyLineList.add(latLng)
+                    }
+                }
+                println("lat long list:::::::: $polyLineList")
+                liveTracking(polyLineList)
+            }
+
+        }
+    }
+
+
+    var listCheck = java.util.ArrayList<String>()
+
+    lateinit var marker: Marker
+
+    var handlerr = Handler()
+    var handlerrLiveApi = Handler()
+    val delay: Long = 500 //milliseconds
+    val delayanim: Long = 3000 //milliseconds
+
+    private var index: Int = 0
+    private var next: Int = 0
+    private var startPosition: LatLng? = null
+    private var endPosition: LatLng? = null
+    private var v: Float = 0.toFloat()
+    private var lat: kotlin.Double = 0.toDouble()
+    private var lng: kotlin.Double = 0.toDouble()
+
+    private fun liveTracking(polyLineList: ArrayList<LatLng>) {
+
+        if (polyLineList!!.size == 1) {
+            marker = googleMap.addMarker(
+                MarkerOptions().position(polyLineList!![0])
+                    .flat(true)
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.map_mark_blue))
+            )
+
+            googleMap.moveCamera(
+                CameraUpdateFactory
+                    .newCameraPosition(
+                        CameraPosition.Builder()
+                            .target(polyLineList!![0])
+                            .zoom(15.5f)
+                            .build()
+                    )
+            )
+        }
+
+        if (polyLineList!!.size >= 2) {
+
+
+            marker = googleMap.addMarker(
+                MarkerOptions().position(polyLineList!![0])
+                    .flat(true)
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.map_mark_blue))
+            )
+
+            googleMap.moveCamera(
+                CameraUpdateFactory
+                    .newCameraPosition(
+                        CameraPosition.Builder()
+                            .target(polyLineList!![0])
+                            .zoom(15.5f)
+                            .build()
+                    )
+            )
+
+            handlerr = Handler()
+            index = -1
+            next = 1
+            handlerr.postDelayed(object : Runnable {
+                override fun run() {
+                    if (index < polyLineList!!.size - 1) {
+                        index++
+                        next = index + 1
+                    }
+                    if (index < polyLineList!!.size - 1) {
+                        startPosition = polyLineList!![index]
+                        endPosition = polyLineList!![next]
+                    }
+
+                    if (next < (polyLineList!!.size - 1)) {
+                        println("CHECK VALUE HERE START Lat >> " + polyLineList!![index].latitude)
+                        println("CHECK VALUE HERE START Long >> " + polyLineList!![index].longitude)
+                        val valueAnimator = ValueAnimator.ofFloat(0f, 1f)
+                        valueAnimator.duration = delayanim
+                        valueAnimator.interpolator = LinearInterpolator()
+                        valueAnimator.addUpdateListener { valueAnimator ->
+                            v = valueAnimator.animatedFraction
+                            lng = v * endPosition!!.longitude + (1 - v) * startPosition!!.longitude
+                            lat = v * endPosition!!.latitude + (1 - v) * startPosition!!.latitude
+                            val newPos = LatLng(lat, lng)
+
+                            marker.position = newPos
+                            marker.setAnchor(0.5f, 0.5f)
+
+                            if (next % 5 == 0)
+                                marker.rotation = getBearing(startPosition!!, newPos)
+
+                            googleMap.moveCamera(
+                                CameraUpdateFactory
+                                    .newCameraPosition(
+                                        CameraPosition.Builder()
+                                            .target(newPos)
+                                            .zoom(15.5f)
+                                            .bearing(90f) // Sets the orientation of the camera to east
+                                            .tilt(30f)
+                                            .build()
+                                    )
+                            )
+                        }
+                        valueAnimator.start()
+                        println("CHECK VALUE HERE END Lat >> " + polyLineList!![next].latitude)
+                        println("CHECK VALUE HERE END Long >> " + polyLineList!![next].longitude)
+                    }
+
+
+                    println("CHECK VALUE HERE >> $index >> $next >> $lat >> $lng >> SIZE >> ${polyLineList!!.size}")
+
+                    handlerr.postDelayed(this, delayanim)
+                }
+            }, delayanim)
+        }
 
     }
 
+    private fun getBearing(begin: LatLng, end: LatLng): Float {
+        val lat = Math.abs(begin.latitude - end.latitude)
+        val lng = Math.abs(begin.longitude - end.longitude)
+
+        if (begin.latitude < end.latitude && begin.longitude < end.longitude)
+            return Math.toDegrees(Math.atan(lng / lat)).toFloat()
+        else if (begin.latitude >= end.latitude && begin.longitude < end.longitude)
+            return (90 - Math.toDegrees(Math.atan(lng / lat)) + 90).toFloat()
+        else if (begin.latitude >= end.latitude && begin.longitude >= end.longitude)
+            return (Math.toDegrees(Math.atan(lng / lat)) + 180).toFloat()
+        else if (begin.latitude < end.latitude && begin.longitude >= end.longitude)
+            return (90 - Math.toDegrees(Math.atan(lng / lat)) + 270).toFloat()
+        return -1f
+    }
 
 }

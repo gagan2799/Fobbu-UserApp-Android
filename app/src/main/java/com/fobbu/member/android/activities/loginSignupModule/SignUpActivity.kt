@@ -26,6 +26,7 @@ class SignUpActivity : AppCompatActivity(),ActivityView {
     private lateinit var dataAdaperSelectService: ArrayAdapter<String>
     private lateinit var webServiceApi: WebServiceApi
     lateinit var signUpactivityHandler: SignUpActivityHandler
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
@@ -35,7 +36,6 @@ class SignUpActivity : AppCompatActivity(),ActivityView {
         addClicks()
         fetchDeviceToken()
     }
-
 
     // Method for fetching device token
     private fun fetchDeviceToken() {
@@ -64,6 +64,7 @@ class SignUpActivity : AppCompatActivity(),ActivityView {
     // Method for initializing all the variables that are used in the class
     private fun initialise() {
         webServiceApi = getEnv().getRetrofit()
+
         val itemSelectGender = arrayOf(this.resources.getString(R.string.selectGender),this.resources.getString(R.string.male),
                 this.resources.getString(R.string.female),this.resources.getString(R.string.not_specified))
         dataAdaperSelectService = ArrayAdapter(this, R.layout.spinnertype, itemSelectGender)
@@ -121,6 +122,11 @@ class SignUpActivity : AppCompatActivity(),ActivityView {
 
                 etPassword.text.toString() =="" -> {
                     CommonClass(this, this).showToast(resources.getString(R.string.please_enter_password))
+                    etPassword.requestFocus()
+                }
+
+                etPassword.text.length < 6 -> {
+                    CommonClass(this, this).showToast(resources.getString(R.string.please_enter_valid_password))
                     etPassword.requestFocus()
                 }
 

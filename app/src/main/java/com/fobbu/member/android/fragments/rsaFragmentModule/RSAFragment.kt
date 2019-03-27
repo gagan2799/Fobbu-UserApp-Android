@@ -5,11 +5,13 @@ import android.annotation.SuppressLint
 import android.annotation.TargetApi
 import android.app.Activity
 import android.content.Context
-import android.content.Context.LOCATION_SERVICE
 import android.content.Intent
 import android.content.IntentSender
 import android.content.pm.PackageManager
-import android.graphics.*
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.Color
+import android.graphics.Matrix
 import android.location.Address
 import android.location.Geocoder
 import android.location.Location
@@ -24,24 +26,23 @@ import android.provider.MediaStore
 import android.support.annotation.RequiresApi
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
-import android.support.v4.content.ContextCompat.getSystemService
 import android.support.v4.content.FileProvider
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.GridLayoutManager
-
 import android.support.v7.widget.RecyclerView
 import android.util.Log
-import android.view.*
+import android.view.Gravity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.*
 import com.bumptech.glide.Glide
 import com.fobbu.member.android.R
-import com.fobbu.member.android.activities.dashboardActivity.DashboardActivity
 import com.fobbu.member.android.activities.selectVehicleActivity.SelectVehicleActivity
 import com.fobbu.member.android.activities.waitingScreenModule.WaitingScreenBlue
-
 import com.fobbu.member.android.apiInterface.MyApplication
 import com.fobbu.member.android.apiInterface.WebServiceApi
 import com.fobbu.member.android.backgroundServices.FetchStatusAPI
@@ -73,13 +74,16 @@ import kotlinx.android.synthetic.main.fragment_rsa.view.*
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import java.io.*
+import java.io.ByteArrayOutputStream
+import java.io.File
+import java.io.FileOutputStream
 import java.lang.Double
 import java.util.*
 import kotlin.collections.ArrayList
 
 class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
-    GoogleApiClient.ConnectionCallbacks, LocationListener, RsaFragmentView {
+    GoogleApiClient.ConnectionCallbacks, LocationListener, RsaFragmentView
+{
 
     private lateinit var mMapView: MapView
     private lateinit var googleMap: GoogleMap
@@ -194,6 +198,7 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     lateinit var viewRightTwoWheeler: View
 
 
+
     @SuppressLint("NewApi")
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
@@ -203,9 +208,17 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
         if (isAdded)
         {
+            if (savedInstanceState != null && savedInstanceState.getBoolean("STATE_HAS_SAVED_STATE"))
+            {
+                println("NULL >>>>>>>>>")
+            }
+            else
+            {
+                println("SAVEDD>>>>>>>")
+            }
+
             if (view != null)
             {
-
                 mapInitialise(view, savedInstanceState)
 
                 initialise(view)
@@ -261,6 +274,8 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                 }
 
                 llUploadPics.visibility == View.VISIBLE -> {
+
+                    deleteAllImagesIfSelectedOnBack()
 
                     when {
                         serviceSelected == RsaConstants.ServiceName.burstTyre -> {
@@ -1394,7 +1409,7 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
         val cameraPosition = CameraPosition.Builder()
             .target(LatLng(Double.valueOf(latitude), Double.valueOf(longitude))).zoom(14f).build()
 
-        googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
+       // googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
     }
 
     // for handling clicks on the map
@@ -1423,6 +1438,16 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
         }
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+
+        outState.putBoolean("STATE_HAS_SAVED_STATE", true)
+
+        mapView.onSaveInstanceState(outState)
+
+        super.onSaveInstanceState(outState)
+
+    }
+
     fun ifTopBarChnagesNull(boolean: Boolean) {
         if (topBarChanges == null)
             topBarChanges = activity as TopBarChanges
@@ -1433,6 +1458,7 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     override fun onResume() {
         super.onResume()
         mMapView.onResume()
+
         if (CommonClass(activity!!,activity!!).getString(RsaConstants.Ods.vehicleTypeSelect).isNotEmpty())
         {
             etVehicleNumber.setText(CommonClass(activity!!,activity!!).getString(RsaConstants.Ods.vehicleNumberSelect))
@@ -1459,7 +1485,7 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
     override fun onDestroy() {
         super.onDestroy()
-        mMapView.onDestroy()
+       // mMapView.onDestroy()
     }
 
     override fun onLowMemory() {
@@ -1565,6 +1591,25 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
         }
 
         alertDialog.show()
+    }
+
+    private fun deleteAllImagesIfSelectedOnBack() {
+        file1 = null
+        isImageOn1 = false
+        ivImage1.setImageResource(R.drawable.photo_camera)
+
+        file2 = null
+        isImageOn2 = false
+        ivImage2.setImageResource(R.drawable.photo_camera)
+
+        file3 = null
+        isImageOn3 = false
+        ivImage3.setImageResource(R.drawable.photo_camera)
+
+        file4 = null
+        isImageOn4 = false
+        ivImage4.setImageResource(R.drawable.photo_camera)
+
     }
 
     // method for uploading images either by capturing from camera or from gallery

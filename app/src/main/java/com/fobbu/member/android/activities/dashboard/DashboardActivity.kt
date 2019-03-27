@@ -388,9 +388,10 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
         else
             transaction.remove(fragmentEarlier).add(R.id.content_frame, fragment, tag)
 
-        if (tag != resources.getString(R.string.home)) {
+        /*if (tag != resources.getString(R.string.home))
+        {
             transaction.addToBackStack(null)
-        }
+        }*/
         transaction.commitAllowingStateLoss()
         fragmentEarlier = fragment
         fragmentEarlierBool = true

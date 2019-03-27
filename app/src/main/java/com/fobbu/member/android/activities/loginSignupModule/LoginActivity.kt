@@ -28,8 +28,7 @@ class LoginActivity : AppCompatActivity(), ActivityView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-        loginActivityHandler =
-                LoginActivityPresenter(this, this)
+        loginActivityHandler = LoginActivityPresenter(this, this)
         addClicks()
         fetchDeviceToken()
     }
@@ -82,13 +81,20 @@ class LoginActivity : AppCompatActivity(), ActivityView {
             when {
                 etMobile.text.isEmpty() -> {
                     CommonClass(this, this).showToast(resources.getString(R.string.please_enter_mobile))
+                    etMobile.requestFocus()
                 }
                 etMobile.text.length<10->
                 {
                     CommonClass(this, this).showToast(resources.getString(R.string.correct_mobile_number_msg))
+                    etMobile.requestFocus()
                 }
                 etPassword.text.isEmpty() -> {
                     CommonClass(this, this).showToast(resources.getString(R.string.please_enter_password))
+                    etPassword.requestFocus()
+                }
+                etPassword.text.length < 6 -> {
+                    CommonClass(this, this).showToast(resources.getString(R.string.please_enter_valid_password))
+                    etPassword.requestFocus()
                 }
                 else -> {
                     callLoginAPIUser(etMobile.text.toString(), etPassword.text.toString())

@@ -812,31 +812,40 @@ class ProfileActivity : AppCompatActivity(),ActivityView,ProfileView
     {
         if (commonClass.checkInternetConn(this))
         {
-            val map=HashMap<String,Any>()
+
             when{
                 tvDobKycProfile.text.toString()==getString(R.string.date_of_birth)->commonClass.showToast(getString(R.string.provide_date_msg))
 
-               /* etPANProfile.text.isEmpty()->commonClass.showToast(getString(R.string.provide_pan_msg))
-
-                etPANProfile.text.length<10->commonClass.showToast(getString(R.string.correct_pan_msg))
-*/
                 etAdharProfile.text.trim().isEmpty() && etPANProfile.text.trim().isEmpty() ->commonClass.showToast(getString(R.string.provide_any_msg))
+
+                etPANProfile.text.toString().isNotEmpty() ->
+                {
+                    if(etPANProfile.text.length<10)
+                        commonClass.showToast(getString(R.string.provide_pan_msg_error))
+                    else
+                        hitKYC_API()
+                }
 
                 else->
                 {
-                    map["date_of_birth"]=tvDobKycProfile.text.trim().toString()
-
-                    map["pan_card"]=etPANProfile.text.trim().toString()
-
-                    map["aadhar_number"]=etAdharProfile.text.trim().toString()
-
-                    profileHandler.updateKyc(map,
-                        commonClass.getString("x_access_token"))
+                    hitKYC_API()
                 }
             }
         }
         else
             commonClass.showToast(resources.getString(R.string.internet_is_unavailable))
+    }
+
+    private fun hitKYC_API() {
+
+        val map=HashMap<String,Any>()
+        map["date_of_birth"]=tvDobKycProfile.text.trim().toString()
+
+        map["pan_card"]=etPANProfile.text.trim().toString()
+
+        map["aadhar_number"]=etAdharProfile.text.trim().toString()
+
+        profileHandler.updateKyc(map, commonClass.getString("x_access_token"))
     }
 
     //function for handling the response of the update Kyc API

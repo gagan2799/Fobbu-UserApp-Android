@@ -365,7 +365,7 @@
     <string name="select_image_first">Please provide a profile pic.</string>
     <string name="provide_name">Please provide name.</string>
     <string name="date_of_birth">Date of Birth</string>
-    <string name="enter_pan">Enter PAN</string>
+    <string name="enter_pan">Enter PAN Card Number</string>
     <string name="enter_aadhaar_number">Enter Aadhaar Number</string>
     <string name="thank_you">Thank You</string>
     <string name="permission_message"><![CDATA[You need to allow the permissions from\n"
@@ -428,6 +428,7 @@
     <string name="select_languages">Select languages:</string>
     <string name="correct_pan_msg">Please provide correct PAN number</string>
     <string name="provide_pan_msg">Please provide PAN number.</string>
+    <string name="provide_pan_msg_error">Please provide PAN number of 10 Digits.</string>
     <string name="provide_aadhar_msg">Please provide Aadhaar number.</string>
     <string name="provide_any_msg">Please either provide PAN or Aadhaar details.</string>
     <string name="provide_date_msg">Please provide date of birth</string>
