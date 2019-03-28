@@ -32,12 +32,10 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
-import android.view.Gravity
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import com.bumptech.glide.Glide
 import com.fobbu.member.android.R
@@ -64,7 +62,6 @@ import com.google.android.gms.common.api.Status
 import com.google.android.gms.location.*
 import com.google.android.gms.location.places.Place
 import com.google.android.gms.location.places.ui.PlaceAutocomplete
-import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.MapsInitializer
@@ -206,6 +203,8 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_rsa, container, false)
 
+       // activity!!.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
+
         if (isAdded)
         {
             if (savedInstanceState != null && savedInstanceState.getBoolean("STATE_HAS_SAVED_STATE"))
@@ -235,6 +234,8 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
         return view
     }
+
+
 
     // handling click functionality of the  activity in this method
     @SuppressLint("NewApi")
@@ -847,6 +848,12 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
         etVehicleNumber = view.findViewById(R.id.etVehicleNumber)
 
+        etVehicleNumber.setOnClickListener {
+            etVehicleNumber.requestFocus()
+            val imm:InputMethodManager= activity!!.getSystemService (Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.showSoftInput(etVehicleNumber, InputMethodManager.SHOW_IMPLICIT)
+        }
+
         llFindFobbu = view.findViewById(R.id.llFindFobbu)
         tvHeadingFind = view.findViewById(R.id.tvHeadingFind)
         text1 = view.findViewById(R.id.text1)
@@ -892,6 +899,8 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
             activity!!,
             activity!!
         ).getString("display_name")}"""
+
+
     }
 
 

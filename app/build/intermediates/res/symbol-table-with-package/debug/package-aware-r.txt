@@ -2633,6 +2633,7 @@ id tvMyPassbook
 id tvNOdataOrder
 id tvName
 id tvNameOdsTrack
+id tvNamePartner
 id tvNew
 id tvNewPin
 id tvNo
@@ -3333,6 +3334,7 @@ string proceed_to_payment
 string profile
 string project_id
 string provide_aadhar_msg
+string provide_adhar_msg_error
 string provide_any_msg
 string provide_date_message
 string provide_date_msg

@@ -158,6 +158,16 @@ class CommonClass(activity1: Activity, context1: Context) {
         {
             e.printStackTrace()
         }
+
+
+        try {
+            val nm = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+            nm.cancelAll()
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
     @SuppressLint("ObsoleteSdkInt")

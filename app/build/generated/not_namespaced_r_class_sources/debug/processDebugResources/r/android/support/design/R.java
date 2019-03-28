@@ -1147,12 +1147,12 @@ public final class R {
         public static final int transition_position = 0x7f0902b7;
         public static final int transition_scene_layoutid_cache = 0x7f0902b8;
         public static final int transition_transform = 0x7f0902b9;
-        public static final int uniform = 0x7f090376;
-        public static final int unlabeled = 0x7f090377;
-        public static final int up = 0x7f090378;
-        public static final int view_offset_helper = 0x7f09039b;
-        public static final int visible = 0x7f09039d;
-        public static final int wrap_content = 0x7f0903a3;
+        public static final int uniform = 0x7f090377;
+        public static final int unlabeled = 0x7f090378;
+        public static final int up = 0x7f090379;
+        public static final int view_offset_helper = 0x7f09039c;
+        public static final int visible = 0x7f09039e;
+        public static final int wrap_content = 0x7f0903a4;
     }
     public static final class integer {
         private integer() {}
@@ -1294,8 +1294,8 @@ public final class R {
         public static final int path_password_eye_mask_strike_through = 0x7f0f014e;
         public static final int path_password_eye_mask_visible = 0x7f0f014f;
         public static final int path_password_strike_through = 0x7f0f0150;
-        public static final int search_menu_title = 0x7f0f019c;
-        public static final int status_bar_notification_info_overflow = 0x7f0f01bf;
+        public static final int search_menu_title = 0x7f0f019d;
+        public static final int status_bar_notification_info_overflow = 0x7f0f01c0;
     }
     public static final class style {
         private style() {}

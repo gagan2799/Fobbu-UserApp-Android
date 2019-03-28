@@ -80,7 +80,7 @@
     <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="56dp"
+            android:layout_above="@+id/textViewConfirmAndPay"
             android:layout_below="@+id/tvHeading"
     >
 
@@ -576,6 +576,7 @@
             android:padding="@dimen/red_rounded_rectangle_padding"
             android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp"
+            android:layout_marginTop="15dp"
             android:foreground="?attr/selectableItemBackground"
             android:singleLine="true"
             android:layout_marginBottom="10dp"

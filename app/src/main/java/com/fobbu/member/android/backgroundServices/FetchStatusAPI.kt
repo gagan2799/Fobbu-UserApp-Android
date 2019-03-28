@@ -49,16 +49,13 @@ class FetchStatusAPI : Service() {
     private fun syncData() {
         println("HIT API>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
 
-        if(myPrefs.getString(RsaConstants.ServiceSaved.fobbuRequestId, "")!="")
-        {
+        if (myPrefs.getString(RsaConstants.ServiceSaved.fobbuRequestId, "") != "") {
             if (checkInternetConn(this))
-            fetchStatus()
+                fetchStatus()
 
             // Repeat this runnable code block again every ... min
             mHandler.postDelayed(runnableService, defaultSyncInterval)
-        }
-        else
-        {
+        } else {
             println("REQUEST ID EMPTY STOPPING SERVICE>>>>>>>>>>")
             stopSelf()
         }
@@ -157,14 +154,18 @@ class FetchStatusAPI : Service() {
 
                     if (mainPojo!!.success == "true") {
 
-                        if(myPrefs.getString(RsaConstants.RsaTypes.checkStatus,"")!=
-                            mainPojo.getData().status)
-                        {
+                        if (myPrefs.getString(RsaConstants.RsaTypes.checkStatus, "") !=
+                            mainPojo.getData().status
+                        ) {
                             println("SAVED AND MOVED YEAHH")
 
-                            prefsEditor.putString(RsaConstants.ServiceSaved.serviceNameSelected,mainPojo.getData().static_name).apply()
+                            prefsEditor.putString(
+                                RsaConstants.ServiceSaved.serviceNameSelected,
+                                mainPojo.getData().static_name
+                            ).apply()
 
-                            prefsEditor.putString(RsaConstants.ServiceSaved.fobbuRequestId, mainPojo.getData()._id).apply()
+                            prefsEditor.putString(RsaConstants.ServiceSaved.fobbuRequestId, mainPojo.getData()._id)
+                                .apply()
 
                             prefsEditor.putString(RsaConstants.RsaTypes.checkIfOnGoingRsaRequest, "YES").apply()
 
@@ -179,39 +180,39 @@ class FetchStatusAPI : Service() {
 
 
                             when {
-                                mainPojo.getData().status=="cancelled_by_admin" ->
-                                {
+                                mainPojo.getData().status == "cancelled_by_admin" -> {
                                     emptySharedRequest()
 
                                     val intent = Intent()
                                     intent.action = FcmPushTypes.Types.acceptRequestBroadCast
-                                    intent.putExtra("navigate_to","4")
-                                    intent.putExtra("message",mainPojo.getData().reason_of_cancellation)
+                                    intent.putExtra("navigate_to", "4")
+                                    intent.putExtra("message", mainPojo.getData().reason_of_cancellation)
                                     sendBroadcast(intent)
                                 }
 
-                                mainPojo.getData().status=="new" -> {
+                                mainPojo.getData().status == "new" -> {
 
                                 }
-                                mainPojo.getData().status==FcmPushTypes.Types.accept -> {
+                                mainPojo.getData().status == FcmPushTypes.Types.accept -> {
+                                    prefsEditor.putString(RsaConstants.ServiceSaved.isNew,"").apply()
                                     val intent = Intent()
                                     intent.action = FcmPushTypes.Types.acceptRequestBroadCast
-                                    intent.putExtra("navigate_to","1")
+                                    intent.putExtra("navigate_to", "1")
                                     sendBroadcast(intent)
                                 }
                                 else -> {
+                                    prefsEditor.putString(RsaConstants.ServiceSaved.isNew,"").apply()
                                     val intent = Intent()
                                     intent.action = FcmPushTypes.Types.fromAPIBroadCast
                                     sendBroadcast(intent)
 
                                     val intent1 = Intent()
                                     intent1.action = FcmPushTypes.Types.acceptRequestBroadCast
-                                    intent1.putExtra("navigate_to","1")
+                                    intent1.putExtra("navigate_to", "1")
                                     sendBroadcast(intent1)
                                 }
                             }
-                        }
-                        else {
+                        } else {
                             println("NOT SAVED BECAUSE SAME ")
                         }
                     }
@@ -224,12 +225,12 @@ class FetchStatusAPI : Service() {
     }
 
     private fun emptySharedRequest() {
-        prefsEditor.putString(RsaConstants.ServiceSaved.isNew,"").apply()
+        prefsEditor.putString(RsaConstants.ServiceSaved.isNew, "").apply()
         prefsEditor.remove(RsaConstants.ServiceSaved.fobbuRequestId).apply()
         prefsEditor.putString(RsaConstants.RsaTypes.onGoingRsaScreen, "").apply()
         prefsEditor.putString(RsaConstants.RsaTypes.onGoingRsaScreenType, "").apply()
-        prefsEditor.putString(RsaConstants.RsaTypes.checkIfOnGoingRsaRequest,"").apply()
-        prefsEditor.putString(RsaConstants.RsaTypes.checkStatus,"").apply()
+        prefsEditor.putString(RsaConstants.RsaTypes.checkIfOnGoingRsaRequest, "").apply()
+        prefsEditor.putString(RsaConstants.RsaTypes.checkStatus, "").apply()
     }
 
 

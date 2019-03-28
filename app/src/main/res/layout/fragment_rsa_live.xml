@@ -91,13 +91,13 @@
                 android:layout_below="@+id/rlProfilePic"
                 android:padding="6dp"
                 android:gravity="center"
-                android:id="@+id/tvName"
+                android:id="@+id/tvNamePartner"
                 android:text=""
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
         <RelativeLayout
-                android:layout_below="@+id/tvName"
+                android:layout_below="@+id/tvNamePartner"
                 android:id="@+id/rlTrack"
                 android:layout_width="match_parent"
                 android:layout_marginTop="15dp"

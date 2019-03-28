@@ -147,7 +147,7 @@
     <string name="diesel">(Diesel)</string>
     <string name="car_suv">Car/Suv</string>
     <string name="fix_on_the_spot">We will fix it on the spot…</string>
-    <string name="help_you_fix">We help you fix it…</string>
+    <string name="help_you_fix">We help you fix it !</string>
     <string name="we_will_connect_towing">We will connect you to our towing partner</string>
     <string name="enter_vehicle_no">Enter Vehicle No.</string>
     <string name="find_fobbu">Find Fobbu</string>
@@ -429,6 +429,7 @@
     <string name="correct_pan_msg">Please provide correct PAN number</string>
     <string name="provide_pan_msg">Please provide PAN number.</string>
     <string name="provide_pan_msg_error">Please provide PAN number of 10 Digits.</string>
+    <string name="provide_adhar_msg_error">Please provide Aadhaar Card number of 12 Digits.</string>
     <string name="provide_aadhar_msg">Please provide Aadhaar number.</string>
     <string name="provide_any_msg">Please either provide PAN or Aadhaar details.</string>
     <string name="provide_date_msg">Please provide date of birth</string>

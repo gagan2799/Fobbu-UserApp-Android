@@ -37,7 +37,6 @@ import com.fobbu.member.android.activities.waitingScreenModule.WaitingScreenWhit
 import com.fobbu.member.android.apiInterface.MyApplication
 import com.fobbu.member.android.fcm.FcmPushTypes
 import com.fobbu.member.android.fragments.HomeFragment
-
 import com.fobbu.member.android.fragments.RSALiveFragment
 import com.fobbu.member.android.fragments.odsModule.OdsTrackingFragment.OdsTrackingFragment
 import com.fobbu.member.android.fragments.odsModule.odsFragment.OdsFragment
@@ -58,7 +57,6 @@ import kotlinx.android.synthetic.main.activity_dashboard.*
 import kotlinx.android.synthetic.main.app_bar_dashboard.*
 import kotlinx.android.synthetic.main.inflate_drawer.*
 import kotlinx.android.synthetic.main.option_menu_layout.*
-import java.lang.Exception
 
 @Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragments, TopBarChanges, ActivityView,
@@ -434,18 +432,26 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
     }
 
     override fun onBackPressed() {
-        super.onBackPressed()
+        //super.onBackPressed()
+
+        val intent =   Intent(Intent.ACTION_MAIN)
+        intent.addCategory(Intent.CATEGORY_HOME)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(intent)
 
         if (supportFragmentManager.findFragmentById(R.id.content_frame) != null) {
             val f: Fragment = supportFragmentManager.findFragmentById(R.id.content_frame)!!
             if (f is HomeFragment) {
                 rlTopDrawer.visibility = View.VISIBLE
                 changeTabs(resources.getString(R.string.home))
-            } else if (f is RSALiveFragment) {
+            } else //if (f is RSALiveFragment)
+            {
 
             }
         } else {
             finish()
+
+
         }
 
     }
@@ -454,6 +460,14 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
     {
         when {
             (CommonClass(this, this).getString(RsaConstants.ServiceSaved.isNew) == "1") -> {
+
+                println(
+                    "GOING TO WAITING SCREEN >>>>>>> " + CommonClass(
+                        this,
+                        this
+                    ).getString(RsaConstants.ServiceSaved.isNew)
+                )
+
                 startActivity(
                     Intent(this, WaitingScreenBlue::class.java)
                         .putExtra("navigate_to", "0")
@@ -477,6 +491,9 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
             }
             CommonClass(this, this).getString(RsaConstants.RsaTypes.checkStatus) != "" -> {
                 val type: String = CommonClass(this, this).getString(RsaConstants.RsaTypes.checkStatus)
+
+                println("STATUS IN DASHBOARD METHOD >>>> " + type)
+
                 when (type) {
 
                     FcmPushTypes.Types.accept -> {

@@ -72,7 +72,7 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     private lateinit var ivTool: ImageView
     private lateinit var tvText: TextView
     private lateinit var tvCode: TextView
-    private lateinit var tvName: TextView
+    private lateinit var tvNamePartner: TextView
     private lateinit var imgProfile: ImageView
     private var strWhere = ""
     private var topBarChanges: TopBarChanges? = null
@@ -104,13 +104,6 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
                 rsaLiveHandler = RsaLivePresenter(this.activity!!, this)
 
-                /* val status = CommonClass(activity!!, activity!!).getString(RsaConstants.RsaTypes.checkStatus)
-
-                 if(status == FcmPushTypes.Types.inRouteRequest)
-                 {
-                     updateLiveLocation()
-                 }
-                 else*/
                 getServices()
             }
         }
@@ -119,16 +112,25 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     }
 
     private fun getServices() {
-        if (CommonClass(activity!!, activity!!).checkInternetConn(activity!!)) {
-            rsaLiveHandler.getService(
-                CommonClass(activity!!, activity!!).getString("x_access_token"),
-                CommonClass(this.activity!!, this.activity!!).getString(
-                    RsaConstants.ServiceSaved.fobbuRequestId
+
+        println("HERE IN RSA SERVICE MAIN>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+
+        try {
+            if (CommonClass(activity!!, activity!!).checkInternetConn(activity!!)) {
+                rsaLiveHandler.getService(
+                    CommonClass(activity!!, activity!!).getString("x_access_token"),
+                    CommonClass(this.activity!!, this.activity!!).getString(
+                        RsaConstants.ServiceSaved.fobbuRequestId
+                    )
                 )
-            )
+            } else
+                CommonClass(
+                    activity!!,
+                    activity!!
+                ).showToast(activity!!.resources.getString(R.string.internet_is_unavailable))
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
-        else
-            CommonClass(activity!!,activity!!).showToast(activity!!.resources.getString(R.string.internet_is_unavailable))
     }
 
     @SuppressLint("ResourceAsColor")
@@ -186,7 +188,7 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
         tvText = view.findViewById(R.id.tvText)
         tvCode = view.findViewById(R.id.tvCode)
         imgProfile = view.findViewById(R.id.imgProfile)
-        tvName = view.findViewById(R.id.tvName)
+        tvNamePartner = view.findViewById(R.id.tvNamePartner)
 
         ivLeftDotted = view.findViewById(R.id.ivLeftDotted)
         ivRightDotted = view.findViewById(R.id.ivRightDotted)
@@ -433,6 +435,10 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     override fun onDestroy() {
         super.onDestroy()
 
+       destroyEverythingMethod()
+    }
+
+    private fun destroyEverythingMethod() {
         try {
             mMapView.onDestroy()
 
@@ -485,6 +491,114 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
 
     @SuppressLint("SetTextI18n")
+    private fun checkStatusAndUpdateText() {
+
+        val status = CommonClass(activity!!, activity!!).getString(RsaConstants.RsaTypes.checkStatus)
+
+        println("HERE IN LIVE FRAGMENT $status")
+
+        when (status) {
+
+            FcmPushTypes.Types.accept -> {
+
+                println("DISPLAY NAME ACCEPT >>> " + displayName)
+
+                tvText.text =
+                        """${activity!!.resources.getString(R.string.please_wait_fobbu_msg)}$displayName ${activity!!.resources.getString(
+                            R.string.gathering_tools__msg
+                        )}"""
+            }
+
+            FcmPushTypes.Types.moneyPaid -> {
+
+                println("DISPLAY NAME IN ROUTE >>> " + displayName)
+                ivTool.setImageResource(R.drawable.man_riding_bike)
+                tvText.text = displayName + " " + resources.getString(R.string.fobbu_on_way)
+                strWhere = "share"
+                ivLeftDotted.setImageResource(R.drawable.dotted)
+                ivRightDotted.setImageResource(R.drawable.dotted)
+                tvTrack.background = resources.getDrawable(R.drawable.solid_color_red)
+                rlPickingFuel.visibility = View.GONE
+                tvPickingFuel.visibility = View.GONE
+                rlTools.visibility = View.VISIBLE
+            }
+
+            FcmPushTypes.Types.inRouteRequest -> {
+
+                println("DISPLAY NAME IN ROUTE >>> " + displayName)
+
+                ivTool.setImageResource(R.drawable.man_riding_bike)
+                tvText.text = displayName + " " + resources.getString(R.string.fobbu_on_way)
+                strWhere = "share"
+                ivLeftDotted.setImageResource(R.drawable.dotted)
+                ivRightDotted.setImageResource(R.drawable.dotted)
+                tvTrack.background = resources.getDrawable(R.drawable.solid_color_red)
+                rlPickingFuel.visibility = View.GONE
+                tvPickingFuel.visibility = View.GONE
+                rlTools.visibility = View.VISIBLE
+
+            }
+            FcmPushTypes.Types.newPin -> {
+
+                println("DISPLAY NAME NEW PIN >>> " + displayName)
+
+                ivTool.setImageResource(R.drawable.mechanic_with_cap)
+                tvText.text = resources.getString(R.string.share_4_digit_code)
+                if (CommonClass(activity!!, activity!!).getString(RsaConstants.ServiceSaved.otpStart).length == 3)
+                    tvCode.text = "0" +
+                            CommonClass(activity!!, activity!!).getString(RsaConstants.ServiceSaved.otpStart)
+                else
+                    tvCode.text = CommonClass(activity!!, activity!!).getString(RsaConstants.ServiceSaved.otpStart)
+                tvCode.visibility = View.VISIBLE
+            }
+
+            FcmPushTypes.Types.otpGenerated -> {
+
+                println("DISPLAY NAME otpGenerated >>> " + displayName)
+
+                ivTool.setImageResource(R.drawable.mechanic_with_cap)
+                tvText.text = resources.getString(R.string.share_4_digit_code)
+                if (CommonClass(activity!!, activity!!).getString(RsaConstants.ServiceSaved.otpStart).length == 3)
+                    tvCode.text = "0" +
+                            CommonClass(activity!!, activity!!).getString(RsaConstants.ServiceSaved.otpStart)
+                else
+                    tvCode.text = CommonClass(activity!!, activity!!).getString(RsaConstants.ServiceSaved.otpStart)
+                tvCode.visibility = View.VISIBLE
+            }
+            FcmPushTypes.Types.otpVerified -> {
+                println("HERE IN LIVE ")
+                println("DISPLAY NAME VERIFIED >>> " + displayName)
+
+
+                startActivity(
+                    Intent(
+                        activity!!,
+                        WaitingScreenWhite::class.java
+                    ).putExtra("from_where", "code_valid")
+                )
+                destroyEverythingMethod()
+            }
+
+            FcmPushTypes.Types.fuelDefaultScreen -> {
+                ivLeftDotted.setImageResource(R.drawable.dotted_gray)
+                ivRightDotted.setImageResource(R.drawable.dotted_gray)
+                tvTrack.setBackgroundResource(R.drawable.solid_color_grey)
+                rlPickingFuel.visibility = View.VISIBLE
+                tvPickingFuel.visibility = View.VISIBLE
+                rlTools.visibility = View.GONE
+            }
+
+            FcmPushTypes.Types.requestCancelled -> {
+                val intent = Intent()
+                intent.action = FcmPushTypes.Types.fromAPIBroadCast
+                activity!!.sendBroadcast(intent)
+            }
+        }
+
+    }
+
+
+    @SuppressLint("SetTextI18n")
     private fun checkStatusAndNavigate() {
 
         val status = CommonClass(activity!!, activity!!).getString(RsaConstants.RsaTypes.checkStatus)
@@ -492,7 +606,38 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
         println("HERE IN LIVE FRAGMENT $status")
 
         when (status) {
+
+            FcmPushTypes.Types.accept -> {
+
+                println("DISPLAY NAME ACCEPT >>> " + displayName)
+
+                tvText.text =
+                        """${activity!!.resources.getString(R.string.please_wait_fobbu_msg)}$displayName ${activity!!.resources.getString(
+                            R.string.gathering_tools__msg
+                        )}"""
+            }
+
             FcmPushTypes.Types.inRouteRequest -> {
+
+                println("DISPLAY NAME IN ROUTE >>> " + displayName)
+
+                ivTool.setImageResource(R.drawable.man_riding_bike)
+                tvText.text = displayName + " " + resources.getString(R.string.fobbu_on_way)
+                strWhere = "share"
+                updateLiveLocation()
+                ivLeftDotted.setImageResource(R.drawable.dotted)
+                ivRightDotted.setImageResource(R.drawable.dotted)
+                tvTrack.background = resources.getDrawable(R.drawable.solid_color_red)
+                rlPickingFuel.visibility = View.GONE
+                tvPickingFuel.visibility = View.GONE
+                rlTools.visibility = View.VISIBLE
+
+            }
+
+            FcmPushTypes.Types.moneyPaid -> {
+
+                println("DISPLAY NAME IN ROUTE >>> " + displayName)
+
                 ivTool.setImageResource(R.drawable.man_riding_bike)
                 tvText.text = displayName + " " + resources.getString(R.string.fobbu_on_way)
                 strWhere = "share"
@@ -506,6 +651,9 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
             }
             FcmPushTypes.Types.newPin -> {
+
+                println("DISPLAY NAME NEW PIN >>> " + displayName)
+
                 ivTool.setImageResource(R.drawable.mechanic_with_cap)
                 tvText.text = resources.getString(R.string.share_4_digit_code)
                 if (CommonClass(activity!!, activity!!).getString(RsaConstants.ServiceSaved.otpStart).length == 3)
@@ -517,6 +665,9 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
             }
 
             FcmPushTypes.Types.otpGenerated -> {
+
+                println("DISPLAY NAME otpGenerated >>> " + displayName)
+
                 ivTool.setImageResource(R.drawable.mechanic_with_cap)
                 tvText.text = resources.getString(R.string.share_4_digit_code)
                 if (CommonClass(activity!!, activity!!).getString(RsaConstants.ServiceSaved.otpStart).length == 3)
@@ -528,7 +679,7 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
             }
             FcmPushTypes.Types.otpVerified -> {
                 println("HERE IN LIVE ")
-
+                println("DISPLAY NAME VERIFIED >>> " + displayName)
                 startActivity(
                     Intent(
                         activity!!,
@@ -688,6 +839,17 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     override fun onRequestSuccessReport(mainPojo: MainPojo) {
         if (mainPojo.success == "true") {
 
+            displayName = mainPojo.getData().partner.display_name
+
+            println("DISPLAY NAME FIRST>>> " + mainPojo.getData().partner.display_name)
+
+
+            val otp = if (mainPojo.getData().otp.contains("\\.".toRegex())) {
+                mainPojo.getData().otp.split("\\.".toRegex())[0]
+            } else
+                mainPojo.getData().otp
+
+            CommonClass(activity!!,activity!!).putString(RsaConstants.ServiceSaved.otpStart, otp)
 
             if (checkFirstTime) {
                 checkFirstTime = false
@@ -700,17 +862,26 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                     else
                         imgProfile.setImageResource(R.drawable.dummy_pic)
                 }
+                CommonClass(activity!!, activity!!).putString(
+                    RsaConstants.RsaTypes.checkStatus,
+                    mainPojo.getData().status
+                )
 
-                displayName = mainPojo.getData().partner.display_name
-                tvName.text = displayName
-                tvText.text =
-                        """${activity!!.resources.getString(R.string.please_wait_fobbu_msg)}$displayName ${activity!!.resources.getString(
-                            R.string.gathering_tools__msg
-                        )}"""
+                tvNamePartner.text = displayName
 
                 mobileNumber = mainPojo.getData().partner.mobile_number
+
+                checkStatusAndUpdateText()
+
+                checkStatusAndNavigate()
             }
 
+
+            tvNamePartner.text = displayName
+
+            mobileNumber = mainPojo.getData().partner.mobile_number
+
+            checkStatusAndUpdateText()
 
             if (!(mainPojo.getData().lat_long.isNullOrEmpty())) {
                 val jsonArray = JSONArray(mainPojo.getData().lat_long)

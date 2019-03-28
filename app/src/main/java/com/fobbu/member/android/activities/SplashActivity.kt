@@ -1,23 +1,25 @@
 package com.fobbu.member.android.activities
 
+import android.app.NotificationManager
+import android.content.Context
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import com.fobbu.member.android.R
 import com.fobbu.member.android.activities.dashboardActivity.DashboardActivity
-import com.fobbu.member.android.activities.loginSignupModule.LoginActivity
 import com.fobbu.member.android.activities.loginSignupModule.SMSVerificationActivity
+import com.fobbu.member.android.backgroundServices.FetchStatusAPI
+import com.fobbu.member.android.fragments.rsaFragmentModule.RsaConstants
 import com.fobbu.member.android.tutorial.TutorialActivity
 import com.fobbu.member.android.utils.CommonClass
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
 import com.google.firebase.iid.FirebaseInstanceId
 import kotlinx.android.synthetic.main.activity_splash.*
-import java.lang.Exception
 
 class SplashActivity : AppCompatActivity() {
 
@@ -33,6 +35,22 @@ class SplashActivity : AppCompatActivity() {
         splashAnimation()
 
         fetchDeviceToken()
+
+        try {
+            val nm = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+            nm.cancelAll()
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+        if (CommonClass(this, this).getString(RsaConstants.ServiceSaved.fobbuRequestId) != "") {
+            stopService(Intent(this, FetchStatusAPI::class.java))
+
+            startService(Intent(this, FetchStatusAPI::class.java))
+        }
+
     }
 
     // Method for launching different screens

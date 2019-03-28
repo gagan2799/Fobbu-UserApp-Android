@@ -15,7 +15,6 @@ import com.fobbu.member.android.R
 import com.fobbu.member.android.activities.dashboardActivity.DashboardActivity
 import com.fobbu.member.android.apiInterface.WebServiceApi
 import com.fobbu.member.android.fragments.rsaFragmentModule.RsaConstants
-import com.fobbu.member.android.utils.CommonClass
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import org.json.JSONObject
@@ -59,6 +58,15 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             val type = remoteMessage.data["type"].toString()
 
             prefsEditor.putString(RsaConstants.ServiceSaved.cancellationMessage, dataMap["body"]).apply()
+
+
+            val json = JSONObject(dataMap["notification"])
+
+            if (json["type"].toString()== FcmPushTypes.Types.cancelledByAdmin) {
+                prefsEditor.putString(RsaConstants.RsaTypes.checkStatus, dataMap["type"]).apply()
+                prefsEditor.putString(RsaConstants.ServiceSaved.isNew,"").apply()
+            }
+            println("MESSAGE MAP >>>>>>>> " + json["type"].toString())
 
             if (!isAppIsInBackground(this)) {
 
@@ -124,7 +132,6 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
                 intent.putExtra("from_push", FcmPushTypes.Types.cancelledByAdmin)
                 intent.putExtra("message", map["body"])
             }
-
         }
 
         val pendingIntent = PendingIntent.getActivity(

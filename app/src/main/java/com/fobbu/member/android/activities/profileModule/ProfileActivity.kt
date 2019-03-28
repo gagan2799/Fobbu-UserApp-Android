@@ -826,6 +826,14 @@ class ProfileActivity : AppCompatActivity(),ActivityView,ProfileView
                         hitKYC_API()
                 }
 
+                etAdharProfile.text.toString().isNotEmpty() ->
+                {
+                    if(etAdharProfile.text.length<12)
+                        commonClass.showToast(getString(R.string.provide_adhar_msg_error))
+                    else
+                        hitKYC_API()
+                }
+
                 else->
                 {
                     hitKYC_API()

@@ -932,10 +932,10 @@ public final class R {
         public static final int titleDividerNoCustom = 0x7f0902aa;
         public static final int title_template = 0x7f0902ab;
         public static final int topPanel = 0x7f0902b3;
-        public static final int uniform = 0x7f090376;
-        public static final int up = 0x7f090378;
-        public static final int volume_item_container = 0x7f09039e;
-        public static final int wrap_content = 0x7f0903a3;
+        public static final int uniform = 0x7f090377;
+        public static final int up = 0x7f090379;
+        public static final int volume_item_container = 0x7f09039f;
+        public static final int wrap_content = 0x7f0903a4;
     }
     public static final class integer {
         private integer() {}
@@ -1063,8 +1063,8 @@ public final class R {
         public static final int mr_controller_volume_slider = 0x7f0f0128;
         public static final int mr_system_route_name = 0x7f0f0129;
         public static final int mr_user_route_category_name = 0x7f0f012a;
-        public static final int search_menu_title = 0x7f0f019c;
-        public static final int status_bar_notification_info_overflow = 0x7f0f01bf;
+        public static final int search_menu_title = 0x7f0f019d;
+        public static final int status_bar_notification_info_overflow = 0x7f0f01c0;
     }
     public static final class style {
         private style() {}
