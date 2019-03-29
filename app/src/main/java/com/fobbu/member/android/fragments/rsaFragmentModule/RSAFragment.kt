@@ -32,9 +32,13 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
-import android.view.*
+import android.view.Gravity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import com.bumptech.glide.Glide
@@ -62,12 +66,14 @@ import com.google.android.gms.common.api.Status
 import com.google.android.gms.location.*
 import com.google.android.gms.location.places.Place
 import com.google.android.gms.location.places.ui.PlaceAutocomplete
+import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.MapsInitializer
 import com.google.android.gms.maps.model.*
 import kotlinx.android.synthetic.main.fragment_rsa.*
 import kotlinx.android.synthetic.main.fragment_rsa.view.*
+import kotlinx.android.synthetic.main.inflate_marker_title.view.*
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -79,8 +85,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
-    GoogleApiClient.ConnectionCallbacks, LocationListener, RsaFragmentView
-{
+    GoogleApiClient.ConnectionCallbacks, LocationListener, RsaFragmentView {
 
     private lateinit var mMapView: MapView
     private lateinit var googleMap: GoogleMap
@@ -89,9 +94,9 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     private var headerIconChanges: HeaderIconChanges? = null
     private var webServiceApi: WebServiceApi? = null
 
-    var currentAddress= ""
+    var currentAddress = ""
 
-    private lateinit var geocoder:Geocoder
+    private lateinit var geocoder: Geocoder
 
     private lateinit var llPhoto1: LinearLayout
     private lateinit var llPhoto2: LinearLayout
@@ -145,6 +150,8 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     private lateinit var tvUploadPics: TextView
     private lateinit var tvSkip: TextView
 
+    private var mLastLocation: Location? = null
+
     private lateinit var llFindFobbu: LinearLayout
     private lateinit var tvHeadingFind: TextView
     private lateinit var text1: TextView
@@ -195,7 +202,6 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     lateinit var viewRightTwoWheeler: View
 
 
-
     @SuppressLint("NewApi")
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
@@ -203,21 +209,10 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_rsa, container, false)
 
-       // activity!!.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
+        // activity!!.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
 
-        if (isAdded)
-        {
-            if (savedInstanceState != null && savedInstanceState.getBoolean("STATE_HAS_SAVED_STATE"))
-            {
-                println("NULL >>>>>>>>>")
-            }
-            else
-            {
-                println("SAVEDD>>>>>>>")
-            }
-
-            if (view != null)
-            {
+        if (isAdded) {
+            if (view != null) {
                 mapInitialise(view, savedInstanceState)
 
                 initialise(view)
@@ -236,26 +231,37 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     }
 
 
-
     // handling click functionality of the  activity in this method
     @SuppressLint("NewApi")
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
-    private fun handleClick() {
+    private fun handleClick()
+    {
+        etVehicleNumber.setOnEditorActionListener { textView, i, keyEvent ->
+            if (i == EditorInfo.IME_ACTION_DONE) {
+                // Do whatever you want here
+                CommonClass(activity!!,activity!!).hideSoftKeyboard(activity!!)
+
+                return@setOnEditorActionListener true
+            }
+            return@setOnEditorActionListener false
+        }
 
         chooseImagesClick()
 
         ivVehicleTypeRsa.setOnClickListener {
-            startActivity(Intent(activity!!,SelectVehicleActivity::class.java))
+            startActivity(Intent(activity!!, SelectVehicleActivity::class.java))
         }
 
 
         tvFindFobbu.setOnClickListener {
-            if (CommonClass(activity!!,activity!!).checkInternetConn(activity!!))
-            findFobbuApi()
-
+            if (CommonClass(activity!!, activity!!).checkInternetConn(activity!!))
+                findFobbuApi()
             else
-                CommonClass(activity!!,activity!!).showToast(activity!!.resources.getString(R.string.internet_is_unavailable))
+                CommonClass(
+                    activity!!,
+                    activity!!
+                ).showToast(activity!!.resources.getString(R.string.internet_is_unavailable))
             //("Puncture cost is Rs $serviceSelectedAmount\n(extra puncture will cost Rs $serviceSelectedAmount per puncture)")
         }
 
@@ -287,15 +293,12 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                             llMarkTyreBurst.visibility = View.VISIBLE
                             llTowRequired.visibility = View.GONE
 
-                            if(strVehicleType == "2wheeler")
-                            {
-                                rl4WheelerBurst.visibility=View.GONE
-                                rlTwoWheelerBurst.visibility=View.VISIBLE
-                            }
-                            else
-                            {
-                                rl4WheelerBurst.visibility=View.VISIBLE
-                                rlTwoWheelerBurst.visibility=View.GONE
+                            if (strVehicleType == "2wheeler") {
+                                rl4WheelerBurst.visibility = View.GONE
+                                rlTwoWheelerBurst.visibility = View.VISIBLE
+                            } else {
+                                rl4WheelerBurst.visibility = View.VISIBLE
+                                rlTwoWheelerBurst.visibility = View.GONE
                             }
                         }
                         ifTowRequired -> {
@@ -340,15 +343,12 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                     llMarkTyreBurst.visibility = View.VISIBLE
                     llTowRequired.visibility = View.GONE
                     ifTowRequired = false
-                    if(strVehicleType == "2wheeler")
-                    {
-                        rl4WheelerBurst.visibility=View.GONE
-                        rlTwoWheelerBurst.visibility=View.VISIBLE
-                    }
-                    else
-                    {
-                        rl4WheelerBurst.visibility=View.VISIBLE
-                        rlTwoWheelerBurst.visibility=View.GONE
+                    if (strVehicleType == "2wheeler") {
+                        rl4WheelerBurst.visibility = View.GONE
+                        rlTwoWheelerBurst.visibility = View.VISIBLE
+                    } else {
+                        rl4WheelerBurst.visibility = View.VISIBLE
+                        rlTwoWheelerBurst.visibility = View.GONE
                     }
                 }
             }
@@ -368,15 +368,12 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                     llUploadPics.visibility = View.GONE
                     llFindFobbu.visibility = View.GONE
                     llMarkTyreBurst.visibility = View.VISIBLE
-                    if(strVehicleType == "2wheeler")
-                    {
-                        rl4WheelerBurst.visibility=View.GONE
-                        rlTwoWheelerBurst.visibility=View.VISIBLE
-                    }
-                    else
-                    {
-                        rl4WheelerBurst.visibility=View.VISIBLE
-                        rlTwoWheelerBurst.visibility=View.GONE
+                    if (strVehicleType == "2wheeler") {
+                        rl4WheelerBurst.visibility = View.GONE
+                        rlTwoWheelerBurst.visibility = View.VISIBLE
+                    } else {
+                        rl4WheelerBurst.visibility = View.VISIBLE
+                        rlTwoWheelerBurst.visibility = View.GONE
                     }
                 } else {
                     llHomeServices.visibility = View.GONE
@@ -479,15 +476,12 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                     llUploadPics.visibility = View.GONE
                     llFindFobbu.visibility = View.GONE
                     llMarkTyreBurst.visibility = View.VISIBLE
-                    if(strVehicleType == "2wheeler")
-                    {
-                        rl4WheelerBurst.visibility=View.GONE
-                        rlTwoWheelerBurst.visibility=View.VISIBLE
-                    }
-                    else
-                    {
-                        rl4WheelerBurst.visibility=View.VISIBLE
-                        rlTwoWheelerBurst.visibility=View.GONE
+                    if (strVehicleType == "2wheeler") {
+                        rl4WheelerBurst.visibility = View.GONE
+                        rlTwoWheelerBurst.visibility = View.VISIBLE
+                    } else {
+                        rl4WheelerBurst.visibility = View.VISIBLE
+                        rlTwoWheelerBurst.visibility = View.GONE
                     }
                 } else {
                     llHomeServices.visibility = View.GONE
@@ -500,9 +494,12 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
         }
 
         tvUploadPics.setOnClickListener {
-            if (file1!=null || file2!= null || file3 != null || file4!=null)
+            if (file1 != null || file2 != null || file3 != null || file4 != null)
                 showMainFindFobbuView()
-            else CommonClass(activity!!,activity!!).showToast(activity!!.resources.getString(R.string.provide_image_rsa_msg))
+            else CommonClass(
+                activity!!,
+                activity!!
+            ).showToast(activity!!.resources.getString(R.string.provide_image_rsa_msg))
         }
 
         tvSkip.setOnClickListener {
@@ -534,13 +531,10 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
         viewLeftTwoWheeler.setOnClickListener {
 
-            if(!listSelectedBurstTyre.contains("LeftTwoWheeler"))
-            {
+            if (!listSelectedBurstTyre.contains("LeftTwoWheeler")) {
                 viewLeftTwoWheeler.setBackgroundResource(R.drawable.red_circle)
                 listSelectedBurstTyre.add("LeftTwoWheeler")
-            }
-            else
-            {
+            } else {
                 viewLeftTwoWheeler.setBackgroundResource(R.drawable.border_circle)
                 listSelectedBurstTyre.remove("LeftTwoWheeler")
             }
@@ -548,13 +542,10 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
         viewRightTwoWheeler.setOnClickListener {
 
-            if(!listSelectedBurstTyre.contains("RightTwoWheeler"))
-            {
+            if (!listSelectedBurstTyre.contains("RightTwoWheeler")) {
                 viewRightTwoWheeler.setBackgroundResource(R.drawable.red_circle)
                 listSelectedBurstTyre.add("RightTwoWheeler")
-            }
-            else
-            {
+            } else {
                 viewRightTwoWheeler.setBackgroundResource(R.drawable.border_circle)
                 listSelectedBurstTyre.remove("RightTwoWheeler")
             }
@@ -789,8 +780,7 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     }
 
     // initializing all the variables of the class in this method
-    private fun initialise(view: View?)
-    {
+    private fun initialise(view: View?) {
 
         webServiceApi = getEnv().getRetrofitMulti()
 
@@ -850,7 +840,8 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
         etVehicleNumber.setOnClickListener {
             etVehicleNumber.requestFocus()
-            val imm:InputMethodManager= activity!!.getSystemService (Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            val imm: InputMethodManager =
+                activity!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.showSoftInput(etVehicleNumber, InputMethodManager.SHOW_IMPLICIT)
         }
 
@@ -895,7 +886,7 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
         viewLeftTwoWheeler = view.findViewById(R.id.viewLeftTwoWheeler)
         viewRightTwoWheeler = view.findViewById(R.id.viewRightTwoWheeler)
 
-        view.tvName.text= """${activity!!.resources.getString(R.string.hello)} ${CommonClass(
+        view.tvName.text = """${activity!!.resources.getString(R.string.hello)} ${CommonClass(
             activity!!,
             activity!!
         ).getString("display_name")}"""
@@ -907,17 +898,19 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     ///RECYCLER VIEW CLICKS HANDLED
     private fun recyclerViewClicks() {
 
-        val locationManager : LocationManager? = activity?.getSystemService(Context.LOCATION_SERVICE) as LocationManager?
+        val locationManager: LocationManager? = activity?.getSystemService(Context.LOCATION_SERVICE) as LocationManager?
 
-        if (isAdded)
-        {
+        if (isAdded) {
             recyclerViewServices.addOnItemTouchListener(
                 RecyclerItemClickListener(activity!!, object : RecyclerItemClickListener.OnItemClickListener {
                     @SuppressLint("SetTextI18n")
                     override fun onItemClick(view: View, position: Int) {
 
                         val permission =
-                            ContextCompat.checkSelfPermission(context!!, android.Manifest.permission.ACCESS_FINE_LOCATION)
+                            ContextCompat.checkSelfPermission(
+                                context!!,
+                                android.Manifest.permission.ACCESS_FINE_LOCATION
+                            )
 
                         if (permission != PackageManager.PERMISSION_GRANTED) {
                             showMessageDialog(
@@ -925,10 +918,7 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                                         "Phone Settings -> Apps --> Fobbu Member --> Permissions\n" +
                                         "to allow the permissions"
                             )
-                        }
-
-
-                        else if ( !locationManager?.isProviderEnabled( LocationManager.GPS_PROVIDER )!!) {
+                        } else if (!locationManager?.isProviderEnabled(LocationManager.GPS_PROVIDER)!!) {
                             enableGPSAutoMatically()
                         }
 
@@ -936,8 +926,8 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                            {
                                CommonClass(activity!!,activity!!).showToast("Unable to fetch the loaction. Please wait few seconds")
                            }*/
-                        else
-                        {  serviceSelected = dataListServices[position]["static_name"].toString()
+                        else {
+                            serviceSelected = dataListServices[position]["static_name"].toString()
                             serviceSelectedID = dataListServices[position]["_id"].toString()
                             serviceSelectedAmount = dataListServices[position]["service_price"].toString()
 
@@ -1042,19 +1032,19 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
     // fetch service Api (API-partners/services)
     private fun serviceListApi() {
-        if (CommonClass(activity!!, activity!!).checkInternetConn(activity!!))
-        {
+        if (CommonClass(activity!!, activity!!).checkInternetConn(activity!!)) {
             val tokenHeader = CommonClass(activity!!, activity!!).getString("x_access_token")
 
             rsaFragmentHandler.fetchService(tokenHeader)
-        }
-        else
-            CommonClass(activity!!,activity!!).showToast(activity!!.resources.getString(R.string.internet_is_unavailable))
+        } else
+            CommonClass(
+                activity!!,
+                activity!!
+            ).showToast(activity!!.resources.getString(R.string.internet_is_unavailable))
     }
 
     // handling fetch service api response (API-partners/services)
-    override fun fetchingServiceReport(mainPojo: MainPojo)
-    {
+    override fun fetchingServiceReport(mainPojo: MainPojo) {
         //val mainPojo = response!!.body()
         val serviceList = mainPojo.services
 
@@ -1067,17 +1057,14 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
         println("service list $dataListServices")
 
-        for (i in dataListServices.indices)
-        {
-            if (i == 0)
-            {
+        for (i in dataListServices.indices) {
+            if (i == 0) {
                 dataListServices[i]["select"] = "1"
 
                 serviceSelectedID = dataListServices[i]["_id"].toString()
 
                 serviceSelectedAmount = dataListServices[i]["service_price"].toString()
-            }
-            else
+            } else
                 dataListServices[i]["select"] = "0"
         }
 
@@ -1121,7 +1108,7 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
             etVehicleNumber.text.toString()
         )
 
-        CommonClass(activity!!,activity!!).removeString(RsaConstants.Ods.vehicleNumberSelect)
+        CommonClass(activity!!, activity!!).removeString(RsaConstants.Ods.vehicleNumberSelect)
 
         rsaFragmentHandler.findFobbuRequest(
             userId, serviceSelected, strLatitude, strLongitude
@@ -1188,9 +1175,11 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
             val tokenHeader = CommonClass(activity!!, activity!!).getString("x_access_token")
 
             rsaFragmentHandler.findFleetOrUser(tokenHeader, id)
-        }
-        else
-            CommonClass(activity!!,activity!!).showToast(activity!!.resources.getString(R.string.internet_is_unavailable))
+        } else
+            CommonClass(
+                activity!!,
+                activity!!
+            ).showToast(activity!!.resources.getString(R.string.internet_is_unavailable))
     }
 
     // Handler Fleet request Api response (Api-users/request/{requestId})
@@ -1226,24 +1215,27 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     }
 
 
-    private fun getAddressFromLocation(lat:kotlin.Double, long:kotlin.Double)
-    {
-        geocoder= Geocoder(activity!!, Locale.ENGLISH)
-        try {
-            val address:  List<Address> = geocoder.getFromLocation(lat,long,1)
-            if (address.isNotEmpty())
-            {
-                println("current address::${address[0].getAddressLine(0)}")
+    private fun getAddressFromLocation(lat: kotlin.Double, long: kotlin.Double) {
 
-                CommonClass(activity!!,activity!!).putString(RsaConstants.Ods.address,address[0].getAddressLine(0))
+            try {
+                geocoder = Geocoder(activity!!, Locale.ENGLISH)
 
-                currentAddress=address[0].getAddressLine(0)
+                val address: List<Address> = geocoder.getFromLocation(lat, long, 1)
+                if (address.isNotEmpty()) {
+                    println("current address::${address[0].getAddressLine(0)}")
+
+                    CommonClass(activity!!, activity!!).putString(
+                        RsaConstants.Ods.address,
+                        address[0].getAddressLine(0)
+                    )
+
+                    currentAddress = address[0].getAddressLine(0)
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
             }
-        }
-        catch (e:Exception)
-        {
 
-        }
+
     }
 
     override fun onConnected(p0: Bundle?) {
@@ -1263,6 +1255,8 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
             strLongitude = p0.longitude.toString()
 
             throwMarkerOnMap(p0.latitude.toString(), p0.longitude.toString())
+
+            setDefaultMarkerOption(LatLng(p0.latitude, p0.longitude))
 
             mapClicks()
 
@@ -1300,10 +1294,8 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     private fun checkGPSEnable() {
         val apiLevel = android.os.Build.VERSION.SDK_INT
 
-        if (isAdded)
-        {
-            if (apiLevel >= 23)
-            {
+        if (isAdded) {
+            if (apiLevel >= 23) {
 
                 val permission =
                     ContextCompat.checkSelfPermission(context!!, android.Manifest.permission.ACCESS_FINE_LOCATION)
@@ -1317,9 +1309,7 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                 } else {
                     enableGPSAutoMatically()
                 }
-            }
-            else
-            {
+            } else {
                 enableGPSAutoMatically()
             }
         }
@@ -1371,6 +1361,11 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                                 googleApiClient, locationRequest,
                                 this@RSAFragment
                             )
+
+                           // mLastLocation = LocationServices.FusedLocationApi.getLastLocation(googleApiClient)
+                            /*assignLocationValues(mLastLocation!!)*/
+                           // throwMarkerOnMap(mLastLocation?.latitude.toString(),mLastLocation?.longitude.toString())
+                           // setDefaultMarkerOption(LatLng(mLastLocation!!.latitude, mLastLocation!!.longitude))
                         } catch (e: IntentSender.SendIntentException) {
                         }
                     }
@@ -1393,48 +1388,74 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     // Method for setting up  marker on Map
     private fun throwMarkerOnMap(latitude: String, longitude: String) {
 
-        // create marker
-        val markerOption = MarkerOptions().position(
-            LatLng(Double.valueOf(latitude), Double.valueOf(longitude))
-        )//.title(data["id"].toString())
-
-        // Changing marker icon
-        markerOption.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_mark_blue))
-
-
-        // adding marker
-        googleMap.clear()
-
-        getAddressFromLocation(Double.valueOf(latitude),Double.valueOf(longitude))
-
-        if (currentAddress!="")
+        if(latitude!="" && longitude!="" && latitude!=null && longitude!=null)
         {
+            // create marker
+            val markerOption = MarkerOptions().position(
+                LatLng(Double.valueOf(latitude), Double.valueOf(longitude))
+            )//.title(data["id"].toString())
+
+            // Changing marker icon
+            markerOption.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_mark_blue))
+
+
             // adding marker
-            val marker = googleMap.addMarker(markerOption)
+            googleMap.clear()
 
-            marker.title = currentAddress
+            getAddressFromLocation(Double.valueOf(latitude), Double.valueOf(longitude))
+
+            if (currentAddress != "") {
+                // adding marker
+                val marker = googleMap.addMarker(markerOption)
+
+                marker.title = currentAddress
+            }
+
+            val cameraPosition = CameraPosition.Builder()
+                .target(LatLng(Double.valueOf(latitude), Double.valueOf(longitude))).zoom(14f).build()
+
+            googleMap.moveCamera(CameraUpdateFactory.newLatLng(LatLng(Double.valueOf(latitude), Double.valueOf(longitude))))
+
+            addCameraToMap(LatLng(Double.valueOf(latitude), Double.valueOf(longitude)))
+
+            // googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
         }
+    }
 
+
+    private fun addCameraToMap(latLng:LatLng)
+    {
         val cameraPosition = CameraPosition.Builder()
-            .target(LatLng(Double.valueOf(latitude), Double.valueOf(longitude))).zoom(14f).build()
+            .target(latLng)
+            .zoom(16f)
+            .build()
+        googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
+    }
 
-       // googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
+
+    private var yourLocationMarker: MarkerOptions? = null
+
+    fun setDefaultMarkerOption(location:LatLng)
+    {
+        if (yourLocationMarker == null) {
+            yourLocationMarker = MarkerOptions()
+        }
+        yourLocationMarker!!.position(location)
     }
 
     // for handling clicks on the map
-    private fun mapClicks()
-    {
+    private fun mapClicks() {
         googleMap.setOnMapClickListener {
 
-            getAddressFromLocation(it.latitude,it.longitude)
+            getAddressFromLocation(it.latitude, it.longitude)
 
-            throwMarkerOnMap(it.latitude.toString(),it.longitude.toString())
+            throwMarkerOnMap(it.latitude.toString(), it.longitude.toString())
         }
 
-        googleMap.setOnInfoWindowClickListener{
+        googleMap.setOnInfoWindowClickListener {
 
             try {
-                val intent =  PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_FULLSCREEN).build(activity!!)
+                val intent = PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_FULLSCREEN).build(activity!!)
                 startActivityForResult(intent, 123)
 
             } catch (e: GooglePlayServicesRepairableException) {
@@ -1447,15 +1468,6 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
         }
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-
-        outState.putBoolean("STATE_HAS_SAVED_STATE", true)
-
-        mapView.onSaveInstanceState(outState)
-
-        super.onSaveInstanceState(outState)
-
-    }
 
     fun ifTopBarChnagesNull(boolean: Boolean) {
         if (topBarChanges == null)
@@ -1468,9 +1480,8 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
         super.onResume()
         mMapView.onResume()
 
-        if (CommonClass(activity!!,activity!!).getString(RsaConstants.Ods.vehicleTypeSelect).isNotEmpty())
-        {
-            etVehicleNumber.setText(CommonClass(activity!!,activity!!).getString(RsaConstants.Ods.vehicleNumberSelect))
+        if (CommonClass(activity!!, activity!!).getString(RsaConstants.Ods.vehicleTypeSelect).isNotEmpty()) {
+            etVehicleNumber.setText(CommonClass(activity!!, activity!!).getString(RsaConstants.Ods.vehicleNumberSelect))
 
             etVehicleNumber.setSelection(etVehicleNumber.text.length)
         }
@@ -1494,7 +1505,7 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
     override fun onDestroy() {
         super.onDestroy()
-       // mMapView.onDestroy()
+        // mMapView.onDestroy()
     }
 
     override fun onLowMemory() {
@@ -1512,8 +1523,12 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
         @SuppressLint("SetTextI18n", "InflateParams")
         override fun getInfoWindow(p0: Marker?): View? {
 
+            val view=LayoutInflater.from(activity!!).inflate(R.layout.inflate_marker_title,null)
 
-            return null
+            view.tvMarkerTitle.text=currentAddress
+
+            return view
+
         }
     }
 
@@ -1632,15 +1647,17 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
         alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Gallery") { dialogInterface, i ->
             val apiLevel = android.os.Build.VERSION.SDK_INT
 
-            if (isAdded)
-            {
+            if (isAdded) {
                 if (apiLevel >= 23) {
                     //phone state
                     val permission1 =
                         ContextCompat.checkSelfPermission(activity!!, android.Manifest.permission.READ_EXTERNAL_STORAGE)
 
                     val permission2 =
-                        ContextCompat.checkSelfPermission(activity!!, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                        ContextCompat.checkSelfPermission(
+                            activity!!,
+                            android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+                        )
 
                     if (permission1 != PackageManager.PERMISSION_GRANTED || permission2 != PackageManager.PERMISSION_GRANTED) {
                         makeRequest2()
@@ -1830,11 +1847,11 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                 if (resultCode == Activity.RESULT_OK) {
                     val place: Place = PlaceAutocomplete.getPlace(activity!!, data)
 
-                    val lat=place.latLng.latitude
+                    val lat = place.latLng.latitude
 
-                    val long=place.latLng.longitude
+                    val long = place.latLng.longitude
 
-                    throwMarkerOnMap(lat.toString(),long.toString())
+                    throwMarkerOnMap(lat.toString(), long.toString())
 
                     //Log.i(TAG, "Place: " + place.getName());
                 } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
@@ -1990,7 +2007,6 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
         fos.close()
         return f
     }
-
 
 
     // Method for rotating images

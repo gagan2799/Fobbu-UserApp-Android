@@ -6,6 +6,8 @@ import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.*
 import android.content.pm.PackageManager
+import android.location.Address
+import android.location.Geocoder
 import android.location.Location
 import android.os.Build
 import android.os.Bundle
@@ -46,8 +48,10 @@ import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.MapsInitializer
 import com.google.android.gms.maps.model.*
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.inflate_marker_title.view.*
 import org.json.JSONArray
 import java.lang.Double
+import java.util.*
 
 class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     GoogleApiClient.ConnectionCallbacks, LocationListener, ActivityView {
@@ -60,6 +64,10 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     private lateinit var mMapView: MapView
     private lateinit var googleMap: GoogleMap
     private val locationPermissionRequestCode = 12312
+
+    var currentAddress = ""
+
+    var geocoder: Geocoder? = null
 
     private var strLatitude = ""
     private var strLongitude = ""
@@ -87,6 +95,9 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     private lateinit var rlTools: RelativeLayout
 
     private var checkFirstTime = true
+
+    private var mLastLocation: Location? = null
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -313,11 +324,34 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
             throwMarkerOnMap(p0.latitude.toString(), p0.longitude.toString())
 
+            setDefaultMarkerOption(LatLng(mLastLocation!!.latitude, mLastLocation!!.longitude))
+
+
             location = true
         } else if (location) {
             LocationServices.FusedLocationApi.removeLocationUpdates(googleApiClient, this@RSALiveFragment)
         }
     }
+
+
+    private fun addCameraToMap(latLng: LatLng) {
+        val cameraPosition = CameraPosition.Builder()
+            .target(latLng)
+            .zoom(16f)
+            .build()
+        googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
+    }
+
+
+    private var yourLocationMarker: MarkerOptions? = null
+
+    fun setDefaultMarkerOption(location: LatLng) {
+        if (yourLocationMarker == null) {
+            yourLocationMarker = MarkerOptions()
+        }
+        yourLocationMarker!!.position(location)
+    }
+
 
     override fun onConnectionFailed(p0: ConnectionResult) {
     }
@@ -390,10 +424,16 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
             when (status.statusCode) {
                 LocationSettingsStatusCodes.SUCCESS -> {
                     try {
-                        LocationServices.FusedLocationApi.requestLocationUpdates(
-                            googleApiClient, locationRequest,
-                            this@RSALiveFragment
-                        )
+                        /*   LocationServices.FusedLocationApi.requestLocationUpdates(
+                               googleApiClient, locationRequest,
+                               this@RSALiveFragment
+                           )*/
+
+                        mLastLocation = LocationServices.FusedLocationApi.getLastLocation(googleApiClient)
+                        /*assignLocationValues(mLastLocation!!)*/
+                        throwMarkerOnMap(mLastLocation?.latitude.toString(), mLastLocation?.longitude.toString())
+                        setDefaultMarkerOption(LatLng(mLastLocation!!.latitude, mLastLocation!!.longitude))
+
                     } catch (e: IntentSender.SendIntentException) {
                     }
                 }
@@ -407,25 +447,74 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
         }
     }
 
-    private fun throwMarkerOnMap(latitude: String, longitude: String) {
+    private fun getAddressFromLocation(lat: kotlin.Double, long: kotlin.Double) {
 
-        // create marker
-        val marker = MarkerOptions().position(
-            LatLng(Double.valueOf(latitude), Double.valueOf(longitude))
-        )//.title(data["id"].toString())
+        try {
+            geocoder = Geocoder(activity!!, Locale.ENGLISH)
 
-        // Changing marker icon
-        marker.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_mark_blue))
+            val address: List<Address> = geocoder!!.getFromLocation(lat, long, 1)
+            if (address.isNotEmpty()) {
+                println("current address::${address[0].getAddressLine(0)}")
 
-        // adding marker
-        googleMap.addMarker(marker)
+                CommonClass(activity!!, activity!!).putString(
+                    RsaConstants.Ods.address,
+                    address[0].getAddressLine(0)
+                )
 
-        val cameraPosition = CameraPosition.Builder()
-            .target(LatLng(Double.valueOf(latitude), Double.valueOf(longitude))).zoom(14f).build()
+                currentAddress = address[0].getAddressLine(0)
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
 
-        //googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
+
     }
 
+    // Method for setting up  marker on Map
+    private fun throwMarkerOnMap(latitude: String, longitude: String) {
+
+        try {
+            // create marker
+            val markerOption = MarkerOptions().position(
+                LatLng(Double.valueOf(latitude), Double.valueOf(longitude))
+            )//.title(data["id"].toString())
+
+            // Changing marker icon
+            markerOption.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_mark_blue))
+
+
+            // adding marker
+            googleMap.clear()
+
+            getAddressFromLocation(Double.valueOf(latitude), Double.valueOf(longitude))
+
+            if (currentAddress != "") {
+                // adding marker
+                val marker = googleMap.addMarker(markerOption)
+
+                marker.title = currentAddress
+            }
+
+            val cameraPosition = CameraPosition.Builder()
+                .target(LatLng(Double.valueOf(latitude), Double.valueOf(longitude))).zoom(14f).build()
+
+            googleMap.moveCamera(
+                CameraUpdateFactory.newLatLng(
+                    LatLng(
+                        Double.valueOf(latitude),
+                        Double.valueOf(longitude)
+                    )
+                )
+            )
+
+            addCameraToMap(LatLng(Double.valueOf(latitude), Double.valueOf(longitude)))
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+        // googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
+    }
     override fun onPause() {
         super.onPause()
         mMapView.onPause()
@@ -464,9 +553,12 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
         @SuppressLint("SetTextI18n", "InflateParams")
         override fun getInfoWindow(p0: Marker?): View? {
+            val view = LayoutInflater.from(activity!!).inflate(R.layout.inflate_marker_title, null)
 
+            view.tvMarkerTitle.text = currentAddress
 
-            return null
+            return view
+
         }
     }
 
@@ -493,216 +585,231 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     @SuppressLint("SetTextI18n")
     private fun checkStatusAndUpdateText() {
 
-        val status = CommonClass(activity!!, activity!!).getString(RsaConstants.RsaTypes.checkStatus)
+        try {
 
-        println("HERE IN LIVE FRAGMENT $status")
+            println(
+                "HERE IN LIVE FRAGMENT" + CommonClass(
+                    activity!!,
+                    activity!!
+                ).getString(RsaConstants.RsaTypes.checkStatus)
+            )
 
-        when (status) {
+            val status = CommonClass(activity!!, activity!!).getString(RsaConstants.RsaTypes.checkStatus)
 
-            FcmPushTypes.Types.accept -> {
+            when (status) {
 
-                println("DISPLAY NAME ACCEPT >>> " + displayName)
+                FcmPushTypes.Types.accept -> {
 
-                tvText.text =
-                        """${activity!!.resources.getString(R.string.please_wait_fobbu_msg)}$displayName ${activity!!.resources.getString(
-                            R.string.gathering_tools__msg
-                        )}"""
+                    println("DISPLAY NAME ACCEPT >>> " + displayName)
+
+                    tvText.text =
+                            """${activity!!.resources.getString(R.string.please_wait_fobbu_msg)}$displayName ${activity!!.resources.getString(
+                                R.string.gathering_tools__msg
+                            )}"""
+                }
+
+                FcmPushTypes.Types.moneyPaid -> {
+
+                    println("DISPLAY NAME IN ROUTE >>> " + displayName)
+                    ivTool.setImageResource(R.drawable.man_riding_bike)
+                    tvText.text = displayName + " " + resources.getString(R.string.fobbu_on_way)
+                    strWhere = "share"
+                    ivLeftDotted.setImageResource(R.drawable.dotted)
+                    ivRightDotted.setImageResource(R.drawable.dotted)
+                    tvTrack.background = resources.getDrawable(R.drawable.solid_color_red)
+                    rlPickingFuel.visibility = View.GONE
+                    tvPickingFuel.visibility = View.GONE
+                    rlTools.visibility = View.VISIBLE
+                }
+
+                FcmPushTypes.Types.inRouteRequest -> {
+
+                    println("DISPLAY NAME IN ROUTE >>> " + displayName)
+
+                    ivTool.setImageResource(R.drawable.man_riding_bike)
+                    tvText.text = displayName + " " + resources.getString(R.string.fobbu_on_way)
+                    strWhere = "share"
+                    ivLeftDotted.setImageResource(R.drawable.dotted)
+                    ivRightDotted.setImageResource(R.drawable.dotted)
+                    tvTrack.background = resources.getDrawable(R.drawable.solid_color_red)
+                    rlPickingFuel.visibility = View.GONE
+                    tvPickingFuel.visibility = View.GONE
+                    rlTools.visibility = View.VISIBLE
+
+                }
+                FcmPushTypes.Types.newPin -> {
+
+                    println("DISPLAY NAME NEW PIN >>> " + displayName)
+
+                    ivTool.setImageResource(R.drawable.mechanic_with_cap)
+                    tvText.text = resources.getString(R.string.share_4_digit_code)
+                    if (CommonClass(activity!!, activity!!).getString(RsaConstants.ServiceSaved.otpStart).length == 3)
+                        tvCode.text = "0" +
+                                CommonClass(activity!!, activity!!).getString(RsaConstants.ServiceSaved.otpStart)
+                    else
+                        tvCode.text = CommonClass(activity!!, activity!!).getString(RsaConstants.ServiceSaved.otpStart)
+                    tvCode.visibility = View.VISIBLE
+                }
+
+                FcmPushTypes.Types.otpGenerated -> {
+
+                    println("DISPLAY NAME otpGenerated >>> " + displayName)
+
+                    ivTool.setImageResource(R.drawable.mechanic_with_cap)
+                    tvText.text = resources.getString(R.string.share_4_digit_code)
+                    if (CommonClass(activity!!, activity!!).getString(RsaConstants.ServiceSaved.otpStart).length == 3)
+                        tvCode.text = "0" +
+                                CommonClass(activity!!, activity!!).getString(RsaConstants.ServiceSaved.otpStart)
+                    else
+                        tvCode.text = CommonClass(activity!!, activity!!).getString(RsaConstants.ServiceSaved.otpStart)
+                    tvCode.visibility = View.VISIBLE
+                }
+                FcmPushTypes.Types.otpVerified -> {
+                    println("HERE IN LIVE ")
+                    println("DISPLAY NAME VERIFIED >>> " + displayName)
+
+
+                    startActivity(
+                        Intent(
+                            activity!!,
+                            WaitingScreenWhite::class.java
+                        ).putExtra("from_where", "code_valid")
+                    )
+                    destroyEverythingMethod()
+                }
+
+                FcmPushTypes.Types.fuelDefaultScreen -> {
+                    ivLeftDotted.setImageResource(R.drawable.dotted_gray)
+                    ivRightDotted.setImageResource(R.drawable.dotted_gray)
+                    tvTrack.setBackgroundResource(R.drawable.solid_color_grey)
+                    rlPickingFuel.visibility = View.VISIBLE
+                    tvPickingFuel.visibility = View.VISIBLE
+                    rlTools.visibility = View.GONE
+                }
+
+                FcmPushTypes.Types.requestCancelled -> {
+                    val intent = Intent()
+                    intent.action = FcmPushTypes.Types.fromAPIBroadCast
+                    activity!!.sendBroadcast(intent)
+                }
             }
 
-            FcmPushTypes.Types.moneyPaid -> {
-
-                println("DISPLAY NAME IN ROUTE >>> " + displayName)
-                ivTool.setImageResource(R.drawable.man_riding_bike)
-                tvText.text = displayName + " " + resources.getString(R.string.fobbu_on_way)
-                strWhere = "share"
-                ivLeftDotted.setImageResource(R.drawable.dotted)
-                ivRightDotted.setImageResource(R.drawable.dotted)
-                tvTrack.background = resources.getDrawable(R.drawable.solid_color_red)
-                rlPickingFuel.visibility = View.GONE
-                tvPickingFuel.visibility = View.GONE
-                rlTools.visibility = View.VISIBLE
-            }
-
-            FcmPushTypes.Types.inRouteRequest -> {
-
-                println("DISPLAY NAME IN ROUTE >>> " + displayName)
-
-                ivTool.setImageResource(R.drawable.man_riding_bike)
-                tvText.text = displayName + " " + resources.getString(R.string.fobbu_on_way)
-                strWhere = "share"
-                ivLeftDotted.setImageResource(R.drawable.dotted)
-                ivRightDotted.setImageResource(R.drawable.dotted)
-                tvTrack.background = resources.getDrawable(R.drawable.solid_color_red)
-                rlPickingFuel.visibility = View.GONE
-                tvPickingFuel.visibility = View.GONE
-                rlTools.visibility = View.VISIBLE
-
-            }
-            FcmPushTypes.Types.newPin -> {
-
-                println("DISPLAY NAME NEW PIN >>> " + displayName)
-
-                ivTool.setImageResource(R.drawable.mechanic_with_cap)
-                tvText.text = resources.getString(R.string.share_4_digit_code)
-                if (CommonClass(activity!!, activity!!).getString(RsaConstants.ServiceSaved.otpStart).length == 3)
-                    tvCode.text = "0" +
-                            CommonClass(activity!!, activity!!).getString(RsaConstants.ServiceSaved.otpStart)
-                else
-                    tvCode.text = CommonClass(activity!!, activity!!).getString(RsaConstants.ServiceSaved.otpStart)
-                tvCode.visibility = View.VISIBLE
-            }
-
-            FcmPushTypes.Types.otpGenerated -> {
-
-                println("DISPLAY NAME otpGenerated >>> " + displayName)
-
-                ivTool.setImageResource(R.drawable.mechanic_with_cap)
-                tvText.text = resources.getString(R.string.share_4_digit_code)
-                if (CommonClass(activity!!, activity!!).getString(RsaConstants.ServiceSaved.otpStart).length == 3)
-                    tvCode.text = "0" +
-                            CommonClass(activity!!, activity!!).getString(RsaConstants.ServiceSaved.otpStart)
-                else
-                    tvCode.text = CommonClass(activity!!, activity!!).getString(RsaConstants.ServiceSaved.otpStart)
-                tvCode.visibility = View.VISIBLE
-            }
-            FcmPushTypes.Types.otpVerified -> {
-                println("HERE IN LIVE ")
-                println("DISPLAY NAME VERIFIED >>> " + displayName)
-
-
-                startActivity(
-                    Intent(
-                        activity!!,
-                        WaitingScreenWhite::class.java
-                    ).putExtra("from_where", "code_valid")
-                )
-                destroyEverythingMethod()
-            }
-
-            FcmPushTypes.Types.fuelDefaultScreen -> {
-                ivLeftDotted.setImageResource(R.drawable.dotted_gray)
-                ivRightDotted.setImageResource(R.drawable.dotted_gray)
-                tvTrack.setBackgroundResource(R.drawable.solid_color_grey)
-                rlPickingFuel.visibility = View.VISIBLE
-                tvPickingFuel.visibility = View.VISIBLE
-                rlTools.visibility = View.GONE
-            }
-
-            FcmPushTypes.Types.requestCancelled -> {
-                val intent = Intent()
-                intent.action = FcmPushTypes.Types.fromAPIBroadCast
-                activity!!.sendBroadcast(intent)
-            }
+        } catch (e: java.lang.Exception) {
+            e.printStackTrace()
         }
-
     }
 
 
     @SuppressLint("SetTextI18n")
     private fun checkStatusAndNavigate() {
 
-        val status = CommonClass(activity!!, activity!!).getString(RsaConstants.RsaTypes.checkStatus)
+        try {
+            val status = CommonClass(activity!!, activity!!).getString(RsaConstants.RsaTypes.checkStatus)
 
-        println("HERE IN LIVE FRAGMENT $status")
+            println("HERE IN LIVE FRAGMENT $status")
 
-        when (status) {
+            when (status) {
 
-            FcmPushTypes.Types.accept -> {
+                FcmPushTypes.Types.accept -> {
 
-                println("DISPLAY NAME ACCEPT >>> " + displayName)
+                    println("DISPLAY NAME ACCEPT >>> " + displayName)
 
-                tvText.text =
-                        """${activity!!.resources.getString(R.string.please_wait_fobbu_msg)}$displayName ${activity!!.resources.getString(
-                            R.string.gathering_tools__msg
-                        )}"""
+                    tvText.text =
+                            """${activity!!.resources.getString(R.string.please_wait_fobbu_msg)}$displayName ${activity!!.resources.getString(
+                                R.string.gathering_tools__msg
+                            )}"""
+                }
+
+                FcmPushTypes.Types.inRouteRequest -> {
+
+                    println("DISPLAY NAME IN ROUTE >>> " + displayName)
+
+                    ivTool.setImageResource(R.drawable.man_riding_bike)
+                    tvText.text = displayName + " " + resources.getString(R.string.fobbu_on_way)
+                    strWhere = "share"
+                   // updateLiveLocation()
+                    ivLeftDotted.setImageResource(R.drawable.dotted)
+                    ivRightDotted.setImageResource(R.drawable.dotted)
+                    tvTrack.background = resources.getDrawable(R.drawable.solid_color_red)
+                    rlPickingFuel.visibility = View.GONE
+                    tvPickingFuel.visibility = View.GONE
+                    rlTools.visibility = View.VISIBLE
+
+                }
+
+                FcmPushTypes.Types.moneyPaid -> {
+
+                    println("DISPLAY NAME IN ROUTE >>> " + displayName)
+
+                    ivTool.setImageResource(R.drawable.man_riding_bike)
+                    tvText.text = displayName + " " + resources.getString(R.string.fobbu_on_way)
+                    strWhere = "share"
+                  //  updateLiveLocation()
+                    ivLeftDotted.setImageResource(R.drawable.dotted)
+                    ivRightDotted.setImageResource(R.drawable.dotted)
+                    tvTrack.background = resources.getDrawable(R.drawable.solid_color_red)
+                    rlPickingFuel.visibility = View.GONE
+                    tvPickingFuel.visibility = View.GONE
+                    rlTools.visibility = View.VISIBLE
+
+                }
+                FcmPushTypes.Types.newPin -> {
+
+                    println("DISPLAY NAME NEW PIN >>> " + displayName)
+
+                    ivTool.setImageResource(R.drawable.mechanic_with_cap)
+                    tvText.text = resources.getString(R.string.share_4_digit_code)
+                    if (CommonClass(activity!!, activity!!).getString(RsaConstants.ServiceSaved.otpStart).length == 3)
+                        tvCode.text = "0" +
+                                CommonClass(activity!!, activity!!).getString(RsaConstants.ServiceSaved.otpStart)
+                    else
+                        tvCode.text = CommonClass(activity!!, activity!!).getString(RsaConstants.ServiceSaved.otpStart)
+                    tvCode.visibility = View.VISIBLE
+                }
+
+                FcmPushTypes.Types.otpGenerated -> {
+
+                    println("DISPLAY NAME otpGenerated >>> " + displayName)
+
+                    ivTool.setImageResource(R.drawable.mechanic_with_cap)
+                    tvText.text = resources.getString(R.string.share_4_digit_code)
+                    if (CommonClass(activity!!, activity!!).getString(RsaConstants.ServiceSaved.otpStart).length == 3)
+                        tvCode.text = "0" +
+                                CommonClass(activity!!, activity!!).getString(RsaConstants.ServiceSaved.otpStart)
+                    else
+                        tvCode.text = CommonClass(activity!!, activity!!).getString(RsaConstants.ServiceSaved.otpStart)
+                    tvCode.visibility = View.VISIBLE
+                }
+                FcmPushTypes.Types.otpVerified -> {
+                    println("HERE IN LIVE ")
+                    println("DISPLAY NAME VERIFIED >>> " + displayName)
+                    startActivity(
+                        Intent(
+                            activity!!,
+                            WaitingScreenWhite::class.java
+                        ).putExtra("from_where", "code_valid")
+                    )
+                }
+
+                FcmPushTypes.Types.fuelDefaultScreen -> {
+                    ivLeftDotted.setImageResource(R.drawable.dotted_gray)
+                    ivRightDotted.setImageResource(R.drawable.dotted_gray)
+                    tvTrack.setBackgroundResource(R.drawable.solid_color_grey)
+                    rlPickingFuel.visibility = View.VISIBLE
+                    tvPickingFuel.visibility = View.VISIBLE
+                    rlTools.visibility = View.GONE
+                }
+
+                FcmPushTypes.Types.requestCancelled -> {
+                    val intent = Intent()
+                    intent.action = FcmPushTypes.Types.fromAPIBroadCast
+                    activity!!.sendBroadcast(intent)
+                }
             }
-
-            FcmPushTypes.Types.inRouteRequest -> {
-
-                println("DISPLAY NAME IN ROUTE >>> " + displayName)
-
-                ivTool.setImageResource(R.drawable.man_riding_bike)
-                tvText.text = displayName + " " + resources.getString(R.string.fobbu_on_way)
-                strWhere = "share"
-                updateLiveLocation()
-                ivLeftDotted.setImageResource(R.drawable.dotted)
-                ivRightDotted.setImageResource(R.drawable.dotted)
-                tvTrack.background = resources.getDrawable(R.drawable.solid_color_red)
-                rlPickingFuel.visibility = View.GONE
-                tvPickingFuel.visibility = View.GONE
-                rlTools.visibility = View.VISIBLE
-
-            }
-
-            FcmPushTypes.Types.moneyPaid -> {
-
-                println("DISPLAY NAME IN ROUTE >>> " + displayName)
-
-                ivTool.setImageResource(R.drawable.man_riding_bike)
-                tvText.text = displayName + " " + resources.getString(R.string.fobbu_on_way)
-                strWhere = "share"
-                updateLiveLocation()
-                ivLeftDotted.setImageResource(R.drawable.dotted)
-                ivRightDotted.setImageResource(R.drawable.dotted)
-                tvTrack.background = resources.getDrawable(R.drawable.solid_color_red)
-                rlPickingFuel.visibility = View.GONE
-                tvPickingFuel.visibility = View.GONE
-                rlTools.visibility = View.VISIBLE
-
-            }
-            FcmPushTypes.Types.newPin -> {
-
-                println("DISPLAY NAME NEW PIN >>> " + displayName)
-
-                ivTool.setImageResource(R.drawable.mechanic_with_cap)
-                tvText.text = resources.getString(R.string.share_4_digit_code)
-                if (CommonClass(activity!!, activity!!).getString(RsaConstants.ServiceSaved.otpStart).length == 3)
-                    tvCode.text = "0" +
-                            CommonClass(activity!!, activity!!).getString(RsaConstants.ServiceSaved.otpStart)
-                else
-                    tvCode.text = CommonClass(activity!!, activity!!).getString(RsaConstants.ServiceSaved.otpStart)
-                tvCode.visibility = View.VISIBLE
-            }
-
-            FcmPushTypes.Types.otpGenerated -> {
-
-                println("DISPLAY NAME otpGenerated >>> " + displayName)
-
-                ivTool.setImageResource(R.drawable.mechanic_with_cap)
-                tvText.text = resources.getString(R.string.share_4_digit_code)
-                if (CommonClass(activity!!, activity!!).getString(RsaConstants.ServiceSaved.otpStart).length == 3)
-                    tvCode.text = "0" +
-                            CommonClass(activity!!, activity!!).getString(RsaConstants.ServiceSaved.otpStart)
-                else
-                    tvCode.text = CommonClass(activity!!, activity!!).getString(RsaConstants.ServiceSaved.otpStart)
-                tvCode.visibility = View.VISIBLE
-            }
-            FcmPushTypes.Types.otpVerified -> {
-                println("HERE IN LIVE ")
-                println("DISPLAY NAME VERIFIED >>> " + displayName)
-                startActivity(
-                    Intent(
-                        activity!!,
-                        WaitingScreenWhite::class.java
-                    ).putExtra("from_where", "code_valid")
-                )
-            }
-
-            FcmPushTypes.Types.fuelDefaultScreen -> {
-                ivLeftDotted.setImageResource(R.drawable.dotted_gray)
-                ivRightDotted.setImageResource(R.drawable.dotted_gray)
-                tvTrack.setBackgroundResource(R.drawable.solid_color_grey)
-                rlPickingFuel.visibility = View.VISIBLE
-                tvPickingFuel.visibility = View.VISIBLE
-                rlTools.visibility = View.GONE
-            }
-
-            FcmPushTypes.Types.requestCancelled -> {
-                val intent = Intent()
-                intent.action = FcmPushTypes.Types.fromAPIBroadCast
-                activity!!.sendBroadcast(intent)
-            }
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
+
 
     }
 
@@ -817,11 +924,11 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                     println("HIT LIVE LOCATION API>>>>>>>")
                     getServices()
 
-                    handlerrLiveApi.postDelayed(this, 1000 * 60)
+                    handlerrLiveApi.postDelayed(this, 500)
 
 
                 }
-            }, 1000)
+            }, 500)
 
 
             // schedule the task to run starting now and then every minute...
@@ -844,12 +951,22 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
             println("DISPLAY NAME FIRST>>> " + mainPojo.getData().partner.display_name)
 
 
-            val otp = if (mainPojo.getData().otp.contains("\\.".toRegex())) {
-                mainPojo.getData().otp.split("\\.".toRegex())[0]
-            } else
-                mainPojo.getData().otp
+            if (mainPojo.getData().otp != "") {
+                val otp = if (mainPojo.getData().otp.contains("\\.".toRegex())) {
+                    mainPojo.getData().otp.split("\\.".toRegex())[0]
+                } else
+                    mainPojo.getData().otp
 
-            CommonClass(activity!!,activity!!).putString(RsaConstants.ServiceSaved.otpStart, otp)
+                println("OTP >>>>>>>>>>>>>>> " + otp)
+
+                try {
+                    CommonClass(activity!!, activity!!).putString(RsaConstants.ServiceSaved.otpStart, otp)
+                } catch (e: java.lang.Exception) {
+                    e.printStackTrace()
+                }
+
+            }
+
 
             if (checkFirstTime) {
                 checkFirstTime = false
@@ -862,14 +979,25 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                     else
                         imgProfile.setImageResource(R.drawable.dummy_pic)
                 }
-                CommonClass(activity!!, activity!!).putString(
-                    RsaConstants.RsaTypes.checkStatus,
-                    mainPojo.getData().status
-                )
 
                 tvNamePartner.text = displayName
 
                 mobileNumber = mainPojo.getData().partner.mobile_number
+
+
+
+                try {
+
+                    println("STATUS >>>> " + mainPojo.getData().status)
+                    if (mainPojo.getData().status != "")
+                        CommonClass(activity!!, activity!!).putString(
+                            RsaConstants.RsaTypes.checkStatus,
+                            mainPojo.getData().status
+                        )
+
+                } catch (e: java.lang.Exception) {
+                    e.printStackTrace()
+                }
 
                 checkStatusAndUpdateText()
 
@@ -897,15 +1025,18 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                     hmap["long"] = item.getString("long")
                     hmap["set"] = "0"
 
+
+                    println("LAT >>> " + item.getString("lat"))
                     val latLng = LatLng(
                         item.getString("lat").toDouble(),
                         item.getString("long").toDouble()
                     )
 
-                    if (!listCheck.contains(item.getString("lat"))) {
-                        listCheck.add(item.getString("lat"))
-                        polyLineList.add(latLng)
-                    }
+                    // if (!listCheck.contains(item.getString("lat")))
+                    //{
+                    listCheck.add(item.getString("lat"))
+                    polyLineList.add(latLng)
+                    // }
                 }
                 println("lat long list:::::::: $polyLineList")
                 liveTracking(polyLineList)
@@ -932,14 +1063,30 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     private var lat: kotlin.Double = 0.toDouble()
     private var lng: kotlin.Double = 0.toDouble()
 
+    private var firstTime = true
+
     private fun liveTracking(polyLineList: ArrayList<LatLng>) {
 
         if (polyLineList!!.size == 1) {
-            marker = googleMap.addMarker(
-                MarkerOptions().position(polyLineList!![0])
-                    .flat(true)
-                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.map_mark_blue))
-            )
+
+            if (firstTime) {
+                firstTime = false
+                marker = googleMap.addMarker(
+                    MarkerOptions().position(polyLineList!![0])
+                        .flat(true)
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.map_mark_blue))
+                )
+                googleMap.moveCamera(
+                    CameraUpdateFactory
+                        .newCameraPosition(
+                            CameraPosition.Builder()
+                                .target(polyLineList!![0])
+                                .zoom(15.5f)
+                                .build()
+                        )
+                )
+
+            }
 
             googleMap.moveCamera(
                 CameraUpdateFactory
@@ -950,27 +1097,28 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                             .build()
                     )
             )
+
         }
 
         if (polyLineList!!.size >= 2) {
 
 
-            marker = googleMap.addMarker(
-                MarkerOptions().position(polyLineList!![0])
-                    .flat(true)
-                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.map_mark_blue))
-            )
+            /* marker = googleMap.addMarker(
+                 MarkerOptions().position(polyLineList!![0])
+                     .flat(true)
+                     .icon(BitmapDescriptorFactory.fromResource(R.drawable.map_mark_blue))
+             )
 
-            googleMap.moveCamera(
-                CameraUpdateFactory
-                    .newCameraPosition(
-                        CameraPosition.Builder()
-                            .target(polyLineList!![0])
-                            .zoom(15.5f)
-                            .build()
-                    )
-            )
-
+             googleMap.moveCamera(
+                 CameraUpdateFactory
+                     .newCameraPosition(
+                         CameraPosition.Builder()
+                             .target(polyLineList!![0])
+                             .zoom(15.5f)
+                             .build()
+                     )
+             )
+ */
             handlerr = Handler()
             index = -1
             next = 1

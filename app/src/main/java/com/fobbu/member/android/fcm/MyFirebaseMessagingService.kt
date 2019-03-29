@@ -66,7 +66,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
                 prefsEditor.putString(RsaConstants.RsaTypes.checkStatus, dataMap["type"]).apply()
                 prefsEditor.putString(RsaConstants.ServiceSaved.isNew,"").apply()
             }
-            println("MESSAGE MAP >>>>>>>> " + json["type"].toString())
+            println("MESSAGE MAP >>>>>>>> " + isAppIsInBackground(this))
 
             if (!isAppIsInBackground(this)) {
 
@@ -86,6 +86,10 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private fun sendNotificationPushO(map: Map<String, String>) {
+
+        val intent1 = Intent()
+        intent1.action = FcmPushTypes.Types.checkStatusPushOneTime
+        sendBroadcast(intent1)
 
         val nm = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         @SuppressLint("WrongConstant") val nc =
@@ -107,7 +111,11 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
        // prefsEditor.putString(RsaConstants.RsaTypes.checkStatus, json["type"].toString()).apply()
 
         when {
-            json["type"] == FcmPushTypes.Types.accept -> intent.putExtra("from_push", json["type"].toString())
+            json["type"] == FcmPushTypes.Types.accept ->
+            {
+                intent.putExtra("from_push", json["type"].toString())
+                prefsEditor.putString(RsaConstants.ServiceSaved.isNew,"").apply()
+            }
             json["type"] == FcmPushTypes.Types.inRouteRequest -> intent.putExtra("from_push", json["type"].toString())
             json["type"] == FcmPushTypes.Types.newPin -> {
                 intent.putExtra("from_push", FcmPushTypes.Types.newPin)
@@ -167,8 +175,11 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
     private fun ifAppIsOpen(map: Map<String, String>) {
         val json = JSONObject(map["notification"])
 
+        println("MESSAGE MAP IF OPEN >>>>>>>> " + json["type"].toString())
+
         val intent = Intent()
         intent.action = FcmPushTypes.Types.checkStatusPushOneTime
+        intent.putExtra("ForCancelScreen",json["type"].toString())
         sendBroadcast(intent)
 
         //prefsEditor.putString(RsaConstants.RsaTypes.checkStatus, json["type"].toString()).apply()
@@ -236,6 +247,11 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
     }
 
     private fun ifAppIsNotOpenSendNotification(map: Map<String, String>) {
+
+
+        val intent1 = Intent()
+        intent1.action = FcmPushTypes.Types.checkStatusPushOneTime
+        sendBroadcast(intent1)
 
         val intent = Intent(this, DashboardActivity::class.java)
 
@@ -326,14 +342,24 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             val runningProcesses = am.runningAppProcesses
             for (processInfo in runningProcesses) {
                 if (processInfo.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND) {
+
+                    println("LIST >>>>>> "+ processInfo)
+                    println("LIST >>>>>> "+ processInfo)
+
                     for (activeProcess in processInfo.pkgList) {
                         if (activeProcess == context.packageName) {
                             isInBackground = false
                         }
                     }
                 }
+                else if (processInfo.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_BACKGROUND) {
+                    println("TERMINATED >>>>>>>>>>")
+                }
             }
         } else {
+
+            println("HERE IN THIS ONE >>>>>> ")
+
             val taskInfo = am.getRunningTasks(1)
             val componentInfo = taskInfo[0].topActivity
             if (componentInfo.packageName == context.packageName) {

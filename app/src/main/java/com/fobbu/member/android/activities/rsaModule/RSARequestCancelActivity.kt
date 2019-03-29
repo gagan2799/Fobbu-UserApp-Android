@@ -3,8 +3,10 @@ package com.fobbu.member.android.activities.rsaModule
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
+import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -18,9 +20,11 @@ import android.view.WindowManager
 import android.widget.TextView
 import android.widget.Toast
 import com.fobbu.member.android.R
+import com.fobbu.member.android.activities.dashboardActivity.DashboardActivity
 import com.fobbu.member.android.activities.rsaModule.adapter.RsaRecyclerAdapter
 import com.fobbu.member.android.activities.rsaModule.presenter.RsaCancelRequestHandler
 import com.fobbu.member.android.activities.rsaModule.presenter.RsaCancelRequestPresenter
+import com.fobbu.member.android.fcm.FcmPushTypes
 import com.fobbu.member.android.fragments.rsaFragmentModule.RsaConstants
 import com.fobbu.member.android.modals.MainPojo
 import com.fobbu.member.android.utils.CommonClass
@@ -28,6 +32,7 @@ import com.fobbu.member.android.view.ActivityView
 import kotlinx.android.synthetic.main.activity_cancel_rsa.*
 import kotlinx.android.synthetic.main.fragment_builder_confirm.view.*
 import com.fobbu.member.android.utils.RecyclerItemClickListener
+import java.lang.Exception
 import java.util.HashMap
 
 
@@ -59,6 +64,44 @@ class RSARequestCancelActivity : AppCompatActivity(), ActivityView
         cancelReasons()
 
         clicks()
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        val filterStatus = IntentFilter(FcmPushTypes.Types.checkStatusPushOneTime)
+        registerReceiver(changeStatusReceiver, filterStatus)
+    }
+
+
+    private val changeStatusReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+
+            println("GOT BROADCAST API CHECK STATUS ")
+
+            if(intent.hasExtra("ForCancelScreen"))
+            {
+                if(intent.getStringExtra("ForCancelScreen") == FcmPushTypes.Types.requestCancelled)
+                {
+
+                    CommonClass(this@RSARequestCancelActivity, this@RSARequestCancelActivity).workDoneReviewSend()
+                    startActivity(Intent(this@RSARequestCancelActivity, DashboardActivity::class.java))
+                    finish()
+                }
+            }
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        try {
+            unregisterReceiver(changeStatusReceiver)
+        }
+        catch (e:Exception)
+        {
+
+        }
     }
 
 

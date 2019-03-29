@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlertDialog
 import android.app.Dialog
+import android.app.NotificationManager
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -52,6 +53,15 @@ class GetSetGoActivity : AppCompatActivity(), ActivityView
         initView()
 
         clicks()
+
+        try {
+            val nm = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+            nm.cancelAll()
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
     // function for initialising all the variables of the class

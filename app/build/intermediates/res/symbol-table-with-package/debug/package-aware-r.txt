@@ -1815,6 +1815,7 @@ drawable solid_color_grey
 drawable solid_color_red
 drawable sos
 drawable sos_orange
+drawable speech_bubble
 drawable splash_background
 drawable splash_car
 drawable splash_scooter
@@ -3281,6 +3282,7 @@ string not_now
 string not_specified
 string ods
 string ods_fullform
+string ods_liveTrack
 string ods_otp_track_message
 string ods_text
 string ods_tutorial_text

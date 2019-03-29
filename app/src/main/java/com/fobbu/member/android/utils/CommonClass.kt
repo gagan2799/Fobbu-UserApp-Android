@@ -13,6 +13,7 @@ import android.support.v4.app.ActivityCompat
 import android.view.*
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.view.inputmethod.InputMethodManager
 import android.widget.RelativeLayout
 import android.widget.TextView
 import android.widget.Toast
@@ -29,7 +30,9 @@ import java.util.Calendar.*
 import java.util.regex.Pattern
 import kotlin.collections.ArrayList
 
-@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS", "UNREACHABLE_CODE")
+@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS", "UNREACHABLE_CODE",
+    "RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS"
+)
 /**
  * Created by abc on 12/1/18.
  */
@@ -117,6 +120,22 @@ class CommonClass(activity1: Activity, context1: Context) {
             emptyList
     }
 
+
+    fun hideSoftKeyboard(activity: Activity ) {
+        try {
+            val inputMethodManager =
+                activity.getSystemService(
+                    Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+
+            inputMethodManager.hideSoftInputFromWindow(
+                activity.currentFocus.windowToken, 0)
+        }
+        catch (e:java.lang.Exception)
+        {
+            e.printStackTrace()
+        }
+
+    }
 
     fun errorMessage(response: String): String {
         try {

@@ -2,6 +2,7 @@ package com.fobbu.member.android.activities.dashboardActivity
 
 import android.annotation.SuppressLint
 import android.app.Dialog
+import android.app.NotificationManager
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -74,6 +75,8 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
 
     var odsServiceStaticName=""
 
+    lateinit var dialogCancelRsa :Dialog
+
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
@@ -81,12 +84,23 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
         setContentView(R.layout.activity_dashboard)
 
         initView()
+
+        try {
+            val nm = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+            nm.cancelAll()
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
     // function for initialising all the variables and view of the class
     private fun initView()
     {
         dashboardHandler = DashboardPresenter(this, this)
+
+        dialogCancelRsa = Dialog(this)
 
         drawerClicks()
 
@@ -115,7 +129,9 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
         }
 
         llHome.setOnClickListener {
-            changeFragment(HomeFragment(), resources.getString(R.string.home))
+
+            if (supportFragmentManager.findFragmentById(R.id.content_frame)!!.tag != resources.getString(R.string.home))
+                changeFragment(HomeFragment(), resources.getString(R.string.home))
         }
 
         llRSA.setOnClickListener {
@@ -123,34 +139,37 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
         }
 
         llOdsDash.setOnClickListener {
-            if (intent.hasExtra(RsaConstants.Ods.static_name)/*!=RsaConstants.OdsServiceStaticName.trip_ready*/)
-                changeFragment(OdsTrackingFragment(),resources.getString(R.string.ods))
+            if (intent.hasExtra(RsaConstants.Ods.static_name)) {
+                if (supportFragmentManager.findFragmentById(R.id.content_frame)!!.tag != resources.getString(R.string.ods))
+                    changeFragment(OdsTrackingFragment(), resources.getString(R.string.ods_liveTrack))
+            } else {
+                if (supportFragmentManager.findFragmentById(R.id.content_frame)!!.tag != resources.getString(R.string.ods))
+                    changeFragment(OdsFragment(), resources.getString(R.string.ods))
+            }
 
-            else
-                changeFragment(OdsFragment(),resources.getString(R.string.ods))
         }
     }
 
     //// This is for Cancel and Call Helpline
     private fun showOptionLayout() {
-        val dialog = Dialog(this)
-        dialog.setContentView(R.layout.option_menu_layout)
+
+        dialogCancelRsa.setContentView(R.layout.option_menu_layout)
         val layoutParams: WindowManager.LayoutParams
-        layoutParams = dialog.window.attributes
+        layoutParams = dialogCancelRsa.window.attributes
         layoutParams.gravity = Gravity.TOP or Gravity.RIGHT
         layoutParams.x = -100
         layoutParams.y = -100
         layoutParams.windowAnimations = R.style.DialogTheme
 
-        dialog.textViewCancelRSA.setOnClickListener {
-            dialog.dismiss()
+        dialogCancelRsa.textViewCancelRSA.setOnClickListener {
+            dialogCancelRsa.dismiss()
             startActivity(
                 Intent(this, RSARequestCancelActivity::class.java)
                     .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
             )
             overridePendingTransition(R.anim.slide_down, R.anim.fade)
         }
-        dialog.show()
+        dialogCancelRsa.show()
     }
 
     ////CHANGE TABS BACKGROUND WITH CLICK
@@ -364,20 +383,48 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
 
         fragmentTypeForRSA = type
 
-        val fragment: Fragment = when (fragmentTypeForRSA) {
-            resources.getString(R.string.rsa_home) -> RSAFragment()
-            resources.getString(R.string.rsa_live) -> RSALiveFragment()
-            else -> {
-                fragmentTypeForRSA = resources.getString(R.string.rsa_home)
-                RSAFragment()
+        println("HERE IN STACK OF RSA >>>>>>> "+ fragmentTypeForRSA)
+
+        if (fragmentTypeForRSA == resources.getString(R.string.rsa_home))
+        {
+            try {
+                if (supportFragmentManager.findFragmentById(R.id.content_frame)!!.tag != resources.getString(R.string.rsa_home))
+                    changeFragment(RSAFragment(), fragmentTypeForRSA)
+            } catch (e: java.lang.Exception) {
+                changeFragment(RSAFragment(), fragmentTypeForRSA)
+                e.printStackTrace()
             }
         }
+        else if (fragmentTypeForRSA == resources.getString(R.string.rsa_live))
+        {
+            try {
+                if (supportFragmentManager.findFragmentById(R.id.content_frame)!!.tag != resources.getString(R.string.rsa_live))
+                    changeFragment(RSALiveFragment(), fragmentTypeForRSA)
+            } catch (e: java.lang.Exception) {
+                changeFragment(RSALiveFragment(), fragmentTypeForRSA)
+                e.printStackTrace()
+            }
 
-        changeFragment(fragment, fragmentTypeForRSA)
+
+        } else {
+            fragmentTypeForRSA = resources.getString(R.string.rsa_home)
+
+
+            try {
+                if (supportFragmentManager.findFragmentById(R.id.content_frame)!!.tag != resources.getString(R.string.rsa_home))
+                    changeFragment(RSAFragment(), fragmentTypeForRSA)
+            } catch (e: java.lang.Exception) {
+                changeFragment(RSAFragment(), fragmentTypeForRSA)
+                e.printStackTrace()
+            }
+
+
+        }
+
     }
 
     /////CODE TO CHANGE FRAGMENTS IN APP
-    public fun changeFragment(fragment: Fragment, tag: String) {
+    private fun changeFragment(fragment: Fragment, tag: String) {
         val manager = supportFragmentManager
         val transaction = manager.beginTransaction()
 
@@ -394,6 +441,8 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
         fragmentEarlier = fragment
         fragmentEarlierBool = true
         changeTabs(tag)
+
+        dialogCancelRsa.dismiss()
     }
 
     ///LOGOUT POPUP
@@ -475,7 +524,7 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
             }
 
             intent.hasExtra("from_push") -> {
-                println("FROM PUSH CHECK AND NAVIGATE")
+                println("FROM PUSH CHECK AND NAVIGATE >>>> "+ intent.getStringExtra("from_push"))
 
                 if(intent.getStringExtra("from_push")==FcmPushTypes.Types.cancelledByAdmin)
                 {
@@ -522,6 +571,8 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
                     FcmPushTypes.Types.cancelledByAdmin -> {
                         fragmentTypeForRSA = ""
                         CommonClass(this, this).workDoneReviewSend()
+
+                        setFragmentsFromStackForRSA(fragmentTypeForRSA)
 
                     }
 

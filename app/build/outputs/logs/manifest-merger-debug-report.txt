@@ -1,20 +1,20 @@
 -- Merging decision tree log ---
 provider#android.support.v4.content.FileProvider
-INJECTED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:79:9-87:20
+INJECTED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:78:9-86:20
 	android:grantUriPermissions
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:83:17-51
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:82:17-51
 	android:authorities
 		INJECTED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:81:17-64
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:80:17-64
 	android:exported
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:82:17-41
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:81:17-41
 	android:name
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:80:17-71
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:79:17-71
 manifest
-ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:2:1-195:12
-INJECTED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:2:1-195:12
-INJECTED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:2:1-195:12
-INJECTED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:2:1-195:12
+ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:2:1-194:12
+INJECTED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:2:1-194:12
+INJECTED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:2:1-194:12
+INJECTED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:2:1-194:12
 MERGED from [com.android.support:multidex:1.0.3] C:\Users\my pc\.gradle\caches\transforms-1\files-1.1\multidex-1.0.3.aar\c8530e9b69545a4064994eaedcd4291d\AndroidManifest.xml:17:1-22:12
 MERGED from [me.relex:circleindicator:1.2.2] C:\Users\my pc\.gradle\caches\transforms-1\files-1.1\circleindicator-1.2.2.aar\234e070667376cb6be5856e5f40b2700\AndroidManifest.xml:2:1-12:12
 MERGED from [com.android.support.constraint:constraint-layout:1.1.3] C:\Users\my pc\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.3.aar\c47629921852b879e6705f6aff263d6c\AndroidManifest.xml:2:1-11:12
@@ -162,22 +162,22 @@ MERGED from [com.google.android.gms:play-services-vision-common-license:12.0.1] 
 MERGED from [com.google.android.gms:play-services-vision-license:12.0.1] C:\Users\my pc\.gradle\caches\transforms-1\files-1.1\play-services-vision-license-12.0.1.aar\19e368eaad369d9b1b12fad81474d762\AndroidManifest.xml:17:1-24:12
 MERGED from [com.google.android.gms:play-services-wallet-license:12.0.1] C:\Users\my pc\.gradle\caches\transforms-1\files-1.1\play-services-wallet-license-12.0.1.aar\4b497ceac209878d86e58700febb6d95\AndroidManifest.xml:17:1-24:12
 MERGED from [com.google.android.gms:play-services-wearable-license:12.0.1] C:\Users\my pc\.gradle\caches\transforms-1\files-1.1\play-services-wearable-license-12.0.1.aar\f43012ae3d233f143dde5df17aae2693\AndroidManifest.xml:17:1-24:12
-INJECTED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:2:1-195:12
-INJECTED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:2:1-195:12
-INJECTED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:2:1-195:12
+INJECTED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:2:1-194:12
+INJECTED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:2:1-194:12
+INJECTED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:2:1-194:12
 	package
 		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:4:11-45
 		INJECTED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml
 		INJECTED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml
 	android:versionName
 		INJECTED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:2:1-195:12
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:2:1-194:12
 		INJECTED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml
 	xmlns:tools
 		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:3:11-57
 	android:versionCode
 		INJECTED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:2:1-195:12
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:2:1-194:12
 		INJECTED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml
 	xmlns:android
 		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:2:11-69
@@ -256,7 +256,7 @@ ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:13:
 	android:name
 		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:13:22-66
 application
-ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:15:5-193:19
+ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:15:5-192:19
 MERGED from [com.android.support.constraint:constraint-layout:1.1.3] C:\Users\my pc\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.3.aar\c47629921852b879e6705f6aff263d6c\AndroidManifest.xml:9:5-20
 MERGED from [com.android.support.constraint:constraint-layout:1.1.3] C:\Users\my pc\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.3.aar\c47629921852b879e6705f6aff263d6c\AndroidManifest.xml:9:5-20
 MERGED from [com.android.support:design:28.0.0] C:\Users\my pc\.gradle\caches\transforms-1\files-1.1\design-28.0.0.aar\4363baf4f3b032b7d1de4fcaae5cd5dd\AndroidManifest.xml:22:5-20
@@ -465,291 +465,289 @@ MERGED from [com.google.android.gms:play-services-wearable-license:12.0.1] C:\Us
 		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:21:13-39
 	android:label
 		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:19:13-45
-	android:hardwareAccelerated
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:22:13-48
 	tools:ignore
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:26:13-52
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:25:13-52
 	android:roundIcon
 		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:20:13-55
 	android:largeHeap
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:23:13-37
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:22:13-37
 	android:icon
 		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:18:13-44
 	android:allowBackup
 		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:17:13-40
 		REJECTED from [com.mikhaellopez:circularimageview:3.0.2] C:\Users\my pc\.gradle\caches\transforms-1\files-1.1\circularimageview-3.0.2.aar\341bdfe5eb84933ea98887b5362ef19f\AndroidManifest.xml:12:9-35
 	android:theme
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:24:13-44
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:23:13-44
 	tools:replace
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:27:13-48
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:26:13-48
 	android:usesCleartextTraffic
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:25:13-48
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:24:13-48
 	android:name
 		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:16:13-55
 activity#com.fobbu.member.android.activities.SplashActivity
-ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:28:9-36:20
+ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:27:9-35:20
 	android:screenOrientation
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:30:17-53
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:29:17-53
 	android:name
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:29:17-58
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:28:17-58
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:31:13-35:29
+ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:30:13-34:29
 action#android.intent.action.MAIN
-ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:32:17-68
+ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:31:17-68
 	android:name
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:32:25-66
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:31:25-66
 category#android.intent.category.LAUNCHER
-ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:34:17-76
+ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:33:17-76
 	android:name
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:34:27-74
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:33:27-74
 activity#com.fobbu.member.android.tutorial.TutorialActivity
-ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:37:9-39:55
+ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:36:9-38:55
 	android:screenOrientation
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:39:17-53
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:38:17-53
 	android:name
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:38:17-58
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:37:17-58
 activity#com.fobbu.member.android.activities.loginSignupModule.LoginActivity
-ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:40:9-43:61
+ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:39:9-42:61
 	android:screenOrientation
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:42:17-53
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:41:17-53
 	android:windowSoftInputMode
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:43:17-59
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:42:17-59
 	android:name
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:41:17-75
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:40:17-75
 activity#com.fobbu.member.android.activities.loginSignupModule.SignUpActivity
-ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:44:9-46:55
+ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:43:9-45:55
 	android:screenOrientation
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:46:17-53
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:45:17-53
 	android:name
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:45:17-76
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:44:17-76
 activity#com.fobbu.member.android.activities.loginSignupModule.ForgotPasswordActivity
-ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:47:9-49:55
+ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:46:9-48:55
 	android:screenOrientation
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:49:17-53
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:48:17-53
 	android:name
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:48:17-84
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:47:17-84
 activity#com.fobbu.member.android.activities.loginSignupModule.SMSVerificationActivity
-ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:50:9-53:61
+ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:49:9-52:61
 	android:screenOrientation
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:52:17-53
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:51:17-53
 	android:windowSoftInputMode
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:53:17-59
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:52:17-59
 	android:name
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:51:17-85
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:50:17-85
 activity#com.fobbu.member.android.activities.loginSignupModule.GeneratePINActivity
-ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:54:9-57:66
+ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:53:9-56:66
 	android:screenOrientation
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:56:17-53
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:55:17-53
 	android:windowSoftInputMode
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:57:17-64
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:56:17-64
 	android:name
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:55:17-81
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:54:17-81
 activity#com.fobbu.member.android.activities.dashboardActivity.DashboardActivity
-ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:58:9-61:76
+ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:57:9-60:76
 	android:screenOrientation
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:60:17-53
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:59:17-53
 	android:windowSoftInputMode
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:61:17-74
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:60:17-74
 	android:name
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:59:17-79
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:58:17-79
 activity#com.fobbu.member.android.activities.vehicleModule.AddEditVehicleActivity
-ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:62:9-65:66
+ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:61:9-64:66
 	android:screenOrientation
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:64:17-53
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:63:17-53
 	android:windowSoftInputMode
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:65:17-64
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:64:17-64
 	android:name
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:63:17-80
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:62:17-80
 activity#com.fobbu.member.android.activities.waitingScreenModule.WaitingScreenBlue
-ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:66:9-69:66
+ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:65:9-68:66
 	android:screenOrientation
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:68:17-53
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:67:17-53
 	android:windowSoftInputMode
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:69:17-64
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:68:17-64
 	android:name
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:67:17-81
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:66:17-81
 activity#com.fobbu.member.android.activities.waitingScreenModule.WaitingScreenWhite
-ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:70:9-73:66
+ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:69:9-72:66
 	android:screenOrientation
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:72:17-53
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:71:17-53
 	android:windowSoftInputMode
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:73:17-64
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:72:17-64
 	android:name
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:71:17-82
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:70:17-82
 activity#com.fobbu.member.android.activities.vehicleModule.VehicleListActivity
-ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:74:9-77:58
+ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:73:9-76:58
 	android:screenOrientation
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:76:17-53
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:75:17-53
 	android:windowSoftInputMode
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:77:17-56
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:76:17-56
 	android:name
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:75:17-77
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:74:17-77
 meta-data#com.google.android.gms.version
-ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:89:9-91:72
+ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:88:9-90:72
 MERGED from [com.google.android.gms:play-services-basement:12.0.1] C:\Users\my pc\.gradle\caches\transforms-1\files-1.1\play-services-basement-12.0.1.aar\d88a99efb5dcda44df6a700f3996ec7f\AndroidManifest.xml:23:9-25:69
 MERGED from [com.google.android.gms:play-services-basement:12.0.1] C:\Users\my pc\.gradle\caches\transforms-1\files-1.1\play-services-basement-12.0.1.aar\d88a99efb5dcda44df6a700f3996ec7f\AndroidManifest.xml:23:9-25:69
 	android:value
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:91:17-70
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:90:17-70
 	android:name
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:90:17-62
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:89:17-62
 meta-data#com.google.android.geo.API_KEY
-ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:92:9-94:58
+ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:91:9-93:58
 	android:value
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:94:17-56
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:93:17-56
 	android:name
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:93:17-62
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:92:17-62
 service#com.fobbu.member.android.fcm.MyFirebaseMessagingService
-ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:96:9-100:19
+ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:95:9-99:19
 	android:name
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:96:18-64
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:95:18-64
 intent-filter#action:name:com.google.firebase.MESSAGING_EVENT
-ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:97:13-99:29
+ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:96:13-98:29
 action#com.google.firebase.MESSAGING_EVENT
-ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:98:17-77
+ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:97:17-77
 	android:name
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:98:25-75
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:97:25-75
 service#com.fobbu.member.android.fcm.myFirebaseInstanceIDService.MyFirebaseInstanceIDService
-ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:101:9-105:19
+ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:100:9-104:19
 	android:name
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:101:18-93
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:100:18-93
 intent-filter#action:name:com.google.firebase.INSTANCE_ID_EVENT
-ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:102:13-104:29
+ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:101:13-103:29
 action#com.google.firebase.INSTANCE_ID_EVENT
-ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:103:17-79
+ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:102:17-79
 	android:name
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:103:25-77
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:102:25-77
 activity#com.fobbu.member.android.activities.rsaModule.RSARequestCancelActivity
-ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:107:9-110:20
+ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:106:9-109:20
 	android:theme
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:109:17-51
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:108:17-51
 	android:name
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:108:17-78
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:107:17-78
 activity#com.fobbu.member.android.activities.rsaModule.CancellationSuccessMessageActivity
-ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:111:9-114:20
+ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:110:9-113:20
 	android:screenOrientation
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:113:17-53
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:112:17-53
 	android:name
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:112:17-88
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:111:17-88
 activity#com.fobbu.member.android.activities.paymentModule.WorkSummaryActivity
-ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:115:9-119:20
+ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:114:9-118:20
 	android:screenOrientation
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:117:17-53
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:116:17-53
 	android:windowSoftInputMode
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:118:17-59
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:117:17-59
 	android:name
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:116:17-77
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:115:17-77
 activity#com.fobbu.member.android.activities.paymentModule.PaymentModeActivity
-ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:120:9-123:20
+ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:119:9-122:20
 	android:screenOrientation
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:122:17-53
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:121:17-53
 	android:name
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:121:17-77
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:120:17-77
 activity#com.fobbu.member.android.activities.paymentModule.GetSetGoActivity
-ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:124:9-127:20
+ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:123:9-126:20
 	android:screenOrientation
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:126:17-53
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:125:17-53
 	android:name
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:125:17-74
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:124:17-74
 activity#com.fobbu.member.android.activities.orderAndPassbookModule.MyOrder.MyOrdersActivity
-ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:128:9-131:20
+ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:127:9-130:20
 	android:screenOrientation
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:130:17-53
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:129:17-53
 	android:name
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:129:17-91
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:128:17-91
 activity#com.fobbu.member.android.activities.orderAndPassbookModule.passbook.MyPassbookActivity
-ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:132:9-135:20
+ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:131:9-134:20
 	android:screenOrientation
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:134:17-53
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:133:17-53
 	android:name
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:133:17-94
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:132:17-94
 activity#com.fobbu.member.android.activities.orderAndPassbookModule.OrderDetail.OrderDetailActivity
-ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:136:9-139:20
+ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:135:9-138:20
 	android:screenOrientation
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:138:17-53
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:137:17-53
 	android:name
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:137:17-98
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:136:17-98
 activity#com.fobbu.member.android.activities.orderAndPassbookModule.passbookDetail.PassbookDetailActivity
-ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:140:9-143:20
+ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:139:9-142:20
 	android:screenOrientation
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:142:17-53
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:141:17-53
 	android:name
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:141:17-104
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:140:17-104
 activity#com.fobbu.member.android.activities.emergencyContactsModule.emergencyContacts.EmergencyContactsActivity
-ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:144:9-147:20
+ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:143:9-146:20
 	android:screenOrientation
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:146:17-53
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:145:17-53
 	android:name
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:145:17-111
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:144:17-111
 activity#com.fobbu.member.android.activities.paymentSettings.PaymentSettingActivity
-ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:148:9-151:20
+ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:147:9-150:20
 	android:screenOrientation
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:150:17-53
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:149:17-53
 	android:name
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:149:17-82
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:148:17-82
 activity#com.fobbu.member.android.activities.freebies.FreebiesActivity
-ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:152:9-155:20
+ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:151:9-154:20
 	android:screenOrientation
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:154:17-53
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:153:17-53
 	android:name
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:153:17-69
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:152:17-69
 activity#com.fobbu.member.android.activities.help.HelpActivity
-ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:156:9-159:20
+ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:155:9-158:20
 	android:screenOrientation
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:158:17-53
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:157:17-53
 	android:name
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:157:17-61
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:156:17-61
 activity#com.fobbu.member.android.activities.securitySetting.SecuritySettingActivity
-ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:160:9-163:20
+ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:159:9-162:20
 	android:screenOrientation
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:162:17-53
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:161:17-53
 	android:name
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:161:17-83
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:160:17-83
 activity#com.fobbu.member.android.activities.changePassword.ChangePasswordActivity
-ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:164:9-167:20
+ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:163:9-166:20
 	android:screenOrientation
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:166:17-53
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:165:17-53
 	android:name
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:165:17-81
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:164:17-81
 activity#com.fobbu.member.android.activities.emergencyContactsModule.contactList.ContactListActicvity
-ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:168:9-171:20
+ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:167:9-170:20
 	android:screenOrientation
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:170:17-53
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:169:17-53
 	android:name
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:169:17-100
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:168:17-100
 activity#com.fobbu.member.android.activities.profile.ProfileActivity
-ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:172:9-175:20
+ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:171:9-174:20
 	android:screenOrientation
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:174:17-53
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:173:17-53
 	android:name
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:173:17-67
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:172:17-67
 service#com.fobbu.member.android.backgroundServices.FetchStatusAPI
-ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:177:9-179:41
+ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:176:9-178:41
 	android:enabled
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:179:17-39
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:178:17-39
 	android:name
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:178:17-66
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:177:17-66
 uses-library#org.apache.http.legacy
-ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:181:9-183:43
+ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:180:9-182:43
 	android:required
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:183:17-41
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:182:17-41
 	android:name
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:182:17-54
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:181:17-54
 activity#com.fobbu.member.android.activities.paymentModule.OdsGetSetGoActivity
-ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:185:9-186:20
+ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:184:9-185:20
 	android:name
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:185:19-79
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:184:19-79
 activity#com.fobbu.member.android.activities.profileModule.langauage.LanguageActivity
-ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:187:9-188:20
+ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:186:9-187:20
 	android:name
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:187:19-86
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:186:19-86
 activity#com.fobbu.member.android.activities.selectVehicleActivity.SelectVehicleActivity
-ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:189:9-190:20
+ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:188:9-189:20
 	android:name
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:189:19-89
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:188:19-89
 activity#com.fobbu.member.android.activities.paymentModule.OdsWorkSummaryActivity
-ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:191:9-192:20
+ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:190:9-191:20
 	android:name
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:191:19-82
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:190:19-82
 uses-sdk
 INJECTED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml
@@ -1061,11 +1059,11 @@ INJECTED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml
 		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml
 		INJECTED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml
 meta-data#android.support.FILE_PROVIDER_PATHS
-ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:84:13-86:61
+ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:83:13-85:61
 	android:resource
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:86:21-59
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:85:21-59
 	android:name
-		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:85:21-71
+		ADDED from D:\GIT\FobbuGit\user-app-android\app\src\main\AndroidManifest.xml:84:21-71
 uses-feature#0x00020000
 ADDED from [com.google.android.gms:play-services-maps:12.0.1] C:\Users\my pc\.gradle\caches\transforms-1\files-1.1\play-services-maps-12.0.1.aar\ab376a7bbf34e9208c8d31c6c938201c\AndroidManifest.xml:26:5-28:35
 	android:glEsVersion

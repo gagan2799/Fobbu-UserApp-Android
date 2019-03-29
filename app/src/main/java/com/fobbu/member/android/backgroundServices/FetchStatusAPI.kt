@@ -200,6 +200,14 @@ class FetchStatusAPI : Service() {
                                     intent.putExtra("navigate_to", "1")
                                     sendBroadcast(intent)
                                 }
+
+                                mainPojo.getData().status == FcmPushTypes.Types.requestCancelled -> {
+                                    val intent = Intent()
+                                    intent.action = FcmPushTypes.Types.checkStatusPushOneTime
+                                    intent.putExtra("ForCancelScreen","cancelled_by_partner")
+                                    sendBroadcast(intent)
+                                }
+
                                 else -> {
                                     prefsEditor.putString(RsaConstants.ServiceSaved.isNew,"").apply()
                                     val intent = Intent()
@@ -210,6 +218,15 @@ class FetchStatusAPI : Service() {
                                     intent1.action = FcmPushTypes.Types.acceptRequestBroadCast
                                     intent1.putExtra("navigate_to", "1")
                                     sendBroadcast(intent1)
+
+
+                                    if(mainPojo.getData().status == FcmPushTypes.Types.inRouteRequest)
+                                    {
+                                        val intent = Intent()
+                                        intent.action = FcmPushTypes.Types.inRouteRequestBroadCast
+                                        intent.putExtra("navigate_to", FcmPushTypes.Types.inRouteRequest)
+                                        sendBroadcast(intent)
+                                    }
                                 }
                             }
                         } else {

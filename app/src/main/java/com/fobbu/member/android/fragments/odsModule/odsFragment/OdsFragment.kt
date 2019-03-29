@@ -77,6 +77,8 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
     private lateinit var serviceHandler:RsaFragmentHandler
 
+    private var mLastLocation: Location? = null
+
     private lateinit var mMapView: MapView
 
     private var topBarChanges: TopBarChanges? = null
@@ -419,19 +421,28 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     @SuppressLint("MissingPermission")
     private fun checkWhenMapIsReady()
     {
-        mMapView.getMapAsync { mMap ->
-            googleMap = mMap
+        try {
+            mMapView.getMapAsync { mMap ->
+                googleMap = mMap
 
-            val permission =
-                ContextCompat.checkSelfPermission(context!!, android.Manifest.permission.ACCESS_FINE_LOCATION)
 
-            if (permission == PackageManager.PERMISSION_GRANTED)
-            {
-                googleMap.isMyLocationEnabled = true
+                    val permission =
+                        ContextCompat.checkSelfPermission(context!!, android.Manifest.permission.ACCESS_FINE_LOCATION)
+
+                    if (permission == PackageManager.PERMISSION_GRANTED)
+                    {
+                        googleMap.isMyLocationEnabled = true
+                    }
+
+                    googleMap.setInfoWindowAdapter(InfoWindow())
+
             }
-
-            googleMap.setInfoWindowAdapter(InfoWindow())
         }
+        catch (e:Exception)
+        {
+            e.printStackTrace()
+        }
+
     }
 
     // method for checking whether GPS is enabled or not
@@ -462,14 +473,16 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
     private fun getAddressFromLocation(lat:kotlin.Double, long:kotlin.Double)
     {
-        commonClass.putString(RsaConstants.Ods.lat, lat.toString())
 
-        commonClass.putString(RsaConstants.Ods.long, long.toString())
-
-        geocoder = Geocoder(activity!!, Locale.ENGLISH)
 
         try
         {
+            commonClass.putString(RsaConstants.Ods.lat, lat.toString())
+
+            commonClass.putString(RsaConstants.Ods.long, long.toString())
+
+            geocoder = Geocoder(activity!!, Locale.ENGLISH)
+
             val address: List<Address> = geocoder.getFromLocation(lat, long, 1)
 
             if (address.isNotEmpty())
@@ -520,10 +533,16 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                     {
                         try
                         {
-                            LocationServices.FusedLocationApi.requestLocationUpdates(
+                           /* LocationServices.FusedLocationApi.requestLocationUpdates(
                                 googleApiClient, locationRequest,
                                 this@OdsFragment
-                            )
+                            )*/
+
+                            mLastLocation = LocationServices.FusedLocationApi.getLastLocation(googleApiClient)
+                            /*assignLocationValues(mLastLocation!!)*/
+                            throwMarkerOnMap(mLastLocation?.latitude.toString(),mLastLocation?.longitude.toString())
+                            setDefaultMarkerOption(LatLng(mLastLocation!!.latitude, mLastLocation!!.longitude))
+
                         }
                         catch (e: IntentSender.SendIntentException) { }
                     }
@@ -569,7 +588,30 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
         val cameraPosition = CameraPosition.Builder()
             .target(LatLng(Double.valueOf(latitude), Double.valueOf(longitude))).zoom(14f).build()
 
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(LatLng(Double.valueOf(latitude), Double.valueOf(longitude))))
+
+        addCameraToMap(LatLng(Double.valueOf(latitude), Double.valueOf(longitude)))
+    }
+
+
+    private fun addCameraToMap(latLng:LatLng)
+    {
+        val cameraPosition = CameraPosition.Builder()
+            .target(latLng)
+            .zoom(16f)
+            .build()
         googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
+    }
+
+
+    private var yourLocationMarker: MarkerOptions? = null
+
+    fun setDefaultMarkerOption(location:LatLng)
+    {
+        if (yourLocationMarker == null) {
+            yourLocationMarker = MarkerOptions()
+        }
+        yourLocationMarker!!.position(location)
     }
 
 
@@ -583,7 +625,11 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
         @SuppressLint("SetTextI18n", "InflateParams")
         override fun getInfoWindow(p0: Marker?): View?
         {
-            return null
+            val view=LayoutInflater.from(activity!!).inflate(R.layout.inflate_marker_title,null)
+
+            view.tvMarkerTitle.text=currentAddress
+
+            return view
         }
     }
 
@@ -612,6 +658,8 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
             //getAddress(latlng)
 
             throwMarkerOnMap(p0.latitude.toString(), p0.longitude.toString())
+
+            setDefaultMarkerOption(LatLng(p0.latitude, p0.longitude))
 
             mapClicks()
 
