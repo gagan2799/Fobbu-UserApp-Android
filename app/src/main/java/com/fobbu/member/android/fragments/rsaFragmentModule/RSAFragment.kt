@@ -43,6 +43,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import com.bumptech.glide.Glide
 import com.fobbu.member.android.R
+import com.fobbu.member.android.activities.dashboardActivity.DashboardActivity
 import com.fobbu.member.android.activities.selectVehicleActivity.SelectVehicleActivity
 import com.fobbu.member.android.activities.waitingScreenModule.WaitingScreenBlue
 import com.fobbu.member.android.apiInterface.MyApplication
@@ -308,6 +309,23 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                             llFindFobbu.visibility = View.GONE
                             llMarkTyreBurst.visibility = View.GONE
                             llTowRequired.visibility = View.VISIBLE
+
+
+                            for (i in dataListServices.indices) {
+                                if (RsaConstants.ServiceName.burstTyre == dataListServices[i]["static_name"].toString()) {
+
+                                    serviceSelectedID = dataListServices[i]["_id"].toString()
+
+                                    println("NAME " + dataListServices[i]["service_name"].toString())
+
+                                    serviceSelected = dataListServices[i]["static_name"].toString()
+
+                                    break
+                                }
+                            }
+
+                            ifTowRequired = false
+
                         }
                         else -> {
                             llHomeServices.visibility = View.GONE
@@ -333,6 +351,20 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                     llUploadPics.visibility = View.GONE
                     llFindFobbu.visibility = View.GONE
                     llMarkTyreBurst.visibility = View.GONE
+
+                    strBurstTopLeft = ""
+                    strBurstTopRight = ""
+                    strBurstBottomLeft = ""
+                    strBurstBottomRight = ""
+                    listSelectedBurstTyre.clear()
+
+                    viewLeftTop.setBackgroundResource(R.drawable.border_circle)
+                    viewLeftBottom.setBackgroundResource(R.drawable.border_circle)
+                    viewRightTop.setBackgroundResource(R.drawable.border_circle)
+                    viewRightBottom.setBackgroundResource(R.drawable.border_circle)
+
+                    viewLeftTwoWheeler.setBackgroundResource(R.drawable.border_circle)
+                    viewRightTwoWheeler.setBackgroundResource(R.drawable.border_circle)
                 }
 
                 llTowRequired.visibility == View.VISIBLE -> {
@@ -359,8 +391,7 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
             strVehicleType = "2wheeler"
 
             if (etVehicleNumber.text.isNullOrBlank()) {
-                Toast.makeText(activity, resources.getString(R.string.please_enter_vehicle_number), Toast.LENGTH_SHORT)
-                    .show()
+                Toast.makeText(activity, resources.getString(R.string.please_enter_vehicle_number), Toast.LENGTH_SHORT).show()
             } else {
                 if (serviceSelected == RsaConstants.ServiceName.burstTyre) {
                     llHomeServices.visibility = View.GONE
@@ -1076,6 +1107,20 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
     // find fobbu Api (API-users/requests)
     private fun findFobbuApi() {
+
+        if(file1!=null)
+            dataList.add(file1.toString())
+
+        if(file2!=null)
+            dataList.add(file2.toString())
+
+        if(file3!=null)
+            dataList.add(file3.toString())
+
+        if(file4!=null)
+            dataList.add(file4.toString())
+
+
         val fileList = ArrayList<MultipartBody.Part>()
 
         for (i in 0 until dataList.size) {
@@ -1125,7 +1170,7 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
             if (mainPojo.success == "true") {
 
-                /*  if (serviceSelected == RsaConstants.ServiceName.towing) {
+                if (serviceSelected == RsaConstants.ServiceName.towing) {
                       Toast.makeText(activity!!, mainPojo.message, Toast.LENGTH_LONG).show()
 
                       activity!!.startActivity(
@@ -1136,7 +1181,7 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                       CommonClass(activity!!, activity!!).workDoneReviewSend()
 
                       activity!!.finish()
-                  } else {*/
+                } else {
                 //fleetRequestApi(mainPojo.getData()._id)
 
                 CommonClass(activity!!, activity!!).putString(RsaConstants.RsaTypes.checkIfOnGoingRsaRequest, "YES")
@@ -1155,7 +1200,7 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                     Intent(activity!!, WaitingScreenBlue::class.java)
                         .putExtra("navigate_to", "0")
                 )
-                // }
+                }
             } else {
                 CommonClass(activity!!, activity!!).showToast(mainPojo.message)
             }
@@ -1551,10 +1596,15 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
 
     // method for  deleting images
-    private fun showPopupViewDelete(s: String) {
+    private fun showPopupViewDelete(s: String ) {
+
+        val vehicleType = if(strVehicleType == "2wheeler")
+            "Two Wheeler"
+        else
+            "Four Wheeler"
 
         val alertDialog = AlertDialog.Builder(activity!!).create()
-        alertDialog.setTitle("Car Images")
+        alertDialog.setTitle("$vehicleType Image")
         alertDialog.setMessage(null)
         alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "View") { _, _ ->
 
@@ -1878,7 +1928,7 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                     //val imgFile = File(path)
                     println("IMAGE FILE 1$imgFile")
 
-                    dataList.add(imgFile)
+                   // dataList.add(imgFile)
                     if (imgFile.exists()) {
                         when (imageFrom) {
                             "1" -> {
@@ -1923,7 +1973,7 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                     val imgFile = compressImage(File(mFileTemp!!.path))
                     println("IMAGE FILE 2  $imgFile")
 
-                    dataList.add(imgFile)
+                   // dataList.add(imgFile)
                     if (imgFile.exists()) {
                         when (imageFrom) {
                             "1" -> {

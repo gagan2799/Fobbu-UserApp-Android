@@ -93,15 +93,45 @@ class GetSetGoActivity : AppCompatActivity(), ActivityView
 
     override fun onBackPressed() {
 
+        val intent =   Intent(Intent.ACTION_MAIN)
+        intent.addCategory(Intent.CATEGORY_HOME)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(intent)
+
     }
 
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
     private fun clicks()
     {
+
+        linearlayoutNotNowGet.setOnClickListener {
+
+            CommonClass(this, this).workDoneReviewSend()
+
+            Handler().postDelayed(
+                {
+                    startActivity(
+                        Intent(this, DashboardActivity::class.java)
+                            .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+                    )
+                },10
+            )
+        }
+
         buttonSubmitGet.setOnClickListener {
             if (CommonClass(this, this).checkInternetConn(this))
             {
-                if (!editTextReviewGet.text.isEmpty())
+
+                if(ratinBarGetSet.rating.toString() == "0.0")
+                {
+                    Toast.makeText(this, getString(R.string.provide_rating), Toast.LENGTH_SHORT).show()
+                }
+
+                else if (editTextReviewGet.text.isEmpty())
+                {
+                    Toast.makeText(this, getString(R.string.provide_review), Toast.LENGTH_SHORT).show()
+                }
+                else
                 {
                     hideKeyboard()
 
@@ -119,8 +149,7 @@ class GetSetGoActivity : AppCompatActivity(), ActivityView
                         CommonClass(this, this).getString("x_access_token")
                     )
                 }
-                else
-                    Toast.makeText(this, getString(R.string.provide_review), Toast.LENGTH_SHORT).show()
+
             }
             else
                 Toast.makeText(this, getString(R.string.internet_is_unavailable), Toast.LENGTH_SHORT).show()

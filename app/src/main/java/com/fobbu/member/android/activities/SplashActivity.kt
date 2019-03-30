@@ -45,11 +45,11 @@ class SplashActivity : AppCompatActivity() {
             e.printStackTrace()
         }
 
-       /* if (CommonClass(this, this).getString(RsaConstants.ServiceSaved.fobbuRequestId) != "") {
+        if (CommonClass(this, this).getString(RsaConstants.ServiceSaved.fobbuRequestId) != "") {
             stopService(Intent(this, FetchStatusAPI::class.java))
 
             startService(Intent(this, FetchStatusAPI::class.java))
-        }*/
+        }
 
     }
 

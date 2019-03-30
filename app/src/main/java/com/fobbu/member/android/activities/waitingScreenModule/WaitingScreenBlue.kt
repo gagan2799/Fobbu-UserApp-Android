@@ -170,6 +170,21 @@ class WaitingScreenBlue : AppCompatActivity() {
 
         val filter = IntentFilter(FcmPushTypes.Types.acceptRequestBroadCast)
          registerReceiver(changeRSALiveScreenReceiver, filter)
+
+        val filterClearPreference = IntentFilter(FcmPushTypes.Types.clearDataNavigateToHomeScreen)
+        registerReceiver(clearPreferenceScreenReceiver, filterClearPreference)
+    }
+
+    private val clearPreferenceScreenReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+
+            println("GO TO LOGIN BLUE SCREEN >>>>>>>>>>>>")
+
+            CommonClass(this@WaitingScreenBlue,this@WaitingScreenBlue).workDoneReviewSend()
+
+            CommonClass(this@WaitingScreenBlue,this@WaitingScreenBlue).clearPreference()
+        }
+
     }
 
     private val changeRSALiveScreenReceiver = object : BroadcastReceiver() {
@@ -191,6 +206,7 @@ class WaitingScreenBlue : AppCompatActivity() {
 
         try {
             unregisterReceiver(changeRSALiveScreenReceiver)
+            unregisterReceiver(clearPreferenceScreenReceiver)
         }
         catch (e:Exception)
         {

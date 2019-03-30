@@ -2152,16 +2152,16 @@
         "source": "D:\\GIT\\FobbuGit\\user-app-android\\app\\src\\main\\res\\drawable-xxxhdpi\\gray_cross.png"
     },
     {
-        "merged": "D:\\GIT\\FobbuGit\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable_mr_dialog_close_dark.xml.flat",
-        "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-26.1.0.aar\\ba51fb5c7329c305d5aeda44cd9a9a8c\\res\\drawable\\mr_dialog_close_dark.xml"
+        "merged": "D:\\GIT\\FobbuGit\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4_ic_group_collapse_07.png.flat",
+        "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-26.1.0.aar\\ba51fb5c7329c305d5aeda44cd9a9a8c\\res\\drawable-xxxhdpi-v4\\ic_group_collapse_07.png"
     },
     {
         "merged": "D:\\GIT\\FobbuGit\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_power_drawer.png.flat",
         "source": "D:\\GIT\\FobbuGit\\user-app-android\\app\\src\\main\\res\\drawable-xxxhdpi\\power_drawer.png"
     },
     {
-        "merged": "D:\\GIT\\FobbuGit\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4_ic_group_collapse_07.png.flat",
-        "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-26.1.0.aar\\ba51fb5c7329c305d5aeda44cd9a9a8c\\res\\drawable-xxxhdpi-v4\\ic_group_collapse_07.png"
+        "merged": "D:\\GIT\\FobbuGit\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable_mr_dialog_close_dark.xml.flat",
+        "source": "C:\\Users\\my pc\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-26.1.0.aar\\ba51fb5c7329c305d5aeda44cd9a9a8c\\res\\drawable\\mr_dialog_close_dark.xml"
     },
     {
         "merged": "D:\\GIT\\FobbuGit\\user-app-android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_freebies_drawer.png.flat",

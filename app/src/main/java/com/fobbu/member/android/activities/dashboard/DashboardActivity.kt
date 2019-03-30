@@ -499,10 +499,7 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
             }
         } else {
             finish()
-
-
         }
-
     }
 
     private fun checkAndNavigateFromPush()
@@ -510,17 +507,21 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
         when {
             (CommonClass(this, this).getString(RsaConstants.ServiceSaved.isNew) == "1") -> {
 
-                println(
-                    "GOING TO WAITING SCREEN >>>>>>> " + CommonClass(
-                        this,
-                        this
-                    ).getString(RsaConstants.ServiceSaved.isNew)
-                )
 
-                startActivity(
-                    Intent(this, WaitingScreenBlue::class.java)
-                        .putExtra("navigate_to", "0")
-                )
+                if (CommonClass(this, this).getString(RsaConstants.ServiceSaved.fobbuRequestId) != "")
+                {
+                    println(
+                        "GOING TO WAITING SCREEN >>>>>>> " + CommonClass(
+                            this,
+                            this
+                        ).getString(RsaConstants.ServiceSaved.isNew)
+                    )
+
+                    startActivity(
+                        Intent(this, WaitingScreenBlue::class.java)
+                            .putExtra("navigate_to", "0")
+                    )
+                }
             }
 
             intent.hasExtra("from_push") -> {
@@ -769,10 +770,25 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
         val filter = IntentFilter(FcmPushTypes.Types.fromAPIBroadCast)
         registerReceiver(changeRSALiveScreenReceiver, filter)
 
+        val filterClearPreference = IntentFilter(FcmPushTypes.Types.clearDataNavigateToHomeScreen)
+        registerReceiver(clearPreferenceScreenReceiver, filterClearPreference)
+
         val filterStatus = IntentFilter(FcmPushTypes.Types.checkStatusPushOneTime)
         registerReceiver(changeStatusReceiver, filterStatus)
 
         setDataToDrawer()
+    }
+
+    private val clearPreferenceScreenReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+
+            println("GO TO LOGIN DASHBOARD SCREEN >>>>>>>>>>>>")
+
+            CommonClass(this@DashboardActivity,this@DashboardActivity).workDoneReviewSend()
+
+            CommonClass(this@DashboardActivity,this@DashboardActivity).clearPreference()
+        }
+
     }
 
     private val changeRSALiveScreenReceiver = object : BroadcastReceiver() {
@@ -791,6 +807,8 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
         try {
             unregisterReceiver(changeRSALiveScreenReceiver)
             unregisterReceiver(changeStatusReceiver)
+
+            unregisterReceiver(clearPreferenceScreenReceiver)
         } catch (e: Exception) {
             e.printStackTrace()
         }

@@ -39,7 +39,6 @@
         android:largeHeap="true"
         android:roundIcon="@mipmap/app_icon_round"
         android:supportsRtl="true"
-        android:testOnly="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true" >
         <activity

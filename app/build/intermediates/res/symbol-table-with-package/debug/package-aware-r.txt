@@ -2395,6 +2395,7 @@ id rlTrack
 id rlTwoWheelerBurst
 id rlVehicleAccessed
 id rlWallet
+id rlWindowMarker
 id rvContacts
 id rvHelp
 id rvLanguageCheck
@@ -3344,6 +3345,7 @@ string provide_image_rsa_msg
 string provide_name
 string provide_pan_msg
 string provide_pan_msg_error
+string provide_rating
 string provide_review
 string provide_vehicle_msg
 string quantity_of_fuel_d

@@ -152,7 +152,18 @@ class FetchStatusAPI : Service() {
                 try {
                     val mainPojo = response!!.body()
 
-                    if (mainPojo!!.success == "true") {
+                    if(mainPojo == null)
+                    {
+                        if (response!!.code() == 401) {
+
+                            println("HERE GO TO LOGIN SCREEN >>>>>>>>")
+                            val intent = Intent()
+                            intent.action = FcmPushTypes.Types.clearDataNavigateToHomeScreen
+                            sendBroadcast(intent)
+                        }
+                    }
+
+                   else if (mainPojo!!.success == "true") {
 
                         if (myPrefs.getString(RsaConstants.RsaTypes.checkStatus, "") !=
                             mainPojo.getData().status
@@ -194,7 +205,7 @@ class FetchStatusAPI : Service() {
 
                                 }
                                 mainPojo.getData().status == FcmPushTypes.Types.accept -> {
-                                    prefsEditor.putString(RsaConstants.ServiceSaved.isNew,"").apply()
+                                    prefsEditor.putString(RsaConstants.ServiceSaved.isNew, "").apply()
                                     val intent = Intent()
                                     intent.action = FcmPushTypes.Types.acceptRequestBroadCast
                                     intent.putExtra("navigate_to", "1")
@@ -204,12 +215,12 @@ class FetchStatusAPI : Service() {
                                 mainPojo.getData().status == FcmPushTypes.Types.requestCancelled -> {
                                     val intent = Intent()
                                     intent.action = FcmPushTypes.Types.checkStatusPushOneTime
-                                    intent.putExtra("ForCancelScreen","cancelled_by_partner")
+                                    intent.putExtra("ForCancelScreen", "cancelled_by_partner")
                                     sendBroadcast(intent)
                                 }
 
                                 else -> {
-                                    prefsEditor.putString(RsaConstants.ServiceSaved.isNew,"").apply()
+                                    prefsEditor.putString(RsaConstants.ServiceSaved.isNew, "").apply()
                                     val intent = Intent()
                                     intent.action = FcmPushTypes.Types.fromAPIBroadCast
                                     sendBroadcast(intent)
@@ -220,8 +231,7 @@ class FetchStatusAPI : Service() {
                                     sendBroadcast(intent1)
 
 
-                                    if(mainPojo.getData().status == FcmPushTypes.Types.inRouteRequest)
-                                    {
+                                    if (mainPojo.getData().status == FcmPushTypes.Types.inRouteRequest) {
                                         val intent = Intent()
                                         intent.action = FcmPushTypes.Types.inRouteRequestBroadCast
                                         intent.putExtra("navigate_to", FcmPushTypes.Types.inRouteRequest)
@@ -232,6 +242,12 @@ class FetchStatusAPI : Service() {
                         } else {
                             println("NOT SAVED BECAUSE SAME ")
                         }
+                    } else if (response!!.code() == 401) {
+
+                        println("HERE GO TO LOGIN SCREEN >>>>>>>>")
+                        val intent = Intent()
+                        intent.action = FcmPushTypes.Types.clearDataNavigateToHomeScreen
+                        sendBroadcast(intent)
                     }
                 } catch (e: Exception) {
                     e.printStackTrace()

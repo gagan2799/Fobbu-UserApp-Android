@@ -667,15 +667,6 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                 FcmPushTypes.Types.otpVerified -> {
                     println("HERE IN LIVE ")
                     println("DISPLAY NAME VERIFIED >>> " + displayName)
-
-
-                    startActivity(
-                        Intent(
-                            activity!!,
-                            WaitingScreenWhite::class.java
-                        ).putExtra("from_where", "code_valid")
-                    )
-                    destroyEverythingMethod()
                 }
 
                 FcmPushTypes.Types.fuelDefaultScreen -> {
@@ -727,7 +718,7 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                     ivTool.setImageResource(R.drawable.man_riding_bike)
                     tvText.text = displayName + " " + resources.getString(R.string.fobbu_on_way)
                     strWhere = "share"
-                   // updateLiveLocation()
+                    updateLiveLocation()
                     ivLeftDotted.setImageResource(R.drawable.dotted)
                     ivRightDotted.setImageResource(R.drawable.dotted)
                     tvTrack.background = resources.getDrawable(R.drawable.solid_color_red)
@@ -744,7 +735,7 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                     ivTool.setImageResource(R.drawable.man_riding_bike)
                     tvText.text = displayName + " " + resources.getString(R.string.fobbu_on_way)
                     strWhere = "share"
-                  //  updateLiveLocation()
+                    updateLiveLocation()
                     ivLeftDotted.setImageResource(R.drawable.dotted)
                     ivRightDotted.setImageResource(R.drawable.dotted)
                     tvTrack.background = resources.getDrawable(R.drawable.solid_color_red)
@@ -924,7 +915,7 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                     println("HIT LIVE LOCATION API>>>>>>>")
                     getServices()
 
-                    handlerrLiveApi.postDelayed(this, 500)
+                    handlerrLiveApi.postDelayed(this, 5000)
 
 
                 }
@@ -1067,9 +1058,8 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
     private fun liveTracking(polyLineList: ArrayList<LatLng>) {
 
-        if (polyLineList!!.size == 1) {
 
-            if (firstTime) {
+        if (firstTime) {
                 firstTime = false
                 marker = googleMap.addMarker(
                     MarkerOptions().position(polyLineList!![0])
@@ -1086,94 +1076,81 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                         )
                 )
 
-            }
-
-            googleMap.moveCamera(
-                CameraUpdateFactory
-                    .newCameraPosition(
-                        CameraPosition.Builder()
-                            .target(polyLineList!![0])
-                            .zoom(15.5f)
-                            .build()
-                    )
-            )
-
-        }
-
-        if (polyLineList!!.size >= 2) {
+            } else {
+            if (polyLineList!!.size >= 2) {
 
 
-            /* marker = googleMap.addMarker(
-                 MarkerOptions().position(polyLineList!![0])
-                     .flat(true)
-                     .icon(BitmapDescriptorFactory.fromResource(R.drawable.map_mark_blue))
-             )
+                /* marker = googleMap.addMarker(
+                     MarkerOptions().position(polyLineList!![0])
+                         .flat(true)
+                         .icon(BitmapDescriptorFactory.fromResource(R.drawable.map_mark_blue))
+                 )
 
-             googleMap.moveCamera(
-                 CameraUpdateFactory
-                     .newCameraPosition(
-                         CameraPosition.Builder()
-                             .target(polyLineList!![0])
-                             .zoom(15.5f)
-                             .build()
-                     )
-             )
- */
-            handlerr = Handler()
-            index = -1
-            next = 1
-            handlerr.postDelayed(object : Runnable {
-                override fun run() {
-                    if (index < polyLineList!!.size - 1) {
-                        index++
-                        next = index + 1
-                    }
-                    if (index < polyLineList!!.size - 1) {
-                        startPosition = polyLineList!![index]
-                        endPosition = polyLineList!![next]
-                    }
-
-                    if (next < (polyLineList!!.size - 1)) {
-                        println("CHECK VALUE HERE START Lat >> " + polyLineList!![index].latitude)
-                        println("CHECK VALUE HERE START Long >> " + polyLineList!![index].longitude)
-                        val valueAnimator = ValueAnimator.ofFloat(0f, 1f)
-                        valueAnimator.duration = delayanim
-                        valueAnimator.interpolator = LinearInterpolator()
-                        valueAnimator.addUpdateListener { valueAnimator ->
-                            v = valueAnimator.animatedFraction
-                            lng = v * endPosition!!.longitude + (1 - v) * startPosition!!.longitude
-                            lat = v * endPosition!!.latitude + (1 - v) * startPosition!!.latitude
-                            val newPos = LatLng(lat, lng)
-
-                            marker.position = newPos
-                            marker.setAnchor(0.5f, 0.5f)
-
-                            if (next % 5 == 0)
-                                marker.rotation = getBearing(startPosition!!, newPos)
-
-                            googleMap.moveCamera(
-                                CameraUpdateFactory
-                                    .newCameraPosition(
-                                        CameraPosition.Builder()
-                                            .target(newPos)
-                                            .zoom(15.5f)
-                                            .bearing(90f) // Sets the orientation of the camera to east
-                                            .tilt(30f)
-                                            .build()
-                                    )
-                            )
+                 googleMap.moveCamera(
+                     CameraUpdateFactory
+                         .newCameraPosition(
+                             CameraPosition.Builder()
+                                 .target(polyLineList!![0])
+                                 .zoom(15.5f)
+                                 .build()
+                         )
+                 )*/
+                handlerr = Handler()
+                index = -1
+                next = 1
+                handlerr.postDelayed(object : Runnable {
+                    override fun run() {
+                        if (index < polyLineList!!.size - 1) {
+                            index++
+                            next = index + 1
                         }
-                        valueAnimator.start()
-                        println("CHECK VALUE HERE END Lat >> " + polyLineList!![next].latitude)
-                        println("CHECK VALUE HERE END Long >> " + polyLineList!![next].longitude)
+                        if (index < polyLineList!!.size - 1) {
+                            startPosition = polyLineList!![index]
+                            endPosition = polyLineList!![next]
+                        }
+
+                        if (next < (polyLineList!!.size - 1)) {
+                            println("CHECK VALUE HERE START Lat >> " + polyLineList!![index].latitude)
+                            println("CHECK VALUE HERE START Long >> " + polyLineList!![index].longitude)
+                            val valueAnimator = ValueAnimator.ofFloat(0f, 1f)
+                            valueAnimator.duration = delayanim
+                            valueAnimator.interpolator = LinearInterpolator()
+                            valueAnimator.addUpdateListener { valueAnimator ->
+                                v = valueAnimator.animatedFraction
+                                lng = v * endPosition!!.longitude + (1 - v) * startPosition!!.longitude
+                                lat = v * endPosition!!.latitude + (1 - v) * startPosition!!.latitude
+                                val newPos = LatLng(lat, lng)
+
+                                marker.position = newPos
+                                marker.setAnchor(0.5f, 0.5f)
+
+                                if (next % 5 == 0)
+                                    marker.rotation = getBearing(startPosition!!, newPos)
+
+                                googleMap.moveCamera(
+                                    CameraUpdateFactory
+                                        .newCameraPosition(
+                                            CameraPosition.Builder()
+                                                .target(newPos)
+                                                .zoom(15.5f)
+                                                .bearing(90f) // Sets the orientation of the camera to east
+                                                .tilt(30f)
+                                                .build()
+                                        )
+                                )
+                            }
+                            valueAnimator.start()
+                            println("CHECK VALUE HERE END Lat >> " + polyLineList!![next].latitude)
+                            println("CHECK VALUE HERE END Long >> " + polyLineList!![next].longitude)
+                        }
+
+
+                        println("CHECK VALUE HERE >> $index >> $next >> $lat >> $lng >> SIZE >> ${polyLineList!!.size}")
+
+                        handlerr.postDelayed(this, delayanim)
                     }
-
-
-                    println("CHECK VALUE HERE >> $index >> $next >> $lat >> $lng >> SIZE >> ${polyLineList!!.size}")
-
-                    handlerr.postDelayed(this, delayanim)
-                }
-            }, delayanim)
+                }, delayanim)
+            }
         }
 
     }

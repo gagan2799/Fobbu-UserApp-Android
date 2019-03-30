@@ -300,6 +300,7 @@
     <string name="requestID_not_provided">Request ID is not provided.</string>
     <string name="internet_is_unavailable">Internet is unavailable.Please try again in some time.</string>
     <string name="provide_review">Provide some review!</string>
+    <string name="provide_rating">Provide some rating!</string>
     <string name="we_will_live_track_it_nonce_the_fobbu_is_on_his_way">We will live Track it\nonce the fobbu is on his
         way !
     </string>
