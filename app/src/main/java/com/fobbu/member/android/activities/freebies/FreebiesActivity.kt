@@ -20,9 +20,9 @@ class FreebiesActivity : AppCompatActivity()
 
         setContentView(R.layout.activity_freebies)
 
-        initView()
+        initView()          // function for initialising all the variables of the class
 
-        clicks()
+        clicks()          //function for handling all the clicks of the class
     }
 
     // function for initialising all the variables of the class
@@ -34,15 +34,15 @@ class FreebiesActivity : AppCompatActivity()
     }
 
     //function for handling all the clicks of the class
-     fun clicks()
+    fun clicks()
     {
         ivBackButton.setOnClickListener {
             finish()
         }
 
-
         tvInviteFriends.setOnClickListener {
-            try {
+            try
+            {
                 val shareIntent = Intent(Intent.ACTION_SEND)
 
                 shareIntent.type = "text/plain"
@@ -57,9 +57,8 @@ class FreebiesActivity : AppCompatActivity()
             }
             catch (e: Exception)
             {
-                //e.toString();
+                e.printStackTrace()
             }
-
         }
 
     }

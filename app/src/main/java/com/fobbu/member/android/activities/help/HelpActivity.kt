@@ -26,16 +26,15 @@ class HelpActivity : AppCompatActivity(),ActivityView
 
     private lateinit var helpHandler:HelpHandler
 
-
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_help)
 
-        initView()
+        initView()            //function for initialising all the variables of the class
 
-        clicks()
+        clicks()               // function for handling clicks of the class
     }
 
     //function for initialising all the variables of the class
@@ -47,7 +46,7 @@ class HelpActivity : AppCompatActivity(),ActivityView
 
         ivSearchToolbar.visibility=View.INVISIBLE
 
-        getHelp()      // hitting get help API
+        getHelp()      // implementing get_helps API
 
     }
 
@@ -74,32 +73,27 @@ class HelpActivity : AppCompatActivity(),ActivityView
         {
             override fun onItemClick(view: View, position: Int)
             {
-
                 if (dataList[position]["selected"]=="1")
-                {
                     dataList[position]["selected"]="0"
-                }
+
                 else
-                {
                     dataList[position]["selected"]="1"
-                }
 
                 helpAdapter.notifyDataSetChanged()
             }
-
         }))
     }
 
-    //####################GET HELP API###################//
+    //#################### get_helps API ###################//
 
-    //function for hitting getHelp API
+    //implementing get_helps API
     private fun getHelp()
     {
         if (commonClass.checkInternetConn(this))
             helpHandler.getHelp(commonClass.getString(commonClass.getString("x_access_token")))
+
         else
             Toast.makeText(this,resources.getString(R.string.internet_is_unavailable), Toast.LENGTH_SHORT).show()
-
     }
 
     // function for handling response of get help API
@@ -107,8 +101,6 @@ class HelpActivity : AppCompatActivity(),ActivityView
     {
         if (mainPojo.success=="true")
         {
-
-
             for (i in mainPojo.list.indices)
             {
                 val map=mainPojo.list[i]
@@ -118,24 +110,23 @@ class HelpActivity : AppCompatActivity(),ActivityView
                 dataList.add(map)
             }
 
-            setUpRecycler()
-
-            println("list $dataList")
+            setUpRecycler()            //function for setting up recycler
         }
+
         else
             Toast.makeText(this,mainPojo.message, Toast.LENGTH_SHORT).show()
     }
 
     override fun showLoader()
     {
-    rlLoader.visibility=View.VISIBLE
+        rlLoader.visibility=View.VISIBLE
 
         avi.show()
     }
 
     override fun hideLoader()
     {
-    rlLoader.visibility=View.GONE
+        rlLoader.visibility=View.GONE
 
         avi.hide()
     }

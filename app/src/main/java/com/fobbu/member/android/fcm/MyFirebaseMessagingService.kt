@@ -12,7 +12,7 @@ import android.support.annotation.RequiresApi
 import android.support.v4.app.NotificationCompat
 import android.util.Log
 import com.fobbu.member.android.R
-import com.fobbu.member.android.activities.dashboardActivity.DashboardActivity
+import com.fobbu.member.android.activities.dashboard.DashboardActivity
 import com.fobbu.member.android.apiInterface.WebServiceApi
 import com.fobbu.member.android.fragments.rsaFragmentModule.RsaConstants
 import com.google.firebase.messaging.FirebaseMessagingService

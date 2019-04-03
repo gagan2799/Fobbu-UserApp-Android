@@ -609,17 +609,30 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                 }
 
                 FcmPushTypes.Types.moneyPaid -> {
-
                     println("DISPLAY NAME IN ROUTE >>> " + displayName)
-                    ivTool.setImageResource(R.drawable.man_riding_bike)
-                    tvText.text = displayName + " " + resources.getString(R.string.fobbu_on_way)
-                    strWhere = "share"
-                    ivLeftDotted.setImageResource(R.drawable.dotted)
-                    ivRightDotted.setImageResource(R.drawable.dotted)
-                    tvTrack.background = resources.getDrawable(R.drawable.solid_color_red)
-                    rlPickingFuel.visibility = View.GONE
-                    tvPickingFuel.visibility = View.GONE
-                    rlTools.visibility = View.VISIBLE
+                    if(CommonClass(activity!!, activity!!).getString(RsaConstants.ServiceSaved.serviceNameSelected)==
+                        RsaConstants.ServiceName.fuelDelivery)
+                    {
+                        ivLeftDotted.setImageResource(R.drawable.dotted_gray)
+                        ivRightDotted.setImageResource(R.drawable.dotted_gray)
+                        tvTrack.setBackgroundResource(R.drawable.solid_color_grey)
+                        rlPickingFuel.visibility = View.VISIBLE
+                        tvPickingFuel.visibility = View.VISIBLE
+                        rlTools.visibility = View.GONE
+                    }
+                    else
+                    {
+                        ivTool.setImageResource(R.drawable.man_riding_bike)
+                        tvText.text = displayName + " " + resources.getString(R.string.fobbu_on_way)
+                        strWhere = "share"
+                        updateLiveLocation()
+                        ivLeftDotted.setImageResource(R.drawable.dotted)
+                        ivRightDotted.setImageResource(R.drawable.dotted)
+                        tvTrack.background = resources.getDrawable(R.drawable.solid_color_red)
+                        rlPickingFuel.visibility = View.GONE
+                        tvPickingFuel.visibility = View.GONE
+                        rlTools.visibility = View.VISIBLE
+                    }
                 }
 
                 FcmPushTypes.Types.inRouteRequest -> {
@@ -731,17 +744,29 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                 FcmPushTypes.Types.moneyPaid -> {
 
                     println("DISPLAY NAME IN ROUTE >>> " + displayName)
-
-                    ivTool.setImageResource(R.drawable.man_riding_bike)
-                    tvText.text = displayName + " " + resources.getString(R.string.fobbu_on_way)
-                    strWhere = "share"
-                    updateLiveLocation()
-                    ivLeftDotted.setImageResource(R.drawable.dotted)
-                    ivRightDotted.setImageResource(R.drawable.dotted)
-                    tvTrack.background = resources.getDrawable(R.drawable.solid_color_red)
-                    rlPickingFuel.visibility = View.GONE
-                    tvPickingFuel.visibility = View.GONE
-                    rlTools.visibility = View.VISIBLE
+                    if(CommonClass(activity!!, activity!!).getString(RsaConstants.ServiceSaved.serviceNameSelected)==
+                        RsaConstants.ServiceName.fuelDelivery)
+                    {
+                        ivLeftDotted.setImageResource(R.drawable.dotted_gray)
+                        ivRightDotted.setImageResource(R.drawable.dotted_gray)
+                        tvTrack.setBackgroundResource(R.drawable.solid_color_grey)
+                        rlPickingFuel.visibility = View.VISIBLE
+                        tvPickingFuel.visibility = View.VISIBLE
+                        rlTools.visibility = View.GONE
+                    }
+                    else
+                    {
+                        ivTool.setImageResource(R.drawable.man_riding_bike)
+                        tvText.text = displayName + " " + resources.getString(R.string.fobbu_on_way)
+                        strWhere = "share"
+                        updateLiveLocation()
+                        ivLeftDotted.setImageResource(R.drawable.dotted)
+                        ivRightDotted.setImageResource(R.drawable.dotted)
+                        tvTrack.background = resources.getDrawable(R.drawable.solid_color_red)
+                        rlPickingFuel.visibility = View.GONE
+                        tvPickingFuel.visibility = View.GONE
+                        rlTools.visibility = View.VISIBLE
+                    }
 
                 }
                 FcmPushTypes.Types.newPin -> {

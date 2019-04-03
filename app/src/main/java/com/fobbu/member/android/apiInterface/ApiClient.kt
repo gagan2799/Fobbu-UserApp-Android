@@ -280,7 +280,7 @@ class ApiClient(var activity: Activity) {
         })
     }
 
-    // service request API
+    // request API
     fun getService(token:String,requestId: String, responseHandler: ResponseHandler)
     {
         webServiceApi.getServices(token,requestId).enqueue(object :Callback<MainPojo>

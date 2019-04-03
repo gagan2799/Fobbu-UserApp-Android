@@ -23,7 +23,7 @@ import android.view.animation.AnimationUtils
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import com.fobbu.member.android.R
-import com.fobbu.member.android.activities.dashboardActivity.DashboardActivity
+import com.fobbu.member.android.activities.dashboard.DashboardActivity
 import com.fobbu.member.android.activities.paymentModule.presenter.GetSetGoHandler
 import com.fobbu.member.android.activities.paymentModule.presenter.GetSetGoPresenter
 import com.fobbu.member.android.activities.rsaModule.RSARequestCancelActivity

@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.fobbu.member.android.R
-import com.fobbu.member.android.activities.dashboardActivity.DashboardActivity
 import com.fobbu.member.android.activities.loginSignupModule.presenter.LoginActivityHandler
 import com.fobbu.member.android.activities.loginSignupModule.presenter.LoginActivityPresenter
 import com.fobbu.member.android.apiInterface.MyApplication

@@ -4,8 +4,6 @@ import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.annotation.SuppressLint
 import android.annotation.TargetApi
-import android.app.Activity
-import android.content.Intent
 import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -21,7 +19,6 @@ import android.view.View
 import android.view.ViewAnimationUtils
 import android.widget.*
 import com.fobbu.member.android.R
-import com.fobbu.member.android.activities.dashboardActivity.DashboardActivity
 import com.fobbu.member.android.activities.selectVehicleActivity.adapter.Vehicle2WheelerAdapter
 import com.fobbu.member.android.activities.vehicleModule.presenter.VehicleListHandler
 import com.fobbu.member.android.activities.vehicleModule.presenter.VehicleListPresenter
@@ -31,7 +28,6 @@ import com.fobbu.member.android.utils.CommonClass
 import com.fobbu.member.android.utils.RecyclerItemClickListener
 import com.fobbu.member.android.view.ActivityView
 import kotlinx.android.synthetic.main.activity_select_vehicle.*
-import kotlinx.android.synthetic.main.activity_vehicle_list.*
 import kotlinx.android.synthetic.main.toolbar.*
 import java.util.ArrayList
 

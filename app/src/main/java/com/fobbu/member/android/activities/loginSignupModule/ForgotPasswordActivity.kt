@@ -26,30 +26,35 @@ class ForgotPasswordActivity : AppCompatActivity(),ActivityView
 
         setContentView(R.layout.activity_forgot)
 
-        forgotPasswordHandler=
-                ForgotPasswordPresenter(this, this)
+        initView()    // function for initialising the variables and views of the class
 
-        addClicks()
+        addClicks()     // All the clicks of this activity are handled in this method
+    }
+
+    // function for initialising the variables and views of the class
+    private fun initView()
+    {
+        forgotPasswordHandler= ForgotPasswordPresenter(this, this)
     }
 
     // All the clicks of this activity are handled in this method
-    private fun addClicks() {
-
+    private fun addClicks()
+    {
         webServiceApi = getEnv().getRetrofit()
 
         ivBack.setOnClickListener { finish() }
 
         tvReset.setOnClickListener {
-            when {
-                etEmail.text.isEmpty() -> {
+            when
+            {
+                etEmail.text.trim().isEmpty() ->
                     CommonClass(this, this).showToast(resources.getString(R.string.please_enter_email))
-                }
-                !Patterns.EMAIL_ADDRESS.matcher(etEmail.text.toString().trim()).matches() -> {
+
+                !Patterns.EMAIL_ADDRESS.matcher(etEmail.text.toString().trim()).matches() ->
                     CommonClass(this, this).showToast(resources.getString(R.string.correct_email_error))
-                }
-                else -> {
-                   callForgotAPIUser(etEmail.text.toString().trim())
-                }
+
+                else ->
+                    callForgotAPIUser(etEmail.text.toString().trim())              // Forgot Password API (API-users/forgot-password)
             }
         }
     }
@@ -57,32 +62,28 @@ class ForgotPasswordActivity : AppCompatActivity(),ActivityView
     //////////////////FORGOT API USER/////////////////////////
 
     // Forgot Password API (API-users/forgot-password)
-    private fun callForgotAPIUser(email: String) {
-
+    private fun callForgotAPIUser(email: String)
+    {
         if (CommonClass(this, this).checkInternetConn(this))
-        {
-            //  rlLoader.visibility = View.VISIBLE
             forgotPasswordHandler.getPassword(email)
-        } else {
 
+        else
             CommonClass(this, this).internetIssue(this)
-        }
     }
 
-
     // Forgot Password API Response (API-users/forgot-password)
-    override fun onRequestSuccessReport(mainPojo: MainPojo) {
-        //rlLoader.visibility = View.GONE
-        if (mainPojo!!.success == "true") {
-
+    override fun onRequestSuccessReport(mainPojo: MainPojo)
+    {
+        if (mainPojo.success == "true")
+        {
             CommonClass(this@ForgotPasswordActivity, this@ForgotPasswordActivity)
                 .showToast(mainPojo.message)
+
             finish()
-
-        } else {
+        }
+        else
             CommonClass(this@ForgotPasswordActivity, this@ForgotPasswordActivity)
                 .showToast(mainPojo.message)
-        }
     }
 
     override fun showLoader()
@@ -90,10 +91,13 @@ class ForgotPasswordActivity : AppCompatActivity(),ActivityView
         rlLoader.visibility=View.VISIBLE
     }
 
-    override fun hideLoader() {
+    override fun hideLoader()
+    {
         rlLoader.visibility=View.GONE
     }
-    private fun getEnv(): MyApplication {
+
+    private fun getEnv(): MyApplication
+    {
         return application as MyApplication
     }
 }

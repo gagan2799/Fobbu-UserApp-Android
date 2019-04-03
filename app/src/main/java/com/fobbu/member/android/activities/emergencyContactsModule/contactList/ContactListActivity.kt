@@ -34,12 +34,12 @@ class ContactListActicvity : AppCompatActivity(),ContactListView,DeleteVehicleCl
 
         setContentView(R.layout.activity_contact_list)
 
-        initView()
+        initView()         //function for initialising all the variables of the class
 
-        clicks()
+        clicks()    //function for handling all the clicks of the class
     }
 
-    //function for initialisng all the variablies of the class
+    //function for initialising all the variables of the class
     @SuppressLint("SetTextI18n")
     private fun initView()
     {
@@ -49,7 +49,15 @@ class ContactListActicvity : AppCompatActivity(),ContactListView,DeleteVehicleCl
 
         listHandler=ListPresenter(this,this)
 
-        getContact()
+        getContact()    //implementing emergencycontacts API (GET)
+    }
+
+    //function for handling all the clicks of the class
+    private fun clicks()
+    {
+        ivBackButton.setOnClickListener {
+            finish()
+        }
     }
 
     //function for setting up recycler
@@ -79,39 +87,36 @@ class ContactListActicvity : AppCompatActivity(),ContactListView,DeleteVehicleCl
 
         alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "OK") { _, _ ->
             alertDialog.dismiss()
+
             deleteContact(id)
         }
+
         alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "CANCEL") { _, _ ->
             alertDialog.dismiss()
         }
+
         alertDialog.setOnShowListener {
             alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.BLACK)
+
             alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.BLACK)
         }
 
         alertDialog.show()
     }
 
+    //************************** GET CONTACTS API ************************//
 
-    //function for handling all the clicks of the class
-    private fun clicks()
-    {
-        ivBackButton.setOnClickListener {
-            finish()
-        }
-    }
-
-    //***********************GET CONTACTS API*****************//
-
-    //function for getting contact list
+    //implementing emergencycontacts API (GET)
     private fun getContact()
     {
         if (commonClass.checkInternetConn(this))
             listHandler.getContacts(commonClass.getString("x_access_token"))
+
         else
             commonClass.showToast(resources.getString(R.string.internet_is_unavailable))
     }
 
+    // function for handling the response of the emergencycontacts API (GET)
     override fun SuccessReport(mainPojo: MainPojo)
     {
         if (mainPojo.success== "true")
@@ -132,8 +137,7 @@ class ContactListActicvity : AppCompatActivity(),ContactListView,DeleteVehicleCl
 
                 rvContacts.visibility=View.VISIBLE
 
-                setupRecycler()
-
+                setupRecycler()     //function for setting up recycler
             }
         }
         else
@@ -143,15 +147,25 @@ class ContactListActicvity : AppCompatActivity(),ContactListView,DeleteVehicleCl
 
     // ####################### DELETE CONTACT API###################//
 
-    // function for delete api
+    // function for emergencycontacts api (DELETE)
     private fun deleteContact(contactId: String)
     {
         if (commonClass.checkInternetConn(this))
             listHandler.deleteContact(contactId,commonClass.getString("x_access_token"))
+
         else
             commonClass.showToast(resources.getString(R.string.internet_is_unavailable))
     }
 
+    // function for handling the response of the emergencycontacts API (DELETE)
+    override fun deleteContactSuccessReport(mainPojo: MainPojo)
+    {
+        if (mainPojo.success=="true")
+            getContact()          //implementing emergencycontacts API (GET)
+
+        else
+            commonClass.showToast(mainPojo.message)
+    }
 
     override fun showLoader()
     {
@@ -166,14 +180,4 @@ class ContactListActicvity : AppCompatActivity(),ContactListView,DeleteVehicleCl
 
         avi.hide()
     }
-    override fun deleteContactSuccessReport(mainPojo: MainPojo)
-    {
-        if (mainPojo.success=="true")
-            getContact()
-        else
-            commonClass.showToast(mainPojo.message)
-    }
-
-
-
 }

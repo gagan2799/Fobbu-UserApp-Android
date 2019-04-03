@@ -24,7 +24,6 @@ import android.view.ViewGroup
 import android.widget.RelativeLayout
 
 import com.fobbu.member.android.R
-import com.fobbu.member.android.activities.dashboardActivity.DashboardActivity
 import com.fobbu.member.android.fragments.odsModule.odsFragment.adapter.OdsFragmentAdapter
 import com.fobbu.member.android.fragments.odsModule.odsFragment.presenter.MapServiceHandler
 import com.fobbu.member.android.fragments.odsModule.odsFragment.presenter.MapServicePresenter
@@ -45,12 +44,8 @@ import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.common.api.PendingResult
 import com.google.android.gms.common.api.Status
 import com.google.android.gms.location.*
-import com.google.android.gms.location.places.AutocompleteFilter
 import com.google.android.gms.location.places.Place
 import com.google.android.gms.location.places.ui.PlaceAutocomplete
-import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment
-import com.google.android.gms.location.places.ui.PlaceSelectionListener
-import com.google.android.gms.location.places.ui.SupportPlaceAutocompleteFragment
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView

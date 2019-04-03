@@ -15,6 +15,7 @@ class EmergencyPresenter(var activity: Activity,var activityView: ActivityView,v
 {
     private val apiCLient=ApiClient(activity)
 
+    // implementing emergencycontacts API (PUT)
     override fun editContacts(dataList: HashMap<String, Any>, id: String, token: String)
     {
         activityView.showLoader()
@@ -50,6 +51,7 @@ class EmergencyPresenter(var activity: Activity,var activityView: ActivityView,v
         })
     }
 
+    // implementing emergencycontacts API (POST)
     @RequiresApi(Build.VERSION_CODES.KITKAT)
     override fun postEmergencyContracts(contactList: ArrayList<HashMap<String, String>>, token: String)
     {

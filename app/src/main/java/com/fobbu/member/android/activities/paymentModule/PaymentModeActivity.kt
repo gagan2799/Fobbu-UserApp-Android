@@ -12,7 +12,7 @@ import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
 import com.fobbu.member.android.R
-import com.fobbu.member.android.activities.dashboardActivity.DashboardActivity
+import com.fobbu.member.android.activities.dashboard.DashboardActivity
 import com.fobbu.member.android.activities.paymentModule.presenter.PaymentModeHandler
 import com.fobbu.member.android.activities.paymentModule.presenter.PaymentModePresenter
 import com.fobbu.member.android.activities.rsaModule.RSARequestCancelActivity
@@ -74,7 +74,7 @@ class PaymentModeActivity : AppCompatActivity(), ActivityView
                 }
 
                 Handler().postDelayed({
-                    startActivity(Intent(this,DashboardActivity::class.java)
+                    startActivity(Intent(this, DashboardActivity::class.java)
                         .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                         .putExtra(RsaConstants.Ods.static_name,staticName))
                 },1000)

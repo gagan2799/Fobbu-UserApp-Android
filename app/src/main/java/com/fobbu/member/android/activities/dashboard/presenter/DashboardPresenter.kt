@@ -8,21 +8,27 @@ import com.fobbu.member.android.modals.MainPojo
 import com.fobbu.member.android.utils.CommonClass
 import com.fobbu.member.android.view.ActivityView
 
-class DashboardPresenter(var activity:Activity,var activityView: ActivityView):DashboardHandler {
-
-    override fun logout(userID: String, token: String) {
+class DashboardPresenter(var activity:Activity,var activityView: ActivityView):DashboardHandler
+{
+    // implementing update device token API
+    override fun logout(userID: String, token: String)
+    {
         val apiClient=ApiClient(activity)
+
         apiClient.logout(userID,token,object :ResponseHandler
         {
-            override fun onSuccess(mainPojo: MainPojo) {
+            override fun onSuccess(mainPojo: MainPojo)
+            {
                 activityView.onRequestSuccessReport(mainPojo)
             }
 
-            override fun onError(message: String) {
+            override fun onError(message: String)
+            {
                 Toast.makeText(activity,message, Toast.LENGTH_SHORT).show()
             }
 
-            override fun onServerError(message: String) {
+            override fun onServerError(message: String)
+            {
                 Toast.makeText(activity,message, Toast.LENGTH_SHORT).show()
             }
 
@@ -30,7 +36,6 @@ class DashboardPresenter(var activity:Activity,var activityView: ActivityView):D
             {
                 CommonClass(activity,activity).clearPreference()
             }
-
         })
     }
 }

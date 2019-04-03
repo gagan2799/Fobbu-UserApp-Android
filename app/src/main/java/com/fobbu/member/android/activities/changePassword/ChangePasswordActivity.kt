@@ -26,9 +26,9 @@ class ChangePasswordActivity : AppCompatActivity(),ActivityView
 
         setContentView(R.layout.activity_change_password)
 
-        initView()
+        initView()              //function for initialising all the variables of the class
 
-        clicks()
+        clicks()                 // function for handling all the clicks of the class
     }
 
     //function for initialising all the variables of the class
@@ -51,23 +51,21 @@ class ChangePasswordActivity : AppCompatActivity(),ActivityView
         tvReset.setOnClickListener {
             when
             {
-                (etCurrentPasswordChange.text.toString()!=commonClass.getString("user_password"))-> Toast.makeText(this,"Please provide correct current password.", Toast.LENGTH_SHORT).show()
+                (etCurrentPasswordChange.text.trim().toString()!=commonClass.getString("user_password"))-> Toast.makeText(this,"Please provide correct current password.", Toast.LENGTH_SHORT).show()
 
-                etPasswordChange.text.isEmpty()->Toast.makeText(this,"Please provide password.", Toast.LENGTH_SHORT).show()
+                etPasswordChange.text.trim().isEmpty()->Toast.makeText(this,"Please provide password.", Toast.LENGTH_SHORT).show()
 
-                etConfirmPass.text.isEmpty()->Toast.makeText(this,"Please confirm the password.", Toast.LENGTH_SHORT).show()
+                etConfirmPass.text.trim().isEmpty()->Toast.makeText(this,"Please confirm the password.", Toast.LENGTH_SHORT).show()
 
-                (etPasswordChange.text.toString()== etCurrentPasswordChange.text.toString())->Toast.makeText(this,"The new password is same as the old one.Please try another password.", Toast.LENGTH_SHORT).show()
+                (etPasswordChange.text.trim().toString()== etCurrentPasswordChange.text.trim().toString())->Toast.makeText(this,"The new password is same as the old one.Please try another password.", Toast.LENGTH_SHORT).show()
 
-                (etPasswordChange.text.toString()!= etConfirmPass.text.toString())->Toast.makeText(this,"Password did not match. Please retry.", Toast.LENGTH_SHORT).show()
+                (etPasswordChange.text.trim().toString()!= etConfirmPass.text.toString())->Toast.makeText(this,"Password did not match. Please retry.", Toast.LENGTH_SHORT).show()
 
                 else->
-                    changePassword()
+                    changePassword()                 //function for hitting change password API
             }
         }
-
     }
-
 
     //#########################CHANGE PASSWORD API##################//
 
@@ -75,28 +73,23 @@ class ChangePasswordActivity : AppCompatActivity(),ActivityView
     private fun changePassword()
     {
         if (commonClass.checkInternetConn(this))
-            passwordHandler.changePassword(etPasswordChange.text.toString(),
-                commonClass.getString("x_access_token"))
+            passwordHandler.changePassword(etPasswordChange.text.toString(), commonClass.getString("x_access_token"))
+
         else
             Toast.makeText(this,resources.getString(R.string.internet_is_unavailable), Toast.LENGTH_SHORT).show()
     }
-
 
     // function for handling the response of the change password API
     override fun onRequestSuccessReport(mainPojo: MainPojo)
     {
         if (mainPojo.success=="true")
         {
-            Toast.makeText(this,"Password change successfully.", Toast.LENGTH_SHORT).show()
-
-            Handler().postDelayed({
-                finish()
-            },1000)
-        }
-
-        else
             Toast.makeText(this,mainPojo.message, Toast.LENGTH_SHORT).show()
 
+            Handler().postDelayed({ finish() },1000)
+        }
+        else
+            Toast.makeText(this,mainPojo.message, Toast.LENGTH_SHORT).show()
     }
 
     override fun showLoader()
@@ -112,5 +105,4 @@ class ChangePasswordActivity : AppCompatActivity(),ActivityView
 
         aviPass.hide()
     }
-
 }

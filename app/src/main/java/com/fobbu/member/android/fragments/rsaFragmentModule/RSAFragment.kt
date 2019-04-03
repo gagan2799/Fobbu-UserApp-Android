@@ -43,7 +43,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import com.bumptech.glide.Glide
 import com.fobbu.member.android.R
-import com.fobbu.member.android.activities.dashboardActivity.DashboardActivity
+import com.fobbu.member.android.activities.dashboard.DashboardActivity
 import com.fobbu.member.android.activities.selectVehicleActivity.SelectVehicleActivity
 import com.fobbu.member.android.activities.waitingScreenModule.WaitingScreenBlue
 import com.fobbu.member.android.apiInterface.MyApplication
@@ -256,8 +256,22 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
 
         tvFindFobbu.setOnClickListener {
+
+
             if (CommonClass(activity!!, activity!!).checkInternetConn(activity!!))
-                findFobbuApi()
+            {
+                if (llTowing.visibility==View.VISIBLE)
+                {
+                    if (ivLifting.drawable.constantState==activity!!.resources.getDrawable(R.drawable.lifting).constantState && ivFlatBed.drawable.constantState==activity!!.resources.getDrawable(R.drawable.flatbed_selected).constantState)
+                        CommonClass(activity!!,activity!!).showToast(activity!!.resources.getString(R.string.select_one_towing_service))
+
+                    else
+                        findFobbuApi()
+                }
+                else
+                    findFobbuApi()
+            }
+
             else
                 CommonClass(
                     activity!!,
@@ -811,8 +825,9 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     }
 
     // initializing all the variables of the class in this method
-    private fun initialise(view: View?) {
-
+    @SuppressLint("SetTextI18n")
+    private fun initialise(view: View?)
+    {
         webServiceApi = getEnv().getRetrofitMulti()
 
         headerIconChanges = activity as HeaderIconChanges?
@@ -917,21 +932,16 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
         viewLeftTwoWheeler = view.findViewById(R.id.viewLeftTwoWheeler)
         viewRightTwoWheeler = view.findViewById(R.id.viewRightTwoWheeler)
 
-        view.tvName.text = """${activity!!.resources.getString(R.string.hello)} ${CommonClass(
-            activity!!,
-            activity!!
-        ).getString("display_name")}"""
-
-
+        view.tvName.text = activity!!.resources.getString(R.string.hello) + """ """ + CommonClass(activity!!, activity!!).getString("display_name")
     }
 
-
     ///RECYCLER VIEW CLICKS HANDLED
-    private fun recyclerViewClicks() {
-
+    private fun recyclerViewClicks()
+    {
         val locationManager: LocationManager? = activity?.getSystemService(Context.LOCATION_SERVICE) as LocationManager?
 
-        if (isAdded) {
+        if (isAdded)
+        {
             recyclerViewServices.addOnItemTouchListener(
                 RecyclerItemClickListener(activity!!, object : RecyclerItemClickListener.OnItemClickListener {
                     @SuppressLint("SetTextI18n")
@@ -966,7 +976,6 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                                 tvHeadingFind.text = "Rs ${serviceSelectedAmount.split("\\.".toRegex())[0]}/-"
                             } else
                                 tvHeadingFind.text = "Rs $serviceSelectedAmount/-"
-
 
 
                             when (serviceSelected) {
@@ -1106,8 +1115,8 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     //////////////////FIND FOBBU REQUEST API  /////////////////////////
 
     // find fobbu Api (API-users/requests)
-    private fun findFobbuApi() {
-
+    private fun findFobbuApi()
+    {
         if(file1!=null)
             dataList.add(file1.toString())
 
@@ -1119,7 +1128,6 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
         if(file4!=null)
             dataList.add(file4.toString())
-
 
         val fileList = ArrayList<MultipartBody.Part>()
 
@@ -1171,35 +1179,35 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
             if (mainPojo.success == "true") {
 
                 if (serviceSelected == RsaConstants.ServiceName.towing) {
-                      Toast.makeText(activity!!, mainPojo.message, Toast.LENGTH_LONG).show()
+                    Toast.makeText(activity!!, mainPojo.message, Toast.LENGTH_LONG).show()
 
-                      activity!!.startActivity(
-                          Intent(activity!!, DashboardActivity::class.java)
-                              .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
-                      )
+                    activity!!.startActivity(
+                        Intent(activity!!, DashboardActivity::class.java)
+                            .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+                    )
 
-                      CommonClass(activity!!, activity!!).workDoneReviewSend()
+                    CommonClass(activity!!, activity!!).workDoneReviewSend()
 
-                      activity!!.finish()
+                    activity!!.finish()
                 } else {
-                //fleetRequestApi(mainPojo.getData()._id)
+                    //fleetRequestApi(mainPojo.getData()._id)
 
-                CommonClass(activity!!, activity!!).putString(RsaConstants.RsaTypes.checkIfOnGoingRsaRequest, "YES")
+                    CommonClass(activity!!, activity!!).putString(RsaConstants.RsaTypes.checkIfOnGoingRsaRequest, "YES")
 
-                CommonClass(activity!!, activity!!).putString(
-                    RsaConstants.ServiceSaved.fobbuRequestId,
-                    mainPojo.getData()._id
-                )
+                    CommonClass(activity!!, activity!!).putString(
+                        RsaConstants.ServiceSaved.fobbuRequestId,
+                        mainPojo.getData()._id
+                    )
 
-                CommonClass(activity!!, activity!!).putString(
-                    RsaConstants.ServiceSaved.serviceNameSelected,
-                    serviceSelected
-                )
+                    CommonClass(activity!!, activity!!).putString(
+                        RsaConstants.ServiceSaved.serviceNameSelected,
+                        serviceSelected
+                    )
 
-                activity!!.startActivity(
-                    Intent(activity!!, WaitingScreenBlue::class.java)
-                        .putExtra("navigate_to", "0")
-                )
+                    activity!!.startActivity(
+                        Intent(activity!!, WaitingScreenBlue::class.java)
+                            .putExtra("navigate_to", "0")
+                    )
                 }
             } else {
                 CommonClass(activity!!, activity!!).showToast(mainPojo.message)
@@ -1262,23 +1270,23 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
     private fun getAddressFromLocation(lat: kotlin.Double, long: kotlin.Double) {
 
-            try {
-                geocoder = Geocoder(activity!!, Locale.ENGLISH)
+        try {
+            geocoder = Geocoder(activity!!, Locale.ENGLISH)
 
-                val address: List<Address> = geocoder.getFromLocation(lat, long, 1)
-                if (address.isNotEmpty()) {
-                    println("current address::${address[0].getAddressLine(0)}")
+            val address: List<Address> = geocoder.getFromLocation(lat, long, 1)
+            if (address.isNotEmpty()) {
+                println("current address::${address[0].getAddressLine(0)}")
 
-                    CommonClass(activity!!, activity!!).putString(
-                        RsaConstants.Ods.address,
-                        address[0].getAddressLine(0)
-                    )
+                CommonClass(activity!!, activity!!).putString(
+                    RsaConstants.Ods.address,
+                    address[0].getAddressLine(0)
+                )
 
-                    currentAddress = address[0].getAddressLine(0)
-                }
-            } catch (e: Exception) {
-                e.printStackTrace()
+                currentAddress = address[0].getAddressLine(0)
             }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
 
 
     }
@@ -1407,10 +1415,10 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                                 this@RSAFragment
                             )
 
-                           // mLastLocation = LocationServices.FusedLocationApi.getLastLocation(googleApiClient)
+                            // mLastLocation = LocationServices.FusedLocationApi.getLastLocation(googleApiClient)
                             /*assignLocationValues(mLastLocation!!)*/
-                           // throwMarkerOnMap(mLastLocation?.latitude.toString(),mLastLocation?.longitude.toString())
-                           // setDefaultMarkerOption(LatLng(mLastLocation!!.latitude, mLastLocation!!.longitude))
+                            // throwMarkerOnMap(mLastLocation?.latitude.toString(),mLastLocation?.longitude.toString())
+                            // setDefaultMarkerOption(LatLng(mLastLocation!!.latitude, mLastLocation!!.longitude))
                         } catch (e: IntentSender.SendIntentException) {
                         }
                     }
@@ -1928,7 +1936,7 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                     //val imgFile = File(path)
                     println("IMAGE FILE 1$imgFile")
 
-                   // dataList.add(imgFile)
+                    // dataList.add(imgFile)
                     if (imgFile.exists()) {
                         when (imageFrom) {
                             "1" -> {
@@ -1973,7 +1981,7 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                     val imgFile = compressImage(File(mFileTemp!!.path))
                     println("IMAGE FILE 2  $imgFile")
 
-                   // dataList.add(imgFile)
+                    // dataList.add(imgFile)
                     if (imgFile.exists()) {
                         when (imageFrom) {
                             "1" -> {

@@ -10,6 +10,7 @@ import com.fobbu.member.android.view.ActivityView
 
 class HelpPresenter(var activity:Activity,var activityView: ActivityView):HelpHandler
 {
+    // implementing the get_helps API
     override fun getHelp(token: String)
     {
         activityView.showLoader()

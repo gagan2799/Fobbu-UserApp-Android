@@ -10,6 +10,7 @@ import com.fobbu.member.android.view.ActivityView
 
 class PasswordPresenter(var activity: Activity,var activityView: ActivityView):PasswordHandler
 {
+    // implementing the change password API
     override fun changePassword(password:String,token: String)
     {
         activityView.showLoader()

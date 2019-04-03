@@ -20,7 +20,7 @@ import android.view.WindowManager
 import android.widget.TextView
 import android.widget.Toast
 import com.fobbu.member.android.R
-import com.fobbu.member.android.activities.dashboardActivity.DashboardActivity
+import com.fobbu.member.android.activities.dashboard.DashboardActivity
 import com.fobbu.member.android.activities.rsaModule.adapter.RsaRecyclerAdapter
 import com.fobbu.member.android.activities.rsaModule.presenter.RsaCancelRequestHandler
 import com.fobbu.member.android.activities.rsaModule.presenter.RsaCancelRequestPresenter

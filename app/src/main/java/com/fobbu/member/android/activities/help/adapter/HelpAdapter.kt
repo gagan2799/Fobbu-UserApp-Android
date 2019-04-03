@@ -13,30 +13,27 @@ class HelpAdapter(var activity:Activity, private var dataList:ArrayList<HashMap<
 {
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): HelpViewHolder
     {
-    return HelpViewHolder(LayoutInflater.from(activity).inflate(R.layout.inflate_expandable_layout,p0,false) )
+        return HelpViewHolder(LayoutInflater.from(activity).inflate(R.layout.inflate_expandable_layout,p0,false) )
     }
 
     override fun getItemCount(): Int
     {
-   return dataList.size
+        return dataList.size
     }
 
     override fun onBindViewHolder(p0: HelpViewHolder, p1: Int)
     {
-
         p0.tvQuestion.text=dataList[p1]["questions"].toString()
 
         p0.tvAnswer.text=dataList[p1]["answer"].toString()
 
         if (dataList[p1]["selected"]== "1")
-               p0.llAnswer.visibility=View.VISIBLE
-           else
-               p0.llAnswer.visibility=View.GONE
-
-
+            p0.llAnswer.visibility=View.VISIBLE
+        else
+            p0.llAnswer.visibility=View.GONE
     }
 
-
+    // inner view holder of the class
     class HelpViewHolder(view :View) :RecyclerView.ViewHolder(view)
     {
         val tvAnswer: TextView =view.findViewById(R.id.tvHelpAnswer)

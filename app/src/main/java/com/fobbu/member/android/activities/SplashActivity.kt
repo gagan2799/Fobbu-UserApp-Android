@@ -10,7 +10,7 @@ import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import com.fobbu.member.android.R
-import com.fobbu.member.android.activities.dashboardActivity.DashboardActivity
+import com.fobbu.member.android.activities.dashboard.DashboardActivity
 import com.fobbu.member.android.activities.loginSignupModule.SMSVerificationActivity
 import com.fobbu.member.android.backgroundServices.FetchStatusAPI
 import com.fobbu.member.android.fragments.rsaFragmentModule.RsaConstants

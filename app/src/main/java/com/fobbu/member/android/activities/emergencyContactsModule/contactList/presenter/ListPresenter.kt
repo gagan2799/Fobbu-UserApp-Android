@@ -13,42 +13,48 @@ class ListPresenter(var activity: Activity,var contactView:ContactListView):List
 {
     val apiClient= ApiClient(activity)
 
+    // implementing  emergencycontacts API (DELETE)
     override fun deleteContact(contactId: String, token: String)
     {
-    apiClient.deleteContact(contactId,token,object :ResponseHandler
-    {
-        override fun onSuccess(mainPojo: MainPojo) {
-            contactView.hideLoader()
+        apiClient.deleteContact(contactId,token,object :ResponseHandler
+        {
+            override fun onSuccess(mainPojo: MainPojo)
+            {
+                contactView.hideLoader()
 
-            contactView.deleteContactSuccessReport(mainPojo)
-        }
+                contactView.deleteContactSuccessReport(mainPojo)
+            }
 
-        override fun onError(message: String) {
-            contactView.hideLoader()
+            override fun onError(message: String)
+            {
+                contactView.hideLoader()
 
-            Toast.makeText(activity,message, Toast.LENGTH_SHORT).show()
-        }
+                Toast.makeText(activity,message, Toast.LENGTH_SHORT).show()
+            }
 
-        override fun onServerError(message: String) {
-            contactView.hideLoader()
+            override fun onServerError(message: String)
+            {
+                contactView.hideLoader()
 
-            Toast.makeText(activity,message, Toast.LENGTH_SHORT).show()
-        }
+                Toast.makeText(activity,message, Toast.LENGTH_SHORT).show()
+            }
 
-        override fun on401() {
-            CommonClass(activity,activity).clearPreference()
-        }
-
-    })
+            override fun on401()
+            {
+                CommonClass(activity,activity).clearPreference()
+            }
+        })
     }
 
+    // implementing  emergencycontacts API (GET)
     override fun getContacts(token: String)
     {
-    contactView.showLoader()
+        contactView.showLoader()
 
         apiClient.getContact(token,object :ResponseHandler
         {
-            override fun onSuccess(mainPojo: MainPojo) {
+            override fun onSuccess(mainPojo: MainPojo)
+            {
                 contactView.hideLoader()
 
                 contactView.SuccessReport(mainPojo)
@@ -72,7 +78,6 @@ class ListPresenter(var activity: Activity,var contactView:ContactListView):List
             {
                 CommonClass(activity,activity).clearPreference()
             }
-
         })
     }
 }

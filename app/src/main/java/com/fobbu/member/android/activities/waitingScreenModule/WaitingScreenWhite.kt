@@ -7,20 +7,17 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.os.Bundle
 import android.os.Handler
-import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.fobbu.member.android.R
-import com.fobbu.member.android.activities.dashboardActivity.DashboardActivity
+import com.fobbu.member.android.activities.dashboard.DashboardActivity
 import com.fobbu.member.android.activities.paymentModule.GetSetGoActivity
 import com.fobbu.member.android.activities.paymentModule.OdsGetSetGoActivity
 import com.fobbu.member.android.activities.paymentModule.WorkSummaryActivity
 import com.fobbu.member.android.fcm.FcmPushTypes
-import com.fobbu.member.android.fragments.HomeFragment
 import com.fobbu.member.android.fragments.rsaFragmentModule.RsaConstants
 import com.fobbu.member.android.utils.CommonClass
 import kotlinx.android.synthetic.main.activity_waiting_screen_white.*
-import kotlinx.android.synthetic.main.app_bar_dashboard.*
 import java.lang.Exception
 
 class WaitingScreenWhite : AppCompatActivity() {
