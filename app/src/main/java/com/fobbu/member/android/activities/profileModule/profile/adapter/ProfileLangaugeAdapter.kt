@@ -12,18 +12,20 @@ class ProfileLangaugeAdapter(var activity: Activity,var selectedLanguageList:Arr
 {
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ProfileViewHolder
     {
-    return ProfileViewHolder(LayoutInflater.from(activity).inflate(R.layout.inflate_selected_language,p0,false))
+        return ProfileViewHolder(LayoutInflater.from(activity).inflate(R.layout.inflate_selected_language,p0,false))
     }
 
     override fun getItemCount(): Int
     {
-  return  selectedLanguageList.size
+        return  selectedLanguageList.size
     }
 
-    override fun onBindViewHolder(p0: ProfileViewHolder, p1: Int) {
+    override fun onBindViewHolder(p0: ProfileViewHolder, p1: Int)
+    {
         p0.tvSelectedLanguage.text=selectedLanguageList[p1]["language"].toString()
     }
 
+    // inner view holder class
     class ProfileViewHolder(view:View):RecyclerView.ViewHolder(view)
     {
         var tvSelectedLanguage:TextView=view.findViewById(R.id.tvSelectedLanguageProfile)

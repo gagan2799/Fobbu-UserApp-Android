@@ -59,6 +59,12 @@ class AddEditVehicleActivity : AppCompatActivity(),
 {
     private lateinit var webServiceApi: WebServiceApi
 
+    private val imageCameraRequest = 100
+
+    private val imageCameraCaptureRequest = 200
+
+    private var mFileTemp: File? = null
+
     lateinit var addEditActivityHandler: AddEditActivityHandler
 
     private var imageFrom = ""
@@ -105,9 +111,9 @@ class AddEditVehicleActivity : AppCompatActivity(),
 
         setContentView(R.layout.activity_add_edit_vehicle)
 
-        initialise()
+        initialise()     // all the initialization of the class is done here
 
-        addClicks()
+        addClicks()      // all the clicks  are handled in this method
     }
 
     // all the initialization of the class is done here
@@ -144,7 +150,7 @@ class AddEditVehicleActivity : AppCompatActivity(),
 
             etSubModel.setText(hashMapEdit["vehicle_sub_model"].toString())
 
-            etYearsOfMake.setText(hashMapEdit["make_of_year"].toString())
+            etYearsOfMake.text = hashMapEdit["make_of_year"].toString()
 
             vehicleType = hashMapEdit["vehicle_type"].toString()
 
@@ -160,9 +166,6 @@ class AddEditVehicleActivity : AppCompatActivity(),
 
                 ivCar.setImageResource(R.drawable.car_blue)
             }
-
-            //tvNew.setTextColor(resources.getColor(R.color.color_grey))
-
             tvEdit.visibility=View.VISIBLE
 
             tvEdit.setTextColor(resources.getColor(R.color.red))
@@ -192,13 +195,7 @@ class AddEditVehicleActivity : AppCompatActivity(),
                     0 ->
                     {
                         if (listImagesEdit[i] != "")
-                            Picasso.get().load(listImagesEdit[i])
-
-                                .fit().centerInside()
-
-                                .error(R.drawable.photo_camera)
-
-                                .into(ivImage1)
+                            Picasso.get().load(listImagesEdit[i]).fit().centerInside().error(R.drawable.photo_camera).into(ivImage1)
 
                         isImageOn1 = true
                     }
@@ -206,13 +203,7 @@ class AddEditVehicleActivity : AppCompatActivity(),
                     1 ->
                     {
                         if (listImagesEdit[i] != "")
-                            Picasso.get().load(listImagesEdit[i])
-
-                                .fit().centerInside()
-
-                                .error(R.drawable.photo_camera)
-
-                                .into(ivImage2)
+                            Picasso.get().load(listImagesEdit[i]).fit().centerInside().error(R.drawable.photo_camera).into(ivImage2)
 
                         isImageOn2 = true
                     }
@@ -220,26 +211,14 @@ class AddEditVehicleActivity : AppCompatActivity(),
                     2 ->
                     {
                         if (listImagesEdit[i] != "")
-                            Picasso.get().load(listImagesEdit[i])
-
-                                .fit().centerInside()
-
-                                .error(R.drawable.photo_camera)
-
-                                .into(ivImage3)
+                            Picasso.get().load(listImagesEdit[i]).fit().centerInside().error(R.drawable.photo_camera).into(ivImage3)
 
                         isImageOn3 = true
                     }
 
                     else ->
                     {
-                        Picasso.get().load(listImagesEdit[i])
-
-                            .fit().centerInside()
-
-                            .error(R.drawable.photo_camera)
-
-                            .into(ivImage4)
+                        Picasso.get().load(listImagesEdit[i]).fit().centerInside().error(R.drawable.photo_camera).into(ivImage4)
 
                         isImageOn4 = true
                     }
@@ -257,20 +236,16 @@ class AddEditVehicleActivity : AppCompatActivity(),
 
             bigProfileList.clear()
         }
-        else{
+        else
+        {
             if (fromWhere == "RSA")
                 startActivity(Intent(this, WaitingScreenWhite::class.java).putExtra("from_where", "building_live"))
 
             if (intent.hasExtra("vehicle_edit"))
-            {
-                startActivity(Intent(this,VehicleListActivity::class.java)
-                    .setFlags
-                        (Intent.FLAG_ACTIVITY_NO_ANIMATION))
-            }
+                startActivity(Intent(this,VehicleListActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
 
             finish()
         }
-
     }
 
     // all the clicks  are handled in this method
@@ -298,76 +273,76 @@ class AddEditVehicleActivity : AppCompatActivity(),
         }
 
         ivBack.setOnClickListener {
-
             if (intent.hasExtra("vehicle_edit"))
-            {
-                startActivity(Intent(this,VehicleListActivity::class.java)
-                    .setFlags
-                        (Intent.FLAG_ACTIVITY_NO_ANIMATION))
-            }
-            finish()
+                startActivity(Intent(this,VehicleListActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
 
+            finish()
         }
 
         etYearsOfMake.setOnClickListener{
-            dialogYearShow()
+            dialogYearShow()          // function for showing year dialog
         }
 
 
         llPhoto1.setOnClickListener {
             if (isImageOn1)
-            {
-                showPopupViewDelete("1")
-            }
+                showPopupViewDelete("1")       //Method for  deleting selected images
+
             else
             {
                 imageFrom = "1"
 
-                uploadImagesPopup()
+                uploadImagesPopup()               //Method for uploading car images
             }
-
         }
 
         llPhoto2.setOnClickListener {
             if (isImageOn2)
-            {
-                showPopupViewDelete("2")
-            }
+                showPopupViewDelete("2")        //Method for  deleting selected images
+
             else
             {
                 imageFrom = "2"
 
-                uploadImagesPopup()
+                uploadImagesPopup()                  //Method for uploading car images
             }
         }
 
         llPhoto3.setOnClickListener {
-            if (isImageOn3) {
-                showPopupViewDelete("3")
-            } else {
+            if (isImageOn3)
+                showPopupViewDelete("3")         //Method for  deleting selected images
+            else
+            {
                 imageFrom = "3"
-                uploadImagesPopup()
+
+                uploadImagesPopup()               //Method for uploading car images
             }
         }
 
         llPhoto4.setOnClickListener {
-            if (isImageOn4) {
-                showPopupViewDelete("4")
-            } else {
+            if (isImageOn4)
+                showPopupViewDelete("4")        //Method for  deleting selected images
+            else
+            {
                 imageFrom = "4"
-                uploadImagesPopup()
+
+                uploadImagesPopup()                    //Method for uploading car images
             }
         }
 
         ivBike.setOnClickListener {
             vehicleType = "2wheeler"
+
             ivBike.setImageResource(R.drawable.scooter_blue)
+
             ivCar.setImageResource(R.drawable.car_gray)
         }
 
         ivCar.setOnClickListener {
             vehicleType = "4wheeler"
+
             ivBike.setImageResource(R.drawable.scooter_gray)
+
             ivCar.setImageResource(R.drawable.car_blue)
         }
 
@@ -379,37 +354,28 @@ class AddEditVehicleActivity : AppCompatActivity(),
             val subModel=checkAndRemoveSpace(etSubModel.text.toString())
 
             val year=checkAndRemoveSpace(etYearsOfMake.text.toString())
-            when {
+
+            when
+            {
                 brand == "" ->
                 {
-                    Toast.makeText(
-                        this,
-                        resources.getString(R.string.add_brand),
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    Toast.makeText(this, resources.getString(R.string.add_brand), Toast.LENGTH_SHORT).show()
                 }
-                regNo == "" -> Toast.makeText(
-                    this,
-                    resources.getString(R.string.add_reg_no),
-                    Toast.LENGTH_SHORT
-                ).show()
-                subModel == "" -> Toast.makeText(
-                    this,
-                    resources.getString(R.string.add_sub_model),
-                    Toast.LENGTH_SHORT
-                ).show()
-                year == "" -> Toast.makeText(
-                    this,
-                    resources.getString(R.string.add_year),
-                    Toast.LENGTH_SHORT
-                ).show()
-                vehicleType == "" -> Toast.makeText(
-                    this,
-                    resources.getString(R.string.add_vehicle_type),
-                    Toast.LENGTH_SHORT
-                ).show()
-                else -> {
 
+                regNo == "" ->
+                    Toast.makeText(this, resources.getString(R.string.add_reg_no), Toast.LENGTH_SHORT).show()
+
+                subModel == "" ->
+                    Toast.makeText(this, resources.getString(R.string.add_sub_model), Toast.LENGTH_SHORT).show()
+
+                year == "" ->
+                    Toast.makeText(this, resources.getString(R.string.add_year), Toast.LENGTH_SHORT).show()
+
+                vehicleType == "" ->
+                    Toast.makeText(this, resources.getString(R.string.add_vehicle_type), Toast.LENGTH_SHORT).show()
+
+                else ->
+                {
                     if (file1 != null && file1!!.exists())
                         dataList.add(file1!!)
 
@@ -421,7 +387,6 @@ class AddEditVehicleActivity : AppCompatActivity(),
 
                     if (file4 != null && file4!!.exists())
                         dataList.add(file4!!)
-
 
                     if (CommonClass(this,this).checkInternetConn(this))
                     {
@@ -435,169 +400,184 @@ class AddEditVehicleActivity : AppCompatActivity(),
                         CommonClass(this,this).showToast(resources.getString(R.string.internet_is_unavailable))
                 }
             }
-
         }
     }
 
 
     //Method for  deleting selected images
-    private fun showPopupViewDelete(s: String) {
-
+    private fun showPopupViewDelete(s: String)
+    {
         val alertDialog = AlertDialog.Builder(this).create()
+
         alertDialog.setTitle("Car Images")
+
         alertDialog.setMessage(null)
 
         alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "View") { _, _ ->
-            println("list image edit::::::$listImagesEdit")
-            println("list image edit size::::::${listImagesEdit.size}")
-            when (s) {
-                "1" -> {
-
-                    if (tvHeading.text == resources.getString(R.string.edit_vehicle)) {
+            when (s)
+            {
+                "1" ->
+                {
+                    if (tvHeading.text == resources.getString(R.string.edit_vehicle))
                         if (listImagesEdit.size<1)
-                        {
-                            addFileToList()
-                        }
+                            addFileToList()       //  adding files to arraylist
 
-                    } else {
-                        addFileToList()
-                    }
+                        else
+                            addFileToList()      //  adding files to arraylist
 
-                    setUpSlider(0)
-                    println("big profile added 1:::: $bigProfileList")
+                    setUpSlider(0)      // function for setting up slider
+
                     rlBigProfile.visibility = View.VISIBLE
-
                 }
-                "2" -> {
-                    if (tvHeading.text == resources.getString(R.string.edit_vehicle)) {
+
+                "2" ->
+                {
+                    if (tvHeading.text == resources.getString(R.string.edit_vehicle))
                         if (listImagesEdit.size<2)
-                        {
-                            addFileToList()
-                        }
-                    }
-                    else
-                    {
-                        addFileToList()
-                    }
-                    setUpSlider(1)
+                            addFileToList()         //  adding files to arraylist
 
-                    println("big profile added 2:::: $bigProfileList")
+                        else
+                            addFileToList()          //  adding files to arraylist
+
+                    setUpSlider(1)          // function for setting up slider
+
                     rlBigProfile.visibility = View.VISIBLE
                 }
-                "3" -> {
-                    if (tvHeading.text == resources.getString(R.string.edit_vehicle)) {
+                "3" ->
+                {
+                    if (tvHeading.text == resources.getString(R.string.edit_vehicle))
                         if (listImagesEdit.size<3)
-                        {
-                            addFileToList()
-                        }
-                    }
-                    else
-                    {
-                        addFileToList()
-                    }
-                    setUpSlider(2)
+                            addFileToList()         //  adding files to arraylist
 
-                    println("big profile added 3:::: $bigProfileList")
+                        else
+                            addFileToList()          //  adding files to arraylist
+
+                    setUpSlider(2)         // function for setting up slider
+
                     rlBigProfile.visibility = View.VISIBLE
                 }
                 "4" -> {
-                    if (tvHeading.text == resources.getString(R.string.edit_vehicle)) {
-                        if (listImagesEdit.size<4)
-                        {
-                            addFileToList()
-                        }
-                    } else {
-                        addFileToList()
-                    }
-                    setUpSlider(3)
+                    if (tvHeading.text == resources.getString(R.string.edit_vehicle))
 
-                    println("big profile added 4:::: $bigProfileList")
+                        if (listImagesEdit.size<4)
+                            addFileToList()       //  adding files to arraylist
+
+                        else
+                            addFileToList()       //  adding files to arraylist
+
+                    setUpSlider(3)              // function for setting up slider
+
                     rlBigProfile.visibility = View.VISIBLE
                 }
             }
         }
-        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Delete") { _, _ ->
-            when (s) {
-                "1" -> {
 
-                    if (tvHeading.text != resources.getString(R.string.edit_vehicle)) {
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Delete") { _, _ ->
+            when (s)
+            {
+                "1" ->
+                {
+                    if (tvHeading.text != resources.getString(R.string.edit_vehicle))
                         file1 = null
-                    } else {
+
+                    else
+                    {
                         if (listImagesEdit.size<1)
                             file1=null
+
                         else
-                        {
                             if (listImagesEdit.size>=1)
                                 listImagesEdit.removeAt(0)
-                        }
-
                     }
                     isImageOn1 = false
+
                     ivImage1.setImageResource(R.drawable.photo_camera)
                 }
-                "2" -> {
-                    if (tvHeading.text != resources.getString(R.string.edit_vehicle)) {
+                "2" ->
+                {
+                    if (tvHeading.text != resources.getString(R.string.edit_vehicle))
                         file2 = null
-                    } else {
+
+                    else
+                    {
                         if (listImagesEdit.size<2)
                             file2=null
+
                         else
                         {
                             if (listImagesEdit.size==2)
                                 listImagesEdit.removeAt(1)
+
                             else
                                 listImagesEdit.removeAt(0)
                         }
                     }
                     isImageOn2 = false
+
                     ivImage2.setImageResource(R.drawable.photo_camera)
                 }
-                "3" -> {
-                    if (tvHeading.text != resources.getString(R.string.edit_vehicle)) {
+
+                "3" ->
+                {
+                    if (tvHeading.text != resources.getString(R.string.edit_vehicle))
                         file3 = null
-                    } else {
+
+                    else
+                    {
                         if (listImagesEdit.size<3)
                             file3=null
+
                         else
                         {
                             if (listImagesEdit.size==3)
                                 listImagesEdit.removeAt(2)
+
                             else
                                 listImagesEdit.removeAt(0)
                         }
                     }
                     isImageOn3 = false
+
                     ivImage3.setImageResource(R.drawable.photo_camera)
                 }
-                "4" -> {
-                    if (tvHeading.text != resources.getString(R.string.edit_vehicle)) {
+
+                "4" ->
+                {
+                    if (tvHeading.text != resources.getString(R.string.edit_vehicle))
                         file4 = null
-                    } else {
+
+                    else
+                    {
                         if (listImagesEdit.size<4)
                             file1=null
+
                         else
                         {
                             if (listImagesEdit.size==4)
                                 listImagesEdit.removeAt(3)
+
                             else
                                 listImagesEdit.removeAt(0)
                         }
                     }
                     isImageOn4 = false
+
                     ivImage4.setImageResource(R.drawable.photo_camera)
                 }
             }
+
             bigProfileList.clear()
+
             if (listImagesEdit.isNotEmpty())
-            {
                 for (i in listImagesEdit.indices)
                 {
                     bigProfileList.add(listImagesEdit[i])
                 }
-            }
         }
+
         alertDialog.setOnShowListener {
             alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.BLACK)
+
             alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.BLACK)
         }
 
@@ -619,20 +599,18 @@ class AddEditVehicleActivity : AppCompatActivity(),
             if (apiLevel >= 23)
             {
                 //phone state
-                val permission1 =
-                    ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE)
+                val permission1 = ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE)
 
-                val permission2 =
-                    ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                val permission2 = ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
 
                 if (permission1 != PackageManager.PERMISSION_GRANTED || permission2 != PackageManager.PERMISSION_GRANTED) {
-                    makeRequest2()
+                    makeRequest2()       // function for requesting permission
                 }
                 else
-                    openGallery()
+                    openGallery()        //Method for opening gallery
             }
             else
-                openGallery()
+                openGallery()        //Method for opening gallery
         }
 
         alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Camera") { _, _ ->
@@ -641,24 +619,21 @@ class AddEditVehicleActivity : AppCompatActivity(),
             if (apiLevel >= 23)
             {
                 //phone state
-                val permission1 =
-                    ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE)
+                val permission1 = ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE)
 
-                val permission2 =
-                    ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                val permission2 = ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
 
                 val permission3 = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
 
                 if (permission1 != PackageManager.PERMISSION_GRANTED || permission2 != PackageManager.PERMISSION_GRANTED
                     || permission3 != PackageManager.PERMISSION_GRANTED
                 )
-                    makeRequest1()
+                    makeRequest1()        // function for requesting permission
                 else
-                    takePicture()
-
+                    takePicture()      // Method for opening camera and capturing images
             }
             else
-                takePicture()
+                takePicture()      // Method for opening camera and capturing images
         }
 
         alertDialog.setOnShowListener {
@@ -670,43 +645,34 @@ class AddEditVehicleActivity : AppCompatActivity(),
         alertDialog.show()
     }
 
+    // function for requesting permission
     private fun makeRequest1()
     {
         ActivityCompat.requestPermissions(
             this@AddEditVehicleActivity,
             arrayOf(
                 "android.permission.WRITE_EXTERNAL_STORAGE",
-
                 "android.permission.READ_EXTERNAL_STORAGE",
-
                 "android.permission.CAMERA"
-            ),
-            1)
+            ), 1)
     }
 
-    private fun makeRequest2() {
+    // function for requesting permission
+    private fun makeRequest2()
+    {
         ActivityCompat.requestPermissions(
             this@AddEditVehicleActivity,
             arrayOf(
                 "android.permission.WRITE_EXTERNAL_STORAGE",
                 "android.permission.READ_EXTERNAL_STORAGE",
                 "android.permission.CAMERA"
-            ),
-            2
-        )
+            ), 2)
     }
 
-    private val imageCameraRequest = 100
-
-    private val imageCameraCaptureRequest = 200
-
-    private var mFileTemp: File? = null
-
-
     // Method for opening camera and capturing images
-    private fun takePicture() {
-
-        createFileAndDeleteOldFile()
+    private fun takePicture()
+    {
+        createFileAndDeleteOldFile()       //Method for creating files and deleting old ones
 
         val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
 
@@ -714,176 +680,197 @@ class AddEditVehicleActivity : AppCompatActivity(),
 
         val mImageCaptureUri: Uri
 
-        mImageCaptureUri = if (apiLevel >= 24) {
-            FileProvider.getUriForFile(
-                this@AddEditVehicleActivity,
-                this.applicationContext.packageName + ".provider", mFileTemp!!
-            )
-        } else {
+        mImageCaptureUri = if (apiLevel >= 24)
+            FileProvider.getUriForFile(this@AddEditVehicleActivity, this.applicationContext.packageName + ".provider", mFileTemp!!)
+
+        else
             Uri.fromFile(mFileTemp)
-        }
 
         intent.putExtra(MediaStore.EXTRA_OUTPUT, mImageCaptureUri)
-        try {
+
+        try
+        {
             startActivityForResult(intent, imageCameraCaptureRequest)
-        } catch (e: Exception) {
+        }
+        catch (e: Exception)
+        {
             e.printStackTrace()
         }
     }
 
     //Method for creating files and deleting old ones
-    private fun createFileAndDeleteOldFile() {
-        mFileTemp =
-                File(Environment.getExternalStorageDirectory(), "vehicle_images" + System.currentTimeMillis() + ".jpg")
-        if (mFileTemp!!.exists()) {
+    private fun createFileAndDeleteOldFile()
+    {
+        mFileTemp = File(Environment.getExternalStorageDirectory(), "vehicle_images" + System.currentTimeMillis() + ".jpg")
+
+        if (mFileTemp!!.exists())
             mFileTemp!!.delete()
-        }
     }
 
     //Method for opening gallery
-    private fun openGallery() {
-
+    private fun openGallery()
+    {
         val photoPickerIntent = Intent(Intent.ACTION_PICK)
+
         photoPickerIntent.type = "image/*"
+
         startActivityForResult(photoPickerIntent, imageCameraRequest)
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
-        when (requestCode) {
-            1 -> {
-                if (grantResults.isEmpty() || grantResults[0] != PackageManager.PERMISSION_GRANTED
-                    || grantResults[1] != PackageManager.PERMISSION_GRANTED
-                    || grantResults[2] != PackageManager.PERMISSION_GRANTED
-                ) {
-                    Log.i("", "Permission has been denied by user")
-                    showMessageDialog(
-                        "You need to allow the permissions from\n" +
-                                "Phone Settings -> Apps --> Fobbu  --> Permissions\n" +
-                                "to allow the permissions"
-                    )
+        when (requestCode)
+        {
+            1 ->
+            {
+                if (grantResults.isEmpty() || grantResults[0] != PackageManager.PERMISSION_GRANTED || grantResults[1] != PackageManager.PERMISSION_GRANTED || grantResults[2] != PackageManager.PERMISSION_GRANTED)
+                    showMessageDialog(resources.getString(R.string.permission_message))       //Method to display message to the user about the permission required by the application
 
-                } else {
-                    Log.i("", "Permission has been granted by user")
+                else
+                    takePicture()        // Method for opening camera and capturing images
 
-                    takePicture()
-                }
                 return
             }
-            2 -> {
-                if (grantResults.isEmpty() || grantResults[0] != PackageManager.PERMISSION_GRANTED
-                    || grantResults[1] != PackageManager.PERMISSION_GRANTED
-                    || grantResults[2] != PackageManager.PERMISSION_GRANTED
-                ) {
-                    Log.i("", "Permission has been denied by user")
-                    showMessageDialog(
-                        "You need to allow the permissions from\n" +
-                                "Phone Settings -> Apps --> Fobbu Vendor --> Permissions\n" +
-                                "to allow the permissions"
-                    )
-                } else {
-                    Log.i("", "Permission has been granted by user")
+            2 ->
+            {
+                if (grantResults.isEmpty() || grantResults[0] != PackageManager.PERMISSION_GRANTED || grantResults[1] != PackageManager.PERMISSION_GRANTED || grantResults[2] != PackageManager.PERMISSION_GRANTED)
+                    showMessageDialog(resources.getString(R.string.permission_message))  //Method to display message to the user about the permission required by the application
 
-                    openGallery()
-                }
+                else
+                    openGallery()     //Method for opening gallery
+
                 return
             }
         }
     }
 
     @SuppressLint("Recycle")
-    public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (resultCode != RESULT_OK) {
+    public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?)
+    {
+        if (resultCode != RESULT_OK)
             return
-        }
 
-        when (requestCode) {
-
+        when (requestCode)
+        {
             imageCameraRequest ->
-
-                try {
+                try
+                {
                     val projection = arrayOf(MediaStore.Images.Media.DATA)
-                    val cursor = contentResolver.query(data!!.data, projection, null, null, null)
-                    val columnIndex = cursor!!.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
-                    cursor.moveToFirst()
-                    val path = cursor.getString(columnIndex)
-                    val imgFile = compressImage(File(path))
-                    //val imgFile = File(path)
-                    println("IMAGE FILE 1$imgFile")
 
-                    //dataList.add(imgFile)
-                    if (imgFile.exists()) {
-                        when (imageFrom) {
-                            "1" -> {
+                    val cursor = contentResolver.query(data!!.data, projection, null, null, null)
+
+                    val columnIndex = cursor!!.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
+
+                    cursor.moveToFirst()
+
+                    val path = cursor.getString(columnIndex)
+
+                    val imgFile = compressImage(File(path))    // compressing image
+
+                    if (imgFile.exists())
+                    {
+                        when (imageFrom)
+                        {
+                            "1" ->
+                            {
                                 Glide.with(this@AddEditVehicleActivity)
                                     .load(imgFile)
                                     .into(ivImage1)
+
                                 isImageOn1 = true
+
                                 file1 = imgFile
                             }
-                            "2" -> {
+
+                            "2" ->
+                            {
                                 Glide.with(this@AddEditVehicleActivity)
                                     .load(imgFile)
                                     .into(ivImage2)
+
                                 isImageOn2 = true
+
                                 file2 = imgFile
                             }
-                            "3" -> {
+
+                            "3" ->
+                            {
                                 Glide.with(this@AddEditVehicleActivity)
                                     .load(imgFile)
                                     .into(ivImage3)
+
                                 isImageOn3 = true
+
                                 file3 = imgFile
                             }
-                            "4" -> {
+
+                            "4" ->
+                            {
                                 Glide.with(this@AddEditVehicleActivity)
                                     .load(imgFile)
                                     .into(ivImage4)
+
                                 isImageOn4 = true
+
                                 file4 = imgFile
                             }
                         }
-
                     }
-                } catch (e: Exception) {
-                    Log.e("tag", "Error while creating temp file", e)
+                }
+                catch (e: Exception)
+                {
+                    e.printStackTrace()
                 }
 
             imageCameraCaptureRequest ->
+                if (requestCode == imageCameraCaptureRequest && resultCode == RESULT_OK)
+                {
+                    val imgFile = compressImage(File(mFileTemp!!.path))         // compressing image
 
-                if (requestCode == imageCameraCaptureRequest && resultCode == RESULT_OK) {
-
-                    val imgFile = compressImage(File(mFileTemp!!.path))
-                    println("IMAGE FILE 2  $imgFile")
-
-                    // dataList.add(imgFile)
-                    if (imgFile.exists()) {
-                        when (imageFrom) {
-                            "1" -> {
+                    if (imgFile.exists())
+                    {
+                        when (imageFrom)
+                        {
+                            "1" ->
+                            {
                                 Glide.with(this@AddEditVehicleActivity)
                                     .load(imgFile)
                                     .into(ivImage1)
+
                                 isImageOn1 = true
+
                                 file1 = imgFile
                             }
-                            "2" -> {
+
+                            "2" ->
+                            {
                                 Glide.with(this@AddEditVehicleActivity)
                                     .load(imgFile)
                                     .into(ivImage2)
+
                                 isImageOn2 = true
+
                                 file2 = imgFile
                             }
-                            "3" -> {
+
+                            "3" ->
+                            {
                                 Glide.with(this@AddEditVehicleActivity)
                                     .load(imgFile)
                                     .into(ivImage3)
+
                                 isImageOn3 = true
+
                                 file3 = imgFile
                             }
-                            "4" -> {
+
+                            "4" ->
+                            {
                                 Glide.with(this@AddEditVehicleActivity)
                                     .load(imgFile)
                                     .into(ivImage4)
+
                                 isImageOn4 = true
+
                                 file4 = imgFile
                             }
                         }
@@ -894,38 +881,33 @@ class AddEditVehicleActivity : AppCompatActivity(),
     }
 
 
-    //Method to dislpay message to the user about the permission required by the application
-    private fun showMessageDialog(message: String) {
-        val alertDialog = AlertDialog.Builder(
-            this@AddEditVehicleActivity!!
-            , R.style.MyDialogTheme
-        ).create()
+    //Method to display message to the user about the permission required by the application
+    private fun showMessageDialog(message: String)
+    {
+        val alertDialog = AlertDialog.Builder(this@AddEditVehicleActivity!!, R.style.MyDialogTheme).create()
+
         alertDialog.setMessage(message)
-        alertDialog.setButton(
-            AlertDialog.BUTTON_POSITIVE, "Ok"
-        ) { dialog
-            , _ ->
+
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Ok") { dialog, _ ->
             dialog.dismiss()
+
             finish()
         }
-
         alertDialog.show()
 
         val messageText: TextView = alertDialog!!.findViewById(android.R.id.message)!!
 
         messageText.gravity = Gravity.LEFT
-
     }
 
 
-    //Method for compressing image
     // Method for compressing image
-    private fun compressImage(imgFile: File): File {
+    private fun compressImage(imgFile: File): File
+    {
         //////old code
         val bos = ByteArrayOutputStream()
 
-        // var myBitmap = BitmapFactory.decodeFile(imgFile.absolutePath)
-        val myBitmap = imageRotation(BitmapFactory.decodeFile(imgFile.absolutePath), imgFile.absolutePath)
+        val myBitmap = imageRotation(BitmapFactory.decodeFile(imgFile.absolutePath), imgFile.absolutePath)  // changing the orientation of the images
 
         val nh = (myBitmap.height * (512.0 / myBitmap.width)).toInt()
 
@@ -935,40 +917,49 @@ class AddEditVehicleActivity : AppCompatActivity(),
 
         val bitmapdata = bos.toByteArray()
 
-        val f = imgFile
-        val fos = FileOutputStream(f)
+        val fos = FileOutputStream(imgFile)
+
         fos.write(bitmapdata)
+
         fos.flush()
+
         fos.close()
-        return f
+
+        return imgFile
     }
 
     // method for changing the orientation of the images
-    private fun imageRotation(bitmap: Bitmap, path: String): Bitmap {
+    private fun imageRotation(bitmap: Bitmap, path: String): Bitmap
+    {
         val ei = ExifInterface(path)
+
         val orientation = ei.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL)
 
         var rotatedBitmap: Bitmap = bitmap
-        println("orientation $orientation")
 
-        when (orientation) {
+        when (orientation)
+        {
             ExifInterface.ORIENTATION_ROTATE_90 ->
-                rotatedBitmap = rotateImage(bitmap, 90F)
+                rotatedBitmap = rotateImage(bitmap, 90F)   // rotating image
+
             ExifInterface.ORIENTATION_ROTATE_180 ->
-                rotatedBitmap = rotateImage(bitmap, 180F)
+                rotatedBitmap = rotateImage(bitmap, 180F)   // rotating image
+
             ExifInterface.ORIENTATION_ROTATE_270 ->
-                rotatedBitmap = rotateImage(bitmap, 270F)
+                rotatedBitmap = rotateImage(bitmap, 270F)   // rotating image
+
             ExifInterface.ORIENTATION_NORMAL ->
                 rotatedBitmap = bitmap
         }
-
         return rotatedBitmap
     }
 
 
     // Method for rotating image
-    private fun rotateImage(source: Bitmap, angle: Float): Bitmap {
+    private fun rotateImage(source: Bitmap, angle: Float): Bitmap
+    {
         val matrix = Matrix()
+
         matrix.postRotate(angle)
 
         return Bitmap.createBitmap(source, 0, 0, source.width, source.height, matrix, false)
@@ -1027,35 +1018,24 @@ class AddEditVehicleActivity : AppCompatActivity(),
         if (mainPojo.success == "true")
         {
             if (fromWhere == "RSA")
-            {
-                callUpdateVehicle(mainPojo.getData()._id)
-            }
+                callUpdateVehicle(mainPojo.getData()._id)          //Update FOBBU Vehicle API (API-users/requests)
+
             else
             {
-                println("Success")
-                CommonClass(
-                    this@AddEditVehicleActivity,
+                CommonClass(this@AddEditVehicleActivity, this@AddEditVehicleActivity).showToast(mainPojo.message)
 
-                    this@AddEditVehicleActivity
-                ).showToast(mainPojo.message)
-
-                startActivity(Intent(this,VehicleListActivity::class.java)
-                    .putExtra("vehicle_type",vehicleType))
+                startActivity(Intent(this,VehicleListActivity::class.java).putExtra("vehicle_type",vehicleType))
 
                 finish()
             }
         }
         else
-        {
-            CommonClass(
-                this@AddEditVehicleActivity,
-                this@AddEditVehicleActivity
-            ).showToast(mainPojo.message)
-        }
+            CommonClass(this@AddEditVehicleActivity, this@AddEditVehicleActivity).showToast(mainPojo.message)
     }
 
+    // ************************  update_vehicle API ********************//
 
-    //EDIT vehicle API (API-users/vehicles)
+    //EDIT vehicle API (API-update_vehicle API)
     private fun editVehicleApi()
     {
         val fileList = ArrayList<MultipartBody.Part>()
@@ -1088,7 +1068,6 @@ class AddEditVehicleActivity : AppCompatActivity(),
                 list.put(jsonObject)
             }
         }
-
         val bodyUserId = RequestBody.create(MediaType.parse("text/plain"), CommonClass(this, this).getString("_id"))
 
         val bodyVehicleBrand = RequestBody.create(MediaType.parse("text/plain"), etBrand.text.toString().trim())
@@ -1126,98 +1105,85 @@ class AddEditVehicleActivity : AppCompatActivity(),
         val tokenHeader = CommonClass(this, this).getString("x_access_token")
 
         addEditActivityHandler.sendEditData(map, fileList, tokenHeader)
-
     }
 
-
+    // handling the response of update_vehicle API
     override fun onRequestSuccessReportEdit(mainPojo: MainPojo)
     {
         if (mainPojo.success == "true")
         {
-            CommonClass(
-                this@AddEditVehicleActivity,
-                this@AddEditVehicleActivity
-            ).showToast(mainPojo.message)
+            CommonClass(this@AddEditVehicleActivity, this@AddEditVehicleActivity).showToast(mainPojo.message)
 
-            startActivity(Intent(this,VehicleListActivity::class.java)
-                .putExtra("vehicle_type",vehicleType))
+            startActivity(Intent(this,VehicleListActivity::class.java).putExtra("vehicle_type",vehicleType))
+
             finish()
-        } else {
-
-            CommonClass(
-                this@AddEditVehicleActivity,
-                this@AddEditVehicleActivity
-            ).showToast(mainPojo.message)
         }
+        else
+            CommonClass(this@AddEditVehicleActivity, this@AddEditVehicleActivity).showToast(mainPojo.message)
     }
 
 
     //////////////////UPDATE FOBBU VEHICLE API /////////////////////////
+
     //Update FOBBU Vehicle API (API-users/requests)
-    private fun callUpdateVehicle(id: String) {
+    private fun callUpdateVehicle(id: String)
+    {
+        if (CommonClass(this, this).checkInternetConn(this))
+        {
+            val token = CommonClass(this@AddEditVehicleActivity, this@AddEditVehicleActivity).getString("x_access_token")
 
-        if (CommonClass(this, this).checkInternetConn(this)) {
+            val requestId = CommonClass(this@AddEditVehicleActivity, this@AddEditVehicleActivity).getString(RsaConstants.ServiceSaved.fobbuRequestId)
 
-            val token = CommonClass(this@AddEditVehicleActivity, this@AddEditVehicleActivity)
-                .getString("x_access_token")
-
-            val requestId = CommonClass(this@AddEditVehicleActivity, this@AddEditVehicleActivity)
-                .getString(RsaConstants.ServiceSaved.fobbuRequestId)
-            // rlLoader.visibility = View.VISIBLE
             val hash = HashMap<String, String>()
+
             hash["request_id"] = requestId
+
             hash["vehicle"] = id
 
             addEditActivityHandler.findFobbuRequestUpdateVehicle(hash, token)
-
-        } else {
-
-            CommonClass(this, this).internetIssue(this)
         }
+        else
+            CommonClass(this, this).internetIssue(this)
     }
 
 
     // Update FOBBU Vehicle API Response (API-users/requests)
-    override fun onRequestSuccessUpdateVehicle(mainPojo: MainPojo) {
-        // rlLoader.visibility = View.GONE
-        if (mainPojo!!.success == "true") {
+    override fun onRequestSuccessUpdateVehicle(mainPojo: MainPojo)
+    {
+        if (mainPojo!!.success == "true")
+        {
+            startActivity(Intent(this@AddEditVehicleActivity, WaitingScreenWhite::class.java).putExtra("from_where", "new_vehicle_added").putExtra("vehicle_type",vehicleType))
 
-            startActivity(
-                Intent(
-                    this@AddEditVehicleActivity
-                    , WaitingScreenWhite::class.java
-                ).putExtra("from_where", "new_vehicle_added")
-                    .putExtra("vehicle_type",vehicleType)
-            )
             finish()
-
-        } else {
-
+        }
+        else
             CommonClass(this@AddEditVehicleActivity, this@AddEditVehicleActivity)
                 .showToast(mainPojo.message)
-        }
-
     }
 
-    override fun showLoader() {
+    override fun showLoader()
+    {
         rlLoader.visibility = View.VISIBLE
     }
 
-    override fun hideLoader() {
+    override fun hideLoader()
+    {
         rlLoader.visibility = View.GONE
     }
 
-    private fun getEnv(): MyApplication {
+    private fun getEnv(): MyApplication
+    {
         return application as MyApplication
     }
 
-    override fun onDeleteVehicleSuccessUpdateVehicle(mainPojo: MainPojo) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun onDeleteVehicleSuccessUpdateVehicle(mainPojo: MainPojo) {}
 
-    override fun onDateSet(p0: DatePicker?, p1: Int, p2: Int, p3: Int) {
+    override fun onDateSet(p0: DatePicker?, p1: Int, p2: Int, p3: Int)
+    {
         year=p1
+
         month=p2
+
         day=p3
     }
 
@@ -1229,35 +1195,23 @@ class AddEditVehicleActivity : AppCompatActivity(),
         return text
     }
 
+    // function adding files to arraylist
     private fun addFileToList()
     {
-
         if (file1!=null)
-        {
             bigProfileList.add(file1.toString())
-        }
-
 
         if (file2!=null)
-        {
             bigProfileList.add(file2.toString())
-        }
-
 
         if (file3!=null)
-        {
             bigProfileList.add(file3.toString())
-        }
-
 
         if (file4!=null)
-        {
             bigProfileList.add(file4.toString())
-        }
     }
 
-
-    // functiom for setting up slider
+    // function for setting up slider
     private fun  setUpSlider(pos:Int)
     {
         viewAdapter= BigProfileViewAdapter(this,bigProfileList)
@@ -1265,7 +1219,9 @@ class AddEditVehicleActivity : AppCompatActivity(),
         vpBigProfile.adapter=viewAdapter
 
         val density = resources.displayMetrics.density
+
         val partialWidth = (16 * density).toInt() // 16dp
+
         val pageMargin = (8 * density).toInt() // 8dp
 
         val viewPagerPadding = partialWidth + pageMargin
@@ -1277,36 +1233,46 @@ class AddEditVehicleActivity : AppCompatActivity(),
         vpBigProfile.setPageTransformer(true, CardsPagerTransformerBasic(2,5, 0.7F))
 
         circleIndicator.setViewPager(vpBigProfile)
+
         if (pos>=bigProfileList.size)
-        {
             vpBigProfile.currentItem = bigProfileList.size-1
-        }
+
         else
             vpBigProfile.currentItem = pos
     }
 
+    // function for showing year dialog
     @SuppressLint("SetTextI18n")
     fun dialogYearShow()
     {
-        val d: Dialog =  Dialog(this)
+        val d =  Dialog(this)
+
         d.setTitle("NumberPicker")
+
         d.setContentView(R.layout.inflate_dialog_year)
+
         val b1:TextView  =  d.findViewById(R.id.button1);
+
         val np: NumberPicker  =  d.findViewById(R.id.numberPicker1)
+
         np.maxValue = 2019
+
         np.minValue = 1970
+
         np.wrapSelectorWheel = false
+
         np.setOnValueChangedListener(this)
+
         b1.setOnClickListener {
-            etYearsOfMake.setText(""+(np.value))
+            etYearsOfMake.text = ""+(np.value)
+
             d.dismiss()
         }
         d.show()
     }
 
-
-    override fun onValueChange(p0: NumberPicker?, p1: Int, p2: Int) {
+    override fun onValueChange(p0: NumberPicker?, p1: Int, p2: Int)
+    {
         Log.i("value is",""+p2)
     }
-
 }

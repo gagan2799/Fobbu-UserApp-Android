@@ -453,6 +453,10 @@
     <string name="relationship_status_1st_msg">Please provide a relationship status with 2nd contact</string>
     <string name="enter_new_pin_msg">Please enter New PIN.</string>
     <string name="confirm_pin_msg">Please enter Confirm PIN.</string>
+    <string name="provide_mail_msg">Please provide email id</string>
+    <string name="prvovide_correct_mail_msg">Please provide correct email id</string>
+    <string name="select_gender_msg">Please select gender</string>
+    <string name="cancellation_by_user_msg">Your request has been cancelled\n A Cancellation fee will be deducted \nfrom your fobbu wallet</string>
 
 
     <!--///LANGUAGE ARRAY-->

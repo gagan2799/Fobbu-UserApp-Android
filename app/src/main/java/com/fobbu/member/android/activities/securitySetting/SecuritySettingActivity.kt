@@ -14,17 +14,17 @@ import kotlinx.android.synthetic.main.toolbar.*
 class SecuritySettingActivity : AppCompatActivity()
 {
     lateinit var commonClass: CommonClass
+
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_security_setting)
 
-        initView()
+        initView()       // function for initialising all the variables of the class
 
-        clicks()
+        clicks()        //function for handling the clicks of the class
     }
-
 
     // function for initialising all the variables of the class
     private fun initView()
@@ -33,7 +33,6 @@ class SecuritySettingActivity : AppCompatActivity()
 
         ivSearchToolbar.visibility=View.INVISIBLE
     }
-
 
     //function for handling the clicks of the class
     private fun clicks()
@@ -47,11 +46,7 @@ class SecuritySettingActivity : AppCompatActivity()
         }
 
         llPinSecurity.setOnClickListener {
-            startActivity(Intent(this,GeneratePINActivity::class.java)
-                .putExtra("pin","security"))
+            startActivity(Intent(this,GeneratePINActivity::class.java).putExtra("pin","security"))
         }
-
     }
-
-
 }

@@ -33,7 +33,6 @@ import kotlinx.android.synthetic.main.toolbar.*
 
 class MyOrdersActivity : AppCompatActivity(),ActivityView
 {
-
     private lateinit var sharedPref: CommonClass
 
     private lateinit var orderAdapter:OrderAdapter
@@ -52,7 +51,6 @@ class MyOrdersActivity : AppCompatActivity(),ActivityView
 
     var dataList= ArrayList<HashMap<String,Any>>()
 
-
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
     override fun onCreate(savedInstanceState: Bundle?)
     {
@@ -60,11 +58,11 @@ class MyOrdersActivity : AppCompatActivity(),ActivityView
 
         setContentView(R.layout.activity_my_orders)
 
-        initView()
+        initView()                 // function for handling all the views of the class
 
-        clicks()
+        clicks()                 // function for handling all the clicks of the class
     }
-    
+
 
     // function for handling all the views of the class
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
@@ -72,24 +70,13 @@ class MyOrdersActivity : AppCompatActivity(),ActivityView
     {
         setSupportActionBar(toolbar)
 
-        setsearchtoolbar()
+        setsearchtoolbar()                     // function for setting up search tool bar
 
         sharedPref= CommonClass(this,this)
 
         orderHandler=OrderPresenter(this,this)
 
-        tabAllSelected()
-    }
-
-    
-    // function for setting up the recycler
-    private fun setUpRecycler() 
-    {
-        orderAdapter= OrderAdapter(this,dataList)
-
-        rvOrder.layoutManager=LinearLayoutManager(this)
-
-        rvOrder.adapter=orderAdapter
+        tabAllSelected()                // change in layout when tab all is  selected
     }
 
     // function for handling all the clicks of the class
@@ -97,9 +84,8 @@ class MyOrdersActivity : AppCompatActivity(),ActivityView
     {
         // ALL tab
         llAllOrder.setOnClickListener{
-            tabAllSelected()
+            tabAllSelected()                   // change in layout when tab all is  selected
         }
-
 
         // finish
         ivBackButton.setOnClickListener {
@@ -111,10 +97,11 @@ class MyOrdersActivity : AppCompatActivity(),ActivityView
         {
             override fun onItemClick(view: View, position: Int)
             {
-             val map=dataList[position]
+                val map=dataList[position]
+
                 for (i in dataList.indices)
                 {
-                     val hashMap=dataList[i]
+                    val hashMap=dataList[i]
 
                     if (map["order_id"]==hashMap["order_id"])
                     {
@@ -123,25 +110,20 @@ class MyOrdersActivity : AppCompatActivity(),ActivityView
                         sortedList.add(sortedMap)
                     }
                 }
-                startActivity(
-                    Intent(this@MyOrdersActivity, OrderDetailActivity::class.java)
-                        .putExtra("service_list",sortedList))
+                startActivity(Intent(this@MyOrdersActivity, OrderDetailActivity::class.java).putExtra("service_list",sortedList))
             }
-
         }))
 
         // search
         ivSearchToolbar.setOnClickListener {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
-            {
-                circleReveal(R.id.searchtoolbar, 1, true, true)
-            }
+                circleReveal(R.id.searchtoolbar, 1, true, true)  // function for adding circle reveal animation the search tool bar
+
             else
                 searchtoolbar.visibility = View.VISIBLE
 
             item_search.expandActionView()
         }
-
 
         // RSA tab
         llRsaOrder.setOnClickListener{
@@ -165,7 +147,7 @@ class MyOrdersActivity : AppCompatActivity(),ActivityView
 
             viewFree.visibility=View.GONE
 
-           getOrderApi("RSA")
+            getOrderApi("RSA")                  // implementing the get_requests API  for RSA
         }
 
 
@@ -191,7 +173,7 @@ class MyOrdersActivity : AppCompatActivity(),ActivityView
 
             viewFree.visibility=View.GONE
 
-              getOrderApi("ODS")
+            getOrderApi("ODS")                      // implementing the get_requests API for ODS
         }
 
         // LSD Tab
@@ -216,7 +198,7 @@ class MyOrdersActivity : AppCompatActivity(),ActivityView
 
             viewFree.visibility=View.GONE
 
-              getOrderApi("LSD")
+            getOrderApi("LSD")                        // implementing the get_requests API for LSD
         }
 
         // Free Tab
@@ -241,9 +223,19 @@ class MyOrdersActivity : AppCompatActivity(),ActivityView
 
             viewFree.visibility=View.VISIBLE
 
-              getOrderApi("FREE")
+            getOrderApi("FREE")                       // implementing the get_requests API ofr FREE
         }
 
+    }
+
+    // function for setting up the recycler
+    private fun setUpRecycler()
+    {
+        orderAdapter= OrderAdapter(this,dataList)
+
+        rvOrder.layoutManager=LinearLayoutManager(this)
+
+        rvOrder.adapter=orderAdapter
     }
 
     // change in layout when tab all is  selected
@@ -269,9 +261,10 @@ class MyOrdersActivity : AppCompatActivity(),ActivityView
 
         viewFree.visibility=View.GONE
 
-        getOrderApi("ALL")
+        getOrderApi("ALL")                       // implementing the get_requests API for ALL
     }
 
+    // function for setting up search tool bar
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
     fun setsearchtoolbar()
     {
@@ -284,35 +277,37 @@ class MyOrdersActivity : AppCompatActivity(),ActivityView
         searchtoolbar.setNavigationOnClickListener {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
             //searchtoolbar!!.visibility = View.VISIBLE
-                circleReveal(R.id.searchtoolbar, 1, true, false)
+                circleReveal(R.id.searchtoolbar, 1, true, false)   // function for adding circle reveal animation the search tool bar
+
             else
                 searchtoolbar!!.visibility = View.GONE
         }
-
         item_search = search_menu.findItem(R.id.action_filter_search)
 
-        MenuItemCompat.setOnActionExpandListener(item_search, object : MenuItemCompat.OnActionExpandListener {
-            override fun onMenuItemActionCollapse(item: MenuItem): Boolean {
+        MenuItemCompat.setOnActionExpandListener(item_search, object : MenuItemCompat.OnActionExpandListener
+        {
+            override fun onMenuItemActionCollapse(item: MenuItem): Boolean
+            {
                 // Do something when collapsed
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    circleReveal(R.id.searchtoolbar, 1, true, false)
-                } else
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+                    circleReveal(R.id.searchtoolbar, 1, true, false)  // function for adding circle reveal animation the search tool bar
+
+                else
                     searchtoolbar.visibility = View.GONE
+
                 return true
             }
 
-            override fun onMenuItemActionExpand(item: MenuItem): Boolean {
+            override fun onMenuItemActionExpand(item: MenuItem): Boolean
+            {
                 // Do something when expanded
                 return true
             }
         })
-
         initSearchView()
-
-
     }
 
-
+// function for initialising the variables and views of the search toolbar
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
     private fun initSearchView()
@@ -346,8 +341,8 @@ class MyOrdersActivity : AppCompatActivity(),ActivityView
         txtSearch.setHintTextColor(resources.getColor(R.color.white))
 
         // set the cursor
-
         val searchTextView = searchView.findViewById<View>(android.support.v7.appcompat.R.id.search_src_text) as AutoCompleteTextView
+
         try
         {
             val mCursorDrawableRes = TextView::class.java.getDeclaredField("mCursorDrawableRes")
@@ -361,33 +356,39 @@ class MyOrdersActivity : AppCompatActivity(),ActivityView
             e.printStackTrace()
         }
 
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener
+        {
             @SuppressLint("RestrictedApi")
-            override fun onQueryTextSubmit(query: String): Boolean {
-                callSearch(query)
+            override fun onQueryTextSubmit(query: String): Boolean
+            {
+                callSearch(query)         // function for performing search operation on the list
+
                 searchView.clearFocus()
+
                 return true
             }
 
-            override fun onQueryTextChange(newText: String): Boolean {
-                callSearch(newText)
+            override fun onQueryTextChange(newText: String): Boolean
+            {
+                callSearch(newText)           // function for performing search operation on the list
+
                 return true
             }
 
-            fun callSearch(query: String) {
-                //Do searching
+            // function for performing search operation on the list
+            fun callSearch(query: String)
+            {
                 Log.i("query", "" + query)
-
             }
-
         })
-
     }
 
 
+    // function for adding circle reveal animation the search tool bar
     @SuppressLint("PrivateResource")
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    fun circleReveal(viewID: Int, posFromRight: Int, containsOverflow: Boolean, isShow: Boolean) {
+    fun circleReveal(viewID: Int, posFromRight: Int, containsOverflow: Boolean, isShow: Boolean)
+    {
         val myView = findViewById<View>(viewID)
 
         var width = myView.width
@@ -396,25 +397,33 @@ class MyOrdersActivity : AppCompatActivity(),ActivityView
             width -= posFromRight * resources.getDimensionPixelSize(R.dimen.abc_action_button_min_width_material) - resources.getDimensionPixelSize(
                 R.dimen.abc_action_button_min_width_material
             )
+
         if (containsOverflow)
             width -= resources.getDimensionPixelSize(R.dimen.abc_action_button_min_width_overflow_material)
 
         val cx = width + 9
+
         val cy = myView.height / 2
 
         val anim: Animator
+
         anim = if (isShow)
             ViewAnimationUtils.createCircularReveal(myView, cx, cy, 0f, width.toFloat())
+
         else
             ViewAnimationUtils.createCircularReveal(myView, cx, cy, width.toFloat(), 0f)
 
         anim.duration = 220.toLong()
 
         // make the view invisible when the animation is done
-        anim.addListener(object : AnimatorListenerAdapter() {
-            override fun onAnimationEnd(animation: Animator) {
-                if (!isShow) {
+        anim.addListener(object : AnimatorListenerAdapter()
+        {
+            override fun onAnimationEnd(animation: Animator)
+            {
+                if (!isShow)
+                {
                     super.onAnimationEnd(animation)
+
                     myView.visibility = View.INVISIBLE
                 }
             }
@@ -429,57 +438,50 @@ class MyOrdersActivity : AppCompatActivity(),ActivityView
     }
 
 
-    //******************get order API*******************//
+    //****************** get_request API *******************//
 
-    //function for hitting get order API
+    // implementing the get_requests API
     private fun getOrderApi(type:String)
     {
         if (sharedPref.checkInternetConn(this))
-        {
             orderHandler.getOrder(type,"1",CommonClass(this, this).getString("x_access_token"))
-        }
+
         else
-        {
-        Toast.makeText(this,resources.getString(R.string.internet_is_unavailable), Toast.LENGTH_SHORT).show()
-        }
+            Toast.makeText(this,resources.getString(R.string.internet_is_unavailable), Toast.LENGTH_SHORT).show()
+
     }
 
-    // handling response of the get order API
+    // handling response of the get_request API
     override fun onRequestSuccessReport(mainPojo: MainPojo)
     {
-    if (mainPojo.success=="true")
-    {
-        dataList=mainPojo.list
-        if (dataList.size>0)
+        if (mainPojo.success=="true")
         {
-            rvOrder.visibility=View.VISIBLE
+            dataList=mainPojo.list
 
-            tvNOdataOrder.visibility=View.GONE
+            if (dataList.size>0)
+            {
+                rvOrder.visibility=View.VISIBLE
 
-            setUpRecycler()
+                tvNOdataOrder.visibility=View.GONE
+
+                setUpRecycler()         // function for setting up the recycler
+            }
+            else
+            {
+                rvOrder.visibility=View.GONE
+
+                tvNOdataOrder.visibility=View.VISIBLE
+            }
         }
         else
         {
-            rvOrder.visibility=View.GONE
-
-            tvNOdataOrder.visibility=View.VISIBLE
+            println("message:: ${mainPojo.message}")
         }
-
-    }
-        else{
-        println("message:: ${mainPojo.message}")
-    }
     }
 
     override fun showLoader()
-    {
-
-    }
+    {}
 
     override fun hideLoader()
-    {
-
-    }
-
-
+    {}
 }

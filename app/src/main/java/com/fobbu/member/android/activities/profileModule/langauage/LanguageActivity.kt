@@ -57,9 +57,9 @@ class LanguageActivity : AppCompatActivity(),Filterable
 
         setContentView(R.layout.activity_language)
 
-        initView()
+        initView()           //function for initialising all the views of the class
 
-        clicks()
+        clicks()                     //function for handling the clicks of the class
     }
 
     //function for initialising all the views of the class
@@ -85,29 +85,23 @@ class LanguageActivity : AppCompatActivity(),Filterable
 
             languageList.add(languageMap)
 
-           if (commonClass.getStringList(RsaConstants.Constants.selectedLanguageList).isNotEmpty())
-           {
-               selectedLanguageList=commonClass.getStringList(RsaConstants.Constants.selectedLanguageList)
+            if (commonClass.getStringList(RsaConstants.Constants.selectedLanguageList).isNotEmpty())
+            {
+                selectedLanguageList=commonClass.getStringList(RsaConstants.Constants.selectedLanguageList)
 
-               for (i in languageList.indices)
-               {
-                   for (j in selectedLanguageList.indices)
-                   {
-                       if (languageList[i]["language"]==selectedLanguageList[j]["language"])
-                       {
-                           if (languageList[i]["selected"]!=selectedLanguageList[j]["selected"])
-                           {
-                               languageList[i]["selected"]=selectedLanguageList[j]["selected"].toString()
-                           }
-                       }
-                   }
-               }
-           }
+                for (i in languageList.indices)
+                {
+                    for (j in selectedLanguageList.indices)
+                    {
+                        if (languageList[i]["language"]==selectedLanguageList[j]["language"])
+                            if (languageList[i]["selected"]!=selectedLanguageList[j]["selected"])
+                                languageList[i]["selected"]=selectedLanguageList[j]["selected"].toString()
+
+                    }
+                }
+            }
         }
-
-        println("list of language:::$languageList")
-
-      filter.filter("")
+        filter.filter("")        // filter object for performing search operation
     }
 
     //function for handling the clicks of the class
@@ -116,9 +110,8 @@ class LanguageActivity : AppCompatActivity(),Filterable
         // search
         ivSearchToolbar.setOnClickListener {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
-            {
-                circleReveal(R.id.searchtoolbar, 1, true, true)
-            }
+                circleReveal(R.id.searchtoolbar, 1, true, true)      // function for adding circle reveal animation to the search tool bar
+
             else
                 searchtoolbar.visibility = View.VISIBLE
 
@@ -133,11 +126,11 @@ class LanguageActivity : AppCompatActivity(),Filterable
         {
             override fun onItemClick(view: View, position: Int)
             {
-               if (filteredLanguageList[position]["selected"]=="0")
-                   filteredLanguageList[position]["selected"]="1"
+                if (filteredLanguageList[position]["selected"]=="0")
+                    filteredLanguageList[position]["selected"]="1"
 
                 else
-                   filteredLanguageList[position]["selected"]="0"
+                    filteredLanguageList[position]["selected"]="0"
 
                 when
                 {
@@ -145,7 +138,7 @@ class LanguageActivity : AppCompatActivity(),Filterable
                     {
                         if (selectedLanguageList.size<3)
                         {
-                           val map = filteredLanguageList[position]
+                            val map = filteredLanguageList[position]
 
                             selectedLanguageList.add(map)
                         }
@@ -155,8 +148,6 @@ class LanguageActivity : AppCompatActivity(),Filterable
 
                             commonClass.showToast("You have reached the limit of the languages that can be selected. Please Unselect one add a new one.")
                         }
-
-                        println("language list ADDED:::$filteredLanguageList")
                     }
 
                     else->
@@ -172,20 +163,16 @@ class LanguageActivity : AppCompatActivity(),Filterable
                                     break
                                 }
                             }
-                            println("language list REMOVED:::$filteredLanguageList")
                         }
                     }
                 }
 
                 if (selectedLanguageList.isNotEmpty())
-                {
                     commonClass.putStringList(RsaConstants.Constants.selectedLanguageList,selectedLanguageList)
-                }
 
                 languageAdapter.notifyDataSetChanged()
             }
         }))
-
     }
 
     //function for setting up recycler
@@ -198,7 +185,7 @@ class LanguageActivity : AppCompatActivity(),Filterable
         rvLanguageCheck.adapter=languageAdapter
     }
 
-
+// function for setting up search tool bar
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
     fun setsearchtoolbar()
     {
@@ -210,36 +197,38 @@ class LanguageActivity : AppCompatActivity(),Filterable
 
         searchtoolbar.setNavigationOnClickListener {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
-            //searchtoolbar!!.visibility = View.VISIBLE
-                circleReveal(R.id.searchtoolbar, 1, true, false)
+                circleReveal(R.id.searchtoolbar, 1, true, false)  // function for adding circle reveal animation to the search tool bar
+
             else
                 searchtoolbar.visibility = View.GONE
         }
 
         item_search = search_menu.findItem(R.id.action_filter_search)
 
-        MenuItemCompat.setOnActionExpandListener(item_search, object : MenuItemCompat.OnActionExpandListener {
-            override fun onMenuItemActionCollapse(item: MenuItem): Boolean {
+        MenuItemCompat.setOnActionExpandListener(item_search, object : MenuItemCompat.OnActionExpandListener
+        {
+            override fun onMenuItemActionCollapse(item: MenuItem): Boolean
+            {
                 // Do something when collapsed
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    circleReveal(R.id.searchtoolbar, 1, true, false)
-                } else
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+                    circleReveal(R.id.searchtoolbar, 1, true, false)     // function for adding circle reveal animation to the search tool bar
+
+                else
                     searchtoolbar.visibility = View.GONE
+
                 return true
             }
 
-            override fun onMenuItemActionExpand(item: MenuItem): Boolean {
+            override fun onMenuItemActionExpand(item: MenuItem): Boolean
+            {
                 // Do something when expanded
                 return true
             }
         })
-
-        initSearchView()
-
-
+        initSearchView()          // function for initialising the variables and views of the search tool bar
     }
 
-
+// function for initialising the variables and views of the search tool bar
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
     private fun initSearchView()
@@ -247,7 +236,6 @@ class LanguageActivity : AppCompatActivity(),Filterable
         val searchView = search_menu.findItem(R.id.action_filter_search).actionView as SearchView
 
         // Enable/Disable Submit button in the keyboard
-
         searchView.isSubmitButtonEnabled = false
 
         searchView.setBackgroundResource(R.drawable.et_blue_base)
@@ -257,13 +245,11 @@ class LanguageActivity : AppCompatActivity(),Filterable
         searchplate.setBackgroundResource(R.drawable.et_white_base)
 
         // Change search close button image
-
         val closeButton = searchView.findViewById(R.id.search_close_btn) as ImageView
 
         closeButton.setImageResource(R.drawable.cross_white)
 
         // set hint and the text colors
-
         val txtSearch = searchView.findViewById<View>(android.support.v7.appcompat.R.id.search_src_text) as EditText
 
         txtSearch.hint = "Search.."
@@ -272,32 +258,38 @@ class LanguageActivity : AppCompatActivity(),Filterable
 
         txtSearch.setHintTextColor(resources.getColor(R.color.white))
 
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener
+        {
             @SuppressLint("RestrictedApi")
-            override fun onQueryTextSubmit(query: String): Boolean {
-                callSearch(query)
+            override fun onQueryTextSubmit(query: String): Boolean
+            {
+                callSearch(query)      // function for performing search operation on the list
+
                 searchView.clearFocus()
+
                 return true
             }
 
-            override fun onQueryTextChange(newText: String): Boolean {
-                callSearch(newText)
+            override fun onQueryTextChange(newText: String): Boolean
+            {
+                callSearch(newText)     // function for performing search operation on the list
+
                 return true
             }
 
-            fun callSearch(query: String) {
-                //Do searching
-                filter.filter(query)
+            // function for performing search operation on the list
+            fun callSearch(query: String)
+            {
+                filter.filter(query)        // filter object for performing search operation
             }
-
         })
-
     }
 
-
+    // function for adding circle reveal animation to the search tool bar
     @SuppressLint("PrivateResource")
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    fun circleReveal(viewID: Int, posFromRight: Int, containsOverflow: Boolean, isShow: Boolean) {
+    fun circleReveal(viewID: Int, posFromRight: Int, containsOverflow: Boolean, isShow: Boolean)
+    {
         val myView = findViewById<View>(viewID)
 
         var width = myView.width
@@ -306,25 +298,33 @@ class LanguageActivity : AppCompatActivity(),Filterable
             width -= posFromRight * resources.getDimensionPixelSize(R.dimen.abc_action_button_min_width_material) - resources.getDimensionPixelSize(
                 R.dimen.abc_action_button_min_width_material
             )
+
         if (containsOverflow)
             width -= resources.getDimensionPixelSize(R.dimen.abc_action_button_min_width_overflow_material)
 
         val cx = width + 9
+
         val cy = myView.height / 2
 
         val anim: Animator
+
         anim = if (isShow)
             ViewAnimationUtils.createCircularReveal(myView, cx, cy, 0f, width.toFloat())
+
         else
             ViewAnimationUtils.createCircularReveal(myView, cx, cy, width.toFloat(), 0f)
 
         anim.duration = 220.toLong()
 
         // make the view invisible when the animation is done
-        anim.addListener(object : AnimatorListenerAdapter() {
-            override fun onAnimationEnd(animation: Animator) {
-                if (!isShow) {
+        anim.addListener(object : AnimatorListenerAdapter()
+        {
+            override fun onAnimationEnd(animation: Animator)
+            {
+                if (!isShow)
+                {
                     super.onAnimationEnd(animation)
+
                     myView.visibility = View.INVISIBLE
                 }
             }
@@ -338,9 +338,7 @@ class LanguageActivity : AppCompatActivity(),Filterable
         anim.start()
     }
 
-
-
-
+    // filter object for performing search operation
     override fun getFilter(): Filter {
 
         return object : Filter()
@@ -377,7 +375,7 @@ class LanguageActivity : AppCompatActivity(),Filterable
             {
                 filteredLanguageList = filterResults.values as ArrayList<HashMap<String,Any>>
 
-                setRecycler()
+                setRecycler()       //function for setting up recycler
             }
         }
     }

@@ -17,34 +17,34 @@ class PassbookDetailActivity : AppCompatActivity()
 
     private lateinit var paymentAdapter:PaymentDetailAdapter
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?)
+    {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_passbook_detail)
-        initView()
 
-        clicks()
+        initView()            // function for initialising all the variables of the class
 
+        clicks()            // function for handling all the clicks of the class
     }
 
-    // function for handliing all the clicks of the class
+    // function for initialising all the variables of the class
+    private fun initView()
+    {
+        commonClass= CommonClass(this,this)
+
+        ivSearchToolbar.visibility=View.INVISIBLE
+
+        setRecycler()        // function for setting up the recycler
+    }
+
+    // function for handling all the clicks of the class
     private fun clicks()
     {
         ivBackButton.setOnClickListener {
             finish()
         }
     }
-
-    // function for initialising all the varaibles of the class
-    private fun initView()
-    {
-
-        commonClass= CommonClass(this,this)
-
-        ivSearchToolbar.visibility=View.INVISIBLE
-
-        setRecycler()
-    }
-
 
     // function for setting up the recycler
     private fun setRecycler()
@@ -55,9 +55,4 @@ class PassbookDetailActivity : AppCompatActivity()
 
         rvPassDetail.adapter=paymentAdapter
     }
-
-
-
-
-
 }

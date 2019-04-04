@@ -18,62 +18,76 @@ import com.fobbu.member.android.utils.CommonClass
 import kotlinx.android.synthetic.main.activity_waiting_screen_blue.*
 import java.lang.Exception
 
-class WaitingScreenBlue : AppCompatActivity() {
+class WaitingScreenBlue : AppCompatActivity()
+{
     private var strWhich = "0"
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?)
+    {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_waiting_screen_blue)
-        initView()
+
+        initView()                    // function for initialising all the variables and views of the class
+
         //handleclicks()
     }
 
-    private fun initView() {
-
+    // function for initialising all the variables and views of the class
+    private fun initView()
+    {
         strWhich = intent.getStringExtra("navigate_to")
 
-        if(strWhich=="0") {
+        if(strWhich=="0")
+        {
             CommonClass(this, this).putString(RsaConstants.ServiceSaved.isBlueScreenON, "1")
 
             CommonClass(this,this).putString(RsaConstants.ServiceSaved.isNew,"1")
         }
-        changeLayout()
-
+        changeLayout()      // function for changing message screen as per the status of the user
     }
 
-
-    private fun changeLayout() {
-
-        when (strWhich) {
-            "1" -> {
-
+    // function for changing message screen as per the status of the user
+    private fun changeLayout()
+    {
+        when (strWhich)
+        {
+            "1" ->
+            {
                 CommonClass(this,this).putString(RsaConstants.ServiceSaved.isBlueScreenON,"")
 
                 CommonClass(this,this).putString(RsaConstants.ServiceSaved.isNew,"")
+
                 strWhich="2"
-                tvTextOne.text=resources.getString(R.string.awesome)
-                tvTextTwo.text=resources.getString(R.string.fobbu_found)
-                tvTextThree.visibility=View.GONE
-                Handler().postDelayed({ changeLayout() },1000)
-            }
-            "2" -> {
 
+                tvTextOne.text=resources.getString(R.string.awesome)
+
+                tvTextTwo.text=resources.getString(R.string.fobbu_found)
+
+                tvTextThree.visibility=View.GONE
+
+                Handler().postDelayed({ changeLayout() },1000)      // function for changing message screen as per the status of the user
+            }
+
+            "2" ->
+            {
                 CommonClass(this,this).putString(RsaConstants.ServiceSaved.isBlueScreenON,"")
+
                 CommonClass(this,this).putString(RsaConstants.ServiceSaved.isNew,"")
+
                 strWhich="3"
+
                 tvTextOne.text=resources.getString(R.string.wonderful)
+
                 tvTextTwo.text=resources.getString(R.string.fobbu_confirmed_request)
+
                 tvTextThree.visibility=View.VISIBLE
 
-                if(CommonClass(this,this).getString(RsaConstants.ServiceSaved.serviceNameSelected) ==
-                    RsaConstants.ServiceName.flatTyre
-                    ||
-                    CommonClass(this,this).getString(RsaConstants.ServiceSaved.serviceNameSelected) ==
-                    RsaConstants.ServiceName.burstTyre)
+                if(CommonClass(this,this).getString(RsaConstants.ServiceSaved.serviceNameSelected) == RsaConstants.ServiceName.flatTyre || CommonClass(this,this).getString(RsaConstants.ServiceSaved.serviceNameSelected) == RsaConstants.ServiceName.burstTyre)
                 {
                     tvTextThree.text=resources.getString(R.string.fobbu_gathering_tools)
-                    Handler().postDelayed({ changeLayout() },1000)
+
+                    Handler().postDelayed({ changeLayout() },1000)     // function for changing message screen as per the status of the user
                 }
                 else
                 {
@@ -81,32 +95,35 @@ class WaitingScreenBlue : AppCompatActivity() {
 
                     Handler().postDelayed({
                         startActivity(Intent(this, WorkSummaryActivity::class.java) )
+
                         finish()
                     },1000)
-
                 }
-
-
             }
-            "3" -> {
 
+            "3" ->
+            {
                 CommonClass(this,this).putString(RsaConstants.ServiceSaved.isBlueScreenON,"")
+
                 CommonClass(this,this).putString(RsaConstants.ServiceSaved.isNew,"")
+
                 strWhich="3"
 
-                startActivity(Intent(this, WaitingScreenWhite::class.java)
-                    .putExtra("from_where", "building_live"))
+                startActivity(Intent(this, WaitingScreenWhite::class.java).putExtra("from_where", "building_live"))
+
                 finish()
             }
 
-            "4" -> {
-
+            "4" ->
+            {
                 CommonClass(this,this).putString(RsaConstants.ServiceSaved.isBlueScreenON,"")
+
                 CommonClass(this,this).putString(RsaConstants.ServiceSaved.isNew,"")
-                startActivity(Intent(this, DashboardActivity::class.java)
-                    .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK))
+
+                startActivity(Intent(this, DashboardActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK))
 
                 CommonClass(this,this).workDoneReviewSend()
+
                 finish()
             }
         }
@@ -150,66 +167,76 @@ class WaitingScreenBlue : AppCompatActivity() {
         }
     }
 
-    override fun onBackPressed() {
+    override fun onBackPressed()
+    {
         //super.onBackPressed()
-
         if(strWhich =="0" )
         {
             val intent =   Intent(Intent.ACTION_MAIN)
+
             intent.addCategory(Intent.CATEGORY_HOME)
+
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+
             startActivity(intent)
-
         }
-
     }
 
-    override fun onResume() {
+    override fun onResume()
+    {
         super.onResume()
 
         val filter = IntentFilter(FcmPushTypes.Types.acceptRequestBroadCast)
-         registerReceiver(changeRSALiveScreenReceiver, filter)
+
+        registerReceiver(changeRSALiveScreenReceiver, filter)
 
         val filterClearPreference = IntentFilter(FcmPushTypes.Types.clearDataNavigateToHomeScreen)
+
         registerReceiver(clearPreferenceScreenReceiver, filterClearPreference)
     }
 
-    private val clearPreferenceScreenReceiver = object : BroadcastReceiver() {
-        override fun onReceive(context: Context, intent: Intent) {
-
+    // initialising clearPreferenceScreenReceiver broadcast receiver
+    private val clearPreferenceScreenReceiver = object : BroadcastReceiver()
+    {
+        override fun onReceive(context: Context, intent: Intent)
+        {
             println("GO TO LOGIN BLUE SCREEN >>>>>>>>>>>>")
 
             CommonClass(this@WaitingScreenBlue,this@WaitingScreenBlue).workDoneReviewSend()
 
             CommonClass(this@WaitingScreenBlue,this@WaitingScreenBlue).clearPreference()
         }
-
     }
 
-    private val changeRSALiveScreenReceiver = object : BroadcastReceiver() {
-        override fun onReceive(context: Context, intent: Intent) {
-            println("Broadcast received")
+    // initialising changeRSALiveScreenReceiver broadcast receiver
+    private val changeRSALiveScreenReceiver = object : BroadcastReceiver()
+    {
+        override fun onReceive(context: Context, intent: Intent)
+        {
             strWhich = intent.getStringExtra("navigate_to")
 
-            if(strWhich=="4") {
+            if(strWhich=="4")
                 Toast.makeText(context, intent.getStringExtra("message"), Toast.LENGTH_SHORT).show()
-            }
-            changeLayout()
+
+            changeLayout()         // function for changing message screen as per the status of the user
         }
     }
 
-    override fun onDestroy() {
+    override fun onDestroy()
+    {
         super.onDestroy()
 
         CommonClass(this,this).putString(RsaConstants.ServiceSaved.isBlueScreenON,"")
 
-        try {
+        try
+        {
             unregisterReceiver(changeRSALiveScreenReceiver)
+
             unregisterReceiver(clearPreferenceScreenReceiver)
         }
         catch (e:Exception)
         {
-
+            e.printStackTrace()
         }
     }
 }

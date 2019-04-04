@@ -21,31 +21,146 @@ import com.google.android.gms.common.GoogleApiAvailability
 import com.google.firebase.iid.FirebaseInstanceId
 import kotlinx.android.synthetic.main.activity_sign_up.*
 
-class SignUpActivity : AppCompatActivity(),ActivityView {
-
+class SignUpActivity : AppCompatActivity(),ActivityView
+{
     private lateinit var dataAdaperSelectService: ArrayAdapter<String>
+
     private lateinit var webServiceApi: WebServiceApi
+
     lateinit var signUpactivityHandler: SignUpActivityHandler
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?)
+    {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_sign_up)
-        signUpactivityHandler=
-                SignUpActivityPresenter(this, this)
-        initialise()
-        addClicks()
-        fetchDeviceToken()
+
+        initialise()            // Method for initializing all the variables that are used in the class
+
+        addClicks()          // Functionality of  all clicks present in the activity are handled here
+
+        fetchDeviceToken()       // Method for fetching device token
+    }
+
+    // Method for initializing all the variables that are used in the class
+    private fun initialise()
+    {
+        signUpactivityHandler= SignUpActivityPresenter(this, this)
+
+        webServiceApi = getEnv().getRetrofit()
+
+        val itemSelectGender = arrayOf(this.resources.getString(R.string.selectGender),this.resources.getString(R.string.male),
+            this.resources.getString(R.string.female),this.resources.getString(R.string.not_specified))
+        dataAdaperSelectService = ArrayAdapter(this, R.layout.spinnertype, itemSelectGender)
+
+        spinnerSelectGender.adapter = dataAdaperSelectService as SpinnerAdapter?
+    }
+
+    // Functionality of  all clicks present in the activity are handled here
+    private fun addClicks()
+    {
+        spinnerSelectGender.onItemSelectedListener = object : AdapterView.OnItemSelectedListener
+        {
+            override fun onNothingSelected(p0: AdapterView<*>?) {}
+
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long)
+            {
+                tvGender.text = p0!!.selectedItem.toString()
+            }
+        }
+
+        tvGender.setOnClickListener {
+            spinnerSelectGender.performClick()
+        }
+
+        tvAlreadyRegistered.setOnClickListener {
+            startActivity(Intent(this, LoginActivity::class.java))
+
+            finish()
+        }
+
+        tvStartFobbu.setOnClickListener {
+            when
+            {
+                etFullName.text.trim().toString() =="" ->
+                {
+                    CommonClass(this, this).showToast(resources.getString(R.string.please_enter_full_name))
+
+                    etFullName.requestFocus()
+                }
+
+                etMobile.text.trim().toString() =="" -> {
+                    CommonClass(this, this).showToast(resources.getString(R.string.please_enter_mobile))
+                    etMobile.requestFocus()
+                }
+
+                etMobile.text.trim().toString().length<10->
+                {
+                    CommonClass(this,this).showToast(resources.getString(R.string.correct_mobile_number_msg))
+
+                    etFullName.requestFocus()
+                }
+
+                etEmail.text.trim().toString() =="" ->
+                {
+                    CommonClass(this, this).showToast(resources.getString(R.string.please_enter_email))
+
+                    etEmail.requestFocus()
+                }
+
+                !Patterns.EMAIL_ADDRESS.matcher(etEmail.text.trim().toString()).matches() ->
+                {
+                    CommonClass(this, this).showToast(resources.getString(R.string.correct_email_error))
+
+                    etEmail.requestFocus()
+                }
+
+                etPassword.text.trim().toString() =="" ->
+                {
+                    CommonClass(this, this).showToast(resources.getString(R.string.please_enter_password))
+
+                    etPassword.requestFocus()
+                }
+
+                etPassword.text.trim().length < 6 ->
+                {
+                    CommonClass(this, this).showToast(resources.getString(R.string.please_enter_valid_password))
+
+                    etPassword.requestFocus()
+                }
+
+                tvGender.text.trim().toString() ==resources.getString(R.string.selectGender) ->
+                {
+                    CommonClass(this, this).showToast(resources.getString(R.string.please_enter_gender))
+
+                    etPassword.requestFocus()
+                }
+                else ->
+                {
+                    val gender: String = if (tvGender.text.trim().toString()==resources.getString(R.string.not_specified))
+                        resources.getString(R.string.other)
+
+                     else
+                        tvGender.text.trim().toString()
+
+                    callSignUpAPIUser("user", etFullName.text.trim().toString(), etEmail.text.trim().toString(), etPassword.text.trim().toString(), etMobile.text.trim().toString(), gender.trim().toLowerCase())
+                }
+            }
+        }
     }
 
     // Method for fetching device token
-    private fun fetchDeviceToken() {
+    private fun fetchDeviceToken()
+    {
         val api = GoogleApiAvailability.getInstance()
 
         val code = api.isGooglePlayServicesAvailable(this@SignUpActivity)
 
-        if (code == ConnectionResult.SUCCESS) {
+        if (code == ConnectionResult.SUCCESS)
+        {
             // Do Your Stuff Here
-            if (FirebaseInstanceId.getInstance().token != null) {
+            if (FirebaseInstanceId.getInstance().token != null)
+            {
                 val refreshedToken = FirebaseInstanceId.getInstance().token
 
                 System.out.println("RE 0 $refreshedToken")
@@ -55,107 +170,15 @@ class SignUpActivity : AppCompatActivity(),ActivityView {
                 getSharedPreferences("Fobbu_Member_Prefs", MODE_PRIVATE).edit()
                     .putString("device_token", refreshedToken).apply()
             }
-
-        } else {
+        }
+        else
             System.out.println("ERRROR")
-        }
-    }
-
-    // Method for initializing all the variables that are used in the class
-    private fun initialise() {
-        webServiceApi = getEnv().getRetrofit()
-
-        val itemSelectGender = arrayOf(this.resources.getString(R.string.selectGender),this.resources.getString(R.string.male),
-                this.resources.getString(R.string.female),this.resources.getString(R.string.not_specified))
-        dataAdaperSelectService = ArrayAdapter(this, R.layout.spinnertype, itemSelectGender)
-        spinnerSelectGender.adapter = dataAdaperSelectService as SpinnerAdapter?
-        spinnerSelectGender.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-            }
-            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                tvGender.text = p0!!.selectedItem.toString()
-            }
-        }
-    }
-
-    // Functionality of  all clicks present in the activity are handled here
-    private fun addClicks()
-    {
-        tvGender.setOnClickListener {
-            spinnerSelectGender.performClick()
-        }
-
-        tvAlreadyRegistered.setOnClickListener {
-
-            startActivity(Intent(this, LoginActivity::class.java))
-            finish()
-        }
-
-        tvStartFobbu.setOnClickListener {
-            when {
-                etFullName.text.toString() =="" -> {
-                    CommonClass(this, this).showToast(resources.getString(R.string.please_enter_full_name))
-                    etFullName.requestFocus()
-                }
-
-                etMobile.text.toString() =="" -> {
-                    CommonClass(this, this).showToast(resources.getString(R.string.please_enter_mobile))
-                    etMobile.requestFocus()
-                }
-
-                etMobile.text.toString().length<10->
-                {
-                    CommonClass(this,this).showToast(resources.getString(R.string.correct_mobile_number_msg))
-
-                    etFullName.requestFocus()
-                }
-
-                etEmail.text.toString() =="" -> {
-                    CommonClass(this, this).showToast(resources.getString(R.string.please_enter_email))
-                    etEmail.requestFocus()
-                }
-
-                !Patterns.EMAIL_ADDRESS.matcher(etEmail.text.toString()).matches() -> {
-                    CommonClass(this, this).showToast(resources.getString(R.string.correct_email_error))
-                    etEmail.requestFocus()
-                }
-
-                etPassword.text.toString() =="" -> {
-                    CommonClass(this, this).showToast(resources.getString(R.string.please_enter_password))
-                    etPassword.requestFocus()
-                }
-
-                etPassword.text.length < 6 -> {
-                    CommonClass(this, this).showToast(resources.getString(R.string.please_enter_valid_password))
-                    etPassword.requestFocus()
-                }
-
-                tvGender.text.toString() ==resources.getString(R.string.selectGender) -> {
-                    CommonClass(this, this).showToast(resources.getString(R.string.please_enter_gender))
-                    etPassword.requestFocus()
-                }
-                else -> {
-                    val gender: String = if (tvGender.text.toString()==resources.getString(R.string.not_specified)) {
-                        resources.getString(R.string.other)
-                    } else
-                        tvGender.text.toString()
-
-                    callSignUpAPIUser("user",
-                        etFullName.text.toString(),
-                        etEmail.text.toString(),
-                        etPassword.text.toString(),
-                        etMobile.text.toString(),
-                        gender.toLowerCase())
-                }
-            }
-        }
     }
 
     //////////////////SIGN UP API USER/////////////////////////
 
     // Signup API (API-users/signup)
-    private fun callSignUpAPIUser(user_type: String,display_name:String,
-                                  email:String,password:String,mobile_number:String,gender:String )
+    private fun callSignUpAPIUser(user_type: String,display_name:String, email:String,password:String,mobile_number:String,gender:String )
     {
         if (CommonClass(this, this).checkInternetConn(this))
         {
@@ -190,9 +213,9 @@ class SignUpActivity : AppCompatActivity(),ActivityView {
     }
 
     // Signup API Response (API-users/signup)
-    override fun onRequestSuccessReport(mainPojo: MainPojo) {
-
-       // rlLoader.visibility = View.GONE
+    override fun onRequestSuccessReport(mainPojo: MainPojo)
+    {
+        // rlLoader.visibility = View.GONE
         if (mainPojo.success== "true")
         {
             CommonClass(this@SignUpActivity,this@SignUpActivity)
@@ -229,25 +252,24 @@ class SignUpActivity : AppCompatActivity(),ActivityView {
                 SMSVerificationActivity::class.java))
 
             finish()
-
-        }else{
+        }
+        else
             CommonClass(this@SignUpActivity, this@SignUpActivity)
                 .showToast(mainPojo.message)
-        }
-
     }
 
-    override fun showLoader() {
+    override fun showLoader()
+    {
         rlLoader.visibility=View.VISIBLE
     }
 
-    override fun hideLoader() {
+    override fun hideLoader()
+    {
         rlLoader.visibility=View.GONE
     }
 
-
-
-    private fun getEnv(): MyApplication {
+    private fun getEnv(): MyApplication
+    {
         return application as MyApplication
     }
 }

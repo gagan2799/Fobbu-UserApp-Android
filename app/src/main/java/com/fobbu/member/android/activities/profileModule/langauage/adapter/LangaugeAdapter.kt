@@ -18,9 +18,7 @@ class LangaugeAdapter(var activity:Activity,var languageDataList:ArrayList<HashM
     
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): LanguageViewHolder
     {
-    return LanguageViewHolder(
-        LayoutInflater.from(activity).inflate(R.layout.inflate_language_layout, p0, false)
-    )
+    return LanguageViewHolder(LayoutInflater.from(activity).inflate(R.layout.inflate_language_layout, p0, false))
     }
 
     override fun getItemCount(): Int
@@ -28,31 +26,25 @@ class LangaugeAdapter(var activity:Activity,var languageDataList:ArrayList<HashM
      return languageDataList.size
     }
 
-
-
     override fun onBindViewHolder(p0: LanguageViewHolder, p1: Int)
     {
         p0.tvLanguage.text=languageDataList[p1]["language"].toString()
 
-
-       when{
+        when
+        {
             languageDataList[p1]["selected"]=="1"->
-            {
                 p0.cbLanguage.setImageResource(R.drawable.checkbox_checked)
 
-            }
-
             else->
-            {
                 p0.cbLanguage.setImageResource(R.drawable.checkbox_uncheck)
-            }
         }
-
     }
 
+    // inner view holder class
     class LanguageViewHolder(view: View):RecyclerView.ViewHolder(view)
     {
         val tvLanguage: TextView = view.findViewById(R.id.tvLanguageRecycler)
+
         val cbLanguage: ImageView = view.findViewById(R.id.cblanguageRecycler)
     }
 }

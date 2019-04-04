@@ -524,7 +524,7 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     override fun onDestroy() {
         super.onDestroy()
 
-       destroyEverythingMethod()
+        destroyEverythingMethod()
     }
 
     private fun destroyEverythingMethod() {
@@ -623,9 +623,18 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                     else
                     {
                         ivTool.setImageResource(R.drawable.man_riding_bike)
-                        tvText.text = displayName + " " + resources.getString(R.string.fobbu_on_way)
+                        if(CommonClass(activity!!, activity!!).getString(RsaConstants.ServiceSaved.serviceNameSelected)!=
+                            RsaConstants.ServiceName.jumpStart)
+                            tvText.text = displayName + " " + resources.getString(R.string.fobbu_on_way)
+
+                        else
+                            tvText.text =
+                                    """${activity!!.resources.getString(R.string.please_wait_fobbu_msg)}$displayName ${activity!!.resources.getString(
+                                        R.string.gathering_tools__msg
+                                    )}"""
+
                         strWhere = "share"
-                        updateLiveLocation()
+                        //   updateLiveLocation()
                         ivLeftDotted.setImageResource(R.drawable.dotted)
                         ivRightDotted.setImageResource(R.drawable.dotted)
                         tvTrack.background = resources.getDrawable(R.drawable.solid_color_red)
@@ -731,7 +740,7 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                     ivTool.setImageResource(R.drawable.man_riding_bike)
                     tvText.text = displayName + " " + resources.getString(R.string.fobbu_on_way)
                     strWhere = "share"
-                    updateLiveLocation()
+                    //updateLiveLocation()
                     ivLeftDotted.setImageResource(R.drawable.dotted)
                     ivRightDotted.setImageResource(R.drawable.dotted)
                     tvTrack.background = resources.getDrawable(R.drawable.solid_color_red)
@@ -759,7 +768,7 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                         ivTool.setImageResource(R.drawable.man_riding_bike)
                         tvText.text = displayName + " " + resources.getString(R.string.fobbu_on_way)
                         strWhere = "share"
-                        updateLiveLocation()
+                        // updateLiveLocation()
                         ivLeftDotted.setImageResource(R.drawable.dotted)
                         ivRightDotted.setImageResource(R.drawable.dotted)
                         tvTrack.background = resources.getDrawable(R.drawable.solid_color_red)
@@ -1085,23 +1094,23 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
 
         if (firstTime) {
-                firstTime = false
-                marker = googleMap.addMarker(
-                    MarkerOptions().position(polyLineList!![0])
-                        .flat(true)
-                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.map_mark_blue))
-                )
-                googleMap.moveCamera(
-                    CameraUpdateFactory
-                        .newCameraPosition(
-                            CameraPosition.Builder()
-                                .target(polyLineList!![0])
-                                .zoom(15.5f)
-                                .build()
-                        )
-                )
+            firstTime = false
+            marker = googleMap.addMarker(
+                MarkerOptions().position(polyLineList!![0])
+                    .flat(true)
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.map_mark_blue))
+            )
+            googleMap.moveCamera(
+                CameraUpdateFactory
+                    .newCameraPosition(
+                        CameraPosition.Builder()
+                            .target(polyLineList!![0])
+                            .zoom(15.5f)
+                            .build()
+                    )
+            )
 
-            } else {
+        } else {
             if (polyLineList!!.size >= 2) {
 
 

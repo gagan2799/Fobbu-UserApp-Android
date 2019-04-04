@@ -11,28 +11,32 @@ import okhttp3.RequestBody
 
 class GetSetGoPresenter(var activity: Activity,var acivityView: ActivityView):GetSetGoHandler
 {
-    override fun postReviews(requestId: RequestBody, ratings: RequestBody, reviews: RequestBody,token: String) {
-
+    // implementing the provide_ratings API
+    override fun postReviews(requestId: RequestBody, ratings: RequestBody, reviews: RequestBody,token: String)
+    {
         val apiClient=ApiClient(activity)
 
         apiClient.postReviews(requestId,ratings,reviews,token,object :ResponseHandler
         {
-            override fun onSuccess(mainPojo: MainPojo) {
+            override fun onSuccess(mainPojo: MainPojo)
+            {
                 acivityView.onRequestSuccessReport(mainPojo)
             }
 
-            override fun onError(message: String) {
+            override fun onError(message: String)
+            {
                 Toast.makeText(activity,message, Toast.LENGTH_SHORT).show()
             }
 
-            override fun onServerError(message: String) {
+            override fun onServerError(message: String)
+            {
                 Toast.makeText(activity,message, Toast.LENGTH_SHORT).show()
             }
 
-            override fun on401() {
+            override fun on401()
+            {
                 CommonClass(activity,activity).clearPreference()
             }
-
         })
     }
 }

@@ -10,12 +10,15 @@ import android.widget.ImageView
 import com.fobbu.member.android.R
 import kotlinx.android.synthetic.main.sliding_cards.view.*
 
-class OdsSlideAdapter(var context: Context, var list:ArrayList<Int>): PagerAdapter(){
-    override fun isViewFromObject(p0: View, p1: Any): Boolean {
+class OdsSlideAdapter(var context: Context, var list:ArrayList<Int>): PagerAdapter()
+{
+    override fun isViewFromObject(p0: View, p1: Any): Boolean
+    {
         return p0 == p1
     }
 
-    override fun getCount(): Int {
+    override fun getCount(): Int
+    {
         return if (list.size==0)
             1
         else
@@ -31,7 +34,8 @@ class OdsSlideAdapter(var context: Context, var list:ArrayList<Int>): PagerAdapt
         view.loaderOds.visibility=View.VISIBLE
 
             view.ivSlidingImage.visibility=View.GONE
-        }else
+        }
+        else
         {
             view.loaderOds.visibility=View.GONE
 
@@ -39,14 +43,13 @@ class OdsSlideAdapter(var context: Context, var list:ArrayList<Int>): PagerAdapt
 
             view.ivSlidingImage.setImageResource(R.drawable.hill)
         }
-
         container.addView(view)
 
         return view
     }
 
-    override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
+    override fun destroyItem(container: ViewGroup, position: Int, `object`: Any)
+    {
         container.removeView(`object` as View?)
     }
-
 }

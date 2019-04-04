@@ -34,7 +34,6 @@ import java.util.*
 
 class MyPassbookActivity : AppCompatActivity()
 {
-
     lateinit var searchtoolbar: Toolbar
 
     private lateinit var search_menu: Menu
@@ -62,10 +61,11 @@ class MyPassbookActivity : AppCompatActivity()
 
         setContentView(R.layout.activity_my_passbook)
 
-        initView()
+        initView()    // function for initialising  all the variables of the class
 
-        clicks()
+        clicks()         // function for managing all the clicks of the class
     }
+
     // function for initialising  all the variables of the class
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     private fun initView()
@@ -82,7 +82,6 @@ class MyPassbookActivity : AppCompatActivity()
 
         setRecycler()
     }
-
 
     // function for setting up filter bottom sheet
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
@@ -106,17 +105,15 @@ class MyPassbookActivity : AppCompatActivity()
         val tvPassbookWeek:TextView= dialogBottom.findViewById(R.id.tvPassbookWeek)!!
 
         tvStartDate.setOnClickListener {
-            openDatePicker("Start", tvStartDate)
+            openDatePicker("Start", tvStartDate)            // function for opening date picker dialog
         }
 
         tvEndDate.setOnClickListener {
-            openDatePicker("End", tvEndDate)
+            openDatePicker("End", tvEndDate)               // function for opening date picker dialog
         }
 
         tvTodayDate.text=commonClass.getCurrentDate("today")
-
     }
-
 
     // function for setting up recycler
     private fun setRecycler()
@@ -135,6 +132,7 @@ class MyPassbookActivity : AppCompatActivity()
         ivSearchToolbar.setOnClickListener {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
                 circleReveal(R.id.searchtoolbar, 1, true, true)
+
             else
                 searchtoolbar.visibility = View.VISIBLE
 
@@ -146,7 +144,6 @@ class MyPassbookActivity : AppCompatActivity()
         }
 
         ivFilterPassbook.setOnClickListener {
-
             dialogBottom.show()
         }
 
@@ -156,10 +153,10 @@ class MyPassbookActivity : AppCompatActivity()
             {
                startActivity(Intent(this@MyPassbookActivity, PassbookDetailActivity::class.java))
             }
-
         }))
     }
 
+    // function for setting up search tool bar
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
     fun setsearchtoolbar()
     {
@@ -179,28 +176,30 @@ class MyPassbookActivity : AppCompatActivity()
 
         item_search = search_menu.findItem(R.id.action_filter_search)
 
-        MenuItemCompat.setOnActionExpandListener(item_search, object : MenuItemCompat.OnActionExpandListener {
-            override fun onMenuItemActionCollapse(item: MenuItem): Boolean {
+        MenuItemCompat.setOnActionExpandListener(item_search, object : MenuItemCompat.OnActionExpandListener
+        {
+            override fun onMenuItemActionCollapse(item: MenuItem): Boolean
+            {
                 // Do something when collapsed
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
                     circleReveal(R.id.searchtoolbar, 1, true, false)
-                } else
+
+                 else
                     searchtoolbar.visibility = View.GONE
+
                 return true
             }
 
-            override fun onMenuItemActionExpand(item: MenuItem): Boolean {
+            override fun onMenuItemActionExpand(item: MenuItem): Boolean
+            {
                 // Do something when expanded
                 return true
             }
         })
-
-        initSearchView()
-
-
+        initSearchView()           // function for initialising the views and variables of the search tool bar
     }
 
-
+    // function for initialising the views and variables of the search tool bar
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
     private fun initSearchView()
@@ -236,6 +235,7 @@ class MyPassbookActivity : AppCompatActivity()
         // set the cursor
 
         val searchTextView = searchView.findViewById<View>(android.support.v7.appcompat.R.id.search_src_text) as AutoCompleteTextView
+
         try
         {
             val mCursorDrawableRes = TextView::class.java.getDeclaredField("mCursorDrawableRes")
@@ -249,33 +249,39 @@ class MyPassbookActivity : AppCompatActivity()
             e.printStackTrace()
         }
 
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener
+        {
             @SuppressLint("RestrictedApi")
-            override fun onQueryTextSubmit(query: String): Boolean {
-                callSearch(query)
+            override fun onQueryTextSubmit(query: String): Boolean
+            {
+                callSearch(query)          // function for performing search operation on the list
+
                 searchView.clearFocus()
+
                 return true
             }
 
-            override fun onQueryTextChange(newText: String): Boolean {
-                callSearch(newText)
+            override fun onQueryTextChange(newText: String): Boolean
+            {
+                callSearch(newText)            // function for performing search operation on the list
+
                 return true
             }
 
-            fun callSearch(query: String) {
-                //Do searching
+            // function for performing search operation on the list
+            fun callSearch(query: String)
+            {
                 Log.i("query", "" + query)
-
             }
-
         })
-
     }
 
 
+    // function for adding circle reveal animation to the search tool bar
     @SuppressLint("PrivateResource")
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    fun circleReveal(viewID: Int, posFromRight: Int, containsOverflow: Boolean, isShow: Boolean) {
+    fun circleReveal(viewID: Int, posFromRight: Int, containsOverflow: Boolean, isShow: Boolean)
+    {
         val myView = findViewById<View>(viewID)
 
         var width = myView.width
@@ -284,30 +290,37 @@ class MyPassbookActivity : AppCompatActivity()
             width -= posFromRight * resources.getDimensionPixelSize(R.dimen.abc_action_button_min_width_material) - resources.getDimensionPixelSize(
                 R.dimen.abc_action_button_min_width_material
             )
+
         if (containsOverflow)
             width -= resources.getDimensionPixelSize(R.dimen.abc_action_button_min_width_overflow_material)
 
         val cx = width + 9
+
         val cy = myView.height / 2
 
         val anim: Animator
+
         anim = if (isShow)
             ViewAnimationUtils.createCircularReveal(myView, cx, cy, 0f, width.toFloat())
+
         else
             ViewAnimationUtils.createCircularReveal(myView, cx, cy, width.toFloat(), 0f)
 
         anim.duration = 220.toLong()
 
         // make the view invisible when the animation is done
-        anim.addListener(object : AnimatorListenerAdapter() {
-            override fun onAnimationEnd(animation: Animator) {
-                if (!isShow) {
+        anim.addListener(object : AnimatorListenerAdapter()
+        {
+            override fun onAnimationEnd(animation: Animator)
+            {
+                if (!isShow)
+                {
                     super.onAnimationEnd(animation)
+
                     myView.visibility = View.INVISIBLE
                 }
             }
         })
-
         // make the view visible and start the animation
         if (isShow)
             myView.visibility = View.VISIBLE
@@ -316,33 +329,32 @@ class MyPassbookActivity : AppCompatActivity()
         anim.start()
     }
 
-
-
-    private fun openDatePicker(from: String, textview: TextView) {
-
+    // function for opening date picker dialog
+    private fun openDatePicker(from: String, textview: TextView)
+    {
         myCalendar = Calendar.getInstance()
 
         datePickerDialog = DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
             myCalendar.set(Calendar.YEAR, year)
+
             myCalendar.set(Calendar.MONTH, monthOfYear)
+
             myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
 
-            updateLabel(from, textview)
+            updateLabel(from, textview)           // function updating text view with the date that was selected by the user
         }
 
-        val datePicker = DatePickerDialog(this, R.style.CustomPickerTheme, datePickerDialog, myCalendar
-            .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-            myCalendar.get(Calendar.DAY_OF_MONTH))
-        //datePicker.datePicker.minDate = myCalendar.timeInMillis
-        //datePicker.datePicker.maxDate = myCalendar.timeInMillis + 2592000000
-        datePicker.show()
+        val datePicker = DatePickerDialog(this, R.style.CustomPickerTheme, datePickerDialog, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH))
 
+        datePicker.show()
     }
 
-
+    // function updating text view with the date that was selected by the user
     @SuppressLint("SimpleDateFormat")
-    private fun updateLabel(from: String, etDate: TextView?) {
+    private fun updateLabel(from: String, etDate: TextView?)
+    {
         val myFormat = "dd MMM yyyy" //In which you need put here
+
         val sdf = SimpleDateFormat(myFormat, Locale.ENGLISH)
 
         etDate!!.text = sdf.format(myCalendar.time)
@@ -350,16 +362,12 @@ class MyPassbookActivity : AppCompatActivity()
         val sdfServer = SimpleDateFormat("yyyy-MM-dd")
         // sdf.timeZone = TimeZone.getTimeZone("UTC")
 
-        if (from == "Start") {
+        if (from == "Start")
             startDateCustom = sdfServer.format(myCalendar.time)
-        } else
+
+         else
             endDateCustom = sdfServer.format(myCalendar.time)
-
-      /*  rbLastMonth.isChecked = false
-        rbLastWeek.isChecked = false*/
     }
-
-
 }
 
 

@@ -34,7 +34,6 @@ import java.util.ArrayList
 
 class SelectVehicleActivity : AppCompatActivity(),ActivityView,Filterable
 {
-
     private var dataListMain: ArrayList<HashMap<String, Any>> = ArrayList()
 
     private var dataListTwo: ArrayList<HashMap<String, Any>> = ArrayList()
@@ -65,24 +64,23 @@ class SelectVehicleActivity : AppCompatActivity(),ActivityView,Filterable
 
         setContentView(R.layout.activity_select_vehicle)
 
-        initView()
+        initView()  // function for initialising all the variables of the class
 
-        clicks()
+        clicks() // function for handling all the clicks of the class
     }
-
 
     // function for initialising all the variables of the class
     private fun initView()
     {
         setSupportActionBar(toolbar)
 
-        setsearchtoolbar()
+        setsearchtoolbar()         // function for setting up search tool bar
 
         commonClass= CommonClass(this,this)
 
         vehicleHandler= VehicleListPresenter(this, this)
 
-        vehicleListApi()
+        vehicleListApi()      /// implementing Vehicle List API  (API - users/vehicles)
 
         filteredLanguageList= ArrayList()
         
@@ -90,21 +88,11 @@ class SelectVehicleActivity : AppCompatActivity(),ActivityView,Filterable
 
         toolbarHeading.visibility=View.VISIBLE
 
-        setupTabIconsAndText()
+        setupTabIconsAndText()       // function for setting icon and text on the tabs
 
-        set2WheelerRecycler()
+        set2WheelerRecycler()   // function for setting 2 wheeler recycler
 
         toolbarHeading.text=resources.getString(R.string.select_vehicle)
-    }
-
-    // function for setting 2 wheeler recycler
-    private fun set2WheelerRecycler()
-    {
-        vehicle2WheelerAdapter= Vehicle2WheelerAdapter(this,filteredLanguageList)
-
-        rvWheelerVehicle.layoutManager=LinearLayoutManager(this)
-
-        rvWheelerVehicle.adapter=vehicle2WheelerAdapter
     }
 
     // function for handling all the clicks of the class
@@ -167,12 +155,12 @@ class SelectVehicleActivity : AppCompatActivity(),ActivityView,Filterable
                    0->
                    {
                        vehicleType="2wheeler"
-                       vehicleListApi()
+                       vehicleListApi()  /// implementing Vehicle List API  (API - users/vehicles)
                    }
                    1->
                    {
                        vehicleType="4wheeler"
-                       vehicleListApi()
+                       vehicleListApi()    /// implementing Vehicle List API  (API - users/vehicles)
                    }
                }
             }
@@ -181,7 +169,17 @@ class SelectVehicleActivity : AppCompatActivity(),ActivityView,Filterable
 
     }
 
+    // function for setting 2 wheeler recycler
+    private fun set2WheelerRecycler()
+    {
+        vehicle2WheelerAdapter= Vehicle2WheelerAdapter(this,filteredLanguageList)
 
+        rvWheelerVehicle.layoutManager=LinearLayoutManager(this)
+
+        rvWheelerVehicle.adapter=vehicle2WheelerAdapter
+    }
+
+    // function for setting up search tool bar
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
     fun setsearchtoolbar()
     {
@@ -193,36 +191,38 @@ class SelectVehicleActivity : AppCompatActivity(),ActivityView,Filterable
 
         searchtoolbar.setNavigationOnClickListener {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
-            //searchtoolbar!!.visibility = View.VISIBLE
                 circleReveal(R.id.searchtoolbar, 1, true, false)
+
             else
                 searchtoolbar.visibility = View.GONE
         }
 
         item_search = search_menu.findItem(R.id.action_filter_search)
 
-        MenuItemCompat.setOnActionExpandListener(item_search, object : MenuItemCompat.OnActionExpandListener {
-            override fun onMenuItemActionCollapse(item: MenuItem): Boolean {
+        MenuItemCompat.setOnActionExpandListener(item_search, object : MenuItemCompat.OnActionExpandListener
+        {
+            override fun onMenuItemActionCollapse(item: MenuItem): Boolean
+            {
                 // Do something when collapsed
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
                     circleReveal(R.id.searchtoolbar, 1, true, false)
-                } else
+
+                else
                     searchtoolbar.visibility = View.GONE
+
                 return true
             }
 
-            override fun onMenuItemActionExpand(item: MenuItem): Boolean {
+            override fun onMenuItemActionExpand(item: MenuItem): Boolean
+            {
                 // Do something when expanded
                 return true
             }
         })
-
-        initSearchView()
-
-
+        initSearchView()        // function for initialising all the views and the variables of the search tool bar
     }
 
-
+// function for initialising all the views and the variables of the search tool bar
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
     private fun initSearchView()
@@ -230,7 +230,6 @@ class SelectVehicleActivity : AppCompatActivity(),ActivityView,Filterable
          searchView = search_menu.findItem(R.id.action_filter_search).actionView as SearchView
 
         // Enable/Disable Submit button in the keyboard
-
         searchView.isSubmitButtonEnabled = false
 
         searchView.setBackgroundResource(R.drawable.et_blue_base)
@@ -240,13 +239,11 @@ class SelectVehicleActivity : AppCompatActivity(),ActivityView,Filterable
         searchplate.setBackgroundResource(R.drawable.et_white_base)
 
         // Change search close button image
-
         val closeButton = searchView.findViewById(R.id.search_close_btn) as ImageView
 
         closeButton.setImageResource(R.drawable.cross_white)
 
         // set hint and the text colors
-
         val txtSearch = searchView.findViewById<View>(android.support.v7.appcompat.R.id.search_src_text) as EditText
 
         txtSearch.hint = "Search.."
@@ -255,32 +252,38 @@ class SelectVehicleActivity : AppCompatActivity(),ActivityView,Filterable
 
         txtSearch.setHintTextColor(resources.getColor(R.color.white))
 
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener
+        {
             @SuppressLint("RestrictedApi")
-            override fun onQueryTextSubmit(query: String): Boolean {
-                callSearch(query)
+            override fun onQueryTextSubmit(query: String): Boolean
+            {
+                callSearch(query)    // function for performing search operation
+
                 searchView.clearFocus()
+
                 return true
             }
 
-            override fun onQueryTextChange(newText: String): Boolean {
-                callSearch(newText)
+            override fun onQueryTextChange(newText: String): Boolean
+            {
+                callSearch(newText)     // function for performing search operation
+
                 return true
             }
 
-            fun callSearch(query: String) {
-                //Do searching
-                filter.filter(query)
+            // function for performing search operation
+            fun callSearch(query: String)
+            {
+                filter.filter(query)        // filter object for performing search operation
             }
-
         })
-
     }
 
-
+    // function for adding circle reveal operation to the search tool bar
     @SuppressLint("PrivateResource")
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    fun circleReveal(viewID: Int, posFromRight: Int, containsOverflow: Boolean, isShow: Boolean) {
+    fun circleReveal(viewID: Int, posFromRight: Int, containsOverflow: Boolean, isShow: Boolean)
+    {
         val myView = findViewById<View>(viewID)
 
         var width = myView.width
@@ -289,30 +292,37 @@ class SelectVehicleActivity : AppCompatActivity(),ActivityView,Filterable
             width -= posFromRight * resources.getDimensionPixelSize(R.dimen.abc_action_button_min_width_material) - resources.getDimensionPixelSize(
                 R.dimen.abc_action_button_min_width_material
             )
+
         if (containsOverflow)
             width -= resources.getDimensionPixelSize(R.dimen.abc_action_button_min_width_overflow_material)
 
         val cx = width + 9
+
         val cy = myView.height / 2
 
         val anim: Animator
+
         anim = if (isShow)
             ViewAnimationUtils.createCircularReveal(myView, cx, cy, 0f, width.toFloat())
+
         else
             ViewAnimationUtils.createCircularReveal(myView, cx, cy, width.toFloat(), 0f)
 
         anim.duration = 220.toLong()
 
         // make the view invisible when the animation is done
-        anim.addListener(object : AnimatorListenerAdapter() {
-            override fun onAnimationEnd(animation: Animator) {
-                if (!isShow) {
+        anim.addListener(object : AnimatorListenerAdapter()
+        {
+            override fun onAnimationEnd(animation: Animator)
+            {
+                if (!isShow)
+                {
                     super.onAnimationEnd(animation)
+
                     myView.visibility = View.INVISIBLE
                 }
             }
         })
-
         // make the view visible and start the animation
         if (isShow)
             myView.visibility = View.VISIBLE
@@ -321,20 +331,25 @@ class SelectVehicleActivity : AppCompatActivity(),ActivityView,Filterable
         anim.start()
     }
 
-    private fun setupTabIconsAndText() {
-
+    // function for setting icon and text on the tabs
+    private fun setupTabIconsAndText()
+    {
         tlVehicle.addTab(tlVehicle.newTab().setText("2 wheeler"),true)
+
         tlVehicle.addTab(tlVehicle.newTab().setText("4 wheeler"))
         
         tlVehicle.getTabAt(0)?.setIcon(R.drawable.scooter_gray)
+
         tlVehicle.getTabAt(1)?.setIcon(R.drawable.car_gray)
+
         tlVehicle.getTabAt(0)?.text = "2 wheeler"
+
         tlVehicle.getTabAt(1)?.text = "4 wheeler"
     }
 
-
-    override fun getFilter(): Filter {
-
+    // filter object for performing search operation
+    override fun getFilter(): Filter
+    {
         return object : Filter()
         {
             override fun performFiltering(charSequence: CharSequence): Filter.FilterResults
@@ -342,26 +357,27 @@ class SelectVehicleActivity : AppCompatActivity(),ActivityView,Filterable
                 val charString = charSequence.toString()
 
                 if (charString.isEmpty())
-                {
                     filteredLanguageList=dataListMain
-                }
+
                 else
                 {
                     val filteredList = ArrayList<HashMap<String,Any>>()
+
                     for (row in dataListMain)
                     {
                         // name match condition. this might differ depending on your requirement
+
                         // here we are looking for name or phone number match
                         if (row["vehicle_brand"].toString().toLowerCase().contains(charString.toLowerCase()) )
-                        {
                             filteredList.add(row)
-                        }
+
                     }
                     filteredLanguageList = filteredList
                 }
-
                 val filterResults = Filter.FilterResults()
+
                 filterResults.values = filteredLanguageList
+
                 return filterResults
             }
 
@@ -369,18 +385,18 @@ class SelectVehicleActivity : AppCompatActivity(),ActivityView,Filterable
             {
                 filteredLanguageList = filterResults.values as ArrayList<HashMap<String,Any>>
 
-                set2WheelerRecycler()
+                set2WheelerRecycler()  // function for setting 2 wheeler recycler
             }
         }
     }
 
-    //******************* vehicle list API ********************//
-    /// Vehicle List API  (API - users/vehicles)
-    private fun vehicleListApi() {
+    //******************* vehicle list (GET) API ********************//
 
-        // rlLoaderVehicleList.visibility = View.VISIBLE
-
-        if (CommonClass(this, this).checkInternetConn(this)) {
+    /// implementing Vehicle List API  (API - users/vehicles(GET))
+    private fun vehicleListApi()
+    {
+        if (CommonClass(this, this).checkInternetConn(this))
+        {
 
             val tokenHeader = CommonClass(this, this).getString("x_access_token")
 
@@ -393,8 +409,8 @@ class SelectVehicleActivity : AppCompatActivity(),ActivityView,Filterable
     }
 
     // handling response of the vehicle list API
-    override fun onRequestSuccessReport(mainPojo: MainPojo) {
-        // rlLoaderVehicleList.visibility = View.GONE
+    override fun onRequestSuccessReport(mainPojo: MainPojo)
+    {
         if (mainPojo.success == "true")
         {
             dataListMain.clear()
@@ -407,6 +423,7 @@ class SelectVehicleActivity : AppCompatActivity(),ActivityView,Filterable
             {
                 if (mainPojo.vehicles[i]["vehicle_type"] == "4wheeler")
                     dataListFour.add(mainPojo.vehicles[i])
+
                 else
                     dataListTwo.add(mainPojo.vehicles[i])
             }
@@ -414,8 +431,6 @@ class SelectVehicleActivity : AppCompatActivity(),ActivityView,Filterable
             if (vehicleType=="4wheeler")
             {
                 dataListMain.addAll(dataListFour)
-
-                //vehicleAdapter.notifyDataSetChanged()
 
                 if(dataListMain.size>0)
                 {
@@ -436,14 +451,11 @@ class SelectVehicleActivity : AppCompatActivity(),ActivityView,Filterable
             {
                 dataListMain.addAll(dataListTwo)
 
-                //vehicleAdapter.notifyDataSetChanged()
-
                 if(dataListMain.size>0)
                 {
                     tvNodataVehcile.visibility=View.GONE
 
                     rvWheelerVehicle.visibility=View.VISIBLE
-
                 }
                 else
                 {
@@ -454,16 +466,11 @@ class SelectVehicleActivity : AppCompatActivity(),ActivityView,Filterable
                     rvWheelerVehicle.visibility=View.GONE
                 }
             }
-
-            filter.filter("")
+            filter.filter("")     // filter object for performing search operation
         }
     }
 
-    override fun showLoader() {
+    override fun showLoader() {}
 
-    }
-
-    override fun hideLoader() {
-
-    }
+    override fun hideLoader() {}
 }

@@ -44,8 +44,6 @@ class RSARequestCancelActivity : AppCompatActivity(), ActivityView
 
     lateinit var rsaRecyclerAdapter: RsaRecyclerAdapter
 
-    var row_index: Int = 0
-
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreate(savedInstanceState: Bundle?)
     {
@@ -53,28 +51,73 @@ class RSARequestCancelActivity : AppCompatActivity(), ActivityView
 
         setContentView(R.layout.activity_cancel_rsa)
 
-        //window.decorView.systemUiVisibility=View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+        initView()      // function for initialising all the views and variables of the class
+
+        clicks()     // function for handling all the clicks of the class
+    }
+
+    // function for initialising all the views and variables of the class
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+    private fun initView()
+    {
         window.navigationBarColor=resources.getColor(R.color.white)
 
         Handler().postDelayed({ window.navigationBarColor=resources.getColor(R.color.black) },1000)
 
-
         rsaHandler = RsaCancelRequestPresenter(this, this)
 
-        cancelReasons()
-
-        clicks()
+        cancelReasons()     // implementing reasons API
     }
 
-    override fun onResume() {
+    // function for handling all the clicks of the class
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+    private fun clicks()
+    {
+        ivBack.setOnClickListener {
+            window.navigationBarColor=resources.getColor(R.color.white)
+
+            overridePendingTransition(R.anim.fade, R.anim.slide_up)
+
+            finish()
+        }
+
+        tvCancelRequest.setOnClickListener {
+            var isSelected = false
+
+            var reason=""
+
+            for (i in issueList.indices)
+            {
+                if (issueList[i]["select"] == "1")
+                {
+                    isSelected = true
+
+                    reason = issueList[i]["reason"].toString()
+
+                    break
+                }
+            }
+            if(isSelected)
+                showPopUp(this,reason)         // function for showing custom dialog
+
+            else
+                Toast.makeText(this,resources.getString(R.string.please_select_one_issue)
+                    ,Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    override fun onResume()
+    {
         super.onResume()
 
         val filterStatus = IntentFilter(FcmPushTypes.Types.checkStatusPushOneTime)
+
         registerReceiver(changeStatusReceiver, filterStatus)
     }
 
-
-    private val changeStatusReceiver = object : BroadcastReceiver() {
+    // implementing broadcast receiver
+    private val changeStatusReceiver = object : BroadcastReceiver()
+    {
         override fun onReceive(context: Context, intent: Intent) {
 
             println("GOT BROADCAST API CHECK STATUS ")
@@ -83,65 +126,33 @@ class RSARequestCancelActivity : AppCompatActivity(), ActivityView
             {
                 if(intent.getStringExtra("ForCancelScreen") == FcmPushTypes.Types.requestCancelled)
                 {
-
                     CommonClass(this@RSARequestCancelActivity, this@RSARequestCancelActivity).workDoneReviewSend()
+
                     startActivity(Intent(this@RSARequestCancelActivity, DashboardActivity::class.java))
+
                     finish()
                 }
             }
         }
     }
 
-    override fun onDestroy() {
+    override fun onDestroy()
+    {
         super.onDestroy()
 
-        try {
+        try
+        {
             unregisterReceiver(changeStatusReceiver)
         }
         catch (e:Exception)
         {
-
+            e.printStackTrace()
         }
     }
 
-
-    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-    private fun clicks() {
-
-        ivBack.setOnClickListener {
-            finish()
-            window.navigationBarColor=resources.getColor(R.color.white)
-            overridePendingTransition(R.anim.fade, R.anim.slide_up)
-        }
-
-        tvCancelRequest.setOnClickListener {
-
-            var isSelected = false
-            var reason=""
-
-            for (i in issueList.indices) {
-                if (issueList[i]["select"] == "1") {
-                    isSelected = true
-                    reason = issueList[i]["reason"].toString()
-                    break
-                }
-            }
-
-            if(isSelected)
-            {
-                showPopUp(this,reason)
-            }
-            else
-            {
-                Toast.makeText(this,resources.getString(R.string.please_select_one_issue)
-                    ,Toast.LENGTH_SHORT).show()
-            }
-
-        }
-    }
-
-    private fun setRecycler() {
-
+    // function for setting up recycler
+    private fun setRecycler()
+    {
         rsaRecyclerAdapter = RsaRecyclerAdapter(this, issueList)
 
         recyclerViewCancelRsa.setHasFixedSize(true)
@@ -151,9 +162,10 @@ class RSARequestCancelActivity : AppCompatActivity(), ActivityView
         recyclerViewCancelRsa.adapter = rsaRecyclerAdapter
 
         recyclerViewCancelRsa.addOnItemTouchListener(
-            RecyclerItemClickListener(this, object : RecyclerItemClickListener.OnItemClickListener {
-                override fun onItemClick(view: View, position: Int) {
-
+            RecyclerItemClickListener(this, object : RecyclerItemClickListener.OnItemClickListener
+            {
+                override fun onItemClick(view: View, position: Int)
+                {
                     if (issueList[position]["select"] == "0")
                     {
                         for (i in issueList.indices)
@@ -167,17 +179,16 @@ class RSARequestCancelActivity : AppCompatActivity(), ActivityView
                             issueList[i]["select"] = "0"
                     }
                     rsaRecyclerAdapter.notifyDataSetChanged()
-
                 }
             })
-
         )
-
         rsaRecyclerAdapter.notifyDataSetChanged()
     }
 
+    // function for showing custom dialog
     @SuppressLint("InflateParams")
-    private fun showPopUp(activity: Activity, string: String) {
+    private fun showPopUp(activity: Activity, string: String)
+    {
         val inflater = activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
         val cViewFinalPopup = inflater.inflate(R.layout.fragment_builder_confirm, null)
@@ -195,46 +206,51 @@ class RSARequestCancelActivity : AppCompatActivity(), ActivityView
         val tvCancel = cViewFinalPopup.findViewById(R.id.tvCancel) as TextView
 
         val tvText = cViewFinalPopup.findViewById(R.id.tvText) as TextView
+
         tvText.text = resources.getString(R.string.cancellation_msg)
+
         cViewFinalPopup.tvCancel.text = resources.getString(R.string.no).toUpperCase()
+
         cViewFinalPopup.tvConfirm.text = resources.getString(R.string.yes).toUpperCase()
 
         val tvConfirm = cViewFinalPopup.findViewById(R.id.tvConfirm) as TextView
 
         tvCancel.setOnClickListener {
             builderFinal.dismiss()
-
         }
+
         tvConfirm.setOnClickListener {
             builderFinal.dismiss()
 
-            if (CommonClass(this,this).checkInternetConn(this))
-            {
-                rsaHandler.cancelRequest(
-                    string,
-                    CommonClass(this, this).getString(RsaConstants.ServiceSaved.fobbuRequestId),
-                    CommonClass(this, this).getString("x_access_token"))
-            }
-            else
-                CommonClass(this,this).showToast(resources.getString(R.string.noInternet))
-
+           cancelRequest(string)
         }
-
         builderFinal.window!!.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
 
         builderFinal.show()
     }
 
+
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-    override fun onBackPressed() {
-        super.onBackPressed()
-        finish()
+    override fun onBackPressed()
+    {
         window.navigationBarColor=resources.getColor(R.color.white)
+
         overridePendingTransition(R.anim.fade, R.anim.slide_up)
+
+        super.onBackPressed()
     }
 
-    // *************************** reasons API ********************//
+    // *************************** reasons API  and change_status API (CANCELLATION) ********************//
 
+    // implementing change_status API for cancellation
+    private fun cancelRequest(string: String)
+    {
+        if (CommonClass(this,this).checkInternetConn(this))
+            rsaHandler.cancelRequest(string, CommonClass(this, this).getString(RsaConstants.ServiceSaved.fobbuRequestId), CommonClass(this, this).getString("x_access_token"))
+
+        else
+            CommonClass(this,this).showToast(resources.getString(R.string.noInternet))
+    }
 
     // implementing reasons API
     private fun cancelReasons()
@@ -246,43 +262,36 @@ class RSARequestCancelActivity : AppCompatActivity(), ActivityView
             CommonClass(this,this).showToast(resources.getString(R.string.internet_is_unavailable))
     }
 
-    // handling the response of the reasons API
-    override fun onRequestSuccessReport(mainPojo: MainPojo) {
-        if (mainPojo.success == "true") {
-            if (mainPojo.message == "Service List") {
+    // handling the response of the reasons API and change_status API (cancellation)
+    override fun onRequestSuccessReport(mainPojo: MainPojo)
+    {
+        if (mainPojo.success == "true")
+        {
+            if (mainPojo.message == "Service List")      // reasons of cancellation
+            {
                 issueList.clear()
+
                 issueList = mainPojo.list
 
-                for (i in issueList.indices) {
+                for (i in issueList.indices)
                     issueList[i]["select"] = "0"
-                }
 
-                setRecycler()
-            } else {
+                setRecycler()          // function for setting up recycler
+            }
+            else                          // canceling current request
+            {
                 CommonClass(this, this).workDoneReviewSend()
 
-                startActivity(
-                    Intent(
-                        this,
-                        CancellationSuccessMessageActivity::class.java
-                    )
-                )
+                startActivity(Intent(this, CancellationSuccessMessageActivity::class.java))
+
                 finish()
-
             }
-
-        } else {
-            Toast.makeText(this, "" + mainPojo.message, Toast.LENGTH_SHORT).show()
         }
-
-
+        else
+            Toast.makeText(this, "" + mainPojo.message, Toast.LENGTH_SHORT).show()
     }
 
-    override fun showLoader() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun showLoader() {}
 
-    override fun hideLoader() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun hideLoader() {}
 }

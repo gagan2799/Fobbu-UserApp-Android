@@ -31,8 +31,6 @@ class WorkSummaryActivity : AppCompatActivity(),ActivityView
 
     private lateinit var workSummaryAdapter:WorkSummaryAdapter
 
-    private var odsServiceTime=""
-
     lateinit var dataList:ArrayList<HashMap<String,Any>>
 
     override fun onCreate(savedInstanceState: Bundle?)
@@ -41,96 +39,96 @@ class WorkSummaryActivity : AppCompatActivity(),ActivityView
 
         setContentView(R.layout.activity_work_summary)
 
-        initView()
+        initView()                  // method for handling all the initialization of this class
 
-        clicks()
+        clicks()                    // Method for handling click  functionality of the Class
     }
-
-    override fun onBackPressed() {
-
-        val intent =   Intent(Intent.ACTION_MAIN)
-        intent.addCategory(Intent.CATEGORY_HOME)
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-        startActivity(intent)
-    }
-
 
     // method for handling all the initialization of this class
     private fun initView()
     {
         commonClass= CommonClass(this,this)
 
-
         recyclerViewWorkSummary.visibility=View.VISIBLE
 
         rsaLiveHandler=RsaLivePresenter(this,this)
 
-        if (CommonClass(this,this).checkInternetConn(this))
-        {
-            rsaLiveHandler.getService(
-                CommonClass(this,this).getString("x_access_token"),CommonClass(this, this).getString(
-                    RsaConstants.ServiceSaved.fobbuRequestId))
-        }
-
-        else
-            CommonClass(this,this).showToast(resources.getString(R.string.internet_is_unavailable))
+        getService()               //implementing requests API
     }
-
-
 
     // Method for handling click  functionality of the Class
     private fun clicks()
     {
         imageViewOptionMenuWorkSummary.setOnClickListener {
-            showOptionLayout()
+            showOptionLayout()        // function for showing custom dialog
         }
 
         textViewConfirmAndPay.setOnClickListener {
-            startActivity(Intent(this,PaymentModeActivity::class.java)
-                .setFlags
-                    (Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK))
+            startActivity(Intent(this,PaymentModeActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK))
         }
     }
 
-
+    // function for showing custom dialog
     @SuppressLint("RtlHardcoded")
-    private fun showOptionLayout() {
-        val dialog: Dialog = Dialog(this)
+    private fun showOptionLayout()
+    {
+        val dialog = Dialog(this)
+
         dialog.setContentView(R.layout.option_menu_layout)
+
         val layoutParams: WindowManager.LayoutParams
+
         layoutParams=dialog.window.attributes
+
         layoutParams.gravity= Gravity.TOP or Gravity.RIGHT
+
         layoutParams.x=-100
+
         layoutParams.y=-100
+
         layoutParams.windowAnimations=R.style.DialogTheme
 
         dialog.textViewCancelRSA.setOnClickListener {
             dialog.dismiss()
-            startActivity(
-                Intent(this, RSARequestCancelActivity::class.java)
-                    .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK))
+
+            startActivity(Intent(this, RSARequestCancelActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK))
+
             overridePendingTransition(R.anim.slide_down,R.anim.fade)
         }
         dialog.show()
     }
 
-    override fun onRequestSuccessReport(mainPojo: MainPojo) {
+    //************************* requests API *********************//
+
+    //implementing requests API
+    private fun getService()
+    {
+        if (CommonClass(this,this).checkInternetConn(this))
+            rsaLiveHandler.getService(CommonClass(this,this).getString("x_access_token"),CommonClass(this, this).getString(RsaConstants.ServiceSaved.fobbuRequestId))
+
+        else
+            CommonClass(this,this).showToast(resources.getString(R.string.internet_is_unavailable))
+    }
+
+    // handling response of the request API
+    override fun onRequestSuccessReport(mainPojo: MainPojo)
+    {
         if (mainPojo.success=="true")
         {
             if(mainPojo.getData().addition_services.size>0)
             {
-                setUpRecycler(mainPojo.getData().addition_services)
+                setUpRecycler(mainPojo.getData().addition_services)          //function for setting up recycler
+
                 var totalAmount: Long = 0
 
-                for (i in mainPojo.getData().addition_services.indices) {
-                    val noOfService: Long =
-                        (mainPojo.getData().addition_services[i]["number_of_services"] as Double).toLong()
-                    val servicePrice: Long =
-                        (mainPojo.getData().addition_services[i]["service_price"] as Double).toLong()
+                for (i in mainPojo.getData().addition_services.indices)
+                {
+                    val noOfService: Long = (mainPojo.getData().addition_services[i]["number_of_services"] as Double).toLong()
+
+                    val servicePrice: Long = (mainPojo.getData().addition_services[i]["service_price"] as Double).toLong()
 
                     totalAmount = totalAmount.plus(noOfService * servicePrice)
                 }
-
                 textViewTotalAmount.text = totalAmount.toString()
 
                 textViewServiceTypeWork.text=(mainPojo.getData().service_name)
@@ -145,24 +143,33 @@ class WorkSummaryActivity : AppCompatActivity(),ActivityView
 
                 textViewOrderIdWork.text=("#"+mainPojo.getData().order_id)
             }
-
-        }else{
-            Toast.makeText(this,mainPojo.message, Toast.LENGTH_SHORT).show()
         }
+        else
+            Toast.makeText(this,mainPojo.message, Toast.LENGTH_SHORT).show()
     }
 
-    private fun setUpRecycler(addition_services: ArrayList<HashMap<String, Any>>) {
+    //function for setting up recycler
+    private fun setUpRecycler(addition_services: ArrayList<HashMap<String, Any>>)
+    {
         workSummaryAdapter= WorkSummaryAdapter(addition_services,this)
+
         recyclerViewWorkSummary.layoutManager=LinearLayoutManager(this)
+
         recyclerViewWorkSummary.adapter=workSummaryAdapter
     }
 
-    override fun showLoader() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun showLoader() {}
 
-    override fun hideLoader() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun hideLoader() {}
 
+    override fun onBackPressed()
+    {
+        val intent =   Intent(Intent.ACTION_MAIN)
+
+        intent.addCategory(Intent.CATEGORY_HOME)
+
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+
+        startActivity(intent)
+    }
 }

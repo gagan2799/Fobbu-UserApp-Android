@@ -9,22 +9,24 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.fobbu.member.android.R
 
-class Vehicle2WheelerAdapter(var activity: Activity,var dataList:ArrayList<HashMap<String,Any>>):RecyclerView.Adapter<Vehicle2WheelerAdapter.MyViewHolder>() {
-    override fun onCreateViewHolder(p0: ViewGroup, p1: Int): MyViewHolder {
+class Vehicle2WheelerAdapter(var activity: Activity,var dataList:ArrayList<HashMap<String,Any>>):RecyclerView.Adapter<Vehicle2WheelerAdapter.MyViewHolder>()
+{
+    override fun onCreateViewHolder(p0: ViewGroup, p1: Int): MyViewHolder
+    {
         val view = LayoutInflater.from(activity).inflate(R.layout.inflate_vehicle_adapter, p0, false)
 
         return MyViewHolder(view)
     }
 
-    override fun getItemCount(): Int 
+    override fun getItemCount(): Int
     {
-    return dataList.size
+        return dataList.size
     }
 
-    override fun onBindViewHolder(p0: MyViewHolder, p1: Int) 
+    override fun onBindViewHolder(p0: MyViewHolder, p1: Int)
     {
-    p0.ivDELETE.visibility=View.GONE
-        
+        p0.ivDELETE.visibility=View.GONE
+
         p0.ivImage.visibility=View.GONE
 
         p0.tvVehicleName.text = dataList[p1]["vehicle_brand"].toString()
@@ -37,7 +39,7 @@ class Vehicle2WheelerAdapter(var activity: Activity,var dataList:ArrayList<HashM
 
     }
 
-
+    // inner view holder class
     inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view)
     {
         var ivImage = view.findViewById(R.id.ivImage) as ImageView

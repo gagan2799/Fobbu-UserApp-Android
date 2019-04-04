@@ -40,11 +40,10 @@ class PaymentModeActivity : AppCompatActivity(), ActivityView
 
         setContentView(R.layout.activity_payment_mode)
 
-        initView()
+        initView()             // method for initializing all the  variables of the class
 
-        clicks()
+        clicks()                 // method for handling clicks of the class
     }
-
 
     // method for initializing all the  variables of the class
     private fun initView()
@@ -54,7 +53,6 @@ class PaymentModeActivity : AppCompatActivity(), ActivityView
         paymentModeHandler = PaymentModePresenter(this, this)
     }
 
-
     // method for handling clicks of the class
     private fun clicks()
     {
@@ -63,28 +61,24 @@ class PaymentModeActivity : AppCompatActivity(), ActivityView
         }
 
         linearLayoutBankPayment.setOnClickListener {
-
             if (intent.hasExtra(RsaConstants.Ods.service_name))
             {
-                successDialog()
+                successDialog()      // function for showing dialog with success message
 
                 if (commonClass.getStringList(RsaConstants.Ods.singleServiceList).isNotEmpty())
-                {
                     staticName=commonClass.getStringList(RsaConstants.Ods.singleServiceList)[0][RsaConstants.Ods.static_name].toString()
-                }
 
                 Handler().postDelayed({
-                    startActivity(Intent(this, DashboardActivity::class.java)
-                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
-                        .putExtra(RsaConstants.Ods.static_name,staticName))
+                    startActivity(Intent(this, DashboardActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK).putExtra(RsaConstants.Ods.static_name,staticName))
                 },1000)
             }
             else
-                makePayment()
+                makePayment()         // implementing the make_payment API
         }
 
     }
 
+    // function for showing dialog with success message
     private fun successDialog()
     {
         val builder=AlertDialog.Builder(this)
@@ -126,10 +120,8 @@ class PaymentModeActivity : AppCompatActivity(), ActivityView
         dialog.textViewCancelRSA.setOnClickListener {
             dialog.dismiss()
 
-            startActivity(
-                Intent(this, RSARequestCancelActivity::class.java)
-                    .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
-            )
+            startActivity(Intent(this, RSARequestCancelActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK))
+
             overridePendingTransition(R.anim.slide_down, R.anim.fade)
         }
         dialog.show()
@@ -137,29 +129,26 @@ class PaymentModeActivity : AppCompatActivity(), ActivityView
 
     //***************************** make_payment API *************************//
 
-    // implementing make payment API
+    // implementing the make_payment API
     private fun makePayment()
      {
          if (CommonClass(this, this).checkInternetConn(this))
          {
              if (!CommonClass(this, this).getString(RsaConstants.ServiceSaved.fobbuRequestId).isEmpty())
-             {
-                 paymentModeHandler.makePayment(
-                     CommonClass(this, this).getString("x_access_token"),
-                     CommonClass(this, this).getString(RsaConstants.ServiceSaved.fobbuRequestId))
-             }
+                 paymentModeHandler.makePayment(CommonClass(this, this).getString("x_access_token"), CommonClass(this, this).getString(RsaConstants.ServiceSaved.fobbuRequestId))
+
              else
                  Toast.makeText(this, getString(R.string.requestID_not_provided), Toast.LENGTH_SHORT).show()
          }
          else
              Toast.makeText(this, getString(R.string.internet_is_unavailable), Toast.LENGTH_SHORT).show()
-
      }
 
     // handling response of the make_payment API
     override fun onRequestSuccessReport(mainPojo: MainPojo)
     {
-        if (mainPojo.success == "true") {
+        if (mainPojo.success == "true")
+        {
             CommonClass(this, this).putString(RsaConstants.RsaTypes.checkStatus, FcmPushTypes.Types.moneyPaid)
 
             if (CommonClass(this, this).getString(RsaConstants.ServiceSaved.serviceNameSelected) ==
@@ -167,46 +156,30 @@ class PaymentModeActivity : AppCompatActivity(), ActivityView
                 ||
                 CommonClass(this, this).getString(RsaConstants.ServiceSaved.serviceNameSelected) ==
                 RsaConstants.ServiceName.burstTyre
-            ) {
-                startActivity(
-                    Intent(this, GetSetGoActivity::class.java)
-                        .setFlags
-                            (Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
-                )
+            )
+            {
+                startActivity(Intent(this, GetSetGoActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK))
 
                 finish()
             }
             else
             {
-                CommonClass(this,this).putString(RsaConstants.RsaTypes.checkStatus
-                    ,FcmPushTypes.Types.moneyPaid)
+                CommonClass(this,this).putString(RsaConstants.RsaTypes.checkStatus,FcmPushTypes.Types.moneyPaid)
 
-                startActivity(
-                    Intent(this, DashboardActivity::class.java)
-                        .setFlags
-                            (Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
-                )
+                startActivity(Intent(this, DashboardActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK))
 
                 CommonClass(this, this).putString(RsaConstants.RsaTypes.onGoingRsaScreen, "YES")
 
-                CommonClass(this, this).putString(
-                    RsaConstants.RsaTypes.onGoingRsaScreenType,
-                    resources.getString(R.string.rsa_live)
-                )
+                CommonClass(this, this).putString(RsaConstants.RsaTypes.onGoingRsaScreenType, resources.getString(R.string.rsa_live))
 
                 finish()
             }
-
         }
         else
             Toast.makeText(this, mainPojo.message, Toast.LENGTH_SHORT).show()
     }
 
-    override fun showLoader() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun showLoader() {}
 
-    override fun hideLoader() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun hideLoader() {}
 }

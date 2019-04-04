@@ -100,26 +100,15 @@ class ProfileActivity : AppCompatActivity(),ActivityView,ProfileView
 
         setContentView(R.layout.activity_profile)
 
-        initView()
+        initView()         // function for initialising all the variables and the views of the class
 
-        clicks()
+        clicks()         // function for handling all the clicks of the class
 
-        chooseImagesClick()
+        chooseImagesClick()         // method for capturing images
     }
 
 
-    override fun onResume()
-    {
-        super.onResume()
-
-        if (commonClass.getStringList(RsaConstants.Constants.selectedLanguageList).isNotEmpty())
-        {
-            selectedLanguageList=commonClass.getStringList(RsaConstants.Constants.selectedLanguageList)
-
-            setSelectedLanguageRecycler()
-        }
-    }
-
+    // function for initialising all the variables and the views of the class
     private fun initView()
     {
         commonClass= CommonClass(this,this)
@@ -131,7 +120,7 @@ class ProfileActivity : AppCompatActivity(),ActivityView,ProfileView
 
         civPicProfile.isEnabled=false
 
-        setDataInView()
+        setDataInView()       // function for setting data form preference into view
 
         profileHandler=ProfilePresenter(this,this,this)
 
@@ -146,70 +135,7 @@ class ProfileActivity : AppCompatActivity(),ActivityView,ProfileView
         spinnerProfile.adapter=spinnerAdapter
     }
 
-    private fun setSelectedLanguageRecycler()
-    {
-        rvSelectedLangauges.visibility=View.VISIBLE
-
-     profileAdapter= ProfileLangaugeAdapter(this,selectedLanguageList)
-
-        rvSelectedLangauges.layoutManager=GridLayoutManager(this,2)
-
-        rvSelectedLangauges.adapter=profileAdapter
-    }
-
-
-    // function for setting data form preference into view
-    private fun setDataInView()
-    {
-        val fullName=commonClass.getString("first_name")+" "+commonClass.getString("last_name")
-
-        etNameProfile.setText(fullName)
-
-        etNameKycProfile.setText(fullName)
-
-        etNumberProfile.setText(commonClass.getString("mobile_number"))
-
-        etEmailProfile.setText(commonClass.getString("email"))
-
-        if (commonClass.getString("date_of_birth").isNotEmpty())
-        {
-            tvDobKycProfile.text=commonClass.getString("date_of_birth")
-        }
-        if (commonClass.getString("pan_card").isNotEmpty())
-        {
-            etPANProfile.setText(commonClass.getString("pan_card"))
-
-            etPANProfile.setSelection(etPANProfile.text.length)
-        }
-        if (commonClass.getString("aadhar_number").isNotEmpty())
-        {
-            etAdharProfile.setText(commonClass.getString("aadhar_number"))
-
-            etAdharProfile.setSelection(etAdharProfile.text.length)
-        }
-
-        if(CommonClass(this,this).getString("user_image")!="")
-        {
-            hasPic=true
-
-            val urlProfile = CommonClass(this,this).getString("user_url")+
-                    CommonClass(this,this).getString("user_image")
-
-            Picasso.get().load(urlProfile)
-                .error(R.drawable.dummy_pic)
-                .placeholder(R.drawable.dummy_pic)
-                .into(civPicProfile)
-        }
-
-        Handler().postDelayed({
-            if (commonClass.getString("gender")==resources.getString(R.string.other))
-            tvGenderProfile.text=resources.getString(R.string.not_specified)
-
-            else
-            tvGenderProfile.text=commonClass.getString("gender")
-        },1000)
-    }
-
+    // function for handling all the clicks of the class
     fun clicks()
     {
         tvEditToolbar.setOnClickListener {
@@ -244,11 +170,11 @@ class ProfileActivity : AppCompatActivity(),ActivityView,ProfileView
 
         rlGenderProfile.setOnClickListener {
             if (tvEditToolbar.visibility==View.GONE)
-            spinnerProfile.performClick()
+                spinnerProfile.performClick()
         }
 
         tvLanguageProfile.setOnClickListener {
-           startActivity(Intent(this,LanguageActivity::class.java))
+            startActivity(Intent(this,LanguageActivity::class.java))
         }
 
         spinnerProfile.onItemSelectedListener = object : AdapterView.OnItemSelectedListener
@@ -264,9 +190,7 @@ class ProfileActivity : AppCompatActivity(),ActivityView,ProfileView
                     tvGenderProfile.setTextColor(resources.getColor(R.color.color_grey))
 
             } // to close the onItemSelected
-            override fun onNothingSelected(parent: AdapterView<*>) {
-
-            }
+            override fun onNothingSelected(parent: AdapterView<*>) {}
         }
 
         tvDobKycProfile.setOnClickListener {
@@ -274,7 +198,6 @@ class ProfileActivity : AppCompatActivity(),ActivityView,ProfileView
 
             tvDobKycProfile.setTextColor(resources.getColor(R.color.black))
         }
-
 
         llBasicProfile.setOnClickListener {
             tvBasicProfile.setTextColor(resources.getColor(R.color.red))
@@ -316,21 +239,95 @@ class ProfileActivity : AppCompatActivity(),ActivityView,ProfileView
 
         tvAddDetailsProfile.setOnClickListener {
             if (checKBasic)
-                updateUser()
+                updateUser()       // implementing update_user API
+
             else
-                updateKyc()
+                validatingKyc()     // validating Kyc and implementing update_kyc API
         }
+    }
+
+    // setting recycler view for languages
+    private fun setSelectedLanguageRecycler()
+    {
+        rvSelectedLangauges.visibility=View.VISIBLE
+
+        profileAdapter= ProfileLangaugeAdapter(this,selectedLanguageList)
+
+        rvSelectedLangauges.layoutManager=GridLayoutManager(this,2)
+
+        rvSelectedLangauges.adapter=profileAdapter
+    }
+
+    override fun onResume()
+    {
+        super.onResume()
+
+        if (commonClass.getStringList(RsaConstants.Constants.selectedLanguageList).isNotEmpty())
+        {
+            selectedLanguageList=commonClass.getStringList(RsaConstants.Constants.selectedLanguageList)
+
+            setSelectedLanguageRecycler()        // setting recycler view for languages
+        }
+    }
+
+    // function for setting data form preference into view
+    private fun setDataInView()
+    {
+        val fullName=commonClass.getString("first_name")+" "+commonClass.getString("last_name")
+
+        etNameProfile.setText(fullName)
+
+        etNameKycProfile.setText(fullName)
+
+        etNumberProfile.setText(commonClass.getString("mobile_number"))
+
+        etEmailProfile.setText(commonClass.getString("email"))
+
+        if (commonClass.getString("date_of_birth").isNotEmpty())
+            tvDobKycProfile.text=commonClass.getString("date_of_birth")
+
+        if (commonClass.getString("pan_card").isNotEmpty())
+        {
+            etPANProfile.setText(commonClass.getString("pan_card"))
+
+            etPANProfile.setSelection(etPANProfile.text.length)
+        }
+
+        if (commonClass.getString("aadhar_number").isNotEmpty())
+        {
+            etAdharProfile.setText(commonClass.getString("aadhar_number"))
+
+            etAdharProfile.setSelection(etAdharProfile.text.length)
+        }
+
+        if(CommonClass(this,this).getString("user_image")!="")
+        {
+            hasPic=true
+
+            val urlProfile = CommonClass(this,this).getString("user_url")+ CommonClass(this,this).getString("user_image")
+
+            Picasso.get().load(urlProfile).error(R.drawable.dummy_pic).placeholder(R.drawable.dummy_pic).into(civPicProfile)
+        }
+
+        Handler().postDelayed({
+            if (commonClass.getString("gender")==resources.getString(R.string.other))
+                tvGenderProfile.text=resources.getString(R.string.not_specified)
+
+            else
+                tvGenderProfile.text=commonClass.getString("gender")
+        },1000)
     }
 
     // method for capturing images
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
     @SuppressLint("ClickableViewAccessibility", "NewApi")
-    private fun chooseImagesClick() {
+    private fun chooseImagesClick()
+    {
         civPicProfile.setOnClickListener {
             imageFrom = "1"
 
-            showDocPopup()
+            showDocPopup()        // method for uploading images either by capturing from camera or from gallery
         }
     }
 
@@ -338,85 +335,88 @@ class ProfileActivity : AppCompatActivity(),ActivityView,ProfileView
     @SuppressLint("NewApi")
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
-    private fun showDocPopup() {
-
+    private fun showDocPopup()
+    {
         val alertDialog = AlertDialog.Builder(this).create()
+
         alertDialog.setTitle(getString(R.string.upload_pics))
+
         alertDialog.setMessage(getString(R.string.please_select_from_where_you_want_to_choose))
+
         alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Gallery") { dialogInterface, i ->
             val apiLevel = android.os.Build.VERSION.SDK_INT
 
-            if (apiLevel >= 23) {
+            if (apiLevel >= 23)
+            {
                 //phone state
-                val permission1 =
-                    ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE)
+                val permission1 = ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE)
 
-                val permission2 =
-                    ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                val permission2 = ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
 
-                if (permission1 != PackageManager.PERMISSION_GRANTED || permission2 != PackageManager.PERMISSION_GRANTED) {
-                    makeRequest2()
-                } else {
-                    openGallery()
-                }
-            } else {
-                openGallery()
+                if (permission1 != PackageManager.PERMISSION_GRANTED || permission2 != PackageManager.PERMISSION_GRANTED)
+                    makeRequest2()        // function for requesting permissions to the user
+                else
+                    openGallery()         // Method for opening gallery
             }
+            else
+                openGallery()          // Method for opening gallery
         }
+
         alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Camera") { _, _ ->
             val apiLevel = android.os.Build.VERSION.SDK_INT
 
-            if (apiLevel >= 23) {
+            if (apiLevel >= 23)
+            {
                 //phone state
+                val permission1 = ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE)
 
-                val permission1 =
-                    ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE)
-
-                val permission2 =
-                    ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                val permission2 = ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
 
                 val permission3 = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
 
                 if (permission1 != PackageManager.PERMISSION_GRANTED || permission2 != PackageManager.PERMISSION_GRANTED
                     || permission3 != PackageManager.PERMISSION_GRANTED
-                ) {
-                    makeRequest1()
-                } else {
-                    takePicture()
-                }
-            } else {
-                takePicture()
+                )
+                    makeRequest1()          // function for requesting permissions
+
+                else
+                    takePicture()         // Method for  capturing images via Camera
             }
+            else
+                takePicture()        // Method for  capturing images via Camera
+
         }
         alertDialog.setOnShowListener {
             alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.BLACK)
+
             alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.BLACK)
         }
-
         alertDialog.show()
     }
 
-
+    // function for requesting permissions to the user
     @RequiresApi(Build.VERSION_CODES.M)
-    private fun makeRequest2() {
+    private fun makeRequest2()
+    {
         requestPermissions(
             arrayOf(
                 "android.permission.WRITE_EXTERNAL_STORAGE",
                 "android.permission.READ_EXTERNAL_STORAGE",
                 "android.permission.CAMERA"
-            ),
-            2
-        )
+            ), 2)
     }
 
     // Method for opening gallery
-    private fun openGallery() {
-
+    private fun openGallery()
+    {
         val photoPickerIntent = Intent(Intent.ACTION_PICK)
+
         photoPickerIntent.type = "image/*"
+
         startActivityForResult(photoPickerIntent, imageCameraRequest)
     }
 
+    // function for requesting permissions
     @TargetApi(Build.VERSION_CODES.M)
     @RequiresApi(Build.VERSION_CODES.M)
     private fun makeRequest1() {
@@ -425,16 +425,13 @@ class ProfileActivity : AppCompatActivity(),ActivityView,ProfileView
                 "android.permission.WRITE_EXTERNAL_STORAGE",
                 "android.permission.READ_EXTERNAL_STORAGE",
                 "android.permission.CAMERA"
-            ),
-            1
-        )
+            ), 1)
     }
 
-
     // Method for  capturing images via Camera
-    private fun takePicture() {
-
-        createFileAndDeleteOldFile()
+    private fun takePicture()
+    {
+        createFileAndDeleteOldFile()         // Method for creating new files and deleting old files
 
         val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
 
@@ -442,91 +439,82 @@ class ProfileActivity : AppCompatActivity(),ActivityView,ProfileView
 
         val mImageCaptureUri: Uri
 
-        mImageCaptureUri = if (apiLevel >= 24) {
+        mImageCaptureUri = if (apiLevel >= 24)
             FileProvider.getUriForFile(
                 this,
                 this.packageName + ".provider", mFileTemp!!
             )
-        } else {
+
+        else
             Uri.fromFile(mFileTemp)
-        }
 
         intent.putExtra(MediaStore.EXTRA_OUTPUT, mImageCaptureUri)
-        try {
+
+        try
+        {
             startActivityForResult(intent, imageCameraCaptureRequest)
-        } catch (e: Exception) {
+        }
+        catch (e: Exception)
+        {
             e.printStackTrace()
         }
     }
 
-
     // Method for creating new files and deleting old files
-    private fun createFileAndDeleteOldFile() {
-        mFileTemp =
-                File(Environment.getExternalStorageDirectory(), "profie_pic" + System.currentTimeMillis() + ".jpg")
-        if (mFileTemp!!.exists()) {
+    private fun createFileAndDeleteOldFile()
+    {
+        mFileTemp = File(Environment.getExternalStorageDirectory(), "profie_pic" + System.currentTimeMillis() + ".jpg")
+
+        if (mFileTemp!!.exists())
             mFileTemp!!.delete()
-        }
     }
 
-
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray)
+    {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        when (requestCode) {
-            1 -> {
+
+        when (requestCode)
+        {
+            1 ->
+            {
                 if (grantResults.isEmpty() || grantResults[0] != PackageManager.PERMISSION_GRANTED
                     || grantResults[1] != PackageManager.PERMISSION_GRANTED
-                    || grantResults[2] != PackageManager.PERMISSION_GRANTED
-                ) {
-                    Log.i("", getString(R.string.permission_denied))
-                    showMessageDialog(
-                        resources.getString(R.string.permission_message)
-                    )
-
-                } else {
-                    Log.i("", resources.getString(R.string.permission_granted))
-
-                    takePicture()
+                    || grantResults[2] != PackageManager.PERMISSION_GRANTED)
+                {
+                    //Method to display message to the user about the permission required by the application
+                    showMessageDialog(resources.getString(R.string.permission_message))
                 }
+                else
+                    takePicture()          // Method for  capturing images via Camera
+
                 return
             }
             2 -> {
                 if (grantResults.isEmpty() || grantResults[0] != PackageManager.PERMISSION_GRANTED
                     || grantResults[1] != PackageManager.PERMISSION_GRANTED
-                    || grantResults[2] != PackageManager.PERMISSION_GRANTED
-                ) {
-                    Log.i("", resources.getString(R.string.permission_denied))
-                    showMessageDialog(
-                        getString(R.string.permission_message)
-                    )
-                } else {
-                    Log.i("", getString(R.string.permission_granted))
-
-                    openGallery()
+                    || grantResults[2] != PackageManager.PERMISSION_GRANTED)
+                {
+                    //Method to display message to the user about the permission required by the application
+                    showMessageDialog(getString(R.string.permission_message))
                 }
+                else
+                    openGallery()        // Method for opening gallery
+
                 return
             }
-
         }
     }
 
-
-    //Method to dislpay message to the user about the permission required by the application
+    //Method to display message to the user about the permission required by the application
     @SuppressLint("RtlHardcoded")
     private fun showMessageDialog(message: String)
     {
-        val alertDialog = android.support.v7.app.AlertDialog.Builder(
-            this
-            , R.style.MyDialogTheme
-        ).create()
+        val alertDialog = android.support.v7.app.AlertDialog.Builder(this, R.style.MyDialogTheme).create()
 
         alertDialog.setMessage(message)
 
-        alertDialog.setButton(
-            android.support.v7.app.AlertDialog.BUTTON_POSITIVE, "Ok"
-        )
-        { dialog
-          , _ ->
+        alertDialog.setButton(android.support.v7.app.AlertDialog.BUTTON_POSITIVE, "Ok")
+        { dialog, _ ->
             dialog.dismiss()
 
             finish()
@@ -539,62 +527,69 @@ class ProfileActivity : AppCompatActivity(),ActivityView,ProfileView
         val messageText: TextView = alertDialog!!.findViewById(android.R.id.message)!!
 
         messageText.gravity = Gravity.LEFT
-
     }
 
-
     @SuppressLint("Recycle")
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?)
+    {
         super.onActivityResult(requestCode, resultCode, data)
-        when (requestCode) {
 
+        when (requestCode)
+        {
             imageCameraRequest ->
-
-                try {
+                try
+                {
                     val projection = arrayOf(MediaStore.Images.Media.DATA)
-                    val cursor = this.contentResolver.query(
-                        data!!.data,
-                        projection, null, null, null
-                    )
-                    val columnIndex = cursor!!.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
-                    cursor.moveToFirst()
-                    val path = cursor.getString(columnIndex)
-                    val imgFile = compressImage(File(path))
-                    //val imgFile = File(path)
-                    println("IMAGE FILE 1$imgFile")
 
-                    //dataList.add(imgFile)
-                    if (imgFile.exists()) {
-                        when (imageFrom) {
-                            "1" -> {
+                    val cursor = this.contentResolver.query(data!!.data, projection, null, null, null)
+
+                    val columnIndex = cursor!!.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
+
+                    cursor.moveToFirst()
+
+                    val path = cursor.getString(columnIndex)
+
+                    val imgFile = compressImage(File(path))
+
+                    if (imgFile.exists())
+                    {
+                        when (imageFrom)
+                        {
+                            "1" ->
+                            {
                                 Glide.with(this)
                                     .load(imgFile)
                                     .into(civPicProfile)
+
                                 isImageOn1 = true
+
                                 file1 = imgFile
                             }
                         }
-
                     }
-                } catch (e: Exception) {
-                    Log.e("tag", "Error while creating temp file", e)
+                }
+                catch (e: Exception)
+                {
+                   e.printStackTrace()
                 }
 
             imageCameraCaptureRequest ->
-
-                if (requestCode == imageCameraCaptureRequest && resultCode == AppCompatActivity.RESULT_OK) {
-
+                if (requestCode == imageCameraCaptureRequest && resultCode == AppCompatActivity.RESULT_OK)
+                {
                     val imgFile = compressImage(File(mFileTemp!!.path))
-                    println("IMAGE FILE 2  $imgFile")
 
-                    // dataList.add(imgFile)
-                    if (imgFile.exists()) {
-                        when (imageFrom) {
-                            "1" -> {
+                    if (imgFile.exists())
+                    {
+                        when (imageFrom)
+                        {
+                            "1" ->
+                            {
                                 Glide.with(this)
                                     .load(imgFile)
                                     .into(civPicProfile)
+
                                 isImageOn1 = true
+
                                 file1 = imgFile
                             }
                         }
@@ -603,12 +598,11 @@ class ProfileActivity : AppCompatActivity(),ActivityView,ProfileView
         }
     }
 
-
     // Method for compressing image
-    private fun compressImage(imgFile: File): File {
+    private fun compressImage(imgFile: File): File
+    {
         val bos = ByteArrayOutputStream()
 
-        // var myBitmap = BitmapFactory.decodeFile(imgFile.absolutePath)
         val myBitmap = imageRotation(BitmapFactory.decodeFile(imgFile.absolutePath), imgFile.absolutePath)
 
         myBitmap.compress(Bitmap.CompressFormat.JPEG, 25, bos)
@@ -616,49 +610,56 @@ class ProfileActivity : AppCompatActivity(),ActivityView,ProfileView
         val bitmapdata = bos.toByteArray()
 
         val fos = FileOutputStream(imgFile)
+
         fos.write(bitmapdata)
+
         fos.flush()
+
         fos.close()
 
         return imgFile
-
     }
 
     // Method for rotating images
-    private fun imageRotation(bitmap: Bitmap, path: String): Bitmap {
+    private fun imageRotation(bitmap: Bitmap, path: String): Bitmap
+    {
         val ei = ExifInterface(path)
+
         val orientation = ei.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL)
 
         var rotatedBitmap: Bitmap = bitmap
-        println("orientation $orientation")
 
-        when (orientation) {
+          when (orientation)
+          {
             ExifInterface.ORIENTATION_ROTATE_90 ->
-                rotatedBitmap = rotateImage(bitmap, 90F)
+                rotatedBitmap = rotateImage(bitmap, 90F)   // function for rotating image
+
             ExifInterface.ORIENTATION_ROTATE_180 ->
-                rotatedBitmap = rotateImage(bitmap, 180F)
+                rotatedBitmap = rotateImage(bitmap, 180F)   // function for rotating image
+
             ExifInterface.ORIENTATION_ROTATE_270 ->
-                rotatedBitmap = rotateImage(bitmap, 270F)
-            ExifInterface.ORIENTATION_NORMAL ->
+                rotatedBitmap = rotateImage(bitmap, 270F)  // function for rotating image
+
+              ExifInterface.ORIENTATION_NORMAL ->
                 rotatedBitmap = bitmap
         }
-
-        return rotatedBitmap
+        return rotatedBitmap   // function for rotating image
     }
 
-    private fun rotateImage(source: Bitmap, angle: Float): Bitmap {
+    // function for rotating image
+    private fun rotateImage(source: Bitmap, angle: Float): Bitmap
+    {
         val matrix = Matrix()
+
         matrix.postRotate(angle)
 
         return Bitmap.createBitmap(source, 0, 0, source.width, source.height, matrix, false)
     }
 
 
-
-
     //###################### UPDATE USER API########################//
 
-    // function for hitting update user API
+    // implementing update_user API
     private fun updateUser()
     {
         if (commonClass.checkInternetConn(this))
@@ -682,42 +683,41 @@ class ProfileActivity : AppCompatActivity(),ActivityView,ProfileView
                 fileList.add(imgProfile!!)
             }
 
-            when{
+            when
+            {
                 !hasPic -> commonClass.showToast(getString(R.string.select_image_first))
 
-                etNameProfile.text.isEmpty()->commonClass.showToast(getString(R.string.provide_name))
+                etNameProfile.text.trim().isEmpty()->commonClass.showToast(getString(R.string.provide_name))
 
-                etNumberProfile.text.isEmpty()->commonClass.showToast("Please provide mobile number")
+                etNumberProfile.text.trim().isEmpty()->commonClass.showToast(resources.getString(R.string.provide_number_msg))
 
-                //etNumberProfile.text.toString().length<10->commonClass.showToast("Please provide correct mobile number")
+                etEmailProfile.text.trim().isEmpty()->commonClass.showToast(resources.getString(R.string.provide_mail_msg))
 
-                etEmailProfile.text.isEmpty()->commonClass.showToast("Please provide email id")
+                !commonClass.isEmailValid(etEmailProfile.text.toString()) ->commonClass.showToast(resources.getString(R.string.prvovide_correct_mail_msg))
 
-                !commonClass.isEmailValid(etEmailProfile.text.toString()) ->commonClass.showToast("Please provide correct email id")
-
-                tvGenderProfile.text.toString()=="Select Gender"->commonClass.showToast("Please select gender")
+                tvGenderProfile.text.trim().toString()=="Select Gender"->commonClass.showToast(resources.getString(R.string.select_gender_msg))
 
                 else->
                 {
-                    if (etNameProfile.text.toString().contains("\\\\s+"))
+                    if (etNameProfile.text.trim().toString().contains("\\\\s+"))
                     {
-                        first=getName(etNameProfile.text.toString())
+                        first=getName(etNameProfile.text.trim().toString())
 
-                        last=getSurname(etNameProfile.text.toString())
+                        last=getSurname(etNameProfile.text.trim().toString())
                     }
                     else
                     {
-                        first = etNameProfile.text.toString()
+                        first = etNameProfile.text.trim().toString()
                         last=""
                     }
 
-                    val gender= if (tvGenderProfile.text.toString()==resources.getString(R.string.not_specified))
+                    val gender= if (tvGenderProfile.text.trim().toString()==resources.getString(R.string.not_specified))
                         resources.getString(R.string.other)
                     else
-                        tvGenderProfile.text.toString()
+                        tvGenderProfile.text.trim().toString()
 
-                    profileHandler.updateUser(RequestBody.create(MediaType.parse("text/plain"),etEmailProfile.text.toString()),
-                        RequestBody.create(MediaType.parse("text/plain"),etNumberProfile.text.toString()),
+                    profileHandler.updateUser(RequestBody.create(MediaType.parse("text/plain"),etEmailProfile.text.trim().toString()),
+                        RequestBody.create(MediaType.parse("text/plain"),etNumberProfile.text.trim().toString()),
                         RequestBody.create(MediaType.parse("text/plain"),first),
                         RequestBody.create(MediaType.parse("text/plain"),last),
                         RequestBody.create(MediaType.parse("text/plain"),gender),
@@ -760,9 +760,10 @@ class ProfileActivity : AppCompatActivity(),ActivityView,ProfileView
 
             commonClass.putString("last_name",last)
 
-            val displayName = if(last!="") {
+            val displayName = if(last!="")
                 "$first $last"
-            } else
+
+             else
                 first
 
             commonClass. putString("display_name",displayName)
@@ -775,10 +776,7 @@ class ProfileActivity : AppCompatActivity(),ActivityView,ProfileView
 
             val urlProfile = mainPojo.getData().profile
 
-            println("PROFILE URL >>>>>>>> $urlProfile")
-
             commonClass.putString("user_image",urlProfile)
-
         }
         commonClass.showToast(mainPojo.message)
     }
@@ -797,66 +795,75 @@ class ProfileActivity : AppCompatActivity(),ActivityView,ProfileView
         aviPro.hide()
     }
 
-    private fun getName(fullName: String): String {
+    // function for getting first from the edit text
+    private fun getName(fullName: String): String
+    {
         return fullName.split(" (?!.* )".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[0]
     }
 
-    private fun getSurname(fullName: String): String {
+    // function for getting last from the edit text
+    private fun getSurname(fullName: String): String
+    {
         return fullName.split(" (?!.* )".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[1]
     }
 
     // ########################### UPDATE KYC API#######################//
 
-    // function for hitting updateKyc API
-    private fun updateKyc()
+    // validatingKyc
+    private fun validatingKyc()
     {
         if (commonClass.checkInternetConn(this))
         {
-
             when{
                 tvDobKycProfile.text.toString()==getString(R.string.date_of_birth)->commonClass.showToast(getString(R.string.provide_date_msg))
 
                 etAdharProfile.text.trim().isEmpty() && etPANProfile.text.trim().isEmpty() ->commonClass.showToast(getString(R.string.provide_any_msg))
 
-                etPANProfile.text.toString().isNotEmpty() ->
+                etPANProfile.text.trim().toString().isNotEmpty() ->
                 {
-                    if(etPANProfile.text.length<10)
+                    if(etPANProfile.text.trim().length<10)
                         commonClass.showToast(getString(R.string.provide_pan_msg_error))
+
                     else
-                        hitKYC_API()
+                        updateKyc()      // implementing update_kyc API
                 }
 
-                etAdharProfile.text.toString().isNotEmpty() ->
+                etAdharProfile.text.trim().toString().isNotEmpty() ->
                 {
-                    if(etAdharProfile.text.length<12)
+                    if(etAdharProfile.text.trim().length<12)
                         commonClass.showToast(getString(R.string.provide_adhar_msg_error))
-                    else
-                        hitKYC_API()
-                }
 
-                else->
-                {
-                    hitKYC_API()
+                    else
+                        updateKyc() // implementing update_kyc API
                 }
+                else->
+                    updateKyc()     // implementing update_kyc API
             }
         }
         else
             commonClass.showToast(resources.getString(R.string.internet_is_unavailable))
     }
 
-    private fun hitKYC_API() {
+    // implementing update_kyc API
+    private fun updateKyc()
+    {
+        if (CommonClass(this,this).checkInternetConn(this))
+        {
+            val map=HashMap<String,Any>()
 
-        val map=HashMap<String,Any>()
-        map["date_of_birth"]=tvDobKycProfile.text.trim().toString()
+            map["date_of_birth"]=tvDobKycProfile.text.trim().toString()
 
-        map["pan_card"]=etPANProfile.text.trim().toString()
+            map["pan_card"]=etPANProfile.text.trim().toString()
 
-        map["aadhar_number"]=etAdharProfile.text.trim().toString()
+            map["aadhar_number"]=etAdharProfile.text.trim().toString()
 
-        profileHandler.updateKyc(map, commonClass.getString("x_access_token"))
+            profileHandler.updateKyc(map, commonClass.getString("x_access_token"))
+        }
+        else
+            CommonClass(this,this).showToast(resources.getString(R.string.internet_is_unavailable))
     }
 
-    //function for handling the response of the update Kyc API
+    //function for handling the response of the update_kyc API
     override fun updateKycSuccessReport(mainPojo: MainPojo)
     {
         if (mainPojo.success=="true")
@@ -867,13 +874,9 @@ class ProfileActivity : AppCompatActivity(),ActivityView,ProfileView
 
             commonClass.putString("aadhar_number",mainPojo.getData().aadhar_number)
 
-            startActivity(Intent(this,WaitingScreenWhite::class.java)
-                .putExtra("from_where","profile"))
+            startActivity(Intent(this,WaitingScreenWhite::class.java).putExtra("from_where","profile"))
         }
-        else{
+        else
             commonClass.showToast(mainPojo.message)
-        }
     }
-
-
 }

@@ -20,71 +20,81 @@ import com.fobbu.member.android.utils.CommonClass
 import kotlinx.android.synthetic.main.activity_waiting_screen_white.*
 import java.lang.Exception
 
-class WaitingScreenWhite : AppCompatActivity() {
-
+class WaitingScreenWhite : AppCompatActivity()
+{
     private var strWhich = ""
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?)
+    {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_waiting_screen_white)
 
-        handleClicks()
+        initView()   // function for initialising all  the variables and views of the class
 
-        try {
+        handleClicks()       // Click functionality of this activity's clicks are handled here
+
+
+    }
+
+    // function for initialising all  the variables and views of the class
+    private fun initView()
+    {
+        try
+        {
             val nm = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
             nm.cancelAll()
-
-        } catch (e: Exception) {
+        }
+        catch (e: Exception)
+        {
             e.printStackTrace()
         }
     }
 
     // Click functionality of this activity's clicks are handled here
-    private fun handleClicks() {
-
+    private fun handleClicks()
+    {
         strWhich = intent.getStringExtra("from_where")
 
-        switchLayouts(strWhich)
+        switchLayouts(strWhich)         // method for switching layouts
 
-       /* rlNewVehicleAdded.setOnClickListener {
+        /* rlNewVehicleAdded.setOnClickListener {
 
-            strWhich = "building_live"
+             strWhich = "building_live"
 
-            switchLayouts(strWhich)
-        }
+             switchLayouts(strWhich)
+         }
 
-        rlBuildingLiveTrack.setOnClickListener {
+         rlBuildingLiveTrack.setOnClickListener {
 
-            goToRsaLiveScreen()
-        }
+             goToRsaLiveScreen()
+         }
 
-        rlCodeValidated.setOnClickListener {
-            switchLayouts("wallet_accessing")
-        }
+         rlCodeValidated.setOnClickListener {
+             switchLayouts("wallet_accessing")
+         }
 
-        rlAccessingVehicle.setOnClickListener {
-            switchLayouts("vehicle_accessed")
-        }
+         rlAccessingVehicle.setOnClickListener {
+             switchLayouts("vehicle_accessed")
+         }
 
-        rlVehicleAccessed.setOnClickListener {
-            switchLayouts("building_work_summary")
-        }
+         rlVehicleAccessed.setOnClickListener {
+             switchLayouts("building_work_summary")
+         }
 
-        rlBuildingWorkSummary.setOnClickListener {
-            startActivity(
-                Intent(this, WorkSummaryActivity::class.java)
-                    .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
-            )
-        }*/
+         rlBuildingWorkSummary.setOnClickListener {
+             startActivity(
+                 Intent(this, WorkSummaryActivity::class.java)
+                     .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+             )
+         }*/
     }
 
     ///GOING TO RSA LIVE SCREEN
-    private fun goToRsaLiveScreen() {
-
-        startActivity(Intent(this, DashboardActivity::class.java)
-            .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK))
+    private fun goToRsaLiveScreen()
+    {
+        startActivity(Intent(this, DashboardActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK))
 
         CommonClass(this, this).putString(RsaConstants.RsaTypes.onGoingRsaScreen, "YES")
 
@@ -94,10 +104,10 @@ class WaitingScreenWhite : AppCompatActivity() {
     }
 
     // method for switching layouts
-    private fun switchLayouts(strWhich: String?) {
-
-        when (strWhich) {
-
+    private fun switchLayouts(strWhich: String?)
+    {
+        when (strWhich)
+        {
             "profile"->
             {
                 rlNewVehicleAdded.visibility=View.VISIBLE
@@ -106,160 +116,200 @@ class WaitingScreenWhite : AppCompatActivity() {
 
                 tvWhiteSubMessage.text="you have successfully completed \nyour profile."
 
-                Handler().postDelayed({
-                    startActivity(Intent(this, DashboardActivity::class.java)
-                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK))
-                },2000)
-
+                Handler().postDelayed({ startActivity(Intent(this, DashboardActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)) },2000)
             }
 
-            "building_live" -> {
+            "building_live" ->
+            {
                 rlBuildingLiveTrack.visibility = View.VISIBLE
+
                 rlCodeValidated.visibility = View.GONE
+
                 rlAccessingVehicle.visibility = View.GONE
+
                 rlBuildingWorkSummary.visibility = View.GONE
+
                 rlNewVehicleAdded.visibility = View.GONE
+
                 rlVehicleAccessed.visibility = View.GONE
 
-                Handler().postDelayed({
-                    goToRsaLiveScreen()
-                }, 1000)
+                Handler().postDelayed({ goToRsaLiveScreen() }, 1000)        ///GOING TO RSA LIVE SCREEN
             }
-            "code_valid" -> {
+
+            "code_valid" ->
+            {
                 rlBuildingLiveTrack.visibility = View.GONE
+
                 rlCodeValidated.visibility = View.VISIBLE
+
                 rlAccessingVehicle.visibility = View.GONE
+
                 rlBuildingWorkSummary.visibility = View.GONE
+
                 rlNewVehicleAdded.visibility = View.GONE
+
                 rlVehicleAccessed.visibility = View.GONE
 
-                if(CommonClass(this,this).getString(RsaConstants.ServiceSaved.serviceNameSelected) ==
-                    RsaConstants.ServiceName.flatTyre ||
-                    CommonClass(this,this).getString(RsaConstants.ServiceSaved.serviceNameSelected) ==
-                    RsaConstants.ServiceName.burstTyre)
+                if(CommonClass(this,this).getString(RsaConstants.ServiceSaved.serviceNameSelected) == RsaConstants.ServiceName.flatTyre || CommonClass(this,this).getString(RsaConstants.ServiceSaved.serviceNameSelected) == RsaConstants.ServiceName.burstTyre)
                 {
                     Handler().postDelayed({
-                        switchLayouts("wallet_accessing")
+                        switchLayouts("wallet_accessing")              // method for switching layouts
                     }, 1200)
                 }
                 else
                 {
                     Handler().postDelayed({
-                        startActivity(Intent(this, GetSetGoActivity::class.java)
-                            .setFlags
-                                (Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK))
+                        startActivity(Intent(this, GetSetGoActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK))
 
                         finish()
                     }, 1200)
                 }
             }
 
-            "code_valid_ods" -> {
+            "code_valid_ods" ->
+            {
                 rlBuildingLiveTrack.visibility = View.GONE
+
                 rlCodeValidated.visibility = View.VISIBLE
+
                 rlAccessingVehicle.visibility = View.GONE
+
                 rlBuildingWorkSummary.visibility = View.GONE
+
                 rlNewVehicleAdded.visibility = View.GONE
+
                 rlVehicleAccessed.visibility = View.GONE
+
                 tvCodeValidatedSubMessage.visibility = View.GONE
 
                 Handler().postDelayed({
-                        startActivity(Intent(this, OdsGetSetGoActivity::class.java)
-                            .setFlags
-                                (Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK).putExtra(RsaConstants.Ods.static_name,"washing"))
+                    startActivity(Intent(this, OdsGetSetGoActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK).putExtra(RsaConstants.Ods.static_name,"washing"))
 
-                        finish()
-                    }, 1200)
-
+                    finish()
+                }, 1200)
             }
 
-            "wallet_accessing" -> {
+            "wallet_accessing" ->
+            {
                 rlAccessingVehicle.visibility = View.VISIBLE
+
                 rlBuildingLiveTrack.visibility = View.GONE
+
                 rlCodeValidated.visibility = View.GONE
+
                 rlBuildingWorkSummary.visibility = View.GONE
+
                 rlNewVehicleAdded.visibility = View.GONE
+
                 rlVehicleAccessed.visibility = View.GONE
             }
-            "vehicle_accessed" -> {
+
+            "vehicle_accessed" ->
+            {
                 rlVehicleAccessed.visibility = View.VISIBLE
+
                 rlAccessingVehicle.visibility = View.GONE
+
                 rlBuildingLiveTrack.visibility = View.GONE
+
                 rlCodeValidated.visibility = View.GONE
+
                 rlNewVehicleAdded.visibility = View.GONE
+
                 rlBuildingWorkSummary.visibility = View.GONE
 
                 Handler().postDelayed({
-                    switchLayouts("building_work_summary")
+                    switchLayouts("building_work_summary")         // method for switching layouts
                 }, 1000)
             }
-            "building_work_summary" -> {
+
+            "building_work_summary" ->
+            {
                 rlVehicleAccessed.visibility = View.GONE
+
                 rlAccessingVehicle.visibility = View.GONE
+
                 rlBuildingLiveTrack.visibility = View.GONE
+
                 rlCodeValidated.visibility = View.GONE
+
                 rlNewVehicleAdded.visibility = View.GONE
+
                 rlBuildingWorkSummary.visibility = View.VISIBLE
 
                 Handler().postDelayed({
-                    startActivity(
-                        Intent(this, WorkSummaryActivity::class.java)
-                            .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
-                    )
+                    startActivity(Intent(this, WorkSummaryActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK))
+
                     finish()
                 }, 1000)
             }
-            "new_vehicle_added" -> {
+
+            "new_vehicle_added" ->
+            {
                 rlNewVehicleAdded.visibility = View.VISIBLE
+
                 rlVehicleAccessed.visibility = View.GONE
+
                 rlAccessingVehicle.visibility = View.GONE
+
                 rlBuildingLiveTrack.visibility = View.GONE
+
                 rlCodeValidated.visibility = View.GONE
+
                 rlBuildingWorkSummary.visibility = View.GONE
             }
         }
     }
 
-    override fun onBackPressed() {
+    override fun onBackPressed()
+    {
         //super.onBackPressed()
-
         if(strWhich =="wallet_accessing" || strWhich =="code_valid")
         {
             val intent =   Intent(Intent.ACTION_MAIN)
+
             intent.addCategory(Intent.CATEGORY_HOME)
+
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+
             startActivity(intent)
-
         }
-
     }
 
-    override fun onResume() {
+    override fun onResume()
+    {
         super.onResume()
 
         val filter = IntentFilter(FcmPushTypes.Types.moneyRequestedBroadcast)
+
         registerReceiver(changeRSALiveScreenReceiver, filter)
     }
 
-    private val changeRSALiveScreenReceiver = object : BroadcastReceiver() {
-        override fun onReceive(context: Context, intent: Intent) {
-
+    // initialising changeRSALiveScreenReceiver Broadcast receiver
+    private val changeRSALiveScreenReceiver = object : BroadcastReceiver()
+    {
+        override fun onReceive(context: Context, intent: Intent)
+        {
             println("ON RECEIVE BROADCAST WHITE SCREEN " + intent.getStringExtra("navigate_to"))
 
-            when {
-                intent.getStringExtra("navigate_to") == FcmPushTypes.Types.moneyRequested -> {
-                    switchLayouts("vehicle_accessed")
-                }
+            when
+            {
+                intent.getStringExtra("navigate_to") == FcmPushTypes.Types.moneyRequested ->
+                    switchLayouts("vehicle_accessed")            // method for switching layouts
             }
         }
     }
 
-    override fun onDestroy() {
+    override fun onDestroy()
+    {
         super.onDestroy()
-        try {
+        try
+        {
             unregisterReceiver(changeRSALiveScreenReceiver)
-        } catch (e: Exception) {
-
+        }
+        catch (e: Exception)
+        {
+            e.printStackTrace()
         }
     }
 

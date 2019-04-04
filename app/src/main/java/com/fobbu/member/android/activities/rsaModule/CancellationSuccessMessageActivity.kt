@@ -8,16 +8,25 @@ import com.fobbu.member.android.R
 import com.fobbu.member.android.activities.dashboard.DashboardActivity
 import kotlinx.android.synthetic.main.activity_cancellation_message.*
 
-class CancellationSuccessMessageActivity : AppCompatActivity() {
-
-    val text:String= "Your request has been cancelled\n A Cancellation fee will be deducted \nfrom your fobbu wallet"
-    override fun onCreate(savedInstanceState: Bundle?) {
+class CancellationSuccessMessageActivity : AppCompatActivity()
+{
+    override fun onCreate(savedInstanceState: Bundle?)
+    {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_cancellation_message)
-        textViewCancellationRSA.text=text
+
+        initView()   // function for initialising all the variables and views of the class
+    }
+
+    // function for initialising all the variables and views of the class
+    private fun initView()
+    {
+        textViewCancellationRSA.text=resources.getString(R.string.cancellation_by_user_msg)
 
         Handler().postDelayed({
             startActivity(Intent(this, DashboardActivity::class.java))
+
             finish()
         },1000)
     }

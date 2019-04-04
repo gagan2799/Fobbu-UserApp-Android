@@ -50,70 +50,63 @@ class GetSetGoActivity : AppCompatActivity(), ActivityView
 
         setContentView(R.layout.activity_get_set_go)
 
-        initView()
+        initView()         // function for initialising all the variables of the class
 
-        clicks()
-
-        try {
-            val nm = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-
-            nm.cancelAll()
-
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
+        clicks()             // function for handling all the clicks of the class
     }
 
     // function for initialising all the variables of the class
     private fun initView()
     {
+        try
+        {
+            val nm = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+            nm.cancelAll()
+
+        }
+        catch (e: Exception)
+        {
+            e.printStackTrace()
+        }
+
         linearLayoutHolderGet.background=resources.getDrawable(R.drawable.work_summary_drawable)
 
-            //llOdsServiceLoading.visibility=View. GONE
+        getSetGoHandler = GetSetGoPresenter(this, this)
 
-            getSetGoHandler = GetSetGoPresenter(this, this)
+        // function for managing the UI as per the service's name
+        manageService(CommonClass(this, this).getString(RsaConstants.ServiceSaved.serviceNameSelected))
 
-            manageService(CommonClass(this, this).getString(RsaConstants.ServiceSaved.serviceNameSelected))
-
-            if (intent.hasExtra("navigate_to"))
+        if (intent.hasExtra("navigate_to"))
+        {
+            when
             {
-                when
-                {
-                    intent.getStringExtra("navigate_to") == FcmPushTypes.Types.startedWork -> changeLayout("Set")
+                intent.getStringExtra("navigate_to") == FcmPushTypes.Types.startedWork ->
+                    changeLayout("Set")             // function for changing the UI of get_set_go layout
 
-                    intent.getStringExtra("navigate_to") == FcmPushTypes.Types.workEnded -> changeLayout("")
+                intent.getStringExtra("navigate_to") == FcmPushTypes.Types.workEnded ->
+                    changeLayout("")            // function for changing the UI of get_set_go layout
 
-                    else -> changeLayout("Get")
-                }
+                else -> changeLayout("Get")            // function for changing the UI of get_set_go layout
             }
-            else
-                changeLayout("Get")
+        }
+        else
+            changeLayout("Get")          // function for changing the UI of get_set_go layout
 
     }
 
-    override fun onBackPressed() {
 
-        val intent =   Intent(Intent.ACTION_MAIN)
-        intent.addCategory(Intent.CATEGORY_HOME)
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-        startActivity(intent)
-
-    }
-
+    // function for handling all the clicks of the class
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
     private fun clicks()
     {
 
         linearlayoutNotNowGet.setOnClickListener {
-
             CommonClass(this, this).workDoneReviewSend()
 
             Handler().postDelayed(
                 {
-                    startActivity(
-                        Intent(this, DashboardActivity::class.java)
-                            .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
-                    )
+                    startActivity(Intent(this, DashboardActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK))
                 },10
             )
         }
@@ -121,45 +114,30 @@ class GetSetGoActivity : AppCompatActivity(), ActivityView
         buttonSubmitGet.setOnClickListener {
             if (CommonClass(this, this).checkInternetConn(this))
             {
-
-                if(ratinBarGetSet.rating.toString() == "0.0")
+                when
                 {
-                    Toast.makeText(this, getString(R.string.provide_rating), Toast.LENGTH_SHORT).show()
+                    ratinBarGetSet.rating.toString() == "0.0" -> Toast.makeText(this, getString(R.string.provide_rating), Toast.LENGTH_SHORT).show()
+
+                    editTextReviewGet.text.trim().isEmpty() -> Toast.makeText(this, getString(R.string.provide_review), Toast.LENGTH_SHORT).show()
+
+                    else ->
+                    {
+                        hideKeyboard()                // function for hiding keyboard
+
+                        postReviews()                 // implementing the provide_ratings API
+                    }
                 }
-
-                else if (editTextReviewGet.text.isEmpty())
-                {
-                    Toast.makeText(this, getString(R.string.provide_review), Toast.LENGTH_SHORT).show()
-                }
-                else
-                {
-                    hideKeyboard()
-
-                    //println("requestID"+CommonClass(this,this).getString(RsaConstants.ServiceSaved.fobbuRequestId))
-                    getSetGoHandler.postReviews(
-                        RequestBody.create(
-                            MediaType.parse("text/plain"),
-                            CommonClass(this, this).getString(RsaConstants.ServiceSaved.fobbuRequestId)
-                        ),
-
-                        RequestBody.create(MediaType.parse("text/plain"), ratinBarGetSet.rating.toString()),
-
-                        RequestBody.create(MediaType.parse("text/plain"), editTextReviewGet.text.toString()),
-
-                        CommonClass(this, this).getString("x_access_token")
-                    )
-                }
-
             }
             else
                 Toast.makeText(this, getString(R.string.internet_is_unavailable), Toast.LENGTH_SHORT).show()
         }
 
         imageViewOptionMenuGetSetSummary.setOnClickListener {
-            shareIt()
+            shareIt()         // function for opening sharing options bottom sheet
         }
     }
 
+    // function for hiding keyboard
     private fun hideKeyboard()
     {
         val imm: InputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -174,6 +152,7 @@ class GetSetGoActivity : AppCompatActivity(), ActivityView
         imm.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
+    // function for changing the UI of get_set_go layout
     @SuppressLint("NewApi")
     private fun changeLayout(s: String)
     {
@@ -296,6 +275,7 @@ class GetSetGoActivity : AppCompatActivity(), ActivityView
         }
     }
 
+    // function for opening sharing options bottom sheet
     private fun shareIt()
     {
         val intent: Intent = Intent(android.content.Intent.ACTION_SEND)
@@ -311,6 +291,7 @@ class GetSetGoActivity : AppCompatActivity(), ActivityView
         startActivity(Intent.createChooser(intent, "Share via"))
     }
 
+    // function for opening custom dialog
     private fun openWonderfulPopUp()
     {
         val builder: AlertDialog.Builder = AlertDialog.Builder(this)
@@ -336,39 +317,7 @@ class GetSetGoActivity : AppCompatActivity(), ActivityView
         dialog.show()
     }
 
-
-    private fun showOptionPopUp()
-    {
-        val dialog: Dialog = Dialog(this)
-
-        dialog.setContentView(R.layout.option_menu_layout)
-
-        var layoutParams = WindowManager.LayoutParams()
-
-        layoutParams = dialog.window.attributes
-
-        layoutParams.gravity = Gravity.TOP or Gravity.RIGHT
-
-        layoutParams.x = -100
-
-        layoutParams.y = -100
-
-        layoutParams.windowAnimations = R.style.DialogTheme
-
-        dialog.textViewCancelRSA.setOnClickListener {
-            dialog.dismiss()
-
-            startActivity(
-                Intent(this, RSARequestCancelActivity::class.java)
-                    .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
-            )
-
-            overridePendingTransition(R.anim.slide_down, R.anim.fade)
-        }
-
-        dialog.show()
-    }
-
+    // function for managing the UI as per the service's name
     private fun manageService(string: String)
     {
         when (string)
@@ -428,20 +377,26 @@ class GetSetGoActivity : AppCompatActivity(), ActivityView
         }
     }
 
+    //*************************** provide_ratings API *************************//
+
+    // implementing the provide_ratings API
+    private fun postReviews()
+    {
+        getSetGoHandler.postReviews(RequestBody.create(MediaType.parse("text/plain"), CommonClass(this, this).getString(RsaConstants.ServiceSaved.fobbuRequestId)), RequestBody.create(MediaType.parse("text/plain"), ratinBarGetSet.rating.toString()), RequestBody.create(MediaType.parse("text/plain"), editTextReviewGet.text.trim().toString()), CommonClass(this, this).getString("x_access_token"))
+    }
+
+    // handling the response of the provide_ratings API
     override fun onRequestSuccessReport(mainPojo: MainPojo)
     {
         if (mainPojo.success == "true")
         {
             CommonClass(this, this).workDoneReviewSend()
 
-            openWonderfulPopUp()
+            openWonderfulPopUp()       // function for opening custom dialog
 
             Handler().postDelayed(
                 {
-                    startActivity(
-                        Intent(this, DashboardActivity::class.java)
-                            .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
-                    )
+                    startActivity(Intent(this, DashboardActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK))
                 },1000
             )
         }
@@ -449,13 +404,9 @@ class GetSetGoActivity : AppCompatActivity(), ActivityView
             Toast.makeText(this, mainPojo.message, Toast.LENGTH_SHORT).show()
     }
 
-    override fun showLoader() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun showLoader() {}
 
-    override fun hideLoader() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun hideLoader() {}
 
 
     override fun onResume()
@@ -467,17 +418,16 @@ class GetSetGoActivity : AppCompatActivity(), ActivityView
         registerReceiver(changeRSALiveScreenReceiver, filter)
     }
 
+    //  initialising broadcast receiver
     private val changeRSALiveScreenReceiver = object : BroadcastReceiver()
     {
-        override fun onReceive(context: Context, intent: Intent) {
-
-            println("HERE" + intent.getStringExtra("navigate_to"))
-
+        override fun onReceive(context: Context, intent: Intent)
+        {
             if (intent.getStringExtra("navigate_to") == FcmPushTypes.Types.startedWork)
-                changeLayout("Set")
+                changeLayout("Set")// function for changing the UI of get_set_go layout
 
             else if (intent.getStringExtra("navigate_to") == FcmPushTypes.Types.workEnded)
-                changeLayout("")
+                changeLayout("")       // function for changing the UI of get_set_go layout
         }
     }
 
@@ -485,9 +435,22 @@ class GetSetGoActivity : AppCompatActivity(), ActivityView
     {
         super.onDestroy()
 
-        try {
+        try
+        {
             unregisterReceiver(changeRSALiveScreenReceiver)
         }
         catch (e: Exception) { }
+    }
+
+
+    override fun onBackPressed()
+    {
+        val intent =   Intent(Intent.ACTION_MAIN)
+
+        intent.addCategory(Intent.CATEGORY_HOME)
+
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+
+        startActivity(intent)
     }
 }

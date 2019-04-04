@@ -42,6 +42,7 @@ class VehicleAdapter(internal var activity: Activity, private var dataListMain:A
 
         val placeHolder = if(dataListMain[position]["vehicle_type"]=="4wheeler")
             R.drawable.car_gray
+
         else
             R.drawable.scooter_gray
 
@@ -64,13 +65,11 @@ class VehicleAdapter(internal var activity: Activity, private var dataListMain:A
             else
                 holder.ivImage.setImageResource(placeHolder)
         }
-
         else
             holder.ivImage.setImageResource(placeHolder)
 
         holder.itemView.setOnClickListener {
-            activity.startActivity(Intent(activity,AddEditVehicleActivity::class.java).putExtra("vehicle_edit",
-                dataListMain[position]))
+            activity.startActivity(Intent(activity,AddEditVehicleActivity::class.java).putExtra("vehicle_edit", dataListMain[position]))
 
             activity.finish()
         }
@@ -80,6 +79,7 @@ class VehicleAdapter(internal var activity: Activity, private var dataListMain:A
         }
     }
 
+    // inner view holder class
     inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view)
     {
         var ivImage = view.findViewById(R.id.ivImage) as ImageView

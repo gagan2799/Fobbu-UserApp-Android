@@ -10,15 +10,16 @@ import kotlinx.android.synthetic.main.toolbar.*
 class PaymentSettingActivity : AppCompatActivity()
 {
     lateinit var commonClass: CommonClass
+
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_payment_setting)
 
-        initView()
+        initView()        //function for initialising all the variables of the class
 
-        clicks()
+        clicks()            //function for initialising all the variables of the class
     }
 
     //function for initialising all the variables of the class

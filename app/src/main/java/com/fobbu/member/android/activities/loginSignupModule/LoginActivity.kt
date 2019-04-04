@@ -18,30 +18,44 @@ import com.google.android.gms.common.GoogleApiAvailability
 import com.google.firebase.iid.FirebaseInstanceId
 import kotlinx.android.synthetic.main.activity_login.*
 
-class LoginActivity : AppCompatActivity(), ActivityView {
-
-
+class LoginActivity : AppCompatActivity(), ActivityView
+{
     private lateinit var webServiceApi: WebServiceApi
+
     lateinit var loginActivityHandler: LoginActivityHandler
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?)
+    {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_login)
+
+        initView()               // function for initialising all the variables and views of the class
+
+        addClicks()              // Functionality of  all clicks present in the activity are handled here
+
+        fetchDeviceToken()          // Method for fetching device token
+    }
+
+    // function for initialising all the variables and views of the class
+    private fun initView()
+    {
         loginActivityHandler = LoginActivityPresenter(this, this)
-        addClicks()
-        fetchDeviceToken()
     }
 
 
     // Method for fetching device token
-    private fun fetchDeviceToken() {
+    private fun fetchDeviceToken()
+    {
         val api = GoogleApiAvailability.getInstance()
 
         val code = api.isGooglePlayServicesAvailable(this@LoginActivity)
 
-        if (code == ConnectionResult.SUCCESS) {
+        if (code == ConnectionResult.SUCCESS)
+        {
             // Do Your Stuff Here
-            if (FirebaseInstanceId.getInstance().token != null) {
+            if (FirebaseInstanceId.getInstance().token != null)
+            {
                 val refreshedToken = FirebaseInstanceId.getInstance().token
 
                 System.out.println("RE 0 $refreshedToken")
@@ -51,67 +65,79 @@ class LoginActivity : AppCompatActivity(), ActivityView {
                 getSharedPreferences("Fobbu_Member_Prefs", MODE_PRIVATE).edit()
                     .putString("device_token", refreshedToken).apply()
             }
-
-        } else {
+        }
+        else
+        {
             System.out.println("ERRROR")
         }
     }
 
     // Functionality of  all clicks present in the activity are handled here
-    private fun addClicks() {
+    private fun addClicks()
+    {
         webServiceApi = getEnv().getRetrofit()
 
         ivBack.setOnClickListener {
-
             startActivity(Intent(this@LoginActivity, SignUpActivity::class.java))
+
             finish()
         }
 
         tvForgotPassword.setOnClickListener {
-            startActivity(
-                Intent(
-                    this,
-                    ForgotPasswordActivity::class.java
-                )
-            )
+            startActivity(Intent(this, ForgotPasswordActivity::class.java))
         }
 
         tvStartFobbu.setOnClickListener {
-            when {
-                etMobile.text.isEmpty() -> {
+            when
+            {
+                etMobile.text.trim().isEmpty() ->
+                {
                     CommonClass(this, this).showToast(resources.getString(R.string.please_enter_mobile))
+
                     etMobile.requestFocus()
                 }
-                etMobile.text.length<10->
+
+                etMobile.text.trim().length<10->
                 {
                     CommonClass(this, this).showToast(resources.getString(R.string.correct_mobile_number_msg))
+
                     etMobile.requestFocus()
                 }
-                etPassword.text.isEmpty() -> {
+
+                etPassword.text.trim().isEmpty() ->
+                {
                     CommonClass(this, this).showToast(resources.getString(R.string.please_enter_password))
+
                     etPassword.requestFocus()
                 }
-                etPassword.text.length < 6 -> {
+
+                etPassword.text.trim().length < 6 ->
+                {
                     CommonClass(this, this).showToast(resources.getString(R.string.please_enter_valid_password))
+
                     etPassword.requestFocus()
                 }
-                else -> {
-                    callLoginAPIUser(etMobile.text.toString(), etPassword.text.toString())
+
+                else ->
+                {
+                    callLoginAPIUser(etMobile.text.trim().toString(), etPassword.text.trim().toString())
                 }
             }
         }
     }
 
-    override fun onBackPressed() {
+    override fun onBackPressed()
+    {
         startActivity(Intent(this@LoginActivity, SignUpActivity::class.java))
+
         finish()
     }
 
     //////////////////LOGIN API USER/////////////////////////
 
     // Login API (API-users/login)
-    private fun callLoginAPIUser(mobile: String, password: String) {
-
+    private fun callLoginAPIUser(mobile: String, password: String)
+    {
         if (CommonClass(this, this).checkInternetConn(this)) {
 
             val token = CommonClass(this@LoginActivity, this@LoginActivity).getString("device_token")
@@ -127,10 +153,10 @@ class LoginActivity : AppCompatActivity(), ActivityView {
     }
 
     // Login API Response (API-users/login)
-    override fun onRequestSuccessReport(mainPojo: MainPojo) {
-
-        if (mainPojo.success == "true") {
-
+    override fun onRequestSuccessReport(mainPojo: MainPojo)
+    {
+        if (mainPojo.success == "true")
+        {
             CommonClass(this@LoginActivity, this@LoginActivity)
                 .putString("_id", mainPojo!!.getData()._id)
 
@@ -170,13 +196,11 @@ class LoginActivity : AppCompatActivity(), ActivityView {
             CommonClass(this@LoginActivity, this@LoginActivity)
                 .putString("member_id", mainPojo.getData().member_id)
 
-            if (mainPojo.active_requests.size > 0) {
+            if (mainPojo.active_requests.size > 0)
+            {
                 val list = mainPojo.active_requests
 
-                CommonClass(this, this).putString(
-                    RsaConstants.ServiceSaved.serviceNameSelected,
-                    list[0]["static_name"].toString()
-                )
+                CommonClass(this, this).putString(RsaConstants.ServiceSaved.serviceNameSelected, list[0]["static_name"].toString())
 
                 CommonClass(this@LoginActivity, this@LoginActivity)
                     .putString(RsaConstants.ServiceSaved.fobbuRequestId, list[0]["_id"].toString())
@@ -187,11 +211,12 @@ class LoginActivity : AppCompatActivity(), ActivityView {
                 CommonClass(this@LoginActivity, this@LoginActivity)
                     .putString(RsaConstants.RsaTypes.checkStatus, list[0]["status"].toString())
 
-                if (list[0].containsKey("otp")) {
-
-                    val  otp = if (list[0]["otp"].toString().contains("\\.".toRegex())) {
+                if (list[0].containsKey("otp"))
+                {
+                    val  otp = if (list[0]["otp"].toString().contains("\\.".toRegex()))
                         list[0]["otp"].toString().split("\\.".toRegex())[0]
-                    } else
+
+                    else
                         list[0]["otp"].toString()
 
                     CommonClass(this, this).putString(RsaConstants.ServiceSaved.otpStart,otp)
@@ -200,28 +225,27 @@ class LoginActivity : AppCompatActivity(), ActivityView {
             startActivity(Intent(this@LoginActivity, GeneratePINActivity::class.java))
 
             finish()
-        } else {
-            // rlLoader.visibility = View.GONE
-/*
-            val message = CommonClass(this@LoginActivity, this@LoginActivity)
-            .errorMessage(response.errorBody()!!.string())*/
-
+        }
+        else
+        {
             CommonClass(this@LoginActivity, this@LoginActivity)
                 .showToast(mainPojo.message)
-            /* Toast.makeText(this,""+mainPojo.message, Toast.LENGTH_SHORT).show()*/
         }
 
     }
 
-    override fun showLoader() {
+    override fun showLoader()
+    {
         rlLoader.visibility = View.VISIBLE
     }
 
-    override fun hideLoader() {
+    override fun hideLoader()
+    {
         rlLoader.visibility = View.GONE
     }
 
-    private fun getEnv(): MyApplication {
+    private fun getEnv(): MyApplication
+    {
         return application as MyApplication
     }
 }

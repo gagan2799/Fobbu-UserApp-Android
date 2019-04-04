@@ -10,24 +10,19 @@ import com.fobbu.member.android.R
 
 class OrderDetailAdapter(var activity: Activity, var dataList:ArrayList<HashMap<String,Any>>): RecyclerView.Adapter<OrderDetailAdapter.OrderDetailViewHolder>() {
 
-    override fun onCreateViewHolder(p0: ViewGroup, p1: Int): OrderDetailViewHolder {
-        return OrderDetailViewHolder(
-            LayoutInflater.from(activity).inflate(
-                R.layout.inflate_work_summary,
-                p0,
-                false
-            )
-        )
+    override fun onCreateViewHolder(p0: ViewGroup, p1: Int): OrderDetailViewHolder
+    {
+        return OrderDetailViewHolder(LayoutInflater.from(activity).inflate(R.layout.inflate_work_summary, p0, false))
     }
 
-    override fun getItemCount(): Int {
+    override fun getItemCount(): Int
+    {
         return dataList.size
     }
 
     override fun onBindViewHolder(holder: OrderDetailViewHolder, pos: Int)
     {
-        val amount= ((dataList[pos]["number_of_services"] as Double).toLong()*(dataList[pos
-        ]["service_price"] as Double).toLong()).toString()
+        val amount= ((dataList[pos]["number_of_services"] as Double).toLong()*(dataList[pos]["service_price"] as Double).toLong()).toString()
 
         holder.textViewNumericAmountWork.text= amount
 
@@ -37,6 +32,7 @@ class OrderDetailAdapter(var activity: Activity, var dataList:ArrayList<HashMap<
     }
 
 
+    // inner view holder class
     class OrderDetailViewHolder(view: View): RecyclerView.ViewHolder(view)
     {
         val textViewSubServiceWork: TextView = itemView.findViewById(R.id.textViewSubServiceWork)

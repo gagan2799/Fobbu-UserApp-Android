@@ -11,20 +11,21 @@ import android.widget.TextView
 import com.fobbu.member.android.R
 
 
-class PassbookAdapter(var activity: Activity): RecyclerView.Adapter<PassbookAdapter.PassbookViewHolder>() {
-
-    override fun onCreateViewHolder(p0: ViewGroup, p1: Int): PassbookViewHolder {
+class PassbookAdapter(var activity: Activity): RecyclerView.Adapter<PassbookAdapter.PassbookViewHolder>()
+{
+    override fun onCreateViewHolder(p0: ViewGroup, p1: Int): PassbookViewHolder
+    {
         return PassbookViewHolder(LayoutInflater.from(activity).inflate(R.layout.inflate_passbook_data,p0,false))
     }
 
-    override fun getItemCount(): Int {
+    override fun getItemCount(): Int
+    {
         return 10
     }
 
-    override fun onBindViewHolder(p0: PassbookViewHolder, p1: Int) {
-    }
+    override fun onBindViewHolder(p0: PassbookViewHolder, p1: Int) {}
 
-
+    // inner view holder class
     class PassbookViewHolder(view :View) :RecyclerView.ViewHolder(view)
     {
         var tvPayment:TextView= view.findViewById(R.id.tvPaymentReceived)

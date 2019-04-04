@@ -13,9 +13,9 @@ import okhttp3.RequestBody
 
 class ProfilePresenter(var activity: Activity, var activityView: ActivityView,var profileView: ProfileView):ProfileHandler
 {
-
     private val apiLClient=ApiClient(activity)
 
+    // implementing update_kyc API
     override fun updateKyc(map: HashMap<String, Any>, token: String)
     {
         activityView.showLoader()
@@ -47,6 +47,7 @@ class ProfilePresenter(var activity: Activity, var activityView: ActivityView,va
         })
     }
 
+    // implementing update_user API
     override fun updateUser(
         email: RequestBody,
         number: RequestBody,
@@ -55,7 +56,6 @@ class ProfilePresenter(var activity: Activity, var activityView: ActivityView,va
         gender: RequestBody,
         file: ArrayList<MultipartBody.Part>
         ,token:String)
-
     {
         activityView.showLoader()
 

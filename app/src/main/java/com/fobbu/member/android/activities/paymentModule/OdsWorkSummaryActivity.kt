@@ -10,15 +10,14 @@ import android.view.Gravity
 import android.view.View
 import android.view.WindowManager
 import com.fobbu.member.android.R
-import com.fobbu.member.android.R.id.tvTotalAmount
 import com.fobbu.member.android.activities.paymentModule.adapter.OdsWorkAdapter
 import com.fobbu.member.android.activities.rsaModule.RSARequestCancelActivity
 import com.fobbu.member.android.fragments.rsaFragmentModule.RsaConstants
 import com.fobbu.member.android.utils.CommonClass
 import kotlinx.android.synthetic.main.activity_ods_work_summary.*
-import kotlinx.android.synthetic.main.activity_work_summary.*
 import kotlinx.android.synthetic.main.option_menu_layout.*
 
+@Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class OdsWorkSummaryActivity : AppCompatActivity()
 {
     lateinit var dataList:ArrayList<HashMap<String,Any>>
@@ -27,7 +26,7 @@ class OdsWorkSummaryActivity : AppCompatActivity()
 
     private var selectedServiceList=ArrayList<HashMap<String,Any>>()
 
-    lateinit var odsWorkAdapter: OdsWorkAdapter
+    private lateinit var odsWorkAdapter: OdsWorkAdapter
 
     private var odsServiceTime=""
 
@@ -37,14 +36,9 @@ class OdsWorkSummaryActivity : AppCompatActivity()
 
         setContentView(R.layout.activity_ods_work_summary)
 
-        initView()
+        initView()       // function for initialising all the variables of the class
 
-        clicks()
-    }
-
-
-
-    override fun onBackPressed() {
+        clicks()          // function for handling clicks of the class
     }
 
     // function for initialising all the variables of the class
@@ -76,27 +70,23 @@ class OdsWorkSummaryActivity : AppCompatActivity()
 
         tvDateWorkSummary.text=intent.getStringExtra(RsaConstants.Ods.date)
 
-        setUpRecyler()
+        setUpRecycler()         //function for setting up recycler
     }
 
     // function for handling clicks of the class
     private fun clicks()
     {
         tvConfirmAndPay.setOnClickListener {
-            startActivity(
-                Intent(this,PaymentModeActivity::class.java)
-                    .setFlags
-                        (Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
-                    .putExtra(RsaConstants.Ods.service_name,odsServiceTime))
+            startActivity(Intent(this,PaymentModeActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK).putExtra(RsaConstants.Ods.service_name,odsServiceTime))
         }
 
         ivOptionMenuWorkSummary.setOnClickListener {
-            showOptionLayout()
+            showOptionLayout()         // function for showing layout for sharing
         }
     }
 
     //function for setting up recycler
-    private fun setUpRecyler()
+    private fun setUpRecycler()
     {
         odsWorkAdapter= OdsWorkAdapter(this,selectedServiceList)
 
@@ -110,23 +100,33 @@ class OdsWorkSummaryActivity : AppCompatActivity()
 
     // function for showing layout for sharing
     @SuppressLint("RtlHardcoded")
-    private fun showOptionLayout() {
-        val dialog: Dialog = Dialog(this)
+    private fun showOptionLayout()
+    {
+        val dialog = Dialog(this)
+
         dialog.setContentView(R.layout.option_menu_layout)
+
         val layoutParams: WindowManager.LayoutParams
+
         layoutParams=dialog.window.attributes
+
         layoutParams.gravity= Gravity.TOP or Gravity.RIGHT
+
         layoutParams.x=-100
+
         layoutParams.y=-100
+
         layoutParams.windowAnimations=R.style.DialogTheme
 
         dialog.textViewCancelRSA.setOnClickListener {
             dialog.dismiss()
-            startActivity(
-                Intent(this, RSARequestCancelActivity::class.java)
-                    .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK))
+
+            startActivity(Intent(this, RSARequestCancelActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK))
+
             overridePendingTransition(R.anim.slide_down,R.anim.fade)
         }
         dialog.show()
     }
+
+    override fun onBackPressed() {}
 }

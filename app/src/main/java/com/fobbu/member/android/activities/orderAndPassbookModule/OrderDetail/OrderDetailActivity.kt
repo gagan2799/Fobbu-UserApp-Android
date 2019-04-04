@@ -27,9 +27,9 @@ class OrderDetailActivity : AppCompatActivity()
 
         setContentView(R.layout.activity_order_detail)
 
-        initView()
+        initView()                   // function for initialising all the views of the class
 
-        clicks()
+        clicks()                    //function for handling all the clicks of the class
     }
 
     // function for initialising all the views of the class
@@ -38,15 +38,13 @@ class OrderDetailActivity : AppCompatActivity()
         commonClass= CommonClass(this,this)
 
         if (intent.hasExtra("service_list"))
-        {
             dataList=intent.getStringArrayListExtra("service_list") as ArrayList<HashMap<String, Any>>
-        }
 
-        setDataInView()
+        setDataInView()                      // function for setting up data from the list into the view
 
         ivSearchToolbar.visibility= View.INVISIBLE
 
-        setRecycler()
+        setRecycler()                      // function for setting up recycler view
     }
 
     //function for handling all the clicks of the class
@@ -57,7 +55,6 @@ class OrderDetailActivity : AppCompatActivity()
         }
     }
 
-
     // function for setting up recycler view
     private fun setRecycler()
     {
@@ -67,7 +64,6 @@ class OrderDetailActivity : AppCompatActivity()
 
         rvorderDetail.adapter=orderDetailAdapter
     }
-
 
     // function for setting up data from the list into the view
     @SuppressLint("SetTextI18n")

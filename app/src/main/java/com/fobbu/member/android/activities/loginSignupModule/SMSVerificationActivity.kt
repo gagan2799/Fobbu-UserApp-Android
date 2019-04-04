@@ -19,11 +19,11 @@ class SMSVerificationActivity : AppCompatActivity()
 
         setContentView(R.layout.activity_sms_verification)
 
-        initialise()
+        initialise()                  // Method for initializing all the variables that are used in the class
 
-        addClicks()
+        addClicks()                // Functionality of  all clicks present in the activity are handled here
 
-        checkPinValidations()
+        checkPinValidations()         /// FOR 4 DIGIT PIN
     }
 
     // Method for initializing all the variables that are used in the class
@@ -35,121 +35,23 @@ class SMSVerificationActivity : AppCompatActivity()
 
         for (i in pin.indices)
         {
-            when (i) {
+            when (i)
+            {
                 0 -> edPinOne.setText(pin[i].toString())
+
                 1 -> edPinTwo.setText(pin[i].toString())
+
                 2 -> edPinThree.setText(pin[i].toString())
-                3 -> {
+
+                3 ->
+                {
                     edPinFour.setText(pin[i].toString())
-                edPinFour.requestFocus()
+
+                    edPinFour.requestFocus()
+
                     edPinFour.setSelection(edPinFour.text.length)
                 }
             }
-        }
-    }
-
-    override fun onBackPressed()
-    {
-        CommonClass(this,this).removeString("isSmsVerified")
-
-        startActivity(Intent(this,SignUpActivity::class.java)
-            .setFlags
-                (Intent.FLAG_ACTIVITY_NO_ANIMATION))
-
-        finish()
-    }
-
-    /// FOR 4 DIGIT PIN
-    private fun checkPinValidations() {
-        edPinOne.addTextChangedListener(object : TextWatcher {
-
-            override fun afterTextChanged(s: Editable) {
-                if (s.isNotEmpty())
-                    edPinTwo.requestFocus()
-            }
-
-
-            override fun beforeTextChanged(s: CharSequence, start: Int,
-                                           count: Int, after: Int) {
-            }
-
-            override fun onTextChanged(s: CharSequence, start: Int,
-                                       before: Int, count: Int) {}
-
-        })
-        edPinTwo.addTextChangedListener(object : TextWatcher {
-
-            override fun afterTextChanged(s: Editable) {
-                if (s.isNotEmpty()) {
-                    edPinThree.requestFocus()
-                }
-            }
-
-            override fun beforeTextChanged(s: CharSequence, start: Int,
-                                           count: Int, after: Int) {
-            }
-
-            override fun onTextChanged(s: CharSequence, start: Int,
-                                       before: Int, count: Int) {
-
-            }
-        })
-
-        edPinThree.addTextChangedListener(object : TextWatcher {
-
-            override fun afterTextChanged(s: Editable) {
-                if (s.isNotEmpty())
-                    edPinFour.requestFocus()
-            }
-
-            override fun beforeTextChanged(s: CharSequence, start: Int,
-                                           count: Int, after: Int) {
-            }
-
-            override fun onTextChanged(s: CharSequence, start: Int,
-                                       before: Int, count: Int) {
-
-            }
-        })
-
-        edPinFour.addTextChangedListener(object : TextWatcher {
-
-            override fun afterTextChanged(s: Editable) {}
-
-            override fun beforeTextChanged(s: CharSequence, start: Int,
-                                           count: Int, after: Int) {
-            }
-
-            override fun onTextChanged(s: CharSequence, start: Int,
-                                       before: Int, count: Int) {
-
-            }
-        })
-        edPinTwo.setOnKeyListener { v, keyCode, event ->
-            //You can identify which key pressed buy checking keyCode value with KeyEvent.KEYCODE_
-            if (keyCode == KeyEvent.KEYCODE_DEL) {
-                edPinOne.requestFocus()
-            }
-            false
-        }
-
-        edPinThree.setOnKeyListener { v, keyCode, event ->
-            //You can identify which key pressed buy checking keyCode value with KeyEvent.KEYCODE_
-            if (keyCode == KeyEvent.KEYCODE_DEL && edPinThree.text.toString().trim().isEmpty()) {
-
-                edPinTwo.requestFocus()
-
-            }
-            false
-        }
-        edPinFour.setOnKeyListener { v, keyCode, event ->
-            //You can identify which key pressed buy checking keyCode value with KeyEvent.KEYCODE_
-            if (keyCode == KeyEvent.KEYCODE_DEL && edPinFour.text.toString().trim().isEmpty()) {
-
-                edPinThree.requestFocus()
-
-            }
-            false
         }
     }
 
@@ -159,9 +61,7 @@ class SMSVerificationActivity : AppCompatActivity()
         CommonClass(this,this).removeString("isSmsVerified")
 
         ivBack.setOnClickListener {
-            startActivity(Intent(this,SignUpActivity::class.java)
-                .setFlags
-            (Intent.FLAG_ACTIVITY_NO_ANIMATION))
+            startActivity(Intent(this,SignUpActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
 
             finish()
         }
@@ -182,16 +82,108 @@ class SMSVerificationActivity : AppCompatActivity()
 
                 Toast.makeText(this,resources.getString(R.string.sms_success), Toast.LENGTH_SHORT).show()
 
-                   startActivity(Intent(this,
-                       GeneratePINActivity::class.java))
+                startActivity(Intent(this, GeneratePINActivity::class.java))
 
                 finish()
             }
             else
                 Toast.makeText(this,resources.getString(R.string.sms_fail), Toast.LENGTH_SHORT).show()
-            
+        }
+    }
+
+    /// FOR 4 DIGIT PIN
+    private fun checkPinValidations()
+    {
+        edPinOne.addTextChangedListener(object : TextWatcher
+        {
+            override fun afterTextChanged(s: Editable)
+            {
+                if (s.trim().isNotEmpty())
+                    edPinTwo.requestFocus()
+            }
+
+
+            override fun beforeTextChanged(s: CharSequence, start: Int,
+                                           count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence, start: Int,
+                                       before: Int, count: Int) {}
+
+        })
+
+        edPinTwo.addTextChangedListener(object : TextWatcher
+        {
+            override fun afterTextChanged(s: Editable)
+            {
+                if (s.trim().isNotEmpty())
+                {
+                    edPinThree.requestFocus()
+                }
+            }
+
+            override fun beforeTextChanged(s: CharSequence, start: Int,
+                                           count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence, start: Int,
+                                       before: Int, count: Int) {}
+        })
+
+        edPinThree.addTextChangedListener(object : TextWatcher
+        {
+            override fun afterTextChanged(s: Editable)
+            {
+                if (s.trim().isNotEmpty())
+                    edPinFour.requestFocus()
+            }
+
+            override fun beforeTextChanged(s: CharSequence, start: Int,
+                                           count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence, start: Int,
+                                       before: Int, count: Int) {}
+        })
+
+        edPinFour.addTextChangedListener(object : TextWatcher {
+
+            override fun afterTextChanged(s: Editable) {}
+
+            override fun beforeTextChanged(s: CharSequence, start: Int,
+                                           count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence, start: Int,
+                                       before: Int, count: Int) {}
+        })
+
+        edPinTwo.setOnKeyListener { v, keyCode, event ->
+            //You can identify which key pressed buy checking keyCode value with KeyEvent.KEYCODE_
+            if (keyCode == KeyEvent.KEYCODE_DEL)
+                edPinOne.requestFocus()
+
+            false
         }
 
+        edPinThree.setOnKeyListener { v, keyCode, event ->
+            //You can identify which key pressed buy checking keyCode value with KeyEvent.KEYCODE_
+            if (keyCode == KeyEvent.KEYCODE_DEL && edPinThree.text.toString().trim().isEmpty())
+                edPinTwo.requestFocus()
 
+            false
+        }
+        edPinFour.setOnKeyListener { v, keyCode, event ->
+            //You can identify which key pressed buy checking keyCode value with KeyEvent.KEYCODE_
+            if (keyCode == KeyEvent.KEYCODE_DEL && edPinFour.text.toString().trim().isEmpty())
+                edPinThree.requestFocus()
+
+            false
+        }
+    }
+
+    override fun onBackPressed()
+    {
+        CommonClass(this,this).removeString("isSmsVerified")
+
+        startActivity(Intent(this,SignUpActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
+
+        finish()
     }
 }

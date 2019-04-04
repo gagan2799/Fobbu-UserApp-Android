@@ -10,9 +10,10 @@ import com.fobbu.member.android.view.ActivityView
 
 class OrderPresenter(var activity: Activity, var activityView: ActivityView):OrderHandler
 {
+    // implementing the get_requests API
     override fun getOrder(type: String, page: String,token:String)
     {
-    val apiClient=ApiClient(activity)
+        val apiClient=ApiClient(activity)
 
         activityView.showLoader()
 
@@ -27,7 +28,7 @@ class OrderPresenter(var activity: Activity, var activityView: ActivityView):Ord
 
             override fun onError(message: String)
             {
-            activityView.hideLoader()
+                activityView.hideLoader()
 
                 Toast.makeText(activity,message, Toast.LENGTH_SHORT).show()
             }
@@ -43,7 +44,6 @@ class OrderPresenter(var activity: Activity, var activityView: ActivityView):Ord
             {
                 CommonClass(activity,activity).clearPreference()
             }
-
         })
     }
 }

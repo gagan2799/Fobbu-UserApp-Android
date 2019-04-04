@@ -17,28 +17,29 @@ import com.squareup.picasso.Picasso
 import java.util.ArrayList
 import java.util.HashMap
 
-class RsaRecyclerAdapter(private var activtiy:Activity, private var textList: ArrayList<HashMap<String, Any>>): RecyclerView.Adapter<RsaRecyclerAdapter.MyRsaViewHolder>() {
+class RsaRecyclerAdapter(private var activtiy:Activity, private var textList: ArrayList<HashMap<String, Any>>): RecyclerView.Adapter<RsaRecyclerAdapter.MyRsaViewHolder>()
+{
+    override fun onCreateViewHolder(p0: ViewGroup, p1: Int): MyRsaViewHolder
+    {
+        val view:View=LayoutInflater.from(activtiy).inflate(R.layout.inflate_rsa_recycler_layout,p0,false)
 
-    internal lateinit var reason:String
-    var row_index:Int=0
-    override fun onCreateViewHolder(p0: ViewGroup, p1: Int): MyRsaViewHolder {
-
-       val view:View=LayoutInflater.from(activtiy).inflate(R.layout.inflate_rsa_recycler_layout,p0,false)
         return MyRsaViewHolder(view)
     }
 
-    override fun getItemCount(): Int {
+    override fun getItemCount(): Int
+    {
         return textList.size
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
-    override fun onBindViewHolder(holder: MyRsaViewHolder, position: Int) {
-
+    override fun onBindViewHolder(holder: MyRsaViewHolder, position: Int)
+    {
         if (textList[position]["image"].toString() != "")
             Picasso.get().load(textList[position]["image"].toString())
                 .error(R.drawable.dummy_services)
                 .into(holder.imageViewRsaRecycler)
+
         else
             holder.imageViewRsaRecycler.setImageResource(R.drawable.dummy_services)
 
@@ -47,28 +48,31 @@ class RsaRecyclerAdapter(private var activtiy:Activity, private var textList: Ar
 
         if(textList[position]["select"]=="1")
         {
-        /*    holder.linearLayoutRsaCancel.setBackgroundColor(activtiy.resources.getColor(R.color.color_grey))
-            holder.textViewRSaRecycler.setTextColor(activtiy.resources.getColor(R.color.white))
-      */
             holder.textViewRSaRecycler.setTextColor(activtiy.resources.getColor(R.color.red))
+
             holder.relativeLayoutCancelBorder.background= activtiy.getDrawable(R.drawable.red_border)
         }
         else
         {
             holder.relativeLayoutCancelBorder.background= activtiy.getDrawable(R.drawable.border_line_grey)
+
             holder.linearLayoutRsaCancel.setBackgroundColor(activtiy.resources.getColor(R.color.white))
+
             holder.textViewRSaRecycler.setTextColor(activtiy.resources.getColor(R.color.drawer_text_color))
         }
     }
 
-
+    // inner view holder class
     class  MyRsaViewHolder(view: View): RecyclerView.ViewHolder(view)
-     {
-         var imageViewRsaRecycler:ImageView= view.findViewById(R.id.imageViewRecycleRsaCancel)
-         var linearLayoutRsaCancel:LinearLayout= view.findViewById(R.id.linearLayoutRsaCancel)
-         var textViewRSaRecycler: TextView = view.findViewById(R.id.textViewRsaCancelRecycle)
-         var relativeLayoutCancelBorder: RelativeLayout = view.findViewById(R.id.relativeLayoutCancelBorder)
-     }
+    {
+        var imageViewRsaRecycler:ImageView= view.findViewById(R.id.imageViewRecycleRsaCancel)
+
+        var linearLayoutRsaCancel:LinearLayout= view.findViewById(R.id.linearLayoutRsaCancel)
+
+        var textViewRSaRecycler: TextView = view.findViewById(R.id.textViewRsaCancelRecycle)
+
+        var relativeLayoutCancelBorder: RelativeLayout = view.findViewById(R.id.relativeLayoutCancelBorder)
+    }
 
 
 }

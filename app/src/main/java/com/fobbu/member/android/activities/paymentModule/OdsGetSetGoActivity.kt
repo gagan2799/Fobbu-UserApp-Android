@@ -27,9 +27,9 @@ class OdsGetSetGoActivity : AppCompatActivity()
 
         setContentView(R.layout.activity_ods_get_set_go)
 
-        initView()
+        initView()        //function for initialising all the views of the class
 
-        clicks()
+        clicks()          //function for handling clicks of the class
     }
 
     //function for initialising all the views of the class
@@ -37,19 +37,7 @@ class OdsGetSetGoActivity : AppCompatActivity()
     {
        commonClass= CommonClass(this,this)
 
-        setUpSlider()
-    }
-
-
-    override fun onResume() {
-        super.onResume()
-
-        Handler().postDelayed({
-            list.add(R.drawable.hill)
-
-            setUpSlider()
-        },5000)
-
+        setUpSlider()             // function for setting up slider
     }
 
     //function for handling clicks of the class
@@ -60,8 +48,19 @@ class OdsGetSetGoActivity : AppCompatActivity()
         }
     }
 
+    override fun onResume()
+    {
+        super.onResume()
 
-    // functiom for setting up slider
+        Handler().postDelayed({
+            list.add(R.drawable.hill)
+
+            setUpSlider()                   // function for setting up slider
+        },5000)
+
+    }
+
+    // function for setting up slider
     private fun  setUpSlider()
     {
         adapter=OdsSlideAdapter(this,list)
@@ -69,7 +68,9 @@ class OdsGetSetGoActivity : AppCompatActivity()
         picker.adapter=adapter
 
         val density = resources.displayMetrics.density
+
         val partialWidth = (16 * density).toInt() // 16dp
+
         val pageMargin = (8 * density).toInt() // 8dp
 
         val viewPagerPadding = partialWidth + pageMargin
@@ -79,10 +80,5 @@ class OdsGetSetGoActivity : AppCompatActivity()
         picker.setPadding(viewPagerPadding, 0, viewPagerPadding, 0)
 
         picker.setPageTransformer(true,CardsPagerTransformerBasic(2,5, 0.7F))
-
     }
-
-
-
-
 }

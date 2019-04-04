@@ -11,12 +11,15 @@ import kotlinx.android.synthetic.main.inflate_big_profile.view.*
 import kotlinx.android.synthetic.main.sliding_cards.view.*
 import java.io.File
 
-class BigProfileViewAdapter(var context: Context, var list:ArrayList<Any>): PagerAdapter() {
-    override fun isViewFromObject(p0: View, position: Any): Boolean {
+class BigProfileViewAdapter(var context: Context, var list:ArrayList<Any>): PagerAdapter()
+{
+    override fun isViewFromObject(p0: View, position: Any): Boolean
+    {
         return p0 == position
     }
 
-    override fun getCount(): Int {
+    override fun getCount(): Int
+    {
         return  list.size
     }
 
@@ -25,12 +28,12 @@ class BigProfileViewAdapter(var context: Context, var list:ArrayList<Any>): Page
         val view= LayoutInflater.from(context).inflate(R.layout.inflate_big_profile,container,false)
 
         if (list[position].toString().startsWith("https"))
-        {
             Glide.with(context)
                 .load(list[position])
                 .into(view.imgBig)
-        }
-        else{
+
+        else
+        {
             val file= File(list[position].toString())
 
             Glide.with(context)
@@ -42,7 +45,8 @@ class BigProfileViewAdapter(var context: Context, var list:ArrayList<Any>): Page
         return view
     }
 
-    override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
+    override fun destroyItem(container: ViewGroup, position: Int, `object`: Any)
+    {
         container.removeView(`object` as View?)
     }
 
