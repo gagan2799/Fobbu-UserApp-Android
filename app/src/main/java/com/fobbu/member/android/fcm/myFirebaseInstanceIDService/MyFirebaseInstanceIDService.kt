@@ -22,23 +22,26 @@ import java.lang.Exception
 /**
  * Created by abc on 30/1/18.
  */
-class MyFirebaseInstanceIDService : FirebaseInstanceIdService() {
-
+class MyFirebaseInstanceIDService : FirebaseInstanceIdService()
+{
     lateinit var myPrefs: SharedPreferences
 
     lateinit var prefsEditor: SharedPreferences.Editor
+
     private val BASE_URL: String = "http://13.127.103.243:3000/"
+
     lateinit var webServiceApi: WebServiceApi
 
-
     @SuppressLint("CommitPrefEdits")
-    override fun onTokenRefresh() {
-
+    override fun onTokenRefresh()
+    {
         //Getting registration token
         val refreshedToken: String = FirebaseInstanceId.getInstance().token!!
+
         val refreshedId = FirebaseInstanceId.getInstance().id
 
         System.out.println("Refreshed ID: $refreshedId")
+
         //Displaying token on logcat
         System.out.println("Refreshed token: $refreshedToken")
 
@@ -47,6 +50,7 @@ class MyFirebaseInstanceIDService : FirebaseInstanceIdService() {
         prefsEditor = myPrefs.edit()
 
         prefsEditor.putString("device_token", refreshedToken).commit()
+
         prefsEditor.putString("device_ID", refreshedId).commit()
 
         if (checkInternetConn(this))
@@ -57,9 +61,10 @@ class MyFirebaseInstanceIDService : FirebaseInstanceIdService() {
         }
     }
 
-
-    fun checkInternetConn(con: Context): Boolean {
-        try {
+    fun checkInternetConn(con: Context): Boolean
+    {
+        try
+        {
             val connMgr = con.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
             val wifi = connMgr.getNetworkInfo(ConnectivityManager.TYPE_WIFI)
@@ -67,7 +72,9 @@ class MyFirebaseInstanceIDService : FirebaseInstanceIdService() {
             val mobile = connMgr.getNetworkInfo(ConnectivityManager.TYPE_MOBILE)
 
             return mobile.isConnected || wifi.isConnected
-        } catch (e: Exception) {
+        }
+        catch (e: Exception)
+        {
             e.printStackTrace()
         }
 
@@ -75,35 +82,34 @@ class MyFirebaseInstanceIDService : FirebaseInstanceIdService() {
     }
 
 
-    private fun sendRegistrationToServer(refreshedToken: String, accessToken: String, refreshedId: String) {
+    private fun sendRegistrationToServer(refreshedToken: String, accessToken: String, refreshedId: String)
+    {
+        try
+        {
+            webServiceApi = buildRetrofit()               // build retrofit
 
-        try {
-            webServiceApi = buildRetrofit()
             val hashmap = HashMap<String, String>()
+
             hashmap["device_token"] = refreshedToken
+
             hashmap["user_id"] = refreshedId
+
             hashmap["device_type"]="android"
 
-            webServiceApi.updateDeviceTokenFCM(hashmap, accessToken).enqueue(object : Callback<MainPojo> {
-                override fun onFailure(call: Call<MainPojo>, t: Throwable) {
+            webServiceApi.updateDeviceTokenFCM(hashmap, accessToken).enqueue(object : Callback<MainPojo>
+            {
+                override fun onFailure(call: Call<MainPojo>, t: Throwable) {}
 
-                }
-
-                override fun onResponse(call: Call<MainPojo>, response: Response<MainPojo>) {
-
-                }
-
+                override fun onResponse(call: Call<MainPojo>, response: Response<MainPojo>) {}
             })
         }catch (e:Exception)
-        {
-        }
-
+        { }
     }
 
 
     // build retrofit
-    private fun buildRetrofit(): WebServiceApi {
-
+    private fun buildRetrofit(): WebServiceApi
+    {
         val httpClient = OkHttpClient.Builder()
 
         val loggingInterceptor = HttpLoggingInterceptor()
@@ -121,8 +127,8 @@ class MyFirebaseInstanceIDService : FirebaseInstanceIdService() {
 
             chain.proceed(request)
         }
-
         httpClient.addInterceptor(loggingInterceptor)
+
         val okHttpClient: OkHttpClient = httpClient.build()
 
         webServiceApi = Retrofit.Builder()
@@ -130,8 +136,7 @@ class MyFirebaseInstanceIDService : FirebaseInstanceIdService() {
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)
             .build().create(WebServiceApi::class.java)
+
         return webServiceApi
     }
-
-
 }

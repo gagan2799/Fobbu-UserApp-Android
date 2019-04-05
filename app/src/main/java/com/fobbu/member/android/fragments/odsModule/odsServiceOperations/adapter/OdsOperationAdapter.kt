@@ -35,7 +35,8 @@ class OdsOperationAdapter(var context:Activity, var dataList: ArrayList<HashMap<
         return OperationViewHolder(view)
     }
 
-    override fun getItemCount(): Int {
+    override fun getItemCount(): Int
+    {
         return dataList.size
     }
 
@@ -48,19 +49,16 @@ class OdsOperationAdapter(var context:Activity, var dataList: ArrayList<HashMap<
             {
                 optionList= dataList[p1]["option"] as ArrayList<HashMap<String, Any>>
 
-                setUpInnerRecycler(p0)
+                setUpInnerRecycler(p0)   // function for setting up nested view recycler view
             }
-
-            else{
+            else
                 p0.rlOdsSubService.visibility=View.GONE
-            }
         }
 
         p0.rvOdsSubSrevice.addOnItemTouchListener(RecyclerItemClickListener(context,object :RecyclerItemClickListener.OnItemClickListener
         {
             override fun onItemClick(view: View, position: Int)
             {
-
                 for (i in dataList.indices)
                 {
                     if (dataList[i]["service_name"]==optionList[position]["inner_service_name"])
@@ -72,26 +70,22 @@ class OdsOperationAdapter(var context:Activity, var dataList: ArrayList<HashMap<
                             if (list[k]["name"]==optionList[position]["name"])
                             {
                                 if (list[k]["selected"]=="0")
-                                list[k]["selected"]="1"
+                                    list[k]["selected"]="1"
 
                                 else
                                     list[k]["selected"]="0"
                             }
-
                         }
                     }
                 }
                 selectedSubServiceView.onSuccessReport(dataList)
 
-                println("new main list:::: $dataList")
-
-                setUpInnerRecycler(p0)
+                setUpInnerRecycler(p0)   // function for setting up nested view recycler view
             }
-
         }))
     }
 
-
+    // inner view holder class
     class OperationViewHolder(view:View):RecyclerView.ViewHolder(view)
     {
         var tvTopUp:TextView=view.findViewById(R.id.tvTopUpOperations)
@@ -101,6 +95,7 @@ class OdsOperationAdapter(var context:Activity, var dataList: ArrayList<HashMap<
         var rvOdsSubSrevice:RecyclerView=view.findViewById(R.id.rvOdsSubService)
     }
 
+    // function for setting up nested view recycler view
     private fun setUpInnerRecycler(p0: OperationViewHolder)
     {
         p0.rlOdsSubService.visibility=View.VISIBLE

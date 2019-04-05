@@ -13,62 +13,75 @@ import android.widget.TextView
 import com.fobbu.member.android.R
 import pl.droidsonroids.gif.GifImageView
 
-class TutorialFragment4 : Fragment() {
+class TutorialFragment4 : Fragment()
+{
     lateinit var gif: GifImageView
 
     lateinit var tvText: TextView
+
     lateinit var tvTextHeading: TextView
+
     lateinit var tvTextFullForm: TextView
 
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
+    {
         val view = inflater.inflate(R.layout.inflate_tutorials, container, false)
 
-        initialise(view)
+        initialise(view)  // function for initialising the variables and views of the class
 
         return view
     }
 
-    private fun initialise(view: View?) {
-
+    // function for initialising the variables and views of the class
+    private fun initialise(view: View?)
+    {
         gif = view!!.findViewById(R.id.gif)
 
         tvTextHeading = view.findViewById(R.id.tvTextHeading)
+
         tvTextHeading.visibility = View.INVISIBLE
 
         tvTextFullForm = view.findViewById(R.id.tvTextFullForm)
+
         tvTextFullForm.text = resources.getString(R.string.keep_driving)
 
         tvText = view.findViewById(R.id.tvText)
+
         tvText.text = resources.getString(R.string.keep_driving_text)
 
         gif.visibility = View.VISIBLE
+
         gif.setBackgroundResource(0)
     }
 
-    override fun onResume() {
+    override fun onResume()
+    {
         super.onResume()
 
         val filter3 = IntentFilter("com.fobbu.position_start_")
-        activity!!.registerReceiver(startGif, filter3)
 
+        activity!!.registerReceiver(startGif, filter3)
     }
 
-    override fun onDestroy() {
+    override fun onDestroy()
+    {
         super.onDestroy()
 
-        try {
+        try
+        {
             activity!!.unregisterReceiver(startGif)
-        } catch (e: Exception) {
+        }
+        catch (e: Exception)
+        {
             e.printStackTrace()
         }
     }
 
-    private val startGif = object : BroadcastReceiver() {
-        override fun onReceive(context: Context, intent: Intent) {
-
-            //System.out.println("BROADCAST RECEIVED POSITION " + intent.getStringExtra("position"));
-
+    // initialising the  startGif Broadcast Receiver
+    private val startGif = object : BroadcastReceiver()
+    {
+        override fun onReceive(context: Context, intent: Intent)
+        {
             val position = Integer.valueOf(intent.getStringExtra("position"))
 
             activity!!.runOnUiThread {

@@ -58,17 +58,7 @@ class GetSetGoActivity : AppCompatActivity(), ActivityView
     // function for initialising all the variables of the class
     private fun initView()
     {
-        try
-        {
-            val nm = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-
-            nm.cancelAll()
-
-        }
-        catch (e: Exception)
-        {
-            e.printStackTrace()
-        }
+       CommonClass(this,this).cancelNotification()
 
         linearLayoutHolderGet.background=resources.getDrawable(R.drawable.work_summary_drawable)
 

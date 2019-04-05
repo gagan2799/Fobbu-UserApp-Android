@@ -44,8 +44,6 @@ import java.lang.Double
 class OdsTrackingFragment : Fragment(),GoogleApiClient.OnConnectionFailedListener,
     GoogleApiClient.ConnectionCallbacks,LocationListener,ActivityView
 {
-
-
     private lateinit var mMapView: MapView
 
     private lateinit var googleMap: GoogleMap
@@ -58,19 +56,16 @@ class OdsTrackingFragment : Fragment(),GoogleApiClient.OnConnectionFailedListene
 
     lateinit var  commonClass: CommonClass
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
+    {
         // Inflate the layout for this fragment
-
         val view = inflater.inflate(R.layout.fragment_ods_tracking, container, false)
 
-        if (view != null) {
-            initView(view, savedInstanceState)
+        if (view != null)
+        {
+            initView(view, savedInstanceState)   // function for initialising all the variables if the class
 
-            clicks(view)
+            clicks(view)   // function for handling clicks of the class
         }
         return view
     }
@@ -84,16 +79,11 @@ class OdsTrackingFragment : Fragment(),GoogleApiClient.OnConnectionFailedListene
 
         livetTrackingHandler=RsaLivePresenter(activity!!,this)
 
-        initPersistentBottomsheet()
-
-        /*if ( commonClass.getString(
-                RsaConstants.ServiceSaved.fobbuRequestId           // checking if request ID is present or not
-            ).isNotEmpty())
-            getService()*/
+        initPersistentBottomsheet()   //insert bottom sheet
 
         mapInitialise(view, savedInstanceState)
 
-        setUpGoogleClient()
+        setUpGoogleClient()  // setting up google client for map in this method
     }
 
     // function for handling clicks of the class
@@ -101,7 +91,7 @@ class OdsTrackingFragment : Fragment(),GoogleApiClient.OnConnectionFailedListene
     private fun clicks(view: View)
     {
         view.ivCallOdsTrack.setOnClickListener {
-            checkPermissionForCall()
+            checkPermissionForCall()  // function for checking call permission
         }
 
         view.tvLiveTrackOds.setOnClickListener {
@@ -112,51 +102,46 @@ class OdsTrackingFragment : Fragment(),GoogleApiClient.OnConnectionFailedListene
                 view.rlOdsTrackOtp.visibility=View.VISIBLE
             }
 
-
             else if (view.rlOdsTrackOtp.visibility==View.VISIBLE)
             {
-                startActivity(Intent(activity!!,WaitingScreenWhite::class.java)
-                    .putExtra("from_where","code_valid_ods"))
+                startActivity(Intent(activity!!,WaitingScreenWhite::class.java).putExtra("from_where","code_valid_ods"))
 
                 activity!!.finish()
             }
         }
     }
 
-
-
-    private fun checkPermissionForCall() {
+    // function for checking call permission
+    private fun checkPermissionForCall()
+    {
         val apiLevel = android.os.Build.VERSION.SDK_INT
 
-        if (apiLevel >= 23) {
+        if (apiLevel >= 23)
+        {
             //phone state
+            val permission1 = ContextCompat.checkSelfPermission(activity!!, android.Manifest.permission.CALL_PHONE)
 
-            val permission1 =
-                ContextCompat.checkSelfPermission(activity!!, android.Manifest.permission.CALL_PHONE)
+            if (permission1 != PackageManager.PERMISSION_GRANTED)
+                makeRequest()  // function for requesting permission
 
-            if (permission1 != PackageManager.PERMISSION_GRANTED) {
-                makeRequest()
-            } else {
-                dialNumber()
-            }
-        } else {
-            dialNumber()
+             else
+                dialNumber()  //function for calling
         }
+        else
+            dialNumber()  //function for calling
     }
 
-    private fun dialNumber() {
-
+    //function for calling
+    private fun dialNumber()
+    {
         if (mobileNumber != "")
             CommonClass(activity!!, activity!!).callOnPhone(mobileNumber)
     }
 
-    private fun makeRequest() {
-        requestPermissions(
-            arrayOf(
-                "android.permission.CALL_PHONE"
-            ),
-            1
-        )
+    // function for requesting permission
+    private fun makeRequest()
+    {
+        requestPermissions(arrayOf("android.permission.CALL_PHONE"), 1)
     }
 
     //########################### MAP#################################//
@@ -179,44 +164,46 @@ class OdsTrackingFragment : Fragment(),GoogleApiClient.OnConnectionFailedListene
 
         mMapView.onResume()// needed to get the map to display immediately
 
-        try {
+        try
+        {
             MapsInitializer.initialize(activity!!.applicationContext)
-        } catch (e: Exception) {
+        }
+        catch (e: Exception)
+        {
             e.printStackTrace()
         }
 
+        //  setting up a callback object which will be triggered when the GoogleMap instance is ready to be used.
         checkWhenMapIsReady()
     }
 
-
+    // function for setting up a callback object which will be triggered when the GoogleMap instance is ready to be used.
     @SuppressLint("MissingPermission")
-    private fun checkWhenMapIsReady() {
+    private fun checkWhenMapIsReady()
+    {
         mMapView.getMapAsync { mMap ->
             googleMap = mMap
 
-            val permission =
-                ContextCompat.checkSelfPermission(context!!, android.Manifest.permission.ACCESS_FINE_LOCATION)
+            val permission = ContextCompat.checkSelfPermission(context!!, android.Manifest.permission.ACCESS_FINE_LOCATION)
 
-            if (permission == PackageManager.PERMISSION_GRANTED) {
+            if (permission == PackageManager.PERMISSION_GRANTED)
                 googleMap.isMyLocationEnabled = true
-            }
-
 
             googleMap.setInfoWindowAdapter(InfoWindow())
-
         }
     }
 
-
-    private inner class InfoWindow : GoogleMap.InfoWindowAdapter {
-
-        override fun getInfoContents(p0: Marker?): View? {
-
-            return null
+// inner class for customising the info window of the marker
+    private inner class InfoWindow : GoogleMap.InfoWindowAdapter
+{
+    override fun getInfoContents(p0: Marker?): View?
+    {
+        return null
         }
 
         @SuppressLint("SetTextI18n", "InflateParams")
-        override fun getInfoWindow(p0: Marker?): View? {
+        override fun getInfoWindow(p0: Marker?): View?
+        {
             return null
         }
     }
@@ -225,34 +212,32 @@ class OdsTrackingFragment : Fragment(),GoogleApiClient.OnConnectionFailedListene
     private fun checkGPSEnable() {
         val apiLevel = android.os.Build.VERSION.SDK_INT
 
-        if (apiLevel >= 23) {
+        if (apiLevel >= 23)
+        {
+            val permission = ContextCompat.checkSelfPermission(context!!, android.Manifest.permission.ACCESS_FINE_LOCATION)
 
-            val permission =
-                ContextCompat.checkSelfPermission(context!!, android.Manifest.permission.ACCESS_FINE_LOCATION)
+            if (permission != PackageManager.PERMISSION_GRANTED)
+                requestPermissions(arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), locationPermissionRequestCode)
 
-            if (permission != PackageManager.PERMISSION_GRANTED) {
-
-                requestPermissions(
-                    arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
-                    locationPermissionRequestCode
-                )
-            } else {
-                enableGPSAutoMatically()
-            }
-        } else {
-            enableGPSAutoMatically()
+             else
+                enableGPSAutoMatically()  // Method  for enabling Device GPS
         }
+        else
+            enableGPSAutoMatically()  // Method  for enabling Device GPS
+
     }
 
 
     // Method  for enabling Device GPS
     @SuppressLint("MissingPermission")
-    fun enableGPSAutoMatically() {
-
-        if (googleApiClient!!.isConnected) {
-
+    fun enableGPSAutoMatically()
+    {
+        if (googleApiClient!!.isConnected)
+        {
             locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+
             locationRequest.interval = (1000 * 3).toLong()
+
             locationRequest.fastestInterval = (1000 * 3).toLong()
 
             val builder = LocationSettingsRequest.Builder().addLocationRequest(locationRequest)
@@ -266,33 +251,37 @@ class OdsTrackingFragment : Fragment(),GoogleApiClient.OnConnectionFailedListene
                 this@OdsTrackingFragment
             )
 
-            val result: PendingResult<LocationSettingsResult> = LocationServices.SettingsApi
-                .checkLocationSettings(googleApiClient, builder.build())
+            val result: PendingResult<LocationSettingsResult> = LocationServices.SettingsApi.checkLocationSettings(googleApiClient, builder.build())
 
             result.setResultCallback { p0 ->
                 val status: Status = p0.status
 
                 println("STATUS OF LOCATION $status")
 
-                when (status.statusCode) {
-                    LocationSettingsStatusCodes.SUCCESS -> {
-                        try {
+                when (status.statusCode)
+                {
+                    LocationSettingsStatusCodes.SUCCESS ->
+                    {
+                        try
+                        {
                             LocationServices.FusedLocationApi.requestLocationUpdates(
                                 googleApiClient, locationRequest,
                                 this@OdsTrackingFragment
                             )
-                        } catch (e: IntentSender.SendIntentException) {
                         }
+                        catch (e: IntentSender.SendIntentException) { }
                     }
-                    LocationSettingsStatusCodes.RESOLUTION_REQUIRED -> {
+
+                    LocationSettingsStatusCodes.RESOLUTION_REQUIRED ->
+                    {
                         status.startResolutionForResult(activity!!, 1000)
                     }
-                    LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE -> {
 
-                    }
+                    LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE -> { }
 
-                    LocationSettingsStatusCodes.CANCELED -> {
-                        checkGPSEnable()
+                    LocationSettingsStatusCodes.CANCELED ->
+                    {
+                        checkGPSEnable()  // method for checking whether GPS is enabled or not
                     }
                 }
             }
@@ -303,9 +292,7 @@ class OdsTrackingFragment : Fragment(),GoogleApiClient.OnConnectionFailedListene
     private fun throwMarkerOnMap(latitude: String, longitude: String)
     {
         // create marker
-        val marker = MarkerOptions().position(
-            LatLng(Double.valueOf(latitude), Double.valueOf(longitude))
-        )//.title(data["id"].toString())
+        val marker = MarkerOptions().position(LatLng(Double.valueOf(latitude), Double.valueOf(longitude)))//.title(data["id"].toString())
 
         // Changing marker icon
         marker.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_mark_blue))
@@ -315,8 +302,7 @@ class OdsTrackingFragment : Fragment(),GoogleApiClient.OnConnectionFailedListene
 
         googleMap.addMarker(marker)
 
-        val cameraPosition = CameraPosition.Builder()
-            .target(LatLng(Double.valueOf(latitude), Double.valueOf(longitude))).zoom(14f).build()
+        val cameraPosition = CameraPosition.Builder().target(LatLng(Double.valueOf(latitude), Double.valueOf(longitude))).zoom(14f).build()
 
         googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
     }
@@ -335,38 +321,32 @@ class OdsTrackingFragment : Fragment(),GoogleApiClient.OnConnectionFailedListene
         googleApiClient!!.connect()
     }
 
-
     override fun onConnectionFailed(p0: ConnectionResult) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun onConnected(p0: Bundle?) {
-        checkGPSEnable()
+        checkGPSEnable()  // method for checking whether GPS is enabled or not
     }
 
     override fun onConnectionSuspended(p0: Int) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun onLocationChanged(p0: Location?) {
-
+    override fun onLocationChanged(p0: Location?)
+    {
         println("LOCATION >>>>>>>>>>>>>>>>>>>> " + p0!!.latitude)
 
         if (!location)
         {
-            throwMarkerOnMap(p0.latitude.toString(), p0.longitude.toString())
-
-            //mapClicks()
-
-            //getAddressFromLocation(p0.latitude,p0.longitude)
+            throwMarkerOnMap(p0.latitude.toString(), p0.longitude.toString())   // Method for setting up  marker on Map
 
             location = true
         }
+
         else if (location)
             LocationServices.FusedLocationApi.removeLocationUpdates(googleApiClient, this@OdsTrackingFragment)
-
     }
-
 
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
@@ -375,43 +355,33 @@ class OdsTrackingFragment : Fragment(),GoogleApiClient.OnConnectionFailedListene
             locationPermissionRequestCode ->
             {
                 if (grantResults.isEmpty() || grantResults[0] == PackageManager.PERMISSION_GRANTED)
-                    checkGPSEnable()
+                    checkGPSEnable()  // method for checking whether GPS is enabled or not
 
                 else
-                    checkGPSEnable()
-
+                    checkGPSEnable()  // method for checking whether GPS is enabled or not
             }
-            1 -> {
-                if (grantResults.isEmpty() || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                    Log.i("", "Permission has been denied by user")
-                    showMessageDialog(
-                        "You need to allow the permissions from\n" +
-                                "Phone Settings -> Apps --> Fobbu Member --> Permissions\n" +
-                                "to allow the permissions"
-                    )
 
-                } else {
-                    Log.i("", "Permission has been granted by user")
+            1 ->
+            {
+                if (grantResults.isEmpty() || grantResults[0] != PackageManager.PERMISSION_GRANTED)
+                    showMessageDialog(resources.getString(R.string.permission_message))    // Method for opening dialog containing message
 
-                    dialNumber()
-                }
+                else
+                    dialNumber()  //function for calling
+
                 return
             }
-
         }
     }
 
     // Method for opening dialog containing message
-    private fun showMessageDialog(message: String) {
-        val alertDialog = AlertDialog.Builder(
-            activity!!
-            , R.style.MyDialogTheme
-        ).create()
+    private fun showMessageDialog(message: String)
+    {
+        val alertDialog = AlertDialog.Builder(activity!!, R.style.MyDialogTheme).create()
+
         alertDialog.setMessage(message)
-        alertDialog.setButton(
-            AlertDialog.BUTTON_POSITIVE, "Ok"
-        ) { dialog
-            , _ ->
+
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Ok") { dialog, _ ->
             dialog.dismiss()
         }
 
@@ -420,7 +390,6 @@ class OdsTrackingFragment : Fragment(),GoogleApiClient.OnConnectionFailedListene
         val messageText: TextView = alertDialog!!.findViewById(android.R.id.message)!!
 
         messageText.gravity = Gravity.LEFT
-
     }
 
     //insert bottom sheet

@@ -28,7 +28,7 @@ class OdsFragmentAdapter(var activity :Activity,var dataList: ArrayList<HashMap<
 
     override fun onBindViewHolder(holder: OdsViewHolder, position: Int)
     {
-        if (isODD(position))
+        if (isODD(position))            // function for checking whether the number is odd or even
             holder.view.visibility=View.INVISIBLE
 
         else
@@ -37,21 +37,19 @@ class OdsFragmentAdapter(var activity :Activity,var dataList: ArrayList<HashMap<
         if (position== dataList.size-2 || position== dataList.size-1)
             holder.viewBottom.visibility=View.INVISIBLE
 
-
         holder.tvText.text=dataList[position]["service_name"].toString()
 
-        if (dataList[position]["service_image"].toString()!="")
+        if (dataList[position]["service_image"].toString()!="" ||  dataList[position]["service_image"] != null )
         Picasso.get().load(dataList[position]["service_image"].toString())
-
             .placeholder(R.drawable.dummy_services)
-
             .error(R.drawable.dummy_services)
-
             .into(holder.ivImage)
+
         else
             holder.ivImage.setImageResource(R.drawable.dummy_services)
     }
 
+    // inner view holder class
     class OdsViewHolder(view: View):RecyclerView.ViewHolder(view)
     {
         var ivImage = view.findViewById(R.id.ivImage) as ImageView
@@ -65,6 +63,7 @@ class OdsFragmentAdapter(var activity :Activity,var dataList: ArrayList<HashMap<
         var viewBottom:View = view.findViewById(R.id.viewBottom)
     }
 
+    // function for checking whether the number is odd or even
     private fun isODD(number:Int):Boolean
     {
         return (number % 2) != 0

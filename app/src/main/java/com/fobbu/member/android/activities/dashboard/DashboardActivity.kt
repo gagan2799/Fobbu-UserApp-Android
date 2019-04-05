@@ -84,16 +84,7 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
     // function for initialising all the variables and view of the class
     private fun initView()
     {
-        try
-        {
-            val nm = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-
-            nm.cancelAll()
-        }
-        catch (e: Exception)
-        {
-            e.printStackTrace()
-        }
+      CommonClass(this,this).cancelNotification()
 
         dashboardHandler = DashboardPresenter(this, this)
 
@@ -107,6 +98,7 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
               changeFragment(OdsTrackingFragment(),resources.getString(R.string.ods))
 
           else*/
+
         checkAndNavigateFromPush()                 // function for navigating to the desired screen as per the status of the user
     }
 
@@ -255,7 +247,7 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
 
         tvMembership.text = resources.getString(R.string.membership_id) +" "+ CommonClass(this, this).getString("member_id")
 
-        if(CommonClass(this,this).getString("user_image")!="")
+        if(CommonClass(this,this).getString("user_image")!="" || CommonClass(this,this).getString("user_image") != null)
         {
             val urlProfile = CommonClass(this,this).getString("user_url")+ CommonClass(this,this).getString("user_image")
 

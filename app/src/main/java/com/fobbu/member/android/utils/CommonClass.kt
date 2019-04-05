@@ -36,7 +36,8 @@ import kotlin.collections.ArrayList
 /**
  * Created by abc on 12/1/18.
  */
-class CommonClass(activity1: Activity, context1: Context) {
+class CommonClass(activity1: Activity, context1: Context)
+{
     private var activity: Activity = activity1
 
     private var context: Context = context1
@@ -49,9 +50,8 @@ class CommonClass(activity1: Activity, context1: Context) {
 
     private var endDateCustom = ""
 
-    var aPI_KEY: String = "Fobbu"
-
-     fun shareIt(context:Context)
+    // function for showing Sharing bottom sheet
+    fun shareIt(context:Context)
     {
         val intent: Intent = Intent(android.content.Intent.ACTION_SEND)
 
@@ -66,7 +66,9 @@ class CommonClass(activity1: Activity, context1: Context) {
         context.startActivity(Intent.createChooser(intent, "Share via"))
     }
 
-    fun putString(preference: String, value: String) {
+    // function for putting string in preference
+    fun putString(preference: String, value: String)
+    {
         val myPrefs = context.getSharedPreferences("Fobbu_Member_Prefs", Context.MODE_PRIVATE)
 
         val prefsEditor = myPrefs.edit()
@@ -74,20 +76,29 @@ class CommonClass(activity1: Activity, context1: Context) {
         prefsEditor.putString(preference, value).apply()
     }
 
-    fun removeString(KEY: String) {
+    // function for removing string in preference
+    fun removeString(KEY: String)
+    {
         val myPrefs = context.getSharedPreferences("Fobbu_Member_Prefs", Context.MODE_PRIVATE)
+
         val prefsEditor = myPrefs.edit()
+
         prefsEditor.remove(KEY)
+
         prefsEditor.apply()
     }
 
-    fun getString(preference: String): String {
+    // function for getting string in preference
+    fun getString(preference: String): String
+    {
         val myPrefs = context.getSharedPreferences("Fobbu_Member_Prefs", Context.MODE_PRIVATE)
 
         return myPrefs.getString(preference, "")
     }
 
-    fun putStringList(preference: String, value: ArrayList<HashMap<String, Any>>) {
+    // function for putting string List in preference
+    fun putStringList(preference: String, value: ArrayList<HashMap<String, Any>>)
+    {
         val myPrefs = context.getSharedPreferences("Fobbu_Member_Prefs", Context.MODE_PRIVATE)
 
         val prefsEditor = myPrefs.edit()
@@ -99,10 +110,11 @@ class CommonClass(activity1: Activity, context1: Context) {
         prefsEditor.putString(preference, json)
 
         prefsEditor.apply()
-
     }
+
     private val emptyList= ArrayList<HashMap<String, Any>>()
 
+    // function for removing List in preference
     fun getStringList(key: String): ArrayList<HashMap<String, Any>>
     {
         val myPrefs = context.getSharedPreferences("Fobbu_Member_Prefs", Context.MODE_PRIVATE)
@@ -113,64 +125,59 @@ class CommonClass(activity1: Activity, context1: Context) {
 
         val type= object : TypeToken<java.util.ArrayList<java.util.HashMap<String, Any>>>(){}.type
 
-
-        return if (json!="") {
+        return if (json!="")
             gson.fromJson(json,type)
-        } else
+
+        else
             emptyList
     }
 
+    // function for hiding soft keyboard
+    fun hideSoftKeyboard(activity: Activity )
+    {
+        try
+        {
+            val inputMethodManager = activity.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
 
-    fun hideSoftKeyboard(activity: Activity ) {
-        try {
-            val inputMethodManager =
-                activity.getSystemService(
-                    Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-
-            inputMethodManager.hideSoftInputFromWindow(
-                activity.currentFocus.windowToken, 0)
+            inputMethodManager.hideSoftInputFromWindow(activity.currentFocus.windowToken, 0)
         }
         catch (e:java.lang.Exception)
         {
             e.printStackTrace()
         }
-
     }
 
-    fun errorMessage(response: String): String {
-        try {
-            val jsonObject = JSONObject(response)
-
-            return jsonObject.getString("message")
-        } catch (e: java.lang.Exception) {
-            e.printStackTrace()
-        }
-        return ""
-    }
-
-    fun isStringEmpty(text: String): Boolean {
-        return text.isEmpty()
-    }
-
-    fun showToast(text: String) {
+    // function for showing Toast
+    fun showToast(text: String)
+    {
         Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
     }
 
-    fun workDoneReviewSend() {
+    // function for clearing request
+    fun workDoneReviewSend()
+    {
         val myPrefs: SharedPreferences = context.getSharedPreferences("Fobbu_Member_Prefs", Context.MODE_PRIVATE)
+
         val prefsEditor: SharedPreferences.Editor
 
         prefsEditor = myPrefs.edit()
+
         prefsEditor.remove(RsaConstants.ServiceSaved.fobbuRequestId)
+
         prefsEditor.putString(RsaConstants.RsaTypes.onGoingRsaScreen, "")
+
         prefsEditor.putString(RsaConstants.RsaTypes.onGoingRsaScreenType, "")
+
         prefsEditor.putString(RsaConstants.RsaTypes.checkIfOnGoingRsaRequest,"")
+
         prefsEditor.putString(RsaConstants.RsaTypes.checkStatus,"")
+
         prefsEditor.putString(RsaConstants.ServiceSaved.isNew,"")
 
         prefsEditor.apply()
 
-        try {
+        try
+        {
             activity.stopService(Intent(activity,FetchStatusAPI::class.java))
         }
         catch (e:java.lang.Exception)
@@ -178,19 +185,27 @@ class CommonClass(activity1: Activity, context1: Context) {
             e.printStackTrace()
         }
 
+        cancelNotification()
+    }
 
-        try {
+    // function for cancelling notification
+     fun cancelNotification()
+    { try
+        {
             val nm = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
             nm.cancelAll()
-
-        } catch (e: Exception) {
+        }
+        catch (e: Exception)
+        {
             e.printStackTrace()
         }
     }
 
+    // function for clearing preference
     @SuppressLint("ObsoleteSdkInt")
-    fun clearPreference() {
+    fun clearPreference()
+    {
         val myPrefs: SharedPreferences = context.getSharedPreferences("Fobbu_Member_Prefs", Context.MODE_PRIVATE)
 
         val prefsEditor: SharedPreferences.Editor
@@ -211,27 +226,26 @@ class CommonClass(activity1: Activity, context1: Context) {
 
         prefsEditor.putString("CoachMark_first_time", "true").commit()
 
-        try {
-            val nm = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        cancelNotification()
 
-            nm.cancelAll()
-
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
         val i = Intent(activity, LoginActivity::class.java)
+
         i.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+
         activity.startActivity(i)
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN)
             activity.finishAffinity()
-        } else {
+
+        else
             ActivityCompat.finishAffinity(activity)
-        }
     }
 
-    fun checkInternetConn(con: Context): Boolean {
-        try {
+    // function for checking internet connection
+    fun checkInternetConn(con: Context): Boolean
+    {
+        try
+        {
             val connMgr = con.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
             val wifi = connMgr.getNetworkInfo(ConnectivityManager.TYPE_WIFI)
@@ -239,200 +253,142 @@ class CommonClass(activity1: Activity, context1: Context) {
             val mobile = connMgr.getNetworkInfo(ConnectivityManager.TYPE_MOBILE)
 
             return mobile.isConnected || wifi.isConnected
-        } catch (e: Exception) {
+        }
+        catch (e: Exception)
+        {
             e.printStackTrace()
         }
 
         return false
     }
 
-
-    fun internetIssue(context: Context) {
-
+    // function for showing custom dialog of internet issue
+    fun internetIssue(context: Context)
+    {
         val alertDialog = android.app.AlertDialog.Builder(context).create()
+
         alertDialog.setTitle(context.resources.getString(R.string.networkIssue))
+
         alertDialog.setMessage(context.resources.getString(R.string.noInternet))
-        alertDialog.setButton(
-            android.app.AlertDialog.BUTTON_NEGATIVE,
-            context.resources.getString(R.string.setting)
-        ) { dialogInterface, i ->
+
+        alertDialog.setButton(android.app.AlertDialog.BUTTON_NEGATIVE, context.resources.getString(R.string.setting)) { _, i ->
             alertDialog.dismiss()
 
             context.startActivity(Intent(android.provider.Settings.ACTION_SETTINGS))
         }
-        alertDialog.setButton(
-            android.app.AlertDialog.BUTTON_POSITIVE,
-            context.resources.getString(R.string.cancelled)
-        ) { _, _ ->
+
+        alertDialog.setButton(android.app.AlertDialog.BUTTON_POSITIVE, context.resources.getString(R.string.cancelled)) { _, _ ->
             alertDialog.dismiss()
         }
+
         alertDialog.setOnShowListener {
             alertDialog.getButton(android.support.v7.app.AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.BLACK)
+
             alertDialog.getButton(android.support.v7.app.AlertDialog.BUTTON_POSITIVE).setTextColor(Color.BLACK)
         }
-
         alertDialog.show()
     }
 
-
+    // function for converting time into desired format
     @SuppressLint("SimpleDateFormat")
-    fun getTimerTime(expired: String): Boolean {
-
-        try {
-            // String inputText = "Tue May 21 14:32:00 GMT 2012";
-
-            val inputFormat = SimpleDateFormat("dd/MM/yyyy HH:mm:ss")
-            // inputFormat.timeZone = TimeZone.getTimeZone("GMT")
-
-            // Adjust locale and zone appropriately
-            val expire = inputFormat.parse(expired)
-
-            val currentDate = getInstance().time
-            if (currentDate.after(expire)) { // expiry date is either equal to or before current time
-
-                return false
-            } else {
-                // expiry time is greater than current time
-                val difference = expire.time - currentDate.time
-                if (difference >= 1 * 1 * 60 * 1000) {
-                    // difference is less than 1 minute
-                    return true
-                }
-            }
-
-        } catch (e: Exception) {
-            // TODO Auto-generated catch block
-            e.printStackTrace()
-            return false
-        }
-
-        return false
-    }
-
-    @SuppressLint("SimpleDateFormat")
-    fun compareTwoDates(start: String, end: String): Boolean {
-        val sdf = SimpleDateFormat("yyyy-MM-dd")
-
-        val strStartDate = sdf.parse(start)
-
-        val strEndDate = sdf.parse(end)
-
-        if (strEndDate.after(strStartDate)) {
-            return true
-        }
-        return false
-    }
-
-    @SuppressLint("SimpleDateFormat")
-    fun getDesireFormat(input: String, output: String, dateString: String): String {
+    fun getDesireFormat(input: String, output: String, dateString: String): String
+    {
         val inputFormat = SimpleDateFormat(input)
+
         val outputFormat = SimpleDateFormat(output)
+
         val date = inputFormat.parse(dateString)
+
         return outputFormat.format(date)
     }
 
-    @SuppressLint("SimpleDateFormat")
-    fun compareDates(date: String): Boolean {
-        val sdf = SimpleDateFormat("dd/MM/yyyy")
-        val strDate = sdf.parse(date)
-        if (Date().after(strDate)) {
-            return true
-        }
-        return false
-    }
 
-    fun giveDynamicHeightRelativeGallery(): RelativeLayout.LayoutParams? {
-
+    // function for giving dynamic height relative gallery
+    fun giveDynamicHeightRelativeGallery(): RelativeLayout.LayoutParams?
+    {
         val parms: RelativeLayout.LayoutParams
-        try {
+
+        try
+        {
             val display = activity.windowManager.defaultDisplay
+
             val width = display.width // ((display.getWidth()*20)/100)
+
             var height = display.height// ((display.getHeight()*30)/100)
 
             val layoutWidth = width / 3
+
             val layoutHeight = width / 3
 
             parms = RelativeLayout.LayoutParams(layoutWidth, RelativeLayout.LayoutParams.WRAP_CONTENT)
 
             return parms
-        } catch (e: Exception) {
+        }
+        catch (e: Exception)
+        {
             e.printStackTrace()
         }
-
         return null
     }
 
+    // function for calling
     @SuppressLint("MissingPermission")
-    fun callOnPhone(number: String) {
-
-        try {
+    fun callOnPhone(number: String)
+    {
+        try
+        {
             val intent = Intent(Intent.ACTION_CALL)
 
             intent.data = Uri.parse("tel:$number")
+
             activity.startActivity(intent)
         }
         catch (e:java.lang.Exception)
         {
             e.printStackTrace()
         }
-
     }
 
-    fun isEmailValid(email: String): Boolean {
+    // function for checking whether the provided email is valid or not
+    fun isEmailValid(email: String): Boolean
+    {
         val expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$"
+
         val pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE)
+
         val matcher = pattern.matcher(email)
+
         return matcher.matches()
     }
 
-
-    fun openDatePicker(activity:Activity,from: String, textview: TextView) {
-
+    // function for opening date picker dialog
+    fun openDatePickerDOB(activity:Activity,from: String, textview: TextView)
+    {
         myCalendar = Calendar.getInstance()
 
         datePickerDialog = DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
             myCalendar.set(Calendar.YEAR, year)
+
             myCalendar.set(Calendar.MONTH, monthOfYear)
+
             myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
 
-            updateLabel(from, textview)
+            updateLabel(from, textview)  // function for updating the edit text with the provided data
         }
 
-        val datePicker = DatePickerDialog(activity, R.style.CustomPickerTheme, datePickerDialog, myCalendar
-            .get(YEAR), myCalendar.get(MONTH),
-            myCalendar.get(DAY_OF_MONTH))
-       // datePicker.datePicker.minDate = myCalendar.timeInMillis
-        //datePicker.datePicker.maxDate = myCalendar.timeInMillis
+        val datePicker = DatePickerDialog(activity, R.style.CustomPickerTheme, datePickerDialog, myCalendar.get(YEAR), myCalendar.get(MONTH), myCalendar.get(DAY_OF_MONTH))
 
-        datePicker.show()
-
-    }
-
-    fun openDatePickerDOB(activity:Activity,from: String, textview: TextView) {
-
-        myCalendar = Calendar.getInstance()
-
-        datePickerDialog = DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
-            myCalendar.set(Calendar.YEAR, year)
-            myCalendar.set(Calendar.MONTH, monthOfYear)
-            myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-
-            updateLabel(from, textview)
-        }
-
-        val datePicker = DatePickerDialog(activity, R.style.CustomPickerTheme, datePickerDialog, myCalendar
-            .get(YEAR), myCalendar.get(MONTH),
-            myCalendar.get(DAY_OF_MONTH))
-        // datePicker.datePicker.minDate = myCalendar.timeInMillis
         datePicker.datePicker.maxDate = myCalendar.timeInMillis /*+ 2592000000*/
-        datePicker.show()
 
+        datePicker.show()
     }
 
-
+    // function for updating the edit text with the provided data
     @SuppressLint("SimpleDateFormat")
-    private fun updateLabel(from: String, etDate: TextView?) {
+    private fun updateLabel(from: String, etDate: TextView?)
+    {
         val myFormat = "dd MMM yyyy" //In which you need put here
+
         val sdf = SimpleDateFormat(myFormat, Locale.ENGLISH)
 
         etDate!!.text = sdf.format(myCalendar.time)
@@ -440,77 +396,26 @@ class CommonClass(activity1: Activity, context1: Context) {
         val sdfServer = SimpleDateFormat("yyyy-MM-dd")
         // sdf.timeZone = TimeZone.getTimeZone("UTC")
 
-        if (from == "Start") {
+        if (from == "Start")
             startDateCustom = sdfServer.format(myCalendar.time)
-        } else
-            endDateCustom = sdfServer.format(myCalendar.time)
 
-        /*  rbLastMonth.isChecked = false
-          rbLastWeek.isChecked = false*/
+        else
+            endDateCustom = sdfServer.format(myCalendar.time)
     }
 
 
-
-
+    // function for getting current date
     @SuppressLint("SimpleDateFormat")
     fun getCurrentDate(today:String):String
     {
         val c:Date = getInstance().time
+
         System.out.println("Current time => $c")
 
-        val df:SimpleDateFormat  =  SimpleDateFormat("dd MMM")
+        val df  =  SimpleDateFormat("dd MMM")
 
         df.format(c)
 
         return   df.format(c).toString()
-       /* else
-        {
-            val date = df.parse(df.format(c).toString())
-
-            val cal = Calendar.getInstance()
-
-            cal.time=date
-
-            cal.add(Calendar.DATE, -1)
-
-            df.format(cal.time)
-
-            df.toString()
-        }*/
     }
-
-
-    // Method for setting  Animation
-    fun setAnimation(customAnimation: Int, view: View, activity: Activity)
-    {
-        val animation: Animation = AnimationUtils.loadAnimation(activity, customAnimation)
-
-        view.startAnimation(animation)
-    }
-
-      fun isAppIsInBackground(): Boolean {
-        var isInBackground = true
-        val am = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT_WATCH) {
-            val runningProcesses = am.runningAppProcesses
-            for (processInfo in runningProcesses) {
-                if (processInfo.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND) {
-                    for (activeProcess in processInfo.pkgList) {
-                        if (activeProcess == context.packageName) {
-                            isInBackground = false
-                        }
-                    }
-                }
-            }
-        } else {
-            val taskInfo = am.getRunningTasks(1)
-            val componentInfo = taskInfo[0].topActivity
-            if (componentInfo.packageName == context.packageName) {
-                isInBackground = false
-            }
-        }
-
-        return isInBackground
-    }
-
 }

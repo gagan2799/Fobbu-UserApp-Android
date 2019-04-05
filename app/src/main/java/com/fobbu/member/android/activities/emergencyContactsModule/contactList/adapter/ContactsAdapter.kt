@@ -48,7 +48,6 @@ class ContactsAdapter(var activity: Activity,var dataList:ArrayList<HashMap<Stri
                     sortedList.add(map)
                 }
             }
-
             activity.startActivity(Intent(activity, EmergencyContactsActivity::class.java).putExtra("sorted_list",sortedList).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK))
 
             activity.finish()

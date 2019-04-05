@@ -17,35 +17,64 @@ import com.fobbu.member.android.interfaces.HeaderIconChanges
 import com.fobbu.member.android.interfaces.TopBarChanges
 import com.fobbu.member.android.utils.CommonClass
 
-class HomeFragment : Fragment() {
-
+class HomeFragment : Fragment()
+{
     private var changeRSAFragments: ChangeRSAFragments? = null
 
     private lateinit var llRSA: LinearLayout
 
     private var headerIconChanges: HeaderIconChanges? = null
+
     private var topBarChanges:TopBarChanges?=null
 
     private lateinit var llAddNewVehicle:LinearLayout
 
     private lateinit var tvMembershipIdHome:TextView
+
     lateinit var llProfile:LinearLayout
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
+    {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_home, container, false)
 
-        if (view != null) {
+        if (view != null)
+        {
+            initialise(view)  // function for initialising all the variables and views of the class
 
-            initialise(view)
-
-            handleClick()
+            handleClick()  // function for handling clicks of the class
         }
         return view
     }
 
-    private fun handleClick() {
+    // function for initialising all the variables and views of the class
+    @SuppressLint("SetTextI18n")
+    private fun initialise(view: View?)
+    {
+        headerIconChanges = activity as HeaderIconChanges?
 
+        headerIconChanges!!.changeHeaderIcons(true, false, false)
+
+        topBarChanges = activity as TopBarChanges
+
+        topBarChanges!!.showGoneTopBar(true)
+
+        changeRSAFragments = activity!! as ChangeRSAFragments
+
+        llAddNewVehicle = view!!.findViewById(R.id.llAddNewVehicle)
+
+        tvMembershipIdHome = view.findViewById(R.id.tvMembershipIdHome)
+
+        tvMembershipIdHome.text = resources.getString(R.string.your_membership_id) + " "+ CommonClass(activity!!,activity!!).getString("member_id")
+
+        llRSA = view.findViewById(R.id.llRSA)
+
+        llProfile = view.findViewById(R.id.llProfile)
+    }
+
+    // function for handling clicks of the class
+    private fun handleClick()
+    {
         llRSA.setOnClickListener {
             changeRSAFragments!!.setRSAFragments("")
         }
@@ -58,27 +87,5 @@ class HomeFragment : Fragment() {
             activity!!.startActivity(Intent(activity!!, ProfileActivity::class.java))
         }
 
-    }
-
-    @SuppressLint("SetTextI18n")
-    private fun initialise(view: View?) {
-
-        headerIconChanges = activity as HeaderIconChanges?
-        headerIconChanges!!.changeHeaderIcons(true, false, false)
-
-        topBarChanges = activity as TopBarChanges
-        topBarChanges!!.showGoneTopBar(true)
-
-        changeRSAFragments = activity!! as ChangeRSAFragments
-
-        llAddNewVehicle = view!!.findViewById(R.id.llAddNewVehicle)
-        tvMembershipIdHome = view.findViewById(R.id.tvMembershipIdHome)
-
-        tvMembershipIdHome.text = resources.getString(R.string.your_membership_id) + " "+
-                CommonClass(activity!!,activity!!).getString("member_id")
-
-        llRSA = view.findViewById(R.id.llRSA)
-
-        llProfile = view.findViewById(R.id.llProfile)
     }
 }

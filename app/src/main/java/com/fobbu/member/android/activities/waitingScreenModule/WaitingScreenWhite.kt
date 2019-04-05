@@ -40,16 +40,7 @@ class WaitingScreenWhite : AppCompatActivity()
     // function for initialising all  the variables and views of the class
     private fun initView()
     {
-        try
-        {
-            val nm = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-
-            nm.cancelAll()
-        }
-        catch (e: Exception)
-        {
-            e.printStackTrace()
-        }
+        CommonClass(this,this).cancelNotification()
     }
 
     // Click functionality of this activity's clicks are handled here

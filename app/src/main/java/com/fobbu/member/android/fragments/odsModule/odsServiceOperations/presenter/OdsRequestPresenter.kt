@@ -11,10 +11,11 @@ import com.fobbu.member.android.view.ActivityView
 
 class OdsRequestPresenter(var activity: Activity,var activityView: ActivityView) :OdsRequestHandler
 {
-
     val apiClient=ApiClient(activity)
 
-    override fun makeOdsRequest(map: HashMap<String, Any>, token: String) {
+    // implementing ods_requests API
+    override fun makeOdsRequest(map: HashMap<String, Any>, token: String)
+    {
      activityView.showLoader()
 
         apiClient.makeOdsRequest(map,token,object :ResponseHandler

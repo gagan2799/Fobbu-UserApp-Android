@@ -69,10 +69,7 @@ class OdsOperationFragment : Fragment(),ActivityView,SelectedSubServiceView
 
     private lateinit var subServiceList:ArrayList<Map<String,Any>>
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View?
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {
         // Inflate the layout for this fragment
         val   view= inflater.inflate(R.layout.fragment_ods_operation, container, false)
@@ -81,9 +78,9 @@ class OdsOperationFragment : Fragment(),ActivityView,SelectedSubServiceView
         {
             if (view!= null)
             {
-                initView(view)
+                initView(view)     // function for initialising all the variables of the class
 
-                clicks(view)
+                clicks(view)      // function for handling all the clicks of the class
             }
         }
         return  view
@@ -137,17 +134,34 @@ class OdsOperationFragment : Fragment(),ActivityView,SelectedSubServiceView
 
         odsRequestHandler=OdsRequestPresenter(activity!!,this)
 
-        setDataInView(view)
+        setDataInView(view)  // managing the layout according to the service selected
 
-        setRecycler(view)
+        setRecycler(view)   // function for setting up recycler
     }
 
+    // function for handling all the clicks of the class
+    private fun clicks(view: View)
+    {
+        view.tvOperationDate.setOnClickListener {
+            selectDateFromCalender(view)  // function for opening the date picker dialog
+        }
 
-    // managing the layout according to the service selecetd
+        view.tvOperationTime.setOnClickListener {
+            selectTime(view)   // function for selecting time from time picker dialog
+        }
+
+        view.ivBack.setOnClickListener {
+            ifTopBarChnagesNull(true)          // function for changing the state of tool bar
+
+            changeFragment(OdsFragment())   // function for changing the fragment
+        }
+    }
+
+    // managing the layout according to the service selected
     @SuppressLint("SetTextI18n")
     private fun setDataInView(view:View)
     {
-        if (dataList[0][RsaConstants.Ods.service_image].toString()!="")
+        if (dataList[0][RsaConstants.Ods.service_image].toString()!="" || dataList[0][RsaConstants.Ods.service_image] != null )
             Picasso.get().load(dataList[0][RsaConstants.Ods.service_image].toString())
                 .placeholder(R.drawable.dummy_services)
                 .error(R.drawable.dummy_services)
@@ -196,23 +210,6 @@ class OdsOperationFragment : Fragment(),ActivityView,SelectedSubServiceView
     }
 
 
-    // function for handling all the clicks of the class
-    private fun clicks(view: View)
-    {
-        view.tvOperationDate.setOnClickListener {
-            selectDateFromCalender(view)
-        }
-
-        view.tvOperationTime.setOnClickListener {
-            selectTime(view)
-        }
-
-        view.ivBack.setOnClickListener {
-            ifTopBarChnagesNull(true)
-
-            changeFragment(OdsFragment())
-        }
-    }
 
 
     // function for changing the fragment
@@ -225,14 +222,16 @@ class OdsOperationFragment : Fragment(),ActivityView,SelectedSubServiceView
         ft.commit()
     }
 
-
-    private fun ifTopBarChnagesNull(boolean: Boolean) {
+    // function for changing the state of tool bar
+    private fun ifTopBarChnagesNull(boolean: Boolean)
+    {
         if (topBarChanges == null)
             topBarChanges = activity as TopBarChanges
 
         topBarChanges!!.showGoneTopBar(boolean)
     }
 
+    // function for opening the date picker dialog
     private fun selectDateFromCalender(view: View)
     {
         myCalendar = Calendar.getInstance()
@@ -244,33 +243,25 @@ class OdsOperationFragment : Fragment(),ActivityView,SelectedSubServiceView
 
             myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
 
-            dateCustom=updateLabel()
+            dateCustom=updateLabel()  // function for updating text with the selected data
 
             view.tvOperationDate.text=dateCustom
 
             if (time!="")
             {
                 if (dataList[0][RsaConstants.Ods.service_name].toString()=="Washing")
-                    makeOdsRequest()
+                    makeOdsRequest()    //implementing ods_request API
+
                 else
-                    startActivity(Intent(activity!!,OdsWorkSummaryActivity::class.java)
-                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
-                        .putExtra(RsaConstants.Ods.time,timeSlot)
-                        .putExtra(RsaConstants.Ods.date,dateCustom)
-                        .putExtra(RsaConstants.Ods.selectedServiceList,selectedServiceList))
+                    startActivity(Intent(activity!!,OdsWorkSummaryActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK).putExtra(RsaConstants.Ods.time,timeSlot).putExtra(RsaConstants.Ods.date,dateCustom).putExtra(RsaConstants.Ods.selectedServiceList,selectedServiceList))
             }
         }
-
-
-        val datePicker = DatePickerDialog(activity!!, R.style.CustomPickerTheme, datePickerDialog, myCalendar
-
-            .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-
-            myCalendar.get(Calendar.DAY_OF_MONTH))
+        val datePicker = DatePickerDialog(activity!!, R.style.CustomPickerTheme, datePickerDialog, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH))
 
         datePicker.show()
     }
 
+    // function for updating text with the selected data
     @SuppressLint("SimpleDateFormat")
     private fun updateLabel():String
     {
@@ -296,7 +287,7 @@ class OdsOperationFragment : Fragment(),ActivityView,SelectedSubServiceView
         return startdateCustom
     }
 
-
+    // function for selecting time from time picker dialog
     private fun   selectTime(view: View)
     {
         val mcurrentTime = Calendar.getInstance()
@@ -304,16 +295,17 @@ class OdsOperationFragment : Fragment(),ActivityView,SelectedSubServiceView
         val hour = mcurrentTime.get(Calendar.HOUR_OF_DAY)
 
         val minute = mcurrentTime.get(Calendar.MINUTE)
+
         val mTimePicker: TimePickerDialog
 
         mTimePicker =  TimePickerDialog(activity!!,
             TimePickerDialog.OnTimeSetListener { _, p1, p2 ->
 
-                val AM_PM = if(p1 < 12) {
+                val AM_PM = if(p1 < 12)
                     "AM"
-                } else {
+
+                else
                     "PM"
-                }
 
                 time= ("$p1:$p2 $AM_PM")
 
@@ -323,21 +315,16 @@ class OdsOperationFragment : Fragment(),ActivityView,SelectedSubServiceView
                 else
                     ("$p1:$p2-${""+(p1+1)+":"+p2} $AM_PM")
 
-
                 view.tvOperationTime.text=time
 
                 if (dateCustom!="")
                 {
                     if (dataList[0][RsaConstants.Ods.service_name].toString()=="Washing")
-                        makeOdsRequest()
-                    else
-                        startActivity(Intent(activity!!,OdsWorkSummaryActivity::class.java)
-                            .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
-                            .putExtra(RsaConstants.Ods.time,timeSlot)
-                            .putExtra(RsaConstants.Ods.date,dateCustom)
-                            .putExtra(RsaConstants.Ods.selectedServiceList,selectedServiceList))
-                }
+                        makeOdsRequest()    //implementing ods_request API
 
+                    else
+                        startActivity(Intent(activity!!,OdsWorkSummaryActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK).putExtra(RsaConstants.Ods.time,timeSlot).putExtra(RsaConstants.Ods.date,dateCustom).putExtra(RsaConstants.Ods.selectedServiceList,selectedServiceList))
+                }
             }, hour, minute, false)//Yes 24 hour time
 
         mTimePicker.setTitle("Select Time")
@@ -353,8 +340,6 @@ class OdsOperationFragment : Fragment(),ActivityView,SelectedSubServiceView
         if (commonClass.checkInternetConn(activity!!))
         {
             val map=HashMap<String,Any>()
-
-            //map["user_id"]=commonClass.getString("_id")
 
             map["service"]=dataList[0]["_id"].toString()
 
@@ -374,25 +359,18 @@ class OdsOperationFragment : Fragment(),ActivityView,SelectedSubServiceView
 
             map["address"]=commonClass.getString(RsaConstants.Ods.address)
 
-            println("dataMap::::$map")
-
             odsRequestHandler.makeOdsRequest(map,commonClass.getString("x_access_token"))
         }
         else
             commonClass.showToast(activity!!.resources.getString(R.string.internet_is_unavailable))
     }
+
     //handling the response of    ods_request API
     override fun onRequestSuccessReport(mainPojo: MainPojo)
     {
         if (mainPojo.success=="true")
-        {
-            startActivity(Intent(activity!!,OdsWorkSummaryActivity::class.java)
-                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
-                .putExtra(RsaConstants.Ods.time,timeSlot)
-                .putExtra(RsaConstants.Ods.date,dateCustom)
-                .putExtra(RsaConstants.Ods.selectedServiceList,selectedServiceList))
+            startActivity(Intent(activity!!,OdsWorkSummaryActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK).putExtra(RsaConstants.Ods.time,timeSlot).putExtra(RsaConstants.Ods.date,dateCustom).putExtra(RsaConstants.Ods.selectedServiceList,selectedServiceList))
 
-        }
         else
             commonClass.showToast(mainPojo.message)
     }
@@ -420,12 +398,11 @@ class OdsOperationFragment : Fragment(),ActivityView,SelectedSubServiceView
                 if (optionList[j]["selected"]=="1")
                 {
                     val map=optionList[j]
+
                     selectedServiceList.add(map)
                 }
             }
         }
-
-        println("selected list updated::::  $selectedServiceList")
     }
 }
 

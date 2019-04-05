@@ -51,6 +51,7 @@ class SignUpActivity : AppCompatActivity(),ActivityView
 
         val itemSelectGender = arrayOf(this.resources.getString(R.string.selectGender),this.resources.getString(R.string.male),
             this.resources.getString(R.string.female),this.resources.getString(R.string.not_specified))
+
         dataAdaperSelectService = ArrayAdapter(this, R.layout.spinnertype, itemSelectGender)
 
         spinnerSelectGender.adapter = dataAdaperSelectService as SpinnerAdapter?

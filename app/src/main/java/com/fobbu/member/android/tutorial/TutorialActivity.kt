@@ -14,75 +14,82 @@ import com.fobbu.member.android.utils.CommonClass
 import kotlinx.android.synthetic.main.activity_tutorial.*
 import me.relex.circleindicator.CircleIndicator
 
-class TutorialActivity : AppCompatActivity() {
+class TutorialActivity : AppCompatActivity()
+{
     lateinit var viewPager: ViewPager
 
     lateinit var adapterMainPager: MyPagerAdapter
 
     lateinit var circleIndicator: CircleIndicator
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?)
+    {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_tutorial)
 
-        initialise()
+        initialise()  // function for initialising all the variables and views of the class
 
-        CommonClass(this, this).putString("CoachMark_first_time", "true")
+        clicks()  // function for handling clicks of the class
     }
 
-    private fun initialise() {
+    // function for initialising all the variables and views of the class
+    private fun initialise()
+    {
+        CommonClass(this, this).putString("CoachMark_first_time", "true")
 
         circleIndicator = findViewById(R.id.circleIndicator)
 
         viewPager = findViewById(R.id.viewPager)
 
         adapterMainPager = MyPagerAdapter(this.supportFragmentManager)
+
         viewPager.adapter = adapterMainPager
+
         viewPager.offscreenPageLimit = 1
+
         circleIndicator.setViewPager(viewPager)
+    }
 
-
+    // function for handling clicks of the class
+    private fun clicks()
+    {
         viewPager.setOnPageChangeListener(object : ViewPager.OnPageChangeListener {
-            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
-
-            }
+            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
 
             override fun onPageSelected(position: Int) {
                 viewPager.currentItem = position
 
                 viewPager.adapter!!.notifyDataSetChanged()
 
-                //  System.out.println("POSITION " + position);
                 if (position == 6) {
-
                 } else {
-
                 }
 
                 val intent = Intent()
+
                 intent.action = "com.fobbu.position_start_"
+
                 intent.putExtra("position", position.toString() + "")
+
                 sendBroadcast(intent)
             }
 
-            override fun onPageScrollStateChanged(state: Int) {
-
-            }
+            override fun onPageScrollStateChanged(state: Int) {}
         })
 
         tvTryFobbu.setOnClickListener {
             startActivity(Intent(this, SignUpActivity::class.java))
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                 finishAffinity()
-            }
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN)
+                finishAffinity()
             else
                 finish()
         }
     }
 
+    // inner fragment adapter class
     class MyPagerAdapter(fragmentManager: FragmentManager) : FragmentStatePagerAdapter(fragmentManager) {
-
         internal var pos: Int = 0
 
         // Returns total number of pages
@@ -91,12 +98,18 @@ class TutorialActivity : AppCompatActivity() {
         }
 
         // Returns the fragment to display for that page,
-        override fun getItem(position: Int): Fragment? {
+        override fun getItem(position: Int): Fragment?
+        {
             var fragment: Fragment? = null
-            when (position) {
+
+            when (position)
+            {
                 0 -> fragment = TutorialFragment1()
+
                 1 -> fragment = TutorialFragment2()
+
                 2 -> fragment = TutorialFragment3()
+
                 3 -> fragment = TutorialFragment4()
             }
 
@@ -107,7 +120,5 @@ class TutorialActivity : AppCompatActivity() {
         override fun getPageTitle(position: Int): CharSequence? {
             return "Page $position"
         }
-
     }
-
 }

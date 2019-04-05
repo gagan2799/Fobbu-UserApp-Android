@@ -24,16 +24,13 @@ interface WebServiceApi
         @Body map:HashMap<String,String>
     ): Call<MainPojo>
 
-
     @POST("users/login")
     fun login(@Body body: HashMap<String,String> ): Call<MainPojo>
-
 
     @POST("users/forgot-password")
     fun forgotPassword(
         @Body mapData: HashMap<String, String>
     ): Call<MainPojo>
-
 
     @JvmSuppressWildcards
     @Multipart
@@ -41,9 +38,7 @@ interface WebServiceApi
     fun addVehicle(
         @PartMap  partMap:Map<String, RequestBody>,
         @Part files :ArrayList<MultipartBody.Part>,
-        @Header("x-access-token") token: String)
-
-            : Call<MainPojo>
+        @Header("x-access-token") token: String): Call<MainPojo>
 
     @JvmSuppressWildcards
     @Multipart
@@ -52,7 +47,6 @@ interface WebServiceApi
         @PartMap body: Map<String,RequestBody>,
         @Part files :ArrayList<MultipartBody.Part>,
         @Header("x-access-token") token: String): Call<MainPojo>
-
 
     @GET("/partners/services")
     fun fetchServices(
@@ -64,7 +58,6 @@ interface WebServiceApi
     @Multipart
     @POST("users/requests")
     fun findFobbuRequest(
-        /*@Body mapData: HashMap<String, RequestBody>,*/
         @Part("user_id")  user_id: RequestBody,
         @Part("service")  service: RequestBody,
         @Part("latitude")  latitude: RequestBody,
@@ -74,12 +67,10 @@ interface WebServiceApi
         @Part files :ArrayList<MultipartBody.Part>,
         @Header("x-access-token") token: String): Call<MainPojo>
 
-
     @PUT("users/requests")
     fun findFobbuRequestUpdateVehicle(
         @Body body: HashMap<String,String>,
         @Header("x-access-token") token: String): Call<MainPojo>
-
 
     @GET("users/vehicles")
     fun fetchUserVehicles(
@@ -87,13 +78,11 @@ interface WebServiceApi
         @Query ("user_id") user_id:String
     ):Call<MainPojo>
 
-
     @GET("users/request/{requestId}")
     fun findFleetOrUser(
         @Header("x-access-token") token: String,
         @Path ("requestId") requestId:String
     ):Call<MainPojo>
-
 
     @POST("users/update_device_token")
     fun updateDeviceTokenFCM(@Body mapData:HashMap<String,String>,
@@ -106,12 +95,10 @@ interface WebServiceApi
     @GET("users/reason?type=user")
     fun getCancellationReason(@Header("x-access-token") token:String):Call<MainPojo>
 
-
     @GET("users/requests")
     fun getServices(
         @Header("x-access-token") token:String,
         @Query("request_id") requestID:String):Call<MainPojo>
-
 
     @POST("users/request/make_payment")
     fun makePayment(@Body mapData:HashMap<String,String>,
@@ -122,7 +109,6 @@ interface WebServiceApi
         @Header("x-access-token") token: String,
         @Body partMap:Map<String, String>
     ): Call<MainPojo>
-
 
     @POST("users/request/provide_ratings")
     @Multipart
@@ -136,12 +122,6 @@ interface WebServiceApi
     fun getOrders(@Query("type") type:String,
                   @Query("page") pageCount:String,
                   @Header("x-access-token") token:String):Call<MainPojo>
-
-    /*@FormUrlEncoded
-    @POST("users/emergencycontacts")
-    fun postEmergencyContacts(@Field("contacts[]") contactList:ArrayList<HashMap<String,String>>,
-                              @Header("x-access-token") token: String):Call<MainPojo>
- */
 
     @POST("users/emergencycontacts")
     fun postEmergencyContacts(
@@ -169,7 +149,6 @@ interface WebServiceApi
     fun changePassword(@Body map:HashMap<String,Any>
                        ,@Header("x-access-token") token: String):Call<MainPojo>
 
-
     @POST("users/update_user")
     @Multipart
     @JvmSuppressWildcards
@@ -189,11 +168,4 @@ interface WebServiceApi
     fun getAddress(@Query("latlng") latlng:String,
                    @Query("sensor") sensor:String,
                    @Query("key") key:String):Call<MainPojo>
-
-
-    @GET("partners/update_location_request")
-    fun updateLocationLive(@Query("x-access-token")token: String,
-                           @Query("request_id")requestID: String):Call<MainPojo>
-
-
 }

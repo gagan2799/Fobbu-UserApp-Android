@@ -35,7 +35,7 @@ class RsaRecyclerAdapter(private var activtiy:Activity, private var textList: Ar
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
     override fun onBindViewHolder(holder: MyRsaViewHolder, position: Int)
     {
-        if (textList[position]["image"].toString() != "")
+        if (textList[position]["image"].toString() != "" || textList[position]["image"]!= null )
             Picasso.get().load(textList[position]["image"].toString())
                 .error(R.drawable.dummy_services)
                 .into(holder.imageViewRsaRecycler)

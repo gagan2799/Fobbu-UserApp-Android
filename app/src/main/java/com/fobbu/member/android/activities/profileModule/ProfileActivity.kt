@@ -300,7 +300,7 @@ class ProfileActivity : AppCompatActivity(),ActivityView,ProfileView
             etAdharProfile.setSelection(etAdharProfile.text.length)
         }
 
-        if(CommonClass(this,this).getString("user_image")!="")
+        if(CommonClass(this,this).getString("user_image")!=""  ||  CommonClass(this,this).getString("user_image")!= null)
         {
             hasPic=true
 

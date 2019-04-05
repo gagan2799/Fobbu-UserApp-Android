@@ -17,8 +17,8 @@ import java.util.concurrent.TimeUnit
 /**
  * Created by abc on 29/1/18.
  */
-class MyApplication : Application() {
-
+class MyApplication : Application()
+{
     lateinit var myPrefs: SharedPreferences
 
     lateinit var retrofit: Retrofit
@@ -29,12 +29,15 @@ class MyApplication : Application() {
 
     lateinit var mapWebService: WebServiceApi
 
-    override fun attachBaseContext(context: Context) {
+    override fun attachBaseContext(context: Context)
+    {
         super.attachBaseContext(context)
+
         MultiDex.install(this)
     }
 
-    override fun onCreate() {
+    override fun onCreate()
+    {
         super.onCreate()
 
         myPrefs = this.getSharedPreferences("Fobbu_Member_Prefs", Context.MODE_PRIVATE)
@@ -46,13 +49,14 @@ class MyApplication : Application() {
         forMapApi()
     }
 
-    private fun forMapApi() {
-
+    private fun forMapApi()
+    {
         val loggingInterceptor = HttpLoggingInterceptor()
 
         loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
 
         val httpClient = OkHttpClient.Builder()
+
         httpClient.networkInterceptors().add(Interceptor { chain ->
             val original = chain.request()
 
@@ -61,12 +65,14 @@ class MyApplication : Application() {
 
             chain.proceed(request)
         })
+
         httpClient.addInterceptor(loggingInterceptor)
+
         httpClient.readTimeout((2 * 60).toLong(), TimeUnit.SECONDS)
+
         httpClient.writeTimeout((2 * 60).toLong(), TimeUnit.SECONDS)
 
         val client = httpClient.build()
-
 
         val okHttpClient = OkHttpClient.Builder().addInterceptor(loggingInterceptor)
             .readTimeout(60, TimeUnit.SECONDS)
@@ -84,12 +90,15 @@ class MyApplication : Application() {
 
     }
 
-    private fun forMultiPartAPI() {
+    // function for creating retrofit object for multipart request
+    private fun forMultiPartAPI()
+    {
         val loggingInterceptor = HttpLoggingInterceptor()
 
         loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
 
         val httpClient = OkHttpClient.Builder()
+
         httpClient.networkInterceptors().add(Interceptor { chain ->
             val original = chain.request()
 
@@ -101,11 +110,12 @@ class MyApplication : Application() {
             chain.proceed(request)
         })
         httpClient.addInterceptor(loggingInterceptor)
+
         httpClient.readTimeout((2 * 60).toLong(), TimeUnit.SECONDS)
+
         httpClient.writeTimeout((2 * 60).toLong(), TimeUnit.SECONDS)
 
         val client = httpClient.build()
-
 
         val okHttpClient = OkHttpClient.Builder().addInterceptor(loggingInterceptor)
             .readTimeout(60, TimeUnit.SECONDS)
@@ -122,7 +132,9 @@ class MyApplication : Application() {
         webServiceApiMultipart = retrofit.create<WebServiceApi>(WebServiceApi::class.java!!)
     }
 
-    private fun forSimpleAPI() {
+    // function for creating retrofit object for simple request
+    private fun forSimpleAPI()
+    {
         val loggingInterceptor = HttpLoggingInterceptor()
 
         loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
@@ -160,16 +172,19 @@ class MyApplication : Application() {
         webServiceApi = retrofit.create<WebServiceApi>(WebServiceApi::class.java!!)
     }
 
-    fun getRetrofit(): WebServiceApi {
+    fun getRetrofit(): WebServiceApi
+    {
         return webServiceApi
     }
 
-    fun getRetrofitMulti(): WebServiceApi {
+    fun getRetrofitMulti(): WebServiceApi
+    {
         return webServiceApiMultipart
     }
 
 
-    fun getMapService():WebServiceApi{
+    fun getMapService():WebServiceApi
+    {
         return  mapWebService
     }
 }

@@ -45,16 +45,7 @@ class SplashActivity : AppCompatActivity()
 
         fetchDeviceToken()            // Method for fetching device token
 
-        try
-        {
-            val nm = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-
-            nm.cancelAll()
-        }
-        catch (e: Exception)
-        {
-            e.printStackTrace()
-        }
+        CommonClass(this,this).cancelNotification()
 
         if (CommonClass(this, this).getString(RsaConstants.ServiceSaved.fobbuRequestId) != "")
         {
@@ -142,10 +133,7 @@ class SplashActivity : AppCompatActivity()
         // animation listener on fade animation
         animationFade.setAnimationListener(object : Animation.AnimationListener
         {
-            override fun onAnimationRepeat(p0: Animation?)
-            {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-            }
+            override fun onAnimationRepeat(p0: Animation?) {}
 
             override fun onAnimationEnd(p0: Animation?)
             {
@@ -178,12 +166,12 @@ class SplashActivity : AppCompatActivity()
                         }, 2000)
                     }
 
-                    override fun onAnimationStart(p0: Animation?) {
-                    }
+                    override fun onAnimationStart(p0: Animation?) {}
                 })
             }
 
-            override fun onAnimationStart(p0: Animation?) {
+            override fun onAnimationStart(p0: Animation?)
+            {
                 ivCenter.startAnimation(animationFade)
             }
         })

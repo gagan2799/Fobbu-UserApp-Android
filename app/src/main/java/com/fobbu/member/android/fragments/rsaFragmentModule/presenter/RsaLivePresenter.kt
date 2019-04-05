@@ -11,7 +11,7 @@ import com.fobbu.member.android.view.ActivityView
 class RsaLivePresenter (private var activity:Activity,private var activityView: ActivityView):RsaLiveHandler
 {
     val apiClient= ApiClient(activity)
-
+    // implementing requests API
     override fun getService(token:String,requesID: String)
     {
         apiClient.getService(token,requesID,object :ResponseHandler{

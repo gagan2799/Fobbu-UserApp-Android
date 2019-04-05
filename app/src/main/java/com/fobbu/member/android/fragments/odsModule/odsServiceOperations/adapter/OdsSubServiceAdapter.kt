@@ -34,17 +34,15 @@ class OdsSubServiceAdapter (var activity: Activity, var dataList:ArrayList<HashM
 
         when (dataList[p1]["selected"])
         {
-            "0" -> {
+            "0" ->
                 p0.ivSubServiceChecked.setImageResource(R.drawable.checkbox_uncheck)
-            }
 
             else ->
-            {
                 p0.ivSubServiceChecked.setImageResource(R.drawable.checkbox_checked)
-            }
         }
     }
 
+    // inner view holder class
     class OdsSubServiceViewHolder(view: View):RecyclerView.ViewHolder(view)
     {
         val tvSubService:TextView=view.findViewById(R.id.tvSubServiceOds)

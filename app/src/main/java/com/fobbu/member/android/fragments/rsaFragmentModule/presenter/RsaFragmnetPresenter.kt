@@ -10,43 +10,46 @@ import com.fobbu.member.android.utils.CommonClass
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 
-class RsaFragmnetPresenter(private var activity: Activity,private var rsaFragmentView: RsaFragmentView):RsaFragmentHandler {
-
-
+class RsaFragmnetPresenter(private var activity: Activity,private var rsaFragmentView: RsaFragmentView):RsaFragmentHandler
+{
     var apiClient=ApiClient(activity)
 
-
     // fetch service api
-    override fun fetchService(token: String) {
+    override fun fetchService(token: String)
+    {
         rsaFragmentView.showLoader()
+
     apiClient.fetchService(token,object :ResponseHandler
     {
-        override fun on401() {
+        override fun on401()
+        {
             CommonClass(activity,activity).clearPreference()
+
         }
-        override fun onSuccess(mainPojo: MainPojo) {
+        override fun onSuccess(mainPojo: MainPojo)
+        {
             rsaFragmentView.hideLoader()
+
             rsaFragmentView.fetchingServiceReport(mainPojo)
         }
 
-        override fun onError(message: String) {
+        override fun onError(message: String)
+        {
             rsaFragmentView.hideLoader()
+
             Toast.makeText(activity,"Error:$message", Toast.LENGTH_SHORT).show()
-            println("ERRROR -- >>> "+ message)
         }
 
-        override fun onServerError(message: String) {
+        override fun onServerError(message: String)
+        {
             rsaFragmentView.hideLoader()
-            Toast.makeText(activity,"Server Error:$message", Toast.LENGTH_SHORT).show()
-            println("ERRROR -- >>> "+ message)
-        }
 
+            Toast.makeText(activity,"Server Error:$message", Toast.LENGTH_SHORT).show()
+        }
     })
     }
 
-
-
-    // find fobbu request api
+    // find  request api
     override fun findFobbuRequest(
         userId: RequestBody,
         serviceSelected: RequestBody,
@@ -55,57 +58,65 @@ class RsaFragmnetPresenter(private var activity: Activity,private var rsaFragmen
         strVehicleType: RequestBody,
         strVehicleNumber: RequestBody,
         fileList: ArrayList<MultipartBody.Part>,
-        token: String
-    ) {
+        token: String)
+    {
         rsaFragmentView.showLoader()
+
         apiClient.findFobbuRequest(userId,serviceSelected,strtLatitude,strLongitude,strVehicleType,strVehicleNumber,fileList,token,object :ResponseHandler
         {
-            override fun on401() {
+            override fun on401()
+            {
                 CommonClass(activity,activity).clearPreference()
             }
-            override fun onSuccess(mainPojo: MainPojo) {
+
+            override fun onSuccess(mainPojo: MainPojo)
+            {
                 rsaFragmentView.hideLoader()
+
                 rsaFragmentView.findingFobbuReport(mainPojo)
             }
 
-            override fun onError(message: String) {
+            override fun onError(message: String)
+            {
                 rsaFragmentView.hideLoader()
+
                 Toast.makeText(activity,"Error:$message", Toast.LENGTH_SHORT).show()
-                println("ERRROR -- >>> "+ message)
             }
 
-            override fun onServerError(message: String) {
+            override fun onServerError(message: String)
+            {
                 rsaFragmentView.hideLoader()
-                Toast.makeText(activity,"Server Error:$message", Toast.LENGTH_SHORT).show()
-                println("ERRROR -- >>> "+ message)
-            }
 
+                Toast.makeText(activity,"Server Error:$message", Toast.LENGTH_SHORT).show()
+            }
         })
     }
 
 
-    // find fleet or user api
-    override fun findFleetOrUser(token: String, requestId: String) {
+    // find request/{requestId} API
+    override fun findFleetOrUser(token: String, requestId: String)
+    {
         apiClient.findFleetOrUser(token,requestId,object :ResponseHandler
         {
-
-            override fun on401() {
+            override fun on401()
+            {
                 CommonClass(activity,activity).clearPreference()
             }
 
-            override fun onSuccess(mainPojo: MainPojo) {
+            override fun onSuccess(mainPojo: MainPojo)
+            {
                 rsaFragmentView.fleetSuccessReport(mainPojo)
             }
 
-            override fun onError(message: String) {
+            override fun onError(message: String)
+            {
                 Toast.makeText(activity,"Error:$message", Toast.LENGTH_SHORT).show()
             }
 
-            override fun onServerError(message: String) {
+            override fun onServerError(message: String)
+            {
                 Toast.makeText(activity,"Server Error:$message", Toast.LENGTH_SHORT).show()
             }
-
         })
     }
-
 }

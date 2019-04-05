@@ -2,8 +2,14 @@
   <dictionary name="robin">
     <words>
       <w>arraylist</w>
+      <w>emergencycontacts</w>
+      <w>fobbu</w>
+      <w>geocoding</w>
+      <w>latlng</w>
       <w>searchtoolbar</w>
       <w>setsearchtoolbar</w>
+      <w>signup</w>
+      <w>vichle</w>
     </words>
   </dictionary>
 </component>
