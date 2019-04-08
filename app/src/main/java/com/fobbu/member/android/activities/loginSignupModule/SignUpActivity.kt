@@ -244,6 +244,9 @@ class SignUpActivity : AppCompatActivity(),ActivityView
                 .putString("pin",mainPojo.pin)
 
             CommonClass(this@SignUpActivity, this@SignUpActivity)
+                .putString("user_url", mainPojo.urls.user)
+
+            CommonClass(this@SignUpActivity, this@SignUpActivity)
                 .putString("x_access_token", mainPojo.token)
 
             CommonClass(this@SignUpActivity, this@SignUpActivity)

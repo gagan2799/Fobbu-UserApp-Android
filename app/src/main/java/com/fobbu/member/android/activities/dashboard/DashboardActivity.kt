@@ -249,7 +249,10 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
 
         if(CommonClass(this,this).getString("user_image")!="" || CommonClass(this,this).getString("user_image") != null)
         {
+
             val urlProfile = CommonClass(this,this).getString("user_url")+ CommonClass(this,this).getString("user_image")
+
+
 
             Picasso.get().load(urlProfile)
                 .error(R.drawable.dummy_pic)

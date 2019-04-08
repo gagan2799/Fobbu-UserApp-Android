@@ -6,9 +6,11 @@ import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.*
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.location.Address
 import android.location.Geocoder
 import android.location.Location
+import android.os.AsyncTask
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
@@ -36,6 +38,8 @@ import com.fobbu.member.android.interfaces.HeaderIconChanges
 import com.fobbu.member.android.interfaces.TopBarChanges
 import com.fobbu.member.android.modals.MainPojo
 import com.fobbu.member.android.utils.CommonClass
+import com.fobbu.member.android.utils.DirectionsJSONParser
+import com.fobbu.member.android.utils.HttpConnection
 import com.fobbu.member.android.view.ActivityView
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
@@ -50,6 +54,7 @@ import com.google.android.gms.maps.model.*
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.inflate_marker_title.view.*
 import org.json.JSONArray
+import org.json.JSONObject
 import java.lang.Double
 import java.util.*
 
@@ -113,6 +118,10 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     private var checkFirstTime = true
 
     private var mLastLocation: Location? = null
+
+    private var start: LatLng? = null
+
+    private var end: LatLng?=null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {
@@ -188,37 +197,6 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     @SuppressLint("ResourceAsColor")
     private fun handleClick()
     {
-
-        /*  rlInformation.setOnClickListener {
-
-              when (strWhere) {
-                  "" -> {
-                      ivTool.setImageResource(R.drawable.man_riding_bike)
-                      tvText.text = resources.getString(R.string.fobbu_on_way)
-                      strWhere = "share"
-
-                      ivLeftDotted.setImageResource(R.drawable.dotted)
-                      ivRightDotted.setImageResource(R.drawable.dotted)
-                      tvTrack.setBackgroundResource(R.drawable.solid_color_grey)
-                      rlPickingFuel.visibility = View.GONE
-                      tvPickingFuel.visibility = View.GONE
-                      rlTools.visibility = View.VISIBLE
-                  }
-                  "share" -> {
-                      strWhere = "next"
-                      ivTool.setImageResource(R.drawable.mechanic_with_cap)
-                      tvText.text = resources.getString(R.string.share_4_digit_code)
-                      tvCode.visibility = View.VISIBLE
-                  }
-                  else -> startActivity(
-                      Intent(activity!!, WaitingScreenWhite::class.java).putExtra(
-                          "from_where",
-                          "code_valid"
-                      )
-                  )
-              }
-          }*/
-
         ivImageCall.setOnClickListener {
             checkPermissionForCall()
         }
@@ -401,7 +379,8 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     }
 
     // function checking whether the location permission is given or not
-    private fun checkGPSEnable() {
+    private fun checkGPSEnable()
+    {
         val apiLevel = android.os.Build.VERSION.SDK_INT
 
         if (isAdded)
@@ -474,6 +453,8 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
                         // setting up  marker on Map
                         throwMarkerOnMap(mLastLocation?.latitude.toString(), mLastLocation?.longitude.toString())
+
+                        start=LatLng(mLastLocation?.latitude!!,mLastLocation?.longitude!!)
 
                         // setting up default marker on map
                         setDefaultMarkerOption(LatLng(mLastLocation!!.latitude, mLastLocation!!.longitude))
@@ -1159,6 +1140,8 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
                     val latLng = LatLng(item.getString("lat").toDouble(), item.getString("long").toDouble())
 
+                    end=latLng
+
                     // if (!listCheck.contains(item.getString("lat")))
                     //{
                     listCheck.add(item.getString("lat"))
@@ -1330,4 +1313,111 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
         return -1f
     }
 
+
+// ****************************** DRAW ROUTES  *******************************//
+
+    private class ReadTask (val map:GoogleMap,val url: String?): AsyncTask<String, Void, String>() {
+        override fun doInBackground(vararg p0: String?): String {
+            // For storing data from web service
+            var  data = ""
+            try {
+// Fetching the data from web service
+                println("API >>>>>>>>>>>>>>>>${p0[0]}")
+                data = HttpConnection().readUrl(p0[0])
+                //Log.d(“Background Task data”, data.toString());
+            } catch (e:Exception ) {
+                // Log.d(“Background Task”, e.toString());
+            }
+            println("data ::::$data")
+            return data;
+        }
+
+        override fun onPostExecute(result: String?) {
+            super.onPostExecute(result)
+            ParserTask(map).execute(result);
+        }
+    }
+
+
+    private class ParserTask(val mMap:GoogleMap) :
+        AsyncTask<String, Integer, List<List<HashMap<String, String>>>>() {
+        override fun doInBackground(vararg p0: String?): List<List<HashMap<String, String>>> {
+            val  jObject: JSONObject
+            var routes:List<List<HashMap<String, String>>>?  = null;
+            try {
+                jObject =  JSONObject(p0[0]);
+
+                val parser: DirectionsJSONParser =  DirectionsJSONParser()
+
+// Starts parsing data
+                routes = parser.parse(jObject);
+
+            } catch (e:Exception ) {
+
+                e.printStackTrace();
+            }
+            println("routes ::::$routes")
+            return routes!!;
+        }
+
+        override fun onPostExecute(result: List<List<HashMap<String, String>>>?) {
+            super.onPostExecute(result)
+            var points=ArrayList<LatLng>()
+            var lineOptions= PolylineOptions()
+
+
+            // Traversing through all the routes
+            for (i in 0 until result!!.size) {
+                points = ArrayList()
+                lineOptions = PolylineOptions()
+
+                // Fetching i-th route
+                val path = result[i]
+
+                // Fetching all the points in i-th route
+                for (j in path.indices) {
+                    val point = path[j]
+
+                    val lat = java.lang.Double.parseDouble(point["lat"])
+                    val lng = java.lang.Double.parseDouble(point["lng"])
+                    val position = LatLng(lat, lng)
+
+                    points.add(position)
+                }
+
+                // Adding all the points in the route to LineOptions
+                lineOptions.addAll(points)
+                lineOptions.width(10F)
+                lineOptions.color(Color.RED)
+
+                Log.d("onPostExecute", "onPostExecute lineoptions decoded")
+
+            }
+
+            // Drawing polyline in the Google Map for the i-th route
+            if (lineOptions != null) {
+                mMap.addPolyline(lineOptions)
+            } else {
+                Log.d("onPostExecute", "without Polylines drawn")
+            }
+        }
+
+    }
+
+
+    private fun getMapsApiDirectionsUrl(): String {
+        val waypoints = ("waypoints=optimize:true|"
+                + start?.latitude+ "," + start?.longitude
+                + "|" + "|" + end?.latitude + ","
+                +end?.longitude+ "|" + end?.latitude + ","
+                + end?.longitude)
+
+        val sensor = "sensor=false"
+        val params = "$waypoints&$sensor"
+        val output = "json"
+        return ("https://maps.googleapis.com/maps/api/directions/json"
+                + "?origin=" +  start?.latitude+ "," + start?.longitude+"&destination="+ end?.latitude + ","
+                +end?.longitude+
+                "&key=AIzaSyArlc6_7Tbs99zHLJH6BT3oUz3us9nDkSs")
+    }
 }
