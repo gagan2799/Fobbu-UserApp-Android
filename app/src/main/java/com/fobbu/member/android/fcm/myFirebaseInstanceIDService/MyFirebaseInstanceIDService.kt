@@ -19,6 +19,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.lang.Exception
 
+@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 /**
  * Created by abc on 30/1/18.
  */
@@ -28,7 +29,9 @@ class MyFirebaseInstanceIDService : FirebaseInstanceIdService()
 
     lateinit var prefsEditor: SharedPreferences.Editor
 
-    private val BASE_URL: String = "http://13.127.103.243:3000/"
+    /*private val BASE_URL: String = "http://13.127.103.243:3000/"*/   // Production
+
+    private val BASE_URL="http://13.126.177.3:3000"   // Development
 
     lateinit var webServiceApi: WebServiceApi
 
@@ -57,10 +60,11 @@ class MyFirebaseInstanceIDService : FirebaseInstanceIdService()
         {
             if (myPrefs.getString("_id", "") != "")
                 sendRegistrationToServer(refreshedToken,
-                    myPrefs.getString("x_access_token", ""), myPrefs.getString("_id", ""))
+                    myPrefs.getString("x_access_token", ""), myPrefs.getString("_id", ""))   // implementing update_device_token API
         }
     }
 
+    // function for checking internet connection
     fun checkInternetConn(con: Context): Boolean
     {
         try
@@ -81,7 +85,9 @@ class MyFirebaseInstanceIDService : FirebaseInstanceIdService()
         return false
     }
 
+    // ****************************** update_device_token API ************************//
 
+    // implementing update_device_token API
     private fun sendRegistrationToServer(refreshedToken: String, accessToken: String, refreshedId: String)
     {
         try
