@@ -146,7 +146,7 @@ class LanguageActivity : AppCompatActivity(),Filterable
                         {
                             filteredLanguageList[position]["selected"]="0"
 
-                            commonClass.showToast("You have reached the limit of the languages that can be selected. Please Unselect one add a new one.")
+                            commonClass.showToast(resources.getString(R.string.limit_of_selected_languages_msg))
                         }
                     }
 
@@ -154,7 +154,7 @@ class LanguageActivity : AppCompatActivity(),Filterable
                     {
                         if (selectedLanguageList.isNotEmpty())
                         {
-                            for (i in selectedLanguageList.indices)
+                            for (i in selectedLanguageList.size-1 downTo 0)
                             {
                                 if (selectedLanguageList[i]["language"]==filteredLanguageList[position]["language"])
                                 {
@@ -167,8 +167,8 @@ class LanguageActivity : AppCompatActivity(),Filterable
                     }
                 }
 
-                if (selectedLanguageList.isNotEmpty())
-                    commonClass.putStringList(RsaConstants.Constants.selectedLanguageList,selectedLanguageList)
+
+                commonClass.putStringList(RsaConstants.Constants.selectedLanguageList,selectedLanguageList)
 
                 languageAdapter.notifyDataSetChanged()
             }
@@ -185,7 +185,7 @@ class LanguageActivity : AppCompatActivity(),Filterable
         rvLanguageCheck.adapter=languageAdapter
     }
 
-// function for setting up search tool bar
+    // function for setting up search tool bar
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
     fun setsearchtoolbar()
     {
@@ -228,7 +228,7 @@ class LanguageActivity : AppCompatActivity(),Filterable
         initSearchView()          // function for initialising the variables and views of the search tool bar
     }
 
-// function for initialising the variables and views of the search tool bar
+    // function for initialising the variables and views of the search tool bar
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
     private fun initSearchView()

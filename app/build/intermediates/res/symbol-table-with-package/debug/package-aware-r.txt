@@ -3134,6 +3134,7 @@ string correct_email_error
 string correct_mobile_number_msg
 string correct_number_1st_contact_msg
 string correct_pan_msg
+string correct_pan_number_msg
 string current_password
 string current_pin
 string currently_no_data_is_available
@@ -3232,6 +3233,7 @@ string kyc_details
 string language
 string learn_more
 string lifting
+string limit_of_selected_languages_msg
 string live_track
 string login
 string logout

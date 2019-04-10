@@ -50,6 +50,16 @@ class CommonClass(activity1: Activity, context1: Context)
 
     private var endDateCustom = ""
 
+    // function for validating pan card
+    fun validatePan(pan:String):Boolean
+    {
+        val pattern = Pattern.compile("[A-Z]{5}[0-9]{4}[A-Z]{1}")
+
+        val matcher = pattern.matcher(pan)
+// Check if pattern matches
+        return matcher.matches()
+    }
+
     // function for showing Sharing bottom sheet
     fun shareIt(context:Context)
     {
@@ -379,6 +389,8 @@ class CommonClass(activity1: Activity, context1: Context)
         val datePicker = DatePickerDialog(activity, R.style.CustomPickerTheme, datePickerDialog, myCalendar.get(YEAR), myCalendar.get(MONTH), myCalendar.get(DAY_OF_MONTH))
 
         datePicker.datePicker.maxDate = myCalendar.timeInMillis /*+ 2592000000*/
+
+        datePicker.setCancelable(false)
 
         datePicker.show()
     }

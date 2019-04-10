@@ -120,7 +120,7 @@
     <string name="save_changes">Save Changes</string>
     <string name="your_vehicles">Your Vehicles</string>
     <string name="add_brand">Please add vehicle brand</string>
-    <string name="add_reg_no">Please add vehicle reg.no</string>
+    <string name="add_reg_no">Please add vehicle registration number</string>
     <string name="add_sub_model">Please add sub model</string>
     <string name="add_year">Please add year of make</string>
     <string name="add_vehicle_type">Please add vehicle type</string>
@@ -457,6 +457,10 @@
     <string name="prvovide_correct_mail_msg">Please provide correct email id</string>
     <string name="select_gender_msg">Please select gender</string>
     <string name="cancellation_by_user_msg">Your request has been cancelled\n A Cancellation fee will be deducted \nfrom your fobbu wallet</string>
+    <string name="correct_pan_number_msg">Please provide correct pan number</string>
+    <string name="limit_of_selected_languages_msg">You have reached the limit of the languages that can be selected.
+        Please Unselect one add a new one.
+    </string>
 
 
     <!--///LANGUAGE ARRAY-->

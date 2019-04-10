@@ -25,6 +25,7 @@ import android.support.v7.widget.GridLayoutManager
 import android.text.InputFilter
 import android.text.Spanned
 import android.util.Log
+import android.util.Patterns
 import android.view.Gravity
 import android.view.View
 import android.widget.AdapterView
@@ -262,12 +263,9 @@ class ProfileActivity : AppCompatActivity(),ActivityView,ProfileView
     {
         super.onResume()
 
-        if (commonClass.getStringList(RsaConstants.Constants.selectedLanguageList).isNotEmpty())
-        {
-            selectedLanguageList=commonClass.getStringList(RsaConstants.Constants.selectedLanguageList)
+        selectedLanguageList=commonClass.getStringList(RsaConstants.Constants.selectedLanguageList)
 
-            setSelectedLanguageRecycler()        // setting recycler view for languages
-        }
+        setSelectedLanguageRecycler()        // setting recycler view for languages
     }
 
     // function for setting data form preference into view
@@ -314,8 +312,18 @@ class ProfileActivity : AppCompatActivity(),ActivityView,ProfileView
                 tvGenderProfile.text=resources.getString(R.string.not_specified)
 
             else
-                tvGenderProfile.text=commonClass.getString("gender")
+            {
+                val gender=commonClass.getString("gender").substring(0,1).toUpperCase()+commonClass.getString("gender").substring(1,commonClass.getString("gender").length)
+
+                tvGenderProfile.text=gender
+            }
         },1000)
+
+        if (tvDobKycProfile.text!=resources.getString(R.string.date_of_birth))
+            tvDobKycProfile.setTextColor(resources.getColor(R.color.black))
+
+        else
+            tvDobKycProfile.setTextColor(resources.getColor(R.color.color_grey))
     }
 
     // method for capturing images
@@ -570,7 +578,7 @@ class ProfileActivity : AppCompatActivity(),ActivityView,ProfileView
                 }
                 catch (e: Exception)
                 {
-                   e.printStackTrace()
+                    e.printStackTrace()
                 }
 
             imageCameraCaptureRequest ->
@@ -629,8 +637,8 @@ class ProfileActivity : AppCompatActivity(),ActivityView,ProfileView
 
         var rotatedBitmap: Bitmap = bitmap
 
-          when (orientation)
-          {
+        when (orientation)
+        {
             ExifInterface.ORIENTATION_ROTATE_90 ->
                 rotatedBitmap = rotateImage(bitmap, 90F)   // function for rotating image
 
@@ -640,7 +648,7 @@ class ProfileActivity : AppCompatActivity(),ActivityView,ProfileView
             ExifInterface.ORIENTATION_ROTATE_270 ->
                 rotatedBitmap = rotateImage(bitmap, 270F)  // function for rotating image
 
-              ExifInterface.ORIENTATION_NORMAL ->
+            ExifInterface.ORIENTATION_NORMAL ->
                 rotatedBitmap = bitmap
         }
         return rotatedBitmap   // function for rotating image
@@ -693,7 +701,7 @@ class ProfileActivity : AppCompatActivity(),ActivityView,ProfileView
 
                 etEmailProfile.text.trim().isEmpty()->commonClass.showToast(resources.getString(R.string.provide_mail_msg))
 
-                !commonClass.isEmailValid(etEmailProfile.text.toString()) ->commonClass.showToast(resources.getString(R.string.prvovide_correct_mail_msg))
+                !Patterns.EMAIL_ADDRESS.matcher(etEmailProfile.text.toString().trim()).matches()->commonClass.showToast(resources.getString(R.string.prvovide_correct_mail_msg))
 
                 tvGenderProfile.text.trim().toString()=="Select Gender"->commonClass.showToast(resources.getString(R.string.select_gender_msg))
 
@@ -708,11 +716,12 @@ class ProfileActivity : AppCompatActivity(),ActivityView,ProfileView
                     else
                     {
                         first = etNameProfile.text.trim().toString()
+
                         last=""
                     }
-
                     val gender= if (tvGenderProfile.text.trim().toString()==resources.getString(R.string.not_specified))
                         resources.getString(R.string.other)
+
                     else
                         tvGenderProfile.text.trim().toString()
 
@@ -763,7 +772,7 @@ class ProfileActivity : AppCompatActivity(),ActivityView,ProfileView
             val displayName = if(last!="")
                 "$first $last"
 
-             else
+            else
                 first
 
             commonClass. putString("display_name",displayName)
@@ -823,6 +832,9 @@ class ProfileActivity : AppCompatActivity(),ActivityView,ProfileView
                 {
                     if(etPANProfile.text.trim().length<10)
                         commonClass.showToast(getString(R.string.provide_pan_msg_error))
+
+                    else if(!commonClass.validatePan(etPANProfile.text.toString()))
+                        commonClass.showToast(resources.getString(R.string.correct_pan_number_msg))
 
                     else
                         updateKyc()      // implementing update_kyc API

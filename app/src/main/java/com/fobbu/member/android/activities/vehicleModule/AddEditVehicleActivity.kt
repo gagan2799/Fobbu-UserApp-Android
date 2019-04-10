@@ -409,7 +409,7 @@ class AddEditVehicleActivity : AppCompatActivity(),
     {
         val alertDialog = AlertDialog.Builder(this).create()
 
-        alertDialog.setTitle("Car Images")
+        alertDialog.setTitle(resources.getString(R.string.upload_vehicle_images))
 
         alertDialog.setMessage(null)
 
@@ -774,6 +774,7 @@ class AddEditVehicleActivity : AppCompatActivity(),
                             {
                                 Glide.with(this@AddEditVehicleActivity)
                                     .load(imgFile)
+                                    .centerCrop()
                                     .into(ivImage1)
 
                                 isImageOn1 = true
@@ -785,6 +786,7 @@ class AddEditVehicleActivity : AppCompatActivity(),
                             {
                                 Glide.with(this@AddEditVehicleActivity)
                                     .load(imgFile)
+                                    .centerCrop()
                                     .into(ivImage2)
 
                                 isImageOn2 = true
@@ -796,6 +798,7 @@ class AddEditVehicleActivity : AppCompatActivity(),
                             {
                                 Glide.with(this@AddEditVehicleActivity)
                                     .load(imgFile)
+                                    .centerCrop()
                                     .into(ivImage3)
 
                                 isImageOn3 = true
@@ -807,6 +810,7 @@ class AddEditVehicleActivity : AppCompatActivity(),
                             {
                                 Glide.with(this@AddEditVehicleActivity)
                                     .load(imgFile)
+                                    .centerCrop()
                                     .into(ivImage4)
 
                                 isImageOn4 = true
