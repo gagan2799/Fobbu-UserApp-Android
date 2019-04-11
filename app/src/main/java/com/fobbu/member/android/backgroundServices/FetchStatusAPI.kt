@@ -277,6 +277,20 @@ class FetchStatusAPI : Service()
                         else
                             println("NOT SAVED BECAUSE SAME ")
                     }
+                    else if (mainPojo!!.success == "false")
+                    {
+                        emptySharedRequest()       // function for clearing current request
+
+                        val intent = Intent()
+
+                        intent.action = FcmPushTypes.Types.acceptRequestBroadCast
+
+                        intent.putExtra("navigate_to", "4")
+
+                        //intent.putExtra("message", mainPojo.getData().reason_of_cancellation)
+
+                        sendBroadcast(intent)
+                    }
                     else if (response!!.code() == 401)
                     {
                         println("HERE GO TO LOGIN SCREEN >>>>>>>>")
