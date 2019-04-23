@@ -31,6 +31,7 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.TextView
+import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.fobbu.member.android.R
 import com.fobbu.member.android.R.drawable.filter
@@ -824,30 +825,21 @@ class ProfileActivity : AppCompatActivity(),ActivityView,ProfileView
         if (commonClass.checkInternetConn(this))
         {
             when{
-                tvDobKycProfile.text.toString()==getString(R.string.date_of_birth)->commonClass.showToast(getString(R.string.provide_date_msg))
+                (tvDobKycProfile.text.toString()==getString(R.string.date_of_birth))->
+                    Toast.makeText(this,resources.getString(R.string.provide_date_msg), Toast.LENGTH_SHORT).show()
 
-                etAdharProfile.text.trim().isEmpty() && etPANProfile.text.trim().isEmpty() ->commonClass.showToast(getString(R.string.provide_any_msg))
+                (etAdharProfile.text.trim().isEmpty() && etPANProfile.text.trim().isEmpty()) ->
+                    commonClass.showToast(resources.getString(R.string.provide_any_msg))
 
-                etPANProfile.text.trim().toString().isNotEmpty() ->
-                {
-                    if(etPANProfile.text.trim().length<10)
-                        commonClass.showToast(getString(R.string.provide_pan_msg_error))
+                (etPANProfile.text.trim().toString().isNotEmpty() && etPANProfile.text.trim().length<10)  ->
+                    commonClass.showToast(resources.getString(R.string.provide_pan_msg_error))
 
-                    else if(!commonClass.validatePan(etPANProfile.text.toString()))
-                        commonClass.showToast(resources.getString(R.string.correct_pan_number_msg))
+                (etPANProfile.text.trim().toString().isNotEmpty() && (!commonClass.validatePan(etPANProfile.text.toString())))->
+                    commonClass.showToast(resources.getString(R.string.correct_pan_number_msg))
 
-                    else
-                        updateKyc()      // implementing update_kyc API
-                }
+                etAdharProfile.text.trim().toString().isNotEmpty() && etAdharProfile.text.trim().length<12 ->
+                    commonClass.showToast(resources.getString(R.string.provide_adhar_msg_error))
 
-                etAdharProfile.text.trim().toString().isNotEmpty() ->
-                {
-                    if(etAdharProfile.text.trim().length<12)
-                        commonClass.showToast(getString(R.string.provide_adhar_msg_error))
-
-                    else
-                        updateKyc() // implementing update_kyc API
-                }
                 else->
                     updateKyc()     // implementing update_kyc API
             }

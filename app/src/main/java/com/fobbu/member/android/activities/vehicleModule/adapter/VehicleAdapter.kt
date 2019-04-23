@@ -56,7 +56,7 @@ class VehicleAdapter(internal var activity: Activity, private var dataListMain:A
 
                     .placeholder(placeHolder)
 
-                    .fit().centerInside()
+                    .fit().centerCrop()
 
                     .error(placeHolder)
 

@@ -446,11 +446,11 @@
     <string name="provide_2nd_contact_name_msg">Please provide 2nd contacts name</string>
     <string name="provide_2nd_number_msg">Please provide 2nd contacts number</string>
     <string name="provide_2nd_contact_correct_number_msg">Please provide correct number of 2nd contact</string>
-    <string name="relationship_status_2nd_contact_msg">Please provide a relationship status with 2nd contact</string>
+
     <string name="provide_name_msg">Please provide a name</string>
     <string name="provide_number_msg">Please provide a number</string>
     <string name="correct_number_1st_contact_msg">Please provide correct number of 1st contact</string>
-    <string name="relationship_status_1st_msg">Please provide a relationship status with 2nd contact</string>
+    <string name="relationship_status_1st_msg">Please provide a relationship status</string>
     <string name="enter_new_pin_msg">Please enter New PIN.</string>
     <string name="confirm_pin_msg">Please enter Confirm PIN.</string>
     <string name="provide_mail_msg">Please provide email id</string>

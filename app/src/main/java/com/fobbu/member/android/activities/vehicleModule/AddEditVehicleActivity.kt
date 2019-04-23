@@ -176,7 +176,7 @@ class AddEditVehicleActivity : AppCompatActivity(),
 
             tvNew.visibility = View.GONE
 
-            tvAddEditVehicle.text = resources.getString(R.string.save_changes)
+            tvAddEditVehicle.text = resources.getString(R.string.edit_vehicle)
 
             tvHeading.text = resources.getString(R.string.edit_vehicle)
 
@@ -195,7 +195,7 @@ class AddEditVehicleActivity : AppCompatActivity(),
                     0 ->
                     {
                         if (listImagesEdit[i] != "")
-                            Picasso.get().load(listImagesEdit[i]).fit().centerInside().error(R.drawable.photo_camera).into(ivImage1)
+                            Picasso.get().load(listImagesEdit[i]).fit().centerCrop().error(R.drawable.photo_camera).into(ivImage1)
 
                         isImageOn1 = true
                     }
@@ -203,7 +203,7 @@ class AddEditVehicleActivity : AppCompatActivity(),
                     1 ->
                     {
                         if (listImagesEdit[i] != "")
-                            Picasso.get().load(listImagesEdit[i]).fit().centerInside().error(R.drawable.photo_camera).into(ivImage2)
+                            Picasso.get().load(listImagesEdit[i]).fit().centerCrop().error(R.drawable.photo_camera).into(ivImage2)
 
                         isImageOn2 = true
                     }
@@ -211,14 +211,14 @@ class AddEditVehicleActivity : AppCompatActivity(),
                     2 ->
                     {
                         if (listImagesEdit[i] != "")
-                            Picasso.get().load(listImagesEdit[i]).fit().centerInside().error(R.drawable.photo_camera).into(ivImage3)
+                            Picasso.get().load(listImagesEdit[i]).fit().centerCrop().error(R.drawable.photo_camera).into(ivImage3)
 
                         isImageOn3 = true
                     }
 
                     else ->
                     {
-                        Picasso.get().load(listImagesEdit[i]).fit().centerInside().error(R.drawable.photo_camera).into(ivImage4)
+                        Picasso.get().load(listImagesEdit[i]).fit().centerCrop().error(R.drawable.photo_camera).into(ivImage4)
 
                         isImageOn4 = true
                     }
@@ -282,7 +282,6 @@ class AddEditVehicleActivity : AppCompatActivity(),
         etYearsOfMake.setOnClickListener{
             dialogYearShow()          // function for showing year dialog
         }
-
 
         llPhoto1.setOnClickListener {
             if (isImageOn1)
@@ -390,7 +389,7 @@ class AddEditVehicleActivity : AppCompatActivity(),
 
                     if (CommonClass(this,this).checkInternetConn(this))
                     {
-                        if (tvAddEditVehicle.text == resources.getString(R.string.save_changes))
+                        if (tvAddEditVehicle.text == resources.getString(R.string.edit_vehicle))
                             editVehicleApi()
 
                         else
@@ -409,7 +408,7 @@ class AddEditVehicleActivity : AppCompatActivity(),
     {
         val alertDialog = AlertDialog.Builder(this).create()
 
-        alertDialog.setTitle(resources.getString(R.string.upload_vehicle_images))
+        alertDialog.setTitle("Vehicle Images")
 
         alertDialog.setMessage(null)
 
@@ -589,7 +588,7 @@ class AddEditVehicleActivity : AppCompatActivity(),
     {
         val alertDialog = AlertDialog.Builder(this).create()
 
-        alertDialog.setTitle("Upload Car Images")
+        alertDialog.setTitle("Upload Vehicle Images")
 
         alertDialog.setMessage("Please select from where you want to choose")
 
@@ -1202,6 +1201,14 @@ class AddEditVehicleActivity : AppCompatActivity(),
     // function adding files to arraylist
     private fun addFileToList()
     {
+        bigProfileList.clear()
+
+        if (listImagesEdit.isNotEmpty())
+            for (i in listImagesEdit.indices)
+            {
+                bigProfileList.add(listImagesEdit[i])
+            }
+
         if (file1!=null)
             bigProfileList.add(file1.toString())
 

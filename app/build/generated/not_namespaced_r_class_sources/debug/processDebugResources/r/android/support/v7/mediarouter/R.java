@@ -1063,8 +1063,8 @@ public final class R {
         public static final int mr_controller_volume_slider = 0x7f0f012e;
         public static final int mr_system_route_name = 0x7f0f012f;
         public static final int mr_user_route_category_name = 0x7f0f0130;
-        public static final int search_menu_title = 0x7f0f01ae;
-        public static final int status_bar_notification_info_overflow = 0x7f0f01d3;
+        public static final int search_menu_title = 0x7f0f01ad;
+        public static final int status_bar_notification_info_overflow = 0x7f0f01d2;
     }
     public static final class style {
         private style() {}

@@ -3368,7 +3368,6 @@ string recent_v
 string registeration_no_message
 string relationship
 string relationship_status_1st_msg
-string relationship_status_2nd_contact_msg
 string requestID_not_provided
 string resend_code
 string reset

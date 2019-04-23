@@ -351,7 +351,7 @@
             >
                 <TextView
                         android:layout_alignParentBottom="true"
-                        android:text="@string/add_details"
+                        android:text="@string/edit_profile"
                         android:padding="13dp"
                         android:visibility="gone"
                         android:id="@+id/tvAddDetailsProfile"

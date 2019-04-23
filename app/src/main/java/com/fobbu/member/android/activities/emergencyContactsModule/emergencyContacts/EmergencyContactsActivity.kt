@@ -236,7 +236,8 @@ class EmergencyContactsActivity : ContactListView, AppCompatActivity(), Activity
                 else if (etFullNameEmergency.text.toString().trim().isEmpty() && et2ndFullNameEmergency.text.toString().trim().isEmpty())
                     CommonClass(this, this).showToast("Please provide atleast one contacts information")
 
-                else if (etMobileEmergency.text.trim().toString() == et2ndMobileEmergency.text.trim().toString())
+                else if ((etMobileEmergency.text.trim().toString() == et2ndMobileEmergency.text.trim().toString())&&etMobileEmergency.text.trim().isNotEmpty()
+                && et2ndMobileEmergency.text.trim().isNotEmpty())
                     commonClass.showToast("Please provide different contact number")
 
                 else if (ifEmpty(etFullNameEmergency.text.toString().trim(), etMobileEmergency.text.toString().trim(), tvRelationship.text.toString()))
@@ -273,13 +274,13 @@ class EmergencyContactsActivity : ContactListView, AppCompatActivity(), Activity
                 when
                 {
                     etEditNameEmergency.text.toString().trim().isEmpty() ->
-                        Toast.makeText(this, "Please provide name.", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, resources.getString(R.string.provide_name_msg), Toast.LENGTH_SHORT).show()
 
                     etEditMobileEmergency.text.toString().trim().isEmpty() ->
-                        Toast.makeText(this, "Please provide number.", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, resources.getString(R.string.provide_number_msg), Toast.LENGTH_SHORT).show()
 
                     tvEditRelationship.text == getString(R.string.relationship) ->
-                        Toast.makeText(this, "Please provide relationship.", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, resources.getString(R.string.relationship_status_1st_msg), Toast.LENGTH_SHORT).show()
 
                     else ->
                     {
@@ -355,7 +356,7 @@ class EmergencyContactsActivity : ContactListView, AppCompatActivity(), Activity
             CommonClass(this, this).showToast(getString(R.string.provide_2nd_contact_correct_number_msg))
 
         tv2ndRelationship.text.toString() == "Relationship" ->
-            CommonClass(this, this).showToast(getString(R.string.relationship_status_2nd_contact_msg))
+            CommonClass(this, this).showToast(getString(R.string.relationship_status_1st_msg))
 
         else ->
         {
@@ -367,43 +368,83 @@ class EmergencyContactsActivity : ContactListView, AppCompatActivity(), Activity
     // method for saving prices and total number of services in list
     private fun saveToLocalList(name: String, mobileNumber: String, relationship: String,from:String)
     {
-        var isPresent = false
+        var isPresentInMainList = false
+
+        var firstBlockRepetitionCheck= false
+
+        var position=0
 
         for (i in dataList.indices)
         {
             if (dataList[i]["mobile_number"] == mobileNumber)
             {
-                isPresent = true
+                isPresentInMainList = true
 
                 break
             }
         }
 
-        if (isPresent)
+        for(i in contactList.indices)
+        {
+            if (contactList[i]["mobile_number"]==mobileNumber)
+            {
+                firstBlockRepetitionCheck=true
+
+                position=i
+
+                break
+            }
+        }
+
+        if (isPresentInMainList)
             commonClass.showToast(resources.getString(R.string.user_exists_msg))
 
         else
         {
-            val hashMap = HashMap<String, String>()
+            if (!firstBlockRepetitionCheck) {
+                val hashMap = HashMap<String, String>()
 
-            hashMap["name"] = name
+                hashMap["name"] = name
 
-            hashMap["mobile_number"] = mobileNumber
+                hashMap["mobile_number"] = mobileNumber
 
-            hashMap["relationship"] = relationship
+                hashMap["relationship"] = relationship
 
-            contactList.add(hashMap)
+                contactList.add(hashMap)
 
-            if(from=="1")
-            {
-                if (ifEmpty(et2ndFullNameEmergency.text.toString().trim(), et2ndMobileEmergency.text.toString().trim(), tv2ndRelationship.text.toString()))
-                    check2ndBlock()                // function for validating the texts of the 2nd contact block
+                if (from == "1")
+                {
+                    if (ifEmpty(et2ndFullNameEmergency.text.toString().trim(), et2ndMobileEmergency.text.toString().trim(), tv2ndRelationship.text.toString()))
+                        check2ndBlock()                // function for validating the texts of the 2nd contact block
 
+                    else
+                        postEmergencyContacts()        // implementing emergencycontacts API (POST)
+                }
                 else
-                    postEmergencyContacts()        // implementing emergencycontacts API (POST)
+                    postEmergencyContacts()           // implementing emergencycontacts API (POST)
             }
             else
-                postEmergencyContacts()           // implementing emergencycontacts API (POST)
+            {
+                contactList[position]["name"]= name
+
+                contactList[position]["mobile_number"]= mobileNumber
+
+                contactList[position]["relationship"]= relationship
+
+                if (from == "1") {
+                    if (ifEmpty(
+                            et2ndFullNameEmergency.text.toString().trim(),
+                            et2ndMobileEmergency.text.toString().trim(),
+                            tv2ndRelationship.text.toString()
+                        )
+                    )
+                        check2ndBlock()                // function for validating the texts of the 2nd contact block
+
+                    else
+                        postEmergencyContacts()        // implementing emergencycontacts API (POST)
+                } else
+                    postEmergencyContacts()           // implementing emergencycontacts API (POST)
+            }
         }
     }
 
