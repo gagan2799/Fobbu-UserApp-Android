@@ -4,6 +4,8 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:id="@+id/rlWorkSummary"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:orientation="vertical"
         android:background="@color/grey_header"
 >
@@ -77,7 +79,7 @@
             android:layout_marginTop="10dp"
             android:textColor="@color/colorPrimary"/>
 
-    <ScrollView
+    <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@+id/textViewConfirmAndPay"
@@ -315,7 +317,7 @@
             <android.support.v7.widget.RecyclerView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:nestedScrollingEnabled="false"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
                     android:id="@+id/recyclerViewWorkSummary"
             />
 
@@ -564,7 +566,7 @@
 
 
         </LinearLayout>
-    </ScrollView>
+    </android.support.v4.widget.NestedScrollView>
 
     <TextView
             android:id="@+id/textViewConfirmAndPay"

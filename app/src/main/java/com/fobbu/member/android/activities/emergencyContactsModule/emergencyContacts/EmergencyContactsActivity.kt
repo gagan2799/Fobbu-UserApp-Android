@@ -231,30 +231,30 @@ class EmergencyContactsActivity : ContactListView, AppCompatActivity(), Activity
             if (tvAddEmergencyContacts.text == resources.getString(R.string.add))
             {
                 if (dataList.size >= 5)
-                    Toast.makeText(this, "You have reached the maximum limit of contacts that can be added. Please remove few to add more.", Toast.LENGTH_SHORT).show()
+                    CommonClass(this,this).showToast(resources.getString(R.string.max_limit_contact_msg), rlEmergencyContacts)
 
                 else if (etFullNameEmergency.text.toString().trim().isEmpty() && et2ndFullNameEmergency.text.toString().trim().isEmpty())
-                    CommonClass(this, this).showToast("Please provide atleast one contacts information")
+                    CommonClass(this, this).showToast(resources.getString(R.string.atleast_one_contact_msg),rlEmergencyContacts)
 
                 else if ((etMobileEmergency.text.trim().toString() == et2ndMobileEmergency.text.trim().toString())&&etMobileEmergency.text.trim().isNotEmpty()
-                && et2ndMobileEmergency.text.trim().isNotEmpty())
-                    commonClass.showToast("Please provide different contact number")
+                    && et2ndMobileEmergency.text.trim().isNotEmpty())
+                    commonClass.showToast(resources.getString(R.string.msg_diff_contact_num),rlEmergencyContacts)
 
                 else if (ifEmpty(etFullNameEmergency.text.toString().trim(), etMobileEmergency.text.toString().trim(), tvRelationship.text.toString()))
                 {
                     when
                     {
                         etFullNameEmergency.text.toString().trim().isEmpty() ->
-                            CommonClass(this, this).showToast(resources.getString(R.string.provide_name_msg))
+                            CommonClass(this, this).showToast(resources.getString(R.string.provide_name_msg),rlEmergencyContacts)
 
                         etMobileEmergency.text.toString().trim().isEmpty() ->
-                            CommonClass(this, this).showToast(resources.getString(R.string.provide_number_msg))
+                            CommonClass(this, this).showToast(resources.getString(R.string.provide_number_msg),rlEmergencyContacts)
 
                         etMobileEmergency.text.toString().trim().length < 10 ->
-                            CommonClass(this, this).showToast(resources.getString(R.string.correct_number_1st_contact_msg))
+                            CommonClass(this, this).showToast(resources.getString(R.string.correct_number_1st_contact_msg),rlEmergencyContacts)
 
                         tvRelationship.text.toString() == "Relationship" ->
-                            CommonClass(this, this).showToast(resources.getString(R.string.relationship_status_1st_msg))
+                            CommonClass(this, this).showToast(resources.getString(R.string.relationship_status_1st_msg),rlEmergencyContacts)
 
                         else ->
                         {
@@ -274,13 +274,16 @@ class EmergencyContactsActivity : ContactListView, AppCompatActivity(), Activity
                 when
                 {
                     etEditNameEmergency.text.toString().trim().isEmpty() ->
-                        Toast.makeText(this, resources.getString(R.string.provide_name_msg), Toast.LENGTH_SHORT).show()
+                        CommonClass(this,this).showToast( resources.getString(R.string.provide_name_msg), rlEmergencyContacts)
 
                     etEditMobileEmergency.text.toString().trim().isEmpty() ->
-                        Toast.makeText(this, resources.getString(R.string.provide_number_msg), Toast.LENGTH_SHORT).show()
+                        CommonClass(this,this).showToast( resources.getString(R.string.provide_number_msg),rlEmergencyContacts)
+
+                    etEditMobileEmergency.text.trim().isNotEmpty() && etEditMobileEmergency.text.trim().length<10->
+                        CommonClass(this,this).showToast(resources.getString(R.string.correct_num),rlEmergencyContacts)
 
                     tvEditRelationship.text == getString(R.string.relationship) ->
-                        Toast.makeText(this, resources.getString(R.string.relationship_status_1st_msg), Toast.LENGTH_SHORT).show()
+                        CommonClass(this,this).showToast(resources.getString(R.string.relationship_status_1st_msg), rlEmergencyContacts)
 
                     else ->
                     {
@@ -318,7 +321,7 @@ class EmergencyContactsActivity : ContactListView, AppCompatActivity(), Activity
                                 editContacts()           // implementing emergencycontacts API (PUT)
                             }
                             else
-                                commonClass.showToast("This number already exists. Please try with another one")
+                                commonClass.showToast("This number already exists. Please try with another one",rlEmergencyContacts)
                         }
                         else
                         {
@@ -347,16 +350,16 @@ class EmergencyContactsActivity : ContactListView, AppCompatActivity(), Activity
     private fun check2ndBlock() = when
     {
         et2ndFullNameEmergency.text.toString().trim().isEmpty() ->
-            CommonClass(this, this).showToast(getString(R.string.provide_2nd_contact_name_msg))
+            CommonClass(this, this).showToast(getString(R.string.provide_2nd_contact_name_msg),rlEmergencyContacts)
 
         et2ndMobileEmergency.text.trim().toString().isEmpty() ->
-            CommonClass(this, this).showToast(getString(R.string.provide_2nd_number_msg))
+            CommonClass(this, this).showToast(getString(R.string.provide_2nd_number_msg),rlEmergencyContacts)
 
         et2ndMobileEmergency.text.toString().trim().length < 10 ->
-            CommonClass(this, this).showToast(getString(R.string.provide_2nd_contact_correct_number_msg))
+            CommonClass(this, this).showToast(getString(R.string.provide_2nd_contact_correct_number_msg),rlEmergencyContacts)
 
         tv2ndRelationship.text.toString() == "Relationship" ->
-            CommonClass(this, this).showToast(getString(R.string.relationship_status_1st_msg))
+            CommonClass(this, this).showToast(getString(R.string.relationship_status_1st_msg),rlEmergencyContacts)
 
         else ->
         {
@@ -397,7 +400,7 @@ class EmergencyContactsActivity : ContactListView, AppCompatActivity(), Activity
         }
 
         if (isPresentInMainList)
-            commonClass.showToast(resources.getString(R.string.user_exists_msg))
+            commonClass.showToast(resources.getString(R.string.user_exists_msg),rlEmergencyContacts)
 
         else
         {
@@ -462,7 +465,7 @@ class EmergencyContactsActivity : ContactListView, AppCompatActivity(), Activity
             }
         }
         else
-            Toast.makeText(this, resources.getString(R.string.internet_is_unavailable), Toast.LENGTH_SHORT).show()
+            CommonClass(this,this).showToast(resources.getString(R.string.internet_is_unavailable), rlEmergencyContacts)
     }
 
 
@@ -476,7 +479,7 @@ class EmergencyContactsActivity : ContactListView, AppCompatActivity(), Activity
             finish()
         }
         else
-            Toast.makeText(this, mainPojo.message, Toast.LENGTH_SHORT).show()
+            CommonClass(this,this).showToast(mainPojo.message, rlEmergencyContacts)
 
     }
 
@@ -490,7 +493,7 @@ class EmergencyContactsActivity : ContactListView, AppCompatActivity(), Activity
             emergencyHandler.editContacts(editedList, sortedList[0]["_id"].toString(), commonClass.getString("x_access_token"))
 
         else
-            Toast.makeText(this, resources.getString(R.string.internet_is_unavailable), Toast.LENGTH_SHORT).show()
+            CommonClass(this,this).showToast( resources.getString(R.string.internet_is_unavailable),rlEmergencyContacts)
     }
 
     // function to handle the response of the edit contacts API
@@ -503,7 +506,7 @@ class EmergencyContactsActivity : ContactListView, AppCompatActivity(), Activity
             finish()
         }
         else
-            commonClass.showToast(mainPojo.message)
+            commonClass.showToast(mainPojo.message,rlEmergencyContacts)
     }
 
     override fun showLoader()
@@ -530,7 +533,7 @@ class EmergencyContactsActivity : ContactListView, AppCompatActivity(), Activity
             listHandler.getContacts(commonClass.getString("x_access_token"))
 
         else
-            commonClass.showToast(resources.getString(R.string.internet_is_unavailable))
+            commonClass.showToast(resources.getString(R.string.internet_is_unavailable),rlEmergencyContacts)
     }
 
     // handling response of emergencycontacts API (GET)

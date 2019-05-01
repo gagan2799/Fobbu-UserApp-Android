@@ -5,6 +5,7 @@
         xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
         android:background="@color/blue_transparent_back"
         android:clickable="true"
+        android:id="@+id/rlRsaFrag"
         android:layout_height="match_parent">
 
 

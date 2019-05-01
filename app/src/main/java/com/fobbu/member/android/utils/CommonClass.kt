@@ -9,6 +9,7 @@ import android.graphics.Color
 import android.net.ConnectivityManager
 import android.net.Uri
 import android.os.Build
+import android.support.design.widget.Snackbar
 import android.support.v4.app.ActivityCompat
 import android.view.*
 import android.view.animation.Animation
@@ -158,10 +159,30 @@ class CommonClass(activity1: Activity, context1: Context)
     }
 
     // function for showing Toast
-    fun showToast(text: String)
+    fun showToast(text: String,view:View)
     {
-        Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
+        activity.runOnUiThread {
+            /*Toast.makeText(context, text, Toast.LENGTH_SHORT).show()*/
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                val snackbar = Snackbar
+                    .make(view, text, Snackbar.LENGTH_LONG)
+                val view = snackbar.view
+                view.setBackgroundColor(context.resources.getColor(R.color.colorPrimaryDark))
+                snackbar.show()
+            } else {
+                Toast.makeText(context, text, Toast.LENGTH_LONG).show()
+            }
+        }
+
     }
+
+    fun messageDisplay(message: String) {
+
+
+
+    }
+
 
     // function for clearing request
     fun workDoneReviewSend()

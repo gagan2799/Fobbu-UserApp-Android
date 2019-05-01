@@ -272,7 +272,7 @@ class ProfileActivity : AppCompatActivity(),ActivityView,ProfileView
     // function for setting data form preference into view
     private fun setDataInView()
     {
-        val fullName=commonClass.getString("first_name")+" "+commonClass.getString("last_name")
+        val fullName=commonClass.getString("display_name")/*+" "+commonClass.getString("last_name")*/
 
         etNameProfile.setText(fullName)
 
@@ -694,52 +694,75 @@ class ProfileActivity : AppCompatActivity(),ActivityView,ProfileView
 
             when
             {
-                !hasPic -> commonClass.showToast(getString(R.string.select_image_first))
+                !hasPic -> commonClass.showToast(getString(R.string.select_image_first),rlProfile)
 
-                etNameProfile.text.trim().isEmpty()->commonClass.showToast(getString(R.string.provide_name))
+                etNameProfile.text.trim().isEmpty()->commonClass.showToast(getString(R.string.provide_name),rlProfile)
 
-                etNumberProfile.text.trim().isEmpty()->commonClass.showToast(resources.getString(R.string.provide_number_msg))
+                etNumberProfile.text.trim().isEmpty()->commonClass.showToast(resources.getString(R.string.provide_number_msg),rlProfile)
 
-                etEmailProfile.text.trim().isEmpty()->commonClass.showToast(resources.getString(R.string.provide_mail_msg))
+                etEmailProfile.text.trim().isEmpty()->commonClass.showToast(resources.getString(R.string.provide_mail_msg),rlProfile)
 
-                !Patterns.EMAIL_ADDRESS.matcher(etEmailProfile.text.toString().trim()).matches()->commonClass.showToast(resources.getString(R.string.prvovide_correct_mail_msg))
+                !Patterns.EMAIL_ADDRESS.matcher(etEmailProfile.text.toString().trim()).matches()->commonClass.showToast(resources.getString(R.string.prvovide_correct_mail_msg),rlProfile)
 
-                tvGenderProfile.text.trim().toString()=="Select Gender"->commonClass.showToast(resources.getString(R.string.select_gender_msg))
+                tvGenderProfile.text.trim().toString()=="Select Gender"->commonClass.showToast(resources.getString(R.string.select_gender_msg),rlProfile)
 
                 else->
                 {
-                    if (etNameProfile.text.trim().toString().contains("\\\\s+"))
-                    {
-                        first=getName(etNameProfile.text.trim().toString())
+                 var name= etNameProfile.text.trim().toString()
+                    if (!is_word(name)) {
+                        if (name.split("\\w+").toString().length > 1) {
 
-                        last=getSurname(etNameProfile.text.trim().toString())
-                    }
-                    else
-                    {
-                        first = etNameProfile.text.trim().toString()
+                            first = getName(etNameProfile.text.trim().toString())
 
-                        last=""
+                            last = getSurname(etNameProfile.text.trim().toString())
+
+                        }
                     }
+                        else{
+                            first = name;
+                            last=""
+                        }
+
+
+                    println("Name first>>>>>>>>>>>>>>>>>>${first}")
+                    println("Name last>>>>>>>>>>>>>>>>>>${last}")
+
+
                     val gender= if (tvGenderProfile.text.trim().toString()==resources.getString(R.string.not_specified))
                         resources.getString(R.string.other)
 
                     else
                         tvGenderProfile.text.trim().toString()
 
-                    profileHandler.updateUser(RequestBody.create(MediaType.parse("text/plain"),etEmailProfile.text.trim().toString()),
-                        RequestBody.create(MediaType.parse("text/plain"),etNumberProfile.text.trim().toString()),
-                        RequestBody.create(MediaType.parse("text/plain"),first),
-                        RequestBody.create(MediaType.parse("text/plain"),last),
-                        RequestBody.create(MediaType.parse("text/plain"),gender),
-                        fileList,
-                        commonClass.getString("x_access_token"))
+
+
+
+                         profileHandler.updateUser(RequestBody.create(MediaType.parse("text/plain"),etEmailProfile.text.trim().toString()),
+                             RequestBody.create(MediaType.parse("text/plain"),etNumberProfile.text.trim().toString()),
+                             RequestBody.create(MediaType.parse("text/plain"),first),
+                             RequestBody.create(MediaType.parse("text/plain"),last),
+                             RequestBody.create(MediaType.parse("text/plain"),gender),
+                             fileList,
+                             commonClass.getString("x_access_token"))
                 }
             }
         }
         else
-            commonClass.showToast(resources.getString(R.string.internet_is_unavailable))
+            commonClass.showToast(resources.getString(R.string.internet_is_unavailable),rlProfile)
     }
 
+    fun is_word(s: String): Boolean {
+        return s.length > 0 && s.split("\\s+".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray().size == 1
+    }
+
+/*
+    fun getName(fullName: String): String {
+        return fullName.split(" (?!.* )".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[0]
+    }
+
+    fun getSurname(fullName: String): String {
+        return fullName.split(" (?!.* )".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[1]
+    }*/
 
     // function for handling the response of the update Request API
     override fun onRequestSuccessReport(mainPojo: MainPojo)
@@ -788,7 +811,7 @@ class ProfileActivity : AppCompatActivity(),ActivityView,ProfileView
 
             commonClass.putString("user_image",urlProfile)
         }
-        commonClass.showToast(mainPojo.message)
+        commonClass.showToast(mainPojo.message,rlProfile)
     }
 
     override fun showLoader()
@@ -826,26 +849,26 @@ class ProfileActivity : AppCompatActivity(),ActivityView,ProfileView
         {
             when{
                 (tvDobKycProfile.text.toString()==getString(R.string.date_of_birth))->
-                    Toast.makeText(this,resources.getString(R.string.provide_date_msg), Toast.LENGTH_SHORT).show()
+                    CommonClass(this,this).showToast(resources.getString(R.string.provide_date_msg),rlProfile)
 
                 (etAdharProfile.text.trim().isEmpty() && etPANProfile.text.trim().isEmpty()) ->
-                    commonClass.showToast(resources.getString(R.string.provide_any_msg))
+                    commonClass.showToast(resources.getString(R.string.provide_any_msg),rlProfile)
 
                 (etPANProfile.text.trim().toString().isNotEmpty() && etPANProfile.text.trim().length<10)  ->
-                    commonClass.showToast(resources.getString(R.string.provide_pan_msg_error))
+                    commonClass.showToast(resources.getString(R.string.provide_pan_msg_error),rlProfile)
 
                 (etPANProfile.text.trim().toString().isNotEmpty() && (!commonClass.validatePan(etPANProfile.text.toString())))->
-                    commonClass.showToast(resources.getString(R.string.correct_pan_number_msg))
+                    commonClass.showToast(resources.getString(R.string.correct_pan_number_msg),rlProfile)
 
                 etAdharProfile.text.trim().toString().isNotEmpty() && etAdharProfile.text.trim().length<12 ->
-                    commonClass.showToast(resources.getString(R.string.provide_adhar_msg_error))
+                    commonClass.showToast(resources.getString(R.string.provide_adhar_msg_error),rlProfile)
 
                 else->
                     updateKyc()     // implementing update_kyc API
             }
         }
         else
-            commonClass.showToast(resources.getString(R.string.internet_is_unavailable))
+            commonClass.showToast(resources.getString(R.string.internet_is_unavailable),rlProfile)
     }
 
     // implementing update_kyc API
@@ -864,7 +887,7 @@ class ProfileActivity : AppCompatActivity(),ActivityView,ProfileView
             profileHandler.updateKyc(map, commonClass.getString("x_access_token"))
         }
         else
-            CommonClass(this,this).showToast(resources.getString(R.string.internet_is_unavailable))
+            CommonClass(this,this).showToast(resources.getString(R.string.internet_is_unavailable),rlProfile)
     }
 
     //function for handling the response of the update_kyc API
@@ -881,6 +904,6 @@ class ProfileActivity : AppCompatActivity(),ActivityView,ProfileView
             startActivity(Intent(this,WaitingScreenWhite::class.java).putExtra("from_where","profile"))
         }
         else
-            commonClass.showToast(mainPojo.message)
+            commonClass.showToast(mainPojo.message,rlProfile)
     }
 }

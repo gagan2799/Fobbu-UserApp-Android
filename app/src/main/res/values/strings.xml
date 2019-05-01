@@ -70,7 +70,7 @@
         <u>Resend Code</u>
     </string>
     <string name="sms_success">OTP verified successfully.</string>
-    <string name="sms_fail">Wrong OTP. PLease try again.</string>
+    <string name="sms_fail">Wrong OTP. Please try again.</string>
 
     ///GENERATE PIN
     <string name="generate_pin">Generate PIN</string>
@@ -438,10 +438,10 @@
     <string name="select_vehicle">Select Vehicle</string>
     <string name="no_data_msg">No data found</string>
     <string name="provide_image_rsa_msg">Please provide atleast one image for assistance.</string>
-    <string name="upload_vehicle_images">Upload Vehicle Images</string>
+    <string name="upload_vehicle_images">Upload Vehicle Image</string>
     <string name="select_from_gallery_or_camera_msg">Please select from where you want to choose</string>
     <string name="cancellation_msg">Are you sure you want to cancel\nA cancellation fee or Rs$$ will be charged</string>
-    <string name="select_one_towing_service">PLease select one from the provided services</string>
+    <string name="select_one_towing_service">Please select one from the provided services</string>
     <string name="user_exists_msg">User already exists. Please try with another number.</string>
     <string name="provide_2nd_contact_name_msg">Please provide 2nd contacts name</string>
     <string name="provide_2nd_number_msg">Please provide 2nd contacts number</string>
@@ -461,6 +461,12 @@
     <string name="limit_of_selected_languages_msg">You have reached the limit of the languages that can be selected.
         Please Unselect one add a new one.
     </string>
+    <string name="correct_num">Please provide correct mobile number</string>
+    <string name="max_limit_contact_msg">You have reached the maximum limit of contacts that can be added. Please remove
+        few to add more.
+    </string>
+    <string name="atleast_one_contact_msg">Please provide atleast one contacts information</string>
+    <string name="msg_diff_contact_num">Please provide different contact number</string>
 
 
     <!--///LANGUAGE ARRAY-->

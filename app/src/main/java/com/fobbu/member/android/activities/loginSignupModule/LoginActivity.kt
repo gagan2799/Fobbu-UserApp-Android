@@ -92,28 +92,28 @@ class LoginActivity : AppCompatActivity(), ActivityView
             {
                 etMobile.text.trim().isEmpty() ->
                 {
-                    CommonClass(this, this).showToast(resources.getString(R.string.please_enter_mobile))
+                    CommonClass(this, this).showToast(resources.getString(R.string.please_enter_mobile),rlLogin)
 
                     etMobile.requestFocus()
                 }
 
                 etMobile.text.trim().length<10->
                 {
-                    CommonClass(this, this).showToast(resources.getString(R.string.correct_mobile_number_msg))
+                    CommonClass(this, this).showToast(resources.getString(R.string.correct_mobile_number_msg),rlLogin)
 
                     etMobile.requestFocus()
                 }
 
                 etPassword.text.trim().isEmpty() ->
                 {
-                    CommonClass(this, this).showToast(resources.getString(R.string.please_enter_password))
+                    CommonClass(this, this).showToast(resources.getString(R.string.please_enter_password),rlLogin)
 
                     etPassword.requestFocus()
                 }
 
                 etPassword.text.trim().length < 6 ->
                 {
-                    CommonClass(this, this).showToast(resources.getString(R.string.please_enter_valid_password))
+                    CommonClass(this, this).showToast(resources.getString(R.string.please_enter_valid_password),rlLogin)
 
                     etPassword.requestFocus()
                 }
@@ -229,7 +229,7 @@ class LoginActivity : AppCompatActivity(), ActivityView
         else
         {
             CommonClass(this@LoginActivity, this@LoginActivity)
-                .showToast(mainPojo.message)
+                .showToast(mainPojo.message,rlLogin)
         }
 
     }

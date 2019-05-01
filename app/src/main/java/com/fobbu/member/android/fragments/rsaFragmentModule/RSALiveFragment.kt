@@ -123,6 +123,8 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
     private var end: LatLng?=null
 
+    lateinit var coordinator:CoordinatorLayout
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {
         // Inflate the layout for this fragment
@@ -152,6 +154,8 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     @SuppressLint("ResourceAsColor")
     private fun initialise(view: View?)
     {
+        coordinator=view!!.findViewById(R.id.coordinator)
+
         headerIconChanges = activity as HeaderIconChanges?
 
         headerIconChanges!!.changeHeaderIcons(false, true, true)
@@ -1029,7 +1033,7 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
             //  timer.schedule (hourlyTask, 1L, 1000*60)
         }
         else
-            CommonClass(activity!!, activity!!).showToast(activity!!.resources.getString(R.string.internet_is_unavailable))
+            CommonClass(activity!!, activity!!).showToast(activity!!.resources.getString(R.string.internet_is_unavailable),coordinator)
     }
 
     //*************************** requests API ************************//
@@ -1046,7 +1050,7 @@ class RSALiveFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                 rsaLiveHandler.getService(CommonClass(activity!!, activity!!).getString("x_access_token"), CommonClass(this.activity!!, this.activity!!).getString(RsaConstants.ServiceSaved.fobbuRequestId))
 
             else
-                CommonClass(activity!!, activity!!).showToast(activity!!.resources.getString(R.string.internet_is_unavailable))
+                CommonClass(activity!!, activity!!).showToast(activity!!.resources.getString(R.string.internet_is_unavailable),coordinator)
         }
         catch (e: Exception)
         {

@@ -405,7 +405,7 @@ class SelectVehicleActivity : AppCompatActivity(),ActivityView,Filterable
             vehicleHandler.sendVehicleData(tokenHeader,userId)
         }
         else
-            CommonClass(this,this).showToast(resources.getString(R.string.internet_is_unavailable))
+            CommonClass(this,this).showToast(resources.getString(R.string.internet_is_unavailable),rlSelectVehicle)
     }
 
     // handling response of the vehicle list API

@@ -27,6 +27,8 @@ class WorkSummaryAdapter(private var serviceMap:ArrayList<HashMap<String,Any>>, 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: MyWorkViewHolder, position: Int)
     {
+        println("Service LISt >>>>>>>>>>>>>>...${serviceMap[position]["service_name"]}")
+
         val no_of_service: Long = (serviceMap[position]["number_of_services"] as Double).toLong()
 
         val service_price: Long = (serviceMap[position]["service_price"] as Double).toLong()

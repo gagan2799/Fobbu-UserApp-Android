@@ -466,7 +466,7 @@ class VehicleListActivity : AppCompatActivity(),ActivityView,DeleteVehicleClickL
             vehicleHandler.sendVehicleData(tokenHeader,userId)
         }
         else
-            CommonClass(this,this).showToast(resources.getString(R.string.internet_is_unavailable))
+            CommonClass(this,this).showToast(resources.getString(R.string.internet_is_unavailable),rlVehicleList)
     }
 
     /// Vehicle List Response (API -users/vehicles(GET))
@@ -619,7 +619,7 @@ class VehicleListActivity : AppCompatActivity(),ActivityView,DeleteVehicleClickL
             addEditHandler.deleteVehicle(tokenHeader,vehicleID,userId)
         }
         else
-            CommonClass(this,this).showToast(resources.getString(R.string.internet_is_unavailable))
+            CommonClass(this,this).showToast(resources.getString(R.string.internet_is_unavailable),rlVehicleList)
 
     }
 
@@ -660,7 +660,7 @@ class VehicleListActivity : AppCompatActivity(),ActivityView,DeleteVehicleClickL
             vehicleAdapter.notifyDataSetChanged()
         }
         else
-            Toast.makeText(this,mainPojo.message, Toast.LENGTH_SHORT).show()
+            CommonClass(this,this).showToast(mainPojo.message,rlVehicleList)
     }
 
     override fun onRequestSuccessReportEdit(mainPojo: MainPojo) {}

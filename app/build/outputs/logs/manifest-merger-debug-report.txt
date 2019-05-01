@@ -161,7 +161,6 @@ MERGED from [com.google.android.gms:play-services-tasks-license:12.0.1] /home/ro
 MERGED from [com.google.android.gms:play-services-vision-common-license:12.0.1] /home/robin/.gradle/caches/transforms-1/files-1.1/play-services-vision-common-license-12.0.1.aar/4297d914f79f80bce089a30dbe793544/AndroidManifest.xml:17:1-24:12
 MERGED from [com.google.android.gms:play-services-vision-license:12.0.1] /home/robin/.gradle/caches/transforms-1/files-1.1/play-services-vision-license-12.0.1.aar/1a0c51a7971487427938923897ec6762/AndroidManifest.xml:17:1-24:12
 MERGED from [com.google.android.gms:play-services-wallet-license:12.0.1] /home/robin/.gradle/caches/transforms-1/files-1.1/play-services-wallet-license-12.0.1.aar/662be9fde14b17bca87b75170eb90ebe/AndroidManifest.xml:17:1-24:12
-MERGED from [com.google.android.gms:play-services-wearable-license:12.0.1] /home/robin/.gradle/caches/transforms-1/files-1.1/play-services-wearable-license-12.0.1.aar/c88a7228e1951b6305ee987322500992/AndroidManifest.xml:17:1-24:12
 INJECTED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:2:1-194:12
 INJECTED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:2:1-194:12
 INJECTED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml:2:1-194:12
@@ -457,8 +456,6 @@ MERGED from [com.google.android.gms:play-services-vision-license:12.0.1] /home/r
 MERGED from [com.google.android.gms:play-services-vision-license:12.0.1] /home/robin/.gradle/caches/transforms-1/files-1.1/play-services-vision-license-12.0.1.aar/1a0c51a7971487427938923897ec6762/AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.gms:play-services-wallet-license:12.0.1] /home/robin/.gradle/caches/transforms-1/files-1.1/play-services-wallet-license-12.0.1.aar/662be9fde14b17bca87b75170eb90ebe/AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.gms:play-services-wallet-license:12.0.1] /home/robin/.gradle/caches/transforms-1/files-1.1/play-services-wallet-license-12.0.1.aar/662be9fde14b17bca87b75170eb90ebe/AndroidManifest.xml:22:5-20
-MERGED from [com.google.android.gms:play-services-wearable-license:12.0.1] /home/robin/.gradle/caches/transforms-1/files-1.1/play-services-wearable-license-12.0.1.aar/c88a7228e1951b6305ee987322500992/AndroidManifest.xml:22:5-20
-MERGED from [com.google.android.gms:play-services-wearable-license:12.0.1] /home/robin/.gradle/caches/transforms-1/files-1.1/play-services-wearable-license-12.0.1.aar/c88a7228e1951b6305ee987322500992/AndroidManifest.xml:22:5-20
 	android:appComponentFactory
 		ADDED from [com.android.support:support-compat:28.0.0] /home/robin/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/039c28797e5175886ed63fb98e346303/AndroidManifest.xml:22:18-91
 	android:supportsRtl
@@ -1044,8 +1041,6 @@ MERGED from [com.google.android.gms:play-services-vision-license:12.0.1] /home/r
 MERGED from [com.google.android.gms:play-services-vision-license:12.0.1] /home/robin/.gradle/caches/transforms-1/files-1.1/play-services-vision-license-12.0.1.aar/1a0c51a7971487427938923897ec6762/AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.gms:play-services-wallet-license:12.0.1] /home/robin/.gradle/caches/transforms-1/files-1.1/play-services-wallet-license-12.0.1.aar/662be9fde14b17bca87b75170eb90ebe/AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.gms:play-services-wallet-license:12.0.1] /home/robin/.gradle/caches/transforms-1/files-1.1/play-services-wallet-license-12.0.1.aar/662be9fde14b17bca87b75170eb90ebe/AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-wearable-license:12.0.1] /home/robin/.gradle/caches/transforms-1/files-1.1/play-services-wearable-license-12.0.1.aar/c88a7228e1951b6305ee987322500992/AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-wearable-license:12.0.1] /home/robin/.gradle/caches/transforms-1/files-1.1/play-services-wearable-license-12.0.1.aar/c88a7228e1951b6305ee987322500992/AndroidManifest.xml:20:5-44
 INJECTED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml
 INJECTED from /home/robin/Documents/Ujwal_Sadhu/git/user-app-android/app/src/main/AndroidManifest.xml
 	tools:overrideLibrary

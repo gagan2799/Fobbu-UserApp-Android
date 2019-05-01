@@ -85,54 +85,54 @@ class SignUpActivity : AppCompatActivity(),ActivityView
             {
                 etFullName.text.trim().toString() =="" ->
                 {
-                    CommonClass(this, this).showToast(resources.getString(R.string.please_enter_full_name))
+                    CommonClass(this, this).showToast(resources.getString(R.string.please_enter_full_name),rlSignUp)
 
                     etFullName.requestFocus()
                 }
 
                 etMobile.text.trim().toString() =="" -> {
-                    CommonClass(this, this).showToast(resources.getString(R.string.please_enter_mobile))
+                    CommonClass(this, this).showToast(resources.getString(R.string.please_enter_mobile),rlSignUp)
                     etMobile.requestFocus()
                 }
 
                 etMobile.text.trim().toString().length<10->
                 {
-                    CommonClass(this,this).showToast(resources.getString(R.string.correct_mobile_number_msg))
+                    CommonClass(this,this).showToast(resources.getString(R.string.correct_mobile_number_msg),rlSignUp)
 
                     etFullName.requestFocus()
                 }
 
                 etEmail.text.trim().toString() =="" ->
                 {
-                    CommonClass(this, this).showToast(resources.getString(R.string.please_enter_email))
+                    CommonClass(this, this).showToast(resources.getString(R.string.please_enter_email),rlSignUp)
 
                     etEmail.requestFocus()
                 }
 
                 !Patterns.EMAIL_ADDRESS.matcher(etEmail.text.trim().toString()).matches() ->
                 {
-                    CommonClass(this, this).showToast(resources.getString(R.string.correct_email_error))
+                    CommonClass(this, this).showToast(resources.getString(R.string.correct_email_error),rlSignUp)
 
                     etEmail.requestFocus()
                 }
 
                 etPassword.text.trim().toString() =="" ->
                 {
-                    CommonClass(this, this).showToast(resources.getString(R.string.please_enter_password))
+                    CommonClass(this, this).showToast(resources.getString(R.string.please_enter_password),rlSignUp)
 
                     etPassword.requestFocus()
                 }
 
                 etPassword.text.trim().length < 6 ->
                 {
-                    CommonClass(this, this).showToast(resources.getString(R.string.please_enter_valid_password))
+                    CommonClass(this, this).showToast(resources.getString(R.string.please_enter_valid_password),rlSignUp)
 
                     etPassword.requestFocus()
                 }
 
                 tvGender.text.trim().toString() ==resources.getString(R.string.selectGender) ->
                 {
-                    CommonClass(this, this).showToast(resources.getString(R.string.please_enter_gender))
+                    CommonClass(this, this).showToast(resources.getString(R.string.please_enter_gender),rlSignUp)
 
                     etPassword.requestFocus()
                 }
@@ -259,7 +259,7 @@ class SignUpActivity : AppCompatActivity(),ActivityView
         }
         else
             CommonClass(this@SignUpActivity, this@SignUpActivity)
-                .showToast(mainPojo.message)
+                .showToast(mainPojo.message,rlSignUp)
     }
 
     override fun showLoader()

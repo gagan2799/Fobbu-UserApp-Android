@@ -28,12 +28,12 @@ class MapServicePresenter(var activity: Activity,var activityView: MapServiceVie
 
             override fun onError(message: String)
             {
-                commonClass.showToast(message)
+              //  commonClass.showToast(message)
             }
 
             override fun onServerError(message: String)
             {
-                commonClass.showToast(message)
+              //  commonClass.showToast(message)
             }
 
             override fun on401()

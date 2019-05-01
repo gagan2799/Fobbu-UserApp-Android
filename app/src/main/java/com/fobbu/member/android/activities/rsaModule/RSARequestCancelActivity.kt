@@ -101,8 +101,7 @@ class RSARequestCancelActivity : AppCompatActivity(), ActivityView
                 showPopUp(this,reason)         // function for showing custom dialog
 
             else
-                Toast.makeText(this,resources.getString(R.string.please_select_one_issue)
-                    ,Toast.LENGTH_SHORT).show()
+                CommonClass(this,this).showToast(resources.getString(R.string.please_select_one_issue),rlRequestCancel)
         }
     }
 
@@ -249,7 +248,7 @@ class RSARequestCancelActivity : AppCompatActivity(), ActivityView
             rsaHandler.cancelRequest(string, CommonClass(this, this).getString(RsaConstants.ServiceSaved.fobbuRequestId), CommonClass(this, this).getString("x_access_token"))
 
         else
-            CommonClass(this,this).showToast(resources.getString(R.string.noInternet))
+            CommonClass(this,this).showToast(resources.getString(R.string.noInternet),rlRequestCancel)
     }
 
     // implementing reasons API
@@ -259,7 +258,7 @@ class RSARequestCancelActivity : AppCompatActivity(), ActivityView
             rsaHandler.cancelReasons(CommonClass(this, this).getString("x_access_token"))
 
         else
-            CommonClass(this,this).showToast(resources.getString(R.string.internet_is_unavailable))
+            CommonClass(this,this).showToast(resources.getString(R.string.internet_is_unavailable),rlRequestCancel)
     }
 
     // handling the response of the reasons API and change_status API (cancellation)
@@ -288,7 +287,7 @@ class RSARequestCancelActivity : AppCompatActivity(), ActivityView
             }
         }
         else
-            Toast.makeText(this, "" + mainPojo.message, Toast.LENGTH_SHORT).show()
+            CommonClass(this,this).showToast("" + mainPojo.message, rlRequestCancel)
     }
 
     override fun showLoader() {}

@@ -86,6 +86,8 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
     var selectedPosition=0
 
+    lateinit var rlOdsFrag:RelativeLayout
+
     private lateinit var geocoder:Geocoder
 
     private lateinit var mapServiceHandler:MapServiceHandler
@@ -122,6 +124,8 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     // function for initialising all the variables of the class
     private fun initView(view: View, savedInstanceState: Bundle?)
     {
+        rlOdsFrag=view.findViewById(R.id.rlOdsFrag)
+
         rlLoader=view.findViewById(R.id.rlLoader)
 
         commonClass= CommonClass(activity!!,activity!!)
@@ -150,7 +154,7 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                 selectedPosition=position
 
                 if (currentAddress=="")
-                    commonClass.showToast(getString(R.string.gathering_info))
+                    commonClass.showToast(getString(R.string.gathering_info),rlOdsFrag)
 
                 else
                     showDialog(activity!!,position)        // function for showing custom dialog
@@ -209,10 +213,10 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
             when
             {
                 wheels==""->
-                    commonClass.showToast(getString(R.string.provide_vehicle_msg))
+                    commonClass.showToast(getString(R.string.provide_vehicle_msg),rlOdsFrag)
 
                 etVehicleModelOds.text.trim().isNullOrEmpty()->
-                    commonClass.showToast(getString(R.string.car_model_message))
+                    commonClass.showToast(getString(R.string.car_model_message),rlOdsFrag)
 
                 else->
                     changeFragment(OdsOperationFragment())   // function for changing fragment
@@ -224,11 +228,11 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
             when{
                 etCarModelOds.text.trim().isNullOrEmpty()->
-                    commonClass.showToast(getString(R.string.car_model_message))
+                    commonClass.showToast(getString(R.string.car_model_message),rlOdsFrag)
 
 
                 etCarRegestrationOds.text.trim().isNullOrEmpty()->
-                    commonClass.showToast(getString(R.string.registeration_no_message))
+                    commonClass.showToast(getString(R.string.registeration_no_message),rlOdsFrag)
 
                 else->
                 {
@@ -719,7 +723,7 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
             serviceHandler.fetchService(commonClass.getString("x_access_token"))
 
         else
-            commonClass.showToast(activity!!.resources.getString(R.string.internet_is_unavailable))
+            commonClass.showToast(activity!!.resources.getString(R.string.internet_is_unavailable),rlOdsFrag)
     }
 
     // handling the response of the service API
@@ -787,7 +791,7 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
             mapServiceHandler.getAddress(latlng,"false",activity!!.resources.getString(R.string.google_maps_key))
 
         else
-            commonClass.showToast(activity!!.resources.getString(R.string.internet_is_unavailable))
+            commonClass.showToast(activity!!.resources.getString(R.string.internet_is_unavailable),rlOdsFrag)
     }
 
 
@@ -796,6 +800,6 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
         if (mainPojo.results.isNotEmpty())
             addressList=mainPojo.results
 
-        commonClass.showToast(mainPojo.error_message)
+        commonClass.showToast(mainPojo.error_message,rlOdsFrag)
     }
 }

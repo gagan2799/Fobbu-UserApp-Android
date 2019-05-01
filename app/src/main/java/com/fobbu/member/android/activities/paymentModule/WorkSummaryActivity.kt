@@ -107,7 +107,7 @@ class WorkSummaryActivity : AppCompatActivity(),ActivityView
             rsaLiveHandler.getService(CommonClass(this,this).getString("x_access_token"),CommonClass(this, this).getString(RsaConstants.ServiceSaved.fobbuRequestId))
 
         else
-            CommonClass(this,this).showToast(resources.getString(R.string.internet_is_unavailable))
+            CommonClass(this,this).showToast(resources.getString(R.string.internet_is_unavailable),rlWorkSummary)
     }
 
     // handling response of the request API
@@ -145,7 +145,7 @@ class WorkSummaryActivity : AppCompatActivity(),ActivityView
             }
         }
         else
-            Toast.makeText(this,mainPojo.message, Toast.LENGTH_SHORT).show()
+            CommonClass(this,this).showToast(mainPojo.message, rlWorkSummary)
     }
 
     //function for setting up recycler
@@ -156,6 +156,8 @@ class WorkSummaryActivity : AppCompatActivity(),ActivityView
         recyclerViewWorkSummary.layoutManager=LinearLayoutManager(this)
 
         recyclerViewWorkSummary.adapter=workSummaryAdapter
+
+        recyclerViewWorkSummary.isNestedScrollingEnabled=false
     }
 
     override fun showLoader() {}

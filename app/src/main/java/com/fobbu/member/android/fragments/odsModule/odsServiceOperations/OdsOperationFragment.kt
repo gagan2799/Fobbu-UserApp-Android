@@ -67,6 +67,8 @@ class OdsOperationFragment : Fragment(),ActivityView,SelectedSubServiceView
 
     private var topBarChanges: TopBarChanges? = null
 
+    lateinit var rlOdsOperationFrag:RelativeLayout
+
     private lateinit var subServiceList:ArrayList<Map<String,Any>>
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
@@ -90,6 +92,8 @@ class OdsOperationFragment : Fragment(),ActivityView,SelectedSubServiceView
     private fun initView(view: View)
     {
         commonClass= CommonClass(activity!!,activity!!)
+
+        rlOdsOperationFrag=view.findViewById(R.id.rlOdsOperationFrag)
 
         subServiceList= ArrayList()
 
@@ -250,7 +254,7 @@ class OdsOperationFragment : Fragment(),ActivityView,SelectedSubServiceView
             if (time!="")
             {
                 if (dataList[0][RsaConstants.Ods.service_name].toString()=="Washing")
-                    makeOdsRequest()    //implementing ods_request API
+                    makeOdsRequest(view)    //implementing ods_request API
 
                 else
                     startActivity(Intent(activity!!,OdsWorkSummaryActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK).putExtra(RsaConstants.Ods.time,timeSlot).putExtra(RsaConstants.Ods.date,dateCustom).putExtra(RsaConstants.Ods.selectedServiceList,selectedServiceList))
@@ -320,7 +324,7 @@ class OdsOperationFragment : Fragment(),ActivityView,SelectedSubServiceView
                 if (dateCustom!="")
                 {
                     if (dataList[0][RsaConstants.Ods.service_name].toString()=="Washing")
-                        makeOdsRequest()    //implementing ods_request API
+                        makeOdsRequest(view)    //implementing ods_request API
 
                     else
                         startActivity(Intent(activity!!,OdsWorkSummaryActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK).putExtra(RsaConstants.Ods.time,timeSlot).putExtra(RsaConstants.Ods.date,dateCustom).putExtra(RsaConstants.Ods.selectedServiceList,selectedServiceList))
@@ -335,7 +339,7 @@ class OdsOperationFragment : Fragment(),ActivityView,SelectedSubServiceView
     //********************** ods_request API ***********************//
 
     //implementing ods_request API
-    private fun makeOdsRequest()
+    private fun makeOdsRequest(view: View)
     {
         if (commonClass.checkInternetConn(activity!!))
         {
@@ -362,7 +366,7 @@ class OdsOperationFragment : Fragment(),ActivityView,SelectedSubServiceView
             odsRequestHandler.makeOdsRequest(map,commonClass.getString("x_access_token"))
         }
         else
-            commonClass.showToast(activity!!.resources.getString(R.string.internet_is_unavailable))
+            commonClass.showToast(activity!!.resources.getString(R.string.internet_is_unavailable),rlOdsOperationFrag)
     }
 
     //handling the response of    ods_request API
@@ -372,7 +376,7 @@ class OdsOperationFragment : Fragment(),ActivityView,SelectedSubServiceView
             startActivity(Intent(activity!!,OdsWorkSummaryActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK).putExtra(RsaConstants.Ods.time,timeSlot).putExtra(RsaConstants.Ods.date,dateCustom).putExtra(RsaConstants.Ods.selectedServiceList,selectedServiceList))
 
         else
-            commonClass.showToast(mainPojo.message)
+            commonClass.showToast(mainPojo.message,rlOdsOperationFrag)
     }
 
     override fun showLoader()

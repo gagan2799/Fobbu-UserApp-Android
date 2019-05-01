@@ -3,6 +3,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
+        android:id="@+id/rlLanguage"
         android:layout_height="match_parent"
         android:background="@color/order_screen_background"
         tools:context=".activities.profileModule.langauage.LanguageActivity">

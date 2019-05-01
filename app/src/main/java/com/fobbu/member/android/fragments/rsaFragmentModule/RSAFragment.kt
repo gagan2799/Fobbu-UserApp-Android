@@ -262,6 +262,8 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
     lateinit var viewLeftTwoWheeler: View
 
+    lateinit var rlRsaFrag:RelativeLayout
+
     lateinit var viewRightTwoWheeler: View
 
     @SuppressLint("NewApi")
@@ -296,6 +298,8 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     @SuppressLint("SetTextI18n")
     private fun initialise(view: View?)
     {
+        rlRsaFrag=view!!.findViewById(R.id.rlRsaFrag)
+
         webServiceApi = getEnv().getRetrofitMulti()
 
         headerIconChanges = activity as HeaderIconChanges?
@@ -477,7 +481,7 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                 if (llTowing.visibility==View.VISIBLE)
                 {
                     if (ivLifting.drawable.constantState==activity!!.resources.getDrawable(R.drawable.lifting).constantState && ivFlatBed.drawable.constantState==activity!!.resources.getDrawable(R.drawable.flatbed_selected).constantState)
-                        CommonClass(activity!!,activity!!).showToast(activity!!.resources.getString(R.string.select_one_towing_service))
+                        CommonClass(activity!!,activity!!).showToast(activity!!.resources.getString(R.string.select_one_towing_service),rlRsaFrag)
 
                     else
                         findFobbuApi()   // find fobbu Api (API-users/requests)
@@ -487,7 +491,7 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
             }
 
             else
-                CommonClass(activity!!, activity!!).showToast(activity!!.resources.getString(R.string.internet_is_unavailable))
+                CommonClass(activity!!, activity!!).showToast(activity!!.resources.getString(R.string.internet_is_unavailable),rlRsaFrag)
         }
 
         ivBack.setOnClickListener {
@@ -675,7 +679,7 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
             strVehicleType = "2wheeler"
 
             if (etVehicleNumber.text.trim().isNullOrBlank())
-                Toast.makeText(activity, resources.getString(R.string.please_enter_vehicle_number), Toast.LENGTH_SHORT).show()
+                CommonClass(activity!!,activity!!).showToast( resources.getString(R.string.please_enter_vehicle_number),rlRsaFrag)
 
             else
             {
@@ -721,8 +725,7 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
         llScooterThree.setOnClickListener {
             if (etVehicleNumber.text.trim().isNullOrBlank())
-                Toast.makeText(activity, resources.getString(R.string.please_enter_vehicle_number), Toast.LENGTH_SHORT)
-                    .show()
+                CommonClass(activity!!,activity!!).showToast( resources.getString(R.string.please_enter_vehicle_number), rlRsaFrag)
 
             else
             {
@@ -744,8 +747,8 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
         llCarFuelDieselThree.setOnClickListener {
             if (etVehicleNumber.text.trim().isNullOrBlank())
-                Toast.makeText(activity, resources.getString(R.string.please_enter_vehicle_number), Toast.LENGTH_SHORT)
-                    .show()
+                CommonClass(activity!!,activity!!).showToast( resources.getString(R.string.please_enter_vehicle_number), rlRsaFrag)
+
             else
             {
                 strVehicleType = "2wheeler"
@@ -766,8 +769,7 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
         llCarFuelPetrolThree.setOnClickListener {
             if (etVehicleNumber.text.trim().isNullOrBlank())
-                Toast.makeText(activity, resources.getString(R.string.please_enter_vehicle_number), Toast.LENGTH_SHORT)
-                    .show()
+                CommonClass(activity!!,activity!!).showToast( resources.getString(R.string.please_enter_vehicle_number), rlRsaFrag)
 
             else
             {
@@ -818,8 +820,7 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
             strVehicleType = "4wheeler"
 
             if (etVehicleNumber.text.trim().isNullOrBlank())
-                Toast.makeText(activity, resources.getString(R.string.please_enter_vehicle_number), Toast.LENGTH_SHORT)
-                    .show()
+                CommonClass(activity!!,activity!!).showToast( resources.getString(R.string.please_enter_vehicle_number), rlRsaFrag)
 
             else
             {
@@ -868,7 +869,7 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                 showMainFindFobbuView()      ///FIND FOBBU VIEW ACCORDING CONDITIONS
 
             else
-                CommonClass(activity!!, activity!!).showToast(activity!!.resources.getString(R.string.provide_image_rsa_msg))
+                CommonClass(activity!!, activity!!).showToast(activity!!.resources.getString(R.string.provide_image_rsa_msg),rlRsaFrag)
         }
 
         tvSkip.setOnClickListener {
@@ -1020,7 +1021,7 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
             when
             {
                 listSelectedBurstTyre.size == 0 ->
-                    Toast.makeText(activity!!, "Please select atleast one Burst tyre.", Toast.LENGTH_SHORT).show()
+                    CommonClass(activity!!,activity!!).showToast("Please select atleast one Burst tyre.", rlRsaFrag)
 
                 listSelectedBurstTyre.size > 1 ->
                 {
@@ -1462,7 +1463,7 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
             rsaFragmentHandler.fetchService(tokenHeader)
         }
         else
-            CommonClass(activity!!, activity!!).showToast(activity!!.resources.getString(R.string.internet_is_unavailable))
+            CommonClass(activity!!, activity!!).showToast(activity!!.resources.getString(R.string.internet_is_unavailable),rlRsaFrag)
     }
 
     // handling fetch service api response (API-partners/services)
@@ -1558,7 +1559,7 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
             {
                 if (serviceSelected == RsaConstants.ServiceName.towing)
                 {
-                    Toast.makeText(activity!!, mainPojo.message, Toast.LENGTH_LONG).show()
+                    CommonClass(activity!!,activity!!).showToast( mainPojo.message, rlRsaFrag)
 
                     activity!!.startActivity(Intent(activity!!, DashboardActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK))
 
@@ -1578,7 +1579,7 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                 }
             }
             else
-                CommonClass(activity!!, activity!!).showToast(mainPojo.message)
+                CommonClass(activity!!, activity!!).showToast(mainPojo.message,rlRsaFrag)
         }
         catch (e: Exception)
         {
@@ -1599,7 +1600,7 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
             rsaFragmentHandler.findFleetOrUser(tokenHeader, id)
         }
         else
-            CommonClass(activity!!, activity!!).showToast(activity!!.resources.getString(R.string.internet_is_unavailable))
+            CommonClass(activity!!, activity!!).showToast(activity!!.resources.getString(R.string.internet_is_unavailable),rlRsaFrag)
     }
 
     // Handler Fleet request Api response (Api-users/request/{requestId})
@@ -1908,7 +1909,7 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
         if (CommonClass(activity!!, activity!!).getString(RsaConstants.Ods.vehicleTypeSelect).isNotEmpty())
         {
-            etVehicleNumber.setText(CommonClass(activity!!, activity!!).getString(RsaConstants.Ods.vehicleNumberSelect))
+            etVehicleNumber.setText(CommonClass(activity!!, activity!!).getString(RsaConstants.Ods.vehicleNumberSelect).toUpperCase())
 
             etVehicleNumber.setSelection(etVehicleNumber.text.length)
         }

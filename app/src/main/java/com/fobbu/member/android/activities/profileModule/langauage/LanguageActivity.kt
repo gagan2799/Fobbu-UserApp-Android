@@ -146,7 +146,7 @@ class LanguageActivity : AppCompatActivity(),Filterable
                         {
                             filteredLanguageList[position]["selected"]="0"
 
-                            commonClass.showToast(resources.getString(R.string.limit_of_selected_languages_msg))
+                            commonClass.showToast(resources.getString(R.string.limit_of_selected_languages_msg),rlLanguage)
                         }
                     }
 

@@ -20,16 +20,15 @@ import android.support.v4.content.ContextCompat
 import android.support.v4.content.FileProvider
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.GridLayoutManager
 import android.util.Log
 import android.view.Gravity
 import android.view.View
-import android.widget.DatePicker
-import android.widget.NumberPicker
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import com.bumptech.glide.Glide
 import com.fobbu.member.android.R
 import com.fobbu.member.android.activities.vehicleModule.adapter.BigProfileViewAdapter
+import com.fobbu.member.android.activities.vehicleModule.adapter.VehicleImageAdapter
 import com.fobbu.member.android.activities.vehicleModule.presenter.AddEditActivityHandler
 import com.fobbu.member.android.activities.vehicleModule.presenter.AddEditVehiclePresenter
 import com.fobbu.member.android.activities.vehicleModule.view.AddEditVehicleAcivityView
@@ -41,6 +40,7 @@ import com.fobbu.member.android.fragments.rsaFragmentModule.RsaConstants
 import com.fobbu.member.android.modals.MainPojo
 import com.fobbu.member.android.utils.CardsPagerTransformerBasic
 import com.fobbu.member.android.utils.CommonClass
+import com.fobbu.member.android.utils.RecyclerItemClickListener
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_add_edit_vehicle.*
 import okhttp3.MediaType
@@ -67,21 +67,19 @@ class AddEditVehicleActivity : AppCompatActivity(),
 
     lateinit var addEditActivityHandler: AddEditActivityHandler
 
-    private var imageFrom = ""
 
     private var vehicleType = ""
 
-    private var isImageOn1 = false
-
-    private var isImageOn2 = false
 
     lateinit var viewAdapter:BigProfileViewAdapter
 
-    private var isImageOn3 = false
 
     var bigProfileList=ArrayList<Any>()
 
-    private var isImageOn4 = false
+
+    var imageON=false
+
+    var pos=0
 
     private var file1: File? = null
 
@@ -99,11 +97,13 @@ class AddEditVehicleActivity : AppCompatActivity(),
 
     var day=0
 
+    var vehcileImageAdapter:VehicleImageAdapter?=null
+
     private var hashMapEdit = HashMap<String, Any>()
 
     private var fromWhere = ""
 
-    private var listImagesEdit = ArrayList<String>()
+    var dataImageList=ArrayList<Any>()
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
@@ -146,7 +146,7 @@ class AddEditVehicleActivity : AppCompatActivity(),
 
             etBrand.setText(hashMapEdit["vehicle_brand"].toString())
 
-            etRegNumber.setText(hashMapEdit["vehicle_registration_number"].toString())
+            etRegNumber.setText(hashMapEdit["vehicle_registration_number"].toString().toUpperCase())
 
             etSubModel.setText(hashMapEdit["vehicle_sub_model"].toString())
 
@@ -180,77 +180,30 @@ class AddEditVehicleActivity : AppCompatActivity(),
 
             tvHeading.text = resources.getString(R.string.edit_vehicle)
 
-            listImagesEdit = hashMapEdit["images"] as ArrayList<String>
-
-            if (listImagesEdit.size>0)
-            {
-                for (i in listImagesEdit.indices)
-                    bigProfileList.add(listImagesEdit[i])
-            }
-
-            for (i in listImagesEdit.indices)
-            {
-                when (i)
-                {
-                    0 ->
-                    {
-                        if (listImagesEdit[i] != "")
-                            Picasso.get().load(listImagesEdit[i]).fit().centerCrop().error(R.drawable.photo_camera).into(ivImage1)
-
-                        isImageOn1 = true
-                    }
-
-                    1 ->
-                    {
-                        if (listImagesEdit[i] != "")
-                            Picasso.get().load(listImagesEdit[i]).fit().centerCrop().error(R.drawable.photo_camera).into(ivImage2)
-
-                        isImageOn2 = true
-                    }
-
-                    2 ->
-                    {
-                        if (listImagesEdit[i] != "")
-                            Picasso.get().load(listImagesEdit[i]).fit().centerCrop().error(R.drawable.photo_camera).into(ivImage3)
-
-                        isImageOn3 = true
-                    }
-
-                    else ->
-                    {
-                        Picasso.get().load(listImagesEdit[i]).fit().centerCrop().error(R.drawable.photo_camera).into(ivImage4)
-
-                        isImageOn4 = true
-                    }
-                }
-            }
+            dataImageList=hashMapEdit["images"] as ArrayList<Any>
         }
-    }
-
-    override fun onBackPressed()
-    {
-
-        if (rlBigProfile.visibility==View.VISIBLE)
-        {
-            rlBigProfile.visibility=View.GONE
-
-            bigProfileList.clear()
-        }
-        else
-        {
-            if (fromWhere == "RSA")
-                startActivity(Intent(this, WaitingScreenWhite::class.java).putExtra("from_where", "building_live"))
-
-            if (intent.hasExtra("vehicle_edit"))
-                startActivity(Intent(this,VehicleListActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
-
-            finish()
-        }
+        setUpVehicleImageRecycler()  // set up image recycler
     }
 
     // all the clicks  are handled in this method
     private fun addClicks()
     {
+        rvVehicleImage.addOnItemTouchListener(RecyclerItemClickListener(this,object :RecyclerItemClickListener.OnItemClickListener
+        {
+            override fun onItemClick(view: View, position: Int)
+            {
+                pos=position
+
+                imageON = position<dataImageList.size
+
+                if (imageON)
+                    showPopupViewDelete()       //Method for  deleting selected images
+
+                else
+                    uploadImagesPopup()               //Method for uploading car images
+            }
+        }))
+
         ivList.setOnClickListener {
             startActivity(Intent(this, VehicleListActivity::class.java))
 
@@ -283,52 +236,6 @@ class AddEditVehicleActivity : AppCompatActivity(),
             dialogYearShow()          // function for showing year dialog
         }
 
-        llPhoto1.setOnClickListener {
-            if (isImageOn1)
-                showPopupViewDelete("1")       //Method for  deleting selected images
-
-            else
-            {
-                imageFrom = "1"
-
-                uploadImagesPopup()               //Method for uploading car images
-            }
-        }
-
-        llPhoto2.setOnClickListener {
-            if (isImageOn2)
-                showPopupViewDelete("2")        //Method for  deleting selected images
-
-            else
-            {
-                imageFrom = "2"
-
-                uploadImagesPopup()                  //Method for uploading car images
-            }
-        }
-
-        llPhoto3.setOnClickListener {
-            if (isImageOn3)
-                showPopupViewDelete("3")         //Method for  deleting selected images
-            else
-            {
-                imageFrom = "3"
-
-                uploadImagesPopup()               //Method for uploading car images
-            }
-        }
-
-        llPhoto4.setOnClickListener {
-            if (isImageOn4)
-                showPopupViewDelete("4")        //Method for  deleting selected images
-            else
-            {
-                imageFrom = "4"
-
-                uploadImagesPopup()                    //Method for uploading car images
-            }
-        }
-
         ivBike.setOnClickListener {
             vehicleType = "2wheeler"
 
@@ -357,36 +264,22 @@ class AddEditVehicleActivity : AppCompatActivity(),
             when
             {
                 brand == "" ->
-                {
-                    Toast.makeText(this, resources.getString(R.string.add_brand), Toast.LENGTH_SHORT).show()
-                }
+                    CommonClass(this,this).showToast( resources.getString(R.string.add_brand),rlAddEditVehicle)
 
                 regNo == "" ->
-                    Toast.makeText(this, resources.getString(R.string.add_reg_no), Toast.LENGTH_SHORT).show()
+                   CommonClass(this,this).showToast( resources.getString(R.string.add_reg_no),rlAddEditVehicle)
 
                 subModel == "" ->
-                    Toast.makeText(this, resources.getString(R.string.add_sub_model), Toast.LENGTH_SHORT).show()
+                    CommonClass(this,this).showToast( resources.getString(R.string.add_sub_model), rlAddEditVehicle)
 
                 year == "" ->
-                    Toast.makeText(this, resources.getString(R.string.add_year), Toast.LENGTH_SHORT).show()
+                    CommonClass(this,this).showToast(resources.getString(R.string.add_year),rlAddEditVehicle)
 
                 vehicleType == "" ->
-                    Toast.makeText(this, resources.getString(R.string.add_vehicle_type), Toast.LENGTH_SHORT).show()
+                    CommonClass(this,this).showToast( resources.getString(R.string.add_vehicle_type),rlAddEditVehicle)
 
                 else ->
                 {
-                    if (file1 != null && file1!!.exists())
-                        dataList.add(file1!!)
-
-                    if (file2 != null && file2!!.exists())
-                        dataList.add(file2!!)
-
-                    if (file3 != null && file3!!.exists())
-                        dataList.add(file3!!)
-
-                    if (file4 != null && file4!!.exists())
-                        dataList.add(file4!!)
-
                     if (CommonClass(this,this).checkInternetConn(this))
                     {
                         if (tvAddEditVehicle.text == resources.getString(R.string.edit_vehicle))
@@ -396,15 +289,46 @@ class AddEditVehicleActivity : AppCompatActivity(),
                             addVehicleApi()
                     }
                     else
-                        CommonClass(this,this).showToast(resources.getString(R.string.internet_is_unavailable))
+                        CommonClass(this,this).showToast(resources.getString(R.string.internet_is_unavailable),rlAddEditVehicle)
                 }
             }
         }
     }
 
+    // set up image recycler
+    private fun setUpVehicleImageRecycler()
+    {
+        vehcileImageAdapter= VehicleImageAdapter(this,dataImageList)
+
+        rvVehicleImage.layoutManager=GridLayoutManager(this,4)
+
+        rvVehicleImage.adapter=vehcileImageAdapter
+    }
+
+    override fun onBackPressed()
+    {
+        if (rlBigProfile.visibility==View.VISIBLE)
+        {
+            rlBigProfile.visibility=View.GONE
+
+            bigProfileList.clear()
+        }
+        else
+        {
+            if (fromWhere == "RSA")
+                startActivity(Intent(this, WaitingScreenWhite::class.java).putExtra("from_where", "building_live"))
+
+            if (intent.hasExtra("vehicle_edit"))
+                startActivity(Intent(this,VehicleListActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
+
+            finish()
+        }
+    }
+
+
 
     //Method for  deleting selected images
-    private fun showPopupViewDelete(s: String)
+    private fun showPopupViewDelete()
     {
         val alertDialog = AlertDialog.Builder(this).create()
 
@@ -412,166 +336,14 @@ class AddEditVehicleActivity : AppCompatActivity(),
 
         alertDialog.setMessage(null)
 
-        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "View") { _, _ ->
-            when (s)
-            {
-                "1" ->
-                {
-                    if (tvHeading.text == resources.getString(R.string.edit_vehicle))
-                        if (listImagesEdit.size<1)
-                            addFileToList()       //  adding files to arraylist
-
-                        else
-                            addFileToList()      //  adding files to arraylist
-
-                    setUpSlider(0)      // function for setting up slider
-
-                    rlBigProfile.visibility = View.VISIBLE
-                }
-
-                "2" ->
-                {
-                    if (tvHeading.text == resources.getString(R.string.edit_vehicle))
-                        if (listImagesEdit.size<2)
-                            addFileToList()         //  adding files to arraylist
-
-                        else
-                            addFileToList()          //  adding files to arraylist
-
-                    setUpSlider(1)          // function for setting up slider
-
-                    rlBigProfile.visibility = View.VISIBLE
-                }
-                "3" ->
-                {
-                    if (tvHeading.text == resources.getString(R.string.edit_vehicle))
-                        if (listImagesEdit.size<3)
-                            addFileToList()         //  adding files to arraylist
-
-                        else
-                            addFileToList()          //  adding files to arraylist
-
-                    setUpSlider(2)         // function for setting up slider
-
-                    rlBigProfile.visibility = View.VISIBLE
-                }
-                "4" -> {
-                    if (tvHeading.text == resources.getString(R.string.edit_vehicle))
-
-                        if (listImagesEdit.size<4)
-                            addFileToList()       //  adding files to arraylist
-
-                        else
-                            addFileToList()       //  adding files to arraylist
-
-                    setUpSlider(3)              // function for setting up slider
-
-                    rlBigProfile.visibility = View.VISIBLE
-                }
-            }
+       alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "View") { _, _ ->
+           setUpSlider(pos)
         }
 
         alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Delete") { _, _ ->
-            when (s)
-            {
-                "1" ->
-                {
-                    if (tvHeading.text != resources.getString(R.string.edit_vehicle))
-                        file1 = null
+            dataImageList.removeAt(pos)
 
-                    else
-                    {
-                        if (listImagesEdit.size<1)
-                            file1=null
-
-                        else
-                            if (listImagesEdit.size>=1)
-                                listImagesEdit.removeAt(0)
-                    }
-                    isImageOn1 = false
-
-                    ivImage1.setImageResource(R.drawable.photo_camera)
-                }
-                "2" ->
-                {
-                    if (tvHeading.text != resources.getString(R.string.edit_vehicle))
-                        file2 = null
-
-                    else
-                    {
-                        if (listImagesEdit.size<2)
-                            file2=null
-
-                        else
-                        {
-                            if (listImagesEdit.size==2)
-                                listImagesEdit.removeAt(1)
-
-                            else
-                                listImagesEdit.removeAt(0)
-                        }
-                    }
-                    isImageOn2 = false
-
-                    ivImage2.setImageResource(R.drawable.photo_camera)
-                }
-
-                "3" ->
-                {
-                    if (tvHeading.text != resources.getString(R.string.edit_vehicle))
-                        file3 = null
-
-                    else
-                    {
-                        if (listImagesEdit.size<3)
-                            file3=null
-
-                        else
-                        {
-                            if (listImagesEdit.size==3)
-                                listImagesEdit.removeAt(2)
-
-                            else
-                                listImagesEdit.removeAt(0)
-                        }
-                    }
-                    isImageOn3 = false
-
-                    ivImage3.setImageResource(R.drawable.photo_camera)
-                }
-
-                "4" ->
-                {
-                    if (tvHeading.text != resources.getString(R.string.edit_vehicle))
-                        file4 = null
-
-                    else
-                    {
-                        if (listImagesEdit.size<4)
-                            file1=null
-
-                        else
-                        {
-                            if (listImagesEdit.size==4)
-                                listImagesEdit.removeAt(3)
-
-                            else
-                                listImagesEdit.removeAt(0)
-                        }
-                    }
-                    isImageOn4 = false
-
-                    ivImage4.setImageResource(R.drawable.photo_camera)
-                }
-            }
-
-            bigProfileList.clear()
-
-            if (listImagesEdit.isNotEmpty())
-                for (i in listImagesEdit.indices)
-                {
-                    bigProfileList.add(listImagesEdit[i])
-                }
+            vehcileImageAdapter?.notifyDataSetChanged()
         }
 
         alertDialog.setOnShowListener {
@@ -588,7 +360,7 @@ class AddEditVehicleActivity : AppCompatActivity(),
     {
         val alertDialog = AlertDialog.Builder(this).create()
 
-        alertDialog.setTitle("Upload Vehicle Images")
+        alertDialog.setTitle("Upload Vehicle Image")
 
         alertDialog.setMessage("Please select from where you want to choose")
 
@@ -767,56 +539,9 @@ class AddEditVehicleActivity : AppCompatActivity(),
 
                     if (imgFile.exists())
                     {
-                        when (imageFrom)
-                        {
-                            "1" ->
-                            {
-                                Glide.with(this@AddEditVehicleActivity)
-                                    .load(imgFile)
-                                    .centerCrop()
-                                    .into(ivImage1)
+                        dataImageList.add(imgFile)
 
-                                isImageOn1 = true
-
-                                file1 = imgFile
-                            }
-
-                            "2" ->
-                            {
-                                Glide.with(this@AddEditVehicleActivity)
-                                    .load(imgFile)
-                                    .centerCrop()
-                                    .into(ivImage2)
-
-                                isImageOn2 = true
-
-                                file2 = imgFile
-                            }
-
-                            "3" ->
-                            {
-                                Glide.with(this@AddEditVehicleActivity)
-                                    .load(imgFile)
-                                    .centerCrop()
-                                    .into(ivImage3)
-
-                                isImageOn3 = true
-
-                                file3 = imgFile
-                            }
-
-                            "4" ->
-                            {
-                                Glide.with(this@AddEditVehicleActivity)
-                                    .load(imgFile)
-                                    .centerCrop()
-                                    .into(ivImage4)
-
-                                isImageOn4 = true
-
-                                file4 = imgFile
-                            }
-                        }
+                        vehcileImageAdapter?.notifyDataSetChanged()
                     }
                 }
                 catch (e: Exception)
@@ -831,52 +556,9 @@ class AddEditVehicleActivity : AppCompatActivity(),
 
                     if (imgFile.exists())
                     {
-                        when (imageFrom)
-                        {
-                            "1" ->
-                            {
-                                Glide.with(this@AddEditVehicleActivity)
-                                    .load(imgFile)
-                                    .into(ivImage1)
+                        dataImageList.add(imgFile)
 
-                                isImageOn1 = true
-
-                                file1 = imgFile
-                            }
-
-                            "2" ->
-                            {
-                                Glide.with(this@AddEditVehicleActivity)
-                                    .load(imgFile)
-                                    .into(ivImage2)
-
-                                isImageOn2 = true
-
-                                file2 = imgFile
-                            }
-
-                            "3" ->
-                            {
-                                Glide.with(this@AddEditVehicleActivity)
-                                    .load(imgFile)
-                                    .into(ivImage3)
-
-                                isImageOn3 = true
-
-                                file3 = imgFile
-                            }
-
-                            "4" ->
-                            {
-                                Glide.with(this@AddEditVehicleActivity)
-                                    .load(imgFile)
-                                    .into(ivImage4)
-
-                                isImageOn4 = true
-
-                                file4 = imgFile
-                            }
-                        }
+                        vehcileImageAdapter?.notifyDataSetChanged()
                     }
                 }
         }
@@ -975,11 +657,11 @@ class AddEditVehicleActivity : AppCompatActivity(),
     {
         val fileList = ArrayList<MultipartBody.Part>()
 
-        for (i in 0 until dataList.size)
+        for (i in 0 until dataImageList.size)
         {
             var imgProfile: MultipartBody.Part? = null
 
-            val file = File(dataList[i].toString())
+            val file = File(dataImageList[i].toString())
 
             // create RequestBody instance from file
             val requestFile = RequestBody.create(MediaType.parse("image/jpeg"), file)
@@ -1025,7 +707,7 @@ class AddEditVehicleActivity : AppCompatActivity(),
 
             else
             {
-                CommonClass(this@AddEditVehicleActivity, this@AddEditVehicleActivity).showToast(mainPojo.message)
+                CommonClass(this@AddEditVehicleActivity, this@AddEditVehicleActivity).showToast(mainPojo.message,rlAddEditVehicle)
 
                 startActivity(Intent(this,VehicleListActivity::class.java).putExtra("vehicle_type",vehicleType))
 
@@ -1033,7 +715,7 @@ class AddEditVehicleActivity : AppCompatActivity(),
             }
         }
         else
-            CommonClass(this@AddEditVehicleActivity, this@AddEditVehicleActivity).showToast(mainPojo.message)
+            CommonClass(this@AddEditVehicleActivity, this@AddEditVehicleActivity).showToast(mainPojo.message,rlAddEditVehicle)
     }
 
     // ************************  update_vehicle API ********************//
@@ -1043,34 +725,38 @@ class AddEditVehicleActivity : AppCompatActivity(),
     {
         val fileList = ArrayList<MultipartBody.Part>()
 
-        for (i in 0 until dataList.size)
-        {
-            var imgProfile: MultipartBody.Part? = null
-
-            val file = File(dataList[i].toString())
-
-            // create RequestBody instance from file
-            val requestFile = RequestBody.create(MediaType.parse("image/jpeg"), file)
-
-            // MultipartBody.Part is used to send also the actual file name
-            imgProfile = MultipartBody.Part.createFormData("photos", file.name, requestFile)
-
-            fileList.add(imgProfile!!)
-        }
-
         val list=JSONArray()
 
-        for (i in listImagesEdit.indices)
+        for (i in 0 until dataImageList.size)
         {
-            if(listImagesEdit[i].contains("vehicles/"))
+            if (dataImageList[i].toString().contains("vehicles"))
             {
-                val separated = listImagesEdit[i].split("vehicles/".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
+                println("TEST >>>>>>>>>>>>>>>>>>>>>contains vehicle")
+                val separated = dataImageList[i].toString().split("vehicles/".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
 
                 val jsonObject = separated[1]
 
                 list.put(jsonObject)
             }
+            else
+            {
+                var imgProfile: MultipartBody.Part? = null
+
+                val file = File(dataImageList[i].toString())
+
+                // create RequestBody instance from file
+                val requestFile = RequestBody.create(MediaType.parse("image/jpeg"), file)
+
+                // MultipartBody.Part is used to send also the actual file name
+                imgProfile = MultipartBody.Part.createFormData("photos", file.name, requestFile)
+
+                fileList.add(imgProfile!!)
+
+                println("TEST >>>>>>>>>>>>>>>>>>>>>contains profile")
+            }
+
         }
+
         val bodyUserId = RequestBody.create(MediaType.parse("text/plain"), CommonClass(this, this).getString("_id"))
 
         val bodyVehicleBrand = RequestBody.create(MediaType.parse("text/plain"), etBrand.text.toString().trim())
@@ -1107,7 +793,7 @@ class AddEditVehicleActivity : AppCompatActivity(),
 
         val tokenHeader = CommonClass(this, this).getString("x_access_token")
 
-        addEditActivityHandler.sendEditData(map, fileList, tokenHeader)
+            addEditActivityHandler.sendEditData(map, fileList, tokenHeader)
     }
 
     // handling the response of update_vehicle API
@@ -1115,14 +801,14 @@ class AddEditVehicleActivity : AppCompatActivity(),
     {
         if (mainPojo.success == "true")
         {
-            CommonClass(this@AddEditVehicleActivity, this@AddEditVehicleActivity).showToast(mainPojo.message)
+            CommonClass(this@AddEditVehicleActivity, this@AddEditVehicleActivity).showToast(mainPojo.message,rlAddEditVehicle)
 
             startActivity(Intent(this,VehicleListActivity::class.java).putExtra("vehicle_type",vehicleType))
 
             finish()
         }
         else
-            CommonClass(this@AddEditVehicleActivity, this@AddEditVehicleActivity).showToast(mainPojo.message)
+            CommonClass(this@AddEditVehicleActivity, this@AddEditVehicleActivity).showToast(mainPojo.message,rlAddEditVehicle)
     }
 
 
@@ -1161,7 +847,7 @@ class AddEditVehicleActivity : AppCompatActivity(),
         }
         else
             CommonClass(this@AddEditVehicleActivity, this@AddEditVehicleActivity)
-                .showToast(mainPojo.message)
+                .showToast(mainPojo.message,rlAddEditVehicle)
     }
 
     override fun showLoader()
@@ -1198,34 +884,11 @@ class AddEditVehicleActivity : AppCompatActivity(),
         return text
     }
 
-    // function adding files to arraylist
-    private fun addFileToList()
-    {
-        bigProfileList.clear()
-
-        if (listImagesEdit.isNotEmpty())
-            for (i in listImagesEdit.indices)
-            {
-                bigProfileList.add(listImagesEdit[i])
-            }
-
-        if (file1!=null)
-            bigProfileList.add(file1.toString())
-
-        if (file2!=null)
-            bigProfileList.add(file2.toString())
-
-        if (file3!=null)
-            bigProfileList.add(file3.toString())
-
-        if (file4!=null)
-            bigProfileList.add(file4.toString())
-    }
 
     // function for setting up slider
     private fun  setUpSlider(pos:Int)
     {
-        viewAdapter= BigProfileViewAdapter(this,bigProfileList)
+        viewAdapter= BigProfileViewAdapter(this,dataImageList)
 
         vpBigProfile.adapter=viewAdapter
 
@@ -1245,11 +908,14 @@ class AddEditVehicleActivity : AppCompatActivity(),
 
         circleIndicator.setViewPager(vpBigProfile)
 
-        if (pos>=bigProfileList.size)
-            vpBigProfile.currentItem = bigProfileList.size-1
+        if (pos>=dataImageList.size)
+            vpBigProfile.currentItem = dataImageList.size-1
 
         else
             vpBigProfile.currentItem = pos
+
+
+        rlBigProfile.visibility = View.VISIBLE
     }
 
     // function for showing year dialog

@@ -113,7 +113,7 @@ class ContactListActicvity : AppCompatActivity(),ContactListView,DeleteVehicleCl
             listHandler.getContacts(commonClass.getString("x_access_token"))
 
         else
-            commonClass.showToast(resources.getString(R.string.internet_is_unavailable))
+            commonClass.showToast(resources.getString(R.string.internet_is_unavailable),rlContactList)
     }
 
     // function for handling the response of the emergencycontacts API (GET)
@@ -141,7 +141,7 @@ class ContactListActicvity : AppCompatActivity(),ContactListView,DeleteVehicleCl
             }
         }
         else
-            commonClass.showToast(mainPojo.message)
+            commonClass.showToast(mainPojo.message,rlContactList)
     }
 
 
@@ -154,7 +154,7 @@ class ContactListActicvity : AppCompatActivity(),ContactListView,DeleteVehicleCl
             listHandler.deleteContact(contactId,commonClass.getString("x_access_token"))
 
         else
-            commonClass.showToast(resources.getString(R.string.internet_is_unavailable))
+            commonClass.showToast(resources.getString(R.string.internet_is_unavailable),rlContactList)
     }
 
     // function for handling the response of the emergencycontacts API (DELETE)
@@ -164,7 +164,7 @@ class ContactListActicvity : AppCompatActivity(),ContactListView,DeleteVehicleCl
             getContact()          //implementing emergencycontacts API (GET)
 
         else
-            commonClass.showToast(mainPojo.message)
+            commonClass.showToast(mainPojo.message,rlContactList)
     }
 
     override fun showLoader()

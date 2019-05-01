@@ -6,6 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:focusable="false"
+        android:id="@+id/rlProfile"
         android:focusableInTouchMode="true"
         android:background="@color/order_screen_background"
 >

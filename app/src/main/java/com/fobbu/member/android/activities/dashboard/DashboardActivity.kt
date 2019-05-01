@@ -756,7 +756,7 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
                     {
                         fragmentTypeForRSA = ""
 
-                        Toast.makeText(this, CommonClass(this, this).getString(RsaConstants.ServiceSaved.cancellationMessage), Toast.LENGTH_SHORT).show()
+                        CommonClass(this,this).showToast( CommonClass(this, this).getString(RsaConstants.ServiceSaved.cancellationMessage), rlDash)
 
                         CommonClass(this, this).workDoneReviewSend()
 
@@ -845,7 +845,7 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
             dashboardHandler.logout(userId, tokenHeader)
         }
         else
-            CommonClass(this,this).showToast(resources.getString(R.string.internet_is_unavailable))
+            CommonClass(this,this).showToast(resources.getString(R.string.internet_is_unavailable),rlDash)
     }
 
     // handling the response of the update_device API
@@ -855,7 +855,7 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
             CommonClass(this, this).clearPreference()
 
         else
-            Toast.makeText(this, mainPojo.message, Toast.LENGTH_SHORT).show()
+            CommonClass(this,this).showToast( mainPojo.message, rlDash)
     }
 
     override fun showLoader() {}
@@ -885,7 +885,7 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
                 rsaLiveHandler.getServiceOneTime(CommonClass(this, this).getString("x_access_token"), CommonClass(this, this).getString(RsaConstants.ServiceSaved.fobbuRequestId))
 
             else
-                CommonClass(this,this).showToast(resources.getString(R.string.internet_is_unavailable))
+                CommonClass(this,this).showToast(resources.getString(R.string.internet_is_unavailable),rlDash)
         }
         else
         {
@@ -1109,7 +1109,7 @@ class DashboardActivity : AppCompatActivity(), HeaderIconChanges, ChangeRSAFragm
 
             FcmPushTypes.Types.requestCancelled ->
             {
-                Toast.makeText(this, CommonClass(this, this).getString(RsaConstants.ServiceSaved.cancellationMessage), Toast.LENGTH_SHORT).show()
+                CommonClass(this,this).showToast(CommonClass(this, this).getString(RsaConstants.ServiceSaved.cancellationMessage), rlDash)
 
                 CommonClass(this, this).workDoneReviewSend()
 
