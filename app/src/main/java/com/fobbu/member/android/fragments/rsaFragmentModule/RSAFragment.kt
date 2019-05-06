@@ -127,6 +127,7 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     private lateinit var tvFindFobbu: TextView
 
     private var strVehicleType = "2wheeler"
+    private var strVehicleNumber = ""
 
     private var serviceSelected = ""
 
@@ -683,6 +684,8 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
             else
             {
+                strVehicleNumber = etVehicleNumber.text.trim().toString()
+
                 if (serviceSelected == RsaConstants.ServiceName.burstTyre)
                 {
                     llHomeServices.visibility = View.GONE
@@ -729,6 +732,8 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
             else
             {
+                strVehicleNumber = etVehicleNumber.text.trim().toString()
+
                 strVehicleType = "2wheeler"
 
                 strFuelType = "petrol"
@@ -751,6 +756,8 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
             else
             {
+                strVehicleNumber = etVehicleNumber.text.trim().toString()
+
                 strVehicleType = "2wheeler"
 
                 strFuelType = "diesel"
@@ -773,6 +780,8 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
             else
             {
+                strVehicleNumber = etVehicleNumber.text.trim().toString()
+
                 strVehicleType = "2wheeler"
 
                 strFuelType = "petrol"
@@ -824,6 +833,8 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
             else
             {
+                strVehicleNumber = etVehicleNumber.text.trim().toString()
+
                 if (serviceSelected == RsaConstants.ServiceName.burstTyre)
                 {
                     llHomeServices.visibility = View.GONE
@@ -1541,7 +1552,7 @@ class RSAFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
 
         val strVehicleType = RequestBody.create(MediaType.parse("text/plain"), strVehicleType)
 
-        val strVehicleNumber = RequestBody.create(MediaType.parse("text/plain"), etVehicleNumber.text.trim().toString())
+        val strVehicleNumber = RequestBody.create(MediaType.parse("text/plain"), strVehicleNumber)
 
         CommonClass(activity!!, activity!!).removeString(RsaConstants.Ods.vehicleNumberSelect)
 
