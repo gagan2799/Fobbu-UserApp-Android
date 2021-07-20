@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "D:\\GIT\\FobbuGit\\user-app-android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-xxhdpi-v4\\values-xxhdpi-v4.xml",
+            "outputFile": "D:\\GSB\\user-app-android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-xxhdpi-v4\\values-xxhdpi-v4.xml",
             "map": [
                 {
-                    "source": "D:\\GIT\\FobbuGit\\user-app-android\\app\\src\\main\\res\\values-xxhdpi\\dimen.xml",
+                    "source": "D:\\GSB\\user-app-android\\app\\src\\main\\res\\values-xxhdpi\\dimen.xml",
                     "from": {
                         "startLines": "26,17,25,6,19,16,20,24,34,14,15,10,11,18,31,30,23,9,7,8,5,3,4",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",

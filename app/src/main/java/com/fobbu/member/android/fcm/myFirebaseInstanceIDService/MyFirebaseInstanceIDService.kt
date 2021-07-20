@@ -7,6 +7,7 @@ import android.net.ConnectivityManager
 import com.fobbu.member.android.apiInterface.WebServiceApi
 import com.fobbu.member.android.modals.MainPojo
 import com.fobbu.member.android.utils.CommonClass
+import com.fobbu.member.android.utils.Url
 import com.google.firebase.iid.FirebaseInstanceId
 import com.google.firebase.iid.FirebaseInstanceIdService
 import okhttp3.OkHttpClient
@@ -28,10 +29,6 @@ class MyFirebaseInstanceIDService : FirebaseInstanceIdService()
     lateinit var myPrefs: SharedPreferences
 
     lateinit var prefsEditor: SharedPreferences.Editor
-
-    /*private val BASE_URL: String = "http://13.127.103.243:3000/"*/   // Production
-
-    private val BASE_URL="http://13.126.177.3:3000"   // Development
 
     lateinit var webServiceApi: WebServiceApi
 
@@ -138,7 +135,7 @@ class MyFirebaseInstanceIDService : FirebaseInstanceIdService()
         val okHttpClient: OkHttpClient = httpClient.build()
 
         webServiceApi = Retrofit.Builder()
-            .baseUrl(BASE_URL)
+            .baseUrl(Url.ApiUrl.URL)
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)
             .build().create(WebServiceApi::class.java)
