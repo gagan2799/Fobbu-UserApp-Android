@@ -536,7 +536,7 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
                             throwMarkerOnMap(mLastLocation?.latitude.toString(),mLastLocation?.longitude.toString())
 
                             // function for setting up default marker
-                            setDefaultMarkerOption(LatLng(mLastLocation!!.latitude, mLastLocation!!.longitude))
+                          //  setDefaultMarkerOption(LatLng(mLastLocation!!.latitude, mLastLocation!!.longitude))
                         }
                         catch (e: IntentSender.SendIntentException)
                         {e.printStackTrace() }
@@ -561,30 +561,37 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     // Method for setting up  marker on Map
     private fun throwMarkerOnMap(latitude: String, longitude: String)
     {
-        getAddressFromLocation(Double.valueOf(latitude),Double.valueOf(longitude))   // function for getting address from Latitude and longitude
+        try {
+            getAddressFromLocation(Double.valueOf(latitude),Double.valueOf(longitude))   // function for getting address from Latitude and longitude
 
-        // create marker
-        val markerOption = MarkerOptions().position(LatLng(Double.valueOf(latitude), Double.valueOf(longitude)))//.title(data["id"].toString())
+            // create marker
+            val markerOption = MarkerOptions().position(LatLng(Double.valueOf(latitude), Double.valueOf(longitude)))//.title(data["id"].toString())
 
-        // Changing marker icon
-        markerOption.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_mark_blue))
+            // Changing marker icon
+            markerOption.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_mark_blue))
 
-        // adding marker
-        googleMap.clear()
+            // adding marker
+            googleMap.clear()
 
-        if (currentAddress!="")
+            if (currentAddress!="")
+            {
+                val marker =googleMap.addMarker(markerOption)
+
+                marker.title=currentAddress
+            }
+
+            val cameraPosition = CameraPosition.Builder()
+                .target(LatLng(Double.valueOf(latitude), Double.valueOf(longitude))).zoom(14f).build()
+
+            googleMap.moveCamera(CameraUpdateFactory.newLatLng(LatLng(Double.valueOf(latitude), Double.valueOf(longitude))))
+
+            addCameraToMap(LatLng(Double.valueOf(latitude), Double.valueOf(longitude)))
+        }
+        catch (e:java.lang.Exception)
         {
-            val marker =googleMap.addMarker(markerOption)
-
-            marker.title=currentAddress
+            e.printStackTrace()
         }
 
-        val cameraPosition = CameraPosition.Builder()
-            .target(LatLng(Double.valueOf(latitude), Double.valueOf(longitude))).zoom(14f).build()
-
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(LatLng(Double.valueOf(latitude), Double.valueOf(longitude))))
-
-        addCameraToMap(LatLng(Double.valueOf(latitude), Double.valueOf(longitude)))
     }
 
     // function for adding camera to map
@@ -604,10 +611,17 @@ class OdsFragment : Fragment(), GoogleApiClient.OnConnectionFailedListener,
     // function for setting up default marker
     private fun setDefaultMarkerOption(location:LatLng)
     {
-        if (yourLocationMarker == null)
-            yourLocationMarker = MarkerOptions()
+        try {
+            if (yourLocationMarker == null)
+                yourLocationMarker = MarkerOptions()
 
-        yourLocationMarker!!.position(location)
+            yourLocationMarker!!.position(location)
+        }
+        catch (e:java.lang.Exception)
+        {
+            e.printStackTrace()
+        }
+
     }
 
     // inner class for customising the info window
